@@ -178,7 +178,7 @@ export default function OnboardingScreen() {
 
 const styles = StyleSheet.create({
   hero: { marginBottom: spacing.md, marginTop: spacing.md },
-  brand: { ...type.display },
+  brand: { ...type.brand },
   tagline: { ...type.bodyMuted, marginTop: spacing.xs },
   title: { ...type.title, marginBottom: spacing.md },
   subtitle: { ...type.subtitle, marginTop: spacing.md, marginBottom: spacing.sm },

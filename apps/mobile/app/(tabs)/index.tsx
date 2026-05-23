@@ -5,7 +5,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReadinessRing } from '../../components/readiness-ring';
 import { ScreenScroll } from '../../components/screen-scroll';
-import { StreakWeek } from '../../components/streak-week';
+import { StreakBadge, StreakWeek } from '../../components/streak-week';
 import { Card } from '../../components/card';
 import { colors, radii, spacing, type } from '../../constants/theme';
 import { fetchExamBySlug } from '../../lib/api/catalog';
@@ -90,7 +90,7 @@ export default function DashboardScreen() {
   };
 
   return (
-    <ScreenScroll>
+    <ScreenScroll withTabBar safeTop>
       <Text style={styles.greeting}>Kumusta, reviewer!</Text>
       {examName ? <Text style={styles.examLabel}>{examName}</Text> : null}
       <Text style={styles.countdown}>
@@ -110,8 +110,9 @@ export default function DashboardScreen() {
       <View style={styles.pasapathCard}>
         <View style={styles.pasapathHeader}>
           <Text style={styles.pasapathTitle}>PasaPath · Today</Text>
+          <StreakBadge streak={12} />
         </View>
-        <StreakWeek streak={12} completedDays={weekDone} />
+        <StreakWeek completedDays={weekDone} />
         <Text style={styles.pasapathSub}>~{goal?.dailyMinutes ?? 30} min · {tasks.length} tasks</Text>
         {tasks.map((task) => (
           <Pressable key={task.id} style={styles.taskRow} onPress={() => toggleTask(task.id)}>
@@ -162,7 +163,7 @@ export default function DashboardScreen() {
 const styles = StyleSheet.create({
   greeting: { ...type.headline },
   examLabel: { ...type.subtitle, color: colors.primary, marginTop: 4 },
-  countdown: { ...type.bodyMuted, marginTop: spacing.xs, marginBottom: spacing.md },
+  countdown: { ...type.subtitle, color: '#475569', marginTop: spacing.xs, marginBottom: spacing.md },
   banner: {
     backgroundColor: colors.primaryMuted,
     padding: spacing.md,
@@ -182,11 +183,17 @@ const styles = StyleSheet.create({
   },
   pasapathHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   pasapathTitle: {
-    fontFamily: type.display.fontFamily,
+    ...type.title,
     fontSize: 18,
     color: '#fff',
+    flex: 1,
   },
-  pasapathSub: { color: 'rgba(255,255,255,0.85)', marginTop: spacing.xs, marginBottom: spacing.md, fontFamily: type.body.fontFamily, fontSize: 14 },
+  pasapathSub: {
+    color: 'rgba(255,255,255,0.9)',
+    marginBottom: spacing.md,
+    fontFamily: type.body.fontFamily,
+    fontSize: 14,
+  },
   taskRow: { flexDirection: 'row', alignItems: 'center', marginBottom: spacing.sm, minHeight: 40 },
   taskBullet: { color: colors.accent, marginRight: spacing.sm, fontSize: 16, width: 20 },
   taskText: { color: '#fff', fontSize: 14, flex: 1, fontFamily: type.body.fontFamily },

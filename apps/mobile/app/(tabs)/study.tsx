@@ -47,7 +47,7 @@ export default function StudyScreen() {
   }
 
   return (
-    <ScreenScroll>
+    <ScreenScroll withTabBar>
       <SectionHeader title="Study by subject" subtitle={examName} />
 
       {subjects.length === 0 ? (

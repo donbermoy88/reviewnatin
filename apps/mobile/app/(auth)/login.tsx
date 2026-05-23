@@ -122,7 +122,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1, backgroundColor: colors.background },
   hero: { marginBottom: spacing.lg },
-  brand: { ...type.display, fontSize: 28 },
+  brand: { ...type.brand, fontSize: 28 },
   tagline: { ...type.bodyMuted, marginTop: spacing.xs },
   title: { ...type.title },
   subtitle: { ...type.bodyMuted, marginTop: spacing.sm, marginBottom: spacing.lg },

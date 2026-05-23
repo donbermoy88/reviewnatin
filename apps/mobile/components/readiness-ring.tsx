@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { colors, spacing, type } from '../constants/theme';
+import { colors, fonts, spacing, type } from '../constants/theme';
 
 type Props = { percent: number; label?: string; hint?: string; size?: number };
 
@@ -19,7 +19,9 @@ export function ReadinessRing({ percent, label = 'Exam-ready', hint, size = 72 }
           },
         ]}
       >
-        <Text style={[styles.pct, { fontSize: size * 0.26 }]}>{Math.round(percent)}%</Text>
+        <Text style={[styles.pct, { fontSize: Math.round(size * 0.24) }]}>
+          {Math.round(percent)}%
+        </Text>
       </View>
       <View style={styles.meta}>
         <Text style={styles.label}>{label}</Text>
@@ -47,11 +49,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   pct: {
-    fontFamily: type.display.fontFamily,
-    fontWeight: '800',
+    fontFamily: fonts.bodyBold,
     color: colors.primary,
   },
   meta: { flex: 1 },
   label: { ...type.title, fontSize: 17 },
-  hint: { ...type.caption, marginTop: 4 },
+  hint: { ...type.caption, marginTop: 4, color: '#475569' },
 });

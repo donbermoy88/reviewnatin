@@ -38,7 +38,7 @@ export default function ProgressScreen() {
   }, [load]);
 
   return (
-    <ScreenScroll>
+    <ScreenScroll withTabBar>
       <SectionHeader title="Progress" subtitle="Quiz history at readiness" />
 
       {!user && (
@@ -83,6 +83,6 @@ export default function ProgressScreen() {
 const styles = StyleSheet.create({
   sessionCard: { marginBottom: spacing.sm },
   cardTitle: { ...type.subtitle, color: colors.text },
-  cardScore: { fontFamily: type.display.fontFamily, fontSize: 28, color: colors.primary, marginVertical: spacing.xs },
+  cardScore: { fontFamily: type.label.fontFamily, fontSize: 28, color: colors.primary, marginVertical: spacing.xs },
   cardDate: { ...type.caption },
 });

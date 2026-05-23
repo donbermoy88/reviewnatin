@@ -20,7 +20,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScreenScroll>
+    <ScreenScroll withTabBar>
       <SectionHeader title="Settings" />
 
       <Text style={styles.sectionLabel}>Account</Text>

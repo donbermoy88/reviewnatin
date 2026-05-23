@@ -26,10 +26,16 @@ export const type: Record<string, TypeStyle> = {
     color: colors.primary,
   },
   headline: {
-    fontFamily: fonts.displayBold,
+    fontFamily: fonts.bodyBold,
     fontSize: typography.sizes.headline,
     lineHeight: typography.sizes.headline * typography.lineHeights.tight,
     color: colors.text,
+  },
+  brand: {
+    fontFamily: fonts.display,
+    fontSize: typography.sizes.display,
+    lineHeight: typography.sizes.display * typography.lineHeights.tight,
+    color: colors.primary,
   },
   title: {
     fontFamily: fonts.bodyBold,
