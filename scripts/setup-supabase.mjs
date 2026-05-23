@@ -190,6 +190,19 @@ Missing SUPABASE_ACCESS_TOKEN.
 
   console.log('\nCatalog seed included in migration 20260523120002_seed_catalog.sql (applied via db push).');
 
+  try {
+    await api(`/projects/${projectRef}/config/auth`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        disable_signup: false,
+        mailer_autoconfirm: false,
+      }),
+    });
+    console.log('Auth config: sign-up enabled (email uses Supabase built-in mailer for dev).');
+  } catch (e) {
+    console.warn('Could not PATCH auth config (enable Email in Dashboard if needed):', e.message);
+  }
+
   console.log(`
 Done! ReviewNatin Supabase is ready.
 
@@ -197,7 +210,7 @@ Next:
   cd ${ROOT}
   npm run mobile
 
-Enable Email auth: Dashboard → Authentication → Providers → Email (on)
+Dashboard: https://supabase.com/dashboard/project/${projectRef}
 `);
 }
 

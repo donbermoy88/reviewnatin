@@ -12,39 +12,23 @@ npm run supabase:setup
 What happens:
 
 1. Opens Supabase in your browser — **sign in** (GitHub or email).
-2. Waits for login to finish.
-3. Creates project `reviewnatin` (Singapore region).
+2. You **generate an access token** and paste it into `.env.supabase` (file is created for you).
+3. Script detects the saved file and continues automatically.
+4. Creates project `reviewnatin` (Singapore region).
 4. Creates all database tables.
 5. Seeds CSE, LET, PNLE exam catalog + demo question.
 6. Writes `apps/mobile/.env` and `apps/marketing/.env.local` for you.
 
 Takes about **2–3 minutes** after you sign in.
 
-## If the script stops at "Missing token"
-
-**Option A — CLI login**
-
-```bash
-supabase login
-```
-
-Complete sign-in in the browser, then:
-
-```bash
-npm run supabase:setup
-```
-
-**Option B — Manual token**
+## If the script stops at "No token yet"
 
 1. Open https://supabase.com/dashboard/account/tokens
-2. Click **Generate new token** → copy it
-3. Create file `.env.supabase` in project root:
+2. **Generate new token** → copy it
+3. Edit `.env.supabase` in the project root (replace `sbp_paste_here`) and **Save**
+4. Run `npm run supabase:setup` again (or leave it running — it picks up the file within a few seconds)
 
-```
-SUPABASE_ACCESS_TOKEN=sbp_paste_your_token_here
-```
-
-4. Run `npm run supabase:setup` again
+**Alternative:** In Mac Terminal, run `supabase login`, then `npm run supabase:setup`.
 
 ## After setup
 
