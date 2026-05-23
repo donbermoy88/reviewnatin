@@ -188,11 +188,7 @@ Missing SUPABASE_ACCESS_TOKEN.
     env: { ...process.env, SUPABASE_ACCESS_TOKEN: TOKEN },
   });
 
-  console.log('\nRunning seed SQL...');
-  const seedPath = join(ROOT, 'supabase/seed/001_catalog.sql');
-  run(`npx supabase db execute --file "${seedPath}" --linked`, {
-    env: { ...process.env, SUPABASE_ACCESS_TOKEN: TOKEN },
-  });
+  console.log('\nCatalog seed included in migration 20260523120002_seed_catalog.sql (applied via db push).');
 
   console.log(`
 Done! ReviewNatin Supabase is ready.
