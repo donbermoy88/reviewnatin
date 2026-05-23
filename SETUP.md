@@ -56,9 +56,14 @@ If you see “project uses SDK 56” but Expo Go is 54 (Play Store only): either
 
 After any change: force-close Expo Go, reopen, scan a fresh QR code.
 
-## Week 2 preview
+## Week 2 (in progress — mobile app)
 
-- Auth (Supabase email/Google)
-- Practice quiz loop
-- Admin CSV import UI
-- Connect dashboard to real readiness API
+- [x] Email sign-up / sign-in (Supabase Auth)
+- [x] Onboarding with optional account step
+- [x] Practice quiz with EN + Taglish explanations
+- [x] Quiz scores saved when logged in
+- [x] Study tab — subject list from Supabase
+- [x] Progress tab — recent sessions
+- [ ] Google / Apple sign-in
+- [ ] Admin CSV import UI
+- [ ] PasaPath engine + readiness score

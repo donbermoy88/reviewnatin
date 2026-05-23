@@ -1,15 +1,11 @@
-import { useRouter } from 'expo-router';
-import { useState } from 'react';
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { PrimaryButton } from '../../components/primary-button';
 import { colors, spacing } from '../../constants/theme';
+import { syncExamGoal } from '../../lib/api/goals';
 import { saveOnboarding } from '../../lib/onboarding-store';
+import { useAuth } from '../../providers/auth-provider';
 
 const EXAMS = [
   { slug: 'cse-professional', label: 'CSE Professional' },
@@ -23,25 +19,37 @@ const MINUTES = [15, 30, 45, 60];
 
 export default function OnboardingScreen() {
   const router = useRouter();
+  const { step: stepParam } = useLocalSearchParams<{ step?: string }>();
+  const { user } = useAuth();
   const [step, setStep] = useState(0);
   const [examSlug, setExamSlug] = useState('cse-professional');
   const [dailyMinutes, setDailyMinutes] = useState(30);
   const [level, setLevel] = useState<'beginner' | 'average' | 'advanced'>('beginner');
   const [targetDate, setTargetDate] = useState('2026-08-01');
 
+  useEffect(() => {
+    if (stepParam === '3') setStep(3);
+  }, [stepParam]);
+
   const finish = async () => {
-    await saveOnboarding({
-      examSlug,
-      targetDate,
-      dailyMinutes,
-      level,
-      completed: true,
-    });
+    const data = { examSlug, targetDate, dailyMinutes, level, completed: true as const };
+    await saveOnboarding(data);
+    if (user) {
+      try {
+        await syncExamGoal(user.id, data);
+      } catch {
+        /* continue */
+      }
+    }
     router.replace('/(tabs)');
   };
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.content}
+      contentInsetAdjustmentBehavior="automatic"
+    >
       <View style={styles.hero}>
         <Text style={styles.brand}>ReviewNatin</Text>
         <Text style={styles.tagline}>Review together. Pass together.</Text>
@@ -59,9 +67,7 @@ export default function OnboardingScreen() {
               <Text style={[styles.optionText, examSlug === e.slug && styles.optionTextActive]}>{e.label}</Text>
             </Pressable>
           ))}
-          <Pressable style={styles.primaryBtn} onPress={() => setStep(1)}>
-            <Text style={styles.primaryBtnText}>Susunod</Text>
-          </Pressable>
+          <PrimaryButton label="Susunod" onPress={() => setStep(1)} style={{ marginTop: spacing.md }} />
         </View>
       )}
 
@@ -99,24 +105,43 @@ export default function OnboardingScreen() {
               </Text>
             </Pressable>
           ))}
-          <Pressable style={styles.primaryBtn} onPress={() => setStep(2)}>
-            <Text style={styles.primaryBtnText}>Susunod</Text>
-          </Pressable>
+          <PrimaryButton label="Susunod" onPress={() => setStep(2)} style={{ marginTop: spacing.md }} />
         </View>
       )}
 
       {step === 2 && (
         <View style={styles.card}>
+          <Text style={styles.title}>I-save ang progress mo</Text>
+          <Text style={styles.body}>
+            Gumawa ng account para ma-sync ang quiz scores, mistake bank, at PasaPath sa Supabase.
+          </Text>
+          {user ? (
+            <PrimaryButton label="May account na — Susunod" onPress={() => setStep(3)} />
+          ) : (
+            <>
+              <PrimaryButton
+                label="Mag-sign up / Mag-login"
+                onPress={() => router.push({ pathname: '/(auth)/login', params: { returnTo: 'onboarding' } })}
+              />
+              <PrimaryButton
+                label="Skip muna (guest)"
+                variant="outline"
+                onPress={() => setStep(3)}
+                style={{ marginTop: spacing.sm }}
+              />
+            </>
+          )}
+        </View>
+      )}
+
+      {step === 3 && (
+        <View style={styles.card}>
           <Text style={styles.title}>Handa ka na sa PasaPath</Text>
           <Text style={styles.body}>
-            Sa susunod na linggo, magsisimula ang araw-araw mong study path — weak topics, mistake review, at bagong lessons.
+            Magsisimula ang araw-araw mong study path — weak topics, mistake review, at bagong lessons.
           </Text>
-          <Text style={styles.disclaimer}>
-            Hindi affiliated sa CSC o PRC. Independent reviewer lang ito.
-          </Text>
-          <Pressable style={styles.primaryBtn} onPress={finish}>
-            <Text style={styles.primaryBtnText}>Pumasok sa Dashboard</Text>
-          </Pressable>
+          <Text style={styles.disclaimer}>Hindi affiliated sa CSC o PRC. Independent reviewer lang ito.</Text>
+          <PrimaryButton label="Pumasok sa Dashboard" onPress={finish} style={{ marginTop: spacing.md }} />
         </View>
       )}
 
@@ -172,13 +197,5 @@ const styles = StyleSheet.create({
     color: colors.text,
     marginBottom: spacing.md,
   },
-  primaryBtn: {
-    backgroundColor: colors.primary,
-    padding: spacing.md,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginTop: spacing.md,
-  },
-  primaryBtnText: { color: '#fff', fontSize: 16, fontWeight: '700' },
   footer: { textAlign: 'center', color: colors.textMuted, marginTop: spacing.xl, fontSize: 12 },
 });
