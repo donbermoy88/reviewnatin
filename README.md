@@ -4,12 +4,18 @@ Filipino-first mobile exam reviewer — **PasaPath**, Taglish explanations, and 
 
 > Review together. Pass together.
 
-This repository contains **MVP product specifications** produced from the concept audit (May 2026). Implementation has not started yet.
+Week 1 foundation is scaffolded: Expo mobile app, Next.js marketing (`reviewnatinph.com`), admin shell, Supabase migration + seed. See [SETUP.md](SETUP.md).
+
+## Domains
+
+- **Marketing:** [reviewnatinph.com](https://reviewnatinph.com)
+- **Admin (planned):** `admin.reviewnatinph.com`
 
 ## Documentation
 
 | Doc | Description |
 |-----|-------------|
+| [docs/00-domains-and-roadmap.md](docs/00-domains-and-roadmap.md) | Domains (reviewnatinph.com) and what to build next |
 | [docs/01-phase-1-exam-blueprints.md](docs/01-phase-1-exam-blueprints.md) | Phase 1 exams: CSE Pro/Sub, LET, PNLE — official TOS alignment |
 | [docs/02-database-schema.md](docs/02-database-schema.md) | Revised MVP database schema |
 | [docs/03-pasapath-spec.md](docs/03-pasapath-spec.md) | PasaPath daily study engine + readiness score |

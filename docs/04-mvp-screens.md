@@ -221,7 +221,7 @@ Full-length or mini-mock per `exam_blueprints.mock_exam_config`.
 
 | Original screen | Disposition |
 |-----------------|-------------|
-| Landing Page | Web: `reviewnatin.com` |
+| Landing Page | Web: `reviewnatinph.com` |
 | Choose Exam | Merged into Onboarding |
 | Study Plan (standalone) | Merged into Dashboard PasaPath card |
 | Leaderboard | Phase 2 |
@@ -260,14 +260,14 @@ Full-length or mini-mock per `exam_blueprints.mock_exam_config`.
 
 ## Web application (Phase 1 parallel track)
 
-### Marketing site (`reviewnatin.com`)
+### Marketing site (`reviewnatinph.com`)
 
 - Hero, features, exam list (3 Phase 1 exams), pricing, FAQ
 - Disclaimers, links to CSC/PRC
 - App Store / Play Store badges
 - Blog/changelog mirroring `content_changelog`
 
-### Admin CMS (`admin.reviewnatin.com`)
+### Admin CMS (`admin.reviewnatinph.com`)
 
 - Role: `admin`, `content_reviewer`
 - CSV question import — see [06-content-pipeline.md](./06-content-pipeline.md)
