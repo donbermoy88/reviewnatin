@@ -6,12 +6,18 @@
     "packages/*"
   ],
   "overrides": {
+    "expo": "~54.0.0",
+    "expo-router": "~6.0.23",
+    "expo-constants": "~18.0.13",
+    "expo-linking": "~8.0.12",
+    "next": "16.2.6",
     "react-native": "0.81.5",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0"
   },
   "scripts": {
     "mobile": "npm run start --workspace=apps/mobile",
+    "mobile:clear": "npm run start --workspace=apps/mobile -- -c",
     "marketing": "npm run dev --workspace=apps/marketing",
     "admin": "npm run dev --workspace=apps/admin -- -p 3001",
     "db:push": "supabase db push",

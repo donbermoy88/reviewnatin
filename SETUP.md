@@ -35,6 +35,10 @@ npm run admin
 
 Follow `supabase/README.md` — without this, mobile runs in local onboarding-only mode.
 
+## Do not run `npm audit fix --force`
+
+That command **breaks this repo**: it downgrades Next.js to v9 and upgrades Expo to SDK 56, which causes bundler crashes and Expo Go mismatch. Use `npm install` only. Moderate audit warnings in dev dependencies are expected and safe to ignore.
+
 ## Expo Go on Android shows “incompatible version”?
 
 The Play Store **Expo Go** app is still on **SDK 54**. This project was on SDK 56 (too new), which causes that blue error even with the latest Play Store update.
