@@ -1,0 +1,14 @@
+---
+description: ReviewNatin monorepo context and week boundaries
+alwaysApply: true
+---
+
+# ReviewNatin project
+
+Monorepo at repo root: `apps/mobile` (Expo), `apps/marketing`, `apps/admin`, `packages/shared`, `supabase/`.
+
+Product: Filipino exam reviewer — PasaPath, Mistake Bank, CSE/LET/PNLE Phase 1. Marketing domain: **reviewnatinph.com**.
+
+Specs live in `docs/`. Setup: `SETUP.md`, `SUPABASE-SETUP.md`.
+
+Week 1 = foundation (repo, Supabase, scaffolds). Week 2+ = auth, quiz loop, content, PasaPath engine. Do not skip Week 1 deploy/auth checklist when user asks "is Week 1 done?"

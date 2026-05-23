@@ -18,7 +18,7 @@ App deep links and legal pages should point to `reviewnatinph.com` (Privacy, Ter
 - [x] Concept audit and competitor research
 - [x] MVP product specs (blueprints, schema, PasaPath, screens, pricing, content pipeline)
 - [x] SQL migration draft (`supabase/migrations/001_mvp_schema.sql`)
-- [ ] Supabase project provisioned (SQL ready — run locally)
+- [x] Supabase project provisioned (`reviewnatin`, migrations + seed applied)
 - [x] Expo mobile app scaffolded (`apps/mobile`)
 - [x] Marketing site scaffolded (`apps/marketing` → deploy to reviewnatinph.com)
 - [x] Admin shell (`apps/admin`)

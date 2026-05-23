@@ -1,0 +1,38 @@
+---
+description: ReviewNatin design and skills — avoid generic AI UI; use installed mobile/Expo skills
+globs: apps/mobile/**/*,apps/marketing/**/*,apps/admin/**/*
+alwaysApply: false
+---
+
+# ReviewNatin design & skills
+
+## Required skills (read before UI work)
+
+When building or styling **mobile** (`apps/mobile`):
+
+- `building-native-ui` (~/.agents/skills/) — Expo Router, ScrollView + safe areas, components outside `app/`, kebab-case files
+- `native-data-fetching` — Supabase via `lib/api/`, no axios
+- `mobile-ux-patterns` — 48dp touch targets, max 3–4 nav depth, empty states with CTA
+- `mobile-design-system` — spacing, hierarchy, Filipino-first copy
+
+When building **marketing/admin web**:
+
+- `frontend-design` (~/.claude/skills/) — distinctive layout, not generic purple-gradient SaaS
+
+## Brand (do not drift)
+
+- **Tone:** Filipino reviewer app — warm, clear Taglish where helpful, trustworthy (CSC/PRC disclaimers)
+- **Colors:** `apps/mobile/constants/theme.ts` — primary `#1E4FD9`, accent `#F5B800`, light surfaces
+- **Avoid AI slop:** no Inter/Roboto-only stacks, no purple-on-white hero clichés, no cookie-cutter card grids
+- **Mobile:** PasaPath card is the hero CTA; readiness ring + streak; exam countdown in header
+
+## Expo constraints
+
+- Target **Expo SDK 56** with Expo Go from https://expo.dev/go (not Play Store SDK 54)
+- Never run `npm audit fix --force` in this monorepo
+
+## Code layout
+
+- Routes: `apps/mobile/app/`
+- UI + logic: `apps/mobile/components/`, `lib/`, `providers/`
+- Shared exam slugs: `@reviewnatin/shared`
