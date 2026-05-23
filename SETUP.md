@@ -10,9 +10,9 @@ npm install
 npm run marketing
 # → http://localhost:3000
 
-# Mobile app
+# Mobile app (Expo SDK 54 — matches Play Store Expo Go)
 npm run mobile
-# → scan QR with Expo Go
+# → scan QR with Expo Go on your phone
 
 # Admin (dev)
 npm run admin
@@ -34,6 +34,22 @@ npm run admin
 ## Supabase (required for live data)
 
 Follow `supabase/README.md` — without this, mobile runs in local onboarding-only mode.
+
+## Expo Go on Android shows “incompatible version”?
+
+The Play Store **Expo Go** app is still on **SDK 54**. This project was on SDK 56 (too new), which causes that blue error even with the latest Play Store update.
+
+**Fix (already applied in repo):** mobile uses Expo SDK 54. After pulling changes:
+
+```bash
+cd /Users/lyndon/reviewnatin
+npm install
+npm run mobile -- --clear
+```
+
+Then on your phone: force-close Expo Go, reopen, scan the QR code again.
+
+**Alternative:** keep SDK 56 and install matching Expo Go from https://expo.dev/go (Android APK), not the Play Store.
 
 ## Week 2 preview
 
