@@ -11,6 +11,14 @@ Week 1 foundation is scaffolded: Expo mobile app, Next.js marketing (`reviewnati
 - **Marketing:** [reviewnatinph.com](https://reviewnatinph.com)
 - **Admin (planned):** `admin.reviewnatinph.com`
 
+## Supabase (database + auth)
+
+```bash
+npm run supabase:setup   # sign in once in browser, then fully automatic
+```
+
+Guide: [SUPABASE-SETUP.md](SUPABASE-SETUP.md)
+
 ## Documentation
 
 | Doc | Description |

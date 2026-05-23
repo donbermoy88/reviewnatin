@@ -4,6 +4,9 @@ dist/
 .next/
 .env
 .env.local
+.env.supabase
+apps/mobile/.env
+apps/marketing/.env.local
 .env*.local
 *.pem
 .DS_Store

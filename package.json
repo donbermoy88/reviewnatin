@@ -9,6 +9,8 @@
     "mobile": "npm run start --workspace=apps/mobile",
     "marketing": "npm run dev --workspace=apps/marketing",
     "admin": "npm run dev --workspace=apps/admin -- -p 3001",
-    "db:seed": "echo 'Run supabase/seed/001_catalog.sql in Supabase SQL Editor after migration'"
+    "db:seed": "npx supabase db execute --file supabase/seed/001_catalog.sql --linked",
+    "supabase:setup": "node scripts/wait-and-setup-supabase.mjs",
+    "supabase:login": "supabase login"
   }
 }
