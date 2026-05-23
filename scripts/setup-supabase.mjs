@@ -195,7 +195,8 @@ Missing SUPABASE_ACCESS_TOKEN.
       method: 'PATCH',
       body: JSON.stringify({
         disable_signup: false,
-        mailer_autoconfirm: false,
+        external_email_enabled: true,
+        mailer_autoconfirm: true,
       }),
     });
     console.log('Auth config: sign-up enabled (email uses Supabase built-in mailer for dev).');

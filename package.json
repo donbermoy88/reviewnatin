@@ -17,6 +17,7 @@
     "admin": "npm run dev --workspace=apps/admin -- -p 3001",
     "db:push": "supabase db push",
     "supabase:setup": "node scripts/wait-and-setup-supabase.mjs",
-    "supabase:login": "supabase login"
+    "supabase:login": "supabase login",
+    "supabase:auth": "node scripts/configure-supabase-auth.mjs"
   }
 }

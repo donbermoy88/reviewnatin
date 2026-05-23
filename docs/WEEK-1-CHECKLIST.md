@@ -21,11 +21,13 @@ Week 1 goal: **foundation** — repo, backend, scaffolds, app runs on your phone
 
 Do these once if you have not already:
 
-### 1. Supabase Dashboard (5 min)
+### 1. Supabase Email auth (automated)
 
-1. Open [Supabase project](https://supabase.com/dashboard/project/yohewfdafdmwntsbzgxx)
-2. **Authentication → Providers → Email** → enable
-3. (Optional) Turn off “Confirm email” for faster dev testing
+```bash
+npm run supabase:auth
+```
+
+This turns **Email** ON and **auto-confirm** ON (no inbox needed while developing).
 
 ### 2. Security (5 min)
 

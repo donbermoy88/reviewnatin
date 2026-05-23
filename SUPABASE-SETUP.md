@@ -37,7 +37,13 @@ npm run mobile    # Expo app (uses Supabase from .env)
 npm run marketing # Website
 ```
 
-In Supabase Dashboard → **Authentication** → **Providers** → turn **Email** ON.
+Email auth is configured automatically:
+
+```bash
+npm run supabase:auth
+```
+
+(Email ON + auto-confirm for dev. Re-run after creating a new Supabase project.)
 
 ## Files created
 
