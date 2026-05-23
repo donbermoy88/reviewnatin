@@ -1,8 +1,14 @@
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Card } from '../../components/card';
+import { Chip } from '../../components/chip';
 import { PrimaryButton } from '../../components/primary-button';
-import { colors, spacing } from '../../constants/theme';
+import { ScreenScroll } from '../../components/screen-scroll';
+import { StepIndicator } from '../../components/step-indicator';
+import { colors, radii, spacing, type } from '../../constants/theme';
+import { DISCLAIMERS } from '@reviewnatin/shared';
 import { syncExamGoal } from '../../lib/api/goals';
 import { saveOnboarding } from '../../lib/onboarding-store';
 import { useAuth } from '../../providers/auth-provider';
@@ -16,6 +22,7 @@ const EXAMS = [
 ];
 
 const MINUTES = [15, 30, 45, 60];
+const STEP_LABELS = ['Welcome', 'Exam', 'Goals', 'Account', 'PasaPath'];
 
 export default function OnboardingScreen() {
   const router = useRouter();
@@ -25,14 +32,17 @@ export default function OnboardingScreen() {
   const [examSlug, setExamSlug] = useState('cse-professional');
   const [dailyMinutes, setDailyMinutes] = useState(30);
   const [level, setLevel] = useState<'beginner' | 'average' | 'advanced'>('beginner');
-  const [targetDate, setTargetDate] = useState('2026-08-01');
+  const [targetDate, setTargetDate] = useState(new Date('2026-08-01'));
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   useEffect(() => {
-    if (stepParam === '3') setStep(3);
+    if (stepParam === '4') setStep(4);
   }, [stepParam]);
 
+  const dateStr = targetDate.toISOString().slice(0, 10);
+
   const finish = async () => {
-    const data = { examSlug, targetDate, dailyMinutes, level, completed: true as const };
+    const data = { examSlug, targetDate: dateStr, dailyMinutes, level, completed: true as const };
     await saveOnboarding(data);
     if (user) {
       try {
@@ -45,18 +55,28 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      contentInsetAdjustmentBehavior="automatic"
-    >
+    <ScreenScroll>
       <View style={styles.hero}>
         <Text style={styles.brand}>ReviewNatin</Text>
         <Text style={styles.tagline}>Review together. Pass together.</Text>
       </View>
 
+      <StepIndicator current={step} total={5} labels={STEP_LABELS} />
+
       {step === 0 && (
-        <View style={styles.card}>
+        <Card variant="elevated">
+          <Text style={styles.title}>Maligayang pagdating</Text>
+          <Text style={styles.body}>
+            Ang PasaPath ang araw-araw mong gabay — mula sa diagnostic hanggang exam day. Simulan natin
+            sa ilang tanong.
+          </Text>
+          <Text style={styles.disclaimer}>{DISCLAIMERS.short}</Text>
+          <PrimaryButton label="Simulan" onPress={() => setStep(1)} style={{ marginTop: spacing.md }} />
+        </Card>
+      )}
+
+      {step === 1 && (
+        <Card>
           <Text style={styles.title}>Anong exam ang hinahanda mo?</Text>
           {EXAMS.map((e) => (
             <Pressable
@@ -67,30 +87,33 @@ export default function OnboardingScreen() {
               <Text style={[styles.optionText, examSlug === e.slug && styles.optionTextActive]}>{e.label}</Text>
             </Pressable>
           ))}
-          <PrimaryButton label="Susunod" onPress={() => setStep(1)} style={{ marginTop: spacing.md }} />
-        </View>
+          <PrimaryButton label="Susunod" onPress={() => setStep(2)} style={{ marginTop: spacing.md }} />
+        </Card>
       )}
 
-      {step === 1 && (
-        <View style={styles.card}>
+      {step === 2 && (
+        <Card>
           <Text style={styles.title}>Target exam date</Text>
-          <TextInput
-            style={styles.input}
-            value={targetDate}
-            onChangeText={setTargetDate}
-            placeholder="YYYY-MM-DD"
-            placeholderTextColor={colors.textMuted}
-          />
+          <Pressable style={styles.dateBtn} onPress={() => setShowDatePicker(true)}>
+            <Text style={styles.dateText}>{dateStr}</Text>
+            <Text style={styles.dateHint}>Tap to change</Text>
+          </Pressable>
+          {showDatePicker && (
+            <DateTimePicker
+              value={targetDate}
+              mode="date"
+              display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+              minimumDate={new Date()}
+              onChange={(_, date) => {
+                setShowDatePicker(Platform.OS === 'ios');
+                if (date) setTargetDate(date);
+              }}
+            />
+          )}
           <Text style={styles.subtitle}>Mag-review araw-araw ng</Text>
           <View style={styles.row}>
             {MINUTES.map((m) => (
-              <Pressable
-                key={m}
-                style={[styles.chip, dailyMinutes === m && styles.chipActive]}
-                onPress={() => setDailyMinutes(m)}
-              >
-                <Text style={[styles.chipText, dailyMinutes === m && styles.chipTextActive]}>{m} min</Text>
-              </Pressable>
+              <Chip key={m} label={`${m} min`} selected={dailyMinutes === m} onPress={() => setDailyMinutes(m)} />
             ))}
           </View>
           <Text style={styles.subtitle}>Level mo ngayon</Text>
@@ -105,18 +128,18 @@ export default function OnboardingScreen() {
               </Text>
             </Pressable>
           ))}
-          <PrimaryButton label="Susunod" onPress={() => setStep(2)} style={{ marginTop: spacing.md }} />
-        </View>
+          <PrimaryButton label="Susunod" onPress={() => setStep(3)} style={{ marginTop: spacing.md }} />
+        </Card>
       )}
 
-      {step === 2 && (
-        <View style={styles.card}>
+      {step === 3 && (
+        <Card>
           <Text style={styles.title}>I-save ang progress mo</Text>
           <Text style={styles.body}>
-            Gumawa ng account para ma-sync ang quiz scores, mistake bank, at PasaPath sa Supabase.
+            Gumawa ng account para ma-sync ang quiz scores, mistake bank, at PasaPath sa cloud.
           </Text>
           {user ? (
-            <PrimaryButton label="May account na — Susunod" onPress={() => setStep(3)} />
+            <PrimaryButton label="May account na — Susunod" onPress={() => setStep(4)} />
           ) : (
             <>
               <PrimaryButton
@@ -126,76 +149,71 @@ export default function OnboardingScreen() {
               <PrimaryButton
                 label="Skip muna (guest)"
                 variant="outline"
-                onPress={() => setStep(3)}
+                onPress={() => setStep(4)}
                 style={{ marginTop: spacing.sm }}
               />
             </>
           )}
-        </View>
+        </Card>
       )}
 
-      {step === 3 && (
-        <View style={styles.card}>
+      {step === 4 && (
+        <Card>
           <Text style={styles.title}>Handa ka na sa PasaPath</Text>
           <Text style={styles.body}>
             Magsisimula ang araw-araw mong study path — weak topics, mistake review, at bagong lessons.
           </Text>
-          <Text style={styles.disclaimer}>Hindi affiliated sa CSC o PRC. Independent reviewer lang ito.</Text>
+          <View style={styles.disclaimerBox}>
+            <Text style={styles.disclaimerTitle}>Disclaimer</Text>
+            <Text style={styles.disclaimer}>{DISCLAIMERS.short}</Text>
+          </View>
           <PrimaryButton label="Pumasok sa Dashboard" onPress={finish} style={{ marginTop: spacing.md }} />
-        </View>
+        </Card>
       )}
 
       <Text style={styles.footer}>reviewnatinph.com</Text>
-    </ScrollView>
+    </ScreenScroll>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.lg, paddingBottom: spacing.xl * 2 },
-  hero: { marginBottom: spacing.lg, marginTop: spacing.xl },
-  brand: { fontSize: 32, fontWeight: '800', color: colors.primary },
-  tagline: { fontSize: 16, color: colors.textMuted, marginTop: spacing.xs },
-  card: {
-    backgroundColor: colors.surface,
-    borderRadius: 16,
-    padding: spacing.lg,
-    borderWidth: 1,
-    borderColor: colors.border,
+  hero: { marginBottom: spacing.md, marginTop: spacing.md },
+  brand: { ...type.display },
+  tagline: { ...type.bodyMuted, marginTop: spacing.xs },
+  title: { ...type.title, marginBottom: spacing.md },
+  subtitle: { ...type.subtitle, marginTop: spacing.md, marginBottom: spacing.sm },
+  body: { ...type.body, marginBottom: spacing.md },
+  disclaimerBox: {
+    backgroundColor: colors.background,
+    borderRadius: radii.md,
+    padding: spacing.md,
+    marginBottom: spacing.sm,
   },
-  title: { fontSize: 20, fontWeight: '700', color: colors.text, marginBottom: spacing.md },
-  subtitle: { fontSize: 14, fontWeight: '600', color: colors.textMuted, marginTop: spacing.md, marginBottom: spacing.sm },
-  body: { fontSize: 15, color: colors.text, lineHeight: 22, marginBottom: spacing.md },
-  disclaimer: { fontSize: 12, color: colors.textMuted, marginBottom: spacing.lg },
+  disclaimerTitle: { ...type.caption, color: colors.text, fontFamily: type.label.fontFamily },
+  disclaimer: { ...type.caption, marginTop: spacing.xs, lineHeight: 18 },
   option: {
     padding: spacing.md,
-    borderRadius: 12,
+    borderRadius: radii.md,
     borderWidth: 1,
     borderColor: colors.border,
     marginBottom: spacing.sm,
+    minHeight: 48,
+    justifyContent: 'center',
   },
-  optionActive: { borderColor: colors.primary, backgroundColor: '#EEF3FF' },
-  optionText: { fontSize: 15, color: colors.text },
-  optionTextActive: { color: colors.primary, fontWeight: '600' },
+  optionActive: { borderColor: colors.primary, backgroundColor: colors.primaryMuted },
+  optionText: { ...type.body },
+  optionTextActive: { color: colors.primary, fontFamily: type.label.fontFamily },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, marginBottom: spacing.md },
-  chip: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: 20,
+  dateBtn: {
     borderWidth: 1,
     borderColor: colors.border,
-  },
-  chipActive: { backgroundColor: colors.accent, borderColor: colors.accentDark },
-  chipText: { fontSize: 14, color: colors.text },
-  chipTextActive: { fontWeight: '700', color: colors.text },
-  input: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 12,
+    borderRadius: radii.md,
     padding: spacing.md,
-    fontSize: 16,
-    color: colors.text,
     marginBottom: spacing.md,
+    minHeight: 48,
+    justifyContent: 'center',
   },
-  footer: { textAlign: 'center', color: colors.textMuted, marginTop: spacing.xl, fontSize: 12 },
+  dateText: { ...type.label },
+  dateHint: { ...type.caption, marginTop: 4 },
+  footer: { textAlign: 'center', color: colors.textMuted, marginTop: spacing.xl, ...type.caption },
 });

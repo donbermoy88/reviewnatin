@@ -56,6 +56,13 @@ If you see “project uses SDK 56” but Expo Go is 54 (Play Store only): either
 
 After any change: force-close Expo Go, reopen, scan a fresh QR code.
 
+## Design system (mobile)
+
+- Shared tokens: `packages/shared/src/tokens.ts`
+- Fonts: Syne + DM Sans (matches marketing)
+- Components: `apps/mobile/components/`
+- Run: `npm run mobile:clear`
+
 ## Week 2 (in progress — mobile app)
 
 - [x] Email sign-up / sign-in (Supabase Auth)

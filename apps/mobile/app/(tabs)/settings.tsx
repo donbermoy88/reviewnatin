@@ -1,7 +1,11 @@
 import { useRouter } from 'expo-router';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Linking, StyleSheet, Text, View } from 'react-native';
+import { Card } from '../../components/card';
 import { PrimaryButton } from '../../components/primary-button';
-import { colors, spacing } from '../../constants/theme';
+import { ScreenScroll } from '../../components/screen-scroll';
+import { SectionHeader } from '../../components/section-header';
+import { colors, spacing, type } from '../../constants/theme';
+import { SITE_URL, DISCLAIMERS } from '@reviewnatin/shared';
 import { clearOnboarding } from '../../lib/onboarding-store';
 import { isSupabaseConfigured } from '../../lib/supabase';
 import { useAuth } from '../../providers/auth-provider';
@@ -16,36 +20,45 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      contentInsetAdjustmentBehavior="automatic"
-    >
-      <Text style={styles.title}>Settings</Text>
-      <Text style={styles.row}>Supabase: {isSupabaseConfigured ? 'Connected' : 'Not configured'}</Text>
-      <Text style={styles.row}>Account: {user?.email ?? 'Guest'}</Text>
-      <Text style={styles.link}>reviewnatinph.com</Text>
+    <ScreenScroll>
+      <SectionHeader title="Settings" />
 
-      {!user ? (
-        <PrimaryButton label="Mag-login" onPress={() => router.push('/(auth)/login')} />
-      ) : (
-        <PrimaryButton label="Mag-logout" variant="outline" onPress={() => signOut()} style={{ marginTop: spacing.md }} />
-      )}
+      <Text style={styles.sectionLabel}>Account</Text>
+      <Card style={styles.block}>
+        <Text style={styles.row}>Status: {isSupabaseConfigured ? 'Connected' : 'Not configured'}</Text>
+        <Text style={styles.row}>Email: {user?.email ?? 'Guest'}</Text>
+        {!user ? (
+          <PrimaryButton label="Mag-login" onPress={() => router.push('/(auth)/login')} style={{ marginTop: spacing.md }} />
+        ) : (
+          <PrimaryButton label="Mag-logout" variant="outline" onPress={() => signOut()} style={{ marginTop: spacing.md }} />
+        )}
+      </Card>
 
-      <PrimaryButton
-        label="Reset onboarding (dev)"
-        variant="outline"
-        onPress={resetOnboarding}
-        style={{ marginTop: spacing.sm }}
-      />
-    </ScrollView>
+      <Text style={styles.sectionLabel}>App</Text>
+      <Card style={styles.block}>
+        <Text style={styles.row}>Expo SDK 56 · reviewnatinph.com</Text>
+        <PrimaryButton
+          label="Open website"
+          variant="outline"
+          onPress={() => Linking.openURL(SITE_URL)}
+          style={{ marginTop: spacing.sm }}
+        />
+      </Card>
+
+      <Text style={styles.sectionLabel}>Legal</Text>
+      <Card style={styles.block}>
+        <Text style={styles.disclaimer}>{DISCLAIMERS.short}</Text>
+      </Card>
+
+      <Text style={styles.sectionLabel}>Developer</Text>
+      <PrimaryButton label="Reset onboarding" variant="outline" onPress={resetOnboarding} />
+    </ScreenScroll>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.lg, paddingBottom: spacing.xl * 2 },
-  title: { fontSize: 22, fontWeight: '700', color: colors.text, marginBottom: spacing.lg },
-  row: { fontSize: 14, color: colors.textMuted, marginBottom: spacing.sm },
-  link: { fontSize: 14, color: colors.primary, marginBottom: spacing.lg },
+  sectionLabel: { ...type.subtitle, color: colors.primary, marginTop: spacing.md, marginBottom: spacing.sm },
+  block: { marginBottom: spacing.sm },
+  row: { ...type.body, marginBottom: spacing.xs },
+  disclaimer: { ...type.caption, lineHeight: 18 },
 });

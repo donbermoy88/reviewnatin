@@ -1,13 +1,25 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { colors, spacing } from '../constants/theme';
+import { colors, spacing, type } from '../constants/theme';
 
-type Props = { percent: number; label?: string; hint?: string };
+type Props = { percent: number; label?: string; hint?: string; size?: number };
 
-export function ReadinessRing({ percent, label = 'Exam-ready', hint }: Props) {
+export function ReadinessRing({ percent, label = 'Exam-ready', hint, size = 72 }: Props) {
+  const stroke = Math.max(4, Math.round(size * 0.08));
+
   return (
     <View style={styles.card}>
-      <View style={styles.ring}>
-        <Text style={styles.pct}>{percent}%</Text>
+      <View
+        style={[
+          styles.ring,
+          {
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            borderWidth: stroke,
+          },
+        ]}
+      >
+        <Text style={[styles.pct, { fontSize: size * 0.26 }]}>{Math.round(percent)}%</Text>
       </View>
       <View style={styles.meta}>
         <Text style={styles.label}>{label}</Text>
@@ -28,17 +40,18 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   ring: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    borderWidth: 6,
     borderColor: colors.ringFill,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: spacing.md,
+    backgroundColor: colors.surface,
   },
-  pct: { fontSize: 18, fontWeight: '800', color: colors.primary },
+  pct: {
+    fontFamily: type.display.fontFamily,
+    fontWeight: '800',
+    color: colors.primary,
+  },
   meta: { flex: 1 },
-  label: { fontSize: 17, fontWeight: '700', color: colors.text },
-  hint: { fontSize: 12, color: colors.textMuted, marginTop: 4 },
+  label: { ...type.title, fontSize: 17 },
+  hint: { ...type.caption, marginTop: 4 },
 });

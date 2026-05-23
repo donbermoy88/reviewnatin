@@ -4,14 +4,15 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
+import { Card } from '../../components/card';
 import { PrimaryButton } from '../../components/primary-button';
-import { colors, spacing } from '../../constants/theme';
+import { ScreenScroll } from '../../components/screen-scroll';
+import { colors, radii, spacing, type, fonts } from '../../constants/theme';
 import { syncExamGoal } from '../../lib/api/goals';
 import { getOnboarding } from '../../lib/onboarding-store';
 import { useAuth } from '../../providers/auth-provider';
@@ -45,14 +46,14 @@ export default function LoginScreen() {
         try {
           await syncExamGoal(userId, onboarding);
         } catch {
-          /* goal sync optional on first login */
+          /* optional */
         }
       }
     }
 
     setLoading(false);
     if (returnTo === 'onboarding') {
-      router.replace('/onboarding?step=3');
+      router.replace({ pathname: '/onboarding', params: { step: '4' } });
     } else {
       router.replace('/(tabs)');
     }
@@ -63,74 +64,79 @@ export default function LoginScreen() {
       style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <ScrollView
-        contentContainerStyle={styles.content}
-        contentInsetAdjustmentBehavior="automatic"
-        keyboardShouldPersistTaps="handled"
-      >
-        <Text style={styles.title}>{mode === 'signin' ? 'Mag-login' : 'Gumawa ng account'}</Text>
-        <Text style={styles.subtitle}>
-          I-save ang progress mo, quiz scores, at PasaPath sa cloud.
-        </Text>
+      <ScreenScroll>
+        <View style={styles.hero}>
+          <Text style={styles.brand}>ReviewNatin</Text>
+          <Text style={styles.tagline}>Review together. Pass together.</Text>
+        </View>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor={colors.textMuted}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password (min 6 characters)"
-          placeholderTextColor={colors.textMuted}
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-        />
+        <Card variant="elevated">
+          <Text style={styles.title}>{mode === 'signin' ? 'Mag-login' : 'Gumawa ng account'}</Text>
+          <Text style={styles.subtitle}>I-save ang progress mo sa cloud.</Text>
 
-        {error ? <Text style={styles.error}>{error}</Text> : null}
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor={colors.textMuted}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password (min 6 characters)"
+            placeholderTextColor={colors.textMuted}
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+          />
 
-        {loading ? (
-          <ActivityIndicator color={colors.primary} style={{ marginVertical: spacing.md }} />
-        ) : (
-          <PrimaryButton label={mode === 'signin' ? 'Mag-login' : 'Mag-sign up'} onPress={submit} />
-        )}
+          {error ? <Text style={styles.error}>{error}</Text> : null}
 
-        <PrimaryButton
-          label={mode === 'signin' ? 'Walang account? Mag-sign up' : 'May account na? Mag-login'}
-          variant="outline"
-          onPress={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
-          style={{ marginTop: spacing.sm }}
-        />
+          {loading ? (
+            <ActivityIndicator color={colors.primary} style={{ marginVertical: spacing.md }} />
+          ) : (
+            <PrimaryButton label={mode === 'signin' ? 'Mag-login' : 'Mag-sign up'} onPress={submit} />
+          )}
 
-        <PrimaryButton
-          label="Magpatuloy bilang guest"
-          variant="outline"
-          onPress={() => router.replace('/(tabs)')}
-          style={{ marginTop: spacing.sm }}
-        />
-      </ScrollView>
+          <PrimaryButton
+            label={mode === 'signin' ? 'Walang account? Mag-sign up' : 'May account na? Mag-login'}
+            variant="outline"
+            onPress={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
+            style={{ marginTop: spacing.sm }}
+          />
+
+          <PrimaryButton
+            label="Magpatuloy bilang guest"
+            variant="outline"
+            onPress={() => router.replace('/(tabs)')}
+            style={{ marginTop: spacing.sm }}
+          />
+        </Card>
+      </ScreenScroll>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   flex: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.lg, paddingBottom: spacing.xl * 2 },
-  title: { fontSize: 26, fontWeight: '800', color: colors.text },
-  subtitle: { fontSize: 15, color: colors.textMuted, marginTop: spacing.sm, marginBottom: spacing.lg, lineHeight: 22 },
+  hero: { marginBottom: spacing.lg },
+  brand: { ...type.display, fontSize: 28 },
+  tagline: { ...type.bodyMuted, marginTop: spacing.xs },
+  title: { ...type.title },
+  subtitle: { ...type.bodyMuted, marginTop: spacing.sm, marginBottom: spacing.lg },
   input: {
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 12,
+    borderRadius: radii.md,
     padding: spacing.md,
     fontSize: 16,
+    fontFamily: fonts.body,
     color: colors.text,
     marginBottom: spacing.md,
-    backgroundColor: colors.surface,
+    backgroundColor: colors.background,
+    minHeight: 48,
   },
-  error: { color: colors.error, marginBottom: spacing.md, fontSize: 14 },
+  error: { ...type.body, color: colors.error, marginBottom: spacing.md },
 });

@@ -1,7 +1,8 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
-import { colors, spacing } from '../constants/theme';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { colors, radii, spacing, touchTarget, type } from '../constants/theme';
 
 type Props = {
+  letter: string;
   label: string;
   selected: boolean;
   correct?: boolean;
@@ -10,7 +11,7 @@ type Props = {
   onPress: () => void;
 };
 
-export function ChoiceOption({ label, selected, correct, wrong, disabled, onPress }: Props) {
+export function ChoiceOption({ letter, label, selected, correct, wrong, disabled, onPress }: Props) {
   return (
     <Pressable
       style={[
@@ -23,6 +24,9 @@ export function ChoiceOption({ label, selected, correct, wrong, disabled, onPres
       onPress={onPress}
       disabled={disabled}
     >
+      <View style={[styles.badge, selected && styles.badgeSelected]}>
+        <Text style={[styles.letter, selected && styles.letterSelected]}>{letter}</Text>
+      </View>
       <Text style={[styles.text, selected && styles.textSelected]}>{label}</Text>
     </Pressable>
   );
@@ -30,19 +34,32 @@ export function ChoiceOption({ label, selected, correct, wrong, disabled, onPres
 
 const styles = StyleSheet.create({
   option: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: spacing.md,
-    borderRadius: 12,
+    borderRadius: radii.md,
     borderWidth: 1.5,
     borderColor: colors.border,
     backgroundColor: colors.surface,
     marginBottom: spacing.sm,
-    minHeight: 48,
-    justifyContent: 'center',
+    minHeight: touchTarget.min,
+    gap: spacing.md,
   },
-  selected: { borderColor: colors.primary, backgroundColor: '#EEF3FF' },
+  selected: { borderColor: colors.primary, backgroundColor: colors.primaryMuted },
   correct: { borderColor: colors.success, backgroundColor: '#ECFDF3' },
   wrong: { borderColor: colors.error, backgroundColor: '#FEF2F2' },
-  disabled: { opacity: 0.9 },
-  text: { fontSize: 15, color: colors.text, lineHeight: 22 },
-  textSelected: { fontWeight: '600', color: colors.primary },
+  disabled: { opacity: 0.95 },
+  badge: {
+    width: 32,
+    height: 32,
+    borderRadius: radii.sm,
+    backgroundColor: colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  badgeSelected: { backgroundColor: colors.primary },
+  letter: { ...type.label, fontSize: 14, color: colors.textMuted },
+  letterSelected: { color: '#fff' },
+  text: { ...type.body, flex: 1 },
+  textSelected: { fontFamily: type.label.fontFamily, color: colors.primary },
 });

@@ -1,19 +1,27 @@
+import * as Haptics from 'expo-haptics';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
-  ScrollView,
+  Platform,
+  Pressable,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import { ChoiceOption } from '../../components/choice-option';
 import { PrimaryButton } from '../../components/primary-button';
-import { colors, spacing } from '../../constants/theme';
+import { ProgressBar } from '../../components/progress-bar';
+import { ScreenScroll } from '../../components/screen-scroll';
+import { EmptyState } from '../../components/empty-state';
+import { Ionicons } from '@expo/vector-icons';
+import { colors, radii, spacing, type } from '../../constants/theme';
 import { fetchExamBySlug, fetchPracticeQuestions } from '../../lib/api/catalog';
 import { completePracticeSession, createPracticeSession, saveQuizAnswers } from '../../lib/api/quiz';
 import type { Question, QuizAnswerRecord } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
+
+const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 export default function PracticeQuizScreen() {
   const router = useRouter();
@@ -26,6 +34,7 @@ export default function PracticeQuizScreen() {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [lang, setLang] = useState<'en' | 'fil'>('en');
   const [answers, setAnswers] = useState<QuizAnswerRecord[]>([]);
   const startedAt = useRef(Date.now());
   const questionStarted = useRef(Date.now());
@@ -37,10 +46,14 @@ export default function PracticeQuizScreen() {
   }, [slug]);
 
   const current = questions[index];
+  const progressPct = questions.length ? ((index + (revealed ? 1 : 0)) / questions.length) * 100 : 0;
 
   const submitChoice = useCallback(
     (choiceId: string) => {
       if (!current || revealed) return;
+      if (Platform.OS === 'ios') {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      }
       setSelected(choiceId);
       setRevealed(true);
       const elapsed = Math.round((Date.now() - questionStarted.current) / 1000);
@@ -106,31 +119,33 @@ export default function PracticeQuizScreen() {
 
   if (!questions.length || !current) {
     return (
-      <View style={styles.center}>
-        <Text style={styles.emptyTitle}>Walang tanong pa</Text>
-        <Text style={styles.emptyBody}>
-          May 1 demo question lang sa database ngayon. Mag-import pa ng content sa admin.
-        </Text>
-        <PrimaryButton label="Bumalik" onPress={() => router.back()} style={{ marginTop: spacing.lg }} />
-      </View>
+      <ScreenScroll>
+        <EmptyState
+          icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
+          title="Walang tanong pa"
+          description="May 1 demo question lang sa database ngayon. Mag-import pa ng content sa admin."
+          actionLabel="Bumalik"
+          onAction={() => router.back()}
+        />
+      </ScreenScroll>
     );
   }
 
+  const explanation =
+    lang === 'fil' && current.explanation_fil ? current.explanation_fil : current.explanation_en;
+
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      contentInsetAdjustmentBehavior="automatic"
-    >
-      <Text style={styles.progress}>
-        Item {index + 1} / {questions.length}
-        {current.topic?.subject?.name ? ` · ${current.topic.subject.name}` : ''}
-      </Text>
+    <ScreenScroll>
+      <ProgressBar progress={progressPct} label={`Item ${index + 1} of ${questions.length}`} showPercent={false} />
+      {current.topic?.subject?.name ? (
+        <Text style={styles.topic}>{current.topic.subject.name}</Text>
+      ) : null}
       <Text style={styles.stem}>{current.stem}</Text>
 
-      {current.choices.map((c) => (
+      {current.choices.map((c, i) => (
         <ChoiceOption
           key={c.id}
+          letter={LETTERS[i] ?? String(i + 1)}
           label={c.text}
           selected={selected === c.id}
           correct={revealed && c.id === current.correct_choice_id}
@@ -142,11 +157,24 @@ export default function PracticeQuizScreen() {
 
       {revealed && (
         <View style={styles.explanation}>
-          <Text style={styles.explanationTitle}>Explanation</Text>
-          <Text style={styles.explanationEn}>{current.explanation_en}</Text>
-          {current.explanation_fil ? (
-            <Text style={styles.explanationFil}>{current.explanation_fil}</Text>
-          ) : null}
+          <View style={styles.explanationHeader}>
+            <Text style={styles.explanationTitle}>Explanation</Text>
+            <View style={styles.langToggle}>
+              <Pressable
+                style={[styles.langBtn, lang === 'en' && styles.langBtnActive]}
+                onPress={() => setLang('en')}
+              >
+                <Text style={[styles.langText, lang === 'en' && styles.langTextActive]}>EN</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.langBtn, lang === 'fil' && styles.langBtnActive]}
+                onPress={() => setLang('fil')}
+              >
+                <Text style={[styles.langText, lang === 'fil' && styles.langTextActive]}>TL</Text>
+              </Pressable>
+            </View>
+          </View>
+          <Text style={styles.explanationBody}>{explanation}</Text>
         </View>
       )}
 
@@ -157,27 +185,28 @@ export default function PracticeQuizScreen() {
           style={{ marginTop: spacing.md }}
         />
       )}
-    </ScrollView>
+    </ScreenScroll>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.lg, paddingBottom: spacing.xl * 2 },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: spacing.lg, backgroundColor: colors.background },
-  progress: { fontSize: 13, color: colors.textMuted, marginBottom: spacing.sm, fontWeight: '600' },
-  stem: { fontSize: 18, fontWeight: '700', color: colors.text, lineHeight: 26, marginBottom: spacing.lg },
+  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
+  topic: { ...type.caption, color: colors.primary, marginTop: spacing.sm, marginBottom: spacing.xs },
+  stem: { ...type.title, fontSize: 18, lineHeight: 26, marginBottom: spacing.lg },
   explanation: {
     backgroundColor: colors.surface,
-    borderRadius: 12,
+    borderRadius: radii.md,
     padding: spacing.md,
     borderWidth: 1,
     borderColor: colors.border,
     marginTop: spacing.sm,
   },
-  explanationTitle: { fontSize: 14, fontWeight: '700', color: colors.primary, marginBottom: spacing.sm },
-  explanationEn: { fontSize: 14, color: colors.text, lineHeight: 21 },
-  explanationFil: { fontSize: 14, color: colors.textMuted, lineHeight: 21, marginTop: spacing.sm, fontStyle: 'italic' },
-  emptyTitle: { fontSize: 20, fontWeight: '700', color: colors.text },
-  emptyBody: { fontSize: 15, color: colors.textMuted, textAlign: 'center', marginTop: spacing.sm, lineHeight: 22 },
+  explanationHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacing.sm },
+  explanationTitle: { ...type.subtitle, color: colors.primary },
+  langToggle: { flexDirection: 'row', gap: 4, backgroundColor: colors.background, borderRadius: radii.sm, padding: 2 },
+  langBtn: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 6, minWidth: 36, alignItems: 'center' },
+  langBtnActive: { backgroundColor: colors.primary },
+  langText: { ...type.caption, color: colors.textMuted },
+  langTextActive: { color: '#fff' },
+  explanationBody: { ...type.body },
 });

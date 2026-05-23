@@ -1,10 +1,17 @@
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { colors, spacing } from '../../constants/theme';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { Card } from '../../components/card';
+import { EmptyState } from '../../components/empty-state';
+import { ScreenScroll } from '../../components/screen-scroll';
+import { SectionHeader } from '../../components/section-header';
+import { colors, spacing, type } from '../../constants/theme';
 import { fetchRecentSessions } from '../../lib/api/quiz';
 import { useAuth } from '../../providers/auth-provider';
 
 export default function ProgressScreen() {
+  const router = useRouter();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [sessions, setSessions] = useState<
@@ -31,50 +38,51 @@ export default function ProgressScreen() {
   }, [load]);
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      contentInsetAdjustmentBehavior="automatic"
-    >
-      <Text style={styles.title}>Progress</Text>
+    <ScreenScroll>
+      <SectionHeader title="Progress" subtitle="Quiz history at readiness" />
 
       {!user && (
-        <Text style={styles.hint}>Mag-login para makita ang quiz history mula sa Supabase.</Text>
+        <EmptyState
+          icon={<Ionicons name="person-outline" size={32} color={colors.primary} />}
+          title="Mag-login muna"
+          description="I-save at tingnan ang quiz history mula sa Supabase."
+          actionLabel="Mag-login"
+          onAction={() => router.push('/(auth)/login')}
+        />
       )}
 
-      {loading ? (
-        <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.lg }} />
-      ) : sessions.length === 0 ? (
-        <Text style={styles.hint}>Wala pang completed quizzes. Simulan ang practice sa Home.</Text>
-      ) : (
+      {user && loading && <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.lg }} />}
+
+      {user && !loading && sessions.length === 0 && (
+        <EmptyState
+          icon={<Ionicons name="stats-chart-outline" size={32} color={colors.primary} />}
+          title="Wala pang quizzes"
+          description="Simulan ang practice sa Home tab para makita ang scores dito."
+          actionLabel="Go to Home"
+          onAction={() => router.replace('/(tabs)')}
+        />
+      )}
+
+      {user &&
+        !loading &&
         sessions.map((s) => (
-          <View key={s.id} style={styles.card}>
-            <Text style={styles.cardTitle}>{s.mode} · {s.item_count} items</Text>
+          <Card key={s.id} style={styles.sessionCard}>
+            <Text style={styles.cardTitle}>
+              {s.mode} · {s.item_count} items
+            </Text>
             <Text style={styles.cardScore}>{s.score_percent ?? '—'}%</Text>
             <Text style={styles.cardDate}>
               {s.completed_at ? new Date(s.completed_at).toLocaleString() : ''}
             </Text>
-          </View>
-        ))
-      )}
-    </ScrollView>
+          </Card>
+        ))}
+    </ScreenScroll>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.lg },
-  title: { fontSize: 22, fontWeight: '800', color: colors.text, marginBottom: spacing.md },
-  hint: { fontSize: 14, color: colors.textMuted, lineHeight: 22 },
-  card: {
-    backgroundColor: colors.surface,
-    borderRadius: 12,
-    padding: spacing.md,
-    marginBottom: spacing.sm,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  cardTitle: { fontSize: 14, fontWeight: '600', color: colors.text },
-  cardScore: { fontSize: 24, fontWeight: '800', color: colors.primary, marginVertical: 4 },
-  cardDate: { fontSize: 12, color: colors.textMuted },
+  sessionCard: { marginBottom: spacing.sm },
+  cardTitle: { ...type.subtitle, color: colors.text },
+  cardScore: { fontFamily: type.display.fontFamily, fontSize: 28, color: colors.primary, marginVertical: spacing.xs },
+  cardDate: { ...type.caption },
 });

@@ -1,10 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
-import { colors } from '../../constants/theme';
+import { colors, fonts } from '../../constants/theme';
 
-function TabIcon({ label, focused }: { label: string; focused: boolean }) {
+function TabIcon({
+  name,
+  focused,
+}: {
+  name: keyof typeof Ionicons.glyphMap;
+  focused: boolean;
+}) {
   return (
-    <Text style={{ fontSize: 18, opacity: focused ? 1 : 0.5 }}>{label}</Text>
+    <Ionicons name={name} size={24} color={focused ? colors.primary : colors.textMuted} />
   );
 }
 
@@ -14,37 +20,47 @@ export default function TabsLayout() {
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textMuted,
-        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border },
+        tabBarLabelStyle: { fontFamily: fonts.bodyMedium, fontSize: 11 },
+        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border, height: 56 },
         headerStyle: { backgroundColor: colors.surface },
         headerTintColor: colors.primary,
+        headerTitleStyle: { fontFamily: fonts.bodyBold },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ focused }) => <TabIcon label="🏠" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon name={focused ? 'home' : 'home-outline'} focused={focused} />
+          ),
         }}
       />
       <Tabs.Screen
         name="study"
         options={{
           title: 'Study',
-          tabBarIcon: ({ focused }) => <TabIcon label="📚" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon name={focused ? 'book' : 'book-outline'} focused={focused} />
+          ),
         }}
       />
       <Tabs.Screen
         name="progress"
         options={{
           title: 'Progress',
-          tabBarIcon: ({ focused }) => <TabIcon label="📈" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon name={focused ? 'stats-chart' : 'stats-chart-outline'} focused={focused} />
+          ),
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
           title: 'Settings',
-          tabBarIcon: ({ focused }) => <TabIcon label="⚙️" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon name={focused ? 'settings' : 'settings-outline'} focused={focused} />
+          ),
         }}
       />
     </Tabs>
