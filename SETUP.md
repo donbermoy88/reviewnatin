@@ -10,7 +10,7 @@ npm install
 npm run marketing
 # → http://localhost:3000
 
-# Mobile app (Expo SDK 54 — matches Play Store Expo Go)
+# Mobile app (Expo SDK 56 — matches Expo Go from https://expo.dev/go)
 npm run mobile
 # → scan QR with Expo Go on your phone
 
@@ -39,21 +39,22 @@ Follow `supabase/README.md` — without this, mobile runs in local onboarding-on
 
 That command **breaks this repo**: it downgrades Next.js to v9 and upgrades Expo to SDK 56, which causes bundler crashes and Expo Go mismatch. Use `npm install` only. Moderate audit warnings in dev dependencies are expected and safe to ignore.
 
-## Expo Go on Android shows “incompatible version”?
+## Expo Go “incompatible version” on Android
 
-The Play Store **Expo Go** app is still on **SDK 54**. This project was on SDK 56 (too new), which causes that blue error even with the latest Play Store update.
+**Expo Go and the project must use the same SDK.** They are often different depending on where you installed Expo Go:
 
-**Fix (already applied in repo):** mobile uses Expo SDK 54. After pulling changes:
+| Where you installed Expo Go | SDK version |
+|----------------------------|-------------|
+| [expo.dev/go](https://expo.dev/go) (official site APK) | **56** (current) |
+| Google Play Store | Often still **54** |
 
-```bash
-cd /Users/lyndon/reviewnatin
-npm install
-npm run mobile -- --clear
-```
+This repo’s mobile app uses **SDK 56** (matches Expo Go from expo.dev/go).
 
-Then on your phone: force-close Expo Go, reopen, scan the QR code again.
+If you see “project uses SDK 54” but Expo Go is 56: run `git pull`, then `npm install` and `npm run mobile:clear`.
 
-**Alternative:** keep SDK 56 and install matching Expo Go from https://expo.dev/go (Android APK), not the Play Store.
+If you see “project uses SDK 56” but Expo Go is 54 (Play Store only): either install Expo Go from [expo.dev/go?sdkVersion=56](https://expo.dev/go?sdkVersion=56&platform=android&device=true), or install SDK 54 Expo Go from [expo.dev/go?sdkVersion=54](https://expo.dev/go?sdkVersion=54&platform=android&device=true) and ask us to pin the project to 54 again.
+
+After any change: force-close Expo Go, reopen, scan a fresh QR code.
 
 ## Week 2 preview
 
