@@ -1,0 +1,2 @@
+exam_type_slug,subject_slug,topic_slug,stem,choice_a,choice_b,choice_c,choice_d,correct_choice,difficulty,explanation_en,explanation_fil,source_note,tags
+cse-professional,numerical,word-problems,"Sample: If 3 workers complete a task in 8 hours, how long for 6 workers at the same rate?",4 hours,8 hours,16 hours,24 hours,a,3,"More workers means less time; 6 workers finish in 4 hours.","Mas maraming workers, mas mabilis — 4 hours ang sagot.","Original - ReviewNatin sample row",numerical|word-problems
