@@ -1,0 +1,13 @@
+node_modules
+.expo
+.git
+apps/mobile
+apps/mobile/**
+**/.next
+**/dist
+**/.turbo
+supabase/.temp
+supabase/.branches
+*.pem
+.env*
+!.env.example

@@ -10,6 +10,9 @@
     "next": "16.2.6",
     "react-native": "0.85.3"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "mobile": "npm run start --workspace=apps/mobile",
     "mobile:clear": "npm run start --workspace=apps/mobile -- -c",
@@ -39,8 +42,8 @@
     "test": "npm run mobile:test",
     "db:gen-types": "node scripts/gen-db-types.mjs",
     "vercel:setup": "node scripts/setup-vercel.mjs",
-    "vercel:deploy:marketing": "cd apps/marketing && npx vercel deploy --prod --yes",
-    "vercel:deploy:admin": "cd apps/admin && npx vercel deploy --prod --yes"
+    "vercel:deploy:marketing": "npx vercel link --yes --project reviewnatin-marketing && npx vercel deploy --prod --yes --archive=tgz",
+    "vercel:deploy:admin": "npx vercel link --yes --project reviewnatin-admin && npx vercel deploy --prod --yes --archive=tgz"
   },
   "devDependencies": {
     "vercel": "^54.4.1"

@@ -3,7 +3,7 @@
  * One-time Vercel setup for ReviewNatin monorepo.
  * Requires: `npx vercel login` first, or VERCEL_TOKEN env var.
  *
- * Creates two projects:
+ * Creates two projects (root directories set in Vercel):
  *   reviewnatin-marketing  → apps/marketing  (reviewnatinph.com)
  *   reviewnatin-admin      → apps/admin      (admin.reviewnatinph.com)
  */
@@ -32,13 +32,22 @@ function run(cmd, opts = {}) {
   execSync(cmd, { stdio: 'inherit', cwd: root, ...opts });
 }
 
-function vercel(args, cwd) {
+function vercel(args) {
   const r = spawnSync('npx', ['vercel', ...args], {
-    cwd,
+    cwd: root,
     stdio: 'inherit',
     env: process.env,
   });
   if (r.status !== 0) process.exit(r.status ?? 1);
+}
+
+function addEnv(project, key, value) {
+  const escaped = value.replace(/'/g, "'\\''");
+  for (const target of ['production', 'development']) {
+    run(
+      `npx vercel link --yes --project ${project} && npx vercel env add ${key} ${target} --value '${escaped}' --yes --force`,
+    );
+  }
 }
 
 const marketingEnv = loadEnvFile(join(root, 'apps/marketing/.env.local'));
@@ -64,47 +73,35 @@ function ensureProject(name) {
   });
   if (check.status !== 0) {
     console.log(`Creating project ${name}...`);
-    vercel(['project', 'add', name], root);
+    vercel(['project', 'add', name]);
   }
 }
 
 ensureProject('reviewnatin-marketing');
 ensureProject('reviewnatin-admin');
 
-// Link + deploy marketing
 console.log('=== Marketing (reviewnatinph.com) ===');
-vercel(['link', '--yes', '--project', 'reviewnatin-marketing'], join(root, 'apps/marketing'));
-
 for (const [key, value] of Object.entries({
   ...sharedPublic,
   NEXT_PUBLIC_SITE_URL: marketingEnv.NEXT_PUBLIC_SITE_URL ?? 'https://reviewnatinph.com',
 })) {
-  if (!value) continue;
-  run(
-    `printf '%s' '${value.replace(/'/g, "'\\''")}' | npx vercel env add ${key} production preview development --force`,
-    { cwd: join(root, 'apps/marketing') }
-  );
+  if (value) addEnv('reviewnatin-marketing', key, value);
 }
 
-vercel(['deploy', '--prod', '--yes'], join(root, 'apps/marketing'));
+vercel(['link', '--yes', '--project', 'reviewnatin-marketing']);
+vercel(['deploy', '--prod', '--yes', '--archive=tgz']);
 
-// Link + deploy admin
 console.log('\n=== Admin (admin.reviewnatinph.com) ===');
-vercel(['link', '--yes', '--project', 'reviewnatin-admin'], join(root, 'apps/admin'));
-
 for (const [key, value] of Object.entries({
   ...sharedPublic,
   SUPABASE_SERVICE_ROLE_KEY: adminEnv.SUPABASE_SERVICE_ROLE_KEY,
 })) {
-  if (!value) continue;
-  run(
-    `printf '%s' '${value.replace(/'/g, "'\\''")}' | npx vercel env add ${key} production preview development --force`,
-    { cwd: join(root, 'apps/admin') }
-  );
+  if (value) addEnv('reviewnatin-admin', key, value);
 }
 
-vercel(['deploy', '--prod', '--yes'], join(root, 'apps/admin'));
+vercel(['link', '--yes', '--project', 'reviewnatin-admin']);
+vercel(['deploy', '--prod', '--yes', '--archive=tgz']);
 
-console.log('\nDone. Add custom domains in Vercel dashboard:');
-console.log('  reviewnatin-marketing → reviewnatinph.com, www.reviewnatinph.com');
-console.log('  reviewnatin-admin     → admin.reviewnatinph.com');
+console.log('\nDone. Connect GitHub in Vercel → Account Settings → Login Connections.');
+console.log('Then link donbermoy88/reviewnatin to both projects for auto-deploy on push.');
+console.log('Domains: reviewnatinph.com, www.reviewnatinph.com, admin.reviewnatinph.com');
