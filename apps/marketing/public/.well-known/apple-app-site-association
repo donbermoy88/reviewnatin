@@ -1,0 +1,26 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TEAMID.ph.reviewnatin.app",
+        "paths": [
+          "/subscribe*",
+          "/checkout*",
+          "/barkada*",
+          "/exam-calendar*",
+          "/calendar*",
+          "/tutor*",
+          "/ai-tutor*",
+          "/changelog*",
+          "/updates*",
+          "/study*",
+          "/aral*",
+          "/pasapath*",
+          "/mistakes*",
+          "/flashcards*"
+        ]
+      }
+    ]
+  }
+}

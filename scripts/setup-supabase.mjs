@@ -188,7 +188,7 @@ Missing SUPABASE_ACCESS_TOKEN.
     env: { ...process.env, SUPABASE_ACCESS_TOKEN: TOKEN },
   });
 
-  console.log('\nCatalog seed included in migration 20260523120002_seed_catalog.sql (applied via db push).');
+  console.log('\nCatalog seed: supabase/sql/catalog_seed.sql (local db reset + npm run db:seed-catalog).');
 
   try {
     await api(`/projects/${projectRef}/config/auth`, {

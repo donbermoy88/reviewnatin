@@ -4,9 +4,10 @@ export type Question = {
   id: string;
   stem: string;
   choices: QuestionChoice[];
-  correct_choice_id: string;
-  explanation_en: string | null;
-  explanation_fil: string | null;
+  /** Only populated after server-side check_question_answer RPC */
+  correct_choice_id?: string;
+  explanation_en?: string | null;
+  explanation_fil?: string | null;
   difficulty: number;
   topic?: { name: string; subject?: { name: string; exam_slug?: string } };
 };

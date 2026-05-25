@@ -1,111 +1,475 @@
 import * as Haptics from 'expo-haptics';
+import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Platform,
   Pressable,
-  StyleSheet,
+  ScrollView,
   Text,
   View,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
-import { PrimaryButton } from '../../components/primary-button';
-import { ProgressBar } from '../../components/progress-bar';
-import { ScreenScroll } from '../../components/screen-scroll';
 import { EmptyState } from '../../components/empty-state';
-import { Ionicons } from '@expo/vector-icons';
-import { colors, radii, spacing, type } from '../../constants/theme';
-import { fetchExamBySlug, fetchPracticeQuestions } from '../../lib/api/catalog';
-import { completePracticeSession, createPracticeSession, saveQuizAnswers } from '../../lib/api/quiz';
+import { Pill } from '../../components/pill';
+import { PrimaryButton } from '../../components/primary-button';
+import { useAppTheme } from '../../hooks/use-app-theme';
+import { createQuizStyles } from '../../lib/themed-styles';
+import {
+  checkQuestionAnswer,
+  fetchExamBySlug,
+  fetchPracticeQuestions,
+  fetchQuestionsByIds,
+  type AnswerCheckResult,
+} from '../../lib/api/catalog';
+import {
+  checkOfflineAnswer,
+  pickOfflinePracticeQuestions,
+  hasOfflinePack,
+} from '../../lib/offline/pack';
+import { fetchBookmarkedQuestionIds, toggleBookmark } from '../../lib/api/bookmarks';
+import { fetchMistakeQuestionIds, recordQuizOutcome } from '../../lib/api/mistakes';
+import { fetchMockExamById, fetchMockExamQuestions } from '../../lib/api/mock-exams';
+import { fetchDiagnosticQuestions, completeDiagnostic } from '../../lib/api/diagnostic';
+import {
+  completePracticeSession,
+  createQuizSession,
+  saveQuizAnswers,
+} from '../../lib/api/quiz';
+import { fetchUsageLimits, isMiniMockLimitError } from '../../lib/api/iap';
+import { fetchWeakAreaQuestions } from '../../lib/api/analytics';
+import { awardUserBadges } from '../../lib/api/achievements';
+import { FREE_DAILY_QUESTIONS } from '../../lib/paywall';
+import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
+import { saveGuestQuizSession } from '../../lib/guest-quiz-history';
 import type { Question, QuizAnswerRecord } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
+import { useEntitlements } from '../../providers/entitlements-provider';
+import { usePreferences } from '../../providers/preferences-provider';
+
+function finalizeAnswers(
+  prev: QuizAnswerRecord[],
+  current: Question | undefined,
+  selected: string | null,
+  revealed: boolean,
+  timeSpentSeconds: number,
+  revealResult: AnswerCheckResult | null
+): QuizAnswerRecord[] {
+  if (!current || !selected || !revealed || !revealResult) return prev;
+  if (prev.some((a) => a.questionId === current.id)) return prev;
+  return [
+    ...prev,
+    {
+      questionId: current.id,
+      selectedChoiceId: selected,
+      isCorrect: revealResult.isCorrect,
+      timeSpentSeconds,
+    },
+  ];
+}
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
+const DIAGNOSTIC_ITEM_COUNT = 40;
+const DIAGNOSTIC_SOFT_SECONDS = 30 * 60;
+const BOARD_ITEM_COUNT = 30;
+const BOARD_DURATION_SECONDS = 45 * 60;
 
 export default function PracticeQuizScreen() {
   const router = useRouter();
-  const { examSlug } = useLocalSearchParams<{ examSlug: string }>();
-  const slug = examSlug ?? 'cse-professional';
+  const insets = useSafeAreaInsets();
+  const theme = useAppTheme();
+  const { colors, spacing } = theme;
+  const styles = useMemo(() => createQuizStyles(theme), [theme]);
+  const { examSlug, topicSlug, mode, mockExamId, durationSeconds, previewLimit, pasapathTaskId, barkadaChallengeId, questionLimit } = useLocalSearchParams<{
+    examSlug?: string;
+    topicSlug?: string;
+    mode?: string;
+    mockExamId?: string;
+    durationSeconds?: string;
+    previewLimit?: string;
+    pasapathTaskId?: string;
+    barkadaChallengeId?: string;
+    questionLimit?: string;
+  }>();
+  const slug = examSlug ?? DEFAULT_EXAM_SLUG;
+  const isMock = mode === 'mock';
+  const isMistakeReview = mode === 'mistake_review';
+  const isDiagnostic = mode === 'diagnostic';
+  const isTimed = mode === 'timed';
+  const isWeakArea = mode === 'weak_area';
+  const isBarkada = mode === 'barkada';
+  const isBoard = mode === 'board';
+  const isOffline = mode === 'offline';
+  const isStrictExam = isMock || isBoard;
+  const barkadaLimit = Math.max(Number(questionLimit) || 10, 5);
+  const timedDuration = Number(durationSeconds) || 600;
   const { user } = useAuth();
+  const { isPremium } = useEntitlements();
+  const { prefs } = usePreferences();
+  const [paywallBlocked, setPaywallBlocked] = useState(false);
+  const [paywallReason, setPaywallReason] = useState<'daily' | 'board'>('daily');
+  const [softTimerWarn, setSoftTimerWarn] = useState(false);
+  const [sectionBreak, setSectionBreak] = useState<string | null>(null);
+  const [offlineMode, setOfflineMode] = useState(isOffline);
 
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
-  const [lang, setLang] = useState<'en' | 'fil'>('en');
+  const [checking, setChecking] = useState(false);
+  const [revealResult, setRevealResult] = useState<AnswerCheckResult | null>(null);
+  const [lang, setLang] = useState<'en' | 'fil'>(prefs.explanationLocale ?? 'en');
   const [answers, setAnswers] = useState<QuizAnswerRecord[]>([]);
+  const [elapsed, setElapsed] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(
+    isMock ? Number(durationSeconds) || 600 : isBoard ? BOARD_DURATION_SECONDS : isTimed ? timedDuration : 0
+  );
+  const [mockTitle, setMockTitle] = useState('Mock Exam');
   const startedAt = useRef(Date.now());
   const questionStarted = useRef(Date.now());
+  const finishing = useRef(false);
 
   useEffect(() => {
-    fetchPracticeQuestions(slug)
-      .then(setQuestions)
-      .finally(() => setLoading(false));
-  }, [slug]);
+    (async () => {
+      try {
+        const exam = await fetchExamBySlug(slug);
+
+        if (isDiagnostic) {
+          if (!user) {
+            router.replace('/(auth)/login');
+            return;
+          }
+          setQuestions(await fetchDiagnosticQuestions(slug, DIAGNOSTIC_ITEM_COUNT));
+        } else if (isMock && mockExamId) {
+          try {
+            const [mock, qs] = await Promise.all([
+              fetchMockExamById(mockExamId),
+              fetchMockExamQuestions(mockExamId),
+            ]);
+            if (mock) {
+              setMockTitle(mock.title);
+              setTimeLeft(mock.durationSeconds);
+            }
+            setQuestions(qs.questions);
+          } catch (err) {
+            if (isMiniMockLimitError(err as { message?: string })) {
+              setPaywallBlocked(true);
+              return;
+            }
+            throw err;
+          }
+        } else if (isBoard) {
+          if (!user) {
+            router.replace('/(auth)/login');
+            return;
+          }
+          if (!isPremium()) {
+            setPaywallReason('board');
+            setPaywallBlocked(true);
+            return;
+          }
+          const result = await fetchPracticeQuestions(slug, BOARD_ITEM_COUNT, topicSlug);
+          setQuestions(result.questions.slice(0, BOARD_ITEM_COUNT));
+          setTimeLeft(BOARD_DURATION_SECONDS);
+        } else if (isMistakeReview) {
+          const ids = await fetchMistakeQuestionIds(slug, 12);
+          setQuestions(await fetchQuestionsByIds(ids));
+        } else if (isWeakArea) {
+          if (!user) {
+            router.replace('/(auth)/login');
+            return;
+          }
+          if (user && exam) {
+            const limits = await fetchUsageLimits(slug);
+            if (limits && !limits.isPremium && limits.dailyQuestionsRemaining === 0) {
+              setPaywallBlocked(true);
+              return;
+            }
+          }
+          const result = await fetchWeakAreaQuestions(slug, 10);
+          if (result.error === 'daily_limit') {
+            setPaywallBlocked(true);
+            return;
+          }
+          setQuestions(result.questions);
+        } else if (isOffline) {
+          const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
+          if (!offlineQs.length) {
+            Alert.alert('Walang offline pack', 'I-download muna ang offline pack sa Settings.');
+            router.back();
+            return;
+          }
+          setOfflineMode(true);
+          setQuestions(offlineQs);
+        } else if (isBarkada) {
+          if (!user) {
+            router.replace('/(auth)/login');
+            return;
+          }
+          const result = await fetchPracticeQuestions(slug, barkadaLimit, topicSlug);
+          if (result.error === 'daily_limit') {
+            setPaywallBlocked(true);
+            return;
+          }
+          setQuestions(result.questions.slice(0, barkadaLimit));
+        } else {
+          if (user && exam) {
+            const limits = await fetchUsageLimits(slug);
+            if (limits && !limits.isPremium && limits.dailyQuestionsRemaining === 0) {
+              setPaywallBlocked(true);
+              return;
+            }
+          }
+          const result = await fetchPracticeQuestions(slug, 12, topicSlug);
+          if (result.error === 'daily_limit') {
+            setPaywallBlocked(true);
+            return;
+          }
+          setQuestions(result.questions);
+        }
+        if (user) {
+          setBookmarkedIds(await fetchBookmarkedQuestionIds(user.id));
+        }
+      } catch {
+        if (!isMock && !isBoard && !isDiagnostic && !isWeakArea && !isBarkada && (await hasOfflinePack(slug))) {
+          const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
+          if (offlineQs.length) {
+            setOfflineMode(true);
+            setQuestions(offlineQs);
+          }
+        }
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [slug, topicSlug, isMock, isBoard, isOffline, isMistakeReview, isDiagnostic, isTimed, isWeakArea, isBarkada, barkadaLimit, mockExamId, previewLimit, user, isPremium, router]);
+
+  useEffect(() => {
+    setLang(prefs.explanationLocale ?? 'en');
+  }, [prefs.explanationLocale]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const sec = Math.floor((Date.now() - startedAt.current) / 1000);
+      setElapsed(sec);
+      if (isMock || isTimed || isBoard) {
+        setTimeLeft((t) => Math.max(0, t - 1));
+      }
+      if (isDiagnostic && sec >= DIAGNOSTIC_SOFT_SECONDS) {
+        setSoftTimerWarn(true);
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, [isMock, isTimed, isBoard, isDiagnostic]);
+
+  const formatTime = (sec: number) => {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  };
 
   const current = questions[index];
-  const progressPct = questions.length ? ((index + (revealed ? 1 : 0)) / questions.length) * 100 : 0;
 
-  const submitChoice = useCallback(
+  const pickChoice = useCallback(
     (choiceId: string) => {
       if (!current || revealed) return;
       if (Platform.OS === 'ios') {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
       }
       setSelected(choiceId);
-      setRevealed(true);
-      const elapsed = Math.round((Date.now() - questionStarted.current) / 1000);
-      setAnswers((prev) => [
-        ...prev,
-        {
-          questionId: current.id,
-          selectedChoiceId: choiceId,
-          isCorrect: choiceId === current.correct_choice_id,
-          timeSpentSeconds: elapsed,
-        },
-      ]);
     },
     [current, revealed]
   );
 
-  const goNext = async () => {
-    if (index < questions.length - 1) {
-      setIndex((i) => i + 1);
-      setSelected(null);
-      setRevealed(false);
-      questionStarted.current = Date.now();
+  const checkAnswer = useCallback(async () => {
+    if (!current || !selected || revealed || checking) return;
+    if (!user) {
+      router.push('/(auth)/login');
       return;
     }
+    setChecking(true);
+    try {
+      const result = offlineMode
+        ? checkOfflineAnswer(current, selected)
+        : await checkQuestionAnswer(current.id, selected);
+      if (!result) return;
+      const elapsedQ = Math.round((Date.now() - questionStarted.current) / 1000);
+      if (!isStrictExam) {
+        setRevealResult(result);
+        setRevealed(true);
+      }
+      setAnswers((prev) => [
+        ...prev,
+        {
+          questionId: current.id,
+          selectedChoiceId: selected,
+          isCorrect: result.isCorrect,
+          timeSpentSeconds: elapsedQ,
+        },
+      ]);
+      if (user && !offlineMode) {
+        recordQuizOutcome(current.id, result.isCorrect, result.isCorrect ? undefined : selected);
+      }
+    } catch {
+      /* grading failed */
+    } finally {
+      setChecking(false);
+    }
+  }, [current, selected, revealed, checking, isStrictExam, user, router, offlineMode]);
 
-    const totalCorrect = answers.filter((a) => a.isCorrect).length;
+  const finishQuiz = useCallback(async () => {
+    if (finishing.current) return;
+    finishing.current = true;
+
+    const elapsedQ = Math.round((Date.now() - questionStarted.current) / 1000);
+    const finalAnswers = finalizeAnswers(answers, current, selected, revealed || isStrictExam, elapsedQ, revealResult);
+    const totalCorrect = finalAnswers.filter((a) => a.isCorrect).length;
     const score = questions.length ? Math.round((totalCorrect / questions.length) * 100) : 0;
     const duration = Math.round((Date.now() - startedAt.current) / 1000);
 
-    if (user) {
+    let sessionId: string | null = null;
+    let serverScore = score;
+    let diagnosticReadiness: number | null = null;
+    if (user && !offlineMode) {
       try {
         const exam = await fetchExamBySlug(slug);
         if (exam) {
-          const sessionId = await createPracticeSession(user.id, exam.id, questions.length);
+          sessionId = await createQuizSession(
+            user.id,
+            exam.id,
+            questions.length,
+            isDiagnostic
+              ? 'diagnostic'
+              : isMock
+                ? 'mock'
+                : isBoard
+                  ? 'board'
+                  : isTimed
+                  ? 'timed'
+                  : isMistakeReview
+                    ? 'mistake_review'
+                    : isBarkada
+                      ? 'barkada'
+                      : 'practice',
+            mockExamId
+          );
           if (sessionId) {
-            await saveQuizAnswers(sessionId, answers);
-            await completePracticeSession(sessionId, score, duration);
+            await saveQuizAnswers(sessionId, finalAnswers);
+            if (isDiagnostic) {
+              const diag = await completeDiagnostic(sessionId, duration);
+              if (diag) {
+                serverScore = Math.round(diag.score);
+                diagnosticReadiness = diag.readiness;
+              }
+            } else {
+              const graded = await completePracticeSession(sessionId, duration);
+              if (graded != null) serverScore = Math.round(graded);
+              if (!isDiagnostic) {
+                const newBadges = await awardUserBadges();
+                if (newBadges.length > 0) {
+                  Alert.alert(
+                    'Achievement unlocked!',
+                    newBadges.map((b) => `${b.emoji} ${b.title}`).join('\n')
+                  );
+                }
+              }
+            }
           }
         }
       } catch {
-        /* guest or offline */
+        /* session save failed */
+      }
+    }
+
+    const totalCorrectFinal = Math.round((serverScore / 100) * questions.length);
+
+    if (!user && !isDiagnostic) {
+      try {
+        await saveGuestQuizSession({
+          examSlug: slug,
+          mode: isMock ? 'mock' : isBoard ? 'board' : isMistakeReview ? 'mistake_review' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isDiagnostic ? 'diagnostic' : 'practice',
+          itemCount: questions.length,
+          scorePercent: serverScore,
+          correct: totalCorrectFinal,
+          durationSeconds: duration,
+        });
+      } catch {
+        /* local save failed */
       }
     }
 
     router.replace({
       pathname: '/practice/result',
       params: {
-        score: String(score),
+        score: String(serverScore),
         total: String(questions.length),
-        correct: String(totalCorrect),
+        correct: String(totalCorrectFinal),
         duration: String(duration),
+        sessionId: sessionId ?? '',
+        examSlug: slug,
+        mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : offlineMode ? 'offline' : 'practice',
+        diagnosticReadiness: diagnosticReadiness != null ? String(diagnosticReadiness) : '',
+        pasapathTaskId: pasapathTaskId ?? '',
+        barkadaChallengeId: barkadaChallengeId ?? '',
       },
+    });
+  }, [answers, current, selected, revealed, revealResult, questions.length, user, slug, isMock, isBoard, isMistakeReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, router]);
+
+  useEffect(() => {
+    if ((isStrictExam || isTimed) && timeLeft === 0 && questions.length > 0) {
+      finishQuiz();
+    }
+  }, [isStrictExam, isTimed, timeLeft, questions.length, finishQuiz]);
+
+  const subjectName = (q: Question | undefined) => q?.topic?.subject?.name ?? '';
+
+  const goNext = async () => {
+    if (isStrictExam && !revealed && selected && current) {
+      await checkAnswer();
+    }
+
+    if (index < questions.length - 1) {
+      const nextIndex = index + 1;
+      const nextSubject = subjectName(questions[nextIndex]);
+      const currentSubject = subjectName(current);
+      if (isStrictExam && nextSubject && currentSubject && nextSubject !== currentSubject) {
+        setSectionBreak(nextSubject);
+        return;
+      }
+      setIndex(nextIndex);
+      setSelected(null);
+      setRevealed(false);
+      setRevealResult(null);
+      questionStarted.current = Date.now();
+      return;
+    }
+
+    await finishQuiz();
+  };
+
+  const continueAfterSectionBreak = () => {
+    setSectionBreak(null);
+    setIndex((i) => i + 1);
+    setSelected(null);
+    setRevealed(false);
+    setRevealResult(null);
+    questionStarted.current = Date.now();
+  };
+
+  const toggleBookmarkCurrent = async () => {
+    if (!user || !current) return;
+    const isBookmarked = bookmarkedIds.has(current.id);
+    await toggleBookmark(user.id, current.id, isBookmarked);
+    setBookmarkedIds((prev) => {
+      const next = new Set(prev);
+      if (isBookmarked) next.delete(current.id);
+      else next.add(current.id);
+      return next;
     });
   };
 
@@ -117,96 +481,238 @@ export default function PracticeQuizScreen() {
     );
   }
 
-  if (!questions.length || !current) {
+  if (paywallBlocked) {
     return (
-      <ScreenScroll>
+      <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
-          icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
-          title="Walang tanong pa"
-          description="May 1 demo question lang sa database ngayon. Mag-import pa ng content sa admin."
-          actionLabel="Bumalik"
-          onAction={() => router.back()}
+          icon={<Ionicons name="lock-closed-outline" size={32} color={colors.primary} />}
+          title={paywallReason === 'board' ? 'Board Exam Mode' : 'Daily limit reached'}
+          description={
+            paywallReason === 'board'
+              ? 'Simulate real exam pressure with Exam Pass or Plus — strict timer, no hints, no going back.'
+              : `You've used ${FREE_DAILY_QUESTIONS}/${FREE_DAILY_QUESTIONS} free questions today. Unlock unlimited practice.`
+          }
+          actionLabel="View plans"
+          onAction={() => router.replace('/subscribe')}
         />
-      </ScreenScroll>
+      </View>
     );
   }
 
-  const explanation =
-    lang === 'fil' && current.explanation_fil ? current.explanation_fil : current.explanation_en;
+  if (!questions.length || !current) {
+    return (
+      <View style={[styles.root, { paddingTop: insets.top }]}>
+        <EmptyState
+          icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
+          title="Walang tanong pa"
+          description="Wala pang published questions para sa exam o topic na ito. Subukan ulit after content import."
+          actionLabel="Bumalik"
+          onAction={() => router.back()}
+        />
+      </View>
+    );
+  }
+
+  const explanation = revealResult
+    ? lang === 'fil' && revealResult.explanationFil
+      ? revealResult.explanationFil
+      : revealResult.explanationEn
+    : null;
+
+  if (sectionBreak) {
+    return (
+      <View style={[styles.root, styles.center, { paddingTop: insets.top, paddingHorizontal: spacing.lg }]}>
+        <Ionicons name="layers-outline" size={40} color={colors.primary} />
+        <Text style={[styles.mockBannerText, { fontSize: 22, marginTop: spacing.md, textAlign: 'center' }]}>
+          Next section
+        </Text>
+        <Text style={{ fontFamily: theme.fonts.bodyMedium, color: colors.textMuted, marginTop: spacing.sm, textAlign: 'center' }}>
+          {sectionBreak}
+        </Text>
+        <Text style={{ fontFamily: theme.fonts.bodyMedium, color: colors.textLight, marginTop: spacing.md, textAlign: 'center', lineHeight: 20 }}>
+          Take a breath. Board exam mode — no going back to previous sections.
+        </Text>
+        <PrimaryButton label="Continue section →" size="lg" onPress={continueAfterSectionBreak} style={{ marginTop: spacing.xl, alignSelf: 'stretch' }} />
+      </View>
+    );
+  }
 
   return (
-    <ScreenScroll>
-      <ProgressBar progress={progressPct} label={`Item ${index + 1} of ${questions.length}`} showPercent={false} />
-      {current.topic?.subject?.name ? (
-        <Text style={styles.topic}>{current.topic.subject.name}</Text>
-      ) : null}
-      <Text style={styles.stem}>{current.stem}</Text>
-
-      {current.choices.map((c, i) => (
-        <ChoiceOption
-          key={c.id}
-          letter={LETTERS[i] ?? String(i + 1)}
-          label={c.text}
-          selected={selected === c.id}
-          correct={revealed && c.id === current.correct_choice_id}
-          wrong={revealed && selected === c.id && c.id !== current.correct_choice_id}
-          disabled={revealed}
-          onPress={() => submitChoice(c.id)}
-        />
-      ))}
-
-      {revealed && (
-        <View style={styles.explanation}>
-          <View style={styles.explanationHeader}>
-            <Text style={styles.explanationTitle}>Explanation</Text>
-            <View style={styles.langToggle}>
-              <Pressable
-                style={[styles.langBtn, lang === 'en' && styles.langBtnActive]}
-                onPress={() => setLang('en')}
-              >
-                <Text style={[styles.langText, lang === 'en' && styles.langTextActive]}>EN</Text>
-              </Pressable>
-              <Pressable
-                style={[styles.langBtn, lang === 'fil' && styles.langBtnActive]}
-                onPress={() => setLang('fil')}
-              >
-                <Text style={[styles.langText, lang === 'fil' && styles.langTextActive]}>TL</Text>
-              </Pressable>
+    <View style={styles.root}>
+      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 120 }}>
+        <View style={[styles.topBar, { paddingTop: insets.top + spacing.sm }]}>
+          {!isStrictExam && !isDiagnostic ? (
+            <Pressable style={styles.closeBtn} onPress={() => router.back()}>
+              <Ionicons name="close" size={18} color={colors.text} />
+            </Pressable>
+          ) : (
+            <View style={styles.closeBtn}>
+              <Ionicons name="lock-closed" size={16} color={colors.textMuted} />
             </View>
+          )}
+          <View style={styles.segments}>
+            {questions.map((_, i) => (
+              <View
+                key={i}
+                style={[
+                  styles.segment,
+                  i < index && styles.segmentDone,
+                  i === index && styles.segmentActive,
+                ]}
+              />
+            ))}
           </View>
-          <Text style={styles.explanationBody}>{explanation}</Text>
+          <View style={[styles.timer, (isStrictExam || isTimed) && timeLeft < 60 && { backgroundColor: colors.errorBg }]}>
+            <Ionicons name="time-outline" size={14} color={(isStrictExam || isTimed) && timeLeft < 60 ? colors.error : colors.accentDark} />
+            <Text style={[styles.timerText, (isStrictExam || isTimed) && timeLeft < 60 && { color: colors.error }]}>
+              {formatTime(isStrictExam || isTimed ? timeLeft : elapsed)}
+            </Text>
+          </View>
         </View>
-      )}
 
-      {revealed && (
-        <PrimaryButton
-          label={index < questions.length - 1 ? 'Susunod na tanong' : 'Tingnan ang resulta'}
-          onPress={goNext}
-          style={{ marginTop: spacing.md }}
-        />
-      )}
-    </ScreenScroll>
+        {isDiagnostic ? (
+          <View style={styles.mockBanner}>
+            <Text style={styles.mockBannerText}>
+              Diagnostic baseline · {questions.length} items · Soft 30-min timer
+              {softTimerWarn ? ' · Consider wrapping up' : ''}
+            </Text>
+          </View>
+        ) : null}
+
+        {isTimed ? (
+          <View style={styles.mockBanner}>
+            <Text style={styles.mockBannerText}>
+              Timed practice · {Math.round(timedDuration / 60)} min · Auto-submit when time runs out
+            </Text>
+          </View>
+        ) : null}
+
+        {isWeakArea ? (
+          <View style={styles.mockBanner}>
+            <Text style={styles.mockBannerText}>Quick 10 · Questions from your weakest topics</Text>
+          </View>
+        ) : null}
+
+        {isBoard ? (
+          <View style={styles.mockBanner}>
+            <Text style={styles.mockBannerText}>
+              Board Exam Mode · {questions.length} items · 45 min · No hints · No going back
+            </Text>
+          </View>
+        ) : null}
+
+        {isMock ? (
+          <View style={styles.mockBanner}>
+            <Text style={styles.mockBannerText}>{mockTitle} · Board Exam Mode · No going back</Text>
+          </View>
+        ) : null}
+
+        <View style={styles.meta}>
+          <Text style={styles.metaText}>
+            Question {index + 1} of {questions.length}
+          </Text>
+          {current.topic?.subject?.name ? (
+            <Pill color={colors.primary}>{current.topic.subject.name.toUpperCase()}</Pill>
+          ) : null}
+          {user ? (
+            <Pressable onPress={toggleBookmarkCurrent} hitSlop={8}>
+              <Ionicons
+                name={bookmarkedIds.has(current.id) ? 'bookmark' : 'bookmark-outline'}
+                size={20}
+                color={colors.primary}
+              />
+            </Pressable>
+          ) : null}
+        </View>
+
+        <View style={styles.questionCard}>
+          <Text style={styles.stem}>{current.stem}</Text>
+        </View>
+
+        <View style={styles.options}>
+          {current.choices.map((c, i) => (
+            <ChoiceOption
+              key={c.id}
+              letter={LETTERS[i] ?? String(i + 1)}
+              label={c.text}
+              selected={selected === c.id}
+              correct={revealed && c.id === revealResult?.correctChoiceId}
+              wrong={revealed && selected === c.id && c.id !== revealResult?.correctChoiceId}
+              disabled={revealed}
+              onPress={() => pickChoice(c.id)}
+            />
+          ))}
+        </View>
+
+        {revealed && explanation ? (
+          <View style={styles.explanation}>
+            <View style={styles.explanationHeader}>
+              <Text style={styles.explanationTitle}>Explanation</Text>
+              <View style={styles.langToggle}>
+                {(['en', 'fil'] as const).map((l) => (
+                  <Pressable
+                    key={l}
+                    style={[styles.langBtn, lang === l && styles.langBtnActive]}
+                    onPress={() => setLang(l)}
+                  >
+                    <Text style={[styles.langText, lang === l && styles.langTextActive]}>
+                      {l === 'en' ? 'EN' : 'TL'}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            </View>
+            <Text style={styles.explanationBody}>{explanation}</Text>
+          </View>
+        ) : null}
+      </ScrollView>
+
+      <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}>
+        {!revealed && !isStrictExam && !isDiagnostic && !isTimed ? (
+          <View style={styles.hintRow}>
+            <Text style={{ fontSize: 18 }}>💡</Text>
+            <Text style={styles.hintText}>
+              Use hint <Text style={styles.hintXp}>(–10 XP)</Text>
+            </Text>
+            <Pill color={colors.accentDark} bg={colors.surface}>
+              3 LEFT
+            </Pill>
+          </View>
+        ) : null}
+        {revealed && !isStrictExam ? (
+          <PrimaryButton
+            label={
+              index < questions.length - 1
+                ? 'Next question →'
+                : isDiagnostic
+                  ? 'Tingnan ang baseline result'
+                  : 'Tingnan ang resulta'
+            }
+            size="lg"
+            onPress={goNext}
+          />
+        ) : isStrictExam || revealed ? (
+          <PrimaryButton
+            label={
+              index < questions.length - 1
+                ? 'Next question →'
+                : isBoard
+                  ? 'Submit board exam'
+                  : 'Submit mock exam'
+            }
+            size="lg"
+            disabled={!selected || checking}
+            onPress={goNext}
+          />
+        ) : (
+          <PrimaryButton
+            label={checking ? 'Checking…' : 'Check answer'}
+            size="lg"
+            disabled={!selected || checking}
+            onPress={checkAnswer}
+          />
+        )}
+      </View>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
-  topic: { ...type.caption, color: colors.primary, marginTop: spacing.sm, marginBottom: spacing.xs },
-  stem: { ...type.title, fontSize: 18, lineHeight: 26, marginBottom: spacing.lg },
-  explanation: {
-    backgroundColor: colors.surface,
-    borderRadius: radii.md,
-    padding: spacing.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    marginTop: spacing.sm,
-  },
-  explanationHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacing.sm },
-  explanationTitle: { ...type.subtitle, color: colors.primary },
-  langToggle: { flexDirection: 'row', gap: 4, backgroundColor: colors.background, borderRadius: radii.sm, padding: 2 },
-  langBtn: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 6, minWidth: 36, alignItems: 'center' },
-  langBtnActive: { backgroundColor: colors.primary },
-  langText: { ...type.caption, color: colors.textMuted },
-  langTextActive: { color: '#fff' },
-  explanationBody: { ...type.body },
-});

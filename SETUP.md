@@ -14,6 +14,10 @@ npm run marketing
 npm run mobile
 # → scan QR with Expo Go on your phone
 
+# Mobile quality checks
+npm run mobile:lint
+npm run mobile:test
+
 # Admin (dev)
 npm run admin
 # → http://localhost:3001 (if port 3000 taken by marketing)
@@ -24,8 +28,8 @@ npm run admin
 | Component | Path | Status |
 |-----------|------|--------|
 | Monorepo | `package.json` workspaces | Done |
-| DB migration | `supabase/migrations/001_mvp_schema.sql` | Ready to run |
-| Catalog seed | `supabase/seed/001_catalog.sql` | Ready to run |
+| DB migrations | `supabase/migrations/20260523120000_mvp_schema.sql` (+ later timestamped files) | Run via `npm run db:push` |
+| Catalog seed | `supabase/sql/catalog_seed.sql` | Local reset or `npm run db:seed-catalog` |
 | Mobile app | `apps/mobile` | Expo Router, onboarding, dashboard shell |
 | Marketing | `apps/marketing` | Landing at reviewnatinph.com branding |
 | Admin | `apps/admin` | Setup checklist page |
@@ -34,6 +38,15 @@ npm run admin
 ## Supabase (required for live data)
 
 Follow `supabase/README.md` — without this, mobile runs in local onboarding-only mode.
+
+## Database scripts
+
+| Command | Purpose |
+|---------|---------|
+| `npm run db:push` | Apply migrations to linked Supabase |
+| `npm run db:seed-catalog` | Apply full catalog seed (`supabase/sql/catalog_seed.sql`) |
+| `npm run db:restore-catalog` | Quick fix: exam categories + types only |
+| `npm run db:seed-questions` | Demo practice questions per exam |
 
 ## Do not run `npm audit fix --force`
 
@@ -59,7 +72,7 @@ After any change: force-close Expo Go, reopen, scan a fresh QR code.
 ## Design system (mobile)
 
 - Shared tokens: `packages/shared/src/tokens.ts`
-- Fonts: Syne + DM Sans (matches marketing)
+- Fonts: Plus Jakarta Sans (mobile); Syne + DM Sans (marketing site)
 - Components: `apps/mobile/components/`
 - Run: `npm run mobile:clear`
 

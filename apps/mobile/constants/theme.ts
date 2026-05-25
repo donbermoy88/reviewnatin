@@ -16,6 +16,7 @@ type TypeStyle = {
   fontSize: number;
   lineHeight: number;
   color?: string;
+  letterSpacing?: number;
 };
 
 export const type: Record<string, TypeStyle> = {
@@ -23,25 +24,29 @@ export const type: Record<string, TypeStyle> = {
     fontFamily: fonts.display,
     fontSize: typography.sizes.display,
     lineHeight: typography.sizes.display * typography.lineHeights.tight,
-    color: colors.primary,
+    color: colors.text,
+    letterSpacing: -0.5,
   },
   headline: {
-    fontFamily: fonts.bodyBold,
+    fontFamily: fonts.display,
     fontSize: typography.sizes.headline,
     lineHeight: typography.sizes.headline * typography.lineHeights.tight,
     color: colors.text,
+    letterSpacing: -0.4,
   },
   brand: {
     fontFamily: fonts.display,
     fontSize: typography.sizes.display,
     lineHeight: typography.sizes.display * typography.lineHeights.tight,
-    color: colors.primary,
+    color: colors.primaryDark,
+    letterSpacing: -0.5,
   },
   title: {
     fontFamily: fonts.bodyBold,
     fontSize: typography.sizes.title,
     lineHeight: typography.sizes.title * typography.lineHeights.normal,
     color: colors.text,
+    letterSpacing: -0.2,
   },
   body: {
     fontFamily: fonts.body,
@@ -50,7 +55,7 @@ export const type: Record<string, TypeStyle> = {
     color: colors.text,
   },
   bodyMuted: {
-    fontFamily: fonts.body,
+    fontFamily: fonts.bodyMedium,
     fontSize: typography.sizes.body,
     lineHeight: typography.sizes.body * typography.lineHeights.relaxed,
     color: colors.textMuted,
@@ -62,15 +67,36 @@ export const type: Record<string, TypeStyle> = {
     color: colors.textMuted,
   },
   caption: {
-    fontFamily: fonts.bodyMedium,
+    fontFamily: fonts.bodySemiBold,
     fontSize: typography.sizes.caption,
     lineHeight: typography.sizes.caption * typography.lineHeights.normal,
-    color: colors.textMuted,
+    color: colors.textLight,
+    letterSpacing: 0.4,
   },
   label: {
-    fontFamily: fonts.bodySemiBold,
+    fontFamily: fonts.bodyBold,
     fontSize: typography.sizes.bodyLg,
     lineHeight: typography.sizes.bodyLg * typography.lineHeights.normal,
     color: colors.text,
+    letterSpacing: -0.1,
   },
+  bodyMedium: {
+    fontFamily: fonts.bodyMedium,
+    fontSize: typography.sizes.body,
+    lineHeight: typography.sizes.body * typography.lineHeights.relaxed,
+    color: colors.text,
+  },
+  bodySemiBold: {
+    fontFamily: fonts.bodySemiBold,
+    fontSize: typography.sizes.subtitle,
+    lineHeight: typography.sizes.subtitle * typography.lineHeights.normal,
+    color: colors.text,
+  },
+};
+
+/** Gradient stops used across headers */
+export const gradients = {
+  hero: [colors.primary, colors.primaryDark] as const,
+  gold: ['#FFF4DC', '#FFE8AA'] as const,
+  challenge: [colors.primaryDark, colors.primary] as const,
 };

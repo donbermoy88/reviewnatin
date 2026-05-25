@@ -1,3 +1,7 @@
+import { UpdatesSection } from "@/components/updates-section";
+import { WaitlistForm } from "@/components/waitlist-form";
+import { ContentCountsStrip } from "@/components/content-counts-strip";
+
 const exams = [
   { name: "CSE Professional & Subprofessional", desc: "Civil Service — verbal, analytical, numerical" },
   { name: "LET Elementary & Secondary", desc: "Licensure for Teachers — Gen Ed, Prof Ed, majors" },
@@ -61,12 +65,13 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4" id="download">
                 <span className="rounded-xl border border-[var(--rn-muted)]/30 bg-white px-6 py-3 text-sm font-semibold text-[var(--rn-muted)]">
-                  App Store — coming soon
+                  App Store — beta soon
                 </span>
                 <span className="rounded-xl border border-[var(--rn-muted)]/30 bg-white px-6 py-3 text-sm font-semibold text-[var(--rn-muted)]">
-                  Google Play — coming soon
+                  Google Play — beta soon
                 </span>
               </div>
+              <WaitlistForm />
             </div>
             <div className="rounded-3xl border border-white/80 bg-white p-6 shadow-xl shadow-[var(--rn-blue)]/10">
               <div className="mb-4 flex items-center justify-between">
@@ -94,6 +99,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <ContentCountsStrip />
 
         <section id="exams" className="bg-white px-6 py-20">
           <div className="mx-auto max-w-6xl">
@@ -148,6 +155,8 @@ export default function Home() {
           </div>
         </section>
 
+        <UpdatesSection />
+
         <section className="border-t border-[var(--rn-muted)]/20 px-6 py-12">
           <div className="mx-auto max-w-3xl text-center text-sm text-[var(--rn-muted)]">
             <p className="font-semibold text-[var(--rn-text)]">Disclaimer</p>
@@ -168,7 +177,18 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="px-6 py-8 text-center text-sm text-[var(--rn-muted)]">
+      <footer className="border-t border-[var(--rn-muted)]/20 px-6 py-8 text-center text-sm text-[var(--rn-muted)]">
+        <nav className="mb-3 flex flex-wrap justify-center gap-4">
+          <a href="/privacy" className="hover:text-[var(--rn-blue)]">
+            Privacy
+          </a>
+          <a href="/terms" className="hover:text-[var(--rn-blue)]">
+            Terms
+          </a>
+          <a href="/disclaimers" className="hover:text-[var(--rn-blue)]">
+            Disclaimers
+          </a>
+        </nav>
         © {new Date().getFullYear()} ReviewNatin · reviewnatinph.com
       </footer>
     </div>

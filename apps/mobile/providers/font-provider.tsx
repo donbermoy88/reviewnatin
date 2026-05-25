@@ -1,30 +1,34 @@
 import {
-  DMSans_400Regular,
-  DMSans_500Medium,
-  DMSans_600SemiBold,
-  DMSans_700Bold,
-} from '@expo-google-fonts/dm-sans';
-import { Syne_700Bold, Syne_800ExtraBold } from '@expo-google-fonts/syne';
+  PlusJakartaSans_400Regular,
+  PlusJakartaSans_500Medium,
+  PlusJakartaSans_600SemiBold,
+  PlusJakartaSans_700Bold,
+  PlusJakartaSans_800ExtraBold,
+} from '@expo-google-fonts/plus-jakarta-sans';
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, View } from 'react-native';
-import { colors } from '../constants/theme';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
+import { AppSplash } from '../components/app-splash';
+
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export function FontProvider({ children }: { children: React.ReactNode }) {
   const [loaded] = useFonts({
-    Syne_700Bold,
-    Syne_800ExtraBold,
-    DMSans_400Regular,
-    DMSans_500Medium,
-    DMSans_600SemiBold,
-    DMSans_700Bold,
+    PlusJakartaSans_400Regular,
+    PlusJakartaSans_500Medium,
+    PlusJakartaSans_600SemiBold,
+    PlusJakartaSans_700Bold,
+    PlusJakartaSans_800ExtraBold,
   });
 
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
   if (!loaded) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
-        <ActivityIndicator size="large" color={colors.primary} />
-      </View>
-    );
+    return <AppSplash />;
   }
 
   return children;

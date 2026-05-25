@@ -1,0 +1,123 @@
+export const EXAM_TYPES = [
+  { slug: 'cse-professional', name: 'CSE Professional', category: 'Civil Service' },
+  { slug: 'cse-subprofessional', name: 'CSE Subprofessional', category: 'Civil Service' },
+  { slug: 'pnle', name: 'PNLE (Nursing)', category: 'PRC' },
+  { slug: 'let-elementary', name: 'LET Elementary', category: 'PRC' },
+  { slug: 'let-secondary', name: 'LET Secondary', category: 'PRC' },
+] as const;
+
+export type ExamSlug = (typeof EXAM_TYPES)[number]['slug'];
+
+export const DEFAULT_EXAM_SLUG: ExamSlug = 'cse-professional';
+
+export type ExamCatalogItem = {
+  slug: ExamSlug;
+  name: string;
+  shortName: string;
+  abbr: string;
+  sub: string;
+  category: 'Civil Service' | 'PRC';
+  color: string;
+  bg: string;
+  tag?: 'Popular' | 'New';
+  users: string;
+  sortOrder: number;
+};
+
+/** Onboarding + catalog UI — slugs match `exam_types` in Supabase */
+export const EXAM_CATALOG: ExamCatalogItem[] = [
+  {
+    slug: 'cse-professional',
+    name: 'CSE Professional',
+    shortName: 'CSE Full',
+    abbr: 'CSE',
+    sub: 'Career Service Examination — Professional Level',
+    category: 'Civil Service',
+    color: '#08245C',
+    bg: '#E5EAF5',
+    tag: 'Popular',
+    users: '98k',
+    sortOrder: 1,
+  },
+  {
+    slug: 'cse-subprofessional',
+    name: 'CSE Subprofessional',
+    shortName: 'CSE Sub',
+    abbr: 'CSC',
+    sub: 'Career Service Examination — Sub-Professional Level',
+    category: 'Civil Service',
+    color: '#0B5FFF',
+    bg: '#E8F0FF',
+    users: '86k',
+    sortOrder: 2,
+  },
+  {
+    slug: 'pnle',
+    name: 'PNLE (Nursing)',
+    shortName: 'PNLE',
+    abbr: 'NLE',
+    sub: 'Philippine Nurse Licensure Examination',
+    category: 'PRC',
+    color: '#22C55E',
+    bg: '#E4F8EC',
+    users: '54k',
+    sortOrder: 3,
+  },
+  {
+    slug: 'let-elementary',
+    name: 'LET Elementary',
+    shortName: 'LET Elementary',
+    abbr: 'LET',
+    sub: 'Licensure Examination for Teachers — Elementary',
+    category: 'PRC',
+    color: '#0B5FFF',
+    bg: '#E8F0FF',
+    users: '142k',
+    sortOrder: 4,
+  },
+  {
+    slug: 'let-secondary',
+    name: 'LET Secondary',
+    shortName: 'LET Secondary',
+    abbr: 'LET',
+    sub: 'Licensure Examination for Teachers — Secondary',
+    category: 'PRC',
+    color: '#7B2CBF',
+    bg: '#F1E8FA',
+    users: '67k',
+    sortOrder: 5,
+  },
+];
+
+export function getExamCatalogItem(slug: string): ExamCatalogItem | undefined {
+  return EXAM_CATALOG.find((e) => e.slug === slug);
+}
+
+export function getExamCategoryLabel(slug: string): string {
+  const item = getExamCatalogItem(slug);
+  if (!item) return 'EXAM';
+  return item.category === 'Civil Service' ? 'CSC · CIVIL SERVICE' : 'PRC · BOARD EXAM';
+}
+
+/** LET Secondary major fields — stored in user_exam_goals.major_slug */
+export const LET_SECONDARY_MAJORS = [
+  { slug: 'english', name: 'English' },
+  { slug: 'mathematics', name: 'Mathematics' },
+  { slug: 'biological-science', name: 'Biological Science' },
+  { slug: 'physical-science', name: 'Physical Science' },
+  { slug: 'filipino', name: 'Filipino' },
+  { slug: 'social-studies', name: 'Social Studies' },
+] as const;
+
+export type OnboardingLevel = 'beginner' | 'average' | 'advanced';
+
+export const ONBOARDING_LEVELS: {
+  id: OnboardingLevel;
+  label: string;
+  sub: string;
+  emoji: string;
+}[] = [
+  { id: 'beginner', label: 'Beginner', sub: 'Baguhan pa sa exam prep', emoji: '🌱' },
+  { id: 'average', label: 'Average', sub: 'May konting review na', emoji: '📖' },
+  { id: 'advanced', label: 'Advanced', sub: 'Retaker o may solid base na', emoji: '🎯' },
+];

@@ -10,10 +10,9 @@ alwaysApply: false
 
 When building or styling **mobile** (`apps/mobile`):
 
-- `building-native-ui` (~/.agents/skills/) — Expo Router, ScrollView + safe areas, components outside `app/`, kebab-case files
-- `native-data-fetching` — Supabase via `lib/api/`, no axios
-- `mobile-ux-patterns` — 48dp touch targets, max 3–4 nav depth, empty states with CTA
-- `mobile-design-system` — spacing, hierarchy, Filipino-first copy
+- `.cursor/skills/reviewnatin-mobile-design` — brand UI, AppLogo, icons, gradients, onboarding patterns
+- `mobile-design-system` (~/.agents/skills/) — touch targets, spacing grid, accessibility
+- `building-native-ui` (~/.agents/skills/) — Expo Router, ScrollView + safe areas, components outside `app/`
 
 When building **marketing/admin web**:
 
@@ -21,10 +20,14 @@ When building **marketing/admin web**:
 
 ## Brand (do not drift)
 
-- **Tone:** Filipino reviewer app — warm, clear Taglish where helpful, trustworthy (CSC/PRC disclaimers)
-- **Colors:** `apps/mobile/constants/theme.ts` — primary `#1E4FD9`, accent `#F5B800`, light surfaces
-- **Avoid AI slop:** no Inter/Roboto-only stacks, no purple-on-white hero clichés, no cookie-cutter card grids
-- **Mobile:** PasaPath card is the hero CTA; readiness ring + streak; exam countdown in header
+- **Source:** Claude Design handoff — `reviewnatin-ph/project/screens.jsx` (RN palette)
+- **Tone:** Filipino exam prep — royal blue `#0B5FFF`, navy `#08245C`, gold `#FFC928`
+- **Font:** Plus Jakarta Sans only (800 display, 700 labels, 500 body)
+- **Logo:** `LogoMark` + `BrandWordmark` — Review**Natin** gold accent on "Natin"
+- **App icon:** `assets/brand/icon.svg` → run `npm run generate-icons` in `apps/mobile`
+- **Headers:** `LinearGradient` hero with rounded bottom corners (28px)
+- **Cards:** white, 18–22px radius, soft navy shadow
+- **Tab bar:** Home · Review · Stats · Profile with top active indicator bar
 
 ## Expo constraints
 

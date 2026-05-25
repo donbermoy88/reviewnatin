@@ -17,12 +17,12 @@ App deep links and legal pages should point to `reviewnatinph.com` (Privacy, Ter
 
 - [x] Concept audit and competitor research
 - [x] MVP product specs (blueprints, schema, PasaPath, screens, pricing, content pipeline)
-- [x] SQL migration draft (`supabase/migrations/001_mvp_schema.sql`)
+- [x] SQL migration draft (`supabase/migrations/20260523120000_mvp_schema.sql`)
 - [x] Supabase project provisioned (`reviewnatin`, migrations + seed applied)
 - [x] Expo mobile app scaffolded (`apps/mobile`)
 - [x] Marketing site scaffolded (`apps/marketing` → deploy to reviewnatinph.com)
 - [x] Admin shell (`apps/admin`)
-- [x] Seed SQL (`supabase/seed/001_catalog.sql`)
+- [x] Seed SQL (`supabase/sql/catalog_seed.sql`, loaded via `supabase/seed/001_catalog.sql`)
 - [ ] Question content + review pipeline
 - [ ] Beta and store submission
 
@@ -32,7 +32,7 @@ App deep links and legal pages should point to `reviewnatinph.com` (Privacy, Ter
 
 ### Step 1 — Foundation (Week 1)
 
-1. **Create Supabase project** — run `001_mvp_schema.sql`, enable Auth (email + Google + Apple).
+1. **Create Supabase project** — run migrations via `npm run db:push`, then catalog seed (`supabase/sql/catalog_seed.sql`).
 2. **Seed catalog** — insert Phase 1 `exam_types`, `subject_areas`, `topics`, and `exam_blueprints` from [01-phase-1-exam-blueprints.md](./01-phase-1-exam-blueprints.md).
 3. **Scaffold Expo app** — `npx create-expo-app`, Expo Router, TypeScript, Zustand, Supabase client.
 4. **Scaffold marketing site** — Next.js on `reviewnatinph.com` (hero, 3 exams, pricing, disclaimers, store badges).

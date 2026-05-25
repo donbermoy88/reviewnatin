@@ -6,13 +6,15 @@ type Props = {
   children: ReactNode;
   style?: ViewStyle;
   variant?: 'default' | 'elevated' | 'flat';
+  padding?: number;
 };
 
-export function Card({ children, style, variant = 'default' }: Props) {
+export function Card({ children, style, variant = 'default', padding = spacing.lg }: Props) {
   return (
     <View
       style={[
         styles.card,
+        { padding },
         variant === 'elevated' && shadows.card,
         variant === 'flat' && styles.flat,
         style,
@@ -26,10 +28,9 @@ export function Card({ children, style, variant = 'default' }: Props) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.surface,
-    borderRadius: radii.lg,
-    padding: spacing.lg,
+    borderRadius: radii.xl,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: '#f1f5f9',
   },
   flat: {
     borderWidth: 0,

@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { colors, spacing, type } from '../constants/theme';
+import { useMemo } from 'react';
+import { Text, View } from 'react-native';
+import { useAppTheme } from '../hooks/use-app-theme';
+import { createEmptyStateStyles } from '../lib/themed-styles';
 import { PrimaryButton } from './primary-button';
 
 type Props = {
@@ -12,6 +14,9 @@ type Props = {
 };
 
 export function EmptyState({ icon, title, description, actionLabel, onAction }: Props) {
+  const theme = useAppTheme();
+  const styles = useMemo(() => createEmptyStateStyles(theme), [theme]);
+
   return (
     <View style={styles.wrap}>
       <View style={styles.iconWrap}>{icon}</View>
@@ -23,19 +28,3 @@ export function EmptyState({ icon, title, description, actionLabel, onAction }: 
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  wrap: { alignItems: 'center', paddingVertical: spacing.xl, paddingHorizontal: spacing.lg },
-  iconWrap: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: colors.primaryMuted,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: spacing.md,
-  },
-  title: { ...type.title, textAlign: 'center' },
-  description: { ...type.bodyMuted, textAlign: 'center', marginTop: spacing.sm },
-  btn: { marginTop: spacing.lg, alignSelf: 'stretch', width: '100%' },
-});

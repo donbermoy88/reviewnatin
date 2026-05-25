@@ -1,30 +1,37 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { Platform, StyleSheet } from 'react-native';
+import { useMemo } from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, fonts } from '../../constants/theme';
+import { useAppTheme } from '../../hooks/use-app-theme';
+import { createTabLayoutStyles } from '../../lib/themed-styles';
 
-const TAB_BAR_BASE = 52;
+import { TAB_BAR_BASE } from '../../lib/layout/content-padding';
 
 function TabIcon({
   name,
   focused,
+  colors,
+  styles,
 }: {
   name: keyof typeof Ionicons.glyphMap;
   focused: boolean;
+  colors: ReturnType<typeof useAppTheme>['colors'];
+  styles: ReturnType<typeof createTabLayoutStyles>;
 }) {
   return (
-    <Ionicons
-      name={name}
-      size={22}
-      color={focused ? colors.primary : colors.textMuted}
-      style={styles.tabIcon}
-    />
+    <View style={styles.iconWrap}>
+      {focused ? <View style={styles.activeBar} /> : null}
+      <Ionicons name={name} size={21} color={focused ? colors.primary : colors.textLight} />
+    </View>
   );
 }
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
+  const theme = useAppTheme();
+  const { colors, fonts } = theme;
+  const styles = useMemo(() => createTabLayoutStyles(theme), [theme]);
   const bottomInset = Math.max(insets.bottom, Platform.OS === 'android' ? 8 : 0);
   const tabBarHeight = TAB_BAR_BASE + bottomInset;
 
@@ -32,11 +39,10 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.textMuted,
+        tabBarInactiveTintColor: colors.textLight,
         tabBarHideOnKeyboard: true,
         tabBarLabelStyle: styles.tabLabel,
         tabBarItemStyle: styles.tabItem,
-        tabBarIconStyle: styles.tabIconWrap,
         tabBarStyle: {
           backgroundColor: colors.surface,
           borderTopColor: colors.border,
@@ -44,20 +50,20 @@ export default function TabsLayout() {
           height: tabBarHeight,
           paddingTop: 6,
           paddingBottom: bottomInset,
-          paddingHorizontal: spacingHorizontal,
           ...Platform.select({
             android: { elevation: 12 },
             ios: {
-              shadowColor: '#0F172A',
+              shadowColor: '#000',
               shadowOffset: { width: 0, height: -2 },
-              shadowOpacity: 0.06,
-              shadowRadius: 8,
+              shadowOpacity: theme.isDark ? 0.35 : 0.08,
+              shadowRadius: 12,
             },
           }),
         },
         headerStyle: { backgroundColor: colors.surface },
         headerTintColor: colors.primary,
         headerTitleStyle: { fontFamily: fonts.bodyBold, fontSize: 17 },
+        sceneStyle: { backgroundColor: colors.background },
       }}
     >
       <Tabs.Screen
@@ -66,58 +72,41 @@ export default function TabsLayout() {
           title: 'Home',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'home' : 'home-outline'} focused={focused} />
+            <TabIcon name={focused ? 'home' : 'home-outline'} focused={focused} colors={colors} styles={styles} />
           ),
         }}
       />
       <Tabs.Screen
         name="study"
         options={{
-          title: 'Study',
+          title: 'Review',
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'book' : 'book-outline'} focused={focused} />
+            <TabIcon name={focused ? 'layers' : 'layers-outline'} focused={focused} colors={colors} styles={styles} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="leaderboard"
+        options={{
+          title: 'Ranks',
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon name={focused ? 'trophy' : 'trophy-outline'} focused={focused} colors={colors} styles={styles} />
           ),
         }}
       />
       <Tabs.Screen
         name="progress"
         options={{
-          title: 'Progress',
+          title: 'Profile',
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'stats-chart' : 'stats-chart-outline'} focused={focused} />
+            <TabIcon name={focused ? 'person' : 'person-outline'} focused={focused} colors={colors} styles={styles} />
           ),
         }}
       />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Settings',
-          tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'settings' : 'settings-outline'} focused={focused} />
-          ),
-        }}
-      />
+      <Tabs.Screen name="settings" options={{ href: null, headerShown: false }} />
     </Tabs>
   );
 }
-
-const spacingHorizontal = 4;
-
-const styles = StyleSheet.create({
-  tabItem: {
-    paddingTop: 2,
-    minHeight: 44,
-  },
-  tabIconWrap: {
-    marginBottom: 0,
-  },
-  tabIcon: {
-    marginTop: 2,
-  },
-  tabLabel: {
-    fontFamily: fonts.bodyMedium,
-    fontSize: 11,
-    marginTop: 2,
-    marginBottom: Platform.OS === 'android' ? 0 : 2,
-  },
-});

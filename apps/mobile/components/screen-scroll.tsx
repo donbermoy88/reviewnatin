@@ -1,15 +1,14 @@
 import type { ReactNode } from 'react';
-import { ScrollView, StyleSheet, type ScrollViewProps } from 'react-native';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { Platform, ScrollView, StyleSheet, type ScrollViewProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, spacing } from '../constants/theme';
+import { useAppTheme } from '../hooks/use-app-theme';
+
+import { stackScrollPadding, TAB_BAR_BASE } from '../lib/layout/content-padding';
 
 type Props = ScrollViewProps & {
   children: ReactNode;
   padded?: boolean;
-  /** Extra bottom padding for screens inside the tab navigator */
   withTabBar?: boolean;
-  /** Top inset when stack header is hidden (e.g. Home tab) */
   safeTop?: boolean;
 };
 
@@ -22,19 +21,20 @@ export function ScreenScroll({
   ...rest
 }: Props) {
   const insets = useSafeAreaInsets();
-  const tabBarHeight = useBottomTabBarHeight();
+  const { colors, spacing } = useAppTheme();
+  const bottomInset = Math.max(insets.bottom, Platform.OS === 'android' ? 8 : 0);
 
   const bottomPad = withTabBar
-    ? tabBarHeight + spacing.lg
+    ? TAB_BAR_BASE + bottomInset + spacing.lg
     : spacing.xl * 2 + insets.bottom;
 
   const topPad = safeTop ? insets.top + spacing.lg : spacing.lg;
 
   return (
     <ScrollView
-      style={styles.scroll}
+      style={[styles.scroll, { backgroundColor: colors.background }]}
       contentContainerStyle={[
-        padded && styles.padded,
+        padded && { paddingHorizontal: spacing.lg },
         padded && { paddingTop: topPad, paddingBottom: bottomPad },
         contentContainerStyle,
       ]}
@@ -48,6 +48,5 @@ export function ScreenScroll({
 }
 
 const styles = StyleSheet.create({
-  scroll: { flex: 1, backgroundColor: colors.background },
-  padded: { paddingHorizontal: spacing.lg },
+  scroll: { flex: 1 },
 });

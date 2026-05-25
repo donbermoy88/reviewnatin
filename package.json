@@ -18,6 +18,25 @@
     "db:push": "supabase db push",
     "supabase:setup": "node scripts/wait-and-setup-supabase.mjs",
     "supabase:login": "supabase login",
-    "supabase:auth": "node scripts/configure-supabase-auth.mjs"
+    "supabase:auth": "node scripts/configure-supabase-auth.mjs",
+    "supabase:google": "node scripts/configure-google-auth.mjs",
+    "supabase:android": "node scripts/configure-android-oauth.mjs",
+    "supabase:google:setup": "node scripts/setup-google-oauth-interactive.mjs",
+    "db:restore-catalog": "node scripts/restore-exam-catalog.mjs",
+    "db:seed-catalog": "node scripts/seed-catalog.mjs",
+    "db:seed-cse-topics": "node scripts/seed-cse-topics.mjs",
+    "db:seed-questions": "node scripts/seed-demo-questions.mjs",
+    "db:import-questions": "node scripts/import-questions.mjs",
+    "db:refresh-mocks": "node scripts/refresh-mock-exams.mjs",
+    "db:seed-content": "npm run db:seed-cse-topics && npm run db:seed-questions && npm run db:refresh-mocks",
+    "db:apply-all": "node scripts/db-apply-all.mjs",
+    "db:enable-demo-iap": "node scripts/enable-demo-iap.mjs",
+    "mobile:ios:run": "npm run ios:run --workspace=apps/mobile",
+    "mobile:ios:dev": "npm run ios:dev --workspace=apps/mobile",
+    "mobile:ios:build-sim": "npm run ios:build-sim --workspace=apps/mobile",
+    "mobile:lint": "npm run lint --workspace=apps/mobile",
+    "mobile:test": "npm run test --workspace=apps/mobile",
+    "test": "npm run mobile:test",
+    "db:gen-types": "node scripts/gen-db-types.mjs"
   }
 }

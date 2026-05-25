@@ -41,6 +41,7 @@ Email auth is configured automatically:
 
 ```bash
 npm run supabase:auth
+npm run supabase:google   # Google Sign-In for mobile
 ```
 
 (Email ON + auto-confirm for dev. Re-run after creating a new Supabase project.)

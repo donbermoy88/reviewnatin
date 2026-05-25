@@ -1,0 +1,138 @@
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { StackShell } from '../../components/stack-shell';
+import { useAppTheme } from '../../hooks/use-app-theme';
+import { resolveOnboardingGoal } from '../../lib/api/goals';
+import { fetchPasaPathWeek, type PasaPathWeekDay } from '../../lib/api/pasapath';
+import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
+import { useAuth } from '../../providers/auth-provider';
+
+function dayLabel(dateStr: string, isToday: boolean): string {
+  if (isToday) return 'Ngayon';
+  const d = new Date(`${dateStr}T12:00:00`);
+  return d.toLocaleDateString('en-PH', { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+function DayRow({ day, onPressToday }: { day: PasaPathWeekDay; onPressToday?: () => void }) {
+  const theme = useAppTheme();
+  const { colors, fonts, spacing, radii } = theme;
+  const pct = day.tasks_total > 0 ? Math.round((day.tasks_completed / day.tasks_total) * 100) : 0;
+  const done = day.tasks_total > 0 && day.tasks_completed >= day.tasks_total;
+
+  return (
+    <Pressable
+      onPress={day.is_today ? onPressToday : undefined}
+      disabled={!day.is_today}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: spacing.md,
+        backgroundColor: day.is_today ? colors.primaryMuted : colors.surface,
+        borderRadius: radii.xl,
+        padding: spacing.md,
+        borderWidth: 1,
+        borderColor: day.is_today ? colors.primary : colors.border,
+      }}
+      accessibilityRole={day.is_today ? 'button' : 'text'}
+      accessibilityLabel={`${dayLabel(day.date, day.is_today)} — ${day.tasks_completed} of ${day.tasks_total} tasks`}
+    >
+      <View
+        style={{
+          width: 40,
+          height: 40,
+          borderRadius: 20,
+          backgroundColor: done ? colors.successBg : day.is_today ? colors.primary : colors.iconBg,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {done ? (
+          <Ionicons name="checkmark" size={20} color={colors.success} />
+        ) : (
+          <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: day.is_today ? '#fff' : colors.textMuted }}>
+            {pct || '—'}
+          </Text>
+        )}
+      </View>
+      <View style={{ flex: 1 }}>
+        <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text }}>
+          {dayLabel(day.date, day.is_today)}
+        </Text>
+        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 2 }}>
+          {day.tasks_total > 0
+            ? `${day.tasks_completed}/${day.tasks_total} tasks · ${day.daily_minutes ?? '—'} min`
+            : 'Walang naka-save na plan'}
+        </Text>
+      </View>
+      {day.is_today ? <Ionicons name="chevron-forward" size={18} color={colors.primary} /> : null}
+    </Pressable>
+  );
+}
+
+export default function PasaPathWeekScreen() {
+  const router = useRouter();
+  const theme = useAppTheme();
+  const { colors, spacing } = theme;
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [days, setDays] = useState<PasaPathWeekDay[]>([]);
+
+  const load = useCallback(async () => {
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    try {
+      const goal = await resolveOnboardingGoal(user.id);
+      const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
+      const week = await fetchPasaPathWeek(slug);
+      setDays(week?.days ?? []);
+    } finally {
+      setLoading(false);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    void load();
+  }, [load]);
+
+  const weekSummary = useMemo(() => {
+    const withTasks = days.filter((d) => d.tasks_total > 0);
+    const completedDays = withTasks.filter((d) => d.tasks_completed >= d.tasks_total && d.tasks_total > 0).length;
+    return { completedDays, trackedDays: withTasks.length };
+  }, [days]);
+
+  if (!user) {
+    return (
+      <StackShell title="PasaPath week" subtitle="Mag-login para makita ang weekly progress mo.">
+        <Pressable onPress={() => router.push('/(auth)/login')}>
+          <Text style={{ fontFamily: theme.fonts.bodyBold, color: colors.primary }}>Mag-login →</Text>
+        </Pressable>
+      </StackShell>
+    );
+  }
+
+  return (
+    <StackShell
+      title="PasaPath week"
+      subtitle={`Huling 7 araw · ${weekSummary.completedDays}/${weekSummary.trackedDays} araw na kumpleto`}
+    >
+      {loading ? (
+        <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
+      ) : (
+        <View style={{ gap: spacing.sm }}>
+          {days.map((day) => (
+            <DayRow
+              key={day.date}
+              day={day}
+              onPressToday={() => router.replace('/(tabs)')}
+            />
+          ))}
+        </View>
+      )}
+    </StackShell>
+  );
+}

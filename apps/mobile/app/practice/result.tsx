@@ -1,62 +1,467 @@
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Card } from '../../components/card';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, Alert, Pressable, ScrollView, Text, View } from 'react-native';
+import { AppSheet } from '../../components/app-sheet';
+import { ShareScoreCard } from '../../components/share-score-card';
+import { ShareScoreCapture } from '../../components/share-score-capture';
+import { fetchExamBySlug } from '../../lib/api/catalog';
+import { canUseViewShot, shareQuizScore, shareQuizScoreImage } from '../../lib/share/score-share';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ChoiceOption } from '../../components/choice-option';
 import { PrimaryButton } from '../../components/primary-button';
-import { ReadinessRing } from '../../components/readiness-ring';
-import { ScreenScroll } from '../../components/screen-scroll';
-import { spacing, type } from '../../constants/theme';
-import { getOnboarding } from '../../lib/onboarding-store';
+import { ScoreRing } from '../../components/score-ring';
+import { SparkleStar } from '../../components/sparkle-star';
+import { useAppTheme } from '../../hooks/use-app-theme';
+import { createResultStyles } from '../../lib/themed-styles';
+import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
+import { resolveOnboardingGoal } from '../../lib/api/goals';
+import { fetchSessionReview, type SessionReviewItem } from '../../lib/api/quiz';
+import { reportQuestion, type ReportReason } from '../../lib/api/reported-questions';
+import { completePasaPathTask } from '../../lib/api/pasapath';
+import { submitBarkadaChallengeResult } from '../../lib/api/barkada';
+import { MOCK_PASS_THRESHOLD } from '../../lib/api/mock-history';
+import { fetchAiExplanation } from '../../lib/api/ai-explain';
+import { recomputeReadiness } from '../../lib/api/readiness';
+import { fetchUsageLimits } from '../../lib/api/iap';
+import { canUseTts, speakText, stopSpeaking } from '../../lib/tts/speak';
+import { AdBanner } from '../../components/ad-banner';
+import { AdInterstitialModal } from '../../components/ad-interstitial-modal';
+import { tryShowSessionInterstitial } from '../../lib/ads/interstitial';
+import { useAuth } from '../../providers/auth-provider';
+import { useEntitlements } from '../../providers/entitlements-provider';
+import { useUserProfile } from '../../hooks/use-user-profile';
+
+const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+function formatDuration(sec: string): string {
+  const n = Number(sec) || 0;
+  const m = Math.floor(n / 60);
+  const s = n % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
 
 export default function PracticeResultScreen() {
   const router = useRouter();
-  const [examSlug, setExamSlug] = useState('cse-professional');
-  const { score, total, correct, duration } = useLocalSearchParams<{
+  const insets = useSafeAreaInsets();
+  const theme = useAppTheme();
+  const { colors, fonts, gradients, spacing, radii } = theme;
+  const styles = useMemo(() => createResultStyles(theme), [theme]);
+  const { user } = useAuth();
+  const { isPremium } = useEntitlements();
+  const { displayName } = useUserProfile('reviewer');
+  const [showInterstitial, setShowInterstitial] = useState(false);
+  const [reportSheetOpen, setReportSheetOpen] = useState(false);
+  const [reportTargetId, setReportTargetId] = useState<string | null>(null);
+  const [reportFeedback, setReportFeedback] = useState<string | null>(null);
+  const [examTypeId, setExamTypeId] = useState<string | null>(null);
+  const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
+  const [review, setReview] = useState<SessionReviewItem[]>([]);
+  const [reviewLoading, setReviewLoading] = useState(false);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [examName, setExamName] = useState('ReviewNatin');
+  const [sharing, setSharing] = useState(false);
+  const [aiLoadingId, setAiLoadingId] = useState<string | null>(null);
+  const [aiExtras, setAiExtras] = useState<Record<string, string>>({});
+  const [aiRemaining, setAiRemaining] = useState<number | null>(null);
+  const captureRef = useRef<(() => Promise<string | undefined>) | null>(null);
+  const { score, total, correct, duration, sessionId, mode, diagnosticReadiness, pasapathTaskId, examSlug: paramExamSlug, barkadaChallengeId } = useLocalSearchParams<{
     score: string;
     total: string;
     correct: string;
     duration: string;
+    sessionId?: string;
+    mode?: string;
+    diagnosticReadiness?: string;
+    pasapathTaskId?: string;
+    examSlug?: string;
+    barkadaChallengeId?: string;
   }>();
 
   useEffect(() => {
-    getOnboarding().then((o) => {
-      if (o?.examSlug) setExamSlug(o.examSlug);
+    resolveOnboardingGoal(user?.id).then(async (goal) => {
+      const slug = paramExamSlug ?? goal?.examSlug ?? DEFAULT_EXAM_SLUG;
+      setExamSlug(slug);
+      const exam = await fetchExamBySlug(slug);
+      if (exam) setExamName(exam.name);
+      if (exam) setExamTypeId(exam.id);
     });
-  }, []);
+  }, [user?.id, paramExamSlug]);
+
+  useEffect(() => {
+    if (!mode || mode === 'mock' || mode === 'diagnostic' || mode === 'board') return;
+    void (async () => {
+      const premium = isPremium(examTypeId);
+      const outcome = await tryShowSessionInterstitial(premium, false);
+      if (outcome === 'fallback') {
+        setShowInterstitial(true);
+      }
+    })();
+  }, [mode, examTypeId, isPremium]);
+
+  useEffect(() => {
+    if (!sessionId) return;
+    setReviewLoading(true);
+    fetchSessionReview(sessionId)
+      .then(setReview)
+      .finally(() => setReviewLoading(false));
+  }, [sessionId]);
+
+  useEffect(() => {
+    if (!user || !pasapathTaskId || !examSlug) return;
+    void completePasaPathTask(examSlug, pasapathTaskId);
+  }, [user, pasapathTaskId, examSlug]);
+
+  useEffect(() => {
+    if (!user || !examSlug) return;
+    void fetchUsageLimits(examSlug).then((limits) => {
+      if (limits) setAiRemaining(limits.aiExplanationsRemaining);
+    });
+  }, [user, examSlug]);
+
+  useEffect(() => {
+    if (!user || !examSlug) return;
+    void recomputeReadiness(examSlug).catch(() => {});
+  }, [user, examSlug]);
 
   const scoreNum = Number(score) || 0;
   const totalNum = Number(total) || 0;
   const correctNum = Number(correct) || 0;
 
+  useEffect(() => {
+    if (!user || !barkadaChallengeId || !sessionId) return;
+    void submitBarkadaChallengeResult(
+      barkadaChallengeId,
+      sessionId,
+      scoreNum,
+      correctNum,
+      totalNum
+    );
+  }, [user, barkadaChallengeId, sessionId, scoreNum, correctNum, totalNum]);
+
+  const wrongCount = review.filter((r) => r.isCorrect === false).length;
+
+  const promptReport = (questionId: string) => {
+    if (!user) {
+      router.push('/(auth)/login');
+      return;
+    }
+    setReportTargetId(questionId);
+    setReportFeedback(null);
+    setReportSheetOpen(true);
+  };
+
+  const submitReport = async (questionId: string, reason: ReportReason) => {
+    setReportSheetOpen(false);
+    try {
+      await reportQuestion(questionId, reason);
+      setReportFeedback('Salamat! Ire-review namin ito within 48 hours.');
+    } catch {
+      setReportFeedback('Hindi na-send. Subukan ulit later.');
+    }
+  };
+
+  const requestAiExplanation = async (questionId: string) => {
+    if (!user) {
+      router.push('/(auth)/login');
+      return;
+    }
+
+    setAiLoadingId(questionId);
+    try {
+      const result = await fetchAiExplanation(questionId, { examSlug });
+      if (!result.ok) {
+        if (result.error === 'daily_limit_reached') {
+          Alert.alert('Daily limit', 'Free tier: 5 AI explanations lang kada araw. Mag-upgrade para sa unlimited.');
+        } else {
+          Alert.alert('Hindi available', 'Subukan ulit later.');
+        }
+        return;
+      }
+      setAiExtras((prev) => ({ ...prev, [questionId]: result.explanation }));
+      if (result.remaining != null) setAiRemaining(result.remaining);
+    } finally {
+      setAiLoadingId(null);
+    }
+  };
+
+  const modeLabel =
+    mode === 'diagnostic'
+      ? 'Diagnostic baseline'
+      : mode === 'mock'
+        ? 'Mock exam'
+        : mode === 'timed'
+          ? 'Timed practice'
+          : mode === 'weak_area'
+            ? 'Quick 10 · weak areas'
+            : mode === 'barkada'
+              ? 'Barkada challenge'
+              : 'Practice quiz';
+
+  const handleCaptureReady = useCallback((capture: () => Promise<string | undefined>) => {
+    captureRef.current = capture;
+  }, []);
+
+  const shareScore = async () => {
+    setSharing(true);
+    const payload = {
+      displayName,
+      examName,
+      modeLabel,
+      score: scoreNum,
+      correct: correctNum,
+      total: totalNum,
+    };
+
+    try {
+      if (canUseViewShot() && captureRef.current) {
+        const shared = await shareQuizScoreImage(captureRef.current);
+        if (shared) return;
+      }
+      await shareQuizScore(payload);
+    } finally {
+      setSharing(false);
+    }
+  };
+
   return (
-    <ScreenScroll>
-      <Text style={styles.title}>Tapos na ang practice!</Text>
-      <ReadinessRing
-        percent={scoreNum}
-        label="Score sa session"
-        hint={`${correctNum} / ${totalNum} tamang sagot · ${duration}s`}
+    <View style={styles.root}>
+      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}>
+        <LinearGradient
+          colors={[...gradients.hero]}
+          style={[styles.hero, { paddingTop: insets.top + spacing.lg }]}
+        >
+          <View style={styles.sparkleA}>
+            <SparkleStar size={14} />
+          </View>
+          <Text style={styles.heroLbl}>
+            {mode === 'diagnostic'
+              ? 'Diagnostic complete!'
+              : mode === 'mock'
+                ? 'Mock exam complete!'
+                : mode === 'timed'
+                  ? 'Timed practice complete!'
+                  : mode === 'weak_area'
+                    ? 'Quick 10 complete!'
+                    : mode === 'barkada'
+                      ? 'Barkada challenge complete!'
+                      : 'Quiz complete!'}
+          </Text>
+          <Text style={styles.heroTitle}>
+            {mode === 'diagnostic'
+              ? `Baseline readiness: ${diagnosticReadiness ?? scoreNum}%`
+              : mode === 'mock'
+                ? scoreNum >= MOCK_PASS_THRESHOLD
+                  ? `Mock PASS — ${scoreNum}% 🎉`
+                  : `Mock score ${scoreNum}% — aim for ${MOCK_PASS_THRESHOLD}%+`
+                : scoreNum >= 70
+                  ? `Galing mo, ${displayName}! 🎉`
+                  : 'Keep going! 💪'}
+          </Text>
+          <ScoreRing percent={scoreNum} correct={correctNum} total={totalNum} />
+        </LinearGradient>
+
+        <View style={styles.statsRow}>
+          {[
+            { v: `${correctNum}/${totalNum}`, l: 'Correct', c: colors.primary },
+            { v: formatDuration(duration ?? '0'), l: 'Time taken', c: colors.accentDark },
+            { v: `${scoreNum}%`, l: 'Score', c: colors.success },
+          ].map((s) => (
+            <View key={s.l} style={styles.statCard}>
+              <Text style={styles.statLbl}>{s.l.toUpperCase()}</Text>
+              <Text style={[styles.statVal, { color: s.c }]}>{s.v}</Text>
+            </View>
+          ))}
+        </View>
+
+        {reportFeedback ? (
+          <View
+            style={{
+              marginHorizontal: spacing.lg,
+              marginBottom: spacing.sm,
+              padding: spacing.md,
+              borderRadius: radii.lg,
+              backgroundColor: colors.successBg,
+              borderWidth: 1,
+              borderColor: colors.success,
+            }}
+          >
+            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.text, lineHeight: 20 }}>
+              {reportFeedback}
+            </Text>
+          </View>
+        ) : null}
+
+        {sessionId ? (
+          <View style={styles.reviewBox}>
+            <Text style={styles.reviewTitle}>Review answers</Text>
+            {reviewLoading ? (
+              <ActivityIndicator color={colors.primary} />
+            ) : review.length === 0 ? (
+              <Text style={styles.reviewEmpty}>Walang saved answers para sa session na ito.</Text>
+            ) : (
+              review.map((item, idx) => {
+                const explanation =
+                  aiExtras[item.questionId] ??
+                  (item.explanationFil && item.explanationEn
+                    ? item.explanationEn
+                    : item.explanationEn ?? item.explanationFil);
+                const open = expandedId === item.questionId;
+                const showAiCta = user && !explanation && item.isCorrect === false;
+                return (
+                  <Pressable
+                    key={item.questionId}
+                    style={styles.reviewItem}
+                    onPress={() => setExpandedId(open ? null : item.questionId)}
+                  >
+                    <View style={styles.reviewHead}>
+                      <Ionicons
+                        name={item.isCorrect ? 'checkmark-circle' : 'close-circle'}
+                        size={20}
+                        color={item.isCorrect ? colors.success : colors.error}
+                      />
+                      <Text style={styles.reviewQ} numberOfLines={open ? undefined : 2}>
+                        Q{idx + 1}. {item.stem}
+                      </Text>
+                    </View>
+                    {open ? (
+                      <View style={styles.reviewBody}>
+                        {item.choices.map((c, i) => (
+                          <ChoiceOption
+                            key={c.id}
+                            letter={LETTERS[i] ?? String(i + 1)}
+                            label={c.text}
+                            selected={item.selectedChoiceId === c.id}
+                            correct={c.id === item.correctChoiceId}
+                            wrong={item.selectedChoiceId === c.id && c.id !== item.correctChoiceId}
+                            disabled
+                            onPress={() => {}}
+                          />
+                        ))}
+                        {explanation ? (
+                          <>
+                            <Text style={styles.explanation}>{explanation}</Text>
+                            {canUseTts() ? (
+                              <Pressable
+                                style={styles.reportBtn}
+                                onPress={() => void speakText(explanation)}
+                              >
+                                <Ionicons name="volume-high-outline" size={16} color={colors.primary} />
+                                <Text style={[styles.reportBtnText, { color: colors.primary }]}>Listen · TTS</Text>
+                              </Pressable>
+                            ) : null}
+                          </>
+                        ) : null}
+                        {showAiCta ? (
+                          <Pressable
+                            style={styles.reportBtn}
+                            onPress={() => void requestAiExplanation(item.questionId)}
+                            disabled={aiLoadingId === item.questionId}
+                          >
+                            <Ionicons name="sparkles-outline" size={16} color={colors.primary} />
+                            <Text style={[styles.reportBtnText, { color: colors.primary }]}>
+                              {aiLoadingId === item.questionId
+                                ? 'Generating…'
+                                : aiRemaining != null
+                                  ? `AI explain (${aiRemaining} left today)`
+                                  : 'AI explain'}
+                            </Text>
+                          </Pressable>
+                        ) : null}
+                        {user ? (
+                          <Pressable style={styles.reportBtn} onPress={() => promptReport(item.questionId)}>
+                            <Ionicons name="flag-outline" size={16} color={colors.textMuted} />
+                            <Text style={styles.reportBtnText}>Report wrong answer</Text>
+                          </Pressable>
+                        ) : null}
+                      </View>
+                    ) : null}
+                  </Pressable>
+                );
+              })
+            )}
+          </View>
+        ) : null}
+
+        <View style={styles.actions}>
+          {!isPremium(examTypeId) && mode !== 'mock' && mode !== 'diagnostic' && mode !== 'board' ? (
+            <AdBanner onPress={() => router.push('/subscribe')} />
+          ) : null}
+          <PrimaryButton
+            label={sharing ? 'Preparing…' : 'Share score'}
+            variant="outline"
+            icon="share-outline"
+            size="lg"
+            onPress={shareScore}
+            style={{ marginBottom: spacing.sm }}
+          />
+          {wrongCount > 0 && user ? (
+            <PrimaryButton
+              label="Review mistakes"
+              variant="outline"
+              size="lg"
+              onPress={() => router.push('/mistakes')}
+              style={{ marginBottom: spacing.sm }}
+            />
+          ) : null}
+          <PrimaryButton label="Back to Home" size="lg" onPress={() => router.replace('/(tabs)')} />
+          {mode === 'diagnostic' ? (
+            <PrimaryButton
+              label="Tingnan ang PasaPath →"
+              size="lg"
+              onPress={() => router.replace('/(tabs)')}
+              style={{ marginTop: spacing.sm }}
+            />
+          ) : (
+            <PrimaryButton
+              label="Next quiz →"
+              variant="outline"
+              size="lg"
+              onPress={() => router.replace({ pathname: '/practice/quiz', params: { examSlug } })}
+              style={{ marginTop: spacing.sm }}
+            />
+          )}
+        </View>
+      </ScrollView>
+
+      {canUseViewShot() ? (
+        <View style={{ position: 'absolute', left: -9999, top: 0 }}>
+          <ShareScoreCapture onReady={handleCaptureReady}>
+            <ShareScoreCard
+              theme={theme}
+              displayName={displayName}
+              examName={examName}
+              score={scoreNum}
+              correct={correctNum}
+              total={totalNum}
+              modeLabel={modeLabel}
+            />
+          </ShareScoreCapture>
+        </View>
+      ) : null}
+
+      <AppSheet
+        visible={reportSheetOpen}
+        title="I-report ang issue"
+        subtitle="Ano ang problema sa tanong na ito?"
+        onClose={() => setReportSheetOpen(false)}
+        actions={[
+          { label: 'Maling answer key', onPress: () => reportTargetId && void submitReport(reportTargetId, 'wrong_answer') },
+          { label: 'Hindi malinaw ang tanong', onPress: () => reportTargetId && void submitReport(reportTargetId, 'unclear_question'), variant: 'outline' },
+          { label: 'Typo', onPress: () => reportTargetId && void submitReport(reportTargetId, 'typo'), variant: 'outline' },
+          { label: 'Cancel', onPress: () => setReportSheetOpen(false), variant: 'ghost' },
+        ]}
       />
 
-      <Card style={{ marginTop: spacing.md }}>
-        <Text style={styles.tip}>
-          {scoreNum >= 70
-            ? 'Magaling! Ituloy ang PasaPath bukas para mapanatili ang momentum.'
-            : 'Review ang mga maling sagot sa Mistake Bank (darating sa Week 3).'}
-        </Text>
-      </Card>
-
-      <PrimaryButton label="Bumalik sa Home" onPress={() => router.replace('/(tabs)')} style={{ marginTop: spacing.lg }} />
-      <PrimaryButton
-        label="Practice ulit"
-        variant="outline"
-        onPress={() => router.replace({ pathname: '/practice/quiz', params: { examSlug } })}
-        style={{ marginTop: spacing.sm }}
+      <AdInterstitialModal
+        visible={showInterstitial}
+        onClose={() => setShowInterstitial(false)}
+        onUpgrade={() => {
+          setShowInterstitial(false);
+          router.push('/subscribe');
+        }}
       />
-    </ScreenScroll>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  title: { ...type.headline, marginBottom: spacing.sm },
-  tip: { ...type.body },
-});

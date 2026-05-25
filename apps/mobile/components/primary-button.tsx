@@ -1,20 +1,56 @@
-import { Pressable, StyleSheet, Text, type PressableProps, type StyleProp, type ViewStyle } from 'react-native';
-import { colors, radii, spacing, touchTarget, type } from '../constants/theme';
+import { useMemo } from 'react';
+import { Pressable, Text, View, type PressableProps, type StyleProp, type ViewStyle } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import type { ComponentProps } from 'react';
+import { useAppTheme } from '../hooks/use-app-theme';
+import { createPrimaryButtonStyles } from '../lib/themed-styles';
+
+type IconName = ComponentProps<typeof Ionicons>['name'];
 
 type Props = PressableProps & {
   label: string;
-  variant?: 'primary' | 'accent' | 'outline';
+  variant?: 'primary' | 'accent' | 'outline' | 'white' | 'ghost' | 'success';
+  icon?: IconName;
+  iconPosition?: 'left' | 'right';
+  size?: 'md' | 'lg';
+  accessibilityLabel?: string;
 };
 
-export function PrimaryButton({ label, variant = 'primary', style, disabled, ...rest }: Props) {
+export function PrimaryButton({
+  label,
+  variant = 'primary',
+  icon,
+  iconPosition = 'right',
+  size = 'md',
+  style,
+  disabled,
+  accessibilityLabel,
+  ...rest
+}: Props) {
+  const theme = useAppTheme();
+  const styles = useMemo(() => createPrimaryButtonStyles(theme), [theme]);
+  const height = size === 'lg' ? 56 : theme.touchTarget.min;
+  const iconColor =
+    variant === 'outline' || variant === 'ghost'
+      ? theme.colors.primary
+      : variant === 'white'
+        ? theme.colors.primary
+        : variant === 'accent'
+          ? theme.colors.text
+          : '#fff';
+
   return (
     <Pressable
       style={(state) => {
         const base: StyleProp<ViewStyle>[] = [
           styles.base,
+          { minHeight: height },
           variant === 'primary' && styles.primary,
           variant === 'accent' && styles.accent,
           variant === 'outline' && styles.outline,
+          variant === 'white' && styles.white,
+          variant === 'ghost' && styles.ghost,
+          variant === 'success' && styles.success,
           state.pressed && styles.pressed,
           disabled && styles.disabled,
         ];
@@ -22,36 +58,31 @@ export function PrimaryButton({ label, variant = 'primary', style, disabled, ...
         return [...base, style];
       }}
       disabled={disabled}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel ?? label}
+      accessibilityState={{ disabled: !!disabled }}
       {...rest}
     >
-      <Text
-        style={[
-          styles.text,
-          variant === 'outline' && styles.textOutline,
-          variant === 'accent' && styles.textAccent,
-        ]}
-      >
-        {label}
-      </Text>
+      <View style={styles.inner}>
+        {icon && iconPosition === 'left' ? (
+          <Ionicons name={icon} size={20} color={iconColor} style={styles.iconLeft} />
+        ) : null}
+        <Text
+          style={[
+            styles.text,
+            size === 'lg' && styles.textLg,
+            variant === 'outline' && styles.textOutline,
+            variant === 'ghost' && styles.textOutline,
+            variant === 'white' && styles.textWhite,
+            variant === 'accent' && styles.textAccent,
+          ]}
+        >
+          {label}
+        </Text>
+        {icon && iconPosition === 'right' ? (
+          <Ionicons name={icon} size={20} color={iconColor} style={styles.iconRight} />
+        ) : null}
+      </View>
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  base: {
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
-    borderRadius: radii.md,
-    alignItems: 'center',
-    minHeight: touchTarget.min,
-    justifyContent: 'center',
-  },
-  primary: { backgroundColor: colors.primary },
-  accent: { backgroundColor: colors.accent },
-  outline: { backgroundColor: 'transparent', borderWidth: 1.5, borderColor: colors.primary },
-  pressed: { opacity: 0.88 },
-  disabled: { opacity: 0.5 },
-  text: { ...type.label, color: '#fff' },
-  textAccent: { ...type.label, color: colors.text },
-  textOutline: { ...type.label, color: colors.primary },
-});

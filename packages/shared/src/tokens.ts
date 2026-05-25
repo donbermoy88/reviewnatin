@@ -1,20 +1,28 @@
-/** ReviewNatin design tokens — shared by mobile and web */
+/** ReviewNatin design tokens — Claude Design handoff (ReviewNatin PH) */
 
 export const colors = {
-  primary: '#1E4FD9',
-  primaryDark: '#1539A8',
-  accent: '#F5B800',
-  accentDark: '#D9A000',
-  background: '#F7F9FC',
+  primary: '#0B5FFF',
+  primaryLight: '#3B82FF',
+  primaryDark: '#08245C',
+  accent: '#FFC928',
+  accentDark: '#F5A623',
+  accentLight: '#FFF4DC',
+  background: '#F4F7FC',
   surface: '#FFFFFF',
-  text: '#0F172A',
-  textMuted: '#64748B',
-  border: '#E2E8F0',
-  success: '#16A34A',
+  text: '#0E1B3D',
+  textMuted: '#5B6B8C',
+  textLight: '#9AA7BF',
+  border: '#E7ECF5',
+  success: '#22C55E',
+  successBg: '#E4F8EC',
   error: '#DC2626',
-  ringTrack: '#E2E8F0',
-  ringFill: '#1E4FD9',
-  primaryMuted: '#EEF3FF',
+  errorBg: '#FFEEE4',
+  flame: '#FF7A3D',
+  ringTrack: '#E7ECF5',
+  ringFill: '#0B5FFF',
+  primaryMuted: '#E8F0FF',
+  warnBg: '#FFF8E6',
+  warnBorder: '#FFEABB',
 } as const;
 
 export const spacing = {
@@ -30,7 +38,8 @@ export const radii = {
   sm: 8,
   md: 12,
   lg: 16,
-  xl: 24,
+  xl: 22,
+  xxl: 28,
   full: 9999,
 } as const;
 
@@ -39,14 +48,14 @@ export const touchTarget = {
 } as const;
 
 export const typography = {
-  fontDisplay: 'Syne_800ExtraBold',
-  fontDisplayBold: 'Syne_700Bold',
-  fontBody: 'DMSans_400Regular',
-  fontBodyMedium: 'DMSans_500Medium',
-  fontBodySemiBold: 'DMSans_600SemiBold',
-  fontBodyBold: 'DMSans_700Bold',
+  fontDisplay: 'PlusJakartaSans_800ExtraBold',
+  fontDisplayBold: 'PlusJakartaSans_700Bold',
+  fontBody: 'PlusJakartaSans_400Regular',
+  fontBodyMedium: 'PlusJakartaSans_500Medium',
+  fontBodySemiBold: 'PlusJakartaSans_600SemiBold',
+  fontBodyBold: 'PlusJakartaSans_700Bold',
   sizes: {
-    caption: 12,
+    caption: 11,
     body: 15,
     bodyLg: 16,
     subtitle: 14,
@@ -63,17 +72,24 @@ export const typography = {
 
 export const shadows = {
   card: {
-    shadowColor: '#1E4FD9',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
+    shadowColor: '#08245C',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.07,
+    shadowRadius: 8,
     elevation: 3,
   },
   soft: {
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 2 },
+    shadowColor: '#08245C',
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.06,
-    shadowRadius: 8,
+    shadowRadius: 16,
     elevation: 2,
+  },
+  button: {
+    shadowColor: '#0B5FFF',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.35,
+    shadowRadius: 24,
+    elevation: 6,
   },
 } as const;

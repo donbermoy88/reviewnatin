@@ -1,19 +1,11 @@
 import { Redirect } from 'expo-router';
-import { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { colors } from '../constants/theme';
-import { getOnboarding } from '../lib/onboarding-store';
+import { useOnboardingGate } from '../providers/onboarding-gate';
 
+/** Entry redirect — onboarding routing is enforced by OnboardingGate only. */
 export default function Index() {
-  const [ready, setReady] = useState(false);
-  const [completed, setCompleted] = useState(false);
-
-  useEffect(() => {
-    getOnboarding().then((data) => {
-      setCompleted(Boolean(data?.completed));
-      setReady(true);
-    });
-  }, []);
+  const { ready, complete } = useOnboardingGate();
 
   if (!ready) {
     return (
@@ -23,7 +15,7 @@ export default function Index() {
     );
   }
 
-  if (!completed) {
+  if (!complete) {
     return <Redirect href="/onboarding" />;
   }
 

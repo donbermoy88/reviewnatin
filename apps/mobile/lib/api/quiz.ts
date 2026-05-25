@@ -1,10 +1,26 @@
 import type { QuizAnswerRecord } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 
-export async function createPracticeSession(
+export type QuizMode = 'practice' | 'timed' | 'mock' | 'mistake_review' | 'diagnostic' | 'weak_area' | 'barkada' | 'board';
+
+export type SessionReviewItem = {
+  questionId: string;
+  stem: string;
+  choices: { id: string; text: string }[];
+  selectedChoiceId: string | null;
+  isCorrect: boolean | null;
+  correctChoiceId: string;
+  explanationEn: string | null;
+  explanationFil: string | null;
+  timeSpentSeconds: number | null;
+};
+
+export async function createQuizSession(
   userId: string,
   examTypeId: string,
-  itemCount: number
+  itemCount: number,
+  mode: QuizMode = 'practice',
+  mockExamId?: string
 ): Promise<string | null> {
   if (!isSupabaseConfigured) return null;
 
@@ -13,7 +29,8 @@ export async function createPracticeSession(
     .insert({
       user_id: userId,
       exam_type_id: examTypeId,
-      mode: 'practice',
+      mode,
+      mock_exam_id: mockExamId ?? null,
       item_count: itemCount,
     })
     .select('id')
@@ -23,25 +40,31 @@ export async function createPracticeSession(
   return data.id;
 }
 
-export async function completePracticeSession(
-  sessionId: string,
-  scorePercent: number,
-  durationSeconds: number
-): Promise<void> {
-  if (!isSupabaseConfigured) return;
-
-  const { error } = await supabase
-    .from('quiz_sessions')
-    .update({
-      score_percent: scorePercent,
-      duration_seconds: durationSeconds,
-      completed_at: new Date().toISOString(),
-    })
-    .eq('id', sessionId);
-
-  if (error) throw error;
+export async function createPracticeSession(
+  userId: string,
+  examTypeId: string,
+  itemCount: number
+): Promise<string | null> {
+  return createQuizSession(userId, examTypeId, itemCount, 'practice');
 }
 
+/** Server computes score_percent from graded quiz_answers rows. */
+export async function completePracticeSession(
+  sessionId: string,
+  durationSeconds: number
+): Promise<number | null> {
+  if (!isSupabaseConfigured) return null;
+
+  const { data, error } = await supabase.rpc('complete_quiz_session', {
+    p_session_id: sessionId,
+    p_duration_seconds: durationSeconds,
+  });
+
+  if (error) throw error;
+  return typeof data === 'number' ? data : Number(data ?? 0);
+}
+
+/** is_correct is computed server-side by DB trigger — never send from client. */
 export async function saveQuizAnswers(sessionId: string, answers: QuizAnswerRecord[]): Promise<void> {
   if (!isSupabaseConfigured || !sessionId) return;
 
@@ -49,7 +72,6 @@ export async function saveQuizAnswers(sessionId: string, answers: QuizAnswerReco
     session_id: sessionId,
     question_id: a.questionId,
     selected_choice_id: a.selectedChoiceId,
-    is_correct: a.isCorrect,
     time_spent_seconds: a.timeSpentSeconds,
   }));
 
@@ -70,4 +92,36 @@ export async function fetchRecentSessions(userId: string, limit = 5) {
 
   if (error) throw error;
   return data ?? [];
+}
+
+export async function fetchSessionReview(sessionId: string): Promise<SessionReviewItem[]> {
+  if (!isSupabaseConfigured) return [];
+
+  const { data, error } = await supabase.rpc('get_session_review', {
+    p_session_id: sessionId,
+  });
+
+  if (error) throw error;
+
+  return ((data ?? []) as {
+    question_id: string;
+    stem: string;
+    choices: { id: string; text: string }[];
+    selected_choice_id: string | null;
+    is_correct: boolean | null;
+    correct_choice_id: string;
+    explanation_en: string | null;
+    explanation_fil: string | null;
+    time_spent_seconds: number | null;
+  }[]).map((row) => ({
+    questionId: row.question_id,
+    stem: row.stem,
+    choices: row.choices,
+    selectedChoiceId: row.selected_choice_id,
+    isCorrect: row.is_correct,
+    correctChoiceId: row.correct_choice_id,
+    explanationEn: row.explanation_en,
+    explanationFil: row.explanation_fil,
+    timeSpentSeconds: row.time_spent_seconds,
+  }));
 }
