@@ -37,6 +37,12 @@
     "mobile:lint": "npm run lint --workspace=apps/mobile",
     "mobile:test": "npm run test --workspace=apps/mobile",
     "test": "npm run mobile:test",
-    "db:gen-types": "node scripts/gen-db-types.mjs"
+    "db:gen-types": "node scripts/gen-db-types.mjs",
+    "vercel:setup": "node scripts/setup-vercel.mjs",
+    "vercel:deploy:marketing": "cd apps/marketing && npx vercel deploy --prod --yes",
+    "vercel:deploy:admin": "cd apps/admin && npx vercel deploy --prod --yes"
+  },
+  "devDependencies": {
+    "vercel": "^54.4.1"
   }
 }

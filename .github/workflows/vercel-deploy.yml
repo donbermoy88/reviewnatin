@@ -1,0 +1,71 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+jobs:
+  deploy-marketing:
+    name: Marketing site
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_MARKETING }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel env
+        working-directory: apps/marketing
+        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+
+      - name: Build marketing
+        working-directory: apps/marketing
+        run: vercel build --prod --token=$VERCEL_TOKEN
+
+      - name: Deploy marketing
+        working-directory: apps/marketing
+        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+
+  deploy-admin:
+    name: Admin CMS
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel env
+        working-directory: apps/admin
+        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+
+      - name: Build admin
+        working-directory: apps/admin
+        run: vercel build --prod --token=$VERCEL_TOKEN
+
+      - name: Deploy admin
+        working-directory: apps/admin
+        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
