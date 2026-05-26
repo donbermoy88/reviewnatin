@@ -42,6 +42,7 @@
     "test": "npm run mobile:test",
     "db:gen-types": "node scripts/gen-db-types.mjs",
     "vercel:setup": "node scripts/setup-vercel.mjs",
+    "vercel:secrets": "python3 scripts/setup-github-vercel-secrets.py",
     "vercel:deploy:marketing": "npx vercel link --yes --project reviewnatin-marketing && npx vercel deploy --prod --yes --archive=tgz",
     "vercel:deploy:admin": "npx vercel link --yes --project reviewnatin-admin && npx vercel deploy --prod --yes --archive=tgz"
   },

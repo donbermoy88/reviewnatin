@@ -30,17 +30,8 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Pull Vercel env
-        working-directory: apps/marketing
-        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
-
-      - name: Build marketing
-        working-directory: apps/marketing
-        run: vercel build --prod --token=$VERCEL_TOKEN
-
-      - name: Deploy marketing
-        working-directory: apps/marketing
-        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+      - name: Deploy marketing to production
+        run: vercel deploy --prod --yes --archive=tgz --token=$VERCEL_TOKEN
 
   deploy-admin:
     name: Admin CMS
@@ -58,14 +49,5 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Pull Vercel env
-        working-directory: apps/admin
-        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
-
-      - name: Build admin
-        working-directory: apps/admin
-        run: vercel build --prod --token=$VERCEL_TOKEN
-
-      - name: Deploy admin
-        working-directory: apps/admin
-        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+      - name: Deploy admin to production
+        run: vercel deploy --prod --yes --archive=tgz --token=$VERCEL_TOKEN
