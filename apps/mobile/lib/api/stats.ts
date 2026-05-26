@@ -54,17 +54,26 @@ export async function fetchPracticeStats(
   }
 
   try {
-    const { data: sessions, error: sessionsError } = await supabase
-      .from('quiz_sessions')
-      .select('id, item_count, score_percent, completed_at')
-      .eq('user_id', userId)
-      .not('completed_at', 'is', null)
-      .order('completed_at', { ascending: false })
-      .limit(100);
+    const [sessionsResult, userResult] = await Promise.all([
+      supabase
+        .from('quiz_sessions')
+        .select('id, item_count, score_percent, completed_at')
+        .eq('user_id', userId)
+        .not('completed_at', 'is', null)
+        .order('completed_at', { ascending: false })
+        .limit(100),
+      supabase
+        .from('users')
+        .select('streak_count')
+        .eq('id', userId)
+        .single(),
+    ]);
 
-    if (sessionsError) throw sessionsError;
+    if (sessionsResult.error) throw sessionsResult.error;
 
-    const rows = sessions ?? [];
+    const rows = sessionsResult.data ?? [];
+    const dbStreak = userResult.data?.streak_count ?? 0;
+
     const todayStart = startOfTodayIso();
     const questionsToday = rows
       .filter((s) => s.completed_at && s.completed_at >= todayStart)
@@ -81,9 +90,12 @@ export async function fetchPracticeStats(
           )
         : null;
 
-    const streakDays = computeStreak(
+    // Prefer DB streak_count (maintained by trigger); fall back to client-side
+    // computation so existing history still works before the trigger fires once.
+    const computedStreak = computeStreak(
       rows.map((s) => s.completed_at).filter((d): d is string => Boolean(d))
     );
+    const streakDays = Math.max(dbStreak, computedStreak);
 
     return {
       questionsToday,
