@@ -288,7 +288,7 @@ export default function PracticeQuizScreen() {
 
   const checkAnswer = useCallback(async () => {
     if (!current || !selected || revealed || checking) return;
-    if (!user) {
+    if (!user && !offlineMode) {
       router.push('/(auth)/login');
       return;
     }
@@ -392,7 +392,7 @@ export default function PracticeQuizScreen() {
       try {
         await saveGuestQuizSession({
           examSlug: slug,
-          mode: isMock ? 'mock' : isBoard ? 'board' : isMistakeReview ? 'mistake_review' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isDiagnostic ? 'diagnostic' : 'practice',
+          mode: isMock ? 'mock' : isBoard ? 'board' : isMistakeReview ? 'mistake_review' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isDiagnostic ? 'diagnostic' : offlineMode ? 'offline' : 'practice',
           itemCount: questions.length,
           scorePercent: serverScore,
           correct: totalCorrectFinal,

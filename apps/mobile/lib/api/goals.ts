@@ -77,15 +77,27 @@ export async function fetchActiveGoal(userId: string): Promise<ActiveGoalRow | n
   return data as ActiveGoalRow | null;
 }
 
+const _goalCache = new Map<string, { data: OnboardingData | null; ts: number }>();
+const GOAL_CACHE_TTL = 5 * 60 * 1000;
+
 /** Prefer remote Supabase goal when signed in; fall back to local SecureStore */
 export async function resolveOnboardingGoal(userId?: string): Promise<OnboardingData | null> {
   const local = await getOnboarding();
   if (!userId) return local;
 
+  const hit = _goalCache.get(userId);
+  if (hit && Date.now() - hit.ts < GOAL_CACHE_TTL) return hit.data;
+
   try {
     const remote = await fetchActiveGoal(userId);
-    return mergeOnboardingWithRemote(local, remote);
+    const merged = mergeOnboardingWithRemote(local, remote);
+    _goalCache.set(userId, { data: merged, ts: Date.now() });
+    return merged;
   } catch {
     return local;
   }
+}
+
+export function invalidateGoalCache(userId: string) {
+  _goalCache.delete(userId);
 }

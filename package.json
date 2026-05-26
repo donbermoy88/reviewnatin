@@ -45,6 +45,7 @@
     "vercel:secrets": "python3 scripts/setup-github-vercel-secrets.py",
     "vercel:git:deploy": "python3 scripts/vercel-git-deploy.py",
     "vercel:git:link": "node scripts/link-vercel-git.mjs",
+    "admin:create": "node scripts/create-admin-user.mjs",
     "vercel:deploy:marketing": "npx vercel link --yes --project reviewnatin-marketing && npx vercel deploy --prod --yes --archive=tgz",
     "vercel:deploy:admin": "npx vercel link --yes --project reviewnatin-admin && npx vercel deploy --prod --yes --archive=tgz"
   },
