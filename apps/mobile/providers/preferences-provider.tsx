@@ -68,15 +68,8 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
   );
 
   const setDarkMode = useCallback(async (enabled: boolean) => {
-    setPrefs((prev) => {
-      const next = { ...prev, darkMode: enabled };
-      void AsyncStorage.setItem('reviewnatin:prefs', JSON.stringify(next));
-      if (user) {
-        void upsertRemotePreferences(user.id, next).catch(() => {});
-      }
-      return next;
-    });
-  }, [user]);
+    await persist({ ...prefs, darkMode: enabled });
+  }, [persist, prefs]);
 
   const setNotificationsEnabled = useCallback(
     async (enabled: boolean) => {

@@ -127,8 +127,12 @@ export default function DashboardScreen() {
 
     if (user) {
       try {
-        const practiceStats = await fetchPracticeStats(user.id, target);
+        const [practiceStats, gate] = await Promise.all([
+          fetchPracticeStats(user.id, target),
+          fetchContentGateStatus(slug),
+        ]);
         setStats(practiceStats);
+        setContentGate(gate);
         setPasapath(await fetchTodayPasaPath(slug));
         setReadiness(await fetchLatestReadiness(slug));
         try {
@@ -137,17 +141,7 @@ export default function DashboardScreen() {
         } catch {
           setWeakTopic(null);
         }
-        if (prefs.notificationsEnabled) {
-          const dueFlashcards = await fetchDueFlashcardCount(slug);
-          await scheduleDailyReminder(prefs.reminderHour, prefs.reminderMinute, {
-            streakDays: practiceStats.streakDays,
-            dueFlashcards,
-          });
-          if (prefs.examRemindersEnabled) {
-            await scheduleExamReminders(await fetchExamSchedules(slug));
-          }
-        }
-        if (!(await hasCompletedDiagnostic(slug))) {
+        if (gate?.meetsMinimum && !(await hasCompletedDiagnostic(slug))) {
           router.replace('/diagnostic/intro');
           return;
         }
@@ -176,15 +170,36 @@ export default function DashboardScreen() {
       if (found) setExamName(found.name);
     }
 
-    setContentGate(await fetchContentGateStatus(slug));
+    if (!user) setContentGate(await fetchContentGateStatus(slug));
     setAnnouncements(await fetchAppAnnouncements(slug, 3).catch(() => []));
-  }, [user, router, prefs.notificationsEnabled, prefs.reminderHour, prefs.reminderMinute, prefs.examRemindersEnabled]);
+  }, [user, router]);
 
   useEffect(() => {
     load();
   }, [load]);
 
   const examSlug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
+
+  // Notification scheduling in a separate effect so pref changes don't re-trigger the full dashboard load
+  useEffect(() => {
+    if (!user || !prefs.notificationsEnabled) return;
+    void fetchDueFlashcardCount(examSlug)
+      .then((dueFlashcards) =>
+        scheduleDailyReminder(prefs.reminderHour, prefs.reminderMinute, {
+          streakDays: stats.streakDays,
+          dueFlashcards,
+        })
+      )
+      .catch(() => {});
+  }, [prefs.notificationsEnabled, prefs.reminderHour, prefs.reminderMinute, user, examSlug, stats.streakDays]);
+
+  useEffect(() => {
+    if (!user || !prefs.examRemindersEnabled) return;
+    void fetchExamSchedules(examSlug)
+      .then((schedules) => scheduleExamReminders(schedules))
+      .catch(() => {});
+  }, [prefs.examRemindersEnabled, user, examSlug]);
+
   const premium = isPremium(examTypeId);
   const readinessScore = readiness?.score ?? pasapath?.readiness_hint ?? null;
   const questionsTarget = stats.questionsTarget;

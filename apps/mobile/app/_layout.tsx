@@ -59,6 +59,7 @@ function ThemedStack() {
         <Stack.Screen name="pasapath/week" options={{ headerShown: false }} />
         <Stack.Screen name="practice/quiz" options={{ headerShown: false }} />
         <Stack.Screen name="practice/result" options={{ headerShown: false, headerBackVisible: false }} />
+        <Stack.Screen name="mock-review/[sessionId]" options={{ headerShown: false }} />
       </Stack>
     </>
   );

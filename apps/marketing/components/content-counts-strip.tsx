@@ -17,10 +17,9 @@ export async function ContentCountsStrip() {
     })
   );
 
-  const hasData = rows.some((r) => r.counts && r.counts.questions > 0);
-  if (!hasData) return null;
-
   const totalQuestions = rows.reduce((sum, r) => sum + (r.counts?.questions ?? 0), 0);
+  if (totalQuestions < 100) return null;
+
   const totalMocks = rows.reduce((sum, r) => sum + (r.counts?.mockExams ?? 0), 0);
 
   return (

@@ -71,10 +71,14 @@ export async function fetchPracticeStats(
       .reduce((sum, s) => sum + (s.item_count ?? 0), 0);
 
     const totalAnswered = rows.reduce((sum, s) => sum + (s.item_count ?? 0), 0);
-    const scored = rows.filter((s) => s.score_percent != null);
+    const scored = rows.filter((s) => s.score_percent != null && (s.item_count ?? 0) > 0);
+    const totalScoredItems = scored.reduce((sum, s) => sum + (s.item_count ?? 0), 0);
     const accuracyPercent =
-      scored.length > 0
-        ? Math.round(scored.reduce((sum, s) => sum + (s.score_percent ?? 0), 0) / scored.length)
+      totalScoredItems > 0
+        ? Math.round(
+            scored.reduce((sum, s) => sum + (s.score_percent ?? 0) * (s.item_count ?? 0), 0) /
+              totalScoredItems
+          )
         : null;
 
     const streakDays = computeStreak(

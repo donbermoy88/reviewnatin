@@ -103,7 +103,7 @@ export default function CheckoutPage() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-lg flex-col px-6 py-12">
-      <p className="text-sm font-semibold uppercase tracking-wide text-violet-700">ReviewNatin Checkout</p>
+      <p className="text-sm font-semibold uppercase tracking-wide text-[var(--rn-blue)]">ReviewNatin Checkout</p>
       <h1 className="mt-2 font-display text-3xl font-bold text-slate-900">Pay with {providerLabel}</h1>
       <p className="mt-3 text-slate-600">
         Complete your payment using the reference code below, then confirm in the app or on this page.
@@ -119,7 +119,7 @@ export default function CheckoutPage() {
         <div className="mt-8 space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-sm text-slate-500">Reference</span>
-            <span className="font-mono text-lg font-bold text-violet-700">{status.referenceCode}</span>
+            <span className="font-mono text-lg font-bold text-[var(--rn-blue)]">{status.referenceCode}</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm text-slate-500">Amount</span>
@@ -147,7 +147,7 @@ export default function CheckoutPage() {
               type="button"
               disabled={submitting || status.status === 'expired'}
               onClick={() => void submitPayment(process.env.NODE_ENV !== 'production')}
-              className="w-full rounded-xl bg-violet-600 px-4 py-3 font-semibold text-white disabled:opacity-50"
+              className="w-full rounded-xl bg-[var(--rn-blue)] px-4 py-3 font-semibold text-white disabled:opacity-50"
             >
               {submitting ? 'Submitting…' : 'I sent payment — confirm'}
             </button>
@@ -160,7 +160,7 @@ export default function CheckoutPage() {
       <p className="mt-8 text-xs text-slate-500">
         Questions? Email {SUPPORT_EMAIL}. Not affiliated with CSC, PRC, or any government agency.
       </p>
-      <a href={SITE_URL} className="mt-4 text-sm font-medium text-violet-700">
+      <a href={SITE_URL} className="mt-4 text-sm font-medium text-[var(--rn-blue)]">
         ← Back to {SITE_URL.replace('https://', '')}
       </a>
     </main>
