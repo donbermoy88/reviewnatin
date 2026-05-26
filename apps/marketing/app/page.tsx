@@ -15,32 +15,85 @@ const RN = {
   line:      '#E7ECF5',
 };
 
-// ── BrandMark SVG ──────────────────────────────────────────
+// ── BrandMark — exact port of RNIcon from Claude Logo design ──
+// Book-as-checkmark: two page strips forming a ✓, gold 6-pt star above spine.
 function BrandMark({ size = 40 }: { size?: number }) {
-  const id = `mbg-${size}`;
-  const rays = Array.from({ length: 12 }, (_, i) => {
-    const a = (i * Math.PI / 6) - Math.PI / 2;
-    const r = i % 2 === 0 ? 7.5 : 3.2;
-    return `${i === 0 ? 'M' : 'L'}${50 + Math.cos(a) * r},${25 + Math.sin(a) * r}`;
+  // Unique gradient IDs per size to avoid SSR collisions
+  const uid = `rn${size}`;
+
+  // ── Book geometry (100×100 unit space) ──
+  const spineX = 50, spineY = 62;
+  const lx1 = 22, ly1 = 78;   // left tip
+  const rx1 = 78, ry1 = 28;   // right tip
+  const pw = 7;                 // half-width of page strip
+
+  // Left page normal
+  const ldx = lx1 - spineX, ldy = ly1 - spineY;
+  const lLen = Math.sqrt(ldx * ldx + ldy * ldy);
+  const lnx = -ldy / lLen * pw, lny = ldx / lLen * pw;
+  const leftPts = [
+    [spineX + lnx, spineY + lny], [lx1 + lnx, ly1 + lny],
+    [lx1 - lnx, ly1 - lny],       [spineX - lnx, spineY - lny],
+  ];
+
+  // Right page normal
+  const rdx = rx1 - spineX, rdy = ry1 - spineY;
+  const rLen = Math.sqrt(rdx * rdx + rdy * rdy);
+  const rnx = -rdy / rLen * pw, rny = rdx / rLen * pw;
+  const rightPts = [
+    [spineX + rnx, spineY + rny], [rx1 + rnx, ry1 + rny],
+    [rx1 - rnx, ry1 - rny],       [spineX - rnx, spineY - rny],
+  ];
+
+  const toPath = (pts: number[][]) =>
+    pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p[0].toFixed(2)},${p[1].toFixed(2)}`).join(' ') + ' Z';
+
+  // Gold 6-point star above spine junction
+  const starX = 50, starY = 25, starPts = 6, outer = 7.5, inner = 3.2;
+  const starPath = Array.from({ length: starPts * 2 }, (_, i) => {
+    const a = (i * Math.PI / starPts) - Math.PI / 2;
+    const r = i % 2 === 0 ? outer : inner;
+    return `${i === 0 ? 'M' : 'L'}${(starX + Math.cos(a) * r).toFixed(2)},${(starY + Math.sin(a) * r).toFixed(2)}`;
   }).join(' ') + ' Z';
 
+  const tipR = pw * 0.9;
+  const spineR = pw * 0.85;
+
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
       <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={`${uid}bg`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#1A72FF" />
-          <stop offset="100%" stopColor={RN.navy} />
+          <stop offset="100%" stopColor="#08245C" />
         </linearGradient>
+        <linearGradient id={`${uid}pg`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#E8EFFF" />
+        </linearGradient>
+        <filter id={`${uid}glow`} x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1.5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
       </defs>
-      <rect width="100" height="100" rx="22" fill={`url(#${id})`} />
-      <g fill="#fff">
-        <path d="M50,62 L50,62 L22,78 L22,78 Q19,76 22,72 L48,56 Q52,54 50,62 Z" />
-        <path d="M50,62 L50,62 L78,28 L78,28 Q81,30 78,34 L52,68 Q48,70 50,62 Z" />
-        <circle cx="50" cy="62" r="5.5" />
-        <circle cx="22" cy="78" r="5.5" />
-        <circle cx="78" cy="28" r="5.5" />
-      </g>
-      <path d={rays} fill={RN.gold} />
+
+      {/* Background */}
+      <rect width="100" height="100" rx="22" fill={`url(#${uid}bg)`} />
+      {/* Inner top highlight */}
+      <rect x="10" y="6" width="80" height="30" rx="14" fill="white" fillOpacity="0.06" />
+
+      {/* Left page */}
+      <path d={toPath(leftPts)} fill={`url(#${uid}pg)`} />
+      <circle cx={lx1} cy={ly1} r={tipR} fill={`url(#${uid}pg)`} />
+
+      {/* Right page */}
+      <path d={toPath(rightPts)} fill={`url(#${uid}pg)`} />
+      <circle cx={rx1} cy={ry1} r={tipR} fill={`url(#${uid}pg)`} />
+
+      {/* Spine junction */}
+      <circle cx={spineX} cy={spineY} r={spineR} fill={`url(#${uid}pg)`} />
+
+      {/* Gold star */}
+      <path d={starPath} fill="#FFC928" filter={`url(#${uid}glow)`} />
     </svg>
   );
 }
