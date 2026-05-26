@@ -3,6 +3,7 @@ import '../lib/monitoring/sentry-init';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
+import { ErrorBoundary } from '../components/error-boundary';
 import { AuthProvider } from '../providers/auth-provider';
 import { EntitlementsProvider } from '../providers/entitlements-provider';
 import { IapFeedbackProvider } from '../providers/iap-feedback-provider';
@@ -67,6 +68,7 @@ function ThemedStack() {
 
 export default function RootLayout() {
   return (
+    <ErrorBoundary>
     <FontProvider>
       <AuthProvider>
         <PreferencesProvider>
@@ -84,5 +86,6 @@ export default function RootLayout() {
         </PreferencesProvider>
       </AuthProvider>
     </FontProvider>
+    </ErrorBoundary>
   );
 }
