@@ -11,108 +11,40 @@ concurrency:
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  VERCEL_GIT_REF: ${{ github.event.pull_request.head.sha }}
+  VERCEL_DEPLOY_TARGET: preview
 
 jobs:
-  preview-marketing:
-    name: Marketing preview
+  preview:
+    name: Git preview (marketing + admin)
     runs-on: ubuntu-latest
-    env:
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_MARKETING }}
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-python@v5
         with:
-          node-version: '22'
-          cache: npm
+          python-version: '3.13'
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-
-      - name: Deploy marketing preview
+      - name: Deploy preview builds from PR head
         id: deploy
-        run: |
-          URL=$(vercel deploy --yes --archive=tgz --token=$VERCEL_TOKEN)
-          echo "url=$URL" >> "$GITHUB_OUTPUT"
+        run: python3 scripts/vercel-git-deploy.py
 
-      - name: Comment preview URL on PR
+      - name: Comment preview URLs on PR
         uses: actions/github-script@v7
         with:
           script: |
-            const url = '${{ steps.deploy.outputs.url }}';
-            const body = `### Marketing preview\n${url}`;
-            const { data: comments } = await github.rest.issues.listComments({
+            const marketing = 'https://reviewnatin-marketing.vercel.app';
+            const admin = 'https://reviewnatin-admin.vercel.app/login';
+            const body = [
+              '### Vercel preview deploys triggered',
+              `- Marketing: ${marketing}`,
+              `- Admin: ${admin}/login`,
+              '',
+              `Commit: \`${context.payload.pull_request.head.sha.slice(0, 7)}\``,
+            ].join('\n');
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
+              body,
             });
-            const existing = comments.find((c) =>
-              c.user.type === 'Bot' && c.body.includes('Marketing preview')
-            );
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body,
-              });
-            }
-
-  preview-admin:
-    name: Admin preview
-    runs-on: ubuntu-latest
-    env:
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-
-      - name: Deploy admin preview
-        id: deploy
-        run: |
-          URL=$(vercel deploy --yes --archive=tgz --token=$VERCEL_TOKEN)
-          echo "url=$URL" >> "$GITHUB_OUTPUT"
-
-      - name: Comment preview URL on PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const url = '${{ steps.deploy.outputs.url }}';
-            const body = `### Admin preview\n${url}/login`;
-            const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-            });
-            const existing = comments.find((c) =>
-              c.user.type === 'Bot' && c.body.includes('Admin preview')
-            );
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body,
-              });
-            }
