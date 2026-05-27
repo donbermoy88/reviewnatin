@@ -9,11 +9,11 @@ export type SyncGoalResult = { ok: true } | { ok: false; message: string };
 
 export async function syncExamGoal(userId: string, onboarding: OnboardingData): Promise<void> {
   if (!isSupabaseConfigured || !onboarding.examSlug) {
-    throw new Error('Hindi naka-connect ang Supabase o walang napiling exam.');
+    throw new Error('Supabase is not configured or no exam selected.');
   }
 
   if (onboarding.examSlug === 'let-secondary' && !onboarding.majorSlug) {
-    throw new Error('Pumili ng major field para sa LET Secondary bago i-sync.');
+    throw new Error('Please select a major field for LET Secondary before syncing.');
   }
 
   const { data: exam, error: examErr } = await supabase

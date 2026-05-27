@@ -13,10 +13,10 @@ export function getOAuthRedirectUrl() {
 function mapGoogleProviderError(message: string): string {
   const m = message.toLowerCase();
   if (m.includes('provider is not enabled') || m.includes('unsupported provider')) {
-    return 'Google provider hindi pa naka-enable sa Supabase. Run: npm run supabase:google';
+    return 'Google provider is not yet enabled on Supabase. Run: npm run supabase:google';
   }
   if (m.includes('invalid') && m.includes('token')) {
-    return 'Invalid Google token. Siguraduhing naka-match ang Client IDs sa Supabase at sa app .env.';
+    return 'Invalid Google token. Make sure Client IDs match between Supabase and app .env.';
   }
   return message;
 }
@@ -24,13 +24,13 @@ function mapGoogleProviderError(message: string): string {
 /** Google → ID token (native) → Supabase session. Works on iOS/Android Expo Go without Safari redirects. */
 export async function signInWithGoogle(): Promise<{ error: string | null }> {
   if (!isSupabaseConfigured) {
-    return { error: 'Hindi pa naka-connect ang Supabase.' };
+    return { error: 'Supabase is not connected.' };
   }
 
   if (!isGoogleSignInConfigured()) {
     return {
       error:
-        'Google Sign-In hindi pa naka-setup. Sa project root, run: npm run supabase:google — then restart Expo.',
+        'Google Sign-In is not set up. In the project root, run: npm run supabase:google — then restart Expo.',
     };
   }
 
@@ -49,11 +49,11 @@ export async function signInWithGoogle(): Promise<{ error: string | null }> {
 
 export async function signInWithApple(): Promise<{ error: string | null }> {
   if (!isSupabaseConfigured) {
-    return { error: 'Hindi pa naka-connect ang Supabase.' };
+    return { error: 'Supabase is not connected.' };
   }
 
   if (Platform.OS !== 'ios') {
-    return { error: 'Apple Sign-In available lang sa iOS.' };
+    return { error: 'Apple Sign-In is only available on iOS.' };
   }
 
   try {
@@ -66,7 +66,7 @@ export async function signInWithApple(): Promise<{ error: string | null }> {
     });
 
     if (!credential.identityToken) {
-      return { error: 'Walang identity token mula sa Apple.' };
+      return { error: 'No identity token received from Apple.' };
     }
 
     const { error } = await supabase.auth.signInWithIdToken({
@@ -79,13 +79,13 @@ export async function signInWithApple(): Promise<{ error: string | null }> {
   } catch (e: unknown) {
     const err = e as { code?: string };
     if (err.code === 'ERR_REQUEST_CANCELED') return { error: null };
-    return { error: 'Hindi makapag-login gamit ang Apple.' };
+    return { error: 'Unable to sign in with Apple.' };
   }
 }
 
 export async function sendPasswordResetEmail(email: string): Promise<{ error: string | null }> {
   if (!isSupabaseConfigured) {
-    return { error: 'Hindi pa naka-connect ang Supabase.' };
+    return { error: 'Supabase is not connected.' };
   }
 
   const redirectTo = AuthSession.makeRedirectUri({
@@ -99,7 +99,7 @@ export async function sendPasswordResetEmail(email: string): Promise<{ error: st
 
 export async function updatePassword(newPassword: string): Promise<{ error: string | null }> {
   if (!isSupabaseConfigured) {
-    return { error: 'Hindi pa naka-connect ang Supabase.' };
+    return { error: 'Supabase is not connected.' };
   }
 
   const { error } = await supabase.auth.updateUser({ password: newPassword });

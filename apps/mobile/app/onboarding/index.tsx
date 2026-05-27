@@ -193,7 +193,7 @@ export default function OnboardingScreen() {
 
         <View style={[styles.welcomeBody, { paddingBottom: insets.bottom + spacing.lg }]}>
           <Text style={styles.welcomeTitle}>
-            Study buddy mo para sa{'\n'}bawat Filipino exam.
+            Your study buddy for{'\n'}every Filipino board exam.
           </Text>
           <Text style={styles.welcomeSub}>
             CSE Full, CSE Sub, PNLE, LET Elementary & Secondary — one app, one streak, one goal.
@@ -488,7 +488,7 @@ export default function OnboardingScreen() {
             <>
               <View style={[styles.infoCard, { marginTop: spacing.sm }]}>
                 <Ionicons name="cloud-upload-outline" size={22} color={colors.primary} />
-                <Text style={styles.infoText}>Safe kahit magpalit ng phone — email sign-up lang.</Text>
+                <Text style={styles.infoText}>Progress syncs to your account — safe even if you switch phones.</Text>
               </View>
               {user ? (
                 <>

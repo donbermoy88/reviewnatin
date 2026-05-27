@@ -113,14 +113,14 @@ export default function TopicListScreen() {
             })
           }
           accessibilityRole="button"
-          accessibilityLabel={`Flashcards para sa ${subjectName}`}
+          accessibilityLabel={`Flashcards for ${subjectName}`}
         >
           <View style={styles.flashcardIcon}>
             <Ionicons name="albums-outline" size={20} color={colors.primary} />
           </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.flashcardTitle}>Flashcards</Text>
-            <Text style={styles.flashcardSub}>Due cards para sa {subjectName}</Text>
+            <Text style={styles.flashcardSub}>Due cards for {subjectName}</Text>
           </View>
           <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
         </Pressable>

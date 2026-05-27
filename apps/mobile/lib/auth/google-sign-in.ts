@@ -69,7 +69,7 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
     return {
       idToken: null,
       error:
-        'Google Sign-In hindi pa naka-setup. Sa project root, run: npm run supabase:google — then restart Expo.',
+        'Google Sign-In is not set up. In the project root, run: npm run supabase:google — then restart Expo.',
     };
   }
 

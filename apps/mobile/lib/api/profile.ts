@@ -32,7 +32,7 @@ export async function updateUserDisplayName(
   displayName: string
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   if (!isSupabaseConfigured) {
-    return { ok: false, error: 'Hindi pa naka-connect ang Supabase.' };
+    return { ok: false, error: 'Supabase is not connected.' };
   }
 
   const { data: authData, error: authError } = await supabase.auth.updateUser({

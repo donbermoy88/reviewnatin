@@ -259,10 +259,10 @@ export default function SubscribeScreen() {
 
     const primaryLabel = isDevBuild
       ? isBusy
-        ? 'Ina-activate…'
+        ? 'Activating…'
         : plusActive
-          ? 'Active na'
-          : 'I-activate (demo)'
+          ? 'Active'
+          : 'Activate (demo)'
       : isBusy
         ? 'Processing…'
         : plusActive
@@ -380,13 +380,13 @@ export default function SubscribeScreen() {
               style={styles.pendingCard}
               onPress={() => void pollCheckoutStatus()}
               accessibilityRole="button"
-              accessibilityLabel="I-refresh ang checkout status"
+              accessibilityLabel="Refresh checkout status"
             >
               <Ionicons name="time-outline" size={20} color={colors.primary} />
               <View style={{ flex: 1 }}>
-                <Text style={styles.pendingTitle}>Pending ang bayad mo</Text>
+                <Text style={styles.pendingTitle}>Payment pending</Text>
                 <Text style={styles.pendingSub}>
-                  {checkingPayment ? 'Tinitingnan…' : `Ref ${pendingRef} · Tap to refresh`}
+                  {checkingPayment ? 'Checking…' : `Ref ${pendingRef} · Tap to refresh`}
                 </Text>
               </View>
               <Ionicons name="refresh" size={18} color={colors.textMuted} />
@@ -397,7 +397,7 @@ export default function SubscribeScreen() {
             <View style={styles.devBanner}>
               <Ionicons name="code-slash" size={16} color={colors.accentDark} />
               <Text style={styles.devBannerText}>
-                Dev build — demo activation lang. Sa TestFlight/App Store, StoreKit billing ang gagamitin.
+                Dev build — purchases are simulated. On TestFlight/App Store, real StoreKit billing applies.
               </Text>
             </View>
           ) : null}
