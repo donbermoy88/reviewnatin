@@ -17,6 +17,7 @@ import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { QuestionImage } from '../../components/question-image';
+import { RichText } from '../../components/rich-text';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createQuizStyles } from '../../lib/themed-styles';
 import { shuffleArray } from '../../lib/shuffle';
@@ -690,7 +691,11 @@ export default function PracticeQuizScreen() {
         </View>
 
         <View style={styles.questionCard}>
-          <Text style={styles.stem}>{current.stem}</Text>
+          <RichText
+            content={current.stem}
+            fontSize={19}
+            color={colors.text}
+          />
         </View>
 
         {current.image_url ? (
@@ -734,7 +739,11 @@ export default function PracticeQuizScreen() {
                 ))}
               </View>
             </View>
-            <Text style={styles.explanationBody}>{explanation}</Text>
+            <RichText
+              content={explanation}
+              fontSize={14}
+              color={colors.text}
+            />
           </View>
         ) : null}
       </ScrollView>
@@ -762,7 +771,7 @@ export default function PracticeQuizScreen() {
                 color={hintCredits > 0 ? colors.accentDark : colors.textMuted}
                 bg={colors.surface}
               >
-                {hintCredits} LEFT
+                {`${hintCredits} LEFT`}
               </Pill>
             </Pressable>
           )
