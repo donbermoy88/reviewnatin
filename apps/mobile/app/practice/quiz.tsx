@@ -288,13 +288,11 @@ export default function PracticeQuizScreen() {
 
   const checkAnswer = useCallback(async () => {
     if (!current || !selected || revealed || checking) return;
-    if (!user && !offlineMode) {
-      router.push('/(auth)/login');
-      return;
-    }
+    // Guest users (no auth) can still check answers — checkQuestionAnswer uses the anon Supabase key
+    const effectiveOffline = offlineMode;
     setChecking(true);
     try {
-      const result = offlineMode
+      const result = effectiveOffline
         ? checkOfflineAnswer(current, selected)
         : await checkQuestionAnswer(current.id, selected);
       if (!result) return;
@@ -312,7 +310,7 @@ export default function PracticeQuizScreen() {
           timeSpentSeconds: elapsedQ,
         },
       ]);
-      if (user && !offlineMode) {
+      if (user && !effectiveOffline) {
         recordQuizOutcome(current.id, result.isCorrect, result.isCorrect ? undefined : selected);
       }
     } catch {

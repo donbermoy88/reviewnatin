@@ -1,4 +1,5 @@
 import type { Question, QuestionChoice } from '../types';
+import { cleanStem } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 import { isDailyLimitError } from './iap';
 import type { PracticeFetchError } from './catalog';
@@ -33,7 +34,7 @@ export type SubjectAnalytics = {
 function mapPracticeQuestion(row: PracticeQuestionRow): Question {
   return {
     id: row.id,
-    stem: row.stem,
+    stem: cleanStem(row.stem),
     choices: row.choices,
     difficulty: row.difficulty,
     topic: {

@@ -1,5 +1,10 @@
 export type QuestionChoice = { id: string; text: string };
 
+/** Strip internal content-pipeline prefixes like `[demo:cse-professional]` from question stems. */
+export function cleanStem(stem: string): string {
+  return stem.replace(/^\[[\w:_-]+\]\s*/, '');
+}
+
 export type Question = {
   id: string;
   stem: string;

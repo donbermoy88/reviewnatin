@@ -43,7 +43,7 @@ export const EXAM_CATALOG: ExamCatalogItem[] = [
     slug: 'cse-subprofessional',
     name: 'CSE Subprofessional',
     shortName: 'CSE Sub',
-    abbr: 'CSC',
+    abbr: 'CSE',
     sub: 'Career Service Examination — Sub-Professional Level',
     category: 'Civil Service',
     color: '#0B5FFF',
@@ -55,7 +55,7 @@ export const EXAM_CATALOG: ExamCatalogItem[] = [
     slug: 'pnle',
     name: 'PNLE (Nursing)',
     shortName: 'PNLE',
-    abbr: 'NLE',
+    abbr: 'PNLE',
     sub: 'Philippine Nurse Licensure Examination',
     category: 'PRC',
     color: '#22C55E',
@@ -96,7 +96,7 @@ export function getExamCatalogItem(slug: string): ExamCatalogItem | undefined {
 export function getExamCategoryLabel(slug: string): string {
   const item = getExamCatalogItem(slug);
   if (!item) return 'EXAM';
-  return item.category === 'Civil Service' ? 'CSC · CIVIL SERVICE' : 'PRC · BOARD EXAM';
+  return item.category === 'Civil Service' ? 'CSE · CIVIL SERVICE' : 'PRC · BOARD EXAM';
 }
 
 /** LET Secondary major fields — stored in user_exam_goals.major_slug */

@@ -1,4 +1,5 @@
 import type { QuizAnswerRecord } from '../types';
+import { cleanStem } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 
 export type QuizMode = 'practice' | 'timed' | 'mock' | 'mistake_review' | 'diagnostic' | 'weak_area' | 'barkada' | 'board';
@@ -115,7 +116,7 @@ export async function fetchSessionReview(sessionId: string): Promise<SessionRevi
     time_spent_seconds: number | null;
   }[]).map((row) => ({
     questionId: row.question_id,
-    stem: row.stem,
+    stem: cleanStem(row.stem),
     choices: row.choices,
     selectedChoiceId: row.selected_choice_id,
     isCorrect: row.is_correct,

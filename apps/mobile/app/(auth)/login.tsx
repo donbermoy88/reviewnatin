@@ -220,6 +220,15 @@ export default function LoginScreen() {
             />
           ) : null}
 
+          <Pressable
+            onPress={() => router.replace('/')}
+            style={[styles.guestLink, { marginTop: 0, marginBottom: 4 }]}
+            disabled={loading}
+            hitSlop={8}
+          >
+            <Text style={styles.guestLinkText}>Magpatuloy bilang guest</Text>
+          </Pressable>
+
           <View style={styles.dividerRow}>
             <View style={styles.dividerLine} />
             <Text style={styles.dividerText}>o gamit ang email</Text>
@@ -310,14 +319,6 @@ export default function LoginScreen() {
             </Text>
           </Pressable>
 
-          <Pressable
-            onPress={() => router.replace('/')}
-            style={styles.guestLink}
-            disabled={loading}
-            hitSlop={8}
-          >
-            <Text style={styles.guestLinkText}>Magpatuloy bilang guest</Text>
-          </Pressable>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

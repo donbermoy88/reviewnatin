@@ -526,7 +526,7 @@ export default function OnboardingScreen() {
         </View>
       </ScreenScroll>
 
-      {step >= 1 && step < 4 && (
+      {step >= 1 && step < 3 && (
         <LinearGradient
           colors={[colors.footerFade, colors.background]}
           style={[styles.stickyFooterFade, { paddingBottom: insets.bottom + spacing.md }]}

@@ -53,8 +53,8 @@ function timeGreeting(): string {
 
 function examAbbr(slug: string): string {
   if (slug.includes('let')) return 'LET';
-  if (slug.includes('cse')) return 'CSC';
-  if (slug.includes('pnle')) return 'NLE';
+  if (slug.includes('cse')) return 'CSE';
+  if (slug.includes('pnle')) return 'PNLE';
   return 'RN';
 }
 
@@ -501,7 +501,7 @@ export default function DashboardScreen() {
                   ? 'Goal done for today! 🎉'
                   : user
                     ? `${questionsTarget - questionsDone} to go — kaya pa! 💪`
-                    : 'Mag-login para i-track ang daily goal mo.'}
+                    : `${questionsTarget - questionsDone} to go — simulan na! 💪`}
               </Text>
               {showAccuracy ? (
                 <Text style={[styles.goalHint, { marginTop: 6 }]}>

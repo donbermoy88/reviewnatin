@@ -1,5 +1,6 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
 import type { Question, QuestionChoice } from '../types';
+import { cleanStem } from '../types';
 
 type DiagnosticRow = {
   id: string;
@@ -41,7 +42,7 @@ export async function fetchDiagnosticQuestions(examSlug: string, limit = 40): Pr
 
   return ((data ?? []) as DiagnosticRow[]).map((row) => ({
     id: row.id,
-    stem: row.stem,
+    stem: cleanStem(row.stem),
     choices: row.choices,
     difficulty: row.difficulty,
     topic: {

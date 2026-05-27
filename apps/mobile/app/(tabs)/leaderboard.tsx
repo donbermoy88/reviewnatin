@@ -12,7 +12,7 @@ import { createLeaderboardStyles } from '../../lib/themed-styles';
 import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardPeriod } from '../../lib/api/leaderboard';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
-import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
+import { DEFAULT_EXAM_SLUG, getExamCatalogItem } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 
 export default function LeaderboardScreen() {
@@ -65,7 +65,7 @@ export default function LeaderboardScreen() {
         >
           <Text style={styles.headerTitle}>Leaderboard</Text>
           <Text style={styles.headerSub}>
-            {period === 'week' ? 'Weekly XP' : 'All-time XP'} — {examSlug.replace(/-/g, ' ')}
+            {period === 'week' ? 'Weekly XP' : 'All-time XP'} — {getExamCatalogItem(examSlug)?.name ?? examSlug.replace(/-/g, ' ')}
           </Text>
           <View style={{ flexDirection: 'row', gap: spacing.sm, marginTop: spacing.md }}>
             {([

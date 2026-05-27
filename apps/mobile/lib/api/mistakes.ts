@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { cleanStem } from '../types';
 
 export type MistakeItem = {
   id: string;
@@ -34,7 +35,7 @@ export async function fetchMistakes(examSlug: string, limit = 50): Promise<Mista
   }[]).map((row) => ({
     id: row.id,
     questionId: row.question_id,
-    stem: row.stem,
+    stem: cleanStem(row.stem),
     subjectName: row.subject_name,
     topicName: row.topic_name,
     timesWrong: row.times_wrong,

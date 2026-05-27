@@ -1,4 +1,5 @@
 import type { Question, QuestionChoice } from '../types';
+import { cleanStem } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 
 export type MockExam = {
@@ -66,7 +67,7 @@ export async function fetchMockExamQuestions(mockExamId: string): Promise<MockEx
   return {
     questions: rows.map((row) => ({
       id: row.id,
-      stem: row.stem,
+      stem: cleanStem(row.stem),
       choices: row.choices,
       difficulty: row.difficulty,
       topic: {

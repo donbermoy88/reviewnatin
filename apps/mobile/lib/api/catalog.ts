@@ -1,4 +1,5 @@
 import type { ExamType, Question, QuestionChoice, SubjectArea } from '../types';
+import { cleanStem } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 import { isDailyLimitError } from './iap';
 
@@ -31,7 +32,7 @@ export type AnswerCheckResult = {
 function mapPracticeQuestion(row: PracticeQuestionRow): Question {
   return {
     id: row.id,
-    stem: row.stem,
+    stem: cleanStem(row.stem),
     choices: row.choices,
     difficulty: row.difficulty,
     topic: {
