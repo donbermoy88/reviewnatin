@@ -5,13 +5,17 @@ export type ContentMinimum = {
   mockExams: number;
 };
 
-/** Minimum published content before marketing an exam track */
+/**
+ * Minimum published content for each exam track.
+ * Phase 1 targets — enough for a solid practice bank at launch.
+ * These are raised over time as content is added.
+ */
 export const CONTENT_MINIMUMS: Record<ExamSlug, ContentMinimum> = {
-  'cse-professional': { questions: 1500, mockExams: 3 },
-  'cse-subprofessional': { questions: 1500, mockExams: 3 },
-  'let-elementary': { questions: 2000, mockExams: 2 },
-  'let-secondary': { questions: 2000, mockExams: 2 },
-  pnle: { questions: 2500, mockExams: 2 },
+  'cse-professional':    { questions: 300, mockExams: 2 },
+  'cse-subprofessional': { questions: 200, mockExams: 2 },
+  'let-elementary':      { questions: 150, mockExams: 1 },
+  'let-secondary':       { questions: 200, mockExams: 1 },
+  pnle:                  { questions: 200, mockExams: 1 },
 };
 
 export type ContentCounts = {

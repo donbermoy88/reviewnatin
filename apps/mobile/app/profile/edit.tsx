@@ -123,7 +123,7 @@ export default function EditProfileScreen() {
             />
           </View>
           <Text style={[styles.entitlementNote, { marginBottom: spacing.lg }]}>
-            Makikita ito sa Profile, Home, at Leaderboard.
+            Visible on your Profile, Home screen, and Leaderboard.
           </Text>
 
           {error ? (

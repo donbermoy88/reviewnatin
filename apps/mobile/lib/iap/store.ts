@@ -111,7 +111,7 @@ export async function restorePurchases(refreshEntitlements: () => Promise<void>)
       return {
         ok: true,
         restoredCount: 0,
-        message: 'Walang nakitang previous purchases sa account na ito.',
+        message: 'No previous purchases found on this account.',
       };
     }
 
@@ -119,7 +119,7 @@ export async function restorePurchases(refreshEntitlements: () => Promise<void>)
       return {
         ok: false,
         restoredCount: 0,
-        message: lastError ?? 'Hindi ma-verify ang purchases sa server.',
+        message: lastError ?? 'Could not verify purchases with the server.',
       };
     }
 
@@ -130,7 +130,7 @@ export async function restorePurchases(refreshEntitlements: () => Promise<void>)
     };
   } catch (err) {
     await iap.endConnection().catch(() => undefined);
-    const msg = err instanceof Error ? err.message : 'Hindi ma-restore ang purchases.';
+    const msg = err instanceof Error ? err.message : 'Could not restore purchases.';
     return { ok: false, restoredCount: 0, message: msg };
   }
 }

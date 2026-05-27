@@ -45,7 +45,7 @@ export async function updateUserDisplayName(
 
   const userId = authData.user?.id;
   if (!userId) {
-    return { ok: false, error: 'Hindi ma-update ang profile. Subukan ulit.' };
+    return { ok: false, error: 'Unable to update profile. Please try again.' };
   }
 
   const { error: profileError } = await supabase

@@ -32,7 +32,7 @@ export async function shareQuizScore(payload: ScoreSharePayload): Promise<void> 
   try {
     await Share.share({ message });
   } catch {
-    Alert.alert('Could not share', 'Subukan ulit later.');
+    Alert.alert('Could not share', 'Please try again.');
   }
 }
 

@@ -101,7 +101,7 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
   }
 
   if (result.type !== 'success' || !result.params.code) {
-    return { idToken: null, error: 'Hindi natapos ang Google sign-in.' };
+    return { idToken: null, error: 'Google sign-in did not complete.' };
   }
 
   try {
@@ -117,7 +117,7 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
     if (!idToken) {
       return {
         idToken: null,
-        error: 'Walang ID token mula sa Google. Check ang OAuth client sa Google Cloud.',
+        error: 'No ID token received from Google. Check the OAuth client in Google Cloud Console.',
       };
     }
 
@@ -125,7 +125,7 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
   } catch {
     return {
       idToken: null,
-      error: 'Hindi makakuha ng token mula sa Google. Check ang iOS OAuth client (bundle: ph.reviewnatin.app).',
+      error: 'Unable to get token from Google. Check the iOS OAuth client (bundle: ph.reviewnatin.app).',
     };
   }
 }

@@ -23,7 +23,7 @@ export async function syncExamGoal(userId: string, onboarding: OnboardingData): 
     .single();
 
   if (examErr || !exam) {
-    throw new Error(examErr?.message ?? 'Hindi mahanap ang exam sa database.');
+    throw new Error(examErr?.message ?? 'Exam not found in the database.');
   }
 
   const { error: deactivateErr } = await supabase
@@ -55,7 +55,7 @@ export async function syncExamGoalSafe(
     await syncExamGoal(userId, onboarding);
     return { ok: true };
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Hindi ma-sync ang goal mo sa cloud.';
+    const message = err instanceof Error ? err.message : 'Could not sync your goal to the cloud.';
     return { ok: false, message };
   }
 }

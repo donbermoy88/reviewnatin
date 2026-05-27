@@ -266,10 +266,10 @@ export default function LoginScreen() {
           </LabeledField>
 
           {mode === 'signup' ? (
-            <LabeledField label="Ulitin ang password" styles={styles}>
+            <LabeledField label="Confirm password" styles={styles}>
               <TextInput
                 style={styles.input}
-                placeholder="Dapat pareho sa password"
+                placeholder="Must match your password"
                 placeholderTextColor={colors.textLight}
                 secureTextEntry
                 textContentType="newPassword"

@@ -22,15 +22,15 @@ export type ReadinessBand = {
 
 export function getReadinessBand(score: number): ReadinessBand {
   if (score >= 85) {
-    return { label: 'Handa na sa exam', copy: 'Maganda ang form mo — maintain lang gamit ang mocks.' };
+    return { label: 'Exam-ready', copy: 'Great form — keep it up with regular mocks.' };
   }
   if (score >= 70) {
-    return { label: 'Malapit na', copy: 'Malakas ang coverage — kumuha ng full mock ngayong linggo.' };
+    return { label: 'Almost there', copy: 'Strong coverage — take a full mock this week.' };
   }
   if (score >= 40) {
-    return { label: 'Umuusad', copy: 'Magandang progress — ituloy ang daily streak.' };
+    return { label: 'Making progress', copy: 'Good progress — keep your daily streak going.' };
   }
-  return { label: 'Kailangan ng foundation', copy: 'Focus sa basics — i-prioritize ng PasaPath ang weak areas mo.' };
+  return { label: 'Building foundation', copy: 'Focus on the basics — PasaPath will prioritize your weak areas.' };
 }
 
 export async function fetchLatestReadiness(examSlug: string): Promise<ReadinessSnapshot | null> {

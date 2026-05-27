@@ -177,7 +177,7 @@ export default function AiTutorScreen() {
         <TextInput
           value={input}
           onChangeText={setInput}
-          placeholder="Tanungin ang tutor…"
+          placeholder="Ask your AI tutor…"
           placeholderTextColor={colors.textLight}
           multiline
           style={{
