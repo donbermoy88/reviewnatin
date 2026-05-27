@@ -256,7 +256,7 @@ export default function PracticeResultScreen() {
                   ? `Mock PASS — ${scoreNum}% 🎉`
                   : `Mock score ${scoreNum}% — aim for ${MOCK_PASS_THRESHOLD}%+`
                 : scoreNum >= 70
-                  ? `Galing mo, ${displayName}! 🎉`
+                  ? `Great work, ${displayName}! 🎉`
                   : 'Keep going! 💪'}
           </Text>
           <ScoreRing percent={scoreNum} correct={correctNum} total={totalNum} />
