@@ -136,6 +136,24 @@ export default function LeaderboardScreen() {
                 </View>
               ) : null}
 
+              {entries.length < 5 ? (
+                <View style={{
+                  marginTop: spacing.lg,
+                  padding: spacing.md,
+                  backgroundColor: colors.primaryMuted,
+                  borderRadius: 14,
+                  alignItems: 'center',
+                  gap: spacing.sm,
+                }}>
+                  <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 15, color: colors.text, textAlign: 'center' }}>
+                    Challenge your study group
+                  </Text>
+                  <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 13, color: colors.textMuted, textAlign: 'center', lineHeight: 19 }}>
+                    The leaderboard fills up as more reviewers join. Invite friends to compete for the top spot!
+                  </Text>
+                </View>
+              ) : null}
+
               <PrimaryButton
                 label="Barkada challenge →"
                 variant="outline"

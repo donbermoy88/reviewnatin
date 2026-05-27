@@ -604,7 +604,7 @@ export default function PracticeQuizScreen() {
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 120 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 200 }}>
         <View style={[styles.topBar, { paddingTop: insets.top + spacing.sm }]}>
           {!isStrictExam && !isDiagnostic ? (
             <Pressable style={styles.closeBtn} onPress={() => router.back()}>
@@ -720,6 +720,19 @@ export default function PracticeQuizScreen() {
             );
           })}
         </View>
+
+        {revealed && !isStrictExam && !explanation ? (
+          <View style={[styles.explanation, { borderColor: revealResult?.isCorrect ? colors.success : colors.error, backgroundColor: revealResult?.isCorrect ? colors.successBg : colors.errorBg }]}>
+            <Text style={[styles.explanationTitle, { color: revealResult?.isCorrect ? colors.success : colors.error }]}>
+              {revealResult?.isCorrect ? '✓ Correct!' : '✗ Incorrect'}
+            </Text>
+            {!revealResult?.isCorrect && revealResult?.correctChoiceId ? (
+              <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 13, color: colors.text, marginTop: 4 }}>
+                The correct answer is highlighted in green above.
+              </Text>
+            ) : null}
+          </View>
+        ) : null}
 
         {revealed && explanation ? (
           <View style={styles.explanation}>

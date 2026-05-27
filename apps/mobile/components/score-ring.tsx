@@ -17,6 +17,9 @@ export function ScoreRing({ percent, correct, total, size = 180 }: Props) {
   const offset = c * (1 - percent / 100);
   const center = size / 2;
 
+  // Dynamic ring color: green ≥75%, orange ≥50%, red <50%
+  const ringColor = percent >= 75 ? colors.success : percent >= 50 ? colors.flame : colors.error;
+
   return (
     <View style={{ width: size, height: size, marginTop: 24 }}>
       <Svg width={size} height={size} style={{ transform: [{ rotate: '-90deg' }] }}>
@@ -25,7 +28,7 @@ export function ScoreRing({ percent, correct, total, size = 180 }: Props) {
           cx={center}
           cy={center}
           r={r}
-          stroke={colors.accent}
+          stroke={ringColor}
           strokeWidth={stroke}
           fill="none"
           strokeLinecap="round"
@@ -38,7 +41,7 @@ export function ScoreRing({ percent, correct, total, size = 180 }: Props) {
           <Text style={[styles.scoreBig, { fontFamily: fonts.display }]}>{correct}</Text>
           <Text style={[styles.scoreSlash, { fontFamily: fonts.display }]}>/{total}</Text>
         </Text>
-        <Text style={[styles.accuracy, { fontFamily: fonts.bodyBold, color: colors.accent }]}>{Math.round(percent)}% accuracy</Text>
+        <Text style={[styles.accuracy, { fontFamily: fonts.bodyBold, color: ringColor }]}>{Math.round(percent)}% accuracy</Text>
       </View>
     </View>
   );

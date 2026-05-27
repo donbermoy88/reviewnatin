@@ -323,7 +323,7 @@ export default function StudyScreen() {
           {questionCount === 0 ? (
             <View style={styles.noticeCard}>
               <Text style={styles.noticeText}>
-                Content is still loading in — practice questions will appear here as we import them.
+                Questions for this exam are coming soon. Check back shortly — we're actively importing content.
               </Text>
             </View>
           ) : null}
@@ -420,7 +420,7 @@ export default function StudyScreen() {
                   onPress={() =>
                     router.push({
                       pathname: '/study/[subjectSlug]',
-                      params: { subjectSlug: s.slug, examSlug },
+                      params: { subjectSlug: s.slug, examSlug, subjectName: s.name },
                     })
                   }
                 >
@@ -446,10 +446,12 @@ export default function StudyScreen() {
         </View>
       </ScrollView>
 
-      <LinearGradient
-        colors={[colors.footerFade, colors.background]}
-        style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}
-      >
+      <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]} pointerEvents="box-none">
+        <LinearGradient
+          colors={[colors.footerFade, colors.background]}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+          pointerEvents="none"
+        />
         <PrimaryButton
           label="Start practice quiz"
           icon="flash"
@@ -457,7 +459,7 @@ export default function StudyScreen() {
           size="lg"
           onPress={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
         />
-      </LinearGradient>
+      </View>
     </View>
   );
 }

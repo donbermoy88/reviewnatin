@@ -160,7 +160,7 @@ export default function AnalyticsScreen() {
                     {subject.averageAccuracy > 0 ? `${subject.averageAccuracy}%` : '—'}
                   </Text>
                 </View>
-                {subject.topics.slice(0, 6).map((topic) => {
+                {subject.topics.map((topic) => {
                   const pct = topic.attempts > 0 ? Math.round(topic.accuracy) : 0;
                   return (
                     <View key={topic.topicId} style={styles.topicRow}>
@@ -169,7 +169,7 @@ export default function AnalyticsScreen() {
                           {topic.topicName}
                         </Text>
                         <Text style={styles.topicPct}>
-                          {topic.attempts > 0 ? `${pct}% · ${topic.attempts} tries` : 'Not started'}
+                          {topic.attempts > 0 ? `${pct}% · ${topic.attempts} ${topic.attempts === 1 ? 'try' : 'tries'}` : 'Not started'}
                         </Text>
                       </View>
                       <View style={styles.barTrack}>

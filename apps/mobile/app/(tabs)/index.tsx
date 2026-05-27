@@ -451,7 +451,7 @@ export default function DashboardScreen() {
                 </View>
               ) : null}
 
-              {visiblePasapathTasks.map((task) => (
+              {visiblePasapathTasks.filter((task) => task.id !== nextTask?.id || task.completed).map((task) => (
                 <Pressable
                   key={task.id}
                   style={[styles.pasapathTask, task.completed && { opacity: 0.55 }]}
@@ -570,7 +570,7 @@ export default function DashboardScreen() {
                   onPress={() =>
                     router.push({
                       pathname: '/study/[subjectSlug]',
-                      params: { subjectSlug: subject.slug, examSlug },
+                      params: { subjectSlug: subject.slug, examSlug, subjectName: subject.name },
                     })
                   }
                 >

@@ -26,6 +26,26 @@ function dailyQuestionTarget(dailyMinutes: number): number {
   return map[dailyMinutes] ?? 15;
 }
 
+function sessionModeLabel(mode: string): string {
+  const labels: Record<string, string> = {
+    practice: 'Practice',
+    mock: 'Mock Exam',
+    timed: 'Timed',
+    board: 'Board Exam',
+    mistake_review: 'Mistakes',
+    weak_area: 'Quick 10',
+    barkada: 'Barkada',
+    diagnostic: 'Diagnostic',
+    offline: 'Offline',
+  };
+  return labels[mode] ?? mode;
+}
+
+function formatSessionDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
 export default function ProfileScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -223,7 +243,7 @@ export default function ProfileScreen() {
                 <View style={{ flex: 1 }}>
                   <Text style={styles.sessionTitle}>{m.mockTitle}</Text>
                   <Text style={styles.sessionDate}>
-                    {new Date(m.completedAt).toLocaleString()} · {m.passed ? 'PASS' : 'REVIEW'} (≥{MOCK_PASS_THRESHOLD}%)
+                    {new Date(m.completedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} · {m.passed ? '✓ Passed' : 'Needs review'} (target ≥{MOCK_PASS_THRESHOLD}%)
                   </Text>
                 </View>
                 <Text
@@ -257,10 +277,10 @@ export default function ProfileScreen() {
                 <View key={s.id} style={styles.sessionCard}>
                   <View>
                     <Text style={styles.sessionTitle}>
-                      {s.mode} · {s.item_count} items
+                      {sessionModeLabel(s.mode)} · {s.item_count} items
                     </Text>
                     <Text style={styles.sessionDate}>
-                      {s.completed_at ? new Date(s.completed_at).toLocaleString() : ''}
+                      {s.completed_at ? formatSessionDate(s.completed_at) : ''}
                     </Text>
                   </View>
                   <Text style={styles.sessionScore}>{s.score_percent ?? '—'}%</Text>
@@ -285,10 +305,10 @@ export default function ProfileScreen() {
                 <View key={s.id} style={styles.sessionCard}>
                   <View>
                     <Text style={styles.sessionTitle}>
-                      {s.mode} · {s.item_count} items
+                      {sessionModeLabel(s.mode)} · {s.item_count} items
                     </Text>
                     <Text style={styles.sessionDate}>
-                      {s.completed_at ? new Date(s.completed_at).toLocaleString() : ''}
+                      {s.completed_at ? formatSessionDate(s.completed_at) : ''}
                     </Text>
                   </View>
                   <Text style={styles.sessionScore}>{s.score_percent ?? '—'}%</Text>

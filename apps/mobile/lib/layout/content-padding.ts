@@ -15,7 +15,8 @@ export function tabScrollPadding(insets: EdgeInsets, extra = 64): ViewStyle {
 
 /** Tab screens with a fixed footer CTA above the tab bar */
 export function tabScrollPaddingWithFooter(insets: EdgeInsets): ViewStyle {
-  return { paddingBottom: TAB_BAR_BASE + bottomInset(insets) + 68 };
+  // 88 extra to clear the button (56px) + gradient fade area above it
+  return { paddingBottom: TAB_BAR_BASE + bottomInset(insets) + 88 };
 }
 
 /** Stack / modal screens without tab bar */

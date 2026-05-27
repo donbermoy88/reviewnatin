@@ -25,12 +25,13 @@ export default function TopicListScreen() {
   const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createSubjectTopicStyles(theme), [theme]);
   const { user } = useAuth();
-  const { subjectSlug, examSlug } = useLocalSearchParams<{ subjectSlug: string; examSlug: string }>();
+  const { subjectSlug, examSlug, subjectName: paramSubjectName } = useLocalSearchParams<{ subjectSlug: string; examSlug: string; subjectName?: string }>();
   const slug = examSlug ?? DEFAULT_EXAM_SLUG;
   const [loading, setLoading] = useState(true);
   const [topics, setTopics] = useState<TopicRow[]>([]);
   const [topicAnalytics, setTopicAnalytics] = useState<Map<string, TopicAnalyticsRow>>(new Map());
-  const subjectName = subjectSlug ? titleCase(subjectSlug) : 'Subject';
+  // Use the passed subject name (full name from DB), falling back to slug-derived name
+  const subjectName = paramSubjectName ?? (subjectSlug ? titleCase(subjectSlug) : 'Subject');
 
   const load = useCallback(async () => {
     if (!subjectSlug) return;
@@ -157,8 +158,8 @@ export default function TopicListScreen() {
                   <Text style={styles.topicTitle}>{t.name}</Text>
                   <Text style={styles.topicMeta}>
                     {analytics && analytics.attempts > 0
-                      ? `${pct}% · ${analytics.attempts} tries`
-                      : 'Practice questions for this topic'}
+                      ? `${pct}% mastery · ${analytics.attempts} ${analytics.attempts === 1 ? 'try' : 'tries'}`
+                      : 'Tap to start practicing'}
                   </Text>
                   {analytics && analytics.attempts > 0 ? (
                     <MasteryBar accuracy={pct} attempts={analytics.attempts} style={{ marginTop: 6 }} />
