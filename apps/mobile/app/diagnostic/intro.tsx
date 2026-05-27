@@ -12,9 +12,9 @@ import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 
 const FEATURES = [
-  { icon: 'analytics-outline' as const, title: 'Baseline readiness', sub: 'Ito ang simula ng PasaPath score mo' },
-  { icon: 'map-outline' as const, title: 'Weak subject map', sub: 'Top 3 areas na uunahin' },
-  { icon: 'calendar-outline' as const, title: 'Daily plan unlock', sub: 'Bukas, tailored na ang PasaPath mo' },
+  { icon: 'analytics-outline' as const, title: 'Baseline readiness', sub: 'This is the start of your PasaPath score' },
+  { icon: 'map-outline' as const, title: 'Weak subject map', sub: 'Top 3 areas to focus on first' },
+  { icon: 'calendar-outline' as const, title: 'Daily plan unlock', sub: 'Tomorrow, your PasaPath will be tailored' },
 ];
 
 export default function DiagnosticIntroScreen() {
@@ -56,7 +56,7 @@ export default function DiagnosticIntroScreen() {
   return (
     <StackShell
       title="Diagnostic quiz"
-      subtitle="40 tanong sa lahat ng subjects — soft 30-minute timer. May explanation after each item para makita agad ang weak spots mo."
+      subtitle="40 questions across all subjects — soft 30-minute timer. Explanations after each item to surface your weak spots right away."
       headerExtra={
         <Pill color={colors.accentDark} bg={colors.accent}>
           DAY 0 BASELINE
@@ -100,7 +100,7 @@ export default function DiagnosticIntroScreen() {
         ))}
 
         <PrimaryButton
-          label="Simulan ang diagnostic"
+          label="Start diagnostic"
           size="lg"
           onPress={() =>
             router.replace({
@@ -110,7 +110,7 @@ export default function DiagnosticIntroScreen() {
           }
         />
         <PrimaryButton
-          label="Skip muna"
+          label="Skip for now"
           variant="outline"
           size="lg"
           onPress={() => router.replace('/(tabs)')}

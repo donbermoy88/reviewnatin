@@ -42,14 +42,14 @@ export default function OfflineLessonsScreen() {
   return (
     <StackShell
       title="Offline lessons"
-      subtitle="Mula sa downloaded pack mo — hindi kailangan ng internet"
+      subtitle="From your downloaded pack — no internet needed"
     >
       {materials.length === 0 ? (
         <EmptyState
           icon={<Ionicons name="cloud-offline-outline" size={32} color={colors.textMuted} />}
-          title="Walang offline lessons"
-          description="I-download muna ang offline pack sa Settings para makita ang lessons dito."
-          actionLabel="Pumunta sa Settings"
+          title="No offline lessons"
+          description="Download the offline pack in Settings to view lessons here."
+          actionLabel="Go to Settings"
           onAction={() => router.push('/(tabs)/settings')}
         />
       ) : (

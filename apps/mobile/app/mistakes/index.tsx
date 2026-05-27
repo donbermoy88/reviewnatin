@@ -66,9 +66,9 @@ export default function MistakesScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="alert-circle-outline" size={32} color={colors.primary} />}
-          title="Mag-login muna"
-          description="Kailangan ng account para ma-save ang Mistake Bank mo."
-          actionLabel="Mag-login"
+          title="Log in to continue"
+          description="You need an account to save your Mistake Bank."
+          actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </View>
@@ -111,9 +111,9 @@ export default function MistakesScreen() {
         ) : mistakes.length === 0 ? (
           <EmptyState
             icon={<Ionicons name="checkmark-circle-outline" size={32} color={colors.success} />}
-            title="Walang mistakes pa"
-            description="Mali sa quiz? Automatic na ma-save dito para ma-review mo ulit."
-            actionLabel="Mag-practice"
+            title="No mistakes yet"
+            description="Questions you get wrong in quizzes will automatically be saved here for review."
+            actionLabel="Practice now"
             onAction={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
           />
         ) : (

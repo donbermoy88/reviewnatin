@@ -26,13 +26,13 @@ import {
 const isDevBuild = __DEV__;
 
 const PLUS_FEATURES = [
-  'Lahat ng Phase 1 exams',
-  'Unlimited mocks · walang ads',
+  'All Phase 1 exams',
+  'Unlimited mocks · no ads',
   'Full PasaPath + offline packs',
 ];
 
 const EXAM_PASS_FEATURES = [
-  'Isang exam unlock · 6 buwan',
+  'Single exam unlock · 6 months',
   'Full mocks + Mistake Bank',
   'Offline pack + Board Exam Mode',
 ];
@@ -61,8 +61,8 @@ function formatSkuLabel(sku: string): string {
 }
 
 function priceSuffix(sku: string): string {
-  if (sku.includes('yearly')) return '/taon';
-  if (sku.includes('monthly')) return '/buwan';
+  if (sku.includes('yearly')) return '/year';
+  if (sku.includes('monthly')) return '/month';
   return ' one-time';
 }
 
@@ -264,12 +264,12 @@ export default function SubscribeScreen() {
           ? 'Active na'
           : 'I-activate (demo)'
       : isBusy
-        ? 'Pinoproseso…'
+        ? 'Processing…'
         : plusActive
-          ? 'Active na'
+          ? 'Active'
           : variant === 'plus'
-            ? 'Mag-subscribe'
-            : 'Bumili ng Exam Pass';
+            ? 'Subscribe'
+            : 'Buy Exam Pass';
 
     const onPrimary = () => {
       if (isDevBuild) void buyDemo(product.id, product.tier);
@@ -285,7 +285,7 @@ export default function SubscribeScreen() {
           <View style={{ flex: 1 }}>
             {highlighted ? (
               <View style={styles.bestValueBadge}>
-                <Text style={styles.bestValueText}>Pinaka sulit</Text>
+                <Text style={styles.bestValueText}>Best value</Text>
               </View>
             ) : null}
             <Text style={styles.planName}>{label}</Text>
@@ -355,11 +355,11 @@ export default function SubscribeScreen() {
 
           <Text style={styles.headerTitle}>ReviewNatin Plus</Text>
           <Text style={styles.headerSub}>
-            Mag-aral nang walang limit — mocks, Mistake Bank, offline packs, at walang ads.
+            Study without limits — mocks, Mistake Bank, offline packs, and no ads.
           </Text>
 
           <View style={styles.headerPills}>
-            {['Unlimited', 'PasaPath', 'Offline', 'Walang ads'].map((item) => (
+            {['Unlimited', 'PasaPath', 'Offline', 'No ads'].map((item) => (
               <View key={item} style={styles.headerPill}>
                 <Text style={styles.headerPillText}>{item}</Text>
               </View>
@@ -371,7 +371,7 @@ export default function SubscribeScreen() {
           {paymentConfirmed ? (
             <View style={styles.successBanner}>
               <Ionicons name="checkmark-circle" size={20} color={colors.success} />
-              <Text style={styles.successBannerText}>Na-confirm ang bayad — active na ang subscription mo!</Text>
+              <Text style={styles.successBannerText}>Payment confirmed — your subscription is now active!</Text>
             </View>
           ) : null}
 
@@ -406,9 +406,9 @@ export default function SubscribeScreen() {
             <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.lg }} />
           ) : (
             <>
-              <Text style={styles.sectionTitle}>Piliin ang plan mo</Text>
+              <Text style={styles.sectionTitle}>Choose your plan</Text>
               <Text style={styles.sectionSub}>
-                Plus para sa lahat ng exams · Exam Pass kung isang board lang muna
+                Plus for all exams · Exam Pass for a single board exam
               </Text>
 
               {sortedPlus.length > 0 ? (
@@ -421,7 +421,7 @@ export default function SubscribeScreen() {
               {examProducts.length > 0 ? (
                 <View style={styles.planGroup}>
                   <Text style={styles.planGroupLabel}>Exam Pass</Text>
-                  <Text style={styles.planGroupSub}>One-time unlock · 6 months para sa exam mo</Text>
+                  <Text style={styles.planGroupSub}>One-time unlock · 6 months for your exam</Text>
                   {examProducts.map((p) => renderPlanCard(p, 'exam_pass'))}
                 </View>
               ) : null}
@@ -430,11 +430,11 @@ export default function SubscribeScreen() {
 
           <View style={styles.footerBlock}>
             <PrimaryButton
-              label={restoring ? 'Nire-restore…' : 'I-restore ang purchases'}
+              label={restoring ? 'Restoring…' : 'Restore purchases'}
               variant="outline"
               disabled={restoring || !!purchasingSku}
               onPress={handleRestore}
-              accessibilityLabel="I-restore ang mga dating purchase"
+              accessibilityLabel="Restore previous purchases"
             />
             <Text style={styles.disclaimer}>{DISCLAIMERS.subscription}</Text>
             <Text style={styles.disclaimer}>{DISCLAIMERS.short}</Text>
@@ -454,23 +454,23 @@ export default function SubscribeScreen() {
       />
       <AppSheet
         visible={sheet?.kind === 'restore'}
-        title={sheet?.kind === 'restore' && sheet.ok ? 'Na-restore ang purchases' : 'Hindi ma-restore'}
+        title={sheet?.kind === 'restore' && sheet.ok ? 'Purchases restored' : 'Could not restore'}
         subtitle={sheet?.kind === 'restore' ? sheet.message : undefined}
         onClose={() => setSheet(null)}
         actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}
       />
       <AppSheet
         visible={sheet?.kind === 'ewallet'}
-        title="Kumpletuhin ang bayad"
+        title="Complete your payment"
         subtitle={
           sheet?.kind === 'ewallet'
-            ? `Mag-send ng ₱${sheet.amount} via ${sheet.provider === 'gcash' ? 'GCash' : 'Maya'} gamit ang reference ${sheet.reference}, tapos i-confirm sa checkout page.`
+            ? `Send ₱${sheet.amount} via ${sheet.provider === 'gcash' ? 'GCash' : 'Maya'} using reference ${sheet.reference}, then confirm on the checkout page.`
             : undefined
         }
         onClose={() => setSheet(null)}
         actions={[
           {
-            label: 'Buksan ang checkout',
+            label: 'Open checkout',
             onPress: () => {
               if (sheet?.kind === 'ewallet') {
                 void WebBrowser.openBrowserAsync(
@@ -485,7 +485,7 @@ export default function SubscribeScreen() {
       />
       <AppSheet
         visible={sheet?.kind === 'checkout_error'}
-        title="Hindi nag-push ang checkout"
+        title="Checkout failed"
         subtitle={sheet?.kind === 'checkout_error' ? sheet.message : undefined}
         onClose={() => setSheet(null)}
         actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}

@@ -46,9 +46,9 @@ import { useUserProfile } from '../../hooks/use-user-profile';
 
 function timeGreeting(): string {
   const h = new Date().getHours();
-  if (h < 12) return 'Magandang umaga,';
-  if (h < 18) return 'Magandang hapon,';
-  return 'Magandang gabi,';
+  if (h < 12) return 'Good morning,';
+  if (h < 18) return 'Good afternoon,';
+  return 'Good evening,';
 }
 
 function examAbbr(slug: string): string {
@@ -213,7 +213,7 @@ export default function DashboardScreen() {
   const showAccuracy = stats.totalAnswered >= 20 && stats.accuracyPercent != null;
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
   const firstName = displayName.split(/\s+/)[0] ?? displayName;
-  const streakLabel = stats.streakDays > 0 ? 'araw na streak' : 'simulan ngayon';
+  const streakLabel = stats.streakDays > 0 ? 'day streak' : 'start today';
 
   const ensurePracticeAllowed = () => {
     if (!user) return true;
@@ -315,10 +315,10 @@ export default function DashboardScreen() {
   };
 
   const primaryCtaLabel = (task: PasaPathTask): string => {
-    if (task.type === 'mistakes') return 'Buksan ang Mistake Bank';
-    if (task.type === 'flashcards') return 'Simulan ang flashcards';
-    if (task.type === 'mock') return 'Simulan ang mock exam';
-    return 'Simulan ang practice quiz';
+    if (task.type === 'mistakes') return 'Open Mistake Bank';
+    if (task.type === 'flashcards') return 'Start flashcards';
+    if (task.type === 'mock') return 'Start mock exam';
+    return 'Start practice quiz';
   };
 
   return (
@@ -341,7 +341,7 @@ export default function DashboardScreen() {
             <View style={{ flex: 1, minWidth: 0, paddingRight: spacing.xs }}>
               <Text style={styles.heroGreet}>{timeGreeting()}</Text>
               <Text style={styles.heroName} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.85}>
-                Kumusta, {firstName}! 👋
+                Hey, {firstName}! 👋
               </Text>
             </View>
             <Pressable
@@ -374,7 +374,7 @@ export default function DashboardScreen() {
               <View style={styles.statTextWrap}>
                 <Text style={styles.statVal}>{questionsDone}</Text>
                 <Text style={styles.statLbl} numberOfLines={2}>
-                  tanong ngayon
+                  questions today
                 </Text>
               </View>
             </View>
@@ -384,7 +384,7 @@ export default function DashboardScreen() {
               disabled={readinessScore == null}
               accessibilityRole="button"
               accessibilityLabel={
-                readinessScore != null ? `${readinessScore} percent handa na. Tap para sa breakdown.` : 'Walang readiness score pa'
+                readinessScore != null ? `${readinessScore}% ready. Tap for breakdown.` : 'No readiness score yet'
               }
             >
               {readinessScore != null ? (
@@ -401,7 +401,7 @@ export default function DashboardScreen() {
                   <Text style={[styles.statVal, { fontSize: 15 }]}>—</Text>
                 </View>
               )}
-              <Text style={styles.statLblCenter}>handa na</Text>
+              <Text style={styles.statLblCenter}>ready</Text>
             </Pressable>
           </View>
         </LinearGradient>
@@ -415,7 +415,7 @@ export default function DashboardScreen() {
                   onPress={() => router.push('/pasapath/week')}
                   hitSlop={8}
                   accessibilityRole="button"
-                  accessibilityLabel="Tingnan ang PasaPath week"
+                  accessibilityLabel="View PasaPath week"
                 >
                   <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.primary }}>Week →</Text>
                 </Pressable>
@@ -428,7 +428,7 @@ export default function DashboardScreen() {
               {weakTopic ? (
                 <Pressable style={styles.weakChip} onPress={startWeakAreaPractice}>
                   <Ionicons name="trending-down" size={14} color={colors.error} />
-                  <Text style={styles.weakChipText}>Balikan: {weakTopic.topicName}</Text>
+                  <Text style={styles.weakChipText}>Weak area: {weakTopic.topicName}</Text>
                 </Pressable>
               ) : null}
 
@@ -469,7 +469,7 @@ export default function DashboardScreen() {
                       {task.completed
                         ? 'Done for today ✓'
                         : task.type === 'mistakes' && task.question_count === 0
-                          ? 'Mag-quiz muna para may mistakes'
+                          ? 'Take a quiz first to build mistakes'
                           : `${task.minutes} min · ${task.question_count} items`}
                     </Text>
                   </View>
@@ -483,9 +483,9 @@ export default function DashboardScreen() {
             <View style={[styles.pasapathCard, { marginBottom: spacing.md }]}>
               <Text style={styles.pasapathLbl}>Today&apos;s PasaPath</Text>
               <Text style={[styles.pasapathMeta, { marginBottom: spacing.md }]}>
-                Simulan ang unang quiz para ma-generate ang daily plan mo.
+                Complete your first quiz to generate your daily study plan.
               </Text>
-              <PrimaryButton label="Simulan ang practice" onPress={() => void startPractice()} />
+              <PrimaryButton label="Start practicing" onPress={() => void startPractice()} />
             </View>
           ) : null}
 
@@ -500,8 +500,8 @@ export default function DashboardScreen() {
                 {questionsDone >= questionsTarget
                   ? 'Goal done for today! 🎉'
                   : user
-                    ? `${questionsTarget - questionsDone} to go — kaya pa! 💪`
-                    : `${questionsTarget - questionsDone} to go — simulan na! 💪`}
+                    ? `${questionsTarget - questionsDone} to go — keep going! 💪`
+                    : `${questionsTarget - questionsDone} to go — let's go! 💪`}
               </Text>
               {showAccuracy ? (
                 <Text style={[styles.goalHint, { marginTop: 6 }]}>
@@ -527,7 +527,7 @@ export default function DashboardScreen() {
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.continueLbl}>
-                  {hasActivity ? 'Continue reviewing' : 'Simulan ang review'}
+                  {hasActivity ? 'Continue reviewing' : 'Start reviewing'}
                 </Text>
                 <Text style={styles.continueTitle}>{examName || 'Your exam'}</Text>
               </View>
@@ -536,7 +536,7 @@ export default function DashboardScreen() {
             <Text style={styles.continueMeta}>
               {hasActivity
                 ? `${stats.sessionCount} quiz${stats.sessionCount === 1 ? '' : 'zes'} completed`
-                : 'Start your first quiz — walang fake progress dito.'}
+                : 'Start your first quiz — no fake progress here.'}
             </Text>
           </Pressable>
 
@@ -592,9 +592,9 @@ export default function DashboardScreen() {
           <View style={styles.lowerSection}>
             {!user ? (
               <Pressable style={styles.guestBanner} onPress={() => router.push('/(auth)/login')}>
-                <Text style={styles.guestBannerTitle}>Mag-login para ma-save ang progress</Text>
+                <Text style={styles.guestBannerTitle}>Log in to save your progress</Text>
                 <Text style={styles.guestBannerSub}>
-                  PasaPath, streak, Mistake Bank, at readiness — naka-sync kapag may account ka.
+                  PasaPath, streak, Mistake Bank, and readiness — all synced when you have an account.
                 </Text>
               </Pressable>
             ) : null}
@@ -634,15 +634,15 @@ export default function DashboardScreen() {
         title="Daily reminders"
         subtitle={
           prefs.notificationsEnabled
-            ? 'Naka-on ang reminders. I-manage ang schedule sa Settings.'
-            : 'Gusto mo bang i-on ang araw-araw na study reminders?'
+            ? 'Reminders are on. Manage the schedule in Settings.'
+            : 'Want to turn on daily study reminders?'
         }
         onClose={() => setNotificationSheetOpen(false)}
         actions={
           prefs.notificationsEnabled
             ? [
                 {
-                  label: 'Pumunta sa Settings',
+                  label: 'Go to Settings',
                   onPress: () => {
                     setNotificationSheetOpen(false);
                     router.push('/(tabs)/settings');
@@ -652,21 +652,21 @@ export default function DashboardScreen() {
               ]
             : [
                 {
-                  label: 'I-on ang reminders',
+                  label: 'Enable reminders',
                   onPress: () => {
                     setNotificationsEnabled(true);
                     setNotificationSheetOpen(false);
                   },
                 },
                 {
-                  label: 'Pumunta sa Settings',
+                  label: 'Go to Settings',
                   onPress: () => {
                     setNotificationSheetOpen(false);
                     router.push('/(tabs)/settings');
                   },
                   variant: 'outline',
                 },
-                { label: 'Hindi muna', onPress: () => setNotificationSheetOpen(false), variant: 'ghost' },
+                { label: 'Not now', onPress: () => setNotificationSheetOpen(false), variant: 'ghost' },
               ]
         }
       />
@@ -674,7 +674,7 @@ export default function DashboardScreen() {
       <AppSheet
         visible={updatesSheetOpen}
         title="Updates"
-        subtitle="Balita at tips mula sa ReviewNatin team"
+        subtitle="News and tips from the ReviewNatin team"
         onClose={() => setUpdatesSheetOpen(false)}
         actions={[{ label: 'OK', onPress: () => setUpdatesSheetOpen(false), variant: 'outline' }]}
       >

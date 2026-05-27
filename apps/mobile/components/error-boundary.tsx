@@ -20,12 +20,12 @@ export class ErrorBoundary extends Component<Props, State> {
     if (!this.state.error) return this.props.children;
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>May nangyaring mali 😓</Text>
+        <Text style={styles.title}>Something went wrong 😓</Text>
         <Text style={styles.message}>
-          {this.state.error.message || 'Hindi ma-load ang screen na ito.'}
+          {this.state.error.message || 'This screen could not be loaded.'}
         </Text>
         <Pressable style={styles.button} onPress={() => this.setState({ error: null })}>
-          <Text style={styles.buttonText}>Subukan ulit</Text>
+          <Text style={styles.buttonText}>Try again</Text>
         </Pressable>
       </View>
     );

@@ -200,7 +200,7 @@ export default function PracticeQuizScreen() {
         } else if (isOffline) {
           const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
           if (!offlineQs.length) {
-            Alert.alert('Walang offline pack', 'I-download muna ang offline pack sa Settings.');
+            Alert.alert('No offline pack', 'Download the offline pack in Settings first.');
             router.back();
             return;
           }
@@ -502,9 +502,9 @@ export default function PracticeQuizScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
-          title="Walang tanong pa"
-          description="Wala pang published questions para sa exam o topic na ito. Subukan ulit after content import."
-          actionLabel="Bumalik"
+          title="No questions yet"
+          description="No published questions for this exam or topic yet. Try again after content import."
+          actionLabel="Go back"
           onAction={() => router.back()}
         />
       </View>
@@ -683,8 +683,8 @@ export default function PracticeQuizScreen() {
               index < questions.length - 1
                 ? 'Next question →'
                 : isDiagnostic
-                  ? 'Tingnan ang baseline result'
-                  : 'Tingnan ang resulta'
+                  ? 'View baseline result →'
+                  : 'View results →'
             }
             size="lg"
             onPress={goNext}

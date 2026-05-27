@@ -125,14 +125,14 @@ export default function SettingsScreen() {
       if (!result.ok) {
         setSheet({
           kind: 'error',
-          title: 'Hindi na-download',
-          message: result.error === 'premium_required' ? 'Kailangan ng premium.' : result.error ?? 'Subukan ulit.',
+          title: 'Download failed',
+          message: result.error === 'premium_required' ? 'Premium required.' : result.error ?? 'Please try again.',
         });
         return;
       }
       setOfflineMeta(result.meta);
       setToast(
-        `${result.meta.questionCount} tanong · ${result.meta.flashcardCount} flashcards · ${result.meta.materialCount} lessons — naka-save na para offline.`
+        `${result.meta.questionCount} questions · ${result.meta.flashcardCount} flashcards · ${result.meta.materialCount} lessons — saved for offline use.`
       );
     } finally {
       setOfflineBusy(false);
@@ -221,7 +221,7 @@ export default function SettingsScreen() {
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.premiumTitle}>Upgrade to Premium</Text>
-                <Text style={styles.premiumSub}>Unlimited mocks · AI tutor · Walang ads</Text>
+                <Text style={styles.premiumSub}>Unlimited mocks · AI tutor · No ads</Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#fff" />
             </LinearGradient>
@@ -304,7 +304,7 @@ export default function SettingsScreen() {
               colors={colors}
               icon={<Text style={{ fontSize: 18 }}>🌙</Text>}
               label="Dark mode"
-              sub="Easier sa mata sa gabi"
+              sub="Easier on the eyes at night"
               right={
                 <Switch value={prefs.darkMode} onValueChange={setDarkMode} trackColor={switchTrack} />
               }
@@ -319,7 +319,7 @@ export default function SettingsScreen() {
               colors={colors}
               icon={<Ionicons name="swap-horizontal-outline" size={18} color={colors.primary} />}
               label="Switch exam track"
-              sub="Change CSC / LET / PNLE goal — may prompt new diagnostic"
+              sub="Change CSE / LET / PNLE goal — may prompt new diagnostic"
               onPress={() => setSheet('switch_exam')}
               right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
             />
@@ -427,7 +427,7 @@ export default function SettingsScreen() {
                 styles={styles}
                 colors={colors}
                 icon={<Ionicons name="log-in-outline" size={18} color={colors.primary} />}
-                label="Mag-login"
+                label="Log in"
                 onPress={() => router.push('/(auth)/login')}
                 right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
               />
@@ -554,19 +554,19 @@ export default function SettingsScreen() {
 
       <AppSheet
         visible={sheet === 'premium_offline'}
-        title="Kailangan ng Exam Pass"
-        subtitle="Para sa premium subscribers lang ang offline packs."
+        title="Exam Pass required"
+        subtitle="Offline packs are available for premium subscribers only."
         onClose={() => setSheet(null)}
         actions={[
-          { label: 'Tingnan ang plans', onPress: () => { setSheet(null); router.push('/subscribe'); } },
-          { label: 'Hindi muna', onPress: () => setSheet(null), variant: 'outline' },
+          { label: 'View plans', onPress: () => { setSheet(null); router.push('/subscribe'); } },
+          { label: 'Not now', onPress: () => setSheet(null), variant: 'outline' },
         ]}
       />
 
       <AppSheet
         visible={sheet === 'remove_offline'}
         title="Offline pack"
-        subtitle="Tanggalin ang na-download na content sa device na ito?"
+        subtitle="Remove the downloaded content from this device?"
         onClose={() => setSheet(null)}
         actions={[
           {
@@ -586,12 +586,12 @@ export default function SettingsScreen() {
 
       <AppSheet
         visible={sheet === 'switch_exam'}
-        title="Palitan ang exam?"
-        subtitle="Papalitan ang active exam track mo. Recommended: mag-diagnostic ulit pagkatapos mag-switch."
+        title="Switch exam?"
+        subtitle="This will change your active exam track. Recommended: run a new diagnostic after switching."
         onClose={() => setSheet(null)}
         actions={[
           {
-            label: 'Magpatuloy',
+            label: 'Continue',
             onPress: () => {
               setSheet(null);
               router.push({ pathname: '/onboarding', params: { switch: '1' } });
@@ -604,7 +604,7 @@ export default function SettingsScreen() {
       <AppSheet
         visible={sheet === 'delete_account'}
         title="Delete account?"
-        subtitle="Permanent ito — mawawala ang progress, bookmarks, at entitlements. Hindi na maibabalik."
+        subtitle="This is permanent — your progress, bookmarks, and entitlements will be lost and cannot be recovered."
         onClose={() => setSheet(null)}
         actions={[
           {
@@ -617,7 +617,7 @@ export default function SettingsScreen() {
                 const result = await deleteUserAccount();
                 setDeleting(false);
                 if (!result.ok) {
-                  setSheet({ kind: 'error', title: 'Hindi natanggal', message: result.error ?? 'Subukan ulit.' });
+                  setSheet({ kind: 'error', title: 'Could not delete', message: result.error ?? 'Please try again.' });
                   return;
                 }
                 await refreshOnboarding();
@@ -631,7 +631,7 @@ export default function SettingsScreen() {
 
       <AppSheet
         visible={sheet !== null && typeof sheet === 'object' && sheet.kind === 'restore'}
-        title={sheet && typeof sheet === 'object' && sheet.kind === 'restore' && sheet.ok ? 'Na-restore ang purchases' : 'Hindi ma-restore'}
+        title={sheet && typeof sheet === 'object' && sheet.kind === 'restore' && sheet.ok ? 'Purchases restored' : 'Could not restore'}
         subtitle={sheet && typeof sheet === 'object' && sheet.kind === 'restore' ? sheet.message : undefined}
         onClose={() => setSheet(null)}
         actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}

@@ -73,11 +73,11 @@ export default function ResetPasswordScreen() {
       return;
     }
     if (password !== confirm) {
-      setError('Hindi mag-match ang passwords.');
+      setError('Passwords do not match.');
       return;
     }
     if (!session) {
-      setError('Expired na ang link. Humingi ng bagong reset email.');
+      setError('Link has expired. Request a new reset email.');
       return;
     }
     setLoading(true);
@@ -99,16 +99,16 @@ export default function ResetPasswordScreen() {
   }
 
   return (
-    <AuthShell title="Bagong password" subtitle="Mag-set ng bagong password para sa account mo.">
+    <AuthShell title="New password" subtitle="Set a new password for your account.">
       {!session ? (
         <Text style={{ ...styles.error, color: theme.colors.textMuted }}>
-          Buksan ang reset link mula sa email mo, o humingi ng bago sa Forgot password.
+          Open the reset link from your email, or request a new one via Forgot password.
         </Text>
       ) : null}
-      <LabeledField label="Bagong password" styles={styles}>
+      <LabeledField label="New password" styles={styles}>
         <TextInput
           style={styles.input}
-          placeholder="Hindi bababa sa 8 characters"
+          placeholder="At least 8 characters"
           placeholderTextColor={theme.colors.textLight}
           secureTextEntry
           value={password}
@@ -116,10 +116,10 @@ export default function ResetPasswordScreen() {
           editable={!loading && !!session}
         />
       </LabeledField>
-      <LabeledField label="Kumpirmahin ang password" styles={styles}>
+      <LabeledField label="Confirm password" styles={styles}>
         <TextInput
           style={styles.input}
-          placeholder="Dapat pareho sa password"
+          placeholder="Must match your password"
           placeholderTextColor={theme.colors.textLight}
           secureTextEntry
           value={confirm}
@@ -131,10 +131,10 @@ export default function ResetPasswordScreen() {
       {loading ? (
         <ActivityIndicator color={theme.colors.primary} />
       ) : (
-        <PrimaryButton label="I-save ang password" size="lg" onPress={submit} disabled={!session} />
+        <PrimaryButton label="Save password" size="lg" onPress={submit} disabled={!session} />
       )}
       <Pressable onPress={() => router.replace('/(auth)/login')} style={{ marginTop: theme.spacing.lg }} hitSlop={8}>
-        <Text style={styles.backLink}>← Bumalik sa login</Text>
+        <Text style={styles.backLink}>← Back to login</Text>
       </Pressable>
     </AuthShell>
   );

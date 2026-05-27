@@ -80,7 +80,7 @@ export default function ExamCalendarScreen() {
           ) : events.length === 0 ? (
             <EmptyState
               icon={<Ionicons name="calendar-outline" size={32} color={colors.primary} />}
-              title="Walang schedules pa"
+              title="No schedules yet"
               description="Exam dates will appear here once we add them for your exam track."
             />
           ) : (

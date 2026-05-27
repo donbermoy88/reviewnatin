@@ -47,7 +47,7 @@ function UpgradePrompt({ onPress }: { onPress: () => void }) {
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel="Tingnan ang Exam Pass plans — walang ads"
+      accessibilityLabel="View Exam Pass plans — no ads"
       style={{
         marginHorizontal: spacing.lg,
         marginBottom: spacing.md,

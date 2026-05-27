@@ -32,18 +32,18 @@ const GOALS = [
 const READY_ITEMS = [
   {
     icon: 'school-outline' as const,
-    label: 'Handa na ang practice quiz',
-    sub: 'Based sa self-assessed level mo',
+    label: 'Practice quiz ready',
+    sub: 'Based on your self-assessed level',
   },
   {
     icon: 'calendar-outline' as const,
-    label: 'Daily tasks naka-schedule',
-    sub: 'Based sa target exam date mo',
+    label: 'Daily tasks scheduled',
+    sub: 'Based on your target exam date',
   },
   {
     icon: 'bookmark-outline' as const,
-    label: 'Mistake Bank naka-on',
-    sub: 'Auto-track ang mga maling sagot',
+    label: 'Mistake Bank active',
+    sub: 'Auto-tracks all wrong answers',
   },
 ];
 
@@ -118,7 +118,7 @@ export default function OnboardingScreen() {
 
     if (step === 1) {
       if (examSlug === 'let-secondary' && !majorSlug) {
-        setStepError('Pumili ng major field para sa LET Secondary.');
+        setStepError('Please choose a major field for LET Secondary.');
         return;
       }
       await saveOnboardingDraft({
@@ -154,7 +154,7 @@ export default function OnboardingScreen() {
     if (user) {
       const result = await syncExamGoalSafe(user.id, data);
       if (!result.ok) {
-        Alert.alert('Hindi na-sync ang goal', result.message);
+        Alert.alert('Goal sync failed', result.message);
       }
       try {
         await setNotificationsEnabled(reminderOn);
@@ -196,17 +196,17 @@ export default function OnboardingScreen() {
             Study buddy mo para sa{'\n'}bawat Filipino exam.
           </Text>
           <Text style={styles.welcomeSub}>
-            CSE Full, CSE Sub, PNLE, LET Elementary & Secondary — one app, one streak, isang goal.
+            CSE Full, CSE Sub, PNLE, LET Elementary & Secondary — one app, one streak, one goal.
           </Text>
           <PrimaryButton
-            label="Simulan — libre ito"
+            label="Get started — it's free"
             size="lg"
             onPress={() => setStep(1)}
             style={{ marginTop: spacing.lg }}
           />
           <Pressable onPress={() => router.push('/(auth)/login')} style={styles.loginLink}>
             <Text style={styles.loginText}>
-              May account na? <Text style={styles.loginBold}>Mag-login</Text>
+              Already have an account? <Text style={styles.loginBold}>Log in</Text>
             </Text>
           </Pressable>
         </View>
@@ -275,7 +275,7 @@ export default function OnboardingScreen() {
         >
           <View style={styles.stickyFooterInner}>
             <PrimaryButton
-              label={isSwitchMode ? 'I-save ang bagong track' : 'Pumasok sa Dashboard'}
+              label={isSwitchMode ? 'Save new track' : 'Go to Dashboard'}
               size="lg"
               icon="arrow-forward"
               onPress={finish}
@@ -294,25 +294,25 @@ export default function OnboardingScreen() {
           {step === 1 && (
             <>
               <Text style={styles.pageTitle}>
-                {isSwitchMode ? 'Switch exam track' : 'Anong exam ang ire-review mo?'}
+                {isSwitchMode ? 'Switch exam track' : 'Which exam are you reviewing for?'}
               </Text>
               <Text style={styles.pageSub}>
                 {isSwitchMode
-                  ? 'Piliin ang bagong exam — i-sync namin ang goal at PasaPath mo.'
-                  : 'Pumili ng isa muna — pwede mong baguhin later.'}
+                  ? 'Choose your new exam — we\'ll sync your goal and PasaPath.'
+                  : 'Pick one for now — you can change it later.'}
               </Text>
             </>
           )}
           {step === 2 && (
             <>
               <Text style={styles.pageTitle}>Set your daily goal</Text>
-              <Text style={styles.pageSub}>Konting konti, basta consistent. Magtaas tayo ng streak!</Text>
+              <Text style={styles.pageSub}>Even a little each day adds up. Let's build that streak!</Text>
             </>
           )}
           {step === 3 && (
             <>
-              <Text style={styles.pageTitle}>I-save ang progress mo</Text>
-              <Text style={styles.pageSub}>Sync sa cloud ang quiz scores, mistake bank, at PasaPath.</Text>
+              <Text style={styles.pageTitle}>Save your progress</Text>
+              <Text style={styles.pageSub}>Sync quiz scores, mistake bank, and PasaPath to the cloud.</Text>
             </>
           )}
         </View>
@@ -512,13 +512,13 @@ export default function OnboardingScreen() {
               ) : (
                 <>
                   <PrimaryButton
-                    label="Mag-sign up / Mag-login"
+                    label="Sign up / Log in"
                     icon="log-in-outline"
                     iconPosition="left"
                     onPress={() => router.push({ pathname: '/(auth)/login', params: { returnTo: 'onboarding' } })}
                     style={{ marginTop: spacing.lg }}
                   />
-                  <PrimaryButton label="Skip muna (guest)" variant="outline" onPress={() => setStep(4)} style={{ marginTop: spacing.sm }} />
+                  <PrimaryButton label="Skip for now (guest)" variant="outline" onPress={() => setStep(4)} style={{ marginTop: spacing.sm }} />
                 </>
               )}
             </>
@@ -533,7 +533,7 @@ export default function OnboardingScreen() {
         >
           <View style={styles.stickyFooterInner}>
             <PrimaryButton
-              label={step === 2 ? (isSwitchMode ? 'I-save ang bagong track →' : "I'm committed →") : 'Tuloy →'}
+              label={step === 2 ? (isSwitchMode ? 'Save new track →' : "I'm committed →") : 'Continue →'}
               size="lg"
               onPress={advanceStep}
             />

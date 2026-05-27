@@ -43,7 +43,7 @@ export default function ForgotPasswordScreen() {
       return;
     }
     if (!isConfigured) {
-      setError('Hindi pa naka-connect ang Supabase.');
+      setError('Supabase is not connected yet.');
       return;
     }
     setLoading(true);
@@ -53,13 +53,13 @@ export default function ForgotPasswordScreen() {
       setError(result.error);
       return;
     }
-    setInfo('Na-send ang reset link sa email mo. Buksan ang link para mag-set ng bagong password.');
+    setInfo('Reset link sent to your email. Open it to set a new password.');
   };
 
   return (
     <AuthShell
-      title="Nakalimutan ang password?"
-      subtitle="I-send namin ang reset link sa email mo."
+      title="Forgot your password?"
+      subtitle="We'll send a reset link to your email."
     >
       <LabeledField label="Email" styles={styles}>
         <TextInput
@@ -79,10 +79,10 @@ export default function ForgotPasswordScreen() {
       {loading ? (
         <ActivityIndicator color={theme.colors.primary} />
       ) : (
-        <PrimaryButton label="I-send ang reset link" size="lg" onPress={submit} />
+        <PrimaryButton label="Send reset link" size="lg" onPress={submit} />
       )}
       <Pressable onPress={() => router.back()} style={{ marginTop: theme.spacing.lg }} hitSlop={8}>
-        <Text style={styles.backLink}>← Bumalik sa login</Text>
+        <Text style={styles.backLink}>← Back to login</Text>
       </Pressable>
     </AuthShell>
   );

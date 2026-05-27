@@ -60,7 +60,8 @@ export default function ChangelogScreen() {
           </Pressable>
           <Text style={styles.headerTitle}>Content updates</Text>
           <Text style={styles.headerSub}>
-            New questions, lessons, and fixes for {examSlug.replace(/-/g, ' ')}
+            New questions, lessons, and fixes for{' '}
+            {examSlug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
           </Text>
         </LinearGradient>
 
@@ -70,7 +71,7 @@ export default function ChangelogScreen() {
           ) : entries.length === 0 ? (
             <EmptyState
               icon={<Ionicons name="newspaper-outline" size={32} color={colors.primary} />}
-              title="Walang updates pa"
+              title="No updates yet"
               description="Content changelog entries will appear here as we publish new material."
             />
           ) : (

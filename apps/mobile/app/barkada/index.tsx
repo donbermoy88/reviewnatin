@@ -89,7 +89,7 @@ export default function BarkadaScreen() {
       await createBarkadaGroup(examSlug, groupName || 'My Barkada');
       await load();
     } catch (e) {
-      Alert.alert('Hindi nagawa ang group', (e as Error).message);
+      Alert.alert('Could not create group', (e as Error).message);
     } finally {
       setBusy(false);
     }
@@ -106,7 +106,7 @@ export default function BarkadaScreen() {
       await joinBarkadaGroup(joinCode.trim());
       await load();
     } catch (e) {
-      Alert.alert('Invalid code', 'I-check ang invite code at subukan ulit.');
+      Alert.alert('Invalid code', 'Check the invite code and try again.');
     } finally {
       setBusy(false);
     }
@@ -134,7 +134,7 @@ export default function BarkadaScreen() {
         },
       });
     } catch {
-      Alert.alert('Challenge failed', 'Subukan ulit later.');
+      Alert.alert('Challenge failed', 'Please try again later.');
     } finally {
       setBusy(false);
     }
@@ -145,7 +145,7 @@ export default function BarkadaScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="people-outline" size={32} color={colors.primary} />}
-          title="Mag-login muna"
+          title="Log in to continue"
           description="Barkada mode lets you review with friends and compare scores."
           actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
@@ -173,7 +173,7 @@ export default function BarkadaScreen() {
             <Ionicons name="chevron-back" size={22} color="#fff" />
           </Pressable>
           <Text style={styles.headerTitle}>Barkada Mode</Text>
-          <Text style={styles.headerSub}>Review together · compare scores · kaya ng team!</Text>
+          <Text style={styles.headerSub}>Review together · compare scores · stronger as a team!</Text>
         </LinearGradient>
 
         <View style={styles.body}>
@@ -240,7 +240,6 @@ export default function BarkadaScreen() {
 
               <PrimaryButton
                 label="Invite friends"
-                variant="outline"
                 icon="share-outline"
                 onPress={() => void shareInvite()}
                 style={{ marginTop: spacing.sm }}
@@ -288,17 +287,22 @@ export default function BarkadaScreen() {
                       ))}
                     </>
                   ) : (
-                    <Text style={metaStyle}>Walang submissions pa — be the first!</Text>
+                    <Text style={metaStyle}>No submissions yet — be the first!</Text>
                   )}
                 </>
               ) : (
                 <>
-                  <Text style={metaStyle}>Start a 10-question challenge for your Barkada.</Text>
+                  <Text style={metaStyle}>
+                    {group.members.length < 2
+                      ? 'Invite at least one friend to start a challenge.'
+                      : 'Start a 10-question challenge for your Barkada.'}
+                  </Text>
                   <PrimaryButton
                     label={busy ? 'Creating…' : 'Start new challenge'}
+                    variant={group.members.length < 2 ? 'outline' : undefined}
                     icon="trophy-outline"
                     onPress={() => void startChallenge()}
-                    disabled={busy}
+                    disabled={busy || group.members.length < 2}
                     style={{ marginTop: spacing.sm }}
                   />
                 </>

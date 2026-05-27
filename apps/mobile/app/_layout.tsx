@@ -37,7 +37,7 @@ function ThemedStack() {
       >
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="auth/callback" options={{ headerShown: false }} />
-        <Stack.Screen name="onboarding/index" options={{ title: 'Simulan', headerShown: false }} />
+        <Stack.Screen name="onboarding/index" options={{ title: 'Get started', headerShown: false }} />
         <Stack.Screen name="diagnostic/intro" options={{ headerShown: false }} />
         <Stack.Screen name="bookmarks/index" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />

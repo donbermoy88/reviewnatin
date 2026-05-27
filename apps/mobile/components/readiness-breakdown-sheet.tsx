@@ -48,7 +48,7 @@ export function ReadinessBreakdownSheet({ visible, onClose, readiness }: Props) 
   return (
     <AppSheet
       visible={visible}
-      title={`${score}% handa na`}
+      title={`${score}% ready`}
       subtitle={band.copy}
       onClose={onClose}
       actions={[{ label: 'OK', onPress: onClose, variant: 'outline' }]}

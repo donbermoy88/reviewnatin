@@ -90,7 +90,7 @@ export default function TopicListScreen() {
         <Text style={styles.headerTag}>SUBJECT</Text>
         <Text style={styles.headerTitle}>{subjectName}</Text>
         <Text style={styles.headerSub}>
-          {topics.length} topic{topics.length === 1 ? '' : 's'} · piliin para mag-practice
+          {topics.length} topic{topics.length === 1 ? '' : 's'} · tap to practice
         </Text>
         {subjectAvg != null ? (
           <View style={styles.progressCard}>
@@ -128,9 +128,9 @@ export default function TopicListScreen() {
         {topics.length === 0 ? (
           <EmptyState
             icon={<Ionicons name="list-outline" size={32} color={colors.primary} />}
-            title="Walang topics pa"
-            description="Lalabas ang topics habang dumadami ang content."
-            actionLabel="Bumalik"
+            title="No topics yet"
+            description="Topics will appear as we add more content."
+            actionLabel="Go back"
             onAction={() => router.back()}
           />
         ) : (
@@ -158,7 +158,7 @@ export default function TopicListScreen() {
                   <Text style={styles.topicMeta}>
                     {analytics && analytics.attempts > 0
                       ? `${pct}% · ${analytics.attempts} tries`
-                      : 'Practice questions para sa topic na ito'}
+                      : 'Practice questions for this topic'}
                   </Text>
                   {analytics && analytics.attempts > 0 ? (
                     <MasteryBar accuracy={pct} attempts={analytics.attempts} style={{ marginTop: 6 }} />

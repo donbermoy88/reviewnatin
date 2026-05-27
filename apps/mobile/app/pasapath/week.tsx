@@ -63,7 +63,7 @@ function DayRow({ day, onPressToday }: { day: PasaPathWeekDay; onPressToday?: ()
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 2 }}>
           {day.tasks_total > 0
             ? `${day.tasks_completed}/${day.tasks_total} tasks · ${day.daily_minutes ?? '—'} min`
-            : 'Walang naka-save na plan'}
+            : 'No plan saved'}
         </Text>
       </View>
       {day.is_today ? <Ionicons name="chevron-forward" size={18} color={colors.primary} /> : null}
@@ -107,9 +107,9 @@ export default function PasaPathWeekScreen() {
 
   if (!user) {
     return (
-      <StackShell title="PasaPath week" subtitle="Mag-login para makita ang weekly progress mo.">
+      <StackShell title="PasaPath week" subtitle="Log in to see your weekly progress.">
         <Pressable onPress={() => router.push('/(auth)/login')}>
-          <Text style={{ fontFamily: theme.fonts.bodyBold, color: colors.primary }}>Mag-login →</Text>
+          <Text style={{ fontFamily: theme.fonts.bodyBold, color: colors.primary }}>Log in →</Text>
         </Pressable>
       </StackShell>
     );
@@ -118,7 +118,7 @@ export default function PasaPathWeekScreen() {
   return (
     <StackShell
       title="PasaPath week"
-      subtitle={`Huling 7 araw · ${weekSummary.completedDays}/${weekSummary.trackedDays} araw na kumpleto`}
+      subtitle={`Last 7 days · ${weekSummary.completedDays}/${weekSummary.trackedDays} days completed`}
     >
       {loading ? (
         <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />

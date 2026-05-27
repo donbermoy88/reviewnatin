@@ -156,9 +156,9 @@ export default function PracticeResultScreen() {
     setReportSheetOpen(false);
     try {
       await reportQuestion(questionId, reason);
-      setReportFeedback('Salamat! Ire-review namin ito within 48 hours.');
+      setReportFeedback('Thank you! We\'ll review this within 48 hours.');
     } catch {
-      setReportFeedback('Hindi na-send. Subukan ulit later.');
+      setReportFeedback('Report failed. Please try again later.');
     }
   };
 
@@ -173,9 +173,9 @@ export default function PracticeResultScreen() {
       const result = await fetchAiExplanation(questionId, { examSlug });
       if (!result.ok) {
         if (result.error === 'daily_limit_reached') {
-          Alert.alert('Daily limit', 'Free tier: 5 AI explanations lang kada araw. Mag-upgrade para sa unlimited.');
+          Alert.alert('Daily limit reached', 'Free tier: 5 AI explanations per day. Upgrade for unlimited.');
         } else {
-          Alert.alert('Hindi available', 'Subukan ulit later.');
+          Alert.alert('Not available', 'Please try again later.');
         }
         return;
       }
@@ -266,7 +266,7 @@ export default function PracticeResultScreen() {
           {[
             { v: `${correctNum}/${totalNum}`, l: 'Correct', c: colors.primary },
             { v: formatDuration(duration ?? '0'), l: 'Time taken', c: colors.accentDark },
-            { v: `${scoreNum}%`, l: 'Score', c: colors.success },
+            { v: `${scoreNum}%`, l: 'Score', c: scoreNum >= 75 ? colors.success : scoreNum >= 50 ? colors.flame : colors.error },
           ].map((s) => (
             <View key={s.l} style={styles.statCard}>
               <Text style={styles.statLbl}>{s.l.toUpperCase()}</Text>
@@ -299,7 +299,7 @@ export default function PracticeResultScreen() {
             {reviewLoading ? (
               <ActivityIndicator color={colors.primary} />
             ) : review.length === 0 ? (
-              <Text style={styles.reviewEmpty}>Walang saved answers para sa session na ito.</Text>
+              <Text style={styles.reviewEmpty}>No saved answers for this session.</Text>
             ) : (
               review.map((item, idx) => {
                 const explanation =
@@ -321,9 +321,15 @@ export default function PracticeResultScreen() {
                         size={20}
                         color={item.isCorrect ? colors.success : colors.error}
                       />
-                      <Text style={styles.reviewQ} numberOfLines={open ? undefined : 2}>
+                      <Text style={[styles.reviewQ, { flex: 1 }]} numberOfLines={open ? undefined : 2}>
                         Q{idx + 1}. {item.stem}
                       </Text>
+                      <Ionicons
+                        name={open ? 'chevron-up' : 'chevron-down'}
+                        size={16}
+                        color={colors.textMuted}
+                        style={{ marginLeft: 4 }}
+                      />
                     </View>
                     {open ? (
                       <View style={styles.reviewBody}>
@@ -399,23 +405,27 @@ export default function PracticeResultScreen() {
           {wrongCount > 0 && user ? (
             <PrimaryButton
               label="Review mistakes"
-              variant="outline"
               size="lg"
               onPress={() => router.push('/mistakes')}
               style={{ marginBottom: spacing.sm }}
             />
           ) : null}
-          <PrimaryButton label="Back to Home" size="lg" onPress={() => router.replace('/(tabs)')} />
+          <PrimaryButton
+            label="Back to Home"
+            variant={wrongCount > 0 && user ? 'outline' : undefined}
+            size="lg"
+            onPress={() => router.replace('/(tabs)')}
+          />
           {mode === 'diagnostic' ? (
             <PrimaryButton
-              label="Tingnan ang PasaPath →"
+              label="View PasaPath →"
               size="lg"
               onPress={() => router.replace('/(tabs)')}
               style={{ marginTop: spacing.sm }}
             />
           ) : (
             <PrimaryButton
-              label="Next quiz →"
+              label={mode === 'mock' ? 'New mock →' : 'Next quiz →'}
               variant="outline"
               size="lg"
               onPress={() => router.replace({ pathname: '/practice/quiz', params: { examSlug } })}
@@ -443,12 +453,12 @@ export default function PracticeResultScreen() {
 
       <AppSheet
         visible={reportSheetOpen}
-        title="I-report ang issue"
-        subtitle="Ano ang problema sa tanong na ito?"
+        title="Report an issue"
+        subtitle="What's wrong with this question?"
         onClose={() => setReportSheetOpen(false)}
         actions={[
-          { label: 'Maling answer key', onPress: () => reportTargetId && void submitReport(reportTargetId, 'wrong_answer') },
-          { label: 'Hindi malinaw ang tanong', onPress: () => reportTargetId && void submitReport(reportTargetId, 'unclear_question'), variant: 'outline' },
+          { label: 'Wrong answer key', onPress: () => reportTargetId && void submitReport(reportTargetId, 'wrong_answer') },
+          { label: 'Unclear question', onPress: () => reportTargetId && void submitReport(reportTargetId, 'unclear_question'), variant: 'outline' },
           { label: 'Typo', onPress: () => reportTargetId && void submitReport(reportTargetId, 'typo'), variant: 'outline' },
           { label: 'Cancel', onPress: () => setReportSheetOpen(false), variant: 'ghost' },
         ]}

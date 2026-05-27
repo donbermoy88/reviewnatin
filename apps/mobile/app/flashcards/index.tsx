@@ -160,7 +160,7 @@ export default function FlashcardsScreen() {
         await finishDeck();
       }
     } catch {
-      Alert.alert('Hindi na-save', 'Subukan ulit ang rating.');
+      Alert.alert('Could not save', 'Please try rating again.');
     } finally {
       setSubmitting(false);
     }
@@ -182,10 +182,10 @@ export default function FlashcardsScreen() {
           title="Deck complete! 🎉"
           description={
             user
-              ? `${reviewed} card${reviewed === 1 ? '' : 's'} reviewed — susunod na review ay base sa SM-2 schedule mo.`
-              : 'Mag-login para ma-save ang spaced repetition progress mo.'
+              ? `${reviewed} card${reviewed === 1 ? '' : 's'} reviewed — next review will follow your SM-2 schedule.`
+              : 'Log in to save your spaced repetition progress.'
           }
-          actionLabel="Bumalik"
+          actionLabel="Go back"
           onAction={() => router.back()}
         />
       </View>
@@ -197,9 +197,9 @@ export default function FlashcardsScreen() {
       <View style={[styles.center, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="layers-outline" size={32} color={colors.primary} />}
-          title="Walang flashcards pa"
+          title="No flashcards yet"
           description="Flashcard decks will appear as we import content for your exam."
-          actionLabel="Bumalik"
+          actionLabel="Go back"
           onAction={() => router.back()}
         />
       </View>
@@ -249,7 +249,7 @@ export default function FlashcardsScreen() {
             style={[styles.actionBtn, { minWidth: '22%' }]}
             onPress={() => {
               if (!flipped) {
-                Alert.alert('Flip muna', 'Tap the card to reveal the answer before rating.');
+                Alert.alert('Flip first', 'Tap the card to reveal the answer before rating.');
                 return;
               }
               void rateCard(r.rating);

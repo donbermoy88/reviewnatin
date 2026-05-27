@@ -55,9 +55,9 @@ export default function MockReviewScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
-          title="Mag-login muna"
+          title="Log in to continue"
           description="Mock review requires a signed-in account."
-          actionLabel="Mag-login"
+          actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </View>

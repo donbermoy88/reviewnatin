@@ -88,7 +88,7 @@ export default function AnalyticsScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="analytics-outline" size={32} color={colors.primary} />}
-          title="Mag-login muna"
+          title="Log in to continue"
           description="Analytics and weak-topic tracking require a signed-in account."
           actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
@@ -144,9 +144,9 @@ export default function AnalyticsScreen() {
           {subjects.length === 0 ? (
             <EmptyState
               icon={<Ionicons name="bar-chart-outline" size={32} color={colors.primary} />}
-              title="Wala pang topic data"
-              description="Sumagot ng practice questions para makita ang subject at topic mastery dito."
-              actionLabel="Simulan ang practice"
+              title="No topic data yet"
+              description="Answer practice questions to see your subject and topic mastery here."
+              actionLabel="Start practicing"
               onAction={() =>
                 router.push({ pathname: '/practice/quiz', params: { examSlug } })
               }

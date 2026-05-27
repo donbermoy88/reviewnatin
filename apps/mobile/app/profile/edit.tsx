@@ -48,7 +48,7 @@ export default function EditProfileScreen() {
   const save = async () => {
     setError(null);
     if (!isConfigured) {
-      setError('Hindi pa naka-connect ang Supabase.');
+      setError('Supabase is not connected yet.');
       return;
     }
 

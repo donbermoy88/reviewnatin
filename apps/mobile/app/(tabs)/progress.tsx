@@ -124,7 +124,7 @@ export default function ProfileScreen() {
             <View style={{ flex: 1 }}>
               <Text style={styles.userName}>{displayName}</Text>
               <Text style={styles.userSub}>
-                {user ? user.email : 'Mag-login para i-save ang progress mo'}
+                {user ? user.email : 'Log in to save your progress'}
               </Text>
             </View>
           </Pressable>
@@ -247,8 +247,8 @@ export default function ProfileScreen() {
               <EmptyState
                 icon={<Ionicons name="person-outline" size={32} color={colors.primary} />}
                 title="Guest mode"
-                description="Naka-save ang quiz results sa phone na ito. Mag-sign up para ma-sync sa ibang device."
-                actionLabel="Mag-login"
+                description="Quiz results are saved on this device. Sign up to sync across devices."
+                actionLabel="Log in"
                 onAction={() => router.push('/(auth)/login')}
               />
             )}
@@ -274,9 +274,9 @@ export default function ProfileScreen() {
             {!loading && sessions.length === 0 && (
               <EmptyState
                 icon={<Ionicons name="stats-chart-outline" size={32} color={colors.primary} />}
-                title="Wala pang quizzes"
-                description="Simulan ang practice sa Home tab."
-                actionLabel="Simulan ang practice"
+                title="No quizzes yet"
+                description="Start practicing from the Home tab."
+                actionLabel="Start practicing"
                 onAction={() => router.push('/practice/quiz')}
               />
             )}

@@ -97,7 +97,7 @@ export default function LoginScreen() {
     }
 
     if (!isConfigured) {
-      setError('Hindi pa naka-connect ang Supabase. Check ang apps/mobile/.env file.');
+      setError('Supabase is not connected. Check the apps/mobile/.env file.');
       return;
     }
 
@@ -111,7 +111,7 @@ export default function LoginScreen() {
     }
 
     if (result.needsEmailConfirmation) {
-      setInfo('Account created! I-check ang email mo para i-confirm bago mag-login.');
+      setInfo('Account created! Check your email to confirm before logging in.');
       setMode('signin');
       setPassword('');
       setConfirmPassword('');
@@ -121,7 +121,7 @@ export default function LoginScreen() {
 
     const userId = result.session?.user?.id;
     if (!userId) {
-      setError('Naka-sign in pero walang session. Subukan mag-login ulit.');
+      setError('Signed in but no session found. Please try logging in again.');
       setMode('signin');
       setLoading(false);
       return;
@@ -129,7 +129,7 @@ export default function LoginScreen() {
 
     const syncError = await syncOnboardingAfterAuth(userId);
     if (syncError) {
-      setInfo(`Naka-login ka na, pero hindi na-sync ang goal: ${syncError}`);
+      setInfo(`Logged in, but goal sync failed: ${syncError}`);
     }
     setLoading(false);
 
@@ -144,7 +144,7 @@ export default function LoginScreen() {
     if (!sessionUserId) return;
     const syncError = await syncOnboardingAfterAuth(sessionUserId);
     if (syncError) {
-      setInfo(`Naka-login ka na, pero hindi na-sync ang goal: ${syncError}`);
+      setInfo(`Logged in, but goal sync failed: ${syncError}`);
     }
     setLoading(false);
     if (returnTo === 'onboarding') {
@@ -182,23 +182,23 @@ export default function LoginScreen() {
           <Text style={styles.heroBrand}>
             Review<Text style={{ color: colors.accent }}>Natin</Text>
           </Text>
-          <Text style={styles.heroSub}>Mag-review together. Mag-pass together.</Text>
+          <Text style={styles.heroSub}>Review together. Pass together.</Text>
         </LinearGradient>
 
         <View style={[styles.form, { paddingBottom: insets.bottom + spacing.xl }]}>
-          <Text style={styles.title}>{mode === 'signin' ? 'Mag-login' : 'Gumawa ng account'}</Text>
-          <Text style={styles.subtitle}>I-save ang progress mo sa cloud.</Text>
+          <Text style={styles.title}>{mode === 'signin' ? 'Log in' : 'Create account'}</Text>
+          <Text style={styles.subtitle}>Save your progress to the cloud.</Text>
 
           {!isConfigured ? (
             <View style={styles.banner}>
               <Text style={styles.bannerText}>
-                Supabase hindi pa naka-setup. Ilagay ang EXPO_PUBLIC_SUPABASE_URL at ANON_KEY sa .env.
+                Supabase is not configured. Set EXPO_PUBLIC_SUPABASE_URL and ANON_KEY in .env.
               </Text>
             </View>
           ) : null}
 
           <PrimaryButton
-            label="Magpatuloy gamit ang Google"
+            label="Continue with Google"
             variant="outline"
             icon="logo-google"
             iconPosition="left"
@@ -226,7 +226,7 @@ export default function LoginScreen() {
             disabled={loading}
             hitSlop={8}
           >
-            <Text style={styles.guestLinkText}>Magpatuloy bilang guest</Text>
+            <Text style={styles.guestLinkText}>Continue as guest</Text>
           </Pressable>
 
           <View style={styles.dividerRow}>
@@ -254,7 +254,7 @@ export default function LoginScreen() {
           <LabeledField label="Password" styles={styles}>
             <TextInput
               style={styles.input}
-              placeholder={mode === 'signup' ? 'Hindi bababa sa 8 characters' : 'Ilagay ang password mo'}
+              placeholder={mode === 'signup' ? 'At least 8 characters' : 'Enter your password'}
               placeholderTextColor={colors.textLight}
               secureTextEntry
               textContentType={mode === 'signup' ? 'newPassword' : 'password'}
@@ -298,7 +298,7 @@ export default function LoginScreen() {
             <ActivityIndicator color={colors.primary} style={{ marginVertical: spacing.md }} />
           ) : (
             <PrimaryButton
-              label={mode === 'signin' ? 'Mag-login' : 'Mag-sign up'}
+              label={mode === 'signin' ? 'Log in' : 'Sign up'}
               size="lg"
               icon="log-in-outline"
               iconPosition="left"
@@ -312,9 +312,9 @@ export default function LoginScreen() {
             disabled={loading}
           >
             <Text style={styles.modeSwitchText}>
-              {mode === 'signin' ? 'Walang account? ' : 'May account na? '}
+              {mode === 'signin' ? 'No account? ' : 'Already have one? '}
               <Text style={styles.modeSwitchBold}>
-                {mode === 'signin' ? 'Mag-sign up' : 'Mag-login'}
+                {mode === 'signin' ? 'Sign up' : 'Log in'}
               </Text>
             </Text>
           </Pressable>

@@ -75,9 +75,9 @@ export default function BookmarksScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="bookmark-outline" size={32} color={colors.primary} />}
-          title="Mag-login muna"
-          description="Kailangan ng account para ma-save ang bookmarks mo."
-          actionLabel="Mag-login"
+          title="Log in to continue"
+          description="You need an account to save bookmarks."
+          actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </View>
@@ -136,9 +136,9 @@ export default function BookmarksScreen() {
           questions.length === 0 ? (
             <EmptyState
               icon={<Ionicons name="bookmark-outline" size={32} color={colors.primary} />}
-              title="Walang bookmarks pa"
-              description="Tap the bookmark icon sa quiz para i-save ang tanong."
-              actionLabel="Mag-practice"
+              title="No bookmarks yet"
+              description="Tap the bookmark icon during a quiz to save questions here."
+              actionLabel="Practice now"
               onAction={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
             />
           ) : (
@@ -170,7 +170,7 @@ export default function BookmarksScreen() {
         ) : materials.length === 0 ? (
           <EmptyState
             icon={<Ionicons name="reader-outline" size={32} color={colors.primary} />}
-            title="Walang saved lessons"
+            title="No saved lessons"
             description="Bookmark lessons and cheat sheets from the Notes tab."
             actionLabel="Go to Study"
             onAction={() => router.push('/(tabs)/study')}

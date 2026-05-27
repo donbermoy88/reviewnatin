@@ -35,16 +35,16 @@ export function AdInterstitialModal({ visible, onClose, onUpgrade }: Props) {
         >
           <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: colors.textMuted }}>FREE TIER</Text>
           <Text style={{ fontFamily: fonts.displayBold, fontSize: 20, color: colors.text, marginTop: spacing.sm }}>
-            I-unlock ang unlimited review
+            Unlock unlimited review
           </Text>
           <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.textMuted, marginTop: spacing.sm, lineHeight: 20 }}>
-            May limit ang free tier kada araw. Ang Exam Pass ay walang ads at may full mocks + AI tutor.
+            Free tier has a daily limit. Exam Pass removes ads and unlocks full mocks + AI tutor.
           </Text>
           {onUpgrade ? (
             <Pressable
               onPress={onUpgrade}
               accessibilityRole="button"
-              accessibilityLabel="Tingnan ang plans"
+              accessibilityLabel="View plans"
               style={{
                 marginTop: spacing.lg,
                 backgroundColor: colors.primary,
@@ -53,11 +53,11 @@ export function AdInterstitialModal({ visible, onClose, onUpgrade }: Props) {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' }}>Tingnan ang plans</Text>
+              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' }}>View plans</Text>
             </Pressable>
           ) : null}
-          <Pressable onPress={onClose} style={{ marginTop: spacing.md, alignItems: 'center' }} accessibilityRole="button" accessibilityLabel="Magpatuloy">
-            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.textMuted }}>Magpatuloy</Text>
+          <Pressable onPress={onClose} style={{ marginTop: spacing.md, alignItems: 'center' }} accessibilityRole="button" accessibilityLabel="Continue">
+            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.textMuted }}>Continue</Text>
           </Pressable>
         </Pressable>
       </Pressable>

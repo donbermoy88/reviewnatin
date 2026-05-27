@@ -99,9 +99,9 @@ export default function StudyScreen() {
 
   const launchBoardExam = () => {
     if (!isPremium(examTypeId)) {
-      Alert.alert('Board Exam Mode', 'Premium feature — strict timer, walang hints, mixed subjects.', [
-        { text: 'Hindi muna', style: 'cancel' },
-        { text: 'Tingnan ang plans', onPress: () => router.push('/subscribe') },
+      Alert.alert('Board Exam Mode', 'Premium feature — strict timer, no hints, mixed subjects.', [
+        { text: 'Not now', style: 'cancel' },
+        { text: 'View plans', onPress: () => router.push('/subscribe') },
       ]);
       return;
     }
@@ -120,10 +120,10 @@ export default function StudyScreen() {
       if (used) {
         Alert.alert(
           'Weekly limit',
-          '1 mini-mock lang kada linggo sa free tier. Mag-upgrade para sa unlimited mocks.',
+          '1 mini-mock per week on the free tier. Upgrade for unlimited mocks.',
           [
-            { text: 'Hindi muna', style: 'cancel' },
-            { text: 'Tingnan ang plans', onPress: () => router.push('/subscribe') },
+            { text: 'Not now', style: 'cancel' },
+            { text: 'View plans', onPress: () => router.push('/subscribe') },
           ]
         );
         return;
@@ -134,11 +134,11 @@ export default function StudyScreen() {
     if (access === 'preview') {
       Alert.alert(
         'Preview mode',
-        `Free tier: unang ${FREE_MOCK_PREVIEW_ITEMS} items lang. Mag-upgrade para sa buong ${mock.itemCount}-item mock.`,
+        `Free tier: first ${FREE_MOCK_PREVIEW_ITEMS} items only. Upgrade for the full ${mock.itemCount}-item mock.`,
         [
           { text: 'Cancel', style: 'cancel' },
           {
-            text: 'Simulan ang preview',
+            text: 'Start preview',
             onPress: () =>
               router.push({
                 pathname: '/practice/quiz',
@@ -157,15 +157,27 @@ export default function StudyScreen() {
       return;
     }
 
-    router.push({
-      pathname: '/practice/quiz',
-      params: {
-        examSlug,
-        mode: 'mock',
-        mockExamId: mock.id,
-        durationSeconds: String(mock.durationSeconds),
-      },
-    });
+    const durationMin = Math.round(mock.durationSeconds / 60);
+    Alert.alert(
+      'Board Exam Mode',
+      `${mock.title} · ${mock.itemCount} items · ${durationMin} min\n\nStrict timer, no hints, and no going back to previous questions. Make sure you're ready before starting.`,
+      [
+        { text: 'Not now', style: 'cancel' },
+        {
+          text: 'Start exam',
+          onPress: () =>
+            router.push({
+              pathname: '/practice/quiz',
+              params: {
+                examSlug,
+                mode: 'mock',
+                mockExamId: mock.id,
+                durationSeconds: String(mock.durationSeconds),
+              },
+            }),
+        },
+      ]
+    );
   };
 
   const analyticsBySubject = useMemo(() => {
@@ -234,7 +246,7 @@ export default function StudyScreen() {
         {filteredMaterials.length === 0 ? (
           <EmptyState
             icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
-            title="Walang notes pa"
+            title="No notes yet"
             description="Micro-lessons and cheat sheets will appear here as we import content."
           />
         ) : (
@@ -343,8 +355,8 @@ export default function StudyScreen() {
             mockExams.length === 0 ? (
               <EmptyState
               icon={<Ionicons name="timer-outline" size={32} color={colors.primary} />}
-              title="Walang mock exams pa"
-              description="Lalabas dito ang full at mini mocks habang dinadagdagan namin ang content para sa exam mo."
+              title="No mock exams yet"
+              description="Full and mini mocks will appear here as we add content for your exam."
             />
             ) : (
               <>
@@ -390,9 +402,9 @@ export default function StudyScreen() {
           ) : subjects.length === 0 ? (
             <EmptyState
               icon={<Ionicons name="book-outline" size={32} color={colors.primary} />}
-              title="Walang subjects pa"
-              description="Magsisimula kaming magdagdag ng subjects para sa exam mo. Subukan ulit later o palitan ang exam track sa Settings."
-              actionLabel="Subukan ulit"
+              title="No subjects yet"
+              description="We're adding subjects for your exam. Try again later or change your exam track in Settings."
+              actionLabel="Try again"
               onAction={load}
             />
           ) : (
@@ -439,7 +451,7 @@ export default function StudyScreen() {
         style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}
       >
         <PrimaryButton
-          label="Simulan ang practice quiz"
+          label="Start practice quiz"
           icon="flash"
           iconPosition="left"
           size="lg"

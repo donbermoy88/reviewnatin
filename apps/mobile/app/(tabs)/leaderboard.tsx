@@ -97,9 +97,9 @@ export default function LeaderboardScreen() {
           ) : entries.length === 0 ? (
             <EmptyState
               icon={<Ionicons name="trophy-outline" size={32} color={colors.primary} />}
-              title="Wala pang ranks this week"
-              description="Mag-practice muna — XP comes from completed quiz sessions."
-              actionLabel="Simulan ang practice"
+              title="No ranks this week yet"
+              description="Practice to earn XP — it comes from completed quiz sessions."
+              actionLabel="Start practicing"
               onAction={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
             />
           ) : (

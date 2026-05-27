@@ -28,7 +28,7 @@ import { usePreferences } from '../../providers/preferences-provider';
 const STARTER: AiTutorMessage = {
   role: 'assistant',
   content:
-    'Kumusta! Ako ang AI tutor mo. Tanungin mo ako tungkol sa weak topics, study plan, o mock exam prep. Ano ang gusto mong pag-usapan?',
+    "Hi! I'm your AI tutor. Ask me about weak topics, your study plan, or mock exam prep. What would you like to talk about?",
 };
 
 export default function AiTutorScreen() {
@@ -65,9 +65,9 @@ export default function AiTutorScreen() {
     }
 
     if (!isPremium()) {
-      Alert.alert('Kailangan ng Exam Pass', 'Para sa premium subscribers lang ang AI tutor chat.', [
-        { text: 'Hindi muna', style: 'cancel' },
-        { text: 'Tingnan ang plans', onPress: () => router.push('/subscribe') },
+      Alert.alert('Exam Pass required', 'AI tutor chat is available for premium subscribers only.', [
+        { text: 'Not now', style: 'cancel' },
+        { text: 'View plans', onPress: () => router.push('/subscribe') },
       ]);
       return;
     }
@@ -81,10 +81,10 @@ export default function AiTutorScreen() {
       const result = await sendAiTutorMessage(nextMessages, { examSlug, locale });
       if (!result.ok) {
         if (result.error === 'premium_required') {
-          Alert.alert('Kailangan ng Exam Pass', 'Mag-upgrade para makipag-chat sa AI tutor.');
+          Alert.alert('Exam Pass required', 'Upgrade to chat with the AI tutor.');
           return;
         }
-        Alert.alert('Hindi na-send', result.error);
+        Alert.alert('Could not send', result.error);
         return;
       }
       setMessages((prev) => [...prev, { role: 'assistant', content: result.reply }]);
@@ -99,9 +99,9 @@ export default function AiTutorScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="chatbubbles-outline" size={32} color={colors.primary} />}
-          title="Mag-login muna"
+          title="Log in to continue"
           description="AI tutor chat requires a signed-in premium account."
-          actionLabel="Mag-login"
+          actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </View>
