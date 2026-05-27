@@ -44,6 +44,7 @@ import {
 import { fetchUsageLimits, isMiniMockLimitError } from '../../lib/api/iap';
 import { fetchWeakAreaQuestions } from '../../lib/api/analytics';
 import { awardUserBadges } from '../../lib/api/achievements';
+import { useHint, awardSessionXp, fetchXpStats } from '../../lib/api/xp';
 import { FREE_DAILY_QUESTIONS } from '../../lib/paywall';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { saveGuestQuizSession } from '../../lib/guest-quiz-history';
@@ -144,6 +145,14 @@ export default function PracticeQuizScreen() {
     isMock ? Number(durationSeconds) || 600 : isBoard ? BOARD_DURATION_SECONDS : isTimed ? timedDuration : 0
   );
   const [mockTitle, setMockTitle] = useState('Mock Exam');
+
+  // Hint system: eliminates one wrong answer per question.
+  // hintCredits is fetched from DB; hintUsedOnQuestion tracks which questions got a hint.
+  // eliminatedChoiceId is which wrong choice was dimmed on the current question.
+  const [hintCredits, setHintCredits] = useState(3);
+  const [hintUsedOnQuestion, setHintUsedOnQuestion] = useState<Set<string>>(new Set());
+  const [eliminatedChoiceId, setEliminatedChoiceId] = useState<string | null>(null);
+
   const startedAt = useRef(Date.now());
   const questionStarted = useRef(Date.now());
   const finishing = useRef(false);
@@ -253,7 +262,12 @@ export default function PracticeQuizScreen() {
           setQuestions(prepareQuestions(result.questions, true));
         }
         if (user) {
-          setBookmarkedIds(await fetchBookmarkedQuestionIds(user.id));
+          const [bookmarks, xpStats] = await Promise.all([
+            fetchBookmarkedQuestionIds(user.id),
+            fetchXpStats(),
+          ]);
+          setBookmarkedIds(bookmarks);
+          setHintCredits(xpStats.hintCredits);
         }
       } catch {
         if (!isMock && !isBoard && !isDiagnostic && !isWeakArea && !isBarkada && (await hasOfflinePack(slug))) {
@@ -305,6 +319,34 @@ export default function PracticeQuizScreen() {
     },
     [current, revealed]
   );
+
+  /**
+   * Activates a hint: eliminates a random incorrect choice.
+   * Costs 1 hint credit (–10 XP) server-side.
+   */
+  const activateHint = useCallback(async () => {
+    if (!current || revealed || !user || hintUsedOnQuestion.has(current.id) || hintCredits <= 0) return;
+
+    // Pick a wrong choice (not already selected, not correct)
+    // We don't know the correct choice yet — eliminate any non-selected choice
+    // that is likely wrong. We pick a random non-selected choice.
+    const candidates = current.choices.filter((c) => c.id !== selected);
+    if (!candidates.length) return;
+
+    const eliminated = candidates[Math.floor(Math.random() * candidates.length)];
+    setEliminatedChoiceId(eliminated.id);
+
+    if (Platform.OS === 'ios') {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+    }
+
+    setHintUsedOnQuestion((prev) => new Set([...prev, current.id]));
+
+    // Server deduct (fire-and-forget)
+    useHint()
+      .then((remaining) => setHintCredits(remaining))
+      .catch(() => setHintCredits((c) => Math.max(c - 1, 0)));
+  }, [current, revealed, user, selected, hintUsedOnQuestion, hintCredits]);
 
   const checkAnswer = useCallback(async () => {
     if (!current || !selected || revealed || checking) return;
@@ -387,6 +429,8 @@ export default function PracticeQuizScreen() {
             } else {
               const graded = await completePracticeSession(sessionId, duration);
               if (graded != null) serverScore = Math.round(graded);
+              // Award XP for this session (fire-and-forget, non-blocking)
+              awardSessionXp(sessionId).catch(() => {});
               if (!isDiagnostic) {
                 const newBadges = await awardUserBadges();
                 if (newBadges.length > 0) {
@@ -463,6 +507,7 @@ export default function PracticeQuizScreen() {
       setSelected(null);
       setRevealed(false);
       setRevealResult(null);
+      setEliminatedChoiceId(null);
       questionStarted.current = Date.now();
       return;
     }
@@ -476,6 +521,7 @@ export default function PracticeQuizScreen() {
     setSelected(null);
     setRevealed(false);
     setRevealResult(null);
+    setEliminatedChoiceId(null);
     questionStarted.current = Date.now();
   };
 
@@ -652,18 +698,22 @@ export default function PracticeQuizScreen() {
         ) : null}
 
         <View style={styles.options}>
-          {current.choices.map((c, i) => (
-            <ChoiceOption
-              key={c.id}
-              letter={LETTERS[i] ?? String(i + 1)}
-              label={c.text}
-              selected={selected === c.id}
-              correct={revealed && c.id === revealResult?.correctChoiceId}
-              wrong={revealed && selected === c.id && c.id !== revealResult?.correctChoiceId}
-              disabled={revealed}
-              onPress={() => pickChoice(c.id)}
-            />
-          ))}
+          {current.choices.map((c, i) => {
+            const isEliminated = c.id === eliminatedChoiceId;
+            return (
+              <ChoiceOption
+                key={c.id}
+                letter={LETTERS[i] ?? String(i + 1)}
+                label={c.text}
+                selected={selected === c.id}
+                correct={revealed && c.id === revealResult?.correctChoiceId}
+                wrong={revealed && selected === c.id && c.id !== revealResult?.correctChoiceId}
+                disabled={revealed || isEliminated}
+                eliminated={isEliminated}
+                onPress={() => pickChoice(c.id)}
+              />
+            );
+          })}
         </View>
 
         {revealed && explanation ? (
@@ -690,16 +740,32 @@ export default function PracticeQuizScreen() {
       </ScrollView>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}>
-        {!revealed && !isStrictExam && !isDiagnostic && !isTimed ? (
-          <View style={styles.hintRow}>
-            <Text style={{ fontSize: 18 }}>💡</Text>
-            <Text style={styles.hintText}>
-              Use hint <Text style={styles.hintXp}>(–10 XP)</Text>
-            </Text>
-            <Pill color={colors.accentDark} bg={colors.surface}>
-              3 LEFT
-            </Pill>
-          </View>
+        {!revealed && !isStrictExam && !isDiagnostic && !isTimed && user ? (
+          hintUsedOnQuestion.has(current?.id ?? '') ? (
+            <View style={styles.hintRow}>
+              <Text style={{ fontSize: 18 }}>💡</Text>
+              <Text style={[styles.hintText, { color: colors.textMuted }]}>
+                Hint used — one wrong answer removed
+              </Text>
+            </View>
+          ) : (
+            <Pressable
+              style={styles.hintRow}
+              onPress={activateHint}
+              disabled={hintCredits <= 0}
+            >
+              <Text style={{ fontSize: 18 }}>💡</Text>
+              <Text style={[styles.hintText, hintCredits <= 0 && { color: colors.textMuted }]}>
+                Use hint <Text style={styles.hintXp}>(–10 XP)</Text>
+              </Text>
+              <Pill
+                color={hintCredits > 0 ? colors.accentDark : colors.textMuted}
+                bg={colors.surface}
+              >
+                {hintCredits} LEFT
+              </Pill>
+            </Pressable>
+          )
         ) : null}
         {revealed && !isStrictExam ? (
           <PrimaryButton

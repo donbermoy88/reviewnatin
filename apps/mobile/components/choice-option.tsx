@@ -11,16 +11,19 @@ type Props = {
   correct?: boolean;
   wrong?: boolean;
   disabled?: boolean;
+  /** When true, this choice was eliminated by a hint — shown struck-through and dimmed */
+  eliminated?: boolean;
   onPress: () => void;
 };
 
-export function ChoiceOption({ letter, label, selected, correct, wrong, disabled, onPress }: Props) {
+export function ChoiceOption({ letter, label, selected, correct, wrong, disabled, eliminated, onPress }: Props) {
   const theme = useAppTheme();
   const styles = useMemo(() => createChoiceOptionStyles(theme), [theme]);
   const filled = selected && !correct && !wrong;
 
   let stateLabel = 'Not selected';
-  if (correct) stateLabel = 'Correct';
+  if (eliminated) stateLabel = 'Eliminated by hint';
+  else if (correct) stateLabel = 'Correct';
   else if (wrong) stateLabel = 'Incorrect';
   else if (selected) stateLabel = 'Selected';
 
@@ -31,7 +34,8 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
         filled && styles.filled,
         correct && styles.correct,
         wrong && styles.wrong,
-        disabled && !filled && styles.disabled,
+        (disabled && !filled) && styles.disabled,
+        eliminated && eliminatedStyle.option,
       ]}
       onPress={onPress}
       disabled={disabled}
@@ -39,10 +43,19 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
       accessibilityLabel={`Option ${letter}. ${label}. ${stateLabel}`}
       accessibilityState={{ selected, disabled: !!disabled }}
     >
-      <View style={[styles.badge, filled && styles.badgeFilled, correct && styles.badgeCorrect]}>
-        <Text style={[styles.letter, (filled || correct) && styles.letterLight]}>{letter}</Text>
+      <View style={[styles.badge, filled && styles.badgeFilled, correct && styles.badgeCorrect, eliminated && eliminatedStyle.badge]}>
+        <Text style={[styles.letter, (filled || correct) && styles.letterLight, eliminated && eliminatedStyle.letter]}>
+          {eliminated ? '✕' : letter}
+        </Text>
       </View>
-      <Text style={[styles.text, filled && styles.textFilled, correct && styles.textCorrect]}>{label}</Text>
+      <Text style={[
+        styles.text,
+        filled && styles.textFilled,
+        correct && styles.textCorrect,
+        eliminated && eliminatedStyle.text,
+      ]}>
+        {label}
+      </Text>
       {filled ? (
         <View style={styles.checkWrap}>
           <Ionicons name="checkmark" size={14} color={theme.colors.primary} />
@@ -51,3 +64,21 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
     </Pressable>
   );
 }
+
+// Eliminated style: strike-through text, dim the whole row
+const eliminatedStyle = StyleSheet.create({
+  option: {
+    opacity: 0.38,
+  },
+  badge: {
+    backgroundColor: '#e2e8f0',
+    borderColor: '#cbd5e1',
+  },
+  letter: {
+    color: '#94a3b8',
+  },
+  text: {
+    textDecorationLine: 'line-through',
+    color: '#94a3b8',
+  },
+});

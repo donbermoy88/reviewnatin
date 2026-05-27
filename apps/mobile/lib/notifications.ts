@@ -106,10 +106,10 @@ export async function scheduleDailyReminder(
 
   const body =
     context?.streakDays && context.streakDays >= 3
-      ? `🔥 ${context.streakDays}-day streak! Oras na para sa review mo.`
+      ? `🔥 ${context.streakDays}-day streak! Time to keep it going.`
       : context?.dueFlashcards && context.dueFlashcards > 0
-        ? `${context.dueFlashcards} flashcards due — quick review lang!`
-        : 'Oras na para sa PasaPath mo — kaya mo yan!';
+        ? `${context.dueFlashcards} flashcards due — quick review time!`
+        : "Time for your PasaPath session — you've got this!";
 
   try {
     await ensureHandler();

@@ -447,7 +447,7 @@ export default function DashboardScreen() {
               ) : pasapathComplete ? (
                 <View style={[styles.primaryCta, { backgroundColor: colors.success }]}>
                   <Ionicons name="checkmark-circle" size={18} color="#fff" />
-                  <Text style={styles.primaryCtaText}>Tapos na ang PasaPath mo for today! 🎉</Text>
+                  <Text style={styles.primaryCtaText}>PasaPath complete for today! 🎉</Text>
                 </View>
               ) : null}
 
