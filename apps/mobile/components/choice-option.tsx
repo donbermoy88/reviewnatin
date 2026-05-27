@@ -19,10 +19,10 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
   const styles = useMemo(() => createChoiceOptionStyles(theme), [theme]);
   const filled = selected && !correct && !wrong;
 
-  let stateLabel = 'Hindi napili';
-  if (correct) stateLabel = 'Tama';
-  else if (wrong) stateLabel = 'Mali';
-  else if (selected) stateLabel = 'Napili';
+  let stateLabel = 'Not selected';
+  if (correct) stateLabel = 'Correct';
+  else if (wrong) stateLabel = 'Incorrect';
+  else if (selected) stateLabel = 'Selected';
 
   return (
     <Pressable
@@ -36,7 +36,7 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
       onPress={onPress}
       disabled={disabled}
       accessibilityRole="button"
-      accessibilityLabel={`Opsyon ${letter}. ${label}. ${stateLabel}`}
+      accessibilityLabel={`Option ${letter}. ${label}. ${stateLabel}`}
       accessibilityState={{ selected, disabled: !!disabled }}
     >
       <View style={[styles.badge, filled && styles.badgeFilled, correct && styles.badgeCorrect]}>

@@ -13,6 +13,7 @@ type PracticeQuestionRow = {
   topic_name: string;
   subject_name: string;
   exam_slug: string;
+  image_url?: string | null;
 };
 
 type AnswerCheckRow = {
@@ -34,6 +35,7 @@ function mapPracticeQuestion(row: PracticeQuestionRow): Question {
     id: row.id,
     stem: cleanStem(row.stem),
     choices: row.choices,
+    image_url: row.image_url ?? null,
     difficulty: row.difficulty,
     topic: {
       name: row.topic_name,

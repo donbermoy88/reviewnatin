@@ -16,8 +16,10 @@ import { ChoiceOption } from '../../components/choice-option';
 import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
+import { QuestionImage } from '../../components/question-image';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createQuizStyles } from '../../lib/themed-styles';
+import { shuffleArray } from '../../lib/shuffle';
 import {
   checkQuestionAnswer,
   fetchExamBySlug,
@@ -49,6 +51,18 @@ import type { Question, QuizAnswerRecord } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
+
+/**
+ * Shuffle questions and their choices for practice-style modes.
+ * - `shuffleQuestions`: randomises question order (not used for mock/board/diagnostic
+ *   where the question set is curated/ordered).
+ * - Always shuffles choices within each question because grading uses stable choice IDs
+ *   (not positional letters), so this is always safe.
+ */
+function prepareQuestions(questions: Question[], shuffleQuestions: boolean): Question[] {
+  const qs = shuffleQuestions ? shuffleArray(questions) : questions;
+  return qs.map((q) => ({ ...q, choices: shuffleArray(q.choices) }));
+}
 
 function finalizeAnswers(
   prev: QuizAnswerRecord[],
@@ -144,7 +158,8 @@ export default function PracticeQuizScreen() {
             router.replace('/(auth)/login');
             return;
           }
-          setQuestions(await fetchDiagnosticQuestions(slug, DIAGNOSTIC_ITEM_COUNT));
+          // Diagnostic: keep question order (calibrated set), but shuffle choices
+          setQuestions(prepareQuestions(await fetchDiagnosticQuestions(slug, DIAGNOSTIC_ITEM_COUNT), false));
         } else if (isMock && mockExamId) {
           try {
             const [mock, qs] = await Promise.all([
@@ -155,7 +170,8 @@ export default function PracticeQuizScreen() {
               setMockTitle(mock.title);
               setTimeLeft(mock.durationSeconds);
             }
-            setQuestions(qs.questions);
+            // Mock: keep question order (official exam order), shuffle choices
+            setQuestions(prepareQuestions(qs.questions, false));
           } catch (err) {
             if (isMiniMockLimitError(err as { message?: string })) {
               setPaywallBlocked(true);
@@ -174,11 +190,13 @@ export default function PracticeQuizScreen() {
             return;
           }
           const result = await fetchPracticeQuestions(slug, BOARD_ITEM_COUNT, topicSlug);
-          setQuestions(result.questions.slice(0, BOARD_ITEM_COUNT));
+          // Board: keep question order, shuffle choices
+          setQuestions(prepareQuestions(result.questions.slice(0, BOARD_ITEM_COUNT), false));
           setTimeLeft(BOARD_DURATION_SECONDS);
         } else if (isMistakeReview) {
           const ids = await fetchMistakeQuestionIds(slug, 12);
-          setQuestions(await fetchQuestionsByIds(ids));
+          // Mistake review: shuffle questions + choices so it feels fresh each time
+          setQuestions(prepareQuestions(await fetchQuestionsByIds(ids), true));
         } else if (isWeakArea) {
           if (!user) {
             router.replace('/(auth)/login');
@@ -196,7 +214,8 @@ export default function PracticeQuizScreen() {
             setPaywallBlocked(true);
             return;
           }
-          setQuestions(result.questions);
+          // Weak area: shuffle both so different order each session
+          setQuestions(prepareQuestions(result.questions, true));
         } else if (isOffline) {
           const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
           if (!offlineQs.length) {
@@ -205,7 +224,7 @@ export default function PracticeQuizScreen() {
             return;
           }
           setOfflineMode(true);
-          setQuestions(offlineQs);
+          setQuestions(prepareQuestions(offlineQs, true));
         } else if (isBarkada) {
           if (!user) {
             router.replace('/(auth)/login');
@@ -216,7 +235,7 @@ export default function PracticeQuizScreen() {
             setPaywallBlocked(true);
             return;
           }
-          setQuestions(result.questions.slice(0, barkadaLimit));
+          setQuestions(prepareQuestions(result.questions.slice(0, barkadaLimit), true));
         } else {
           if (user && exam) {
             const limits = await fetchUsageLimits(slug);
@@ -230,7 +249,8 @@ export default function PracticeQuizScreen() {
             setPaywallBlocked(true);
             return;
           }
-          setQuestions(result.questions);
+          // Regular practice: shuffle both questions and choices
+          setQuestions(prepareQuestions(result.questions, true));
         }
         if (user) {
           setBookmarkedIds(await fetchBookmarkedQuestionIds(user.id));
@@ -240,7 +260,7 @@ export default function PracticeQuizScreen() {
           const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
           if (offlineQs.length) {
             setOfflineMode(true);
-            setQuestions(offlineQs);
+            setQuestions(prepareQuestions(offlineQs, true));
           }
         }
       } finally {
@@ -626,6 +646,10 @@ export default function PracticeQuizScreen() {
         <View style={styles.questionCard}>
           <Text style={styles.stem}>{current.stem}</Text>
         </View>
+
+        {current.image_url ? (
+          <QuestionImage uri={current.image_url} />
+        ) : null}
 
         <View style={styles.options}>
           {current.choices.map((c, i) => (

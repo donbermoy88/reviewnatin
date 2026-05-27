@@ -9,6 +9,8 @@ export type Question = {
   id: string;
   stem: string;
   choices: QuestionChoice[];
+  /** Optional image URL (Supabase Storage public URL). Used for diagram/abstract-reasoning questions. */
+  image_url?: string | null;
   /** Only populated after server-side check_question_answer RPC */
   correct_choice_id?: string;
   explanation_en?: string | null;
