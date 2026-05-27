@@ -32,7 +32,7 @@ export function AppSheet({ visible, title, subtitle, onClose, children, actions 
         style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.45)', justifyContent: 'flex-end' }}
         onPress={onClose}
         accessibilityRole="button"
-        accessibilityLabel="Isara ang dialog"
+        accessibilityLabel="Close dialog"
       >
         <Pressable
           onPress={(e) => e.stopPropagation()}

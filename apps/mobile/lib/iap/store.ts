@@ -159,7 +159,7 @@ export async function requestStorePurchase(productId: string): Promise<{ ok: boo
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Purchase failed';
     if (message.toLowerCase().includes('cancel')) {
-      return { ok: false, error: 'Kinansela ang purchase.' };
+      return { ok: false, error: 'Purchase cancelled.' };
     }
     return { ok: false, error: message };
   }
