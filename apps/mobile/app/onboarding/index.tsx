@@ -306,7 +306,7 @@ export default function OnboardingScreen() {
           {step === 2 && (
             <>
               <Text style={styles.pageTitle}>Set your daily goal</Text>
-              <Text style={styles.pageSub}>Even a little each day adds up. Let's build that streak!</Text>
+              <Text style={styles.pageSub}>{'Even a little each day adds up. Let\'s build that streak!'}</Text>
             </>
           )}
           {step === 3 && (

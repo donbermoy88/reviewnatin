@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ComponentType, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type ComponentType, type ReactNode } from 'react';
 import { View } from 'react-native';
 import { canUseViewShot } from '../lib/share/score-share';
 
@@ -22,7 +22,9 @@ type Props = {
 export function ShareScoreCapture({ children, onReady }: Props) {
   const ref = useRef<ViewShotHandle | null>(null);
   const onReadyRef = useRef(onReady);
-  onReadyRef.current = onReady;
+  useLayoutEffect(() => {
+    onReadyRef.current = onReady;
+  });
   const [ViewShot, setViewShot] = useState<ComponentType<ViewShotProps> | null>(null);
 
   useEffect(() => {

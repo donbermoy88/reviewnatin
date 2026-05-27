@@ -10,7 +10,7 @@ export async function fetchXpStats(): Promise<XpStats> {
 }
 
 /** Deducts 1 hint credit + 10 XP server-side. Returns remaining credits. */
-export async function useHint(): Promise<number> {
+export async function deductHint(): Promise<number> {
   if (!isSupabaseConfigured) return 3;
   const { data, error } = await supabase.rpc('use_hint');
   if (error) return 0;

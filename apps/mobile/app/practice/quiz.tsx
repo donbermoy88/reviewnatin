@@ -45,7 +45,7 @@ import {
 import { fetchUsageLimits, isMiniMockLimitError } from '../../lib/api/iap';
 import { fetchWeakAreaQuestions } from '../../lib/api/analytics';
 import { awardUserBadges } from '../../lib/api/achievements';
-import { useHint, awardSessionXp, fetchXpStats } from '../../lib/api/xp';
+import { deductHint, awardSessionXp, fetchXpStats } from '../../lib/api/xp';
 import { FREE_DAILY_QUESTIONS } from '../../lib/paywall';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { saveGuestQuizSession } from '../../lib/guest-quiz-history';
@@ -344,7 +344,7 @@ export default function PracticeQuizScreen() {
     setHintUsedOnQuestion((prev) => new Set([...prev, current.id]));
 
     // Server deduct (fire-and-forget)
-    useHint()
+    deductHint()
       .then((remaining) => setHintCredits(remaining))
       .catch(() => setHintCredits((c) => Math.max(c - 1, 0)));
   }, [current, revealed, user, selected, hintUsedOnQuestion, hintCredits]);
