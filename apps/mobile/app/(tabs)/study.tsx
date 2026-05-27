@@ -348,7 +348,7 @@ export default function StudyScreen() {
         </View>
 
         <View style={styles.body}>
-          {!isPremium(examTypeId) ? (
+          {!isPremium(examTypeId) && activeTab === 0 ? (
             <AdBanner onPress={() => router.push('/subscribe')} />
           ) : null}
           {activeTab === 1 ? (

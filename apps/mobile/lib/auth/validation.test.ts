@@ -16,11 +16,11 @@ describe('normalizeEmail', () => {
 
 describe('validateEmail', () => {
   it('rejects empty email', () => {
-    expect(validateEmail('')).toBe('Ilagay ang email mo.');
+    expect(validateEmail('')).toBe('Please enter your email address.');
   });
 
   it('rejects invalid format', () => {
-    expect(validateEmail('not-an-email')).toBe('Hindi valid ang email address.');
+    expect(validateEmail('not-an-email')).toBe('Please enter a valid email address.');
   });
 
   it('accepts valid email', () => {
@@ -30,12 +30,12 @@ describe('validateEmail', () => {
 
 describe('validatePassword', () => {
   it('requires minimum length for sign-in', () => {
-    expect(validatePassword('12345')).toBe('Dapat at least 6 characters ang password.');
+    expect(validatePassword('12345')).toBe('Password must be at least 6 characters.');
   });
 
   it('requires 8 chars for sign-up', () => {
     expect(validatePassword('1234567', true)).toBe(
-      'Para sa sign-up, gamitin ang at least 8 characters.'
+      'For sign-up, use at least 8 characters.'
     );
   });
 });
@@ -43,23 +43,23 @@ describe('validatePassword', () => {
 describe('validatePasswordMatch', () => {
   it('detects mismatch', () => {
     expect(validatePasswordMatch('abc12345', 'abc12346')).toBe(
-      'Hindi mag-match ang password at confirmation.'
+      'Passwords do not match.'
     );
   });
 });
 
 describe('validateDisplayName', () => {
   it('rejects empty name', () => {
-    expect(validateDisplayName('   ')).toBe('Ilagay ang display name mo.');
+    expect(validateDisplayName('   ')).toBe('Please enter a display name.');
   });
 
   it('rejects too short name', () => {
-    expect(validateDisplayName('A')).toBe('Dapat at least 2 characters ang display name.');
+    expect(validateDisplayName('A')).toBe('Display name must be at least 2 characters.');
   });
 
   it('rejects invalid characters', () => {
     expect(validateDisplayName('User@name')).toBe(
-      'Letters, numbers, spaces, at . _ - lang ang allowed.'
+      'Only letters, numbers, spaces, and . _ - are allowed.'
     );
   });
 

@@ -102,7 +102,7 @@ export default function LessonReaderScreen() {
           Lesson not found or not available on your plan.
         </Text>
         <Pressable onPress={() => router.back()} style={{ marginTop: spacing.md }}>
-          <Text style={{ fontFamily: fonts.bodyBold, color: colors.primary }}>Bumalik</Text>
+          <Text style={{ fontFamily: fonts.bodyBold, color: colors.primary }}>Go back</Text>
         </Pressable>
       </View>
     );

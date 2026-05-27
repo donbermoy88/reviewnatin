@@ -60,11 +60,11 @@ export function IapProvider({ children }: { children: React.ReactNode }) {
             });
             if (result.ok) {
               await refresh();
-              notify('Purchase complete', 'Salamat! Na-unlock na ang premium access mo.');
+              notify('Purchase complete', 'Premium access unlocked!');
             } else {
               notify(
-                'Hindi na-verify ang purchase',
-                result.error ?? 'Subukan ulit o i-restore ang purchases.'
+                'Purchase not verified',
+                result.error ?? 'Please try again or restore your purchases.'
               );
             }
           } finally {

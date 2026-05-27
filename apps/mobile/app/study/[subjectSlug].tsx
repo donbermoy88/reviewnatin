@@ -84,7 +84,7 @@ export default function TopicListScreen() {
           style={styles.backBtn}
           onPress={() => router.back()}
           accessibilityRole="button"
-          accessibilityLabel="Bumalik"
+          accessibilityLabel="Go back"
         >
           <Ionicons name="chevron-back" size={20} color="#fff" />
         </Pressable>

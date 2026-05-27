@@ -346,7 +346,7 @@ export default function SubscribeScreen() {
               hitSlop={8}
               style={styles.backBtn}
               accessibilityRole="button"
-              accessibilityLabel="Bumalik"
+              accessibilityLabel="Go back"
             >
               <Ionicons name="chevron-back" size={22} color="#fff" />
             </Pressable>

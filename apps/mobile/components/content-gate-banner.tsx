@@ -50,14 +50,13 @@ export function ContentGateBanner({ theme, status, compact = false }: Props) {
       <Ionicons name="construct-outline" size={20} color={colors.accentDark} />
       <View style={{ flex: 1 }}>
         <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text }}>
-          Content still loading in
+          More questions coming soon
         </Text>
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 4 }}>
-          Questions {status.counts.questions}/{status.minimum.questions} ({status.questionPct}%) · Mocks{' '}
-          {status.counts.mockExams}/{status.minimum.mockExams} ({status.mockPct}%)
+          {status.counts.questions} questions available now · {status.questionPct}% of target bank
         </Text>
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 4 }}>
-          More items are being imported — practice what&apos;s available while we fill the bank.
+          Practice what&apos;s here — new content drops regularly.
         </Text>
       </View>
     </View>

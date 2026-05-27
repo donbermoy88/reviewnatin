@@ -30,7 +30,7 @@ type AuthContextValue = {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 const NOT_CONFIGURED: AuthResult = {
-  error: 'Hindi pa naka-connect ang Supabase. Check ang apps/mobile/.env file.',
+  error: 'Supabase is not configured. Check the apps/mobile/.env file.',
 };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -73,7 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           return { error: null, session: data.session };
         }
 
-        return { error: 'Hindi makapag-login. Subukan ulit.' };
+        return { error: 'Login failed. Please try again.' };
       },
       async signUp(email, password) {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
@@ -112,7 +112,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         return {
-          error: mapAuthError(signInError?.message ?? 'Hindi makapag-sign up. Subukan ulit.'),
+          error: mapAuthError(signInError?.message ?? 'Sign up failed. Please try again.'),
         };
       },
       async signInGoogle() {

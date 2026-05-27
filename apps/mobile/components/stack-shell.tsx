@@ -52,7 +52,7 @@ export function StackShell({
             onPress={() => router.back()}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel="Bumalik"
+            accessibilityLabel="Go back"
           >
             <Ionicons name="chevron-back" size={22} color="#fff" />
           </Pressable>
