@@ -77,7 +77,7 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
     return {
       idToken: null,
       error:
-        'Google Sign-In sa iOS kailangan ng dev build (hindi Expo Go). Run: npm run mobile:ios:dev sa project root.',
+        'Google Sign-In on iOS requires a dev build (not Expo Go). Run: npm run mobile:ios:dev from the project root.',
     };
   }
 
