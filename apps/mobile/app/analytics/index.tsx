@@ -4,36 +4,35 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { MasteryBar } from '../../components/mastery-bar';
 import { PrimaryButton } from '../../components/primary-button';
+import { ReadinessBreakdownSheet } from '../../components/readiness-breakdown-sheet';
+import { ScreenBackground } from '../../components/screen-background';
+import { SegmentedReadinessBar } from '../../components/segmented-readiness-bar';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { fetchTopicAnalytics, type SubjectAnalytics } from '../../lib/api/analytics';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
-import { fetchLatestReadiness, getReadinessBand } from '../../lib/api/readiness';
-import { fetchReadinessHistory, type ReadinessHistoryPoint } from '../../lib/api/readiness-history';
+import {
+  fetchLatestReadiness,
+  getReadinessBand,
+  type ReadinessSnapshot,
+} from '../../lib/api/readiness';
 import { createAnalyticsStyles } from '../../lib/themed-styles';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
-
-function barColor(accuracy: number, colors: ReturnType<typeof useAppTheme>['colors']): string {
-  if (accuracy >= 80) return colors.success;
-  if (accuracy >= 70) return colors.primary;
-  if (accuracy >= 50) return colors.accentDark;
-  return colors.error;
-}
 
 export default function AnalyticsScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, spacing } = theme;
+  const { colors } = theme;
   const styles = useMemo(() => createAnalyticsStyles(theme), [theme]);
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
-  const [examName, setExamName] = useState('');
   const [subjects, setSubjects] = useState<SubjectAnalytics[]>([]);
-  const [readinessScore, setReadinessScore] = useState<number | null>(null);
-  const [readinessHistory, setReadinessHistory] = useState<ReadinessHistoryPoint[]>([]);
+  const [readiness, setReadiness] = useState<ReadinessSnapshot | null>(null);
+  const [breakdownOpen, setBreakdownOpen] = useState(false);
 
   const load = useCallback(async () => {
     const goal = await resolveOnboardingGoal(user?.id);
@@ -46,17 +45,15 @@ export default function AnalyticsScreen() {
     }
 
     try {
-      const [analytics, readiness, history] = await Promise.all([
+      const [analytics, latestReadiness] = await Promise.all([
         fetchTopicAnalytics(slug),
         fetchLatestReadiness(slug),
-        fetchReadinessHistory(slug, 12),
       ]);
       setSubjects(analytics.subjects);
-      setReadinessScore(readiness?.score ?? null);
-      setReadinessHistory(history);
-      setExamName(slug.replace(/-/g, ' ').toUpperCase());
+      setReadiness(latestReadiness);
     } catch {
       setSubjects([]);
+      setReadiness(null);
     } finally {
       setLoading(false);
     }
@@ -73,7 +70,12 @@ export default function AnalyticsScreen() {
     });
   };
 
-  const weakTopics = subjects.flatMap((s) => s.weakTopics).slice(0, 5);
+  const readinessScore = readiness?.score ?? null;
+  const readinessBand = readinessScore != null ? getReadinessBand(readinessScore) : null;
+  const weakTopicNames = subjects
+    .flatMap((s) => s.weakTopics)
+    .map((t) => t.topicName)
+    .slice(0, 6);
 
   if (loading) {
     return (
@@ -85,57 +87,67 @@ export default function AnalyticsScreen() {
 
   if (!user) {
     return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
-        <EmptyState
-          icon={<Ionicons name="analytics-outline" size={32} color={colors.primary} />}
-          title="Log in to continue"
-          description="Analytics and weak-topic tracking require a signed-in account."
-          actionLabel="Log in"
-          onAction={() => router.push('/(auth)/login')}
-        />
+      <View style={styles.root}>
+        <ScreenBackground />
+        <View style={{ paddingTop: insets.top, flex: 1 }}>
+          <EmptyState
+            icon={<Ionicons name="analytics-outline" size={32} color={colors.primary} />}
+            title="Log in to continue"
+            description="Analytics and weak-topic tracking require a signed-in account."
+            actionLabel="Log in"
+            onAction={() => router.push('/(auth)/login')}
+          />
+        </View>
       </View>
     );
   }
 
-  const readinessBand = readinessScore != null ? getReadinessBand(readinessScore) : null;
-
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}>
-        <View style={[styles.header, { paddingTop: insets.top + spacing.sm }]}>
-          <Pressable onPress={() => router.back()} style={styles.backBtn} hitSlop={8}>
-            <Ionicons name="chevron-back" size={22} color={colors.text} />
+      <ScreenBackground />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}
+      >
+        <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
+          <Pressable
+            onPress={() => router.back()}
+            style={styles.backBtn}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+          >
+            <Ionicons name="chevron-back" size={24} color={colors.text} />
           </Pressable>
           <Text style={styles.headerTitle}>Analytics</Text>
         </View>
 
         <View style={styles.body}>
           <View style={styles.summaryCard}>
+            <Pressable
+              style={styles.summarySettings}
+              onPress={() => setBreakdownOpen(true)}
+              accessibilityRole="button"
+              accessibilityLabel="View readiness breakdown"
+            >
+              <Ionicons name="settings-outline" size={20} color={colors.textMuted} />
+            </Pressable>
+
             <Text style={styles.summaryTitle}>
-              {readinessScore != null ? `${readinessScore}% exam ready` : 'Building your baseline'}
+              {readinessScore != null ? `${Math.round(readinessScore)}% exam ready` : 'Building your baseline'}
             </Text>
             <Text style={styles.summarySub}>
               {readinessBand?.label ?? 'Complete quizzes to unlock topic mastery charts.'}
             </Text>
-            {readinessHistory.length >= 2 ? (
-              <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 4, marginTop: spacing.md, height: 52 }}>
-                {readinessHistory.map((point, i) => (
-                  <View
-                    key={`${point.computedAt}-${i}`}
-                    style={{
-                      flex: 1,
-                      height: Math.max(8, Math.round((point.score / 100) * 48)),
-                      backgroundColor: barColor(point.score, colors),
-                      borderRadius: 4,
-                    }}
-                  />
-                ))}
-              </View>
+
+            {readinessScore != null ? (
+              <SegmentedReadinessBar score={readinessScore} style={styles.summarySegments} />
             ) : null}
-            {weakTopics.length > 0 ? (
-              <View style={styles.weakChip}>
-                <Text style={styles.weakChipText}>
-                  Weak areas: {weakTopics.map((t) => t.topicName).join(', ')}
+
+            {weakTopicNames.length > 0 ? (
+              <View style={styles.weakBox}>
+                <Text style={styles.weakBoxText}>
+                  Weak areas: {weakTopicNames.join(', ')}
                 </Text>
               </View>
             ) : null}
@@ -152,42 +164,50 @@ export default function AnalyticsScreen() {
               }
             />
           ) : (
-            subjects.map((subject) => (
-              <View key={subject.subjectName} style={styles.subjectCard}>
-                <View style={styles.subjectHead}>
-                  <Text style={styles.subjectName}>{subject.subjectName}</Text>
-                  <Text style={styles.subjectPct}>
-                    {subject.averageAccuracy > 0 ? `${subject.averageAccuracy}%` : '—'}
-                  </Text>
-                </View>
-                {subject.topics.map((topic) => {
-                  const pct = topic.attempts > 0 ? Math.round(topic.accuracy) : 0;
-                  return (
-                    <View key={topic.topicId} style={styles.topicRow}>
-                      <View style={styles.topicMeta}>
-                        <Text style={styles.topicName} numberOfLines={1}>
-                          {topic.topicName}
-                        </Text>
-                        <Text style={styles.topicPct}>
-                          {topic.attempts > 0 ? `${pct}% · ${topic.attempts} ${topic.attempts === 1 ? 'try' : 'tries'}` : 'Not started'}
-                        </Text>
-                      </View>
-                      <View style={styles.barTrack}>
-                        <View
-                          style={[
-                            styles.barFill,
-                            {
-                              width: `${Math.max(pct, topic.attempts > 0 ? 4 : 0)}%`,
-                              backgroundColor: barColor(pct, colors),
-                            },
-                          ]}
+            subjects.map((subject) => {
+              const subjectPct =
+                subject.averageAccuracy > 0 ? Math.round(subject.averageAccuracy) : 0;
+              const hasSubjectData = subject.topics.some((t) => t.attempts > 0);
+
+              return (
+                <View key={subject.subjectName} style={styles.subjectCard}>
+                  <View style={styles.subjectHead}>
+                    <Text style={styles.subjectName}>{subject.subjectName}</Text>
+                    <Text style={styles.subjectPct}>
+                      {hasSubjectData ? `${subjectPct}%` : '—'}
+                    </Text>
+                  </View>
+
+                  {subject.topics.map((topic, topicIndex) => {
+                    const pct = topic.attempts > 0 ? Math.round(topic.accuracy) : 0;
+                    const started = topic.attempts > 0;
+
+                    return (
+                      <View
+                        key={topic.topicId}
+                        style={[styles.topicRow, topicIndex === 0 && styles.topicRowFirst]}
+                      >
+                        <View style={styles.topicMeta}>
+                          <Text style={styles.topicName} numberOfLines={2}>
+                            {topic.topicName}
+                          </Text>
+                          <Text style={styles.topicPct}>
+                            {started
+                              ? `${pct}% · ${topic.attempts} ${topic.attempts === 1 ? 'try' : 'tries'}`
+                              : 'Not started'}
+                          </Text>
+                        </View>
+                        <MasteryBar
+                          accuracy={pct}
+                          attempts={topic.attempts}
+                          style={styles.topicBar}
                         />
                       </View>
-                    </View>
-                  );
-                })}
-              </View>
-            ))
+                    );
+                  })}
+                </View>
+              );
+            })
           )}
 
           <PrimaryButton
@@ -195,10 +215,16 @@ export default function AnalyticsScreen() {
             icon="flash"
             size="lg"
             onPress={startQuick10}
-            style={{ marginTop: spacing.sm }}
+            style={styles.cta}
           />
         </View>
       </ScrollView>
+
+      <ReadinessBreakdownSheet
+        visible={breakdownOpen}
+        onClose={() => setBreakdownOpen(false)}
+        readiness={readiness}
+      />
     </View>
   );
 }
