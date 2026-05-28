@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { MasteryBar } from '../../components/mastery-bar';
@@ -29,6 +29,7 @@ export default function AnalyticsScreen() {
   const styles = useMemo(() => createAnalyticsStyles(theme), [theme]);
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [subjects, setSubjects] = useState<SubjectAnalytics[]>([]);
   const [readiness, setReadiness] = useState<ReadinessSnapshot | null>(null);
@@ -56,10 +57,16 @@ export default function AnalyticsScreen() {
       setReadiness(null);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, [user]);
 
   useEffect(() => {
+    void load();
+  }, [load]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
     void load();
   }, [load]);
 
@@ -108,6 +115,14 @@ export default function AnalyticsScreen() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
       >
         <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
           <Pressable
@@ -117,7 +132,7 @@ export default function AnalyticsScreen() {
             accessibilityRole="button"
             accessibilityLabel="Go back"
           >
-            <Ionicons name="chevron-back" size={24} color={colors.text} />
+            <Ionicons name="chevron-back" size={24} color={colors.primaryDark} />
           </Pressable>
           <Text style={styles.headerTitle}>Analytics</Text>
         </View>
@@ -130,7 +145,7 @@ export default function AnalyticsScreen() {
               accessibilityRole="button"
               accessibilityLabel="View readiness breakdown"
             >
-              <Ionicons name="settings-outline" size={20} color={colors.textMuted} />
+              <Ionicons name="settings-outline" size={20} color={colors.primary} />
             </Pressable>
 
             <Text style={styles.summaryTitle}>
@@ -201,6 +216,7 @@ export default function AnalyticsScreen() {
                           accuracy={pct}
                           attempts={topic.attempts}
                           style={styles.topicBar}
+                          trackColor={colors.primaryMuted}
                         />
                       </View>
                     );

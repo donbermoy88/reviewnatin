@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
@@ -25,6 +25,7 @@ export default function MistakesScreen() {
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [mistakes, setMistakes] = useState<MistakeItem[]>([]);
   const [showFreeLimitBanner, setShowFreeLimitBanner] = useState(false);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
@@ -54,11 +55,17 @@ export default function MistakesScreen() {
       }
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, [user, isPremium]);
 
   useEffect(() => {
     load();
+  }, [load]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    void load();
   }, [load]);
 
   if (!user) {
@@ -77,7 +84,17 @@ export default function MistakesScreen() {
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
         <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
           <Pressable onPress={() => router.back()}>
             <Ionicons name="chevron-back" size={22} color={colors.text} />
