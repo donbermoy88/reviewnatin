@@ -10,7 +10,7 @@ import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 
 function dayLabel(dateStr: string, isToday: boolean): string {
-  if (isToday) return 'Ngayon';
+  if (isToday) return 'Today';
   const d = new Date(`${dateStr}T12:00:00`);
   return d.toLocaleDateString('en-PH', { weekday: 'short', month: 'short', day: 'numeric' });
 }
