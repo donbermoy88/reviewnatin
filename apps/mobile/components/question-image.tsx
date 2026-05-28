@@ -7,6 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { SvgUri } from 'react-native-svg';
 
 type Props = {
   uri: string;
@@ -15,10 +16,12 @@ type Props = {
 /**
  * Displays an inline question image (diagram, abstract-reasoning pattern, etc.)
  * Tapping opens a full-screen modal for closer inspection.
+ * Supports both raster images (PNG/JPEG) and SVG files.
  */
 export function QuestionImage({ uri }: Props) {
   const [loaded, setLoaded] = useState(false);
   const [open, setOpen] = useState(false);
+  const isSvg = uri.toLowerCase().includes('.svg') || uri.toLowerCase().includes('svg');
 
   return (
     <>
@@ -29,19 +32,31 @@ export function QuestionImage({ uri }: Props) {
         accessibilityLabel="Question diagram — tap to enlarge"
         accessibilityHint="Opens a full-screen view of the image"
       >
-        {!loaded && (
-          <View style={styles.placeholder}>
-            <ActivityIndicator size="small" color="#1e4fd9" />
-          </View>
+        {isSvg ? (
+          <SvgUri
+            uri={uri}
+            width="100%"
+            height={220}
+            onLoad={() => setLoaded(true)}
+            onError={() => setLoaded(true)}
+          />
+        ) : (
+          <>
+            {!loaded && (
+              <View style={styles.placeholder}>
+                <ActivityIndicator size="small" color="#1e4fd9" />
+              </View>
+            )}
+            <Image
+              source={{ uri }}
+              style={[styles.image, !loaded && styles.hidden]}
+              resizeMode="contain"
+              onLoad={() => setLoaded(true)}
+              accessibilityRole="image"
+              accessibilityLabel="Question diagram"
+            />
+          </>
         )}
-        <Image
-          source={{ uri }}
-          style={[styles.image, !loaded && styles.hidden]}
-          resizeMode="contain"
-          onLoad={() => setLoaded(true)}
-          accessibilityRole="image"
-          accessibilityLabel="Question diagram"
-        />
       </Pressable>
 
       <Modal
@@ -52,13 +67,21 @@ export function QuestionImage({ uri }: Props) {
         statusBarTranslucent
       >
         <Pressable style={styles.modalBg} onPress={() => setOpen(false)}>
-          <Image
-            source={{ uri }}
-            style={styles.modalImage}
-            resizeMode="contain"
-            accessibilityRole="image"
-            accessibilityLabel="Question diagram — full screen"
-          />
+          {isSvg ? (
+            <SvgUri
+              uri={uri}
+              width="100%"
+              height="80%"
+            />
+          ) : (
+            <Image
+              source={{ uri }}
+              style={styles.modalImage}
+              resizeMode="contain"
+              accessibilityRole="image"
+              accessibilityLabel="Question diagram — full screen"
+            />
+          )}
         </Pressable>
       </Modal>
     </>
@@ -72,8 +95,8 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     borderRadius: 12,
     overflow: 'hidden',
-    backgroundColor: '#f1f5f9',
-    minHeight: 160,
+    backgroundColor: '#f0f4ff',
+    minHeight: 180,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -84,7 +107,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 200,
+    height: 220,
   },
   hidden: {
     opacity: 0,
