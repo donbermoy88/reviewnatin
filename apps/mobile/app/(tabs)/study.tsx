@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Alert, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
@@ -53,6 +53,7 @@ export default function StudyScreen() {
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [subjects, setSubjects] = useState<SubjectArea[]>([]);
   const [examName, setExamName] = useState('');
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
@@ -94,8 +95,14 @@ export default function StudyScreen() {
       /* load failed */
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, [user]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    void load();
+  }, [load]);
 
   const launchBoardExam = () => {
     if (!isPremium(examTypeId)) {
@@ -304,7 +311,17 @@ export default function StudyScreen() {
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={tabScrollPaddingWithFooter(insets)}>
+      <ScrollView
+        contentContainerStyle={tabScrollPaddingWithFooter(insets)}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
         <LinearGradient
           colors={[...gradients.hero]}
           style={[styles.header, { paddingTop: insets.top + spacing.md }]}

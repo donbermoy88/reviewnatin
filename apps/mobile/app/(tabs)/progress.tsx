@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
@@ -55,6 +55,7 @@ export default function ProfileScreen() {
   const { user } = useAuth();
   const { displayName, initials } = useUserProfile('Guest reviewer');
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [stats, setStats] = useState({
     streakDays: 0,
     totalAnswered: 0,
@@ -108,17 +109,33 @@ export default function ProfileScreen() {
       setSessions([]);
     }
     setLoading(false);
+    setRefreshing(false);
   }, [user]);
 
   useEffect(() => {
     load();
   }, [load]);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    void load();
+  }, [load]);
+
   const hasActivity = stats.sessionCount > 0;
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={tabScrollPadding(insets)}>
+      <ScrollView
+        contentContainerStyle={tabScrollPadding(insets)}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
         <LinearGradient
           colors={[...gradients.hero]}
           style={[styles.header, { paddingTop: insets.top + spacing.md }]}

@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
 import { GoalRing } from '../../components/goal-ring';
@@ -115,6 +115,8 @@ export default function DashboardScreen() {
   const [contentGate, setContentGate] = useState<ContentGateStatus | null>(null);
   const [announcements, setAnnouncements] = useState<AppAnnouncement[]>([]);
   const [weakTopic, setWeakTopic] = useState<TopicAnalyticsRow | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [readinessSheetOpen, setReadinessSheetOpen] = useState(false);
   const [notificationSheetOpen, setNotificationSheetOpen] = useState(false);
   const [updatesSheetOpen, setUpdatesSheetOpen] = useState(false);
@@ -172,10 +174,17 @@ export default function DashboardScreen() {
 
     if (!user) setContentGate(await fetchContentGateStatus(slug));
     setAnnouncements(await fetchAppAnnouncements(slug, 3).catch(() => []));
+    setLoading(false);
+    setRefreshing(false);
   }, [user, router]);
 
   useEffect(() => {
     load();
+  }, [load]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    void load();
   }, [load]);
 
   const examSlug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
@@ -321,9 +330,28 @@ export default function DashboardScreen() {
     return 'Start practice quiz';
   };
 
+  if (loading) {
+    return (
+      <View style={[styles.root, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={tabScrollPadding(insets)} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={tabScrollPadding(insets)}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
         <LinearGradient
           colors={[...gradients.hero]}
           start={{ x: 0, y: 0 }}
