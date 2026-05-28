@@ -7,6 +7,7 @@ type Props = {
   style?: ViewStyle;
 };
 
+/** Segmented readiness bar — Claude design blues (primary / primaryMuted). */
 export function SegmentedReadinessBar({ score, segments = 6, style }: Props) {
   const { colors } = useAppTheme();
   const clamped = Math.max(0, Math.min(100, Math.round(score)));
@@ -23,8 +24,13 @@ export function SegmentedReadinessBar({ score, segments = 6, style }: Props) {
               flex: 1,
               height: 10,
               borderRadius: 5,
-              backgroundColor: active ? colors.error : colors.border,
-              opacity: active ? 1 : 0.55,
+              backgroundColor: active
+                ? clamped >= 70
+                  ? colors.primary
+                  : clamped >= 40
+                    ? colors.primaryLight
+                    : colors.primary
+                : colors.primaryMuted,
             }}
           />
         );

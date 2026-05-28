@@ -5,6 +5,7 @@ type MasteryBarProps = {
   accuracy: number;
   attempts: number;
   style?: ViewStyle;
+  trackColor?: string;
 };
 
 export function masteryBarColor(
@@ -17,7 +18,7 @@ export function masteryBarColor(
   return colors.error;
 }
 
-export function MasteryBar({ accuracy, attempts, style }: MasteryBarProps) {
+export function MasteryBar({ accuracy, attempts, style, trackColor }: MasteryBarProps) {
   const { colors } = useAppTheme();
   const pct = attempts > 0 ? Math.round(accuracy) : 0;
   const width = attempts > 0 ? Math.max(pct, 4) : 0;
@@ -28,7 +29,7 @@ export function MasteryBar({ accuracy, attempts, style }: MasteryBarProps) {
         {
           height: 6,
           borderRadius: 3,
-          backgroundColor: colors.border,
+          backgroundColor: trackColor ?? colors.border,
           overflow: 'hidden',
         },
         style,

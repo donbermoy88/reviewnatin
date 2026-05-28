@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Alert,
   Pressable,
+  RefreshControl,
   ScrollView,
   Share,
   Text,
@@ -50,6 +51,7 @@ export default function BarkadaScreen() {
   const params = useLocalSearchParams<{ code?: string }>();
 
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [busy, setBusy] = useState(false);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [group, setGroup] = useState<BarkadaGroup | null>(null);
@@ -68,10 +70,16 @@ export default function BarkadaScreen() {
       setGroup(await fetchMyBarkada(slug));
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, [user]);
 
   useEffect(() => {
+    void load();
+  }, [load]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
     void load();
   }, [load]);
 
@@ -164,7 +172,17 @@ export default function BarkadaScreen() {
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
         <LinearGradient
           colors={[...gradients.hero]}
           style={[styles.header, { paddingTop: insets.top + spacing.sm }]}

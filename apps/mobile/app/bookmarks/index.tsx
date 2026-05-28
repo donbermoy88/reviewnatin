@@ -29,6 +29,7 @@ export default function BookmarksScreen() {
   const styles = useMemo(() => createListScreenStyles(theme), [theme]);
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [tab, setTab] = useState<Tab>('questions');
   const [questions, setQuestions] = useState<BookmarkItem[]>([]);
   const [materials, setMaterials] = useState<MaterialBookmarkItem[]>([]);
@@ -51,10 +52,16 @@ export default function BookmarksScreen() {
       setMaterials(m);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, [user]);
 
   useEffect(() => {
+    void load();
+  }, [load]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
     void load();
   }, [load]);
 
@@ -88,7 +95,17 @@ export default function BookmarksScreen() {
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
         <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
           <Pressable onPress={() => router.back()}>
             <Ionicons name="chevron-back" size={22} color={colors.text} />

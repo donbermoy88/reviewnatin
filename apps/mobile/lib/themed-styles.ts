@@ -962,6 +962,7 @@ export function createResultStyles(theme: AppTheme) {
 export function createAnalyticsStyles(theme: AppTheme) {
   const { colors, fonts, spacing, radii, shadows, isDark } = theme;
   const cardShadow = isDark ? {} : shadows.card;
+  const headlineBlue = isDark ? colors.text : colors.primaryDark;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
@@ -982,17 +983,19 @@ export function createAnalyticsStyles(theme: AppTheme) {
     headerTitle: {
       fontFamily: fonts.display,
       fontSize: 26,
-      color: colors.text,
+      color: headlineBlue,
       letterSpacing: -0.4,
     },
     body: { paddingHorizontal: spacing.md, paddingTop: spacing.xs },
     summaryCard: {
-      backgroundColor: colors.surface,
+      backgroundColor: isDark ? colors.surface : colors.surface,
       borderRadius: radii.xl,
       padding: spacing.lg,
       marginBottom: spacing.md,
-      borderWidth: isDark ? 1 : 0,
-      borderColor: colors.border,
+      borderWidth: 1,
+      borderColor: isDark ? colors.border : colors.primaryMuted,
+      borderTopWidth: 3,
+      borderTopColor: colors.primary,
       ...cardShadow,
     },
     summarySettings: {
@@ -1002,7 +1005,7 @@ export function createAnalyticsStyles(theme: AppTheme) {
       width: 40,
       height: 40,
       borderRadius: radii.full,
-      backgroundColor: isDark ? colors.iconBg : '#EEF2F8',
+      backgroundColor: colors.primaryMuted,
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 1,
@@ -1010,7 +1013,7 @@ export function createAnalyticsStyles(theme: AppTheme) {
     summaryTitle: {
       fontFamily: fonts.bodyBold,
       fontSize: 17,
-      color: colors.text,
+      color: headlineBlue,
       paddingRight: 44,
       letterSpacing: -0.2,
     },
@@ -1054,7 +1057,7 @@ export function createAnalyticsStyles(theme: AppTheme) {
     subjectName: {
       fontFamily: fonts.bodyBold,
       fontSize: 17,
-      color: colors.text,
+      color: headlineBlue,
       flex: 1,
       letterSpacing: -0.2,
     },
@@ -1085,7 +1088,7 @@ export function createAnalyticsStyles(theme: AppTheme) {
     topicName: {
       fontFamily: fonts.bodySemiBold,
       fontSize: 15,
-      color: colors.text,
+      color: headlineBlue,
       flex: 1,
       lineHeight: 20,
     },

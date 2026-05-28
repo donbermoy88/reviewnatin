@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
@@ -30,6 +30,7 @@ export default function ChangelogScreen() {
   const { user } = useAuth();
 
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [entries, setEntries] = useState<ChangelogEntry[]>([]);
 
@@ -41,6 +42,7 @@ export default function ChangelogScreen() {
       setEntries(await fetchContentChangelog(slug, 20));
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, [user?.id]);
 
@@ -48,9 +50,24 @@ export default function ChangelogScreen() {
     void load();
   }, [load]);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    void load();
+  }, [load]);
+
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
         <LinearGradient
           colors={[...gradients.hero]}
           style={[styles.header, { paddingTop: insets.top + spacing.sm }]}

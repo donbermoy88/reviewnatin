@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as WebBrowser from 'expo-web-browser';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Linking, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Linking, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
@@ -31,6 +31,7 @@ export default function ExamCalendarScreen() {
   const styles = useMemo(() => createLeaderboardStyles(theme), [theme]);
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [events, setEvents] = useState<ExamScheduleEvent[]>([]);
 
@@ -42,10 +43,16 @@ export default function ExamCalendarScreen() {
       setEvents(await fetchExamSchedules(slug));
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, [user?.id]);
 
   useEffect(() => {
+    void load();
+  }, [load]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
     void load();
   }, [load]);
 
@@ -60,7 +67,17 @@ export default function ExamCalendarScreen() {
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
         <LinearGradient
           colors={[...gradients.hero]}
           style={[styles.header, { paddingTop: insets.top + spacing.sm }]}
