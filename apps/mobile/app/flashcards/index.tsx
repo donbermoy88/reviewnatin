@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Alert, PanResponder, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, PanResponder, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
@@ -220,8 +220,26 @@ export default function FlashcardsScreen() {
       </View>
 
       <Text style={styles.counter}>
-        Card {index + 1} of {totalCards} · Tap card to flip, then rate
+        Card {index + 1} of {totalCards}{!flipped ? ' · Tap card to flip' : ' · How well did you know this?'}
       </Text>
+      <View
+        style={{
+          height: 4,
+          backgroundColor: colors.primaryMuted,
+          marginHorizontal: spacing.xl,
+          borderRadius: 2,
+          marginBottom: spacing.sm,
+        }}
+      >
+        <View
+          style={{
+            height: 4,
+            width: `${((index + 1) / totalCards) * 100}%`,
+            backgroundColor: colors.primary,
+            borderRadius: 2,
+          }}
+        />
+      </View>
 
       <View style={styles.stackArea} {...panResponder.panHandlers}>
         <Pressable style={styles.cardFront} onPress={() => setFlipped((f) => !f)}>
@@ -240,21 +258,23 @@ export default function FlashcardsScreen() {
       </View>
 
       <View style={[styles.actions, { paddingBottom: insets.bottom + spacing.lg, flexWrap: 'wrap' }]}>
-        <PrimaryButton label="← Prev" variant="outline" style={styles.actionBtn} onPress={goPrev} disabled={index === 0} />
+        <PrimaryButton
+          label="Prev"
+          icon="chevron-back"
+          iconPosition="left"
+          variant="outline"
+          style={styles.actionBtn}
+          onPress={goPrev}
+          disabled={index === 0}
+        />
         {RATINGS.map((r) => (
           <PrimaryButton
             key={r.rating}
             label={r.label}
             variant={r.variant}
             style={[styles.actionBtn, { minWidth: '22%' }]}
-            onPress={() => {
-              if (!flipped) {
-                Alert.alert('Flip first', 'Tap the card to reveal the answer before rating.');
-                return;
-              }
-              void rateCard(r.rating);
-            }}
-            disabled={submitting}
+            onPress={() => void rateCard(r.rating)}
+            disabled={!flipped || submitting}
           />
         ))}
       </View>

@@ -166,7 +166,7 @@ export default function StudyScreen() {
 
     const durationMin = Math.round(mock.durationSeconds / 60);
     Alert.alert(
-      'Board Exam Mode',
+      'Start mock exam',
       `${mock.title} · ${mock.itemCount} items · ${durationMin} min\n\nStrict timer, no hints, and no going back to previous questions. Make sure you're ready before starting.`,
       [
         { text: 'Not now', style: 'cancel' },
@@ -254,7 +254,7 @@ export default function StudyScreen() {
           <EmptyState
             icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
             title="No notes yet"
-            description="Micro-lessons and cheat sheets will appear here as we import content."
+            description="Lessons and cheat sheets will appear here once content is available for your exam."
           />
         ) : (
           [...materialsBySubject.entries()].map(([subjectName, items]) => (
@@ -385,7 +385,7 @@ export default function StudyScreen() {
                     <View style={{ flex: 1 }}>
                       <Text style={styles.subjectName}>Board Exam Mode</Text>
                       <Text style={styles.subjectMeta}>
-                        30 items · 45 min · No hints · Section breaks
+                        Full-length · Strict timer · No hints
                         {!isPremium(examTypeId) ? ' · Premium' : ''}
                       </Text>
                     </View>
@@ -470,11 +470,17 @@ export default function StudyScreen() {
           pointerEvents="none"
         />
         <PrimaryButton
-          label="Start practice quiz"
-          icon="flash"
+          label={activeTab === 1 && mockExams.length > 0 ? 'Start mock exam' : 'Start practice quiz'}
+          icon={activeTab === 1 && mockExams.length > 0 ? 'timer-outline' : 'flash'}
           iconPosition="left"
           size="lg"
-          onPress={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
+          onPress={() => {
+            if (activeTab === 1 && mockExams.length > 0) {
+              void launchMock(mockExams[0]);
+            } else {
+              router.push({ pathname: '/practice/quiz', params: { examSlug } });
+            }
+          }}
         />
       </View>
     </View>

@@ -708,7 +708,14 @@ export default function DashboardScreen() {
       >
         {announcements.map((announcement) => (
           <View key={announcement.id} style={{ marginBottom: spacing.md }}>
-            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text }}>{announcement.title}</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', gap: spacing.sm }}>
+              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text, flex: 1 }}>
+                {announcement.title}
+              </Text>
+              <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 11, color: colors.textLight }}>
+                {new Date(announcement.publishedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+              </Text>
+            </View>
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 4, lineHeight: 19 }}>
               {announcement.body}
             </Text>

@@ -145,7 +145,7 @@ export default function AnalyticsScreen() {
               accessibilityRole="button"
               accessibilityLabel="View readiness breakdown"
             >
-              <Ionicons name="settings-outline" size={20} color={colors.primary} />
+              <Ionicons name="information-circle-outline" size={22} color={colors.primary} />
             </Pressable>
 
             <Text style={styles.summaryTitle}>

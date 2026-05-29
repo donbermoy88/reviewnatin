@@ -127,6 +127,14 @@ export default function PasaPathWeekScreen() {
     >
       {loading ? (
         <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
+      ) : days.length === 0 ? (
+        <EmptyState
+          icon={<Ionicons name="calendar-outline" size={32} color={colors.primary} />}
+          title="No plan for this week yet"
+          description="Complete a practice quiz on the Home tab to generate your personalized weekly study plan."
+          actionLabel="Go to Home"
+          onAction={() => router.replace('/(tabs)')}
+        />
       ) : (
         <View style={{ gap: spacing.sm }}>
           {days.map((day) => (

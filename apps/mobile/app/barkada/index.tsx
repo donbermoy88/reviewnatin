@@ -283,7 +283,7 @@ export default function BarkadaScreen() {
                 <>
                   <Text style={metaStyle}>
                     {group.activeChallenge.questionCount} questions · expires{' '}
-                    {new Date(group.activeChallenge.expiresAt).toLocaleDateString()}
+                    {new Date(group.activeChallenge.expiresAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </Text>
                   <PrimaryButton
                     label={busy ? 'Starting…' : 'Take challenge quiz'}

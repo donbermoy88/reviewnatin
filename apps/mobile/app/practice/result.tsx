@@ -62,6 +62,7 @@ export default function PracticeResultScreen() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [examName, setExamName] = useState('ReviewNatin');
   const [sharing, setSharing] = useState(false);
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
   const [aiLoadingId, setAiLoadingId] = useState<string | null>(null);
   const [aiExtras, setAiExtras] = useState<Record<string, string>>({});
   const [aiRemaining, setAiRemaining] = useState<number | null>(null);
@@ -191,13 +192,29 @@ export default function PracticeResultScreen() {
       ? 'Diagnostic baseline'
       : mode === 'mock'
         ? 'Mock exam'
-        : mode === 'timed'
-          ? 'Timed practice'
-          : mode === 'weak_area'
-            ? 'Quick 10 · weak areas'
-            : mode === 'barkada'
-              ? 'Barkada challenge'
-              : 'Practice quiz';
+        : mode === 'board'
+          ? 'Board exam'
+          : mode === 'timed'
+            ? 'Timed practice'
+            : mode === 'weak_area'
+              ? 'Quick 10 · weak areas'
+              : mode === 'barkada'
+                ? 'Barkada challenge'
+                : 'Practice quiz';
+
+  const toggleSpeak = async (questionId: string, text: string) => {
+    if (speakingId === questionId) {
+      await stopSpeaking();
+      setSpeakingId(null);
+      return;
+    }
+    if (speakingId) {
+      await stopSpeaking();
+    }
+    setSpeakingId(questionId);
+    await speakText(text);
+    setSpeakingId(null);
+  };
 
   const handleCaptureReady = useCallback((capture: () => Promise<string | undefined>) => {
     captureRef.current = capture;
@@ -240,21 +257,23 @@ export default function PracticeResultScreen() {
               ? 'Diagnostic complete!'
               : mode === 'mock'
                 ? 'Mock exam complete!'
-                : mode === 'timed'
-                  ? 'Timed practice complete!'
-                  : mode === 'weak_area'
-                    ? 'Quick 10 complete!'
-                    : mode === 'barkada'
-                      ? 'Barkada challenge complete!'
-                      : 'Quiz complete!'}
+                : mode === 'board'
+                  ? 'Board exam complete!'
+                  : mode === 'timed'
+                    ? 'Timed practice complete!'
+                    : mode === 'weak_area'
+                      ? 'Quick 10 complete!'
+                      : mode === 'barkada'
+                        ? 'Barkada challenge complete!'
+                        : 'Quiz complete!'}
           </Text>
           <Text style={styles.heroTitle}>
             {mode === 'diagnostic'
               ? `Baseline readiness: ${diagnosticReadiness ?? scoreNum}%`
-              : mode === 'mock'
+              : mode === 'mock' || mode === 'board'
                 ? scoreNum >= MOCK_PASS_THRESHOLD
-                  ? `Mock PASS — ${scoreNum}% 🎉`
-                  : `Mock score ${scoreNum}% — aim for ${MOCK_PASS_THRESHOLD}%+`
+                  ? `${mode === 'board' ? 'Board exam' : 'Mock'} PASS — ${scoreNum}% 🎉`
+                  : `Score: ${scoreNum}% — aim for ${MOCK_PASS_THRESHOLD}%+`
                 : scoreNum >= 70
                   ? `Great work, ${displayName}! 🎉`
                   : 'Keep going! 💪'}
@@ -351,10 +370,16 @@ export default function PracticeResultScreen() {
                             {canUseTts() ? (
                               <Pressable
                                 style={styles.reportBtn}
-                                onPress={() => void speakText(explanation)}
+                                onPress={() => void toggleSpeak(item.questionId, explanation)}
                               >
-                                <Ionicons name="volume-high-outline" size={16} color={colors.primary} />
-                                <Text style={[styles.reportBtnText, { color: colors.primary }]}>Listen · TTS</Text>
+                                <Ionicons
+                                  name={speakingId === item.questionId ? 'stop-circle-outline' : 'volume-high-outline'}
+                                  size={16}
+                                  color={colors.primary}
+                                />
+                                <Text style={[styles.reportBtnText, { color: colors.primary }]}>
+                                  {speakingId === item.questionId ? 'Stop · TTS' : 'Listen · TTS'}
+                                </Text>
                               </Pressable>
                             ) : null}
                           </>
@@ -411,24 +436,33 @@ export default function PracticeResultScreen() {
             />
           ) : null}
           <PrimaryButton
-            label="Back to Home"
+            label={mode === 'mock' || mode === 'diagnostic' || mode === 'board' ? 'Done' : 'Back to Home'}
             variant={wrongCount > 0 && user ? 'outline' : undefined}
             size="lg"
             onPress={() => router.replace('/(tabs)')}
           />
           {mode === 'diagnostic' ? (
             <PrimaryButton
-              label="View PasaPath →"
+              label="View your PasaPath →"
+              variant="outline"
               size="lg"
-              onPress={() => router.replace('/(tabs)')}
+              onPress={() => router.replace('/pasapath/week')}
               style={{ marginTop: spacing.sm }}
             />
           ) : (
             <PrimaryButton
-              label={mode === 'mock' ? 'New mock →' : 'Next quiz →'}
+              label={mode === 'mock' || mode === 'board' ? 'New mock →' : mode === 'weak_area' ? 'Another Quick 10 →' : 'Next quiz →'}
               variant="outline"
               size="lg"
-              onPress={() => router.replace({ pathname: '/practice/quiz', params: { examSlug } })}
+              onPress={() => {
+                if (mode === 'mock' || mode === 'board') {
+                  router.replace('/(tabs)/study');
+                } else if (mode === 'weak_area') {
+                  router.replace({ pathname: '/practice/quiz', params: { examSlug, mode: 'weak_area' } });
+                } else {
+                  router.replace({ pathname: '/practice/quiz', params: { examSlug } });
+                }
+              }}
               style={{ marginTop: spacing.sm }}
             />
           )}

@@ -607,7 +607,23 @@ export default function PracticeQuizScreen() {
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 140 }}>
         <View style={[styles.topBar, { paddingTop: insets.top + spacing.sm }]}>
           {!isStrictExam && !isDiagnostic ? (
-            <Pressable style={styles.closeBtn} onPress={() => router.back()}>
+            <Pressable
+              style={styles.closeBtn}
+              onPress={() => {
+                if (isTimed || isBarkada) {
+                  Alert.alert(
+                    'Leave quiz?',
+                    'Your progress in this session will not be saved.',
+                    [
+                      { text: 'Keep going', style: 'cancel' },
+                      { text: 'Leave', style: 'destructive', onPress: () => router.back() },
+                    ]
+                  );
+                  return;
+                }
+                router.back();
+              }}
+            >
               <Ionicons name="close" size={18} color={colors.text} />
             </Pressable>
           ) : (
@@ -661,14 +677,14 @@ export default function PracticeQuizScreen() {
         {isBoard ? (
           <View style={styles.mockBanner}>
             <Text style={styles.mockBannerText}>
-              Board Exam Mode · {questions.length} items · 45 min · No hints · No going back
+              Board Exam Mode · {questions.length} items · {Math.round(BOARD_DURATION_SECONDS / 60)} min · No hints · No going back
             </Text>
           </View>
         ) : null}
 
         {isMock ? (
           <View style={styles.mockBanner}>
-            <Text style={styles.mockBannerText}>{mockTitle} · Board Exam Mode · No going back</Text>
+            <Text style={styles.mockBannerText}>{mockTitle} · Mock exam · Strict timer · No going back</Text>
           </View>
         ) : null}
 
