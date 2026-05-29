@@ -1,7 +1,8 @@
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import type { TextInput as RNTextInput } from 'react-native';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -59,6 +60,8 @@ export default function LoginScreen() {
   const [info, setInfo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [appleAvailable, setAppleAvailable] = useState(false);
+  const passwordRef = useRef<RNTextInput>(null);
+  const confirmRef = useRef<RNTextInput>(null);
 
   useEffect(() => {
     if (Platform.OS !== 'ios') return;
@@ -245,6 +248,8 @@ export default function LoginScreen() {
               keyboardType="email-address"
               textContentType="emailAddress"
               autoComplete="email"
+              returnKeyType="next"
+              onSubmitEditing={() => passwordRef.current?.focus()}
               value={email}
               onChangeText={setEmail}
               editable={!loading}
@@ -253,12 +258,15 @@ export default function LoginScreen() {
 
           <LabeledField label="Password" styles={styles}>
             <TextInput
+              ref={passwordRef}
               style={styles.input}
               placeholder={mode === 'signup' ? 'At least 8 characters' : 'Enter your password'}
               placeholderTextColor={colors.textLight}
               secureTextEntry
               textContentType={mode === 'signup' ? 'newPassword' : 'password'}
               autoComplete={mode === 'signup' ? 'password-new' : 'password'}
+              returnKeyType={mode === 'signup' ? 'next' : 'done'}
+              onSubmitEditing={mode === 'signup' ? () => confirmRef.current?.focus() : submit}
               value={password}
               onChangeText={setPassword}
               editable={!loading}
@@ -268,12 +276,15 @@ export default function LoginScreen() {
           {mode === 'signup' ? (
             <LabeledField label="Confirm password" styles={styles}>
               <TextInput
+                ref={confirmRef}
                 style={styles.input}
                 placeholder="Must match your password"
                 placeholderTextColor={colors.textLight}
                 secureTextEntry
                 textContentType="newPassword"
                 autoComplete="password-new"
+                returnKeyType="done"
+                onSubmitEditing={submit}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 editable={!loading}

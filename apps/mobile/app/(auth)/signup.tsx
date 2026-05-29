@@ -2,7 +2,8 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import type { TextInput as RNTextInput } from 'react-native';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -56,6 +57,8 @@ export default function SignUpScreen() {
   const [info, setInfo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [appleAvailable, setAppleAvailable] = useState(false);
+  const emailRef = useRef<RNTextInput>(null);
+  const passwordRef = useRef<RNTextInput>(null);
 
   useEffect(() => {
     if (Platform.OS !== 'ios') return;
@@ -217,6 +220,8 @@ export default function SignUpScreen() {
               autoCapitalize="words"
               autoComplete="name"
               textContentType="name"
+              returnKeyType="next"
+              onSubmitEditing={() => emailRef.current?.focus()}
               value={displayName}
               onChangeText={setDisplayName}
               editable={!loading}
@@ -225,6 +230,7 @@ export default function SignUpScreen() {
 
           <LabeledField label="Email" styles={styles}>
             <TextInput
+              ref={emailRef}
               style={styles.input}
               placeholder="e.g. reviewer@email.com"
               placeholderTextColor={colors.textLight}
@@ -233,6 +239,8 @@ export default function SignUpScreen() {
               keyboardType="email-address"
               textContentType="emailAddress"
               autoComplete="email"
+              returnKeyType="next"
+              onSubmitEditing={() => passwordRef.current?.focus()}
               value={email}
               onChangeText={setEmail}
               editable={!loading}
@@ -242,12 +250,15 @@ export default function SignUpScreen() {
           <LabeledField label="Password" styles={styles}>
             <View style={styles.passwordRow}>
               <TextInput
+                ref={passwordRef}
                 style={[styles.input, styles.passwordInput]}
                 placeholder="Create a password"
                 placeholderTextColor={colors.textLight}
                 secureTextEntry={!showPassword}
                 textContentType="newPassword"
                 autoComplete="password-new"
+                returnKeyType="done"
+                onSubmitEditing={submit}
                 value={password}
                 onChangeText={setPassword}
                 editable={!loading}
