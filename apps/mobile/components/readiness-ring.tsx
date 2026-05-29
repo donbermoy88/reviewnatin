@@ -7,7 +7,12 @@ export function ReadinessRing({ percent, label = 'Exam-ready', hint, size = 72 }
   const stroke = Math.max(4, Math.round(size * 0.08));
 
   return (
-    <View style={styles.card}>
+    <View
+      style={styles.card}
+      accessible
+      accessibilityRole="image"
+      accessibilityLabel={`${Math.round(percent)}% ${label}${hint ? `. ${hint}` : ''}`}
+    >
       <View
         style={[
           styles.ring,

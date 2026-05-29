@@ -88,8 +88,16 @@ export default function MockReviewScreen() {
           <Pressable onPress={() => router.back()} hitSlop={8}>
             <Ionicons name="chevron-back" size={22} color={colors.text} />
           </Pressable>
-          <Text style={styles.title}>{title ?? 'Mock review'}</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginTop: spacing.sm }}>
+          <Text style={styles.title} numberOfLines={2}>{title ?? 'Mock review'}</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: spacing.sm,
+              marginTop: spacing.sm,
+            }}
+          >
             <Text style={{ fontFamily: fonts.displayBold, fontSize: 28, color: passed ? colors.success : colors.flame }}>
               {Math.round(scoreNum)}%
             </Text>

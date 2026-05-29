@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
+import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { StackShell } from '../../components/stack-shell';
@@ -28,7 +29,7 @@ export default function DiagnosticIntroScreen() {
   useEffect(() => {
     (async () => {
       if (!user) {
-        router.replace('/(auth)/login');
+        setChecking(false);
         return;
       }
       const goal = await resolveOnboardingGoal(user.id);
@@ -50,6 +51,20 @@ export default function DiagnosticIntroScreen() {
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
         <ActivityIndicator color={colors.primary} />
       </View>
+    );
+  }
+
+  if (!user) {
+    return (
+      <StackShell title="Diagnostic quiz">
+        <EmptyState
+          icon={<Ionicons name="analytics-outline" size={32} color={colors.primary} />}
+          title="Take your diagnostic"
+          description="Log in to take your baseline diagnostic quiz and get a personalized PasaPath study plan."
+          actionLabel="Log in"
+          onAction={() => router.push('/(auth)/login')}
+        />
+      </StackShell>
     );
   }
 

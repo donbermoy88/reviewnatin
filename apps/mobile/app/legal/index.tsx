@@ -13,7 +13,7 @@ export default function LegalScreen() {
     <StackShell
       gradient="challenge"
       title="Legal & disclaimers"
-      subtitle="Independent reviewer — hindi government agency"
+      subtitle="Independent reviewer — not a government agency"
     >
       <View style={styles.card}>
         <Text style={styles.cardTitle}>{DISCLAIMERS.title}</Text>

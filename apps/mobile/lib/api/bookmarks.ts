@@ -91,7 +91,8 @@ export async function fetchBookmarkedQuestions(userId: string): Promise<Bookmark
     .select('question_id, created_at')
     .eq('user_id', userId)
     .not('question_id', 'is', null)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(200);
 
   if (error) throw error;
 

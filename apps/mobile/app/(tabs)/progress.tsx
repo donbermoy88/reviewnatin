@@ -46,6 +46,16 @@ function formatSessionDate(dateStr: string): string {
   return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
+function scoreColor(
+  score: number | null | undefined,
+  palette: { success: string; flame: string; error: string; textMuted: string }
+): string {
+  if (score == null) return palette.textMuted;
+  if (score >= 75) return palette.success;
+  if (score >= 50) return palette.flame;
+  return palette.error;
+}
+
 export default function ProfileScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -300,7 +310,14 @@ export default function ProfileScreen() {
                       {s.completed_at ? formatSessionDate(s.completed_at) : ''}
                     </Text>
                   </View>
-                  <Text style={styles.sessionScore}>{s.score_percent ?? '—'}%</Text>
+                  <Text
+                    style={[
+                      styles.sessionScore,
+                      { color: scoreColor(s.score_percent, colors) },
+                    ]}
+                  >
+                    {s.score_percent ?? '—'}%
+                  </Text>
                 </View>
               ))}
           </View>
@@ -328,7 +345,14 @@ export default function ProfileScreen() {
                       {s.completed_at ? formatSessionDate(s.completed_at) : ''}
                     </Text>
                   </View>
-                  <Text style={styles.sessionScore}>{s.score_percent ?? '—'}%</Text>
+                  <Text
+                    style={[
+                      styles.sessionScore,
+                      { color: scoreColor(s.score_percent, colors) },
+                    ]}
+                  >
+                    {s.score_percent ?? '—'}%
+                  </Text>
                 </View>
               ))}
           </View>

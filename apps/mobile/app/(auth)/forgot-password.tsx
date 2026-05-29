@@ -64,7 +64,7 @@ export default function ForgotPasswordScreen() {
       <LabeledField label="Email" styles={styles}>
         <TextInput
           style={styles.input}
-          placeholder="hal. reviewer@email.com"
+          placeholder="e.g. reviewer@email.com"
           placeholderTextColor={theme.colors.textLight}
           autoCapitalize="none"
           keyboardType="email-address"

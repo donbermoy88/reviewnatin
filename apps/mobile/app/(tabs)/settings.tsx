@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import { AppSheet } from '../../components/app-sheet';
-import { Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
+import { Alert, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Pill } from '../../components/pill';
 import { useAppTheme } from '../../hooks/use-app-theme';
@@ -145,8 +145,17 @@ export default function SettingsScreen() {
     router.replace('/onboarding');
   };
 
-  const handleSignOut = async () => {
-    await signOutAndRedirect(signOut, refreshOnboarding, router);
+  const handleSignOut = () => {
+    Alert.alert('Log out', 'Are you sure you want to log out?', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Log out',
+        style: 'destructive',
+        onPress: () => {
+          void signOutAndRedirect(signOut, refreshOnboarding, router);
+        },
+      },
+    ]);
   };
 
   const handleRestorePurchases = async () => {

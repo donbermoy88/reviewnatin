@@ -36,7 +36,7 @@ export const EXAM_CATALOG: ExamCatalogItem[] = [
     color: '#08245C',
     bg: '#E5EAF5',
     tag: 'Popular',
-    users: '98k',
+    users: 'New',
     sortOrder: 1,
   },
   {
@@ -48,7 +48,7 @@ export const EXAM_CATALOG: ExamCatalogItem[] = [
     category: 'Civil Service',
     color: '#0B5FFF',
     bg: '#E8F0FF',
-    users: '86k',
+    users: 'New',
     sortOrder: 2,
   },
   {
@@ -60,7 +60,7 @@ export const EXAM_CATALOG: ExamCatalogItem[] = [
     category: 'PRC',
     color: '#22C55E',
     bg: '#E4F8EC',
-    users: '54k',
+    users: 'New',
     sortOrder: 3,
   },
   {
@@ -72,7 +72,7 @@ export const EXAM_CATALOG: ExamCatalogItem[] = [
     category: 'PRC',
     color: '#0B5FFF',
     bg: '#E8F0FF',
-    users: '142k',
+    users: 'New',
     sortOrder: 4,
   },
   {
@@ -84,7 +84,7 @@ export const EXAM_CATALOG: ExamCatalogItem[] = [
     category: 'PRC',
     color: '#7B2CBF',
     bg: '#F1E8FA',
-    users: '67k',
+    users: 'New',
     sortOrder: 5,
   },
 ];
@@ -117,7 +117,7 @@ export const ONBOARDING_LEVELS: {
   sub: string;
   emoji: string;
 }[] = [
-  { id: 'beginner', label: 'Beginner', sub: 'Baguhan pa sa exam prep', emoji: '🌱' },
-  { id: 'average', label: 'Average', sub: 'May konting review na', emoji: '📖' },
-  { id: 'advanced', label: 'Advanced', sub: 'Retaker o may solid base na', emoji: '🎯' },
+  { id: 'beginner', label: 'Beginner', sub: 'Just starting exam prep', emoji: '🌱' },
+  { id: 'average', label: 'Average', sub: 'Have some review done', emoji: '📖' },
+  { id: 'advanced', label: 'Advanced', sub: 'Retaker or have a solid base', emoji: '🎯' },
 ];

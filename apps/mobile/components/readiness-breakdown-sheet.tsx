@@ -64,7 +64,7 @@ export function ReadinessBreakdownSheet({ visible, onClose, readiness }: Props) 
         ) : null}
       </View>
       <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textLight, lineHeight: 18 }}>
-        Batay sa diagnostic, mocks, topic coverage, at mistake bank mastery. Mag-practice araw-araw para tumaas ang score.
+        Calculated from your diagnostic score, mock exam average, topic coverage, mistake mastery, and recent practice accuracy. Practice daily to improve your score.
       </Text>
     </AppSheet>
   );

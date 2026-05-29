@@ -10,7 +10,7 @@ import { useAppTheme } from '../../hooks/use-app-theme';
 import { createLeaderboardStyles } from '../../lib/themed-styles';
 import { fetchContentChangelog, type ChangelogEntry } from '../../lib/api/changelog';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
-import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
+import { DEFAULT_EXAM_SLUG, getExamCatalogItem } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 
 function formatDate(iso: string): string {
@@ -78,7 +78,7 @@ export default function ChangelogScreen() {
           <Text style={styles.headerTitle}>Content updates</Text>
           <Text style={styles.headerSub}>
             New questions, lessons, and fixes for{' '}
-            {examSlug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
+            {getExamCatalogItem(examSlug)?.name ?? examSlug.replace(/-/g, ' ')}
           </Text>
         </LinearGradient>
 

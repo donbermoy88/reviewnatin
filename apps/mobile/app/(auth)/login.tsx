@@ -231,14 +231,14 @@ export default function LoginScreen() {
 
           <View style={styles.dividerRow}>
             <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>o gamit ang email</Text>
+            <Text style={styles.dividerText}>or use email</Text>
             <View style={styles.dividerLine} />
           </View>
 
           <LabeledField label="Email" styles={styles}>
             <TextInput
               style={styles.input}
-              placeholder="hal. reviewer@email.com"
+              placeholder="e.g. reviewer@email.com"
               placeholderTextColor={colors.textLight}
               autoCapitalize="none"
               autoCorrect={false}
@@ -287,7 +287,7 @@ export default function LoginScreen() {
               style={styles.forgotRow}
               hitSlop={8}
             >
-              <Text style={styles.forgotLink}>Nakalimutan ang password?</Text>
+              <Text style={styles.forgotLink}>Forgot your password?</Text>
             </Pressable>
           ) : null}
 
@@ -307,7 +307,13 @@ export default function LoginScreen() {
           )}
 
           <Pressable
-            onPress={() => switchMode(mode === 'signin' ? 'signup' : 'signin')}
+            onPress={() => {
+              if (mode === 'signin') {
+                router.push('/(auth)/signup');
+              } else {
+                switchMode('signin');
+              }
+            }}
             style={styles.modeSwitch}
             disabled={loading}
           >

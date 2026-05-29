@@ -91,7 +91,9 @@ export default function TopicListScreen() {
         <Text style={styles.headerTag}>SUBJECT</Text>
         <Text style={styles.headerTitle}>{subjectName}</Text>
         <Text style={styles.headerSub}>
-          {topics.length} topic{topics.length === 1 ? '' : 's'} · tap to practice
+          {topics.length === 0
+            ? 'Content coming soon'
+            : `${topics.length} topic${topics.length === 1 ? '' : 's'} · tap to practice`}
         </Text>
         {subjectAvg != null ? (
           <View style={styles.progressCard}>
@@ -127,13 +129,35 @@ export default function TopicListScreen() {
         </Pressable>
 
         {topics.length === 0 ? (
-          <EmptyState
-            icon={<Ionicons name="list-outline" size={32} color={colors.primary} />}
-            title="No topics yet"
-            description="Topics will appear as we add more content."
-            actionLabel="Go back"
-            onAction={() => router.back()}
-          />
+          <>
+            <EmptyState
+              icon={<Ionicons name="list-outline" size={32} color={colors.primary} />}
+              title="Topics coming soon"
+              description="Topics for this subject are being added. Check back soon or practice with available questions below."
+            />
+            <Pressable
+              style={styles.topicCard}
+              onPress={() =>
+                router.push({
+                  pathname: '/practice/quiz',
+                  params: { examSlug: slug },
+                })
+              }
+              accessibilityRole="button"
+              accessibilityLabel={`Start practice quiz for ${subjectName}`}
+            >
+              <View style={styles.topicIcon}>
+                <Ionicons name="play" size={16} color={colors.primary} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.topicTitle}>Start practice quiz</Text>
+                <Text style={styles.topicMeta}>Practice with any available {subjectName} questions</Text>
+              </View>
+              <View style={styles.playCircle}>
+                <Ionicons name="play" size={14} color="#fff" />
+              </View>
+            </Pressable>
+          </>
         ) : (
           topics.map((t, i) => {
             const analytics = topicAnalytics.get(t.slug);

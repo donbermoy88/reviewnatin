@@ -269,7 +269,7 @@ export default function SubscribeScreen() {
           ? 'Active'
           : variant === 'plus'
             ? 'Subscribe'
-            : 'Buy Exam Pass';
+            : 'Get Exam Pass';
 
     const onPrimary = () => {
       if (isDevBuild) void buyDemo(product.id, product.tier);
@@ -293,6 +293,9 @@ export default function SubscribeScreen() {
               <Text style={styles.planPrice}>₱{product.pricePhp}</Text>
               <Text style={styles.planSuffix}>{suffix}</Text>
             </View>
+            {highlighted ? (
+              <Text style={styles.savingsCallout}>Save 44% vs monthly</Text>
+            ) : null}
           </View>
           {variant === 'plus' && plusActive ? (
             <Pill color={colors.accentDark} bg={colors.accent}>
@@ -305,7 +308,7 @@ export default function SubscribeScreen() {
 
         <PrimaryButton
           label={primaryLabel}
-          variant={highlighted || variant === 'plus' ? 'primary' : 'outline'}
+          variant={highlighted ? 'primary' : 'outline'}
           disabled={!!busy || !!purchasingSku || (variant === 'plus' && plusActive)}
           onPress={onPrimary}
           accessibilityLabel={`${primaryLabel} — ${label}`}
@@ -629,6 +632,13 @@ function createStyles(theme: AppTheme) {
     priceRow: { flexDirection: 'row', alignItems: 'baseline', gap: 4, marginTop: 4 },
     planPrice: { fontFamily: fonts.display, fontSize: 28, color: colors.primary, letterSpacing: -0.8 },
     planSuffix: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted },
+    savingsCallout: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 12,
+      color: colors.success,
+      marginTop: 4,
+      letterSpacing: 0.2,
+    },
     featureList: { gap: spacing.xs },
     featureRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
     featureText: { flex: 1, fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, lineHeight: 18 },

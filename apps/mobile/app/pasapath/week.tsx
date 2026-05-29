@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { EmptyState } from '../../components/empty-state';
 import { StackShell } from '../../components/stack-shell';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
@@ -107,10 +108,14 @@ export default function PasaPathWeekScreen() {
 
   if (!user) {
     return (
-      <StackShell title="PasaPath week" subtitle="Log in to see your weekly progress.">
-        <Pressable onPress={() => router.push('/(auth)/login')}>
-          <Text style={{ fontFamily: theme.fonts.bodyBold, color: colors.primary }}>Log in →</Text>
-        </Pressable>
+      <StackShell title="PasaPath week">
+        <EmptyState
+          icon={<Ionicons name="calendar-outline" size={32} color={colors.primary} />}
+          title="See your weekly path"
+          description="Log in to track your PasaPath week — daily tasks, completion streaks, and personalized study targets."
+          actionLabel="Log in"
+          onAction={() => router.push('/(auth)/login')}
+        />
       </StackShell>
     );
   }

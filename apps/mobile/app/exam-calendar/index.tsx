@@ -11,7 +11,7 @@ import { useAppTheme } from '../../hooks/use-app-theme';
 import { createLeaderboardStyles } from '../../lib/themed-styles';
 import { fetchExamSchedules, formatEventType, type ExamScheduleEvent } from '../../lib/api/exam-calendar';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
-import { DEFAULT_EXAM_SLUG, DISCLAIMERS } from '@reviewnatin/shared';
+import { DEFAULT_EXAM_SLUG, DISCLAIMERS, getExamCatalogItem } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 
 function formatDate(iso: string): string {
@@ -87,7 +87,7 @@ export default function ExamCalendarScreen() {
           </Pressable>
           <Text style={styles.headerTitle}>Exam calendar</Text>
           <Text style={styles.headerSub}>
-            Official-style dates for {examSlug.replace(/-/g, ' ')} — always verify on CSC/PRC sites
+            Official-style dates for {getExamCatalogItem(examSlug)?.name ?? examSlug.replace(/-/g, ' ')} — always verify on CSC/PRC sites
           </Text>
         </LinearGradient>
 

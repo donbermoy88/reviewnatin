@@ -238,9 +238,9 @@ export default function OnboardingScreen() {
               <Pill color={colors.accentDark} bg={colors.accentLight}>
                 PASAPATH READY
               </Pill>
-              <Text style={styles.readyTitle}>Handa ka na sa PasaPath</Text>
+              <Text style={styles.readyTitle}>You&apos;re ready for PasaPath</Text>
               <Text style={styles.readySub}>
-                Magsisimula ang araw-araw mong study path — weak topics, mistake review, at bagong lessons.
+                Your daily study path starts now — weak topics, mistake review, and new lessons every day.
               </Text>
             </View>
 
@@ -349,10 +349,12 @@ export default function OnboardingScreen() {
                           ) : null}
                         </View>
                         <Text style={styles.examSub}>{ex.sub}</Text>
-                        <View style={styles.examUsersRow}>
-                          <View style={styles.examDot} />
-                          <Text style={styles.examUsers}>{ex.users} reviewers</Text>
-                        </View>
+                        {ex.users && ex.users !== 'New' ? (
+                          <View style={styles.examUsersRow}>
+                            <View style={styles.examDot} />
+                            <Text style={styles.examUsers}>{ex.users} reviewers</Text>
+                          </View>
+                        ) : null}
                       </View>
                       <View style={[styles.radio, on && styles.radioOn]}>
                         {on ? <Ionicons name="checkmark" size={14} color="#fff" /> : null}
@@ -393,7 +395,7 @@ export default function OnboardingScreen() {
 
           {step === 2 && (
             <>
-              <Text style={styles.fieldLabel}>Anong level ka ngayon?</Text>
+              <Text style={styles.fieldLabel}>What&apos;s your current level?</Text>
               <View style={styles.list}>
                 {ONBOARDING_LEVELS.map((lv) => {
                   const on = level === lv.id;
@@ -497,12 +499,12 @@ export default function OnboardingScreen() {
                       <Ionicons name="checkmark-circle" size={28} color={colors.success} />
                     </View>
                     <View style={{ flex: 1 }}>
-                      <Text style={styles.signedInTitle}>Naka-sign in ka na</Text>
+                      <Text style={styles.signedInTitle}>You&apos;re signed in</Text>
                       <Text style={styles.signedInEmail}>{user.email}</Text>
                     </View>
                   </View>
                   <PrimaryButton
-                    label="Susunod →"
+                    label="Next →"
                     icon="arrow-forward"
                     iconPosition="right"
                     onPress={() => setStep(4)}

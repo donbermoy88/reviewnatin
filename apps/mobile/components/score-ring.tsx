@@ -21,7 +21,12 @@ export function ScoreRing({ percent, correct, total, size = 180 }: Props) {
   const ringColor = percent >= 75 ? colors.success : percent >= 50 ? colors.flame : colors.error;
 
   return (
-    <View style={{ width: size, height: size, marginTop: 24 }}>
+    <View
+      style={{ width: size, height: size, marginTop: 24 }}
+      accessible
+      accessibilityRole="image"
+      accessibilityLabel={`${Math.round(percent)}% score — ${correct} out of ${total} correct`}
+    >
       <Svg width={size} height={size} style={{ transform: [{ rotate: '-90deg' }] }}>
         <Circle cx={center} cy={center} r={r} stroke="rgba(255,255,255,0.15)" strokeWidth={stroke} fill="none" />
         <Circle

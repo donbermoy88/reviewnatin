@@ -27,7 +27,8 @@ export function ContentGateBanner({ theme, status, compact = false }: Props) {
       >
         <Ionicons name="construct-outline" size={14} color={colors.accentDark} />
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, flex: 1 }}>
-          Content loading — {status.counts.questions}/{status.minimum.questions} Q · {status.counts.mockExams}/
+          Content loading — {Math.min(status.counts.questions, status.minimum.questions)}/
+          {status.minimum.questions} questions · {Math.min(status.counts.mockExams, status.minimum.mockExams)}/
           {status.minimum.mockExams} mocks
         </Text>
       </View>

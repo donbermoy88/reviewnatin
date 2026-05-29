@@ -23,7 +23,7 @@ export async function fetchMistakes(examSlug: string, limit = 50): Promise<Mista
 
   if (error) throw error;
 
-  return ((data ?? []) as {
+  const rows = ((data ?? []) as {
     id: string;
     question_id: string;
     stem: string;
@@ -42,6 +42,26 @@ export async function fetchMistakes(examSlug: string, limit = 50): Promise<Mista
     lastWrongAt: row.last_wrong_at,
     nextReviewAt: row.next_review_at,
   }));
+
+  // Defensive deduplication: each question should appear exactly once.
+  // If the RPC ever returns duplicates (e.g. join fan-out), keep the row
+  // with the latest lastWrongAt and the highest timesWrong.
+  const dedupedByQuestion = new Map<string, MistakeItem>();
+  for (const row of rows) {
+    const existing = dedupedByQuestion.get(row.questionId);
+    if (!existing) {
+      dedupedByQuestion.set(row.questionId, row);
+      continue;
+    }
+    const existingDate = new Date(existing.lastWrongAt).getTime();
+    const rowDate = new Date(row.lastWrongAt).getTime();
+    const next = rowDate > existingDate ? row : existing;
+    next.timesWrong = Math.max(existing.timesWrong, row.timesWrong);
+    dedupedByQuestion.set(row.questionId, next);
+  }
+  return Array.from(dedupedByQuestion.values()).sort(
+    (a, b) => new Date(b.lastWrongAt).getTime() - new Date(a.lastWrongAt).getTime()
+  );
 }
 
 export async function recordQuizOutcome(questionId: string, isCorrect: boolean, wrongChoiceId?: string) {

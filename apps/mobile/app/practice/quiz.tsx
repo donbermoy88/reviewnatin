@@ -604,7 +604,7 @@ export default function PracticeQuizScreen() {
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 200 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 140 }}>
         <View style={[styles.topBar, { paddingTop: insets.top + spacing.sm }]}>
           {!isStrictExam && !isDiagnostic ? (
             <Pressable style={styles.closeBtn} onPress={() => router.back()}>

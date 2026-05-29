@@ -195,6 +195,31 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: "Unauthorized" }, 401);
     }
 
+    // Rate limit: 10 verify attempts per user per hour.
+    // We rely on the rate_limit_checks table and helpers added in
+    // 20260529000002_rate_limiting.sql.
+    const RATE_LIMIT = 10;
+    const { data: attemptCount } = await adminClient.rpc(
+      "count_rate_limit_attempts",
+      {
+        p_actor_key: userData.user.id,
+        p_action: "iap_verify",
+        p_window: "1 hour",
+      }
+    );
+    if (typeof attemptCount === "number" && attemptCount >= RATE_LIMIT) {
+      return jsonResponse(
+        { error: "Too many verification attempts. Please try again later." },
+        429
+      );
+    }
+    await adminClient.rpc("record_rate_limit_attempt", {
+      p_actor_key: userData.user.id,
+      p_action: "iap_verify",
+      p_succeeded: true,
+      p_metadata: null,
+    });
+
     const body = (await req.json()) as VerifyPayload;
     const platform = body.platform;
     const transactionId = body.transaction_id?.trim();
