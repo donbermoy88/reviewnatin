@@ -5,7 +5,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
-import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createLeaderboardStyles } from '../../lib/themed-styles';
@@ -53,10 +52,12 @@ export default function LeaderboardScreen() {
   const rest = entries.slice(3);
   const currentUser = entries.find((e) => e.isCurrentUser);
 
+  const showStickyRank = !loading && !!currentUser && currentUser.rank > 3;
+
   return (
     <View style={styles.root}>
       <ScrollView
-        contentContainerStyle={tabScrollPadding(insets)}
+        contentContainerStyle={[tabScrollPadding(insets), showStickyRank && { paddingBottom: (insets.bottom || 0) + 64 }]}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.primary} />}
       >
         <LinearGradient
@@ -130,11 +131,7 @@ export default function LeaderboardScreen() {
                 </View>
               ))}
 
-              {currentUser && currentUser.rank > 3 ? (
-                <View style={styles.youChip}>
-                  <Pill color={colors.primary}>{`Your rank: #${currentUser.rank}`}</Pill>
-                </View>
-              ) : null}
+              {/* Rank pill shown inline only when within visible entries */}
 
               {entries.length < 5 ? (
                 <View style={{
@@ -165,6 +162,37 @@ export default function LeaderboardScreen() {
           )}
         </View>
       </ScrollView>
+
+      {/* Sticky rank footer — always visible when user is outside top 3 */}
+      {showStickyRank ? (
+        <View
+          style={{
+            position: 'absolute',
+            bottom: insets.bottom + spacing.md,
+            left: spacing.lg,
+            right: spacing.lg,
+            alignItems: 'center',
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: colors.primary,
+              borderRadius: 999,
+              paddingHorizontal: spacing.lg,
+              paddingVertical: spacing.sm,
+              shadowColor: '#000',
+              shadowOpacity: 0.18,
+              shadowRadius: 8,
+              shadowOffset: { width: 0, height: 3 },
+              elevation: 6,
+            }}
+          >
+            <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 14, color: '#fff' }}>
+              🏅 Your rank: #{currentUser!.rank}
+            </Text>
+          </View>
+        </View>
+      ) : null}
     </View>
   );
 }

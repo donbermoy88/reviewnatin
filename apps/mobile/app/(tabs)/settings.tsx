@@ -313,7 +313,7 @@ export default function SettingsScreen() {
               colors={colors}
               icon={<Text style={{ fontSize: 18 }}>🌙</Text>}
               label="Dark mode"
-              sub="Easier on the eyes at night"
+              sub="Override automatic appearance"
               right={
                 <Switch value={prefs.darkMode} onValueChange={setDarkMode} trackColor={switchTrack} />
               }

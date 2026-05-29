@@ -23,13 +23,13 @@ const DEFAULTS: UserPreferences = {
   examRemindersEnabled: true,
 };
 
-export async function loadLocalPreferences(): Promise<UserPreferences> {
+export async function loadLocalPreferences(): Promise<UserPreferences | null> {
   try {
     const raw = await AsyncStorage.getItem(LOCAL_KEY);
-    if (!raw) return DEFAULTS;
+    if (!raw) return null; // No saved prefs — caller should use system defaults
     return { ...DEFAULTS, ...JSON.parse(raw) };
   } catch {
-    return DEFAULTS;
+    return null;
   }
 }
 

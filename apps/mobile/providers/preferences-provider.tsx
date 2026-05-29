@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useColorScheme } from 'react-native';
 import { colors as lightColors } from '@reviewnatin/shared';
 import { darkColors, type ThemeColors } from '../constants/dark-theme';
 import { fetchRemotePreferences, loadLocalPreferences, upsertRemotePreferences, type ExplanationLocale, type UserPreferences } from '../lib/api/preferences';
@@ -21,8 +22,9 @@ const PreferencesContext = createContext<PreferencesContextValue | null>(null);
 
 export function PreferencesProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
+  const systemScheme = useColorScheme(); // Reactive to system appearance changes
   const [prefs, setPrefs] = useState<UserPreferences>({
-    darkMode: false,
+    darkMode: systemScheme === 'dark', // Follow system before saved prefs load
     notificationsEnabled: true,
     reminderHour: 19,
     reminderMinute: 0,
@@ -47,7 +49,8 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
           /* use local */
         }
       }
-      setPrefs(local);
+      // Only override initial state when saved prefs exist
+      if (local) setPrefs(local);
       setLoading(false);
     })();
   }, [user?.id]);

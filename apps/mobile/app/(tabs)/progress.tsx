@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
 import { SparkleStar } from '../../components/sparkle-star';
+import { StreakWeek } from '../../components/streak-week';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createProfileStyles } from '../../lib/themed-styles';
 import { fetchRecentSessions } from '../../lib/api/quiz';
@@ -44,6 +45,23 @@ function sessionModeLabel(mode: string): string {
 function formatSessionDate(dateStr: string): string {
   const date = new Date(dateStr);
   return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+/**
+ * Derives a 7-element boolean array (Mon–Sun) from a streak count.
+ * Marks the most recent `streakDays` days up to and including today as complete.
+ */
+function buildCompletedDays(streakDays: number): boolean[] {
+  // JS getDay(): 0=Sun, 1=Mon, ..., 6=Sat → convert to Mon=0..Sun=6
+  const jsDay = new Date().getDay();
+  const todayIdx = jsDay === 0 ? 6 : jsDay - 1;
+  const days: boolean[] = [false, false, false, false, false, false, false];
+  const count = Math.min(streakDays, 7);
+  for (let i = 0; i < count; i++) {
+    const idx = (todayIdx - i + 7) % 7;
+    days[idx] = true;
+  }
+  return days;
 }
 
 function scoreColor(
@@ -197,17 +215,25 @@ export default function ProfileScreen() {
         {user && weeklySummary ? (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>This week</Text>
-            <View style={styles.sessionCard}>
-              <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 15, color: colors.text }}>
+            <LinearGradient
+              colors={[...gradients.hero]}
+              style={{
+                borderRadius: 16,
+                padding: spacing.md,
+                marginTop: spacing.sm,
+              }}
+            >
+              <StreakWeek completedDays={buildCompletedDays(weeklySummary.streakDays)} />
+              <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 15, color: '#fff', marginTop: spacing.xs }}>
                 {weeklySummary.questionsAnswered} questions · {weeklySummary.sessionsCompleted} sessions
               </Text>
-              <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 4 }}>
+              <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.75)', marginTop: 4 }}>
                 {weeklySummary.accuracyPercent != null
                   ? `${weeklySummary.accuracyPercent}% accuracy`
                   : 'Accuracy —'}{' '}
                 · {weeklySummary.streakDays}-day streak
               </Text>
-            </View>
+            </LinearGradient>
           </View>
         ) : null}
 
