@@ -126,28 +126,6 @@ async function main() {
   console.log(`\n✅ Done: ${total} questions inserted.`);
 }
 
-async function findOrCreateTopic(examSlug, subjectSlug, slug, name) {
-  const { data: sa } = await sb.from('subject_areas')
-    .select('id, exam_types!inner(slug)')
-    .eq('slug', subjectSlug).eq('exam_types.slug', examSlug).maybeSingle();
-  if (!sa) {
-    // Create subject area
-    const { data: et } = await sb.from('exam_types').select('id').eq('slug', examSlug).single();
-    if (!et) { console.error(`Exam type not found: ${examSlug}`); return null; }
-    const { data: newSa, error: saErr } = await sb.from('subject_areas')
-      .insert({ exam_type_id: et.id, slug: subjectSlug, name: subjectSlug === 'prof-ed' ? 'Professional Education' : subjectSlug, sort_order: 99 })
-      .select('id').single();
-    if (saErr) { console.error(`Subject area error: ${saErr.message}`); return null; }
-    const { data: t } = await sb.from('topics').insert({ subject_area_id: newSa.id, slug, name, sort_order: 99 }).select('id').single();
-    console.log(`  📁 Created subject '${subjectSlug}' + topic '${name}'`);
-    return t?.id ?? null;
-  }
-  const { data: ex } = await sb.from('topics').select('id').eq('subject_area_id', sa.id).eq('slug', slug).maybeSingle();
-  if (ex) { console.log(`  📚 ${name} [existing]`); return ex.id; }
-  const { data: t, error } = await sb.from('topics').insert({ subject_area_id: sa.id, slug, name, sort_order: 99 }).select('id').single();
-  if (error) { console.error(`Create topic error: ${error.message}`); return null; }
-  console.log(`  📁 Created topic: ${name}`);
-  return t.id;
-}
+// Duplicate findOrCreateTopic removed (already defined at top of file).
 
 main().catch(console.error);

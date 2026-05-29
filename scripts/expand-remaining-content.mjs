@@ -200,21 +200,30 @@ function buildQuestions(govTopic, lawsTopic) {
 }
 
 async function main() {
-  // Create CSE Sub general-info topics
-  console.log('Creating CSE Sub general-info topics...');
-  const { data: topicData, error: topicErr } = await sb
-    .from('topics')
-    .insert(NEW_TOPICS)
-    .select();
+  // Resolve CSE Sub general-info topics (may already exist — use DB IDs)
+  console.log('Resolving CSE Sub general-info topic IDs from DB...');
+  const saIds = [...new Set(NEW_TOPICS.map(t => t.subject_area_id))];
+  const { data: dbTopics } = await sb.from('topics').select('id, slug, subject_area_id').in('subject_area_id', saIds);
 
-  if (topicErr) {
-    console.error('Topic error:', topicErr.message);
-    process.exit(1);
+  const resolvedTopics = {};
+  for (const t of NEW_TOPICS) {
+    const existing = dbTopics?.find(d => d.slug === t.slug && d.subject_area_id === t.subject_area_id);
+    if (existing) {
+      console.log(`  ✓ ${t.slug} → ${existing.id} [existing]`);
+      resolvedTopics[t.slug] = existing.id;
+    } else {
+      const { data: ins, error: insErr } = await sb
+        .from('topics')
+        .insert({ subject_area_id: t.subject_area_id, slug: t.slug, name: t.name, sort_order: t.sort_order })
+        .select('id, slug').single();
+      if (insErr) { console.error(`  ✗ ${t.slug}:`, insErr.message); continue; }
+      console.log(`  ✓ ${t.slug} → ${ins.id} [created]`);
+      resolvedTopics[t.slug] = ins.id;
+    }
   }
-  console.log(`✅ Created ${topicData.length} topics`);
 
-  const govTopic = topicData.find(t => t.slug === 'phil-government')?.id;
-  const lawsTopic = topicData.find(t => t.slug === 'laws-ethics-sub')?.id;
+  const govTopic = resolvedTopics['phil-government'];
+  const lawsTopic = resolvedTopics['laws-ethics-sub'];
 
   const questions = buildQuestions(govTopic, lawsTopic);
   console.log(`\nInserting ${questions.length} questions...`);

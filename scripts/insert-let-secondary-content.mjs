@@ -311,18 +311,34 @@ function buildQuestions(topicMap) {
 }
 
 async function main() {
-  // Insert topics
-  console.log('Creating LET Secondary topics...');
-  const { data: topicData, error: topicErr } = await sb
+  // Find existing topics by slug+subject_area rather than inserting
+  console.log('Resolving LET Secondary topic IDs from DB...');
+  const saIds = [...new Set(NEW_TOPICS.map(t => t.subject_area_id))];
+  const { data: dbTopics, error: tErr } = await sb
     .from('topics')
-    .insert(NEW_TOPICS.map(t => ({ ...t, description: null, blueprint_topic_code: null })))
-    .select();
+    .select('id, slug, subject_area_id')
+    .in('subject_area_id', saIds);
 
-  if (topicErr) {
-    console.error('Topic error:', topicErr.message);
-    process.exit(1);
+  if (tErr) { console.error('Topic query error:', tErr.message); process.exit(1); }
+
+  // For any topic not found, insert it (first-time setup)
+  const topicData = [];
+  for (const t of NEW_TOPICS) {
+    const existing = dbTopics?.find(d => d.slug === t.slug && d.subject_area_id === t.subject_area_id);
+    if (existing) {
+      console.log(`  ✓ ${t.slug} → ${existing.id} [existing]`);
+      topicData.push({ id: existing.id, slug: t.slug });
+    } else {
+      const { data: inserted, error: insErr } = await sb
+        .from('topics')
+        .insert({ subject_area_id: t.subject_area_id, slug: t.slug, name: t.name, sort_order: t.sort_order, description: null })
+        .select('id, slug').single();
+      if (insErr) { console.error(`  ✗ ${t.slug}:`, insErr.message); continue; }
+      console.log(`  ✓ ${t.slug} → ${inserted.id} [created]`);
+      topicData.push({ id: inserted.id, slug: t.slug });
+    }
   }
-  console.log(`✅ Created ${topicData.length} topics`);
+  console.log(`✅ Topics ready: ${topicData.length}`);
 
   // Merge with existing topics for lookup
   const existingTopics = [

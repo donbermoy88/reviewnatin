@@ -345,17 +345,28 @@ function buildQuestions(topics) {
 }
 
 async function main() {
-  console.log('Creating new PNLE topics...');
-  const { data: topicData, error: topicErr } = await sb
-    .from('topics')
-    .insert(NEW_TOPICS.map(t => ({ ...t, description: null, blueprint_topic_code: null })))
-    .select();
+  // Resolve PNLE topics — use existing DB IDs, create only if missing
+  console.log('Resolving PNLE topic IDs from DB...');
+  const saIds = [...new Set(NEW_TOPICS.map(t => t.subject_area_id))];
+  const { data: dbTopics } = await sb.from('topics').select('id, slug, subject_area_id').in('subject_area_id', saIds);
 
-  if (topicErr) {
-    console.error('Topic insert error:', topicErr);
-    process.exit(1);
+  const topicData = [];
+  for (const t of NEW_TOPICS) {
+    const existing = dbTopics?.find(d => d.slug === t.slug && d.subject_area_id === t.subject_area_id);
+    if (existing) {
+      console.log(`  ✓ ${t.slug} → ${existing.id} [existing]`);
+      topicData.push({ id: existing.id, slug: t.slug });
+    } else {
+      const { data: ins, error: insErr } = await sb
+        .from('topics')
+        .insert({ subject_area_id: t.subject_area_id, slug: t.slug, name: t.name, sort_order: t.sort_order, description: null, blueprint_topic_code: null })
+        .select('id, slug').single();
+      if (insErr) { console.error(`  ✗ ${t.slug}:`, insErr.message); continue; }
+      console.log(`  ✓ ${t.slug} → ${ins.id} [created]`);
+      topicData.push({ id: ins.id, slug: t.slug });
+    }
   }
-  console.log(`✅ Created ${topicData.length} topics`);
+  console.log(`✅ Topics ready: ${topicData.length}`);
 
   const questions = buildQuestions(topicData);
   console.log(`\nInserting ${questions.length} PNLE questions...`);
