@@ -1,0 +1,38 @@
+name: Keep Supabase Alive
+
+# Supabase free tier pauses after 7 days of inactivity.
+# This workflow pings the project every 3 days to prevent that.
+
+on:
+  schedule:
+    # Every 3 days at 08:00 UTC (well within the 7-day window)
+    - cron: '0 8 */3 * *'
+  workflow_dispatch: # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  ping:
+    name: Ping Supabase — ReviewNatin PH
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Ping REST API (counts as project activity)
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/?limit=1")
+
+          echo "HTTP status: $STATUS"
+          echo "Pinged at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
+            echo "✅ Supabase project is active."
+          elif [ "$STATUS" -eq 503 ]; then
+            echo "⚠️  Project returned 503 — it may be paused. Unpause it at:"
+            echo "    https://supabase.com/dashboard/project/_/settings/general"
+            exit 1
+          else
+            echo "❌ Unexpected status $STATUS"
+            exit 1
+          fi
