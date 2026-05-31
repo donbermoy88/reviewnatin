@@ -43,6 +43,8 @@ import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StreakMilestoneModal, isStreakMilestone } from '../../components/streak-milestone-modal';
 
 function timeGreeting(): string {
   const h = new Date().getHours();
@@ -120,6 +122,7 @@ export default function DashboardScreen() {
   const [readinessSheetOpen, setReadinessSheetOpen] = useState(false);
   const [notificationSheetOpen, setNotificationSheetOpen] = useState(false);
   const [updatesSheetOpen, setUpdatesSheetOpen] = useState(false);
+  const [milestoneVisible, setMilestoneVisible] = useState(false);
 
   const load = useCallback(async () => {
     const merged = await resolveOnboardingGoal(user?.id);
@@ -130,7 +133,18 @@ export default function DashboardScreen() {
     if (user) {
       try {
         const [practiceStats, gate] = await Promise.all([
-          fetchPracticeStats(user.id, target),
+          fetchPracticeStats(user.id, target).then(async (s) => {
+            // Show streak milestone modal if a milestone was just reached
+            if (isStreakMilestone(s.streakDays)) {
+              const key = `milestone_shown_${user.id}_${s.streakDays}`;
+              const shown = await AsyncStorage.getItem(key).catch(() => null);
+              if (!shown) {
+                await AsyncStorage.setItem(key, '1').catch(() => {});
+                setMilestoneVisible(true);
+              }
+            }
+            return s;
+          }),
           fetchContentGateStatus(slug),
         ]);
         setStats(practiceStats);
@@ -722,6 +736,12 @@ export default function DashboardScreen() {
           </View>
         ))}
       </AppSheet>
+
+      <StreakMilestoneModal
+        visible={milestoneVisible}
+        streakDays={stats.streakDays}
+        onClose={() => setMilestoneVisible(false)}
+      />
     </View>
   );
 }
