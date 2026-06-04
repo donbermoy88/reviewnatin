@@ -63,8 +63,11 @@ CREATE INDEX IF NOT EXISTS idx_user_entitlements_user_expires
 CREATE INDEX IF NOT EXISTS idx_payment_transactions_user_created
     ON public.payment_transactions (user_id, created_at DESC);
 
-CREATE INDEX IF NOT EXISTS idx_payment_transactions_provider_tx
-    ON public.payment_transactions (provider, transaction_id);
+-- NOTE: payment_transactions stores the store transaction id as
+-- `store_transaction_id`, not `transaction_id`. The reconciliation index
+-- shape comes from migration 20260524150000_p2_payments.sql which already
+-- creates idx on (store_transaction_id, provider). This duplicate is
+-- therefore removed — see that migration for the canonical index.
 
 -- Exam schedules — calendar list filtered by exam.
 CREATE INDEX IF NOT EXISTS idx_exam_schedules_exam_event_date
