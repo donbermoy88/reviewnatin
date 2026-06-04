@@ -52,9 +52,10 @@ CREATE INDEX IF NOT EXISTS idx_topic_mastery_user
     ON public.topic_mastery (user_id);
 
 -- User entitlements — checked on nearly every paid feature gate.
-CREATE INDEX IF NOT EXISTS idx_user_entitlements_user
-    ON public.user_entitlements (user_id, status);
-
+-- NOTE: there is no `status` column on this table; the entitlement check
+-- pattern is (user_id, expires_at) — active entitlements are those with
+-- expires_at IS NULL OR expires_at > now(). The single index below covers
+-- both per-user lookups and the active-entitlement filter.
 CREATE INDEX IF NOT EXISTS idx_user_entitlements_user_expires
     ON public.user_entitlements (user_id, expires_at);
 
@@ -77,27 +78,32 @@ CREATE INDEX IF NOT EXISTS idx_user_exam_goals_user
 CREATE INDEX IF NOT EXISTS idx_barkada_members_group
     ON public.barkada_members (group_id);
 
-CREATE INDEX IF NOT EXISTS idx_barkada_challenge_results_user
-    ON public.barkada_challenge_results (user_id, completed_at DESC NULLS LAST);
+-- NOTE: column is `submitted_at`, not `completed_at`. The PK (challenge_id,
+-- user_id) covers per-challenge lookups; this index accelerates per-user
+-- history listings ordered by most recent.
+CREATE INDEX IF NOT EXISTS idx_barkada_challenge_results_user_submitted
+    ON public.barkada_challenge_results (user_id, submitted_at DESC);
 
 -- Push tokens — quick lookup when sending notifications.
 CREATE INDEX IF NOT EXISTS idx_user_push_tokens_user
     ON public.user_push_tokens (user_id);
 
--- Mock exam questions — sequence lookup inside a mock.
-CREATE INDEX IF NOT EXISTS idx_mock_exam_questions_mock_seq
-    ON public.mock_exam_questions (mock_exam_id, sequence);
+-- Mock exam questions — ordered lookup inside a mock.
+-- NOTE: the column is `sort_order`, not `sequence`. The (mock_exam_id,
+-- question_id) primary key already covers point lookups; this index
+-- accelerates the "list questions in order" read.
+CREATE INDEX IF NOT EXISTS idx_mock_exam_questions_mock_sort
+    ON public.mock_exam_questions (mock_exam_id, sort_order);
 
--- AI usage rate-limiting helpers — count per user per hour.
-CREATE INDEX IF NOT EXISTS idx_ai_explanation_usage_user_created
-    ON public.ai_explanation_usage (user_id, created_at DESC);
-
-CREATE INDEX IF NOT EXISTS idx_ai_tutor_usage_user_created
-    ON public.ai_tutor_usage (user_id, created_at DESC);
+-- AI usage rate-limiting helpers — daily counts per user.
+-- NOTE: these tables key by `usage_date`, not `created_at`. The PK
+-- (user_id, usage_date) on each already covers point lookups; these
+-- indexes would be redundant. Removed.
 
 -- Readiness snapshots — most-recent-per-user.
-CREATE INDEX IF NOT EXISTS idx_readiness_snapshots_user_created
-    ON public.readiness_snapshots (user_id, created_at DESC);
+-- NOTE: column is `computed_at`, not `created_at`.
+CREATE INDEX IF NOT EXISTS idx_readiness_snapshots_user_computed
+    ON public.readiness_snapshots (user_id, computed_at DESC);
 
 -- Diagnostic sessions — single-row lookup per (user, exam).
 CREATE INDEX IF NOT EXISTS idx_diagnostic_sessions_user_exam

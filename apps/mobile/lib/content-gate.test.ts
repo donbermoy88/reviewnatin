@@ -16,6 +16,8 @@ describe('evaluateContentGate', () => {
       mockExams: 2,
     });
     expect(status?.meetsMinimum).toBe(false);
-    expect(status?.questionPct).toBe(4);
+    // pnle minimum is 200 questions → 100/200 = 50%.
+    // (Was 4 when the minimum was 2,500; updated when the minimum dropped.)
+    expect(status?.questionPct).toBe(50);
   });
 });
