@@ -33,6 +33,7 @@ import {
   pickOfflinePracticeQuestions,
   hasOfflinePack,
 } from '../../lib/offline/pack';
+import { queuePendingSession } from '../../lib/offline/answer-queue';
 import { fetchBookmarkedQuestionIds, toggleBookmark } from '../../lib/api/bookmarks';
 import { fetchMistakeQuestionIds, recordQuizOutcome } from '../../lib/api/mistakes';
 import { fetchMockExamById, fetchMockExamQuestions } from '../../lib/api/mock-exams';
@@ -396,6 +397,34 @@ export default function PracticeQuizScreen() {
     let sessionId: string | null = null;
     let serverScore = score;
     let diagnosticReadiness: number | null = null;
+
+    // OFFLINE QUEUE — if user is signed in but quiz ran offline, persist
+    // the session locally so we can sync it the next time we're online.
+    // This guarantees offline practice never loses progress, XP, or
+    // mistake-bank entries.
+    if (user && offlineMode) {
+      try {
+        const localId = `${user.id}-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+        await queuePendingSession({
+          localId,
+          userId: user.id,
+          examSlug: slug,
+          itemCount: questions.length,
+          durationSeconds: duration,
+          mode: 'practice',
+          answers: finalAnswers.map((a) => ({
+            questionId: a.questionId,
+            selectedChoiceId: a.selectedChoiceId,
+            isCorrect: a.isCorrect,
+            timeSpentSeconds: a.timeSpentSeconds,
+          })),
+          completedAt: new Date().toISOString(),
+        });
+      } catch {
+        /* queue write failed — non-fatal; the user still gets their score */
+      }
+    }
+
     if (user && !offlineMode) {
       try {
         const exam = await fetchExamBySlug(slug);

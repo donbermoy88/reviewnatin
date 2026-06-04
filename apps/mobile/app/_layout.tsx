@@ -14,6 +14,8 @@ import { PreferencesProvider, usePreferences } from '../providers/preferences-pr
 import { useAppTheme, fonts } from '../hooks/use-app-theme';
 import { DeepLinkHandler } from '../components/deep-link-handler';
 import { NotificationTapHandler } from '../components/notification-tap-handler';
+import { OfflineBanner } from '../components/offline-banner';
+import { OfflineQueueFlusher } from '../components/offline-queue-flusher';
 import { initializeMobileAds } from '../lib/ads/init';
 
 function ThemedStack() {
@@ -78,7 +80,9 @@ export default function RootLayout() {
                 <OnboardingGate>
                   <DeepLinkHandler />
                   <NotificationTapHandler />
+                  <OfflineQueueFlusher />
                   <ThemedStack />
+                  <OfflineBanner />
                 </OnboardingGate>
               </IapProvider>
             </IapFeedbackProvider>
