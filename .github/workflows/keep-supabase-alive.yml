@@ -2,12 +2,20 @@ name: Keep Supabase Alive
 
 # Supabase free tier pauses after 7 days of inactivity.
 # This workflow pings the project every 3 days to prevent that.
+#
+# DESIGN DECISION — this workflow ALWAYS exits 0.
+# Its purpose is "best effort" prevention of an auto-pause; if the ping
+# fails (network blip, paused project, missing secrets), the worst case
+# is the project pauses anyway. That is NOT a CI failure worth emailing
+# about — it would just spam the inbox every 3 days until the user
+# notices. Instead, every non-success state becomes a ::warning:: visible
+# in the Actions tab.
 
 on:
   schedule:
     # Every 3 days at 08:00 UTC (well within the 7-day window)
     - cron: '0 8 */3 * *'
-  workflow_dispatch: # Allow manual trigger from GitHub Actions UI
+  workflow_dispatch: # Allow manual trigger from the GitHub UI
 
 jobs:
   ping:
@@ -16,28 +24,59 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Ping REST API (counts as project activity)
+      - name: Ping REST API (best effort, never fails the job)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/?limit=1")
+          # Bash: explicitly turn OFF errexit. We want explicit handling
+          # of every branch and a guaranteed exit 0 at the end.
+          set +e
 
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "::warning::SUPABASE_URL or SUPABASE_ANON_KEY secret not set. Add them at Settings → Secrets and variables → Actions. Skipping ping."
+            exit 0
+          fi
+
+          # Strip trailing slash if present so the path concatenation is clean.
+          URL="${SUPABASE_URL%/}/rest/v1/?limit=1"
+
+          # --max-time avoids the runner hanging if Supabase is unreachable.
+          # We capture status and curl exit code separately so we never abort
+          # the job before reporting.
+          STATUS=$(curl -s -o /dev/null -m 30 -w "%{http_code}" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+            "$URL")
+          CURL_EXIT=$?
+
+          echo "Pinged $URL at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "curl exit code: $CURL_EXIT"
           echo "HTTP status: $STATUS"
-          echo "Pinged at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
+          if [ $CURL_EXIT -ne 0 ]; then
+            echo "::warning::curl failed with exit $CURL_EXIT (network unreachable, DNS error, or timeout). Will retry on next schedule."
+            exit 0
+          fi
 
           if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
             echo "✅ Supabase project is active."
             exit 0
           fi
 
-          if [ "$STATUS" -eq 503 ] || [ "$STATUS" -eq 504 ] || [ "$STATUS" -eq 0 ]; then
-            # Project is paused or unreachable — emit a workflow warning rather
-            # than a hard failure so we don't spam email notifications. The
-            # warning is still visible in the Actions tab.
+          # 401 = anon key wrong but the project is up (the request still
+          # touches the project, so it counts as activity).
+          if [ "$STATUS" -eq 401 ] || [ "$STATUS" -eq 403 ]; then
+            echo "::warning::Supabase responded with HTTP $STATUS (key may be wrong, but the project is reachable so the ping still counts as activity)."
+            exit 0
+          fi
+
+          # 503 / 504 / 000 = paused project or transient gateway issue.
+          if [ "$STATUS" -eq 503 ] || [ "$STATUS" -eq 504 ] || [ "$STATUS" = "000" ]; then
             echo "::warning::Supabase project may be paused (HTTP $STATUS). Unpause at https://supabase.com/dashboard/project/_/settings/general — keep-alive will retry on the next schedule."
             exit 0
           fi
 
-          echo "::error::Unexpected status $STATUS from Supabase REST endpoint."
-          exit 1
+          # Anything else is unexpected but still not job-fatal.
+          echo "::warning::Unexpected HTTP status $STATUS from Supabase REST endpoint. Not failing the job — check the project status manually if this recurs."
+          exit 0
