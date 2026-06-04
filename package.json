@@ -47,9 +47,27 @@
     "vercel:git:link": "node scripts/link-vercel-git.mjs",
     "admin:create": "node scripts/create-admin-user.mjs",
     "vercel:deploy:marketing": "npx vercel link --yes --project reviewnatin-marketing && npx vercel deploy --prod --yes --archive=tgz",
-    "vercel:deploy:admin": "npx vercel link --yes --project reviewnatin-admin && npx vercel deploy --prod --yes --archive=tgz"
+    "vercel:deploy:admin": "npx vercel link --yes --project reviewnatin-admin && npx vercel deploy --prod --yes --archive=tgz",
+    "ci:local": "npm run mobile:lint && npm run lint --workspace=apps/admin && npm run lint --workspace=apps/marketing && npm run test",
+    "prepare": "simple-git-hooks || true"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "apps/mobile/**/*.{ts,tsx,js,jsx}": [
+      "bash -c 'cd apps/mobile && npx eslint --max-warnings=10000'"
+    ],
+    "apps/admin/**/*.{ts,tsx,js,jsx}": [
+      "bash -c 'cd apps/admin && npx eslint --max-warnings=10000'"
+    ],
+    "apps/marketing/**/*.{ts,tsx,js,jsx}": [
+      "bash -c 'cd apps/marketing && npx eslint --max-warnings=10000'"
+    ]
   },
   "devDependencies": {
+    "lint-staged": "^15.5.2",
+    "simple-git-hooks": "^2.13.1",
     "vercel": "^54.4.1"
   }
 }

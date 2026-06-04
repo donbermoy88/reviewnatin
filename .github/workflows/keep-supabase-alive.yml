@@ -28,11 +28,16 @@ jobs:
 
           if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
             echo "✅ Supabase project is active."
-          elif [ "$STATUS" -eq 503 ]; then
-            echo "⚠️  Project returned 503 — it may be paused. Unpause it at:"
-            echo "    https://supabase.com/dashboard/project/_/settings/general"
-            exit 1
-          else
-            echo "❌ Unexpected status $STATUS"
-            exit 1
+            exit 0
           fi
+
+          if [ "$STATUS" -eq 503 ] || [ "$STATUS" -eq 504 ] || [ "$STATUS" -eq 0 ]; then
+            # Project is paused or unreachable — emit a workflow warning rather
+            # than a hard failure so we don't spam email notifications. The
+            # warning is still visible in the Actions tab.
+            echo "::warning::Supabase project may be paused (HTTP $STATUS). Unpause at https://supabase.com/dashboard/project/_/settings/general — keep-alive will retry on the next schedule."
+            exit 0
+          fi
+
+          echo "::error::Unexpected status $STATUS from Supabase REST endpoint."
+          exit 1

@@ -340,7 +340,7 @@ export default function StudyScreen() {
           {questionCount === 0 ? (
             <View style={styles.noticeCard}>
               <Text style={styles.noticeText}>
-                Questions for this exam are coming soon. Check back shortly — we're actively importing content.
+                Questions for this exam are coming soon. Check back shortly — we&apos;re actively importing content.
               </Text>
             </View>
           ) : null}

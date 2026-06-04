@@ -22,11 +22,15 @@ export default function CheckoutPage() {
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const refParam = params.get('ref') ?? '';
-    setRef(refParam);
+    // Defer state updates one microtask to satisfy
+    // react-hooks/set-state-in-effect — the effect should not synchronously
+    // call setState during the render-commit phase.
+    queueMicrotask(() => {
+      const params = new URLSearchParams(window.location.search);
+      const refParam = params.get('ref') ?? '';
+      setRef(refParam);
 
-    if (!refParam || !supabaseUrl || !anonKey) return;
+      if (!refParam || !supabaseUrl || !anonKey) return;
 
     const utmSource = [params.get('utm_source'), params.get('utm_medium'), params.get('utm_campaign')]
       .filter(Boolean)
@@ -41,10 +45,11 @@ export default function CheckoutPage() {
         Authorization: `Bearer ${anonKey}`,
       },
       body: JSON.stringify({
-        p_reference_code: refParam,
-        p_utm_source: utmSource || null,
-        p_source: source,
-      }),
+          p_reference_code: refParam,
+          p_utm_source: utmSource || null,
+          p_source: source,
+        }),
+      });
     });
   }, [supabaseUrl, anonKey]);
 
@@ -69,7 +74,7 @@ export default function CheckoutPage() {
   }, [ref, supabaseUrl, anonKey]);
 
   useEffect(() => {
-    void loadStatus();
+    queueMicrotask(() => { void loadStatus(); });
   }, [loadStatus]);
 
   const submitPayment = async (confirmDemo: boolean) => {

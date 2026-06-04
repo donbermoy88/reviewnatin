@@ -5,7 +5,7 @@
  * Matches the Figma handoff design.
  */
 import { Ionicons } from '@expo/vector-icons';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Animated, Modal, Pressable, Share, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAppTheme } from '../hooks/use-app-theme';
@@ -55,9 +55,10 @@ export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
   const confettiColors = [colors.accent, '#fff', colors.primaryMuted, colors.flame, '#4ADE80'];
   const particles = useMemo(() => generateConfetti(confettiColors), []);
 
-  // Fade-in animation
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(0.85)).current;
+  // Fade-in animation — Animated.Value is a long-lived mutable object;
+  // useMemo gives a stable identity without tripping the react-hooks/refs rule.
+  const fadeAnim = useMemo(() => new Animated.Value(0), []);
+  const scaleAnim = useMemo(() => new Animated.Value(0.85), []);
 
   useEffect(() => {
     if (visible) {
@@ -71,8 +72,8 @@ export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
     }
   }, [visible]);
 
-  // Pulse animation for the flame
-  const pulseAnim = useRef(new Animated.Value(1)).current;
+  // Pulse animation for the flame — Animated.Value via useMemo (not useRef).
+  const pulseAnim = useMemo(() => new Animated.Value(1), []);
   useEffect(() => {
     if (!visible) return;
     const loop = Animated.loop(

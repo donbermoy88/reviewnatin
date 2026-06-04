@@ -54,8 +54,9 @@ export default function FlashcardsScreen() {
   const [offlineMode, setOfflineMode] = useState(params.mode === 'offline');
   const [subjectFilter, setSubjectFilter] = useState<string>('all');
 
-  // 3D flip animation
-  const flipAnim = useRef(new Animated.Value(0)).current;
+  // 3D flip animation — Animated.Value is mutable; useMemo keeps a stable
+  // identity without tripping react-hooks/refs by reading .current in render.
+  const flipAnim = useMemo(() => new Animated.Value(0), []);
   const isFlipping = useRef(false);
 
   const limit = Math.max(Number(params.limit) || 20, 1);

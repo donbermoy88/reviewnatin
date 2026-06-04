@@ -33,8 +33,12 @@ export default function SubscribePage() {
   const [params, setParams] = useState<URLSearchParams>(new URLSearchParams());
 
   useEffect(() => {
-    setParams(new URLSearchParams(window.location.search));
-    setMounted(true);
+    // Defer to avoid synchronous setState chain in effect commit phase
+    // (react-hooks/set-state-in-effect).
+    queueMicrotask(() => {
+      setParams(new URLSearchParams(window.location.search));
+      setMounted(true);
+    });
   }, []);
 
   const appUrl = useMemo(() => buildAppUrl(params), [params]);

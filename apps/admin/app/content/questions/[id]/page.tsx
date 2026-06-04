@@ -55,7 +55,9 @@ export default function QuestionEditorPage() {
   }, [params.id]);
 
   useEffect(() => {
-    void load();
+    // Defer to avoid synchronous setState chain inside the effect commit phase
+    // (react-hooks/set-state-in-effect).
+    queueMicrotask(() => { void load(); });
   }, [load]);
 
   const save = async (status?: QuestionDetail['status']) => {

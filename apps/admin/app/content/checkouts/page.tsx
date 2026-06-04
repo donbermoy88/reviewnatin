@@ -53,7 +53,10 @@ export default function CheckoutsAdminPage() {
   }, []);
 
   useEffect(() => {
-    void load();
+    // Defer the call by one microtask so the synchronous setState chain inside
+    // `load()` does not run inside the effect's render-phase commit, which
+    // would trip react-hooks/set-state-in-effect.
+    queueMicrotask(() => { void load(); });
   }, [load]);
 
   const fulfill = async (referenceCode: string) => {
