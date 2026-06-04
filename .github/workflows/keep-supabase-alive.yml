@@ -24,9 +24,8 @@ on:
     - cron: '0 19 * * *'  # 19:00 UTC
   workflow_dispatch: # Allow manual trigger from the GitHub UI
 
-# Belt-and-suspenders: even if a step somehow exits non-zero, the job is still
-# reported as successful and no failure notification is sent.
-permissions: {}
+# Permissions are granted per-job below (least privilege). The ping job needs
+# nothing; the heartbeat job needs contents:write to push its timestamp commit.
 
 jobs:
   ping:
@@ -34,6 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     continue-on-error: true # never mark the run as failed
+    permissions: {} # curl needs no repo permissions
 
     steps:
       - name: Ping a real table (best effort, never fails the job)
@@ -91,4 +91,65 @@ jobs:
           # issue. Emit a warning (NOT a failure) and let the next scheduled
           # run retry — we run 4×/day so a single miss is harmless.
           echo "::warning::Could not confirm Supabase is reachable (last HTTP $STATUS). The project may be paused or there was a transient network issue. Unpause at https://supabase.com/dashboard/project/yohewfdafdmwntsbzgxx — keep-alive retries automatically on the next schedule."
+          exit 0
+
+  # ---------------------------------------------------------------------------
+  # Heartbeat: defeat GitHub's "disable scheduled workflows after 60 days of no
+  # repository activity" rule WITHOUT any external service or your machine.
+  #
+  # It commits a one-line timestamp ONLY when the repo has been silent for 25+
+  # days. While you commit normally this NEVER fires (zero history noise). If
+  # the project is ever left untouched, it auto-commits to reset GitHub's
+  # inactivity clock, so the scheduled pings above keep running forever.
+  # Like the ping job, it can never fail the run.
+  # ---------------------------------------------------------------------------
+  heartbeat:
+    name: Repo heartbeat (anti auto-disable)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    continue-on-error: true
+    if: github.event_name == 'schedule' # only on the cron, not manual runs
+    permissions:
+      contents: write # needed to push the timestamp commit
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Commit a timestamp only if the repo has been quiet for 25+ days
+        run: |
+          set +e
+
+          # Age (in days) of the most recent commit on this branch.
+          LAST_COMMIT_TS=$(git log -1 --format=%ct 2>/dev/null)
+          NOW_TS=$(date -u +%s)
+          if [ -z "$LAST_COMMIT_TS" ]; then
+            echo "::warning::Could not read last commit time; skipping heartbeat."
+            exit 0
+          fi
+          AGE_DAYS=$(( (NOW_TS - LAST_COMMIT_TS) / 86400 ))
+          echo "Last repo activity was $AGE_DAYS day(s) ago."
+
+          if [ "$AGE_DAYS" -lt 25 ]; then
+            echo "Repo is active — no heartbeat commit needed."
+            exit 0
+          fi
+
+          echo "Repo has been quiet for $AGE_DAYS days — writing heartbeat to keep the schedule alive."
+          mkdir -p .github
+          echo "Last automated keep-alive heartbeat: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > .github/keepalive-heartbeat.txt
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/keepalive-heartbeat.txt
+          git commit -m "chore(ci): keep-alive heartbeat [skip ci]" || { echo "Nothing to commit."; exit 0; }
+
+          # Rebase-pull guards against a race, then push. Any failure is a
+          # warning, never a job failure.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" 2>/dev/null
+          if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+            echo "✅ Heartbeat committed — GitHub's 60-day inactivity timer is reset."
+          else
+            echo "::warning::Heartbeat push failed (permissions or branch protection?). The 4x/day pings still ran; only the long-term auto-disable guard is affected."
+          fi
           exit 0
