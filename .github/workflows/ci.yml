@@ -23,6 +23,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Workaround for npm/cli#4828: optional platform-specific rollup
+      # binaries are sometimes skipped during `npm ci`, which makes Vitest
+      # crash with "Cannot find module @rollup/rollup-linux-x64-gnu".
+      # Install the linux binary explicitly so the test step always works.
+      - name: Install rollup linux binary (npm/cli#4828 workaround)
+        run: npm install --no-save @rollup/rollup-linux-x64-gnu
+
       - name: Lint mobile
         run: npm run mobile:lint
 

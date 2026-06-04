@@ -12,9 +12,12 @@ CREATE INDEX IF NOT EXISTS idx_quiz_answers_session
 CREATE INDEX IF NOT EXISTS idx_quiz_answers_question
     ON public.quiz_answers (question_id);
 
-CREATE INDEX IF NOT EXISTS idx_quiz_answers_user_correct
-    ON public.quiz_answers (user_id, is_correct)
-    WHERE user_id IS NOT NULL;
+-- NOTE: quiz_answers is normalized — user_id lives on quiz_sessions, not on
+-- quiz_answers. The original draft of this migration referenced a non-existent
+-- column. The correct shape for accelerating "wrong answers per session"
+-- lookups is (session_id, is_correct).
+CREATE INDEX IF NOT EXISTS idx_quiz_answers_session_correct
+    ON public.quiz_answers (session_id, is_correct);
 
 -- Quiz sessions — used by progress, weekly summary, and Mistake Bank queries.
 CREATE INDEX IF NOT EXISTS idx_quiz_sessions_user_completed_at
