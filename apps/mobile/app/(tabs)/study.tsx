@@ -463,11 +463,10 @@ export default function StudyScreen() {
         </View>
       </ScrollView>
 
-      <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]} pointerEvents="box-none">
+      <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md, pointerEvents: 'box-none' }]}>
         <LinearGradient
           colors={[colors.footerFade, colors.background]}
-          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-          pointerEvents="none"
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}
         />
         <PrimaryButton
           label={activeTab === 1 && mockExams.length > 0 ? 'Start mock exam' : 'Start practice quiz'}

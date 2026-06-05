@@ -19,8 +19,8 @@ export function OfflineBanner() {
 
   return (
     <View
-      pointerEvents="box-none"
       style={{
+        pointerEvents: 'box-none',
         position: 'absolute',
         top: insets.top,
         left: 0,
