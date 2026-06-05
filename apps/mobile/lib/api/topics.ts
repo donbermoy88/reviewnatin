@@ -30,3 +30,28 @@ export async function fetchTopicsBySubjectSlug(
   if (error) throw error;
   return data ?? [];
 }
+
+/**
+ * Published-question count per topic slug for an exam + subject.
+ * Best-effort: returns an empty map if the RPC isn't deployed yet (the caller
+ * then falls back to treating counts as unknown), so the UI never breaks.
+ */
+export async function fetchTopicQuestionCounts(
+  examSlug: string,
+  subjectSlug: string
+): Promise<Map<string, number>> {
+  const counts = new Map<string, number>();
+  if (!isSupabaseConfigured) return counts;
+
+  try {
+    const { data, error } = await supabase.rpc('get_topic_question_counts', {
+      p_exam_slug: examSlug,
+      p_subject_slug: subjectSlug,
+    });
+    if (error || !data) return counts;
+    for (const row of data) counts.set(row.topic_slug, row.published_count);
+  } catch {
+    /* RPC not deployed or transient failure — treat counts as unknown */
+  }
+  return counts;
+}

@@ -1885,6 +1885,10 @@ export type Database = {
         }[]
       }
       get_content_counts: { Args: { p_exam_slug: string }; Returns: Json }
+      get_topic_question_counts: {
+        Args: { p_exam_slug: string; p_subject_slug: string }
+        Returns: { topic_slug: string; published_count: number }[]
+      }
       get_diagnostic_questions: {
         Args: { p_exam_slug: string; p_limit?: number }
         Returns: {

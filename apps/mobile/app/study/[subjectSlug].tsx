@@ -8,7 +8,7 @@ import { EmptyState } from '../../components/empty-state';
 import { MasteryBar } from '../../components/mastery-bar';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { fetchTopicAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
-import { fetchTopicsBySubjectSlug } from '../../lib/api/topics';
+import { fetchTopicsBySubjectSlug, fetchTopicQuestionCounts } from '../../lib/api/topics';
 import type { TopicRow } from '../../lib/api/topics';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
@@ -30,6 +30,7 @@ export default function TopicListScreen() {
   const [loading, setLoading] = useState(true);
   const [topics, setTopics] = useState<TopicRow[]>([]);
   const [topicAnalytics, setTopicAnalytics] = useState<Map<string, TopicAnalyticsRow>>(new Map());
+  const [topicCounts, setTopicCounts] = useState<Map<string, number>>(new Map());
   // Use the passed subject name (full name from DB), falling back to slug-derived name
   const subjectName = paramSubjectName ?? (subjectSlug ? titleCase(subjectSlug) : 'Subject');
 
@@ -37,12 +38,14 @@ export default function TopicListScreen() {
     if (!subjectSlug) return;
 
     try {
-      const [topicRows, analytics] = await Promise.all([
+      const [topicRows, analytics, counts] = await Promise.all([
         fetchTopicsBySubjectSlug(slug, subjectSlug),
         user ? fetchTopicAnalytics(slug).catch(() => ({ subjects: [], allTopics: [] })) : Promise.resolve({ subjects: [], allTopics: [] }),
+        fetchTopicQuestionCounts(slug, subjectSlug),
       ]);
 
       setTopics(topicRows);
+      setTopicCounts(counts);
 
       const bySlug = new Map<string, TopicAnalyticsRow>();
       for (const t of analytics.allTopics) {
@@ -162,36 +165,49 @@ export default function TopicListScreen() {
           topics.map((t, i) => {
             const analytics = topicAnalytics.get(t.slug);
             const pct = analytics && analytics.attempts > 0 ? Math.round(analytics.accuracy) : 0;
+            const qCount = topicCounts.get(t.slug);
+            const isEmpty = qCount === 0;
+            const meta =
+              analytics && analytics.attempts > 0
+                ? `${pct}% mastery · ${analytics.attempts} ${analytics.attempts === 1 ? 'try' : 'tries'}`
+                : isEmpty
+                  ? 'Coming soon'
+                  : qCount != null
+                    ? `${qCount} question${qCount === 1 ? '' : 's'}`
+                    : 'Tap to start practicing';
             return (
               <Pressable
                 key={t.id}
-                style={styles.topicCard}
-                onPress={() =>
+                style={[styles.topicCard, isEmpty && styles.topicCardEmpty]}
+                disabled={isEmpty}
+                onPress={() => {
+                  if (isEmpty) return;
                   router.push({
                     pathname: '/practice/quiz',
                     params: { examSlug: slug, topicSlug: t.slug },
-                  })
-                }
+                  });
+                }}
                 accessibilityRole="button"
-                accessibilityLabel={`Practice topic ${t.name}`}
+                accessibilityState={{ disabled: isEmpty }}
+                accessibilityLabel={isEmpty ? `${t.name} — coming soon` : `Practice topic ${t.name}`}
               >
                 <View style={styles.topicIcon}>
                   <Text style={styles.topicNum}>{i + 1}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text style={styles.topicTitle}>{t.name}</Text>
-                  <Text style={styles.topicMeta}>
-                    {analytics && analytics.attempts > 0
-                      ? `${pct}% mastery · ${analytics.attempts} ${analytics.attempts === 1 ? 'try' : 'tries'}`
-                      : 'Tap to start practicing'}
-                  </Text>
+                  <Text style={styles.topicMeta}>{meta}</Text>
                   {analytics && analytics.attempts > 0 ? (
                     <MasteryBar accuracy={pct} attempts={analytics.attempts} style={{ marginTop: 6 }} />
                   ) : null}
                 </View>
-                <View style={styles.playCircle}>
-                  <Ionicons name="play" size={14} color="#fff" />
-                </View>
+                {isEmpty ? (
+                  <Ionicons name="time-outline" size={18} color={colors.textMuted} />
+                ) : (
+                  <View style={styles.playCircle}>
+                    <Ionicons name="play" size={14} color="#fff" />
+                  </View>
+                )}
               </Pressable>
             );
           })
@@ -284,6 +300,7 @@ function createSubjectTopicStyles(theme: AppTheme) {
       borderWidth: 1,
       borderColor: colors.border,
     },
+    topicCardEmpty: { opacity: 0.55 },
     topicIcon: {
       width: 36,
       height: 36,
