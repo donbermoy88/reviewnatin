@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createListScreenStyles } from '../../lib/themed-styles';
@@ -32,19 +33,20 @@ export default function MistakesScreen() {
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
-    const goal = await resolveOnboardingGoal(user?.id);
-    const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
-    setExamSlug(slug);
-    const exam = await fetchExamBySlug(slug);
-    if (exam) setExamTypeId(exam.id);
-
-    if (!user) {
-      setLoading(false);
-      return;
-    }
-
-    const premium = isPremium(exam?.id);
     try {
+      const goal = await resolveOnboardingGoal(user?.id);
+      const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
+      setExamSlug(slug);
+      const exam = await fetchExamBySlug(slug);
+      if (exam) setExamTypeId(exam.id);
+
+      if (!user) {
+        setMistakes([]);
+        setShowFreeLimitBanner(false);
+        return;
+      }
+
+      const premium = isPremium(exam?.id);
       const visible = await fetchMistakes(slug, 50);
       setMistakes(visible);
       if (!premium) {
@@ -70,7 +72,7 @@ export default function MistakesScreen() {
 
   if (!user) {
     return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
+      <StackShell title="Mistake Bank" subtitle="Every wrong answer, saved to review">
         <EmptyState
           icon={<Ionicons name="alert-circle-outline" size={32} color={colors.primary} />}
           title="Log in to continue"
@@ -78,7 +80,7 @@ export default function MistakesScreen() {
           actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
         />
-      </View>
+      </StackShell>
     );
   }
 
@@ -96,7 +98,7 @@ export default function MistakesScreen() {
         }
       >
         <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
-          <Pressable onPress={() => router.back()}>
+          <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Go back">
             <Ionicons name="chevron-back" size={22} color={colors.text} />
           </Pressable>
           <Text style={styles.title}>Mistake Bank</Text>

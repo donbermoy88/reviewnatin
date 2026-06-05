@@ -8,6 +8,7 @@ import { MasteryBar } from '../../components/mastery-bar';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReadinessBreakdownSheet } from '../../components/readiness-breakdown-sheet';
 import { ScreenBackground } from '../../components/screen-background';
+import { StackShell } from '../../components/stack-shell';
 import { SegmentedReadinessBar } from '../../components/segmented-readiness-bar';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { fetchTopicAnalytics, type SubjectAnalytics } from '../../lib/api/analytics';
@@ -36,22 +37,28 @@ export default function AnalyticsScreen() {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
 
   const load = useCallback(async () => {
-    const goal = await resolveOnboardingGoal(user?.id);
-    const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
-    setExamSlug(slug);
-
-    if (!user) {
-      setLoading(false);
-      return;
-    }
-
     try {
-      const [analytics, latestReadiness] = await Promise.all([
-        fetchTopicAnalytics(slug),
-        fetchLatestReadiness(slug),
-      ]);
-      setSubjects(analytics.subjects);
-      setReadiness(latestReadiness);
+      const goal = await resolveOnboardingGoal(user?.id);
+      const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
+      setExamSlug(slug);
+
+      if (!user) {
+        setSubjects([]);
+        setReadiness(null);
+        return;
+      }
+
+      try {
+        const [analytics, latestReadiness] = await Promise.all([
+          fetchTopicAnalytics(slug),
+          fetchLatestReadiness(slug),
+        ]);
+        setSubjects(analytics.subjects);
+        setReadiness(latestReadiness);
+      } catch {
+        setSubjects([]);
+        setReadiness(null);
+      }
     } catch {
       setSubjects([]);
       setReadiness(null);
@@ -94,18 +101,15 @@ export default function AnalyticsScreen() {
 
   if (!user) {
     return (
-      <View style={styles.root}>
-        <ScreenBackground />
-        <View style={{ paddingTop: insets.top, flex: 1 }}>
-          <EmptyState
-            icon={<Ionicons name="analytics-outline" size={32} color={colors.primary} />}
-            title="Log in to continue"
-            description="Analytics and weak-topic tracking require a signed-in account."
-            actionLabel="Log in"
-            onAction={() => router.push('/(auth)/login')}
-          />
-        </View>
-      </View>
+      <StackShell title="Analytics" subtitle="Readiness and weak-topic tracking">
+        <EmptyState
+          icon={<Ionicons name="analytics-outline" size={32} color={colors.primary} />}
+          title="Log in to continue"
+          description="Analytics and weak-topic tracking require a signed-in account."
+          actionLabel="Log in"
+          onAction={() => router.push('/(auth)/login')}
+        />
+      </StackShell>
     );
   }
 

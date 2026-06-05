@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createLeaderboardStyles } from '../../lib/themed-styles';
@@ -96,7 +97,7 @@ export default function AiTutorScreen() {
 
   if (!user) {
     return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
+      <StackShell title="AI Tutor" subtitle="Ask Kuya AI — step-by-step Taglish help">
         <EmptyState
           icon={<Ionicons name="chatbubbles-outline" size={32} color={colors.primary} />}
           title="Log in to continue"
@@ -104,7 +105,7 @@ export default function AiTutorScreen() {
           actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
         />
-      </View>
+      </StackShell>
     );
   }
 
