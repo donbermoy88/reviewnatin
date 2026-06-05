@@ -34,7 +34,7 @@ export type ExamType = {
 
 export type QuizAnswerRecord = {
   questionId: string;
-  selectedChoiceId: string;
+  selectedChoiceId: string | null; // null = question skipped (no choice picked)
   isCorrect: boolean;
   timeSpentSeconds: number;
 };

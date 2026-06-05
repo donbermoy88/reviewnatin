@@ -179,7 +179,9 @@ export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
                     position: 'absolute', bottom: 28,
                     fontFamily: fonts.displayBold, fontSize: streakDays >= 100 ? 36 : 44,
                     color: colors.primaryDark, letterSpacing: -2,
-                    textShadow: '0 2px 8px rgba(255,255,255,0.4)',
+                    textShadowColor: 'rgba(255,255,255,0.4)',
+                    textShadowOffset: { width: 0, height: 2 },
+                    textShadowRadius: 8,
                   }}>
                     {streakDays}
                   </Text>
