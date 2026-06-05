@@ -599,7 +599,7 @@ export default function PracticeQuizScreen() {
         <EmptyState
           icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
           title="No questions yet"
-          description="No published questions for this exam or topic yet. Try again after content import."
+          description="We're still adding questions for this topic. Try another topic or check back soon — new content drops regularly."
           actionLabel="Go back"
           onAction={() => router.back()}
         />
