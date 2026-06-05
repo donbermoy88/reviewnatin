@@ -75,14 +75,17 @@ export async function fetchSubjectAreas(examTypeId: string): Promise<SubjectArea
 export async function fetchExamQuestionCount(examSlug: string): Promise<number> {
   if (!isSupabaseConfigured) return 0;
 
-  const { data, error } = await supabase.rpc('get_practice_questions', {
+  // Use get_content_counts (the true published-question total for the exam),
+  // NOT get_practice_questions — the latter is the quiz-serving RPC, which is
+  // capped at p_limit and subject to the per-user daily limit, so counting its
+  // rows undercounts the real bank (e.g. showed "20" instead of 822).
+  const { data, error } = await supabase.rpc('get_content_counts', {
     p_exam_slug: examSlug,
-    p_limit: 500,
-    p_topic_slug: null,
   });
 
-  if (error) return 0;
-  return (data as PracticeQuestionRow[] | null)?.length ?? 0;
+  if (error || !data) return 0;
+  const counts = data as { questions?: number } | null;
+  return counts?.questions ?? 0;
 }
 
 export async function fetchPracticeQuestions(
