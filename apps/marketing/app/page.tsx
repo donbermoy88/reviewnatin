@@ -391,7 +391,7 @@ function Hero() {
         <div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', background: '#fff', border: `1px solid ${RN.line}`, borderRadius: 99, fontSize: 12, fontWeight: 700, color: RN.royal, boxShadow: '0 2px 8px rgba(8,36,92,0.05)' }}>
             <span style={{ width: 6, height: 6, borderRadius: 99, background: '#22C55E', boxShadow: '0 0 0 4px rgba(34,197,94,0.2)', display: 'inline-block' }} />
-            Now in beta · 142k+ Filipinos reviewing
+            Now in beta · Free for early reviewers
           </div>
 
           <h1 className="rn-h1" style={{ fontSize: 62, fontWeight: 800, color: RN.ink, letterSpacing: '-0.035em', lineHeight: 1.06, marginTop: 20 }}>
@@ -413,23 +413,19 @@ function Hero() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginTop: 36 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ display: 'flex' }}>
-                {([RN.gold, RN.royal, '#7B2CBF', '#22C55E'] as const).map((c, i) => (
-                  <div key={i} style={{ width: 36, height: 36, borderRadius: '50%', background: c, marginLeft: i === 0 ? 0 : -10, border: '2px solid #fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: i === 0 ? RN.navy : '#fff' }}>
-                    {['AR', 'JM', 'LP', 'MC'][i]}
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div style={{ display: 'flex', gap: 1, color: RN.gold, fontSize: 14 }}>★★★★★</div>
-                <div style={{ fontSize: 12, color: RN.inkSub, fontWeight: 600, marginTop: 2 }}>4.9 from 12,400+ reviews</div>
-              </div>
+            <div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: RN.ink, letterSpacing: '-0.02em' }}>1,600+</div>
+              <div style={{ fontSize: 12, color: RN.inkSub, fontWeight: 600 }}>practice questions</div>
             </div>
             <div style={{ width: 1, height: 40, background: RN.line }} />
             <div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: RN.ink, letterSpacing: '-0.02em' }}>87%</div>
-              <div style={{ fontSize: 12, color: RN.inkSub, fontWeight: 600 }}>pass rate increase</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: RN.ink, letterSpacing: '-0.02em' }}>EN + TL</div>
+              <div style={{ fontSize: 12, color: RN.inkSub, fontWeight: 600 }}>bilingual explanations</div>
+            </div>
+            <div style={{ width: 1, height: 40, background: RN.line }} />
+            <div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: RN.ink, letterSpacing: '-0.02em' }}>₱0</div>
+              <div style={{ fontSize: 12, color: RN.inkSub, fontWeight: 600 }}>free to start</div>
             </div>
           </div>
         </div>
@@ -555,10 +551,10 @@ function Showcase() {
 // ── STATS ──────────────────────────────────────────────────
 function Stats() {
   const items = [
-    { n: '142,000+', l: 'Active reviewers' },
-    { n: '4,200+',   l: 'Vetted questions' },
-    { n: '87%',      l: 'Pass-rate boost'  },
-    { n: '4.9 ★',    l: 'Avg. user rating' },
+    { n: '1,600+', l: 'Practice questions' },
+    { n: '5',      l: 'Exam tracks (CSE, PNLE, LET)' },
+    { n: 'EN + TL', l: 'Bilingual explanations' },
+    { n: '₱0',     l: 'Free to start' },
   ];
   return (
     <section className="rn-section" style={{ padding: '80px 32px', background: '#fff', borderTop: `1px solid ${RN.line}`, borderBottom: `1px solid ${RN.line}` }}>
@@ -567,42 +563,6 @@ function Stats() {
           <div key={s.l} style={{ textAlign: 'center' }}>
             <div style={{ fontSize: 52, fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1, background: `linear-gradient(120deg, ${RN.royal}, ${RN.navy})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.n}</div>
             <div style={{ fontSize: 14, fontWeight: 700, color: RN.inkSub, marginTop: 8 }}>{s.l}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// ── TESTIMONIALS ───────────────────────────────────────────
-function Testimonials() {
-  const reviews = [
-    { stars: 5, q: 'Pumasa ako sa LET first take! Yung daily streak talaga nag-keep sa akin going. Wala nang excuse.', name: 'Andrea M.', role: 'LET passer, Region IV-A',     c: RN.royal    },
-    { stars: 5, q: 'Best CSC reviewer ever. The topic breakdown after every quiz shows exactly anong dapat ko pa pagbutihan.',  name: 'Joshua P.', role: 'Civil Service Pro passer',  c: RN.goldDeep },
-    { stars: 5, q: 'Affordable kaysa review centers, at pwede mag-aral kahit nasa jeepney lang. Sulit talaga.',                name: 'Patricia D.', role: 'UPCAT 2025 reviewer',    c: '#7B2CBF'   },
-  ];
-  return (
-    <section className="rn-section" style={{ padding: '120px 32px', maxWidth: 1240, margin: '0 auto' }}>
-      <div style={{ textAlign: 'center', marginBottom: 50 }}>
-        <Pill text="REVIEWS FROM FILIPINOS" />
-        <h2 className="rn-h2" style={{ fontSize: 46, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
-          From &ldquo;kabado&rdquo; to <span style={{ color: RN.royal }}>&ldquo;pasa ako!&rdquo;</span>
-        </h2>
-      </div>
-      <div className="rn-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
-        {reviews.map(r => (
-          <div key={r.name} style={{ background: '#fff', borderRadius: 22, padding: 28, border: `1px solid ${RN.line}` }}>
-            <div style={{ display: 'flex', gap: 2, color: RN.gold, fontSize: 18 }}>{'★'.repeat(r.stars)}</div>
-            <p style={{ fontSize: 16, color: RN.ink, marginTop: 14, lineHeight: 1.55, fontWeight: 500 }}>&ldquo;{r.q}&rdquo;</p>
-            <div style={{ marginTop: 22, display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ width: 44, height: 44, borderRadius: '50%', background: r.c, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 800, color: '#fff' }}>
-                {r.name.split(' ').map((w: string) => w[0]).join('')}
-              </div>
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 800, color: RN.ink }}>{r.name}</div>
-                <div style={{ fontSize: 12, color: RN.inkSub, fontWeight: 600 }}>{r.role}</div>
-              </div>
-            </div>
           </div>
         ))}
       </div>
@@ -712,7 +672,7 @@ function FinalCTA() {
             <span style={{ color: RN.gold }}>Magpasa together.</span>
           </h2>
           <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.8)', marginTop: 20, fontWeight: 500, maxWidth: 520, margin: '20px auto 0' }}>
-            Join 142,000+ Filipinos already reviewing. Free forever, no credit card needed.
+            Be one of the first Filipinos reviewing with ReviewNatin. Free while in beta, no credit card needed.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', marginTop: 36, flexWrap: 'wrap' }}>
             <AppStoreBadge dark />
@@ -783,7 +743,6 @@ export default function HomePage() {
       <Features />
       <Showcase />
       <Stats />
-      <Testimonials />
       <Pricing />
       <FAQSection />
       <FinalCTA />

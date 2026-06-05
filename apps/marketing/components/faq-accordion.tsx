@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 const QA = [
   { q: 'Available ba sa iOS at Android?', a: 'Oo! ReviewNatin PH is on both the App Store (iOS 15+) and Google Play (Android 8+). Same account works on both.' },
-  { q: 'Free ba talaga or may catch?', a: 'The Free tier is forever free with 50 questions per day across all exams. Premium unlocks unlimited usage and Kuya AI, with a 7-day trial — no card needed.' },
+  { q: 'Free ba talaga or may catch?', a: 'The Free tier is forever free with 50 questions per day across CSE, PNLE, and LET. Premium unlocks unlimited usage and Kuya AI, with a 7-day trial — no card needed.' },
   { q: 'Pwede ba offline?', a: 'Yes, Premium users can download exam packs for offline review — great for long commutes, brownouts, or sa probinsya na walang signal.' },
-  { q: 'How updated are the questions?', a: 'Our content team reviews and refreshes every exam category monthly, with same-week updates after every PRC, CSC, and Bar exam coverage.' },
+  { q: 'How updated are the questions?', a: 'We review and expand the CSE, PNLE, and LET question banks regularly, adding new items and refining explanations as the exams evolve.' },
   { q: 'Is my progress safe if I switch phones?', a: 'Lahat ng data ay naka-cloud-sync with your account. Sign in on a new device and everything is there — streak intact.' },
 ];
 
