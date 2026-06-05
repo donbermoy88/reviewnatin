@@ -343,12 +343,12 @@ function Nav() {
       background: 'rgba(250,251,254,0.88)', backdropFilter: 'blur(20px)',
       borderBottom: `1px solid ${RN.line}`,
     }}>
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '15px 32px', display: 'flex', alignItems: 'center', gap: 32 }}>
+      <div className="rn-nav" style={{ maxWidth: 1240, margin: '0 auto', padding: '15px 32px', display: 'flex', alignItems: 'center', gap: 32 }}>
         <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
           <BrandMark size={36} />
           <Wordmark size={19} />
         </a>
-        <nav style={{ display: 'flex', gap: 28, marginLeft: 20 }}>
+        <nav className="rn-nav-links" style={{ display: 'flex', gap: 28, marginLeft: 20 }}>
           {['Features', 'Exams', 'Pricing', 'About', 'Support'].map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} style={{ fontSize: 14, fontWeight: 600, color: RN.inkSub, textDecoration: 'none' }}>{l}</a>
           ))}
@@ -387,14 +387,14 @@ function Hero() {
         </svg>
       ))}
 
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 32px', display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 40, alignItems: 'center', position: 'relative', zIndex: 1 }}>
+      <div className="rn-hero-grid" style={{ maxWidth: 1240, margin: '0 auto', padding: '0 32px', display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 40, alignItems: 'center', position: 'relative', zIndex: 1 }}>
         <div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', background: '#fff', border: `1px solid ${RN.line}`, borderRadius: 99, fontSize: 12, fontWeight: 700, color: RN.royal, boxShadow: '0 2px 8px rgba(8,36,92,0.05)' }}>
             <span style={{ width: 6, height: 6, borderRadius: 99, background: '#22C55E', boxShadow: '0 0 0 4px rgba(34,197,94,0.2)', display: 'inline-block' }} />
             Now in beta · 142k+ Filipinos reviewing
           </div>
 
-          <h1 style={{ fontSize: 62, fontWeight: 800, color: RN.ink, letterSpacing: '-0.035em', lineHeight: 1.06, marginTop: 20 }}>
+          <h1 className="rn-h1" style={{ fontSize: 62, fontWeight: 800, color: RN.ink, letterSpacing: '-0.035em', lineHeight: 1.06, marginTop: 20 }}>
             Your study buddy<br />
             for every{' '}
             <span style={{ background: `linear-gradient(120deg, ${RN.royal}, ${RN.navy})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -403,7 +403,7 @@ function Hero() {
           </h1>
 
           <p style={{ fontSize: 18, color: RN.inkSub, marginTop: 22, lineHeight: 1.55, fontWeight: 500, maxWidth: 530 }}>
-            PRC Board, Civil Service, Bar, UPCAT, PSHS-NCE, Scholarships — one app, one streak, isang goal.{' '}
+            Civil Service (CSE), Nursing (PNLE), and LET — one app, one streak, isang goal.{' '}
             <b style={{ color: RN.ink }}>Review together. Pass together.</b>
           </p>
 
@@ -434,7 +434,7 @@ function Hero() {
           </div>
         </div>
 
-        <div style={{ position: 'relative', height: 520, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="rn-hero-phones" style={{ position: 'relative', height: 520, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{ position: 'absolute', top: 50, left: 20, opacity: 0.88, zIndex: 1 }}>
             <PhoneShell scale={0.41} rotate={-8}><ScreenExam /></PhoneShell>
           </div>
@@ -449,7 +449,7 @@ function Hero() {
 
 // ── TRUST BAR ──────────────────────────────────────────────
 function TrustBar() {
-  const exams = ['PRC Board', 'Civil Service Exam', 'Bar Exam', 'UPCAT · ACET · DLSU-CET', 'PSHS-NCE', 'DOST · CHED Scholarships'];
+  const exams = ['Civil Service (CSE Pro & Sub)', 'Nursing (PNLE)', 'LET — Elementary & Secondary', 'PRC · UPCAT · Bar — coming soon'];
   return (
     <section style={{ borderTop: `1px solid ${RN.line}`, borderBottom: `1px solid ${RN.line}`, background: '#fff' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '26px 32px', display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
@@ -476,7 +476,7 @@ const FIcons = {
 
 function Features() {
   const items = [
-    { icon: FIcons.Books,  color: '#E8F0FF', title: 'All major Filipino exams',   body: 'PRC, CSC, Bar, UPCAT, PSHS-NCE, scholarships — 4,200+ vetted questions and counting.' },
+    { icon: FIcons.Books,  color: '#E8F0FF', title: 'Built for CSE, PNLE & LET',   body: 'Civil Service, Nursing, and Teacher board exams — 1,600+ vetted questions and counting, with more exams on the way.' },
     { icon: FIcons.AI,     color: '#E8F0FF', title: 'Ask Kuya AI',                body: 'Stuck on an item? Tap to get a step-by-step Filipino explanation in seconds.' },
     { icon: FIcons.Flame,  color: '#FFEEE4', title: 'Streaks that stick',          body: 'Daily goals, gentle reminders, and milestone celebrations — habit muna, pass na.' },
     { icon: FIcons.Trophy, color: '#FFF4DC', title: 'Compete with friends',        body: 'Region, friends, and global leaderboards. Sino ang #1 sa LET ngayong week?' },
@@ -484,10 +484,10 @@ function Features() {
     { icon: FIcons.Brain,  color: '#F1E8FA', title: 'Flashcards & mock exams',     body: 'Spaced-repetition flashcards plus full 100-item timed mocks under real conditions.' },
   ];
   return (
-    <section id="features" style={{ padding: '120px 32px', maxWidth: 1240, margin: '0 auto' }}>
+    <section id="features" className="rn-section" style={{ padding: '120px 32px', maxWidth: 1240, margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: 60 }}>
         <Pill text="WHY REVIEWNATIN" />
-        <h2 style={{ fontSize: 46, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
+        <h2 className="rn-h2" style={{ fontSize: 46, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
           Built for Filipino learners,<br />
           <span style={{ color: RN.royal }}>not generic test prep.</span>
         </h2>
@@ -495,7 +495,7 @@ function Features() {
           Six things every reviewer wished their book had — wrapped in one Tagalog-friendly app.
         </p>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+      <div className="rn-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
         {items.map(it => (
           <div key={it.title} style={{ background: '#fff', borderRadius: 22, padding: 28, border: `1px solid ${RN.line}`, boxShadow: '0 2px 12px rgba(8,36,92,0.04)' }}>
             <div style={{ width: 56, height: 56, borderRadius: 16, background: it.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>{it.icon}</div>
@@ -516,12 +516,12 @@ function Showcase() {
     { x: 50, y: 8,  s: 10 }, { x: 30, y: 90, s: 8 },
   ];
   const steps = [
-    { num: '01', title: 'Pick your exam',      body: 'Choose from PRC, CSC, Bar, UPCAT, PSHS-NCE — set a daily goal that fits your life.',    screen: <ScreenExam /> },
+    { num: '01', title: 'Pick your exam',      body: 'Choose CSE, PNLE, or LET — set a daily goal that fits your life.',    screen: <ScreenExam /> },
     { num: '02', title: 'Review every day',    body: 'Bite-sized quizzes, flashcards, and Taglish explanations build mastery day by day.',      screen: <ScreenHome /> },
     { num: '03', title: 'Track your progress', body: 'See exactly where you stand by topic. Take a mock exam when you feel ready.',             screen: <ScreenProfile /> },
   ];
   return (
-    <section style={{ background: `linear-gradient(165deg, ${RN.navy} 0%, ${RN.royal} 100%)`, padding: '120px 32px', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+    <section className="rn-section" style={{ background: `linear-gradient(165deg, ${RN.navy} 0%, ${RN.royal} 100%)`, padding: '120px 32px', color: '#fff', position: 'relative', overflow: 'hidden' }}>
       {stars.map((s, i) => (
         <svg key={i} style={{ position: 'absolute', left: `${s.x}%`, top: `${s.y}%`, opacity: 0.5 }} width={s.s} height={s.s} viewBox="0 0 20 20">
           <path d="M10 0l2 8 8 2-8 2-2 8-2-8-8-2 8-2z" fill={RN.gold} />
@@ -530,12 +530,12 @@ function Showcase() {
       <div style={{ maxWidth: 1240, margin: '0 auto', position: 'relative' }}>
         <div style={{ textAlign: 'center', marginBottom: 60 }}>
           <span style={{ display: 'inline-block', padding: '6px 14px', background: 'rgba(255,201,40,0.2)', color: RN.gold, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', borderRadius: 99 }}>HOW IT WORKS</span>
-          <h2 style={{ fontSize: 46, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
+          <h2 className="rn-h2" style={{ fontSize: 46, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
             Three steps to your<br />
             <span style={{ color: RN.gold }}>passing score.</span>
           </h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 40, alignItems: 'start' }}>
+        <div className="rn-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 40, alignItems: 'start' }}>
           {steps.map(s => (
             <div key={s.num} style={{ textAlign: 'center' }}>
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
@@ -561,8 +561,8 @@ function Stats() {
     { n: '4.9 ★',    l: 'Avg. user rating' },
   ];
   return (
-    <section style={{ padding: '80px 32px', background: '#fff', borderTop: `1px solid ${RN.line}`, borderBottom: `1px solid ${RN.line}` }}>
-      <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 30 }}>
+    <section className="rn-section" style={{ padding: '80px 32px', background: '#fff', borderTop: `1px solid ${RN.line}`, borderBottom: `1px solid ${RN.line}` }}>
+      <div className="rn-grid-4" style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 30 }}>
         {items.map(s => (
           <div key={s.l} style={{ textAlign: 'center' }}>
             <div style={{ fontSize: 52, fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1, background: `linear-gradient(120deg, ${RN.royal}, ${RN.navy})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.n}</div>
@@ -582,14 +582,14 @@ function Testimonials() {
     { stars: 5, q: 'Affordable kaysa review centers, at pwede mag-aral kahit nasa jeepney lang. Sulit talaga.',                name: 'Patricia D.', role: 'UPCAT 2025 reviewer',    c: '#7B2CBF'   },
   ];
   return (
-    <section style={{ padding: '120px 32px', maxWidth: 1240, margin: '0 auto' }}>
+    <section className="rn-section" style={{ padding: '120px 32px', maxWidth: 1240, margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: 50 }}>
         <Pill text="REVIEWS FROM FILIPINOS" />
-        <h2 style={{ fontSize: 46, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
+        <h2 className="rn-h2" style={{ fontSize: 46, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
           From &ldquo;kabado&rdquo; to <span style={{ color: RN.royal }}>&ldquo;pasa ako!&rdquo;</span>
         </h2>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+      <div className="rn-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
         {reviews.map(r => (
           <div key={r.name} style={{ background: '#fff', borderRadius: 22, padding: 28, border: `1px solid ${RN.line}` }}>
             <div style={{ display: 'flex', gap: 2, color: RN.gold, fontSize: 18 }}>{'★'.repeat(r.stars)}</div>
@@ -613,22 +613,22 @@ function Testimonials() {
 // ── PRICING ────────────────────────────────────────────────
 function Pricing() {
   const plans = [
-    { name: 'Free',          price: '₱0',     sub: 'Forever free, no card needed',         features: ['Access to all 6 exam categories', '50 questions per day', 'Daily streak & basic stats', 'Friends leaderboard'],                                                          cta: 'Download free',        ctaHref: '#',           highlight: false },
+    { name: 'Free',          price: '₱0',     sub: 'Forever free, no card needed',         features: ['CSE, PNLE & LET question banks', '50 questions per day', 'Daily streak & basic stats', 'Friends leaderboard'],                                                          cta: 'Download free',        ctaHref: '#',           highlight: false },
     { name: 'Premium',       price: '₱149',   sub: 'per month, or ₱1,490 yearly',          features: ['Unlimited questions & mock exams', 'Ask Kuya AI — unlimited', 'Advanced topic analytics', 'Offline review mode', 'No ads, walang abala'],                              cta: 'Start 7-day free trial', ctaHref: '/subscribe',  highlight: true  },
     { name: 'Review Center', price: 'Custom', sub: 'For schools & review centers',          features: ['Bulk student licenses', 'Custom question banks', 'Class & batch leaderboards', 'Performance reports for instructors', 'Priority support'],                              cta: 'Contact sales',        ctaHref: '#',           highlight: false },
   ];
   return (
-    <section id="pricing" style={{ padding: '120px 32px', background: '#fff' }}>
+    <section id="pricing" className="rn-section" style={{ padding: '120px 32px', background: '#fff' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 60 }}>
           <Pill text="PRICING" />
-          <h2 style={{ fontSize: 46, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
+          <h2 className="rn-h2" style={{ fontSize: 46, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
             Start free. Upgrade when ka-ready.
           </h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, alignItems: 'center' }}>
+        <div className="rn-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, alignItems: 'center' }}>
           {plans.map(p => (
-            <div key={p.name} style={{
+            <div key={p.name} className="rn-pricing-card" style={{
               background: p.highlight ? `linear-gradient(165deg, ${RN.royal}, ${RN.navy})` : '#fff',
               color: p.highlight ? '#fff' : RN.ink,
               borderRadius: 24, padding: 32,
@@ -675,10 +675,10 @@ function Pricing() {
 // ── FAQ ────────────────────────────────────────────────────
 function FAQSection() {
   return (
-    <section style={{ padding: '120px 32px', maxWidth: 800, margin: '0 auto' }}>
+    <section className="rn-section" style={{ padding: '120px 32px', maxWidth: 800, margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: 50 }}>
         <Pill text="FAQ" />
-        <h2 style={{ fontSize: 42, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
+        <h2 className="rn-h2" style={{ fontSize: 42, fontWeight: 800, color: RN.ink, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 16 }}>
           Madalas itanong
         </h2>
       </div>
@@ -707,7 +707,7 @@ function FinalCTA() {
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
             <BrandMark size={64} />
           </div>
-          <h2 style={{ fontSize: 52, fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.05, maxWidth: 700, margin: '0 auto' }}>
+          <h2 className="rn-h2" style={{ fontSize: 52, fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.05, maxWidth: 700, margin: '0 auto' }}>
             Magtaas ng GWA.<br />
             <span style={{ color: RN.gold }}>Magpasa together.</span>
           </h2>
@@ -731,21 +731,21 @@ function FinalCTA() {
 function Footer() {
   const cols = [
     { h: 'Product', items: ['Features', 'Pricing', 'Exams covered', "What's new", 'Mobile apps'] },
-    { h: 'Exams',   items: ['PRC Board', 'Civil Service', 'Bar Exam', 'UPCAT & CETs', 'PSHS-NCE', 'Scholarships'] },
+    { h: 'Exams',   items: ['Civil Service (CSE)', 'Nursing (PNLE)', 'LET — Teachers', 'PRC · UPCAT · Bar (soon)'] },
     { h: 'Company', items: ['About', 'Careers', 'Blog', 'Press kit', 'Contact'] },
     { h: 'Support', items: ['Help center', 'Privacy policy', 'Terms of service', 'Refunds', 'Report content'] },
   ];
   return (
     <footer style={{ background: RN.ink, color: 'rgba(255,255,255,0.7)', padding: '60px 32px 40px' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1fr', gap: 40, paddingBottom: 48, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="rn-footer-grid" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1fr', gap: 40, paddingBottom: 48, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
               <BrandMark size={34} />
               <Wordmark size={18} dark />
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.6, maxWidth: 260 }}>
-              Your all-in-one Filipino exam reviewer. From PRC Board to UPCAT — review together, pass together.
+              Your all-in-one Filipino exam reviewer for CSE, PNLE & LET — review together, pass together.
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
               {['FB', 'IG', 'TT', 'YT'].map(s => (
