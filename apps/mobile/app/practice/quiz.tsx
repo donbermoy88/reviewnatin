@@ -639,7 +639,8 @@ export default function PracticeQuizScreen() {
             <Pressable
               style={styles.closeBtn}
               onPress={() => {
-                if (isTimed || isBarkada) {
+                const hasProgress = answers.length > 0 || !!selected;
+                if (isTimed || isBarkada || hasProgress) {
                   Alert.alert(
                     'Leave quiz?',
                     'Your progress in this session will not be saved.',

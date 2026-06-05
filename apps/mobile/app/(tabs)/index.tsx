@@ -383,7 +383,7 @@ export default function DashboardScreen() {
             <View style={{ flex: 1, minWidth: 0, paddingRight: spacing.xs }}>
               <Text style={styles.heroGreet}>{timeGreeting()}</Text>
               <Text style={styles.heroName} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.85}>
-                Hey, {firstName}! 👋
+                {firstName}! 👋
               </Text>
             </View>
             <Pressable
