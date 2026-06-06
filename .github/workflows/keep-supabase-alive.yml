@@ -48,7 +48,7 @@ jobs:
             exit 1
           fi
 
-          URL="${SUPABASE_URL}/rest/v1/subscription_products?select=id,sku&limit=1"
+          URL="${SUPABASE_URL}/rest/v1/keepalive_pings?select=id,label&limit=1"
           echo "Querying ReviewNatin PH Supabase project at ${SUPABASE_URL}"
           HTTP_CODE="$(
             curl --silent --show-error --location \
@@ -91,7 +91,7 @@ jobs:
             exit 0
           fi
 
-          URL="${SUPABASE_URL}/rest/v1/subscription_products?select=id,sku&limit=1"
+          URL="${SUPABASE_URL}/rest/v1/keepalive_pings?select=id,label&limit=1"
           echo "Querying optional app-linked Supabase project at ${SUPABASE_URL}"
           HTTP_CODE="$(
             curl --silent --show-error --location \

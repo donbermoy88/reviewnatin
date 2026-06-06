@@ -12,12 +12,12 @@ Primary project from Supabase pause email:
 
 - Project name: `ReviewNatin PH`
 - Project ref: `tirxigmycjuhaecmbygs`
-- Keepalive URL: `https://tirxigmycjuhaecmbygs.supabase.co/rest/v1/subscription_products?select=id,sku&limit=1`
+- Keepalive URL: `https://tirxigmycjuhaecmbygs.supabase.co/rest/v1/keepalive_pings?select=id,label&limit=1`
 
 Optional project currently linked by local mobile env:
 
 - Project ref: `yohewfdafdmwntsbzgxx`
-- Keepalive URL: `https://yohewfdafdmwntsbzgxx.supabase.co/rest/v1/subscription_products?select=id,sku&limit=1`
+- Keepalive URL: `https://yohewfdafdmwntsbzgxx.supabase.co/rest/v1/keepalive_pings?select=id,label&limit=1`
 
 ## Required GitHub secret
 
@@ -44,6 +44,16 @@ Only add this if the mobile app remains pointed at `yohewfdafdmwntsbzgxx`:
 5. Confirm the `Keep ReviewNatin PH Supabase project active` job succeeds with HTTP `2xx`.
 
 If the workflow fails, fix it immediately. A failing keepalive means Supabase may still pause the Free project.
+
+## Database object
+
+Both projects include a tiny table for safe public keepalive reads:
+
+```sql
+public.keepalive_pings(id, label, created_at)
+```
+
+The table has RLS enabled and a read-only policy for `anon` / `authenticated`. It is intentionally separate from product/content tables so keepalive remains stable even if the app catalog schema changes.
 
 ## Why not Supabase Cron only?
 
