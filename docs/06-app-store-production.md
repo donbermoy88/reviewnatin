@@ -62,6 +62,19 @@ Apply account deletion RPC:
 npm run db:push
 ```
 
+### Supabase uptime / no-pause requirement
+
+ReviewNatin production uses Supabase project `ReviewNatin PH` (`tirxigmycjuhaecmbygs`) under organization `ReviewNatin PH` (`uzuxqdnyigbnxqopxgwt`).
+
+This organization should be on Supabase Pro or higher before accepting production traffic. Supabase Free projects can be paused for inactivity, which breaks Auth, PostgREST, Edge Functions, Storage, and mobile app sign-in/data flows. Until Pro is affordable, use the external GitHub Actions keepalive documented in [supabase-keepalive.md](./supabase-keepalive.md).
+
+Release blocker:
+
+- Upgrade organization `ReviewNatin PH` from Free to Pro in Supabase Dashboard → Organization/Billing settings.
+- Confirm project `tirxigmycjuhaecmbygs` remains `ACTIVE_HEALTHY` after the billing change.
+- Keep `npm run db:push` migration checks green after the upgrade.
+- Retain external uptime monitoring for alerting, but treat it as detection only, not pause prevention.
+
 ## IAP follow-up (post–TestFlight)
 
 Server receipt verification is implemented via the **`iap-verify`** Edge Function (`supabase/functions/iap-verify`). The mobile app calls it from `apps/mobile/lib/api/iap.ts` after StoreKit / Play Billing purchases.

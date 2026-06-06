@@ -1,155 +1,152 @@
 name: Keep Supabase Alive
 
-# Supabase's free tier pauses a project after 7 days of inactivity, where
-# "activity" means real requests that reach the database. This workflow runs
-# multiple times a day and executes an actual SELECT against a real table so
-# the project is genuinely exercised — not just the API gateway pinged.
+# Free Supabase projects can be paused after inactivity. This workflow creates
+# real external activity by querying a public PostgREST table several times a
+# day. It intentionally runs outside Supabase, so the schedule is independent
+# of the Supabase project itself.
 #
-# DESIGN DECISION — this workflow ALWAYS exits 0.
-# Its purpose is "best effort" prevention of an auto-pause. If a single ping
-# fails (network blip, transient gateway error, missing secret) that is NOT a
-# CI failure worth emailing about — it would just spam the inbox. Every
-# non-success state becomes a ::warning:: visible in the Actions tab instead.
-# Combined with `continue-on-error` at the job level, this guarantees the run
-# is reported as SUCCESS no matter what, so you never get a failure email.
+# Required GitHub secret:
+# - REVIEWNATIN_PH_SUPABASE_ANON_KEY
+#   Supabase Dashboard -> ReviewNatin PH (tirxigmycjuhaecmbygs)
+#   Project Settings -> API -> Project API keys -> anon public
+#
+# Optional GitHub secret:
+# - APP_LINKED_SUPABASE_ANON_KEY
+#   Only set this if the mobile app remains linked to yohewfdafdmwntsbzgxx.
 
 on:
   schedule:
-    # Four times a day, spread across the clock. Far more than the 7-day
-    # window requires — the redundancy covers GitHub's habit of delaying or
-    # occasionally dropping individual scheduled runs under load.
-    - cron: '0 1 * * *'   # 01:00 UTC
-    - cron: '0 7 * * *'   # 07:00 UTC
-    - cron: '0 13 * * *'  # 13:00 UTC
-    - cron: '0 19 * * *'  # 19:00 UTC
-  workflow_dispatch: # Allow manual trigger from the GitHub UI
+    # Four times per day. This is intentionally much more frequent than the
+    # 7-day inactivity window to cover delayed or skipped GitHub cron runs.
+    - cron: '11 0 * * *'
+    - cron: '11 6 * * *'
+    - cron: '11 12 * * *'
+    - cron: '11 18 * * *'
+  workflow_dispatch:
 
-# Permissions are granted per-job below (least privilege). The ping job needs
-# nothing; the heartbeat job needs contents:write to push its timestamp commit.
+concurrency:
+  group: keep-supabase-alive
+  cancel-in-progress: false
 
 jobs:
-  ping:
-    name: Ping Supabase — ReviewNatin PH
+  ping-reviewnatin-ph:
+    name: Keep ReviewNatin PH Supabase project active
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    continue-on-error: true # never mark the run as failed
-    permissions: {} # curl needs no repo permissions
+    permissions: {}
 
     steps:
-      - name: Ping a real table (best effort, never fails the job)
+      - name: Query ReviewNatin PH database through PostgREST
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_URL: https://tirxigmycjuhaecmbygs.supabase.co
+          SUPABASE_ANON_KEY: ${{ secrets.REVIEWNATIN_PH_SUPABASE_ANON_KEY }}
         run: |
-          # Explicitly turn OFF errexit. We handle every branch ourselves and
-          # guarantee a clean exit 0 at the end.
-          set +e
+          set -euo pipefail
 
-          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
-            echo "::warning::SUPABASE_URL or SUPABASE_ANON_KEY secret not set. Add them at Settings → Secrets and variables → Actions. Skipping ping."
+          if [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+            echo "::error::Missing REVIEWNATIN_PH_SUPABASE_ANON_KEY. Add it in GitHub repo Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
+
+          URL="${SUPABASE_URL}/rest/v1/subscription_products?select=id,sku&limit=1"
+          echo "Querying ReviewNatin PH Supabase project at ${SUPABASE_URL}"
+          HTTP_CODE="$(
+            curl --silent --show-error --location \
+              --max-time 30 \
+              --output /tmp/supabase-keepalive.json \
+              --write-out "%{http_code}" \
+              --header "apikey: ${SUPABASE_ANON_KEY}" \
+              --header "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+              --header "Accept: application/json" \
+              "${URL}"
+          )"
+
+          echo "HTTP ${HTTP_CODE}"
+          cat /tmp/supabase-keepalive.json
+          echo
+
+          if [ "${HTTP_CODE}" -lt 200 ] || [ "${HTTP_CODE}" -ge 300 ]; then
+            echo "::error::Supabase keepalive failed for tirxigmycjuhaecmbygs. Expected 2xx from PostgREST database query."
+            exit 1
+          fi
+
+          echo "ReviewNatin PH Supabase keepalive succeeded at $(date -u '+%Y-%m-%d %H:%M:%S UTC')."
+
+  ping-app-linked-project:
+    name: Keep app-linked Supabase project active if configured
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+
+    steps:
+      - name: Query app-linked database if optional secret exists
+        env:
+          SUPABASE_URL: https://yohewfdafdmwntsbzgxx.supabase.co
+          SUPABASE_ANON_KEY: ${{ secrets.APP_LINKED_SUPABASE_ANON_KEY }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+            echo "::notice::APP_LINKED_SUPABASE_ANON_KEY is not set. Skipping optional app-linked project keepalive."
             exit 0
           fi
 
-          BASE="${SUPABASE_URL%/}"
+          URL="${SUPABASE_URL}/rest/v1/subscription_products?select=id,sku&limit=1"
+          echo "Querying optional app-linked Supabase project at ${SUPABASE_URL}"
+          HTTP_CODE="$(
+            curl --silent --show-error --location \
+              --max-time 30 \
+              --output /tmp/supabase-keepalive-app-linked.json \
+              --write-out "%{http_code}" \
+              --header "apikey: ${SUPABASE_ANON_KEY}" \
+              --header "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+              --header "Accept: application/json" \
+              "${URL}"
+          )"
 
-          # Query a real table so the request reaches Postgres (genuine DB
-          # activity). 'questions' is a stable, anon-readable catalog table.
-          # We try a couple of fallbacks in case the schema changes, then fall
-          # back to the auth health endpoint which always touches the project.
-          ping_endpoint() {
-            curl -s -o /dev/null -m 30 -w "%{http_code}" \
-              -H "apikey: $SUPABASE_ANON_KEY" \
-              -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
-              "$1"
-          }
+          echo "HTTP ${HTTP_CODE}"
+          cat /tmp/supabase-keepalive-app-linked.json
+          echo
 
-          STATUS=""
-          for PATH_TRY in \
-            "/rest/v1/questions?select=id&limit=1" \
-            "/rest/v1/flashcards?select=id&limit=1" \
-            "/auth/v1/health"
-          do
-            URL="$BASE$PATH_TRY"
-            STATUS=$(ping_endpoint "$URL")
-            CURL_EXIT=$?
-            echo "Tried $URL -> curl exit $CURL_EXIT, HTTP $STATUS  ($(date -u '+%Y-%m-%d %H:%M:%S UTC'))"
-            # A 2xx means a real query ran successfully — best possible signal.
-            if [ "$CURL_EXIT" -eq 0 ] && [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
-              echo "✅ Supabase project is active (real query succeeded)."
-              exit 0
-            fi
-            # 401/403/404/406 still mean the request reached the project and
-            # was processed — that counts as activity. Treat as success too.
-            if [ "$CURL_EXIT" -eq 0 ] && { [ "$STATUS" -eq 401 ] || [ "$STATUS" -eq 403 ] || [ "$STATUS" -eq 404 ] || [ "$STATUS" -eq 406 ]; }; then
-              echo "✅ Supabase project is reachable (HTTP $STATUS — request reached the project, counts as activity)."
-              exit 0
-            fi
-          done
+          if [ "${HTTP_CODE}" -lt 200 ] || [ "${HTTP_CODE}" -ge 300 ]; then
+            echo "::error::Optional app-linked Supabase keepalive failed for yohewfdafdmwntsbzgxx."
+            exit 1
+          fi
 
-          # If we got here every attempt failed to confirm reachability.
-          # 503/504/000 typically mean a paused project or transient gateway
-          # issue. Emit a warning (NOT a failure) and let the next scheduled
-          # run retry — we run 4×/day so a single miss is harmless.
-          echo "::warning::Could not confirm Supabase is reachable (last HTTP $STATUS). The project may be paused or there was a transient network issue. Unpause at https://supabase.com/dashboard/project/yohewfdafdmwntsbzgxx — keep-alive retries automatically on the next schedule."
-          exit 0
+          echo "Optional app-linked Supabase keepalive succeeded at $(date -u '+%Y-%m-%d %H:%M:%S UTC')."
 
-  # ---------------------------------------------------------------------------
-  # Heartbeat: defeat GitHub's "disable scheduled workflows after 60 days of no
-  # repository activity" rule WITHOUT any external service or your machine.
-  #
-  # It commits a one-line timestamp ONLY when the repo has been silent for 25+
-  # days. While you commit normally this NEVER fires (zero history noise). If
-  # the project is ever left untouched, it auto-commits to reset GitHub's
-  # inactivity clock, so the scheduled pings above keep running forever.
-  # Like the ping job, it can never fail the run.
-  # ---------------------------------------------------------------------------
-  heartbeat:
-    name: Repo heartbeat (anti auto-disable)
+  repo-heartbeat:
+    name: Repo heartbeat to keep scheduled workflows enabled
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    continue-on-error: true
-    if: github.event_name == 'schedule' # only on the cron, not manual runs
+    if: github.event_name == 'schedule'
     permissions:
-      contents: write # needed to push the timestamp commit
+      contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Commit a timestamp only if the repo has been quiet for 25+ days
+      - name: Commit heartbeat only if repo has been quiet for 25+ days
         run: |
-          set +e
+          set -euo pipefail
 
-          # Age (in days) of the most recent commit on this branch.
-          LAST_COMMIT_TS=$(git log -1 --format=%ct 2>/dev/null)
-          NOW_TS=$(date -u +%s)
-          if [ -z "$LAST_COMMIT_TS" ]; then
-            echo "::warning::Could not read last commit time; skipping heartbeat."
-            exit 0
-          fi
-          AGE_DAYS=$(( (NOW_TS - LAST_COMMIT_TS) / 86400 ))
-          echo "Last repo activity was $AGE_DAYS day(s) ago."
+          LAST_COMMIT_TS="$(git log -1 --format=%ct)"
+          NOW_TS="$(date -u +%s)"
+          AGE_DAYS="$(( (NOW_TS - LAST_COMMIT_TS) / 86400 ))"
+          echo "Last repository activity was ${AGE_DAYS} day(s) ago."
 
-          if [ "$AGE_DAYS" -lt 25 ]; then
-            echo "Repo is active — no heartbeat commit needed."
+          if [ "${AGE_DAYS}" -lt 25 ]; then
+            echo "Repository is active. No heartbeat commit needed."
             exit 0
           fi
 
-          echo "Repo has been quiet for $AGE_DAYS days — writing heartbeat to keep the schedule alive."
           mkdir -p .github
-          echo "Last automated keep-alive heartbeat: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > .github/keepalive-heartbeat.txt
+          echo "Last automated keepalive heartbeat: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > .github/keepalive-heartbeat.txt
 
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .github/keepalive-heartbeat.txt
-          git commit -m "chore(ci): keep-alive heartbeat [skip ci]" || { echo "Nothing to commit."; exit 0; }
-
-          # Rebase-pull guards against a race, then push. Any failure is a
-          # warning, never a job failure.
-          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" 2>/dev/null
-          if git push origin "HEAD:${GITHUB_REF_NAME}"; then
-            echo "✅ Heartbeat committed — GitHub's 60-day inactivity timer is reset."
-          else
-            echo "::warning::Heartbeat push failed (permissions or branch protection?). The 4x/day pings still ran; only the long-term auto-disable guard is affected."
-          fi
-          exit 0
+          git commit -m "chore(ci): keep scheduled keepalive active [skip ci]"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
