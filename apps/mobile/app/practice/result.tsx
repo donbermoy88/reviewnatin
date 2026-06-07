@@ -3,9 +3,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Alert, Pressable, ScrollView, Text, View } from 'react-native';
-import { AppSheet } from '../../components/app-sheet';
 import { ShareScoreCard } from '../../components/share-score-card';
 import { ShareScoreCapture } from '../../components/share-score-capture';
+import { ReportContentButton } from '../../components/report-content-button';
 import { fetchExamBySlug } from '../../lib/api/catalog';
 import { canUseViewShot, shareQuizScore, shareQuizScoreImage } from '../../lib/share/score-share';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -18,7 +18,6 @@ import { createResultStyles } from '../../lib/themed-styles';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchSessionReview, type SessionReviewItem } from '../../lib/api/quiz';
-import { reportQuestion, type ReportReason } from '../../lib/api/reported-questions';
 import { completePasaPathTask } from '../../lib/api/pasapath';
 import { submitBarkadaChallengeResult } from '../../lib/api/barkada';
 import { MOCK_PASS_THRESHOLD } from '../../lib/api/mock-history';
@@ -52,8 +51,6 @@ export default function PracticeResultScreen() {
   const { isPremium } = useEntitlements();
   const { displayName } = useUserProfile('reviewer');
   const [showInterstitial, setShowInterstitial] = useState(false);
-  const [reportSheetOpen, setReportSheetOpen] = useState(false);
-  const [reportTargetId, setReportTargetId] = useState<string | null>(null);
   const [reportFeedback, setReportFeedback] = useState<string | null>(null);
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
@@ -143,26 +140,6 @@ export default function PracticeResultScreen() {
 
   const wrongCount = review.filter((r) => r.isCorrect === false).length;
 
-  const promptReport = (questionId: string) => {
-    if (!user) {
-      router.push('/(auth)/login');
-      return;
-    }
-    setReportTargetId(questionId);
-    setReportFeedback(null);
-    setReportSheetOpen(true);
-  };
-
-  const submitReport = async (questionId: string, reason: ReportReason) => {
-    setReportSheetOpen(false);
-    try {
-      await reportQuestion(questionId, reason);
-      setReportFeedback('Thank you! We\'ll review this within 48 hours.');
-    } catch {
-      setReportFeedback('Report failed. Please try again later.');
-    }
-  };
-
   const requestAiExplanation = async (questionId: string) => {
     if (!user) {
       router.push('/(auth)/login');
@@ -212,8 +189,11 @@ export default function PracticeResultScreen() {
       await stopSpeaking();
     }
     setSpeakingId(questionId);
-    await speakText(text);
-    setSpeakingId(null);
+    const started = await speakText(text, 'en', {
+      onDone: () => setSpeakingId(null),
+      onError: () => setSpeakingId(null),
+    });
+    if (!started) setSpeakingId(null);
   };
 
   const handleCaptureReady = useCallback((capture: () => Promise<string | undefined>) => {
@@ -400,12 +380,13 @@ export default function PracticeResultScreen() {
                             </Text>
                           </Pressable>
                         ) : null}
-                        {user ? (
-                          <Pressable style={styles.reportBtn} onPress={() => promptReport(item.questionId)}>
-                            <Ionicons name="flag-outline" size={16} color={colors.textMuted} />
-                            <Text style={styles.reportBtnText}>Report wrong answer</Text>
-                          </Pressable>
-                        ) : null}
+                        <ReportContentButton
+                          contentType="question"
+                          contentId={item.questionId}
+                          label="Flag question"
+                          style={{ alignSelf: 'flex-start' }}
+                          onReported={() => setReportFeedback('Thank you! We will review this content issue.')}
+                        />
                       </View>
                     ) : null}
                   </Pressable>
@@ -484,19 +465,6 @@ export default function PracticeResultScreen() {
           </ShareScoreCapture>
         </View>
       ) : null}
-
-      <AppSheet
-        visible={reportSheetOpen}
-        title="Report an issue"
-        subtitle="What's wrong with this question?"
-        onClose={() => setReportSheetOpen(false)}
-        actions={[
-          { label: 'Wrong answer key', onPress: () => reportTargetId && void submitReport(reportTargetId, 'wrong_answer') },
-          { label: 'Unclear question', onPress: () => reportTargetId && void submitReport(reportTargetId, 'unclear_question'), variant: 'outline' },
-          { label: 'Typo', onPress: () => reportTargetId && void submitReport(reportTargetId, 'typo'), variant: 'outline' },
-          { label: 'Cancel', onPress: () => setReportSheetOpen(false), variant: 'ghost' },
-        ]}
-      />
 
       <AdInterstitialModal
         visible={showInterstitial}

@@ -17,10 +17,11 @@ import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { QuestionImage } from '../../components/question-image';
+import { ReportContentButton } from '../../components/report-content-button';
 import { RichText } from '../../components/rich-text';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createQuizStyles } from '../../lib/themed-styles';
-import { shuffleArray } from '../../lib/shuffle';
+import { randomizeQuestionSet } from '../../lib/question-randomization';
 import {
   checkQuestionAnswer,
   fetchExamBySlug,
@@ -50,22 +51,12 @@ import { deductHint, awardSessionXp, fetchXpStats } from '../../lib/api/xp';
 import { FREE_DAILY_QUESTIONS } from '../../lib/paywall';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { saveGuestQuizSession } from '../../lib/guest-quiz-history';
+import { dismissDiagnosticPrompt } from '../../lib/diagnostic-prompt';
+import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
 import type { Question, QuizAnswerRecord } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
-
-/**
- * Shuffle questions and their choices for practice-style modes.
- * - `shuffleQuestions`: randomises question order (not used for mock/board/diagnostic
- *   where the question set is curated/ordered).
- * - Always shuffles choices within each question because grading uses stable choice IDs
- *   (not positional letters), so this is always safe.
- */
-function prepareQuestions(questions: Question[], shuffleQuestions: boolean): Question[] {
-  const qs = shuffleQuestions ? shuffleArray(questions) : questions;
-  return qs.map((q) => ({ ...q, choices: shuffleArray(q.choices) }));
-}
 
 function finalizeAnswers(
   prev: QuizAnswerRecord[],
@@ -169,8 +160,7 @@ export default function PracticeQuizScreen() {
             router.replace('/(auth)/login');
             return;
           }
-          // Diagnostic: keep question order (calibrated set), but shuffle choices
-          setQuestions(prepareQuestions(await fetchDiagnosticQuestions(slug, DIAGNOSTIC_ITEM_COUNT), false));
+          setQuestions(randomizeQuestionSet(await fetchDiagnosticQuestions(slug, DIAGNOSTIC_ITEM_COUNT)));
         } else if (isMock && mockExamId) {
           try {
             const [mock, qs] = await Promise.all([
@@ -181,8 +171,7 @@ export default function PracticeQuizScreen() {
               setMockTitle(mock.title);
               setTimeLeft(mock.durationSeconds);
             }
-            // Mock: keep question order (official exam order), shuffle choices
-            setQuestions(prepareQuestions(qs.questions, false));
+            setQuestions(randomizeQuestionSet(qs.questions));
           } catch (err) {
             if (isMiniMockLimitError(err as { message?: string })) {
               setPaywallBlocked(true);
@@ -201,13 +190,11 @@ export default function PracticeQuizScreen() {
             return;
           }
           const result = await fetchPracticeQuestions(slug, BOARD_ITEM_COUNT, topicSlug);
-          // Board: keep question order, shuffle choices
-          setQuestions(prepareQuestions(result.questions.slice(0, BOARD_ITEM_COUNT), false));
+          setQuestions(randomizeQuestionSet(result.questions.slice(0, BOARD_ITEM_COUNT)));
           setTimeLeft(BOARD_DURATION_SECONDS);
         } else if (isMistakeReview) {
           const ids = await fetchMistakeQuestionIds(slug, 12);
-          // Mistake review: shuffle questions + choices so it feels fresh each time
-          setQuestions(prepareQuestions(await fetchQuestionsByIds(ids), true));
+          setQuestions(randomizeQuestionSet(await fetchQuestionsByIds(ids)));
         } else if (isWeakArea) {
           if (!user) {
             router.replace('/(auth)/login');
@@ -225,8 +212,7 @@ export default function PracticeQuizScreen() {
             setPaywallBlocked(true);
             return;
           }
-          // Weak area: shuffle both so different order each session
-          setQuestions(prepareQuestions(result.questions, true));
+          setQuestions(randomizeQuestionSet(result.questions));
         } else if (isOffline) {
           const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
           if (!offlineQs.length) {
@@ -235,7 +221,7 @@ export default function PracticeQuizScreen() {
             return;
           }
           setOfflineMode(true);
-          setQuestions(prepareQuestions(offlineQs, true));
+          setQuestions(randomizeQuestionSet(offlineQs));
         } else if (isBarkada) {
           if (!user) {
             router.replace('/(auth)/login');
@@ -246,7 +232,7 @@ export default function PracticeQuizScreen() {
             setPaywallBlocked(true);
             return;
           }
-          setQuestions(prepareQuestions(result.questions.slice(0, barkadaLimit), true));
+          setQuestions(randomizeQuestionSet(result.questions.slice(0, barkadaLimit)));
         } else {
           if (user && exam) {
             const limits = await fetchUsageLimits(slug);
@@ -260,8 +246,7 @@ export default function PracticeQuizScreen() {
             setPaywallBlocked(true);
             return;
           }
-          // Regular practice: shuffle both questions and choices
-          setQuestions(prepareQuestions(result.questions, true));
+          setQuestions(randomizeQuestionSet(result.questions));
         }
         if (user) {
           const [bookmarks, xpStats] = await Promise.all([
@@ -276,7 +261,7 @@ export default function PracticeQuizScreen() {
           const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
           if (offlineQs.length) {
             setOfflineMode(true);
-            setQuestions(prepareQuestions(offlineQs, true));
+            setQuestions(randomizeQuestionSet(offlineQs));
           }
         }
       } finally {
@@ -375,7 +360,11 @@ export default function PracticeQuizScreen() {
         },
       ]);
       if (user && !effectiveOffline) {
-        recordQuizOutcome(current.id, result.isCorrect, result.isCorrect ? undefined : selected);
+        void recordQuizOutcome(
+          current.id,
+          result.isCorrect,
+          result.isCorrect ? undefined : selected
+        ).catch(() => {});
       }
     } catch {
       /* grading failed */
@@ -420,13 +409,15 @@ export default function PracticeQuizScreen() {
           })),
           completedAt: new Date().toISOString(),
         });
-      } catch {
+      } catch (error) {
+        captureAppException(error, { area: 'quiz', action: 'queue_offline_session' }, { mode: 'practice', itemCount: questions.length });
         /* queue write failed — non-fatal; the user still gets their score */
       }
     }
 
     if (user && !offlineMode) {
       try {
+        addAppBreadcrumb('quiz', 'server quiz save started', { itemCount: questions.length });
         const exam = await fetchExamBySlug(slug);
         if (exam) {
           sessionId = await createQuizSession(
@@ -473,10 +464,21 @@ export default function PracticeQuizScreen() {
             }
           }
         }
-      } catch {
+      } catch (error) {
+        captureAppException(error, { area: 'quiz', action: 'save_server_session' }, {
+          mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
+          itemCount: questions.length,
+        });
         /* session save failed */
       }
     }
+
+    captureAppMessage('quiz submitted', { area: 'quiz', action: 'submit' }, {
+      score,
+      itemCount: questions.length,
+      offline: offlineMode,
+      mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
+    });
 
     const totalCorrectFinal = Math.round((serverScore / 100) * questions.length);
 
@@ -583,7 +585,7 @@ export default function PracticeQuizScreen() {
           title={paywallReason === 'board' ? 'Board Exam Mode' : 'Daily limit reached'}
           description={
             paywallReason === 'board'
-              ? 'Simulate real exam pressure with Exam Pass or Plus — strict timer, no hints, no going back.'
+              ? 'Simulate real exam pressure with ReviewNatin Plus — strict timer, no hints, no going back.'
               : `You've used ${FREE_DAILY_QUESTIONS}/${FREE_DAILY_QUESTIONS} free questions today. Unlock unlimited practice.`
           }
           actionLabel="View plans"
@@ -635,11 +637,29 @@ export default function PracticeQuizScreen() {
     <View style={styles.root}>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 140 }}>
         <View style={[styles.topBar, { paddingTop: insets.top + spacing.sm }]}>
-          {!isStrictExam && !isDiagnostic ? (
+          {!isStrictExam ? (
             <Pressable
               style={styles.closeBtn}
               onPress={() => {
                 const hasProgress = answers.length > 0 || !!selected;
+                if (isDiagnostic && user) {
+                  Alert.alert(
+                    'Leave diagnostic?',
+                    'You can continue with the baseline later from Home. This attempt will not be saved.',
+                    [
+                      { text: 'Keep going', style: 'cancel' },
+                      {
+                        text: 'Leave',
+                        style: 'destructive',
+                        onPress: () => {
+                          void dismissDiagnosticPrompt(user.id, slug).catch(() => {});
+                          router.replace('/(tabs)');
+                        },
+                      },
+                    ]
+                  );
+                  return;
+                }
                 if (isTimed || isBarkada || hasProgress) {
                   Alert.alert(
                     'Leave quiz?',
@@ -653,6 +673,8 @@ export default function PracticeQuizScreen() {
                 }
                 router.back();
               }}
+              accessibilityRole="button"
+              accessibilityLabel={isDiagnostic ? 'Leave diagnostic quiz' : 'Close quiz'}
             >
               <Ionicons name="close" size={18} color={colors.text} />
             </Pressable>
@@ -726,7 +748,12 @@ export default function PracticeQuizScreen() {
             <Pill color={colors.primary}>{current.topic.subject.name.toUpperCase()}</Pill>
           ) : null}
           {user ? (
-            <Pressable onPress={toggleBookmarkCurrent} hitSlop={8}>
+            <Pressable
+              onPress={toggleBookmarkCurrent}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={bookmarkedIds.has(current.id) ? 'Remove bookmark' : 'Save bookmark'}
+            >
               <Ionicons
                 name={bookmarkedIds.has(current.id) ? 'bookmark' : 'bookmark-outline'}
                 size={20}
@@ -734,6 +761,12 @@ export default function PracticeQuizScreen() {
               />
             </Pressable>
           ) : null}
+          <ReportContentButton
+            contentType="question"
+            contentId={current.id}
+            label="Flag"
+            compact
+          />
         </View>
 
         <View style={styles.questionCard}>

@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
+import { ReportContentButton } from '../../components/report-content-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createListScreenStyles } from '../../lib/themed-styles';
 import { fetchExamBySlug } from '../../lib/api/catalog';
@@ -159,6 +160,13 @@ export default function MistakesScreen() {
                 <Text style={styles.cardMeta}>
                   Wrong {m.timesWrong}x · Last {new Date(m.lastWrongAt).toLocaleDateString()}
                 </Text>
+                <ReportContentButton
+                  contentType="question"
+                  contentId={m.questionId}
+                  label="Flag question"
+                  compact
+                  style={{ alignSelf: 'flex-start', marginTop: spacing.sm }}
+                />
               </View>
             ))}
           </>

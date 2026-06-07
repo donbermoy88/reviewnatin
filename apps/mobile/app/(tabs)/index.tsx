@@ -45,6 +45,7 @@ import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StreakMilestoneModal, isStreakMilestone } from '../../components/streak-milestone-modal';
+import { isDiagnosticPromptDismissed } from '../../lib/diagnostic-prompt';
 
 function timeGreeting(): string {
   const h = new Date().getHours();
@@ -125,71 +126,79 @@ export default function DashboardScreen() {
   const [milestoneVisible, setMilestoneVisible] = useState(false);
 
   const load = useCallback(async () => {
-    const merged = await resolveOnboardingGoal(user?.id);
-    setGoal(merged);
-    const slug = merged?.examSlug ?? DEFAULT_EXAM_SLUG;
-    const target = dailyQuestionTarget(merged?.dailyMinutes ?? 30);
+    try {
+      const merged = await resolveOnboardingGoal(user?.id);
+      setGoal(merged);
+      const slug = merged?.examSlug ?? DEFAULT_EXAM_SLUG;
+      const target = dailyQuestionTarget(merged?.dailyMinutes ?? 30);
 
-    if (user) {
-      try {
-        const [practiceStats, gate] = await Promise.all([
-          fetchPracticeStats(user.id, target).then(async (s) => {
-            // Show streak milestone modal if a milestone was just reached
-            if (isStreakMilestone(s.streakDays)) {
-              const key = `milestone_shown_${user.id}_${s.streakDays}`;
-              const shown = await AsyncStorage.getItem(key).catch(() => null);
-              if (!shown) {
-                await AsyncStorage.setItem(key, '1').catch(() => {});
-                setMilestoneVisible(true);
-              }
-            }
-            return s;
-          }),
-          fetchContentGateStatus(slug),
-        ]);
-        setStats(practiceStats);
-        setContentGate(gate);
-        setPasapath(await fetchTodayPasaPath(slug));
-        setReadiness(await fetchLatestReadiness(slug));
+      if (user) {
         try {
-          const analytics = await fetchTopicAnalytics(slug);
-          setWeakTopic(pickWeakTopic(analytics.subjects));
+          const [practiceStats, gate] = await Promise.all([
+            fetchPracticeStats(user.id, target).then(async (s) => {
+              // Show streak milestone modal if a milestone was just reached
+              if (isStreakMilestone(s.streakDays)) {
+                const key = `milestone_shown_${user.id}_${s.streakDays}`;
+                const shown = await AsyncStorage.getItem(key).catch(() => null);
+                if (!shown) {
+                  await AsyncStorage.setItem(key, '1').catch(() => {});
+                  setMilestoneVisible(true);
+                }
+              }
+              return s;
+            }),
+            fetchContentGateStatus(slug),
+          ]);
+          setStats(practiceStats);
+          setContentGate(gate);
+          setPasapath(await fetchTodayPasaPath(slug));
+          setReadiness(await fetchLatestReadiness(slug));
+          try {
+            const analytics = await fetchTopicAnalytics(slug);
+            setWeakTopic(pickWeakTopic(analytics.subjects));
+          } catch {
+            setWeakTopic(null);
+          }
+          if (gate?.meetsMinimum && !(await hasCompletedDiagnostic(slug))) {
+            const dismissed = await isDiagnosticPromptDismissed(user.id, slug).catch(() => false);
+            if (!dismissed) {
+              router.replace('/diagnostic/intro');
+              return;
+            }
+          }
         } catch {
-          setWeakTopic(null);
+          setStats((s) => ({ ...s, questionsTarget: target }));
         }
-        if (gate?.meetsMinimum && !(await hasCompletedDiagnostic(slug))) {
-          router.replace('/diagnostic/intro');
-          return;
+      } else {
+        setPasapath(null);
+        setReadiness(null);
+        setWeakTopic(null);
+        try {
+          setStats(await fetchGuestPracticeStats(target));
+        } catch {
+          setStats((s) => ({ ...s, questionsTarget: target }));
         }
-      } catch {
-        setStats((s) => ({ ...s, questionsTarget: target }));
       }
-    } else {
-      setPasapath(null);
-      setReadiness(null);
-      setWeakTopic(null);
-      try {
-        setStats(await fetchGuestPracticeStats(target));
-      } catch {
-        setStats((s) => ({ ...s, questionsTarget: target }));
+
+      const exam = await fetchExamBySlug(slug).catch(() => null);
+      if (exam) {
+        setExamName(exam.name);
+        setExamTypeId(exam.id);
+        const areas = await fetchSubjectAreas(exam.id).catch(() => []);
+        setSubjects(areas.slice(0, 3));
+      } else {
+        const found = EXAM_TYPES.find((e) => e.slug === slug);
+        if (found) setExamName(found.name);
       }
-    }
 
-    const exam = await fetchExamBySlug(slug);
-    if (exam) {
-      setExamName(exam.name);
-      setExamTypeId(exam.id);
-      const areas = await fetchSubjectAreas(exam.id);
-      setSubjects(areas.slice(0, 3));
-    } else {
-      const found = EXAM_TYPES.find((e) => e.slug === slug);
-      if (found) setExamName(found.name);
+      if (!user) {
+        setContentGate(await fetchContentGateStatus(slug).catch(() => null));
+      }
+      setAnnouncements(await fetchAppAnnouncements(slug, 3).catch(() => []));
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
     }
-
-    if (!user) setContentGate(await fetchContentGateStatus(slug));
-    setAnnouncements(await fetchAppAnnouncements(slug, 3).catch(() => []));
-    setLoading(false);
-    setRefreshing(false);
   }, [user, router]);
 
   useEffect(() => {

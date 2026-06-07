@@ -21,8 +21,8 @@ import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { syncOnboardingAfterAuth } from '../../lib/auth/post-auth';
 import { getAppEntryHref } from '../../lib/onboarding-nav';
+import { updateUserDisplayName } from '../../lib/api/profile';
 import { validateEmail, validatePassword } from '../../lib/auth/validation';
-import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../providers/auth-provider';
 
 function LabeledField({
@@ -113,12 +113,12 @@ export default function SignUpScreen() {
       return;
     }
 
-    // Update display_name in profile
+    // Persist the name into auth metadata + public.users.
     try {
-      await supabase
-        .from('profiles')
-        .update({ display_name: displayName.trim() })
-        .eq('id', userId);
+      const updateResult = await updateUserDisplayName(displayName.trim());
+      if (!updateResult.ok) {
+        setInfo(`Account created, but name sync failed: ${updateResult.error}`);
+      }
     } catch {
       // Non-fatal — display name can be updated later from settings.
     }
@@ -132,7 +132,10 @@ export default function SignUpScreen() {
   };
 
   const finishAuth = async (sessionUserId?: string) => {
-    if (!sessionUserId) return;
+    if (!sessionUserId) {
+      setLoading(false);
+      return;
+    }
     const syncError = await syncOnboardingAfterAuth(sessionUserId);
     if (syncError) {
       setInfo(`Logged in, but goal sync failed: ${syncError}`);
@@ -147,6 +150,10 @@ export default function SignUpScreen() {
     const result = provider === 'google' ? await signInGoogle() : await signInApple();
     if (result.error) {
       setError(result.error);
+      setLoading(false);
+      return;
+    }
+    if (result.cancelled) {
       setLoading(false);
       return;
     }

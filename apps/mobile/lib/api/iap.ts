@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { captureAppException, captureAppMessage } from '../monitoring/events';
 
 export type IapVerifyPayload = {
   platform: 'apple' | 'google';
@@ -21,11 +22,18 @@ export async function verifyPurchaseWithServer(payload: IapVerifyPayload): Promi
   const { data, error } = await supabase.functions.invoke('iap-verify', { body: payload });
 
   if (error) {
+    captureAppException(error, { area: 'iap', action: 'iap_verify_function' }, { platform: payload.platform, productId: payload.product_id });
     return { ok: false, error: error.message };
   }
 
   const body = data as { success?: boolean; error?: string; fulfillment?: { duplicate?: boolean } } | null;
   if (!body?.success) {
+    captureAppMessage(
+      'iap verification rejected',
+      { area: 'iap', action: 'iap_verify_rejected' },
+      { platform: payload.platform, productId: payload.product_id, error: body?.error },
+      'warning'
+    );
     return { ok: false, error: body?.error ?? 'Verification failed' };
   }
 

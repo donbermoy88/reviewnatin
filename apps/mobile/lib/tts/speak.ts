@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { sanitizeSpeechText } from './sanitize';
 
 let speechModule: typeof import('expo-speech') | null = null;
 
@@ -10,33 +11,39 @@ async function getSpeech() {
   return speechModule;
 }
 
-export async function speakText(text: string, locale: 'en' | 'fil' = 'en'): Promise<boolean> {
-  const trimmed = text.trim();
+export async function speakText(
+  text: string,
+  locale: 'en' | 'fil' = 'en',
+  options?: {
+    onDone?: () => void;
+    onError?: () => void;
+  }
+): Promise<boolean> {
+  const trimmed = sanitizeSpeechText(text);
   if (!trimmed) return false;
 
   const Speech = await getSpeech();
   if (!Speech) return false;
 
   try {
-    Speech.stop();
-    await new Promise<void>((resolve) => {
-      Speech.speak(trimmed, {
-        language: locale === 'fil' ? 'fil-PH' : 'en-PH',
-        rate: Platform.OS === 'ios' ? 0.48 : 0.9,
-        onDone: () => resolve(),
-        onStopped: () => resolve(),
-        onError: () => resolve(),
-      });
+    await Speech.stop();
+    Speech.speak(trimmed, {
+      language: locale === 'fil' ? 'fil-PH' : 'en-PH',
+      rate: Platform.OS === 'ios' ? 0.48 : 0.9,
+      onDone: options?.onDone,
+      onStopped: options?.onDone,
+      onError: options?.onError,
     });
     return true;
   } catch {
+    options?.onError?.();
     return false;
   }
 }
 
 export async function stopSpeaking(): Promise<void> {
   const Speech = await getSpeech();
-  if (Speech) Speech.stop();
+  if (Speech) await Speech.stop();
 }
 
 export function canUseTts(): boolean {

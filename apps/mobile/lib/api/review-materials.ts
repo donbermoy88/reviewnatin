@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { cachedJson } from '../cache/json-cache';
 
 export type ReviewMaterial = {
   id: string;
@@ -18,34 +19,36 @@ export async function fetchReviewMaterialsByExam(
 ): Promise<ReviewMaterial[]> {
   if (!isSupabaseConfigured) return [];
 
-  const { data, error } = await supabase.rpc('get_review_materials_by_exam', {
-    p_exam_slug: examSlug,
-    p_material_type: materialType ?? null,
-  });
+  return cachedJson(`review-materials:${examSlug}:${materialType ?? 'all'}`, async () => {
+    const { data, error } = await supabase.rpc('get_review_materials_by_exam', {
+      p_exam_slug: examSlug,
+      p_material_type: materialType ?? null,
+    });
 
-  if (error) throw error;
+    if (error) throw error;
 
-  return ((data ?? []) as Array<{
-    id: string;
-    title: string;
-    body: string;
-    material_type: string;
-    is_premium: boolean;
-    topic_slug: string;
-    topic_name: string;
-    subject_name: string;
-    subject_slug: string;
-  }>).map((row) => ({
-    id: row.id,
-    title: row.title,
-    body: row.body,
-    materialType: row.material_type,
-    isPremium: row.is_premium,
-    topicSlug: row.topic_slug,
-    topicName: row.topic_name,
-    subjectName: row.subject_name,
-    subjectSlug: row.subject_slug,
-  }));
+    return ((data ?? []) as Array<{
+      id: string;
+      title: string;
+      body: string;
+      material_type: string;
+      is_premium: boolean;
+      topic_slug: string;
+      topic_name: string;
+      subject_name: string;
+      subject_slug: string;
+    }>).map((row) => ({
+      id: row.id,
+      title: row.title,
+      body: row.body,
+      materialType: row.material_type,
+      isPremium: row.is_premium,
+      topicSlug: row.topic_slug,
+      topicName: row.topic_name,
+      subjectName: row.subject_name,
+      subjectSlug: row.subject_slug,
+    }));
+  }, { ttlMs: 60 * 60 * 1000, staleTtlMs: 14 * 24 * 60 * 60 * 1000 });
 }
 
 export async function fetchReviewMaterialById(

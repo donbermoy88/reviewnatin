@@ -59,6 +59,7 @@ module.exports = () => {
           ...(base.ios?.infoPlist ?? {}),
           CFBundleURLTypes: [{ CFBundleURLSchemes: urlSchemes }],
           ITSAppUsesNonExemptEncryption: false,
+          UIBackgroundModes: ['fetch', 'remote-notification'],
         },
         entitlements: {
           'aps-environment': isProductionPush ? 'production' : 'development',

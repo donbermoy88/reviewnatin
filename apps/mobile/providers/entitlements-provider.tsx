@@ -24,6 +24,7 @@ const EntitlementsContext = createContext<EntitlementsContextValue | null>(null)
 
 export function EntitlementsProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
+  const userId = user?.id;
   const [products, setProducts] = useState<SubscriptionProduct[]>([]);
   const [entitlements, setEntitlements] = useState<UserEntitlement[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,8 +33,8 @@ export function EntitlementsProvider({ children }: { children: React.ReactNode }
     try {
       const prods = await fetchSubscriptionProducts();
       setProducts(prods);
-      if (user) {
-        const ents = await fetchUserEntitlements(user.id);
+      if (userId) {
+        const ents = await fetchUserEntitlements(userId);
         setEntitlements(ents);
       } else {
         setEntitlements([]);
@@ -43,7 +44,7 @@ export function EntitlementsProvider({ children }: { children: React.ReactNode }
     } finally {
       setLoading(false);
     }
-  }, [user?.id]);
+  }, [userId]);
 
   useEffect(() => {
     refresh();

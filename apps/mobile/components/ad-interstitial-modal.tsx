@@ -38,7 +38,7 @@ export function AdInterstitialModal({ visible, onClose, onUpgrade }: Props) {
             Unlock unlimited review
           </Text>
           <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.textMuted, marginTop: spacing.sm, lineHeight: 20 }}>
-            Free tier has a daily limit. Exam Pass removes ads and unlocks full mocks + AI tutor.
+            Free tier has a daily limit. ReviewNatin Plus removes ads and unlocks full mocks + AI tutor.
           </Text>
           {onUpgrade ? (
             <Pressable

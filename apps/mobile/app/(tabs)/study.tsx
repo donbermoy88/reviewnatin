@@ -3,7 +3,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Alert, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
@@ -228,6 +227,9 @@ export default function StudyScreen() {
             <Pressable
               key={f.id}
               onPress={() => setNotesFilter(f.id)}
+              accessibilityRole="button"
+              accessibilityLabel={`Show ${f.label.toLowerCase()} notes`}
+              accessibilityState={{ selected: notesFilter === f.id }}
               style={{
                 paddingHorizontal: spacing.md,
                 paddingVertical: spacing.sm,
@@ -264,6 +266,8 @@ export default function StudyScreen() {
                 <Pressable
                   key={m.id}
                   style={styles.subjectCard}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Open ${m.materialType === 'cheat_sheet' ? 'cheat sheet' : 'lesson'}: ${m.title}`}
                   onPress={() =>
                     router.push({
                       pathname: '/study/lesson/[id]',
@@ -358,6 +362,9 @@ export default function StudyScreen() {
               key={t}
               style={[styles.tab, activeTab === i && styles.tabActive]}
               onPress={() => setActiveTab(i)}
+              accessibilityRole="tab"
+              accessibilityLabel={`${t} tab`}
+              accessibilityState={{ selected: activeTab === i }}
             >
               <Text style={[styles.tabText, activeTab === i && styles.tabTextActive]}>{t}</Text>
             </Pressable>
@@ -377,7 +384,12 @@ export default function StudyScreen() {
             />
             ) : (
               <>
-                <Pressable style={styles.subjectCard} onPress={launchBoardExam}>
+                <Pressable
+                  style={styles.subjectCard}
+                  onPress={launchBoardExam}
+                  accessibilityRole="button"
+                  accessibilityLabel="Open Board Exam Mode"
+                >
                   <View style={styles.subjectTop}>
                     <View style={[styles.subjectIcon, { backgroundColor: colors.primaryMuted }]}>
                       <Ionicons name="shield-checkmark" size={22} color={colors.primary} />
@@ -393,7 +405,13 @@ export default function StudyScreen() {
                   </View>
                 </Pressable>
                 {mockExams.map((mock) => (
-                <Pressable key={mock.id} style={styles.subjectCard} onPress={() => launchMock(mock)}>
+                <Pressable
+                  key={mock.id}
+                  style={styles.subjectCard}
+                  onPress={() => launchMock(mock)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Start mock exam: ${mock.title}`}
+                >
                   <View style={styles.subjectTop}>
                     <View style={[styles.subjectIcon, { backgroundColor: colors.errorBg }]}>
                       <Ionicons name="timer" size={22} color={colors.flame} />
@@ -434,6 +452,8 @@ export default function StudyScreen() {
                 <Pressable
                   key={s.id}
                   style={styles.subjectCard}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Open ${s.name} subject`}
                   onPress={() =>
                     router.push({
                       pathname: '/study/[subjectSlug]',

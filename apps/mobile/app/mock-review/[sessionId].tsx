@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
 import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
+import { ReportContentButton } from '../../components/report-content-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createListScreenStyles } from '../../lib/themed-styles';
 import { fetchSessionReview, type SessionReviewItem } from '../../lib/api/quiz';
@@ -172,6 +173,13 @@ export default function MockReviewScreen() {
                           {explanation}
                         </Text>
                       ) : null}
+                      <ReportContentButton
+                        contentType="question"
+                        contentId={item.questionId}
+                        label="Flag question"
+                        compact
+                        style={{ alignSelf: 'flex-start', marginTop: spacing.sm }}
+                      />
                     </View>
                   ) : (
                     <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.primary, marginTop: 6 }}>

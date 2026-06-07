@@ -113,7 +113,7 @@ export default function BarkadaScreen() {
     try {
       await joinBarkadaGroup(joinCode.trim());
       await load();
-    } catch (e) {
+    } catch {
       Alert.alert('Invalid code', 'Check the invite code and try again.');
     } finally {
       setBusy(false);

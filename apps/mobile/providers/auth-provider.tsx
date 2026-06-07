@@ -4,10 +4,13 @@ import { updateUserDisplayName } from '../lib/api/profile';
 import { mapAuthError } from '../lib/auth/errors';
 import { sendPasswordResetEmail, signInWithApple, signInWithGoogle, updatePassword } from '../lib/auth/oauth';
 import { normalizeDisplayName, normalizeEmail, validateDisplayName } from '../lib/auth/validation';
+import { addAppBreadcrumb, captureAppMessage } from '../lib/monitoring/events';
+import { Sentry } from '../lib/monitoring/sentry';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
 export type AuthResult = {
   error: string | null;
+  cancelled?: boolean;
   session?: Session | null;
   needsEmailConfirmation?: boolean;
 };
@@ -33,6 +36,33 @@ const NOT_CONFIGURED: AuthResult = {
   error: 'Supabase is not configured. Check the apps/mobile/.env file.',
 };
 
+async function waitForSession(timeoutMs = 5000): Promise<Session | null> {
+  const { data: initial } = await supabase.auth.getSession();
+  if (initial.session) return initial.session;
+
+  return new Promise((resolve) => {
+    const timeout = setTimeout(() => {
+      sub?.subscription.unsubscribe();
+      resolve(null);
+    }, timeoutMs);
+
+    let settled = false;
+    let sub:
+      | {
+          subscription: { unsubscribe: () => void };
+        }
+      | undefined;
+
+    sub = supabase.auth.onAuthStateChange((_event, next) => {
+      if (settled || !next) return;
+      settled = true;
+      clearTimeout(timeout);
+      sub?.subscription.unsubscribe();
+      resolve(next);
+    }).data;
+  });
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
@@ -51,6 +81,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => sub.subscription.unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const userId = session?.user?.id;
+    Sentry.setUser(userId ? { id: userId } : null);
+  }, [session?.user?.id]);
+
   const value = useMemo<AuthContextValue>(
     () => ({
       session,
@@ -66,9 +101,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           password,
         });
 
-        if (error) return { error: mapAuthError(error.message) };
+        if (error) {
+          captureAppMessage('email sign-in failed', { area: 'auth', action: 'sign_in' }, { reason: mapAuthError(error.message) }, 'warning');
+          return { error: mapAuthError(error.message) };
+        }
 
         if (data.session) {
+          addAppBreadcrumb('auth', 'email sign-in completed');
           setSession(data.session);
           return { error: null, session: data.session };
         }
@@ -89,9 +128,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           },
         });
 
-        if (error) return { error: mapAuthError(error.message) };
+        if (error) {
+          captureAppMessage('email sign-up failed', { area: 'auth', action: 'sign_up' }, { reason: mapAuthError(error.message) }, 'warning');
+          return { error: mapAuthError(error.message) };
+        }
 
         if (data.session) {
+          addAppBreadcrumb('auth', 'email sign-up completed with session');
           setSession(data.session);
           return { error: null, session: data.session };
         }
@@ -103,6 +146,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         });
 
         if (signInData.session) {
+          addAppBreadcrumb('auth', 'email sign-up auto sign-in completed');
           setSession(signInData.session);
           return { error: null, session: signInData.session };
         }
@@ -117,19 +161,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
       async signInGoogle() {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
-        const { error } = await signInWithGoogle();
-        if (error) return { error: mapAuthError(error) };
-        const { data } = await supabase.auth.getSession();
-        if (data.session) setSession(data.session);
-        return { error: null, session: data.session };
+        const { error, cancelled } = await signInWithGoogle();
+        if (error) {
+          captureAppMessage('google sign-in failed', { area: 'auth', action: 'google_sign_in' }, { reason: mapAuthError(error) }, 'warning');
+          return { error: mapAuthError(error) };
+        }
+        if (cancelled) return { error: null, cancelled: true, session: null };
+        const nextSession = await waitForSession();
+        if (nextSession) setSession(nextSession);
+        return nextSession
+          ? { error: null, session: nextSession }
+          : { error: 'Sign-in completed, but no session was created. Please try again.' };
       },
       async signInApple() {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
-        const { error } = await signInWithApple();
-        if (error) return { error: mapAuthError(error) };
-        const { data } = await supabase.auth.getSession();
-        if (data.session) setSession(data.session);
-        return { error: null, session: data.session };
+        const { error, cancelled } = await signInWithApple();
+        if (error) {
+          captureAppMessage('apple sign-in failed', { area: 'auth', action: 'apple_sign_in' }, { reason: mapAuthError(error) }, 'warning');
+          return { error: mapAuthError(error) };
+        }
+        if (cancelled) return { error: null, cancelled: true, session: null };
+        const nextSession = await waitForSession();
+        if (nextSession) setSession(nextSession);
+        return nextSession
+          ? { error: null, session: nextSession }
+          : { error: 'Sign-in completed, but no session was created. Please try again.' };
       },
       async resetPassword(email) {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
@@ -158,6 +214,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { error: null, session: data.session };
       },
       async signOut() {
+        addAppBreadcrumb('auth', 'sign-out requested');
         await supabase.auth.signOut();
         setSession(null);
       },

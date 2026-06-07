@@ -12,6 +12,8 @@
   --rn-ink-mute: #9AA7BF;
   --rn-line: #E7ECF5;
   --rn-surface: #ffffff;
+  --font-jakarta: "Avenir Next", "Nunito Sans", system-ui, sans-serif;
+  --font-syne: "Space Grotesk", "Avenir Next", system-ui, sans-serif;
 }
 
 @theme inline {

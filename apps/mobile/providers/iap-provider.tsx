@@ -4,6 +4,7 @@ import { processPurchaseOnServer, prefetchStoreProducts, requestStorePurchase } 
 import { useIapFeedbackOptional } from './iap-feedback-provider';
 import { useAuth } from './auth-provider';
 import { useEntitlements } from './entitlements-provider';
+import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../lib/monitoring/events';
 
 type IapContextValue = {
   purchasingSku: string | null;
@@ -54,19 +55,30 @@ export function IapProvider({ children }: { children: React.ReactNode }) {
 
         purchaseSub = iap.purchaseUpdatedListener(async (purchase) => {
           setPurchasingSku(purchase.productId);
+          addAppBreadcrumb('iap', 'store purchase update received', { sku: purchase.productId });
           try {
             const result = await processPurchaseOnServer(purchase, async (p) => {
               await iap.finishTransaction({ purchase: p, isConsumable: false });
             });
             if (result.ok) {
               await refresh();
+              captureAppMessage('store purchase verified', { area: 'iap', action: 'purchase_verified' }, { sku: purchase.productId });
               notify('Purchase complete', 'Premium access unlocked!');
             } else {
+              captureAppMessage(
+                'store purchase verification failed',
+                { area: 'iap', action: 'purchase_verification_failed' },
+                { sku: purchase.productId, error: result.error },
+                'warning'
+              );
               notify(
                 'Purchase not verified',
                 result.error ?? 'Please try again or restore your purchases.'
               );
             }
+          } catch (error) {
+            captureAppException(error, { area: 'iap', action: 'purchase_listener' }, { sku: purchase.productId });
+            notify('Purchase error', 'Please try again or restore your purchases.');
           } finally {
             setPurchasingSku(null);
           }
@@ -75,9 +87,11 @@ export function IapProvider({ children }: { children: React.ReactNode }) {
         errorSub = iap.purchaseErrorListener((error) => {
           setPurchasingSku(null);
           if (String(error.code).toLowerCase().includes('cancel')) return;
+          captureAppException(error, { area: 'iap', action: 'purchase_error_listener' }, { code: String(error.code) });
           notify('Purchase error', error.message);
         });
-      } catch {
+      } catch (error) {
+        captureAppException(error, { area: 'iap', action: 'listener_setup' });
         // Native IAP module not linked on this build
       }
     })();
@@ -93,6 +107,7 @@ export function IapProvider({ children }: { children: React.ReactNode }) {
   const purchaseProduct = useCallback(
     async (sku: string) => {
       if (!storeEnabled) {
+        addAppBreadcrumb('iap', 'purchase blocked because store billing is unavailable', { sku }, 'warning');
         return {
           ok: false,
           error: __DEV__
@@ -101,6 +116,7 @@ export function IapProvider({ children }: { children: React.ReactNode }) {
         };
       }
       setPurchasingSku(sku);
+      addAppBreadcrumb('iap', 'store purchase requested', { sku });
       return requestStorePurchase(sku);
     },
     [storeEnabled]

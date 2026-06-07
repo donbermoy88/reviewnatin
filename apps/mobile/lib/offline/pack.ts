@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Question } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { shuffleArray } from '../shuffle';
+import { shuffleQuestionChoices } from '../question-randomization';
 
 export type OfflinePackMeta = {
   examSlug: string;
@@ -44,7 +46,7 @@ async function readPack(examSlug: string): Promise<OfflinePackContent | null> {
 }
 
 function mapOfflineQuestion(row: OfflineQuestionRow): Question {
-  return {
+  return shuffleQuestionChoices({
     id: row.id,
     stem: row.stem,
     choices: row.choices,
@@ -53,7 +55,7 @@ function mapOfflineQuestion(row: OfflineQuestionRow): Question {
     explanation_fil: row.explanation_fil,
     difficulty: row.difficulty,
     topic: { name: row.topic_name, subject: { name: row.subject_name } },
-  };
+  });
 }
 
 export async function hasOfflinePack(examSlug: string): Promise<boolean> {
@@ -80,7 +82,7 @@ export async function pickOfflinePracticeQuestions(
     );
     rows = (filtered ?? []).map(mapOfflineQuestion);
   }
-  const shuffled = [...rows].sort(() => Math.random() - 0.5);
+  const shuffled = shuffleArray(rows);
   return shuffled.slice(0, Math.max(limit, 1));
 }
 
@@ -160,14 +162,14 @@ export async function getOfflineFlashcards(examSlug: string): Promise<
 > {
   const pack = await readPack(examSlug);
   if (!pack?.flashcards?.length) return [];
-  return pack.flashcards as Array<{
+  return shuffleArray(pack.flashcards as Array<{
     id: string;
     front: string;
     back: string;
     topic_name: string;
     subject_name: string;
     topic_slug?: string;
-  }>;
+  }>);
 }
 
 export type OfflineMaterial = {

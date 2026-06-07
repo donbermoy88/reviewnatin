@@ -5,15 +5,51 @@ import { SITE_URL } from '@reviewnatin/shared';
 
 const plans = [
   {
-    name: 'ReviewNatin Plus',
-    price: '₱149/mo · ₱999/yr',
-    items: ['All Phase 1 exams', 'Full PasaPath', 'Unlimited mocks', 'No ads'],
+    name: 'Plus Monthly',
+    price: '₱159/month',
+    positioning: 'Starter access',
+    items: [
+      'Access to all Phase 1 exams',
+      'Practice quizzes',
+      'Mock exams',
+      'Flashcards',
+      'Diagnostic exams',
+      'Progress tracking',
+      'No ads',
+      'Basic PasaPath access',
+    ],
+    highlight: false,
+  },
+  {
+    name: 'Plus 6 Months',
+    price: '₱699/6 months',
+    positioning: 'Best for one exam preparation season',
+    badge: 'BEST VALUE',
+    savings: 'Save around 27%',
+    items: [
+      'All features in Plus Monthly',
+      'Full PasaPath access',
+      'Offline review packs',
+      'Weakness-based recommendations',
+      'Priority access to newly added questions',
+      'Save compared with monthly billing',
+    ],
     highlight: true,
   },
   {
-    name: 'Exam Pass',
-    price: '₱499–599',
-    items: ['One exam unlock', '6 months access', 'Offline pack', 'AI tutor'],
+    name: 'Plus Yearly',
+    price: '₱1,499/year',
+    positioning: 'Best for long-term review and multiple exam preparation',
+    savings: 'Save around 21%',
+    items: [
+      'All features in Plus Monthly',
+      'Full 12-month access',
+      'Full PasaPath access',
+      'Offline review packs',
+      'Weakness-based recommendations',
+      'Priority access to newly added questions',
+      'Access to future Phase 1 question updates',
+    ],
     highlight: false,
   },
 ];
@@ -54,10 +90,10 @@ export default function SubscribePage() {
   return (
     <main className="mx-auto flex min-h-screen max-w-lg flex-col px-6 py-12">
       <p className="text-sm font-semibold uppercase tracking-wide text-[var(--rn-blue)]">ReviewNatin Plus</p>
-      <h1 className="mt-2 font-display text-3xl font-bold text-slate-900">Mag-subscribe sa app</h1>
+      <h1 className="mt-2 font-display text-3xl font-bold text-slate-900">Choose your Plus plan</h1>
       <p className="mt-3 text-slate-600">
-        GCash, Maya, Apple, at Google Play checkout ay nasa ReviewNatin app. Buksan ang app para pumili ng plan at
-        magbayad.
+        Monthly, 6 Months, and Yearly are all ReviewNatin Plus subscriptions. The duration controls how long your
+        subscription stays active.
       </p>
 
       <div className="mt-8 space-y-4">
@@ -65,13 +101,22 @@ export default function SubscribePage() {
           <div
             key={plan.name}
             className={`rounded-2xl border p-5 shadow-sm ${
-              plan.highlight ? 'border-[var(--rn-blue)]/20 bg-[var(--rn-blue)]/5' : 'border-slate-200 bg-white'
+              plan.highlight ? 'border-[var(--rn-blue)] bg-[var(--rn-blue)]/5' : 'border-slate-200 bg-white'
             }`}
           >
-            <div className="flex items-baseline justify-between gap-3">
-              <h2 className="font-display text-lg font-bold text-slate-900">{plan.name}</h2>
-              <span className="text-sm font-semibold text-[var(--rn-blue)]">{plan.price}</span>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                {plan.badge ? (
+                  <span className="mb-2 inline-flex rounded-full bg-amber-300 px-3 py-1 text-[11px] font-bold tracking-wide text-amber-950">
+                    {plan.badge}
+                  </span>
+                ) : null}
+                <h2 className="font-display text-lg font-bold text-slate-900">{plan.name}</h2>
+                <p className="mt-1 text-sm text-slate-500">{plan.positioning}</p>
+              </div>
+              <span className="text-right text-sm font-semibold text-[var(--rn-blue)]">{plan.price}</span>
             </div>
+            {plan.savings ? <p className="mt-3 text-sm font-semibold text-emerald-600">{plan.savings}</p> : null}
             <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-700">
               {plan.items.map((item) => (
                 <li key={item}>{item}</li>
@@ -98,7 +143,7 @@ export default function SubscribePage() {
           </a>
         </div>
       ) : (
-        <p className="mt-8 text-slate-500">Loading…</p>
+        <p className="mt-8 text-slate-500">Loading...</p>
       )}
 
       <p className="mt-8 text-xs leading-relaxed text-slate-500">

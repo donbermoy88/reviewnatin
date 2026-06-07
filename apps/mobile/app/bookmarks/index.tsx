@@ -5,6 +5,7 @@ import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
+import { ReportContentButton } from '../../components/report-content-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createListScreenStyles } from '../../lib/themed-styles';
 import {
@@ -36,14 +37,15 @@ export default function BookmarksScreen() {
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
 
   const load = useCallback(async () => {
-    const goal = await resolveOnboardingGoal(user?.id);
-    const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
-    setExamSlug(slug);
-    if (!user) {
-      setLoading(false);
-      return;
-    }
     try {
+      const goal = await resolveOnboardingGoal(user?.id);
+      const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
+      setExamSlug(slug);
+      if (!user) {
+        setQuestions([]);
+        setMaterials([]);
+        return;
+      }
       const [q, m] = await Promise.all([
         fetchBookmarkedQuestions(user.id),
         fetchBookmarkedMaterials(slug),
@@ -107,7 +109,7 @@ export default function BookmarksScreen() {
         }
       >
         <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
-          <Pressable onPress={() => router.back()}>
+          <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Go back">
             <Ionicons name="chevron-back" size={22} color={colors.text} />
           </Pressable>
           <Text style={styles.title}>Bookmarks</Text>
@@ -177,6 +179,12 @@ export default function BookmarksScreen() {
                       })
                     }
                   />
+                  <ReportContentButton
+                    contentType="question"
+                    contentId={item.questionId}
+                    label="Flag"
+                    compact
+                  />
                   <Pressable onPress={() => removeQuestion(item.questionId)} hitSlop={8} style={{ justifyContent: 'center' }}>
                     <Ionicons name="trash-outline" size={20} color={colors.error} />
                   </Pressable>
@@ -212,6 +220,12 @@ export default function BookmarksScreen() {
                       params: { id: item.materialId, examSlug },
                     })
                   }
+                />
+                <ReportContentButton
+                  contentType="review_material"
+                  contentId={item.materialId}
+                  label="Flag"
+                  compact
                 />
                 <Pressable onPress={() => removeMaterial(item.materialId)} hitSlop={8} style={{ justifyContent: 'center' }}>
                   <Ionicons name="trash-outline" size={20} color={colors.error} />

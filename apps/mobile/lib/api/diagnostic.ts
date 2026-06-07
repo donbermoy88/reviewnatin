@@ -1,6 +1,7 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
 import type { Question, QuestionChoice } from '../types';
 import { cleanStem } from '../types';
+import { shuffleQuestionChoices } from '../question-randomization';
 
 type DiagnosticRow = {
   id: string;
@@ -40,7 +41,7 @@ export async function fetchDiagnosticQuestions(examSlug: string, limit = 40): Pr
 
   if (error) throw error;
 
-  return ((data ?? []) as DiagnosticRow[]).map((row) => ({
+  return ((data ?? []) as DiagnosticRow[]).map((row) => shuffleQuestionChoices({
     id: row.id,
     stem: cleanStem(row.stem),
     choices: row.choices,

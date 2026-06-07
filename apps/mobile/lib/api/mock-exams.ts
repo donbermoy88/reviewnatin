@@ -1,6 +1,8 @@
 import type { Question, QuestionChoice } from '../types';
 import { cleanStem } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { shuffleQuestionChoices } from '../question-randomization';
+import { cachedJson } from '../cache/json-cache';
 
 export type MockExam = {
   id: string;
@@ -32,21 +34,23 @@ export type MockExamQuestionsResult = {
 export async function fetchMockExams(examSlug: string): Promise<MockExam[]> {
   if (!isSupabaseConfigured) return [];
 
-  const { data, error } = await supabase
-    .from('mock_exams')
-    .select('id, title, item_count, duration_seconds, exam_types!inner(slug)')
-    .eq('is_active', true)
-    .eq('exam_types.slug', examSlug);
+  return cachedJson(`mock-exams:${examSlug}`, async () => {
+    const { data, error } = await supabase
+      .from('mock_exams')
+      .select('id, title, item_count, duration_seconds, exam_types!inner(slug)')
+      .eq('is_active', true)
+      .eq('exam_types.slug', examSlug);
 
-  if (error) throw error;
+    if (error) throw error;
 
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    title: row.title,
-    itemCount: row.item_count,
-    durationSeconds: row.duration_seconds,
-    examSlug,
-  }));
+    return (data ?? []).map((row) => ({
+      id: row.id,
+      title: row.title,
+      itemCount: row.item_count,
+      durationSeconds: row.duration_seconds,
+      examSlug,
+    }));
+  }, { ttlMs: 10 * 60 * 1000, staleTtlMs: 7 * 24 * 60 * 60 * 1000 });
 }
 
 export async function fetchMockExamQuestions(mockExamId: string): Promise<MockExamQuestionsResult> {
@@ -65,7 +69,7 @@ export async function fetchMockExamQuestions(mockExamId: string): Promise<MockEx
   const previewLimit = rows.find((r) => r.preview_limit != null)?.preview_limit ?? null;
 
   return {
-    questions: rows.map((row) => ({
+    questions: rows.map((row) => shuffleQuestionChoices({
       id: row.id,
       stem: cleanStem(row.stem),
       choices: row.choices,

@@ -150,6 +150,19 @@ export async function cancelReminders(): Promise<void> {
     if (!Notifications) return;
 
     await Notifications.cancelScheduledNotificationAsync(DAILY_REMINDER_ID).catch(() => {});
+    await cancelExamReminders();
+  } catch {
+    /* ignore */
+  }
+}
+
+export async function cancelExamReminders(): Promise<void> {
+  if (!canUseLocalNotifications()) return;
+
+  try {
+    const Notifications = await loadNotificationsCore();
+    if (!Notifications) return;
+
     const scheduled = await Notifications.getAllScheduledNotificationsAsync();
     await Promise.all(
       scheduled

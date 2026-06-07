@@ -96,48 +96,50 @@ export default function ProfileScreen() {
   const [badges, setBadges] = useState<UserBadge[]>([]);
   const [mockHistory, setMockHistory] = useState<MockExamHistoryRow[]>([]);
   const [weeklySummary, setWeeklySummary] = useState<WeeklySummary | null>(null);
-  const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
 
   const load = useCallback(async () => {
-    const goal = await resolveOnboardingGoal(user?.id);
-    const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
-    setExamSlug(slug);
-    const target = dailyQuestionTarget(goal?.dailyMinutes ?? 30);
+    try {
+      const goal = await resolveOnboardingGoal(user?.id);
+      const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
+      const target = dailyQuestionTarget(goal?.dailyMinutes ?? 30);
 
-    if (!user) {
+      if (!user) {
+        try {
+          const [guestSessions, guestStats] = await Promise.all([
+            fetchGuestRecentSessions(),
+            fetchGuestPracticeStats(target),
+          ]);
+          setSessions(guestSessions);
+          setStats(guestStats);
+        } catch {
+          setSessions([]);
+          setStats({ streakDays: 0, totalAnswered: 0, accuracyPercent: null, sessionCount: 0 });
+        }
+        return;
+      }
+
       try {
-        const [guestSessions, guestStats] = await Promise.all([
-          fetchGuestRecentSessions(),
-          fetchGuestPracticeStats(target),
+        const [data, practiceStats, userBadges, mocks, weekly] = await Promise.all([
+          fetchRecentSessions(user.id),
+          fetchPracticeStats(user.id, target),
+          fetchUserBadges(),
+          fetchMockExamHistory(slug),
+          fetchWeeklySummary(slug),
         ]);
-        setSessions(guestSessions);
-        setStats(guestStats);
+        setSessions(data);
+        setStats(practiceStats);
+        setBadges(userBadges);
+        setMockHistory(mocks);
+        setWeeklySummary(weekly);
       } catch {
         setSessions([]);
-        setStats({ streakDays: 0, totalAnswered: 0, accuracyPercent: null, sessionCount: 0 });
       }
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const [data, practiceStats, userBadges, mocks, weekly] = await Promise.all([
-        fetchRecentSessions(user.id),
-        fetchPracticeStats(user.id, target),
-        fetchUserBadges(),
-        fetchMockExamHistory(slug),
-        fetchWeeklySummary(slug),
-      ]);
-      setSessions(data);
-      setStats(practiceStats);
-      setBadges(userBadges);
-      setMockHistory(mocks);
-      setWeeklySummary(weekly);
     } catch {
       setSessions([]);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
     }
-    setLoading(false);
-    setRefreshing(false);
   }, [user]);
 
   useEffect(() => {
@@ -173,7 +175,12 @@ export default function ProfileScreen() {
           </View>
           <View style={styles.headerRow}>
             <Text style={styles.headerTitle}>Profile</Text>
-            <Pressable style={styles.settingsBtn} onPress={() => router.push('/(tabs)/settings')}>
+            <Pressable
+              style={styles.settingsBtn}
+              onPress={() => router.push('/(tabs)/settings')}
+              accessibilityRole="button"
+              accessibilityLabel="Open settings"
+            >
               <Ionicons name="settings-outline" size={20} color="#fff" />
             </Pressable>
           </View>

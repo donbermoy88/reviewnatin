@@ -47,7 +47,7 @@ function UpgradePrompt({ onPress }: { onPress: () => void }) {
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel="View Exam Pass plans — no ads"
+      accessibilityLabel="View ReviewNatin Plus plans — no ads"
       style={{
         marginHorizontal: spacing.lg,
         marginBottom: spacing.md,
@@ -73,10 +73,10 @@ function UpgradePrompt({ onPress }: { onPress: () => void }) {
       </View>
       <View style={{ flex: 1 }}>
         <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.text }}>
-          {adConfig.enabled ? 'Sponsored · Go ad-free with Exam Pass' : 'Go ad-free with Exam Pass'}
+          {adConfig.enabled ? 'Sponsored · Go ad-free with Plus' : 'Go ad-free with Plus'}
         </Text>
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 }}>
-          Unlimited mocks · Offline pack · AI tutor
+          From ₱159/mo · best value 6 months
         </Text>
       </View>
       <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: colors.primary }}>View →</Text>
@@ -84,7 +84,7 @@ function UpgradePrompt({ onPress }: { onPress: () => void }) {
   );
 }
 
-/** Free-tier banner — Google BannerAd when configured, else Exam Pass upgrade CTA. */
+/** Free-tier banner — Google BannerAd when configured, else Plus upgrade CTA. */
 export function AdBanner({ onPress }: Props) {
   const router = useRouter();
   const adConfig = getAdMobConfig();

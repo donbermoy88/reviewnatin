@@ -7,7 +7,8 @@ function pathFromParsed(parsed: Linking.ParsedURL): string {
   if (hostname && HTTPS_HOSTS.has(hostname)) {
     return parsed.path?.replace(/^\//, '') ?? '';
   }
-  return parsed.path?.replace(/^\//, '') ?? '';
+  const path = parsed.path?.replace(/^\//, '') ?? '';
+  return path || hostname || '';
 }
 
 /** Map reviewnatin:// and https://reviewnatinph.com URLs to Expo Router hrefs. */

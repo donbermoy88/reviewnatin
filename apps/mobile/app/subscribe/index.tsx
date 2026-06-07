@@ -6,6 +6,7 @@ import { ActivityIndicator, AppState, Pressable, ScrollView, StyleSheet, Text, V
 import * as WebBrowser from 'expo-web-browser';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
+import { ManagePlusCard } from '../../components/manage-plus-card';
 import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
@@ -17,6 +18,7 @@ import { useEntitlements } from '../../providers/entitlements-provider';
 import { useIap } from '../../providers/iap-provider';
 import { createWebCheckoutSession, fetchWebCheckoutStatus, checkoutAttributionOptions } from '../../lib/api/web-checkout';
 import { captureAttributionFromQuery, loadCheckoutAttribution } from '../../lib/checkout-attribution';
+import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
 import {
   clearPendingCheckoutRef,
   getPendingCheckoutRef,
@@ -24,29 +26,60 @@ import {
 } from '../../lib/web-checkout-pending';
 
 const isDevBuild = __DEV__;
+const MONTHLY_BASE_PRICE_PHP = 159;
 
-const PLUS_FEATURES = [
-  'All Phase 1 exams',
-  'Unlimited mocks · no ads',
-  'Full PasaPath + offline packs',
+const MONTHLY_FEATURES = [
+  'Access to all Phase 1 exams',
+  'Practice quizzes',
+  'Mock exams',
+  'Flashcards',
+  'Diagnostic exams',
+  'Progress tracking',
+  'No ads',
+  'Basic PasaPath access',
 ];
 
-const EXAM_PASS_FEATURES = [
-  'Single exam unlock · 6 months',
-  'Full mocks + Mistake Bank',
-  'Offline pack + Board Exam Mode',
+const SIX_MONTH_FEATURES = [
+  'Longer review access for one exam season',
+  'Full PasaPath access',
+  'Offline review packs',
+  'Weakness-based recommendations',
+  'Priority access to newly added questions',
+  'Save compared with monthly billing',
 ];
+
+const YEARLY_FEATURES = [
+  'Full 12-month access',
+  'Full PasaPath access',
+  'Offline review packs',
+  'Weakness-based recommendations',
+  'Priority access to newly added questions',
+  'Access to future Phase 1 question updates',
+  'Best for users reviewing for multiple exams',
+];
+
+type PlusPlanKind = 'monthly' | 'six_months' | 'yearly';
+
+type PlusPlanMeta = {
+  kind: PlusPlanKind;
+  positioning: string;
+  featureIntro: string;
+  features: string[];
+  badge?: string;
+};
 
 type ProductRow = {
   id: string;
   sku: string;
   tier: string;
   pricePhp: number;
+  durationDays?: number | null;
   examTypeId?: string | null;
 };
 
 function formatSkuLabel(sku: string): string {
   const normalized = sku.toLowerCase();
+  if (normalized.includes('six_months')) return 'Plus 6 Months';
   if (normalized.includes('yearly')) return 'Plus Yearly';
   if (normalized.includes('monthly')) return 'Plus Monthly';
   if (normalized.includes('cse_pro')) return 'CSE Professional';
@@ -61,6 +94,7 @@ function formatSkuLabel(sku: string): string {
 }
 
 function priceSuffix(sku: string): string {
+  if (sku.includes('six_months')) return '/6 months';
   if (sku.includes('yearly')) return '/year';
   if (sku.includes('monthly')) return '/month';
   return ' one-time';
@@ -68,6 +102,52 @@ function priceSuffix(sku: string): string {
 
 function isYearlyPlus(sku: string): boolean {
   return sku.toLowerCase().includes('yearly');
+}
+
+function isSixMonthPlus(sku: string): boolean {
+  return sku.toLowerCase().includes('six_months');
+}
+
+function getPlusPlanMeta(sku: string): PlusPlanMeta {
+  if (isSixMonthPlus(sku)) {
+    return {
+      kind: 'six_months',
+      badge: 'BEST VALUE',
+      positioning: 'Best for one exam preparation season',
+      featureIntro: 'All features in Plus Monthly, plus:',
+      features: SIX_MONTH_FEATURES,
+    };
+  }
+
+  if (isYearlyPlus(sku)) {
+    return {
+      kind: 'yearly',
+      positioning: 'Best for long-term review and multiple exam preparation',
+      featureIntro: 'All features in Plus Monthly, plus:',
+      features: YEARLY_FEATURES,
+    };
+  }
+
+  return {
+    kind: 'monthly',
+    positioning: 'Starter access',
+    featureIntro: 'Includes:',
+    features: MONTHLY_FEATURES,
+  };
+}
+
+function formatPeso(amount: number): string {
+  return `₱${amount.toLocaleString('en-PH')}`;
+}
+
+function planSavingsLabel(product: ProductRow): string | null {
+  const durationMonths = isSixMonthPlus(product.sku) ? 6 : isYearlyPlus(product.sku) ? 12 : null;
+  if (!durationMonths) return null;
+
+  const monthlyEquivalent = MONTHLY_BASE_PRICE_PHP * durationMonths;
+  if (monthlyEquivalent <= product.pricePhp) return null;
+  const savingsPct = Math.round(((monthlyEquivalent - product.pricePhp) / monthlyEquivalent) * 100);
+  return `Save around ${savingsPct}%`;
 }
 
 function FeatureList({ items, styles }: { items: string[]; styles: ReturnType<typeof createStyles> }) {
@@ -87,7 +167,7 @@ export default function SubscribeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, fonts, gradients, spacing, radii } = theme;
+  const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const { ref: checkoutRefParam, utm_source, utm_medium, utm_campaign, source: sourceParam } = useLocalSearchParams<{
     ref?: string;
@@ -120,6 +200,10 @@ export default function SubscribeScreen() {
     | { kind: 'ewallet'; provider: 'gcash' | 'maya'; reference: string; amount: number }
     | { kind: 'checkout_error'; message: string }
   >(null);
+
+  useEffect(() => {
+    void refreshEntitlements();
+  }, [refreshEntitlements]);
 
   useEffect(() => {
     resolveOnboardingGoal(user?.id).then(async (goal) => {
@@ -174,17 +258,19 @@ export default function SubscribeScreen() {
   }, [pollCheckoutStatus]);
 
   const plusProducts = products.filter((p) => p.tier === 'plus');
-  const examProducts = products.filter((p) =>
-    p.tier === 'exam_pass' ? p.examTypeId === examTypeId || !examTypeId : false
-  );
   const sortedPlus = [...plusProducts].sort((a, b) => {
-    if (isYearlyPlus(a.sku)) return -1;
-    if (isYearlyPlus(b.sku)) return 1;
-    return 0;
+    const order = (sku: string) => {
+      if (sku.toLowerCase().includes('monthly')) return 1;
+      if (isSixMonthPlus(sku)) return 2;
+      if (isYearlyPlus(sku)) return 3;
+      return 99;
+    };
+    return order(a.sku) - order(b.sku);
   });
   const hasAccess = isPremium(examTypeId);
 
   const requireLogin = () => {
+    addAppBreadcrumb('paywall', 'login required from subscribe screen');
     router.push('/(auth)/login');
   };
 
@@ -194,12 +280,17 @@ export default function SubscribeScreen() {
       return;
     }
     setBusy(productId);
+    addAppBreadcrumb('paywall', 'demo entitlement activation requested', { productId, tier });
     try {
       const product = products.find((p) => p.id === productId);
       await activateDemoPass(
         productId,
         tier === 'exam_pass' ? product?.examTypeId ?? examTypeId ?? undefined : undefined
       );
+      captureAppMessage('demo entitlement activated', { area: 'paywall', action: 'demo_activate' }, { tier });
+    } catch (error) {
+      captureAppException(error, { area: 'paywall', action: 'demo_activate' }, { tier });
+      throw error;
     } finally {
       setBusy(null);
     }
@@ -210,17 +301,29 @@ export default function SubscribeScreen() {
       requireLogin();
       return;
     }
+    addAppBreadcrumb('paywall', 'store purchase button pressed', { sku });
     const result = await purchaseProduct(sku);
     if (!result.ok && result.error && !result.error.includes('cancel')) {
+      captureAppMessage('store purchase request failed', { area: 'paywall', action: 'store_purchase_request' }, { sku, error: result.error }, 'warning');
       setSheet({ kind: 'purchase_error', message: result.error });
     }
   };
 
   const handleRestore = async () => {
     setRestoring(true);
+    addAppBreadcrumb('iap', 'restore purchases requested');
     try {
       const result = await restoreStorePurchases();
+      captureAppMessage(
+        result.ok ? 'restore purchases completed' : 'restore purchases failed',
+        { area: 'iap', action: 'restore_purchases' },
+        { ok: result.ok, restoredCount: result.restoredCount },
+        result.ok ? 'info' : 'warning'
+      );
       setSheet({ kind: 'restore', ok: result.ok, message: result.message });
+    } catch (error) {
+      captureAppException(error, { area: 'iap', action: 'restore_purchases' });
+      throw error;
     } finally {
       setRestoring(false);
     }
@@ -232,6 +335,7 @@ export default function SubscribeScreen() {
       return;
     }
     try {
+      addAppBreadcrumb('checkout', 'e-wallet checkout requested', { sku, provider });
       const attribution = await loadCheckoutAttribution();
       const attrOpts = checkoutAttributionOptions(attribution);
       const session = await createWebCheckoutSession(sku, provider, attrOpts);
@@ -245,17 +349,19 @@ export default function SubscribeScreen() {
         amount: session.amountPhp,
       });
     } catch (e) {
+      captureAppException(e, { area: 'checkout', action: 'create_ewallet_checkout' }, { sku, provider });
       setSheet({ kind: 'checkout_error', message: (e as Error).message });
     }
   };
 
-  const renderPlanCard = (product: ProductRow, variant: 'plus' | 'exam_pass') => {
-    const highlighted = variant === 'plus' && isYearlyPlus(product.sku);
+  const renderPlanCard = (product: ProductRow) => {
+    const meta = getPlusPlanMeta(product.sku);
+    const highlighted = meta.kind === 'six_months';
     const label = formatSkuLabel(product.sku);
     const suffix = priceSuffix(product.sku);
-    const features = variant === 'plus' ? PLUS_FEATURES : EXAM_PASS_FEATURES;
     const isBusy = busy === product.id || purchasingSku === product.sku;
-    const plusActive = variant === 'plus' && hasAccess;
+    const plusActive = hasAccess;
+    const savingsLabel = planSavingsLabel(product);
 
     const primaryLabel = isDevBuild
       ? isBusy
@@ -263,13 +369,11 @@ export default function SubscribeScreen() {
         : plusActive
           ? 'Active'
           : 'Activate (demo)'
-      : isBusy
-        ? 'Processing…'
-        : plusActive
-          ? 'Active'
-          : variant === 'plus'
-            ? 'Subscribe'
-            : 'Get Exam Pass';
+        : isBusy
+          ? 'Processing…'
+          : plusActive
+            ? 'Active'
+            : 'Subscribe';
 
     const onPrimary = () => {
       if (isDevBuild) void buyDemo(product.id, product.tier);
@@ -283,38 +387,40 @@ export default function SubscribeScreen() {
       >
         <View style={styles.planCardTop}>
           <View style={{ flex: 1 }}>
-            {highlighted ? (
+            {meta.badge ? (
               <View style={styles.bestValueBadge}>
-                <Text style={styles.bestValueText}>Best value</Text>
+                <Text style={styles.bestValueText}>{meta.badge}</Text>
               </View>
             ) : null}
             <Text style={styles.planName}>{label}</Text>
+            <Text style={styles.planPositioning}>{meta.positioning}</Text>
             <View style={styles.priceRow}>
-              <Text style={styles.planPrice}>₱{product.pricePhp}</Text>
+              <Text style={styles.planPrice}>{formatPeso(product.pricePhp)}</Text>
               <Text style={styles.planSuffix}>{suffix}</Text>
             </View>
-            {highlighted ? (
-              <Text style={styles.savingsCallout}>Save 44% vs monthly</Text>
+            {savingsLabel ? (
+              <Text style={styles.savingsCallout}>{savingsLabel}</Text>
             ) : null}
           </View>
-          {variant === 'plus' && plusActive ? (
+          {plusActive ? (
             <Pill color={colors.accentDark} bg={colors.accent}>
               ACTIVE
             </Pill>
           ) : null}
         </View>
 
-        <FeatureList items={features} styles={styles} />
+        <Text style={styles.featureIntro}>{meta.featureIntro}</Text>
+        <FeatureList items={meta.features} styles={styles} />
 
         <PrimaryButton
           label={primaryLabel}
           variant={highlighted ? 'primary' : 'outline'}
-          disabled={!!busy || !!purchasingSku || (variant === 'plus' && plusActive)}
+          disabled={!!busy || !!purchasingSku || plusActive}
           onPress={onPrimary}
           accessibilityLabel={`${primaryLabel} — ${label}`}
         />
 
-        {!isDevBuild && variant === 'plus' && !plusActive ? (
+        {!isDevBuild && !plusActive ? (
           <View style={styles.ewalletRow}>
             <PrimaryButton
               label="GCash"
@@ -405,45 +511,35 @@ export default function SubscribeScreen() {
             </View>
           ) : null}
 
+          <ManagePlusCard
+            entitlements={entitlements}
+            restoring={restoring}
+            onRestore={() => void handleRestore()}
+            compact
+          />
+
           {loading ? (
             <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.lg }} />
           ) : (
             <>
               <Text style={styles.sectionTitle}>Choose your plan</Text>
               <Text style={styles.sectionSub}>
-                Plus for all exams · Exam Pass for a single board exam
+                Choose a Plus duration. Access remains ReviewNatin Plus; duration controls how long it stays active.
               </Text>
 
               {sortedPlus.length > 0 ? (
                 <View style={styles.planGroup}>
                   <Text style={styles.planGroupLabel}>ReviewNatin Plus</Text>
-                  {sortedPlus.map((p) => renderPlanCard(p, 'plus'))}
-                </View>
-              ) : null}
-
-              {examProducts.length > 0 ? (
-                <View style={styles.planGroup}>
-                  <Text style={styles.planGroupLabel}>Exam Pass</Text>
-                  <Text style={styles.planGroupSub}>One-time unlock · 6 months for your exam</Text>
-                  {examProducts.map((p) => renderPlanCard(p, 'exam_pass'))}
+                  <Text style={styles.planGroupSub}>Monthly, 6 Months, and Yearly all activate Plus entitlement.</Text>
+                  {sortedPlus.map((p) => renderPlanCard(p))}
                 </View>
               ) : null}
             </>
           )}
 
           <View style={styles.footerBlock}>
-            <PrimaryButton
-              label={restoring ? 'Restoring…' : 'Restore purchases'}
-              variant="outline"
-              disabled={restoring || !!purchasingSku}
-              onPress={handleRestore}
-              accessibilityLabel="Restore previous purchases"
-            />
             <Text style={styles.disclaimer}>{DISCLAIMERS.subscription}</Text>
             <Text style={styles.disclaimer}>{DISCLAIMERS.short}</Text>
-            {entitlements.length > 0 ? (
-              <Text style={styles.activeText}>Active: {entitlements.map((e) => e.sku).join(', ')}</Text>
-            ) : null}
           </View>
         </View>
       </ScrollView>
@@ -629,6 +725,13 @@ function createStyles(theme: AppTheme) {
       color: colors.text,
       letterSpacing: -0.2,
     },
+    planPositioning: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 12,
+      color: colors.textMuted,
+      lineHeight: 17,
+      marginTop: 3,
+    },
     priceRow: { flexDirection: 'row', alignItems: 'baseline', gap: 4, marginTop: 4 },
     planPrice: { fontFamily: fonts.display, fontSize: 28, color: colors.primary, letterSpacing: -0.8 },
     planSuffix: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted },
@@ -638,6 +741,12 @@ function createStyles(theme: AppTheme) {
       color: colors.success,
       marginTop: 4,
       letterSpacing: 0.2,
+    },
+    featureIntro: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 12,
+      color: colors.text,
+      marginBottom: -spacing.xs,
     },
     featureList: { gap: spacing.xs },
     featureRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },

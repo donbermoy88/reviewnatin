@@ -12,6 +12,10 @@ import { useEffect, useRef } from 'react';
 import { useNetworkStatus } from '../hooks/use-network-status';
 import { useAuth } from '../providers/auth-provider';
 import { flushPendingAnswers } from '../lib/offline/answer-queue';
+import { flushPendingContentReports } from '../lib/api/content-reports';
+import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../lib/monitoring/events';
+
+const RETRY_WHILE_ONLINE_MS = 60_000;
 
 export function OfflineQueueFlusher() {
   const { user } = useAuth();
@@ -30,9 +34,54 @@ export function OfflineQueueFlusher() {
     if (inFlight.current) return;
 
     inFlight.current = true;
-    void flushPendingAnswers()
-      .catch(() => { /* will retry on next online window */ })
+    addAppBreadcrumb('offline_sync', 'flush started after online transition');
+    void Promise.all([
+      flushPendingAnswers(user.id),
+      flushPendingContentReports(user.id),
+    ])
+      .then(([answers, reports]) => {
+        if (answers.flushed || answers.failed || reports.flushed || reports.failed) {
+          captureAppMessage('offline sync flush completed', { area: 'offline_sync', action: 'flush_completed' }, {
+            answerFlushed: answers.flushed,
+            answerFailed: answers.failed,
+            reportFlushed: reports.flushed,
+            reportFailed: reports.failed,
+          }, answers.failed || reports.failed ? 'warning' : 'info');
+        }
+      })
+      .catch((error) => {
+        captureAppException(error, { area: 'offline_sync', action: 'flush_transition' });
+      })
       .finally(() => { inFlight.current = false; });
+  }, [isOnline, hasProbed, user]);
+
+  useEffect(() => {
+    if (!hasProbed || !isOnline || !user) return;
+
+    const interval = setInterval(() => {
+      if (inFlight.current) return;
+      inFlight.current = true;
+      void Promise.all([
+        flushPendingAnswers(user.id),
+        flushPendingContentReports(user.id),
+      ])
+        .then(([answers, reports]) => {
+          if (answers.flushed || answers.failed || reports.flushed || reports.failed) {
+            captureAppMessage('offline sync periodic flush completed', { area: 'offline_sync', action: 'flush_periodic' }, {
+              answerFlushed: answers.flushed,
+              answerFailed: answers.failed,
+              reportFlushed: reports.flushed,
+              reportFailed: reports.failed,
+            }, answers.failed || reports.failed ? 'warning' : 'info');
+          }
+        })
+        .catch((error) => {
+          captureAppException(error, { area: 'offline_sync', action: 'flush_periodic' });
+        })
+        .finally(() => { inFlight.current = false; });
+    }, RETRY_WHILE_ONLINE_MS);
+
+    return () => clearInterval(interval);
   }, [isOnline, hasProbed, user]);
 
   return null;

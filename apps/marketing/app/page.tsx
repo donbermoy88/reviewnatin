@@ -574,7 +574,7 @@ function Stats() {
 function Pricing() {
   const plans = [
     { name: 'Free',          price: '₱0',     sub: 'Forever free, no card needed',         features: ['CSE, PNLE & LET question banks', '50 questions per day', 'Daily streak & basic stats', 'Friends leaderboard'],                                                          cta: 'Download free',        ctaHref: '#',           highlight: false },
-    { name: 'Premium',       price: '₱149',   sub: 'per month, or ₱1,490 yearly',          features: ['Unlimited questions & mock exams', 'Ask Kuya AI — unlimited', 'Advanced topic analytics', 'Offline review mode', 'No ads, walang abala'],                              cta: 'Start 7-day free trial', ctaHref: '/subscribe',  highlight: true  },
+    { name: 'Premium',       price: '₱159',   sub: 'monthly, ₱699 for 6 months, or ₱1,499 yearly',          features: ['Practice quizzes, mocks, flashcards, diagnostics', 'PasaPath review guidance', 'Progress tracking and weak-area recommendations', 'Offline review packs on longer plans', 'No ads, walang abala'],                              cta: 'Start 7-day free trial', ctaHref: '/subscribe',  highlight: true  },
     { name: 'Review Center', price: 'Custom', sub: 'For schools & review centers',          features: ['Bulk student licenses', 'Custom question banks', 'Class & batch leaderboards', 'Performance reports for instructors', 'Priority support'],                              cta: 'Contact sales',        ctaHref: '#',           highlight: false },
   ];
   return (

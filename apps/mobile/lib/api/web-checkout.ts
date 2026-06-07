@@ -1,6 +1,7 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
 import { SITE_URL } from '@reviewnatin/shared';
 import { formatUtmSource, type CheckoutAttribution } from '../checkout-attribution';
+import { captureAppException, captureAppMessage } from '../monitoring/events';
 
 export type WebCheckoutProvider = 'gcash' | 'maya';
 
@@ -38,7 +39,10 @@ export async function createWebCheckoutSession(
     p_utm_source: options?.utmSource ?? null,
   });
 
-  if (error) throw error;
+  if (error) {
+    captureAppException(error, { area: 'checkout', action: 'create_web_checkout_session' }, { sku, provider });
+    throw error;
+  }
 
   const row = data as Record<string, unknown>;
   const referenceCode = row.reference_code as string;
@@ -77,7 +81,10 @@ export async function fetchWebCheckoutStatus(referenceCode: string): Promise<Web
     p_reference_code: referenceCode,
   });
 
-  if (error) throw error;
+  if (error) {
+    captureAppException(error, { area: 'checkout', action: 'get_web_checkout_status' }, { referenceCode });
+    throw error;
+  }
 
   const row = data as Record<string, unknown>;
   if (!row.found) return { found: false };
@@ -105,11 +112,18 @@ export async function submitWebCheckout(referenceCode: string, confirmDemo = fal
   });
 
   if (error) {
+    captureAppException(error, { area: 'checkout', action: 'submit_web_checkout' }, { referenceCode });
     return { ok: false, error: error.message };
   }
 
   const body = data as { success?: boolean; status?: string; error?: string } | null;
   if (!body?.success) {
+    captureAppMessage(
+      'web checkout submit rejected',
+      { area: 'checkout', action: 'submit_web_checkout_rejected' },
+      { referenceCode, error: body?.error },
+      'warning'
+    );
     return { ok: false, error: body?.error ?? 'submit_failed' };
   }
 

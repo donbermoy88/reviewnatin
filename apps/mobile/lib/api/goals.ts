@@ -16,35 +16,17 @@ export async function syncExamGoal(userId: string, onboarding: OnboardingData): 
     throw new Error('Please select a major field for LET Secondary before syncing.');
   }
 
-  const { data: exam, error: examErr } = await supabase
-    .from('exam_types')
-    .select('id')
-    .eq('slug', onboarding.examSlug)
-    .single();
-
-  if (examErr || !exam) {
-    throw new Error(examErr?.message ?? 'Exam not found in the database.');
-  }
-
-  const { error: deactivateErr } = await supabase
-    .from('user_exam_goals')
-    .update({ is_active: false })
-    .eq('user_id', userId);
-
-  if (deactivateErr) throw new Error(deactivateErr.message);
-
-  const { error } = await supabase.from('user_exam_goals').insert({
-    user_id: userId,
-    exam_type_id: exam.id,
-    target_exam_date: onboarding.targetDate,
-    daily_minutes: onboarding.dailyMinutes,
-    current_level: onboarding.level,
-    major_slug: onboarding.majorSlug ?? null,
-    onboarding_completed_at: new Date().toISOString(),
-    is_active: true,
+  const { error } = await supabase.rpc('set_active_exam_goal', {
+    p_exam_slug: onboarding.examSlug,
+    p_target_exam_date: onboarding.targetDate,
+    p_daily_minutes: onboarding.dailyMinutes,
+    p_current_level: onboarding.level,
+    p_major_slug: onboarding.majorSlug ?? null,
+    p_onboarding_completed_at: new Date().toISOString(),
   });
 
   if (error) throw new Error(error.message);
+  invalidateGoalCache(userId);
 }
 
 export async function syncExamGoalSafe(
