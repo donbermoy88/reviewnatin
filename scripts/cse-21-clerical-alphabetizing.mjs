@@ -91,10 +91,10 @@ const QUESTIONS = [
   },
   // Q5 — Presidential Commissions, page 24
   {
-    stem: `Arrange each group of items in alphabetical order:\n\nA. Presidential Commission on Good Governance\nB. Presidential Commission to Fight Poverty\nC. Presidential Commission for the Urban Poor\nD. Presidential Commission on Human Rights`,
+    stem: `Arrange each group of items in alphabetical order:\nA. Presidential Commission on Good Governance\nB. Presidential Commission to Fight Poverty\nC. Presidential Commission for the Urban Poor\nD. Presidential Commission on Human Rights`,
     choices: [
       { id: 'a', text: 'CBAD' },
-      { id: 'b', text: 'CBAD' },
+      { id: 'b', text: 'CDAB' },
       { id: 'c', text: 'CABD' },
       { id: 'd', text: 'CADB' },
     ],

@@ -393,6 +393,12 @@ verify_jwt = false
 [functions.readiness-cron]
 verify_jwt = false
 
+# App Store Server Notifications V2 + Google Play RTDN.
+# External store webhooks do not send a Supabase user JWT. Protect the URL
+# with STORE_WEBHOOK_SECRET as a query token or x-reviewnatin-webhook-secret.
+[functions.store-webhook]
+verify_jwt = false
+
 # [edge_runtime.secrets]
 # secret_key = "env(SECRET_VALUE)"
 

@@ -75,6 +75,19 @@ function stemKey(stem) {
   return stem.toLowerCase().replace(/\s+/g, ' ').trim();
 }
 
+function normalizedChoiceText(value) {
+  return String(value ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+function hasUnbalancedParentheses(value) {
+  return (String(value).match(/\(/g)?.length ?? 0) !== (String(value).match(/\)/g)?.length ?? 0);
+}
+
+function hasUnbalancedSmartQuotes(value) {
+  const text = String(value);
+  return /[“”]/.test(text) && (text.match(/[“”]/g)?.length ?? 0) % 2 !== 0;
+}
+
 export function validateQuestionImportRows(rows, catalog, existingStemKeysByTopic = new Map()) {
   const errors = [];
   const valid = [];
@@ -120,10 +133,16 @@ export function validateQuestionImportRows(rows, catalog, existingStemKeysByTopi
       rowErrors.push({ rowNumber: row.rowNumber, field: 'stem', message: 'Stem exceeds 2000 characters' });
     }
 
-    for (const field of ['choice_a', 'choice_b', 'choice_c', 'choice_d']) {
+    const choiceFields = ['choice_a', 'choice_b', 'choice_c', 'choice_d'];
+    for (const field of choiceFields) {
       if (!row[field]?.trim()) {
         rowErrors.push({ rowNumber: row.rowNumber, field, message: 'Choice text is required' });
       }
+    }
+
+    const nonBlankChoices = choiceFields.map((field) => normalizedChoiceText(row[field])).filter(Boolean);
+    if (new Set(nonBlankChoices).size !== nonBlankChoices.length) {
+      rowErrors.push({ rowNumber: row.rowNumber, field: 'choices', message: 'Content QA failed: choices must not contain duplicate text' });
     }
 
     const correct = row.correct_choice?.toLowerCase();
@@ -136,12 +155,20 @@ export function validateQuestionImportRows(rows, catalog, existingStemKeysByTopi
       rowErrors.push({ rowNumber: row.rowNumber, field: 'difficulty', message: 'difficulty must be an integer 1–5' });
     }
 
-    if (!row.explanation_en || row.explanation_en.length < 20) {
+    if (!row.explanation_en || row.explanation_en.length < 24) {
       rowErrors.push({
         rowNumber: row.rowNumber,
         field: 'explanation_en',
-        message: 'explanation_en must be at least 20 characters',
+        message: 'Content QA failed: explanation_en must be at least 24 characters',
       });
+    }
+
+    if (hasUnbalancedSmartQuotes(row.stem)) {
+      rowErrors.push({ rowNumber: row.rowNumber, field: 'stem', message: 'Content QA failed: stem may contain unbalanced quotation marks' });
+    }
+
+    if (hasUnbalancedParentheses(row.stem)) {
+      rowErrors.push({ rowNumber: row.rowNumber, field: 'stem', message: 'Content QA failed: stem may contain unbalanced parentheses' });
     }
 
     if (topicEntry?.topicId && row.stem.length >= 10) {
@@ -182,4 +209,17 @@ export function buildImportErrorCsv(errors) {
     lines.push(`${err.rowNumber},"${field}","${msg}"`);
   }
   return lines.join('\n');
+}
+
+export function summarizeImportErrors(errors) {
+  const counts = new Map();
+
+  for (const error of errors) {
+    const field = error.field?.trim() || 'row';
+    counts.set(field, (counts.get(field) ?? 0) + 1);
+  }
+
+  return [...counts.entries()]
+    .map(([field, count]) => ({ field, count }))
+    .sort((a, b) => b.count - a.count || a.field.localeCompare(b.field));
 }
