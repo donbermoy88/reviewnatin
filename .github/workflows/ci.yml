@@ -36,11 +36,103 @@ jobs:
       - name: Lint admin
         run: npm run lint --workspace=apps/admin
 
+      - name: Run admin proxy rule tests
+        run: npm run admin:proxy:rules
+
       - name: Lint marketing
         run: npm run lint --workspace=apps/marketing
 
       - name: Run unit tests
         run: npm run test
+
+  content-quality:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run content audit rule tests
+        run: npm run content:audit:rules
+
+      - name: Run content import rule tests
+        run: npm run content:import:rules
+
+      - name: Run admin import UI regression tests
+        run: npm run content:admin-import:ui
+
+      - name: Run live content audit gate
+        if: ${{ env.SUPABASE_URL != '' && env.SUPABASE_SERVICE_ROLE_KEY != '' }}
+        run: npm run content:audit:ci
+
+      - name: Upload content audit report
+        if: ${{ env.SUPABASE_URL != '' && env.SUPABASE_SERVICE_ROLE_KEY != '' && always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-quality-report
+          path: |
+            audit/content-quality-report.md
+            audit/content-quality-report.json
+
+      - name: Skip live content audit gate
+        if: ${{ env.SUPABASE_URL == '' || env.SUPABASE_SERVICE_ROLE_KEY == '' }}
+        run: echo "::warning::Skipping live content audit. Configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY repository secrets to enable it."
+
+  admin-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run admin e2e smoke tests
+        run: npm run admin:e2e
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: admin-playwright-report
+          path: apps/admin/playwright-report
+          if-no-files-found: ignore
+
+  web-build:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build admin and marketing apps
+        run: npm run web:build
 
   supabase:
     runs-on: ubuntu-latest

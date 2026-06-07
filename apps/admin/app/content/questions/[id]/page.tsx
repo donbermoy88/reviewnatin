@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { AdminNav } from '@/components/admin-nav';
+import { AdminCard, AdminShell } from '@/components/admin-shell';
 
 type QuestionDetail = {
   id: string;
@@ -89,46 +89,43 @@ export default function QuestionEditorPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 p-8">
-        <div className="mx-auto max-w-3xl">
-          <AdminNav />
+      <AdminShell title="Edit Question" description="Loading the selected QA item." maxWidth="max-w-4xl">
+        <AdminCard>
           <p className="text-slate-600">Loading question…</p>
-        </div>
-      </div>
+        </AdminCard>
+      </AdminShell>
     );
   }
 
   if (!question) {
     return (
-      <div className="min-h-screen bg-slate-50 p-8">
-        <div className="mx-auto max-w-3xl">
-          <AdminNav />
+      <AdminShell title="Edit Question" description="The selected question could not be loaded." maxWidth="max-w-4xl">
+        <AdminCard>
           <p className="text-red-600">{error || 'Question not found.'}</p>
           <Link href="/content/review" className="mt-4 inline-block text-sm text-blue-600">
             ← Back to review queue
           </Link>
-        </div>
-      </div>
+        </AdminCard>
+      </AdminShell>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="mx-auto max-w-3xl">
-        <AdminNav />
-        <Link href="/content/review" className="text-sm font-medium text-blue-600">
-          ← Review queue
+    <AdminShell
+      title="Edit Question"
+      description={`${question.examSlug} · ${question.subjectName}/${question.topicName} · ${question.status}`}
+      maxWidth="max-w-4xl"
+      actions={
+        <Link href="/content/review" className="inline-flex rounded-2xl bg-white px-5 py-3 text-sm font-black text-blue-700 shadow-sm">
+          Back to QA queue
         </Link>
-        <h1 className="mt-4 text-2xl font-bold text-slate-900">Edit question</h1>
-        <p className="mt-2 text-sm text-slate-600">
-          {question.examSlug} · {question.subjectName}/{question.topicName} · {question.status}
-        </p>
-
-        <div className="mt-8 space-y-6 rounded-xl border bg-white p-6 shadow-sm">
+      }
+    >
+        <AdminCard className="space-y-6">
           <div>
             <label className="text-sm font-semibold text-slate-700">Stem</label>
             <textarea
-              className="mt-2 w-full rounded-lg border p-3 text-sm"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm"
               rows={4}
               value={stem}
               onChange={(e) => setStem(e.target.value)}
@@ -141,7 +138,7 @@ export default function QuestionEditorPage() {
               {question.choices.map((c) => (
                 <li
                   key={c.id}
-                  className={`rounded-lg border px-3 py-2 ${c.id === question.correctChoiceId ? 'border-green-400 bg-green-50' : ''}`}
+                  className={`rounded-2xl border px-4 py-3 ${c.id === question.correctChoiceId ? 'border-green-400 bg-green-50' : 'border-slate-200 bg-slate-50'}`}
                 >
                   <span className="font-medium uppercase">{c.id}.</span> {c.text}
                   {c.id === question.correctChoiceId ? (
@@ -155,7 +152,7 @@ export default function QuestionEditorPage() {
           <div>
             <label className="text-sm font-semibold text-slate-700">Explanation (EN)</label>
             <textarea
-              className="mt-2 w-full rounded-lg border p-3 text-sm"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm"
               rows={4}
               value={explanationEn}
               onChange={(e) => setExplanationEn(e.target.value)}
@@ -165,7 +162,7 @@ export default function QuestionEditorPage() {
           <div>
             <label className="text-sm font-semibold text-slate-700">Explanation (TL)</label>
             <textarea
-              className="mt-2 w-full rounded-lg border p-3 text-sm"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm"
               rows={4}
               value={explanationFil}
               onChange={(e) => setExplanationFil(e.target.value)}
@@ -180,7 +177,7 @@ export default function QuestionEditorPage() {
               type="button"
               disabled={saving}
               onClick={() => save()}
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+              className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white hover:bg-blue-700 disabled:opacity-50"
             >
               Save draft
             </button>
@@ -188,7 +185,7 @@ export default function QuestionEditorPage() {
               type="button"
               disabled={saving}
               onClick={() => save('in_review')}
-              className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-600 disabled:opacity-50"
+              className="rounded-2xl bg-amber-500 px-5 py-3 text-sm font-black text-white hover:bg-amber-600 disabled:opacity-50"
             >
               Mark in review
             </button>
@@ -196,13 +193,12 @@ export default function QuestionEditorPage() {
               type="button"
               disabled={saving}
               onClick={() => save('published')}
-              className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50"
+              className="rounded-2xl bg-green-600 px-5 py-3 text-sm font-black text-white hover:bg-green-700 disabled:opacity-50"
             >
               Publish
             </button>
           </div>
-        </div>
-      </div>
-    </div>
+        </AdminCard>
+    </AdminShell>
   );
 }

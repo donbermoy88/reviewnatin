@@ -1,7 +1,6 @@
 'use client';
 
-import { AdminNav } from '@/components/admin-nav';
-import Link from 'next/link';
+import { AdminCard, AdminMetric, AdminShell } from '@/components/admin-shell';
 import { useEffect, useState } from 'react';
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
 
@@ -30,18 +29,18 @@ export default function WaitlistAdminPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="mx-auto max-w-3xl">
-        <AdminNav />
-        <Link href="/" className="text-sm font-medium text-blue-600">
-          ← Admin home
-        </Link>
-        <h1 className="mt-4 text-2xl font-bold text-slate-900">Beta waitlist</h1>
-        <p className="mt-2 text-sm text-slate-600">Signups from reviewnatinph.com marketing site.</p>
-
+    <AdminShell
+      title="Beta Waitlist"
+      description="Inspect signups from reviewnatinph.com and identify exam demand before production launch."
+    >
+        <div className="grid gap-4 md:grid-cols-3">
+          <AdminMetric label="Signups" value={rows.length} detail="Loaded latest 200" />
+          <AdminMetric label="Source" value="Web" detail="Marketing site" tone="green" />
+          <AdminMetric label="Use" value="Demand" detail="Exam interest planning" tone="amber" />
+        </div>
         {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
 
-        <div className="mt-6 overflow-hidden rounded-xl border bg-white shadow-sm">
+        <AdminCard className="mt-6 overflow-hidden p-0">
           <table className="min-w-full text-sm">
             <thead className="bg-slate-100 text-left text-xs uppercase text-slate-600">
               <tr>
@@ -68,8 +67,7 @@ export default function WaitlistAdminPage() {
               )}
             </tbody>
           </table>
-        </div>
-      </div>
-    </div>
+        </AdminCard>
+    </AdminShell>
   );
 }

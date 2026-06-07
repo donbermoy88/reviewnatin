@@ -1,7 +1,6 @@
 'use client';
 
-import { AdminNav } from '@/components/admin-nav';
-import Link from 'next/link';
+import { AdminCard, AdminShell } from '@/components/admin-shell';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -39,20 +38,17 @@ export default function ChangelogAdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="mx-auto max-w-xl">
-        <AdminNav />
-        <Link href="/" className="text-sm font-medium text-blue-600">
-          ← Admin home
-        </Link>
-        <h1 className="mt-4 text-2xl font-bold text-slate-900">Publish content update</h1>
-        <p className="mt-2 text-sm text-slate-600">Shows in mobile Settings → Content updates and reviewnatinph.com.</p>
-
-        <form onSubmit={submit} className="mt-8 space-y-4 rounded-xl border bg-white p-6 shadow-sm">
+    <AdminShell
+      title="Publish Content Update"
+      description="Send release and content notes to the mobile Settings content updates screen and the marketing site."
+      maxWidth="max-w-3xl"
+    >
+      <AdminCard>
+        <form onSubmit={submit} className="space-y-5">
           <label className="block text-sm font-medium text-slate-700">
             Title
             <input
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
@@ -61,7 +57,7 @@ export default function ChangelogAdminPage() {
           <label className="block text-sm font-medium text-slate-700">
             Body
             <textarea
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
               rows={4}
               value={body}
               onChange={(e) => setBody(e.target.value)}
@@ -71,7 +67,7 @@ export default function ChangelogAdminPage() {
           <label className="block text-sm font-medium text-slate-700">
             Exam slug (optional — leave blank for all exams)
             <input
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
               placeholder="cse-professional"
               value={examSlug}
               onChange={(e) => setExamSlug(e.target.value)}
@@ -80,13 +76,13 @@ export default function ChangelogAdminPage() {
           <button
             type="submit"
             disabled={busy}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+            className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/20 disabled:opacity-50"
           >
             {busy ? 'Publishing…' : 'Publish update'}
           </button>
           {status ? <p className="text-sm text-slate-600">{status}</p> : null}
         </form>
-      </div>
-    </div>
+      </AdminCard>
+    </AdminShell>
   );
 }

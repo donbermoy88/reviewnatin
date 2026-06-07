@@ -1,5 +1,7 @@
 import {
+  buildImportErrorCsv,
   parseQuestionImportCsv,
+  summarizeImportErrors,
   validateQuestionImportRows,
   type QuestionImportCatalog,
   type QuestionImportError,
@@ -11,6 +13,8 @@ export type ImportPreviewResult = {
   rows: ReturnType<typeof parseQuestionImportCsv>;
   valid: ValidatedQuestionImportRow[];
   errors: QuestionImportError[];
+  errorCsv: string;
+  errorSummary: { field: string; count: number }[];
   preview: ValidatedQuestionImportRow[];
 };
 
@@ -78,6 +82,8 @@ export async function previewQuestionImport(csvText: string): Promise<ImportPrev
     rows,
     valid,
     errors,
+    errorCsv: buildImportErrorCsv(errors),
+    errorSummary: summarizeImportErrors(errors),
     preview: valid.slice(0, 10),
   };
 }
