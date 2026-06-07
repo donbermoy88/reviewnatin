@@ -1,33 +1,30 @@
 # Pricing and In-App Purchase (IAP) Specification
 
-Three tiers only for MVP. Payments via **Apple App Store** and **Google Play Billing** first. GCash/Maya deferred to Phase 2 web checkout.
+ReviewNatin Plus uses three subscription durations. Payments via **Apple App Store** and **Google Play Billing** first. GCash/Maya deferred to Phase 2 web checkout.
 
 ---
 
 ## Tier comparison
 
-| Feature | Free | Exam Pass | ReviewNatin Plus |
-|---------|------|-----------|------------------|
-| Price | ₱0 | **₱499** one-time per exam (6 months) | **₱149/mo** or **₱999/yr** |
-| Exams unlocked | 1 active (chosen at onboarding) | 1 purchased exam | All Phase 1 exams |
-| Daily practice questions | 20/day | Unlimited | Unlimited |
-| Diagnostic | Yes | Yes | Yes |
-| PasaPath daily plan | Basic (1 task/day) | Full multi-task | Full + priority regen |
-| Taglish explanations | On answered items | All | All |
-| Mistake Bank | Last 7 days | Full history | Full history |
-| Mini-mock | 1/week | Unlimited mini | Unlimited |
-| Full mock exam | Preview (10 items) | Unlimited | Unlimited |
-| Board Exam Mode | No | Yes | Yes |
-| Offline content pack | No | 1 exam pack | All packs |
-| Advanced analytics | Basic | Full | Full + readiness trends |
-| AI-generated explanations | 5/day | 20/day | Unlimited |
-| Ads | Banner (not during quiz/mock) | None | None |
-| Content updates | Standard | Standard | Priority |
+| Feature | Free | Plus Monthly | Plus 6 Months | Plus Yearly |
+|---------|------|--------------|---------------|-------------|
+| Price | ₱0 | **₱159/month** | **₱699/6 months** | **₱1,499/year** |
+| Positioning | Starter free review | Starter access | Best value for one exam season | Long-term and multiple exam prep |
+| Exams unlocked | 1 active (chosen at onboarding) | All Phase 1 exams | All Phase 1 exams | All Phase 1 exams |
+| Practice quizzes | Daily free limit | Included | Included | Included |
+| Mock exams | Limited / preview | Included | Included | Included |
+| Flashcards | Included | Included | Included | Included |
+| Diagnostic exams | Included | Included | Included | Included |
+| Progress tracking | Basic | Included | Included | Included |
+| PasaPath | Basic | Basic PasaPath copy | Full PasaPath copy | Full PasaPath copy |
+| Offline review packs | No | Plus entitlement access | Highlighted | Highlighted |
+| Weakness recommendations | Basic | Plus entitlement access | Highlighted | Highlighted |
+| Priority question updates | Standard | Plus entitlement access | Highlighted | Highlighted |
+| Ads | Banner (not during quiz/mock) | None | None | None |
 
-**Competitive positioning:**
-- Undercuts Super Tutor yearly all-access (₱999 vs ₱1,999)
-- Per-exam unlock matches Filipino "pay for my exam only" behavior
-- Beats free AI reviewers on **trust** (verified content, report flow) not price
+**Savings display:**
+- Plus 6 Months: ₱159 x 6 = ₱954 monthly equivalent; ₱699 price; save ₱255, shown as "Save around 27%".
+- Plus Yearly: ₱159 x 12 = ₱1,908 monthly equivalent; ₱1,499 price; save ₱409, shown as "Save around 21%".
 
 ---
 
@@ -37,25 +34,17 @@ Three tiers only for MVP. Payments via **Apple App Store** and **Google Play Bil
 
 | SKU ID | Product type | Price tier (PHP) | Notes |
 |--------|--------------|------------------|-------|
-| `com.reviewnatin.exampass.cse_pro` | Non-consumable | ₱499 | 6-month entitlement |
-| `com.reviewnatin.exampass.cse_sub` | Non-consumable | ₱499 | |
-| `com.reviewnatin.exampass.let_elem` | Non-consumable | ₱499 | |
-| `com.reviewnatin.exampass.let_sec` | Non-consumable | ₱599 | Includes major content |
-| `com.reviewnatin.exampass.pnle` | Non-consumable | ₱599 | |
-| `com.reviewnatin.plus.monthly` | Auto-renewable sub | ₱149 | |
-| `com.reviewnatin.plus.yearly` | Auto-renewable sub | ₱999 | Best value badge |
+| `com.reviewnatin.plus.monthly` | Auto-renewable sub | ₱159 | Display order first |
+| `com.reviewnatin.plus.six_months` | Auto-renewable sub | ₱699 | Display order second; BEST VALUE |
+| `com.reviewnatin.plus.yearly` | Auto-renewable sub | ₱1,499 | Display order third |
 
 ### Google Play
 
 | Product ID | Type | Price |
 |------------|------|-------|
-| `exam_pass_cse_pro` | One-time (managed) | ₱499 |
-| `exam_pass_cse_sub` | One-time | ₱499 |
-| `exam_pass_let_elem` | One-time | ₱499 |
-| `exam_pass_let_sec` | One-time | ₱599 |
-| `exam_pass_pnle` | One-time | ₱599 |
-| `plus_monthly` | Subscription | ₱149 |
-| `plus_yearly` | Subscription | ₱999 |
+| `plus_monthly` | Subscription | ₱159 |
+| `plus_six_months` | Subscription | ₱699 |
+| `plus_yearly` | Subscription | ₱1,499 |
 
 ---
 
@@ -69,23 +58,14 @@ function hasAccess(userId: string, examTypeId: string, feature: Feature): boolea
     return true; // Plus unlocks everything
   }
 
-  if (entitlements.some(e => e.tier === 'exam_pass' && e.examTypeId === examTypeId && !isExpired(e))) {
-    return EXAM_PASS_FEATURES.includes(feature);
-  }
-
   return FREE_FEATURES.includes(feature);
 }
 ```
 
-### Exam Pass duration
-
-- `expires_at = purchase_date + 180 days`
-- Show countdown in Settings: "CSE Pro access: 142 days left"
-- Renewal: purchase again (non-consumable — use new SKU or consumable extension SKU in Phase 2)
-
 ### Plus subscription
 
 - Monthly: 30-day rolling from renewal
+- 6 Months: 180-day rolling from renewal
 - Yearly: 365-day rolling
 - Grace period: follow store policies (3–16 days)
 - Restore purchases on new device required
@@ -97,10 +77,10 @@ function hasAccess(userId: string, examTypeId: string, feature: Feature): boolea
 | Trigger | Screen | Message |
 |---------|--------|---------|
 | Daily question limit hit | Practice Quiz | "You've used 20/20 free questions today. Unlock unlimited." |
-| Full mock attempt | Mock Exam list | "Full mock requires Exam Pass or Plus." |
+| Full mock attempt | Mock Exam list | "Full mock requires ReviewNatin Plus." |
 | Mistake older than 7 days | Mistake Bank | "Unlock full Mistake Bank history." |
 | Offline download | Topic List | "Download reviewer pack for offline study." |
-| Board Exam Mode | Practice mode picker | "Simulate real exam pressure with Exam Pass." |
+| Board Exam Mode | Practice mode picker | "Simulate real exam pressure with ReviewNatin Plus." |
 | AI explanation limit | Result screen | "Daily AI explanations used. Upgrade for more." |
 
 **Never show paywall:** During active mock timer, mid-question, or diagnostic.
@@ -247,7 +227,7 @@ Use AdMob with child-directed settings off (17+ education app).
 
 - [ ] Sandbox purchase each SKU (Apple Sandbox, Google test account)
 - [ ] Restore purchases on second device
-- [ ] Expired Exam Pass reverts to free limits
+- [ ] Expired ReviewNatin Plus reverts to free limits
 - [ ] Plus subscription renewal extends `expires_at`
 - [ ] Subscription cancellation retains access until period end
 - [ ] Receipt replay attack rejected server-side

@@ -492,7 +492,7 @@ Maps to Apple/Google IAP SKUs — see [05-pricing-iap.md](./05-pricing-iap.md).
 |----------|----------|
 | `choices` table | Embedded JSONB in MVP |
 | `AIReviewPlan` | Merged into `study_plans` |
-| `SubscriptionPlan` (4 tiers) | Reduced to 3: Free, Exam Pass, Plus |
+| `SubscriptionPlan` | Reduced to Free plus ReviewNatin Plus subscription durations |
 | `roles` table | Enum on `users.role` for MVP |
 | Leaderboard | Phase 2 |
 | Review Center bulk | Phase 2 B2B |

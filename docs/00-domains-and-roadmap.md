@@ -51,7 +51,7 @@ App deep links and legal pages should point to `reviewnatinph.com` (Privacy, Ter
 
 ### Step 4 — Ship (Weeks 9–12)
 
-11. **IAP** — Exam Pass + Plus SKUs ([05-pricing-iap.md](./05-pricing-iap.md)).
+11. **IAP** — ReviewNatin Plus subscription SKUs ([05-pricing-iap.md](./05-pricing-iap.md)).
 12. **Content QA sprint** — hit min question counts per exam before public launch.
 13. **Closed beta** (~50 users) → App Store / Play Store submit.
 

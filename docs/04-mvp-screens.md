@@ -155,7 +155,7 @@ Full-length or mini-mock per `exam_blueprints.mock_exam_config`.
 - Filter by subject
 - Mastered archive (premium: full history; free: last 7 days)
 
-**Paywall:** Free users see last 7 days only; full bank requires Exam Pass or Plus.
+**Paywall:** Free users see last 7 days only; full bank requires ReviewNatin Plus.
 
 ---
 
@@ -191,7 +191,7 @@ Full-length or mini-mock per `exam_blueprints.mock_exam_config`.
 
 **Route:** `/subscribe` (modal or screen)
 
-**Tiers displayed:** Free, Exam Pass, ReviewNatin Plus — see [05-pricing-iap.md](./05-pricing-iap.md).
+**Tiers displayed:** Free and ReviewNatin Plus durations — see [05-pricing-iap.md](./05-pricing-iap.md).
 
 **Triggers:** Full mock limit, mistake bank cap, offline download, unlimited daily questions.
 
