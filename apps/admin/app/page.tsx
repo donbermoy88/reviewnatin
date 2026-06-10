@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { AdminCard, AdminMetric, AdminShell } from '@/components/admin-shell';
+import { AdminCard, AdminMetric, AdminShell, Badge } from '@/components/admin-shell';
 
 const workflowCards = [
   {
@@ -39,59 +39,57 @@ const readinessItems = [
 export default function AdminHome() {
   return (
     <AdminShell
-      title="Mobile App Operations Dashboard"
-      description="Run ReviewNatin content, QA, subscription support, and publishing workflows from one admin command center."
+      title="Operations Dashboard"
+      description="Run ReviewNatin content, QA, subscription support, and publishing workflows from one command center."
       actions={
-        <Link
-          href="/content/review"
-          className="inline-flex rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/25 transition hover:bg-blue-700"
-        >
-          Open QA queue
+        <Link href="/content/review" className="btn btn-primary">
+          Open review queue
         </Link>
       }
     >
-      <div className="grid gap-4 md:grid-cols-4">
-        <AdminMetric label="App Surface" value="Mobile" detail="iOS + Expo workflows" />
-        <AdminMetric label="Catalog" value="Phase 1" detail="CSE, LET, PNLE" tone="green" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <AdminMetric label="App surface" value="Mobile" detail="iOS + Expo workflows" />
+        <AdminMetric label="Catalog" value="Phase 1" detail="CSE · LET · PNLE" tone="green" />
         <AdminMetric label="Paywall" value="Plus" detail="1, 6, 12 months" tone="amber" />
         <AdminMetric label="Mode" value="QA" detail="Pre-production" tone="slate" />
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[1.4fr_0.8fr]">
-        <AdminCard>
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mt-6 grid gap-6 xl:grid-cols-[1.5fr_1fr]">
+        <AdminCard padding="lg">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-600">Content Pipeline</p>
-              <h2 className="mt-2 text-2xl font-black text-[#08183f]">What needs admin attention</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--primary)]">Content pipeline</p>
+              <h2 className="mt-1 text-lg font-semibold text-[var(--text)]">What needs admin attention</h2>
             </div>
-            <code className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+            <code className="rounded-md bg-[var(--surface-sunken)] px-2.5 py-1 text-xs text-[var(--text-muted)]">
               templates/questions_import_v1.csv
             </code>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {workflowCards.map((card) => (
               <Link
                 key={card.href}
                 href={card.href}
-                className="group rounded-[1.35rem] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-950/10"
+                className="group rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition hover:border-blue-200 hover:bg-[var(--surface-muted)] hover:shadow-sm"
               >
-                <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-blue-700">
-                  {card.label}
-                </span>
-                <h3 className="mt-4 text-lg font-black text-[#08183f] group-hover:text-blue-700">{card.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{card.detail}</p>
+                <Badge tone="blue">{card.label}</Badge>
+                <h3 className="mt-3 text-base font-semibold text-[var(--text)] group-hover:text-[var(--primary)]">
+                  {card.title}
+                </h3>
+                <p className="mt-1.5 text-sm leading-6 text-[var(--text-muted)]">{card.detail}</p>
               </Link>
             ))}
           </div>
         </AdminCard>
 
-        <AdminCard className="bg-[#08183f] text-white">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-200">Launch Readiness</p>
-          <h2 className="mt-2 text-2xl font-black">Admin controls connected to the app</h2>
-          <ul className="mt-5 space-y-3 text-sm leading-6 text-blue-50">
+        <AdminCard variant="dark" padding="lg">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue-300">Launch readiness</p>
+          <h2 className="mt-1 text-lg font-semibold text-white">Admin controls connected to the app</h2>
+          <ul className="mt-4 space-y-2.5">
             {readinessItems.map((item) => (
-              <li key={item} className="rounded-2xl bg-white/10 p-3">
+              <li key={item} className="flex gap-2.5 text-sm leading-6 text-slate-300">
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-emerald-400" />
                 {item}
               </li>
             ))}
@@ -99,17 +97,17 @@ export default function AdminHome() {
         </AdminCard>
       </div>
 
-      <AdminCard className="mt-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <AdminCard className="mt-6" variant="tint" padding="lg">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-600">Staff Access</p>
-            <h2 className="mt-2 text-xl font-black text-[#08183f]">Roles allowed in this console</h2>
-            <p className="mt-2 text-sm text-slate-600">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--primary)]">Staff access</p>
+            <h2 className="mt-1 text-base font-semibold text-[var(--text)]">Roles allowed in this console</h2>
+            <p className="mt-1 text-sm text-[var(--text-muted)]">
               Admin, content_reviewer, and content_author accounts can access protected admin routes.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-100 px-4 py-3 text-sm text-slate-700">
-            Set staff roles in the Supabase <code className="font-black">users</code> table.
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--text-muted)]">
+            Set staff roles in the Supabase <code className="font-semibold text-[var(--text)]">users</code> table.
           </div>
         </div>
       </AdminCard>

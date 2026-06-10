@@ -17,39 +17,41 @@ type AdminShellProps = {
 type AdminCardProps = {
   children: ReactNode;
   className?: string;
+  variant?: 'surface' | 'raised' | 'dark' | 'tint';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
 };
 
 type AdminMetricProps = {
   label: string;
   value: string | number;
   detail?: string;
-  tone?: 'blue' | 'green' | 'amber' | 'slate';
+  tone?: 'blue' | 'green' | 'amber' | 'slate' | 'rose';
 };
 
 const navGroups = [
   {
-    label: 'Command',
+    label: 'Operations',
     items: [
-      { href: '/', label: 'Dashboard', detail: 'Ops overview' },
-      { href: '/content/review', label: 'Review Queue', detail: 'Flags, drafts, QA' },
-      { href: '/content/import', label: 'CSV Import', detail: 'Bulk questions' },
+      { href: '/', label: 'Dashboard', detail: 'Overview', mark: 'D' },
+      { href: '/content/review', label: 'Review Queue', detail: 'Flags & QA', mark: 'Q' },
+      { href: '/content/import', label: 'CSV Import', detail: 'Bulk questions', mark: 'I' },
+      { href: '/content/stats', label: 'Stats', detail: 'Catalog metrics', mark: 'S' },
     ],
   },
   {
     label: 'Content',
     items: [
-      { href: '/content/materials', label: 'Materials', detail: 'Lessons and cheat sheets' },
-      { href: '/content/announcements', label: 'Announcements', detail: 'App updates' },
-      { href: '/content/schedules', label: 'Schedules', detail: 'Exam calendar' },
-      { href: '/content/changelog', label: 'Changelog', detail: 'Release notes' },
+      { href: '/content/materials', label: 'Materials', detail: 'Lessons & cheat sheets', mark: 'M' },
+      { href: '/content/announcements', label: 'Announcements', detail: 'App updates', mark: 'A' },
+      { href: '/content/schedules', label: 'Schedules', detail: 'Exam calendar', mark: 'C' },
+      { href: '/content/changelog', label: 'Changelog', detail: 'Release notes', mark: 'L' },
     ],
   },
   {
     label: 'Growth',
     items: [
-      { href: '/content/checkouts', label: 'Checkouts', detail: 'Manual fulfillment' },
-      { href: '/content/stats', label: 'Stats', detail: 'Catalog metrics' },
-      { href: '/content/waitlist', label: 'Waitlist', detail: 'Beta signups' },
+      { href: '/content/checkouts', label: 'Checkouts', detail: 'Manual fulfillment', mark: 'P' },
+      { href: '/content/waitlist', label: 'Waitlist', detail: 'Beta signups', mark: 'W' },
     ],
   },
 ];
@@ -62,6 +64,7 @@ function isActive(pathname: string, href: string): boolean {
 
 function todayLabel(): string {
   return new Intl.DateTimeFormat('en-PH', {
+    weekday: 'short',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -88,39 +91,55 @@ export function AdminShell({
   };
 
   return (
-    <div className="min-h-screen bg-[#eef4ff] text-slate-950">
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(20,99,255,0.20),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,190,38,0.18),transparent_30%),linear-gradient(180deg,#f8fbff_0%,#eef4ff_45%,#f6f8fb_100%)]" />
+    <div className="min-h-screen bg-[var(--app-bg)] text-[var(--text)]">
       <div className="flex min-h-screen">
-        <aside className="hidden w-80 shrink-0 border-r border-white/10 bg-[#071a44] text-white shadow-2xl lg:flex lg:flex-col">
-          <div className="p-6">
-            <Link href="/" className="block rounded-[1.75rem] border border-white/10 bg-white/10 p-5 shadow-xl shadow-blue-950/30">
-              <p className="text-xs font-black uppercase tracking-[0.28em] text-blue-200">ReviewNatin</p>
-              <h2 className="mt-2 text-2xl font-black tracking-tight">Admin Command</h2>
-              <p className="mt-2 text-sm leading-6 text-blue-100">
-                Content QA, subscription ops, and mobile app publishing controls.
-              </p>
-            </Link>
+        {/* Sidebar */}
+        <aside className="hidden w-72 shrink-0 flex-col bg-[var(--sidebar)] text-slate-100 lg:flex">
+          <div className="flex h-16 items-center gap-2.5 border-b border-[var(--sidebar-border)] px-6">
+            <span className="grid size-8 place-items-center rounded-lg bg-[var(--primary)] text-sm font-bold text-white">
+              R
+            </span>
+            <div className="leading-tight">
+              <p className="text-sm font-semibold tracking-tight">ReviewNatin</p>
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">Admin Console</p>
+            </div>
           </div>
 
-          <nav className="flex-1 space-y-6 overflow-y-auto px-4 pb-6">
+          <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-5">
             {navGroups.map((group) => (
               <div key={group.label}>
-                <p className="px-3 text-[11px] font-black uppercase tracking-[0.22em] text-blue-200/80">{group.label}</p>
-                <div className="mt-2 space-y-1">
+                <p className="px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                  {group.label}
+                </p>
+                <div className="mt-2 space-y-0.5">
                   {group.items.map((item) => {
                     const active = isActive(pathname, item.href);
                     return (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={`block rounded-2xl px-4 py-3 transition ${
+                        aria-current={active ? 'page' : undefined}
+                        className={`group flex items-center gap-3 rounded-lg px-3 py-2 transition ${
                           active
-                            ? 'bg-white text-[#0b255f] shadow-lg shadow-blue-950/20'
-                            : 'text-blue-50 hover:bg-white/10 hover:text-white'
+                            ? 'bg-white/10 text-white'
+                            : 'text-slate-300 hover:bg-white/5 hover:text-white'
                         }`}
                       >
-                        <span className="block text-sm font-black">{item.label}</span>
-                        <span className={`mt-0.5 block text-xs ${active ? 'text-slate-500' : 'text-blue-200'}`}>{item.detail}</span>
+                        <span
+                          className={`grid size-7 shrink-0 place-items-center rounded-md text-[11px] font-semibold transition ${
+                            active
+                              ? 'bg-[var(--primary)] text-white'
+                              : 'bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-slate-200'
+                          }`}
+                        >
+                          {item.mark}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block truncate text-sm font-medium">{item.label}</span>
+                          <span className={`block truncate text-[11px] ${active ? 'text-slate-300' : 'text-slate-500'}`}>
+                            {item.detail}
+                          </span>
+                        </span>
                       </Link>
                     );
                   })}
@@ -129,88 +148,146 @@ export function AdminShell({
             ))}
           </nav>
 
-          <div className="border-t border-white/10 p-5">
-            <div className="rounded-2xl bg-white/10 p-4">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">Today</p>
-              <p className="mt-1 text-sm font-semibold text-white">{todayLabel()}</p>
+          <div className="border-t border-[var(--sidebar-border)] p-4">
+            <div className="flex items-center gap-2 px-2 text-[11px] text-slate-400">
+              <span className="size-1.5 rounded-full bg-emerald-400" />
+              Production linked · {todayLabel()}
+            </div>
+            <button
+              type="button"
+              onClick={signOut}
+              className="mt-3 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/10"
+            >
+              Sign out
+            </button>
+          </div>
+        </aside>
+
+        {/* Main */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          {/* Mobile top bar */}
+          <div className="sticky top-0 z-20 border-b border-[var(--border)] bg-[var(--sidebar)] text-white lg:hidden">
+            <div className="flex h-14 items-center justify-between px-4">
+              <div className="flex items-center gap-2">
+                <span className="grid size-7 place-items-center rounded-md bg-[var(--primary)] text-xs font-bold text-white">
+                  R
+                </span>
+                <span className="text-sm font-semibold">ReviewNatin Admin</span>
+              </div>
               <button
                 type="button"
                 onClick={signOut}
-                className="mt-4 w-full rounded-xl border border-white/15 bg-white px-4 py-2 text-sm font-black text-[#0b255f] transition hover:bg-blue-50"
+                className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium"
               >
                 Sign out
               </button>
             </div>
+            <nav className="flex gap-1.5 overflow-x-auto px-4 pb-2.5">
+              {mobileNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition ${
+                    isActive(pathname, item.href) ? 'bg-white text-[var(--sidebar)]' : 'bg-white/10 text-slate-200'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
           </div>
-        </aside>
 
-        <main className="min-w-0 flex-1 px-4 py-5 sm:px-6 lg:px-8">
-          <div className={`mx-auto ${maxWidth}`}>
-            <div className="mb-5 rounded-[1.75rem] border border-white/70 bg-[#071a44] p-4 text-white shadow-xl shadow-blue-950/20 lg:hidden">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-200">ReviewNatin</p>
-                  <p className="mt-1 text-xl font-black">Admin Command</p>
-                </div>
-                <button type="button" onClick={signOut} className="rounded-xl bg-white px-3 py-2 text-xs font-black text-[#0b255f]">
-                  Sign out
-                </button>
-              </div>
-              <nav className="mt-4 flex gap-2 overflow-x-auto pb-1">
-                {mobileNavItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`shrink-0 rounded-full px-4 py-2 text-xs font-black ${
-                      isActive(pathname, item.href) ? 'bg-white text-[#0b255f]' : 'bg-white/10 text-blue-50'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-
-            <header className="mb-8 overflow-hidden rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-xl shadow-blue-950/10 backdrop-blur sm:p-8">
-              <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.28em] text-blue-600">{eyebrow}</p>
-                  <h1 className="mt-3 max-w-4xl text-3xl font-black tracking-tight text-[#08183f] sm:text-4xl">{title}</h1>
-                  {description ? <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">{description}</p> : null}
+          <main className="flex-1 px-4 py-6 sm:px-6 lg:px-10">
+            <div className={`mx-auto ${maxWidth}`}>
+              <header className="mb-7 flex flex-col gap-4 border-b border-[var(--border)] pb-6 xl:flex-row xl:items-end xl:justify-between">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--primary)]">{eyebrow}</p>
+                  <h1 className="mt-1.5 text-2xl font-semibold tracking-tight text-[var(--text)] sm:text-3xl">{title}</h1>
+                  {description ? (
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--text-muted)]">{description}</p>
+                  ) : null}
                 </div>
                 {actions ? <div className="shrink-0">{actions}</div> : null}
-              </div>
-            </header>
+              </header>
 
-            {children}
-          </div>
-        </main>
+              {children}
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   );
 }
 
-export function AdminCard({ children, className = '' }: AdminCardProps) {
+export function AdminCard({ children, className = '', variant = 'surface', padding = 'md' }: AdminCardProps) {
+  const variantClass = {
+    surface: 'border-[var(--border)] bg-[var(--surface)] text-[var(--text)] shadow-sm',
+    raised: 'border-[var(--border)] bg-[var(--surface)] text-[var(--text)] shadow-md',
+    dark: 'border-white/10 bg-[var(--sidebar)] text-slate-100',
+    tint: 'border-blue-100 bg-[var(--primary-soft)] text-[var(--text)]',
+  }[variant];
+  const paddingClass = {
+    none: 'p-0',
+    sm: 'p-4',
+    md: 'p-5',
+    lg: 'p-6',
+  }[padding];
+
   return (
-    <section className={`rounded-[1.5rem] border border-white/80 bg-white/90 p-5 shadow-lg shadow-blue-950/5 backdrop-blur ${className}`}>
-      {children}
-    </section>
+    <section className={`rounded-xl border ${variantClass} ${paddingClass} ${className}`}>{children}</section>
   );
 }
 
 export function AdminMetric({ label, value, detail, tone = 'blue' }: AdminMetricProps) {
-  const toneClass = {
-    blue: 'bg-blue-50 text-blue-700 ring-blue-100',
-    green: 'bg-emerald-50 text-emerald-700 ring-emerald-100',
-    amber: 'bg-amber-50 text-amber-700 ring-amber-100',
-    slate: 'bg-slate-50 text-slate-700 ring-slate-100',
+  const accent = {
+    blue: 'text-[var(--primary)]',
+    green: 'text-emerald-600',
+    amber: 'text-amber-600',
+    slate: 'text-slate-500',
+    rose: 'text-rose-600',
   }[tone];
 
   return (
-    <div className={`rounded-[1.25rem] p-4 ring-1 ${toneClass}`}>
-      <p className="text-xs font-black uppercase tracking-[0.18em] opacity-80">{label}</p>
-      <p className="mt-2 text-3xl font-black tracking-tight">{value}</p>
-      {detail ? <p className="mt-1 text-sm font-semibold opacity-75">{detail}</p> : null}
+    <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm">
+      <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">{label}</p>
+      <p className="mt-2 text-3xl font-semibold tracking-tight text-[var(--text)]">{value}</p>
+      {detail ? <p className={`mt-1 text-xs font-medium ${accent}`}>{detail}</p> : null}
     </div>
+  );
+}
+
+type BadgeTone = 'neutral' | 'blue' | 'green' | 'amber' | 'orange' | 'red' | 'purple';
+
+export function Badge({ tone = 'neutral', children }: { tone?: BadgeTone; children: ReactNode }) {
+  const toneClass = {
+    neutral: 'bg-slate-100 text-slate-600',
+    blue: 'bg-blue-50 text-blue-700',
+    green: 'bg-emerald-50 text-emerald-700',
+    amber: 'bg-amber-50 text-amber-700',
+    orange: 'bg-orange-50 text-orange-700',
+    red: 'bg-red-50 text-red-700',
+    purple: 'bg-purple-50 text-purple-700',
+  }[tone];
+  return <span className={`badge ${toneClass}`}>{children}</span>;
+}
+
+/** Labelled form field wrapper. */
+export function Field({
+  label,
+  hint,
+  className = '',
+  children,
+}: {
+  label: string;
+  hint?: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <label className={`block ${className}`}>
+      <span className="field-label">{label}</span>
+      {children}
+      {hint ? <span className="field-hint">{hint}</span> : null}
+    </label>
   );
 }

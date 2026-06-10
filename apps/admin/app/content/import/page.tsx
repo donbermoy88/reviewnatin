@@ -94,33 +94,33 @@ export default function ContentImportPage() {
       title="CSV Question Import"
       description="Validate and stage new question batches for ReviewNatin mobile exams without letting malformed rows reach the review queue."
       actions={
-        <code className="rounded-full bg-white px-4 py-2 text-xs font-black text-blue-700 shadow-sm">
+        <code className="rounded-md bg-[var(--surface-sunken)] px-3 py-2 text-xs text-[var(--text-muted)]">
           templates/questions_import_v1.csv
         </code>
       }
     >
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <AdminMetric label="Step 1" value="Upload" detail="CSV template" />
         <AdminMetric label="Step 2" value="Validate" detail="Schema + metadata" tone="amber" />
         <AdminMetric label="Step 3" value="Preview" detail="Errors blocked" tone="slate" />
         <AdminMetric label="Step 4" value="Import" detail={publish ? 'Publish mode' : 'Draft mode'} tone="green" />
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <AdminCard className="space-y-6">
+      <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_1fr]">
+        <AdminCard className="space-y-5" padding="lg">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-600">Batch Controls</p>
-            <h2 className="mt-2 text-2xl font-black text-[#08183f]">Upload and validate</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              Rows import as <strong>draft</strong> unless publish is enabled for a controlled admin release.
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--primary)]">Batch controls</p>
+            <h2 className="mt-1 text-lg font-semibold text-[var(--text)]">Upload and validate</h2>
+            <p className="mt-1 text-sm leading-6 text-[var(--text-muted)]">
+              Rows import as <strong className="font-semibold text-[var(--text)]">draft</strong> unless publish is enabled for a controlled admin release.
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Upload CSV</label>
+            <span className="field-label">Upload CSV</span>
             <input
               type="file"
               accept=".csv,text/csv"
-              className="mt-2 block w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm file:mr-4 file:rounded-xl file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-sm file:font-black file:text-white"
+              className="block w-full rounded-lg border border-[var(--border-strong)] bg-[var(--surface-muted)] px-3 py-2.5 text-sm text-[var(--text-muted)] file:mr-3 file:rounded-md file:border-0 file:bg-[var(--primary)] file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-white hover:file:bg-[var(--primary-hover)]"
               onChange={(e) => {
                 setFile(e.target.files?.[0] ?? null);
                 setPreview(null);
@@ -130,48 +130,38 @@ export default function ContentImportPage() {
             />
           </div>
 
-          <label className="flex items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
-            <input type="checkbox" checked={publish} onChange={(e) => setPublish(e.target.checked)} className="size-4" />
+          <label className="flex items-start gap-3 rounded-lg border border-amber-200 bg-[var(--warning-soft)] p-4 text-sm text-amber-900">
+            <input type="checkbox" checked={publish} onChange={(e) => setPublish(e.target.checked)} className="mt-0.5 size-4 accent-[var(--primary)]" />
             <span>
-              <span className="block font-black">Publish immediately</span>
-              <span className="text-amber-800">Skip review queue. Use only for verified dev/admin batches.</span>
+              <span className="block font-semibold">Publish immediately</span>
+              <span className="text-amber-700">Skips the review queue. Use only for verified dev/admin batches.</span>
             </span>
           </label>
 
           <div className="flex flex-wrap gap-3">
-            <button
-              type="button"
-              disabled={!file || busy !== null}
-              onClick={() => runAction('preview')}
-              className="rounded-2xl bg-[#08183f] px-5 py-3 text-sm font-black text-white shadow-lg shadow-slate-950/10 disabled:opacity-50"
-            >
+            <button type="button" disabled={!file || busy !== null} onClick={() => runAction('preview')} className="btn btn-secondary">
               {busy === 'preview' ? 'Validating…' : 'Preview & validate'}
             </button>
-            <button
-              type="button"
-              disabled={!canImport}
-              onClick={() => runAction('import')}
-              className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/20 disabled:opacity-50"
-            >
+            <button type="button" disabled={!canImport} onClick={() => runAction('import')} className="btn btn-primary">
               {busy === 'import' ? 'Importing…' : 'Confirm import'}
             </button>
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[var(--text-muted)]">
             Preview validation must pass before importing. This keeps malformed CSV rows out of the review queue.
           </p>
 
           {error ? <p className="text-sm text-red-600">{error}</p> : null}
-          {message ? <p className="text-sm text-green-700">{message}</p> : null}
+          {message ? <p className="text-sm text-emerald-700">{message}</p> : null}
         </AdminCard>
 
-        <AdminCard className="bg-[#08183f] text-white">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-200">Mobile App Safety</p>
-          <h2 className="mt-2 text-2xl font-black">Import checks before users see content</h2>
-          <div className="mt-5 grid gap-3 text-sm leading-6 text-blue-50 sm:grid-cols-2">
-            <div className="rounded-2xl bg-white/10 p-4">Exam, subject, and topic slugs must map to the Supabase catalog.</div>
-            <div className="rounded-2xl bg-white/10 p-4">Malformed answer keys are blocked before practice or mock exam use.</div>
-            <div className="rounded-2xl bg-white/10 p-4">Error CSV export gives reviewers exact rows to correct.</div>
-            <div className="rounded-2xl bg-white/10 p-4">Draft mode keeps fresh batches out of production until reviewed.</div>
+        <AdminCard variant="dark" padding="lg">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue-300">Mobile app safety</p>
+          <h2 className="mt-1 text-lg font-semibold text-white">Import checks before users see content</h2>
+          <div className="mt-4 grid gap-2.5 text-sm leading-6 text-slate-300 sm:grid-cols-2">
+            <div className="rounded-lg border border-white/10 bg-white/5 p-3.5">Exam, subject, and topic slugs must map to the Supabase catalog.</div>
+            <div className="rounded-lg border border-white/10 bg-white/5 p-3.5">Malformed answer keys are blocked before practice or mock exam use.</div>
+            <div className="rounded-lg border border-white/10 bg-white/5 p-3.5">Error CSV export gives reviewers exact rows to correct.</div>
+            <div className="rounded-lg border border-white/10 bg-white/5 p-3.5">Draft mode keeps fresh batches out of production until reviewed.</div>
           </div>
         </AdminCard>
       </div>
@@ -179,21 +169,21 @@ export default function ContentImportPage() {
         {preview ? (
           <div className="mt-8 space-y-6">
             <AdminCard>
-              <h2 className="text-xl font-black text-[#08183f]">Validation summary</h2>
+              <h2 className="text-base font-semibold text-[var(--text)]">Validation summary</h2>
               <div className="mt-4 grid gap-3 sm:grid-cols-4">
-                <div className="rounded-lg border bg-slate-50 p-3">
-                  <p className="text-xs font-medium uppercase tracking-wide text-slate-500">Rows</p>
-                  <p className="mt-1 text-2xl font-bold text-slate-900">{preview.rows.length}</p>
+                <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-muted)] p-3">
+                  <p className="text-xs font-medium uppercase tracking-wide text-[var(--text-muted)]">Rows</p>
+                  <p className="mt-1 text-2xl font-semibold tabular-nums text-[var(--text)]">{preview.rows.length}</p>
                 </div>
-                <div className="rounded-lg border bg-green-50 p-3">
-                  <p className="text-xs font-medium uppercase tracking-wide text-green-700">Valid</p>
-                  <p className="mt-1 text-2xl font-bold text-green-800">{preview.valid.length}</p>
+                <div className="rounded-lg border border-emerald-100 bg-[var(--success-soft)] p-3">
+                  <p className="text-xs font-medium uppercase tracking-wide text-emerald-700">Valid</p>
+                  <p className="mt-1 text-2xl font-semibold tabular-nums text-emerald-800">{preview.valid.length}</p>
                 </div>
-                <div className="rounded-lg border bg-red-50 p-3">
+                <div className="rounded-lg border border-red-100 bg-[var(--danger-soft)] p-3">
                   <p className="text-xs font-medium uppercase tracking-wide text-red-700">Errors</p>
-                  <p className="mt-1 text-2xl font-bold text-red-800">{preview.errors.length}</p>
+                  <p className="mt-1 text-2xl font-semibold tabular-nums text-red-800">{preview.errors.length}</p>
                 </div>
-                <div className="rounded-lg border bg-blue-50 p-3">
+                <div className="rounded-lg border border-blue-100 bg-[var(--primary-soft)] p-3">
                   <p className="text-xs font-medium uppercase tracking-wide text-blue-700">Import status</p>
                   <p className="mt-2 text-sm font-semibold text-blue-900">
                     {previewHasErrors ? 'Blocked' : publish ? 'Ready to publish' : 'Ready as draft'}
@@ -214,7 +204,7 @@ export default function ContentImportPage() {
                   <button
                     type="button"
                     onClick={downloadErrorCsv}
-                    className="rounded-lg border border-red-300 bg-white px-3 py-2 text-sm font-medium text-red-700 hover:bg-red-100"
+                    className="btn btn-sm border border-red-300 bg-white text-red-700 hover:bg-red-50"
                   >
                     Download .errors.csv
                   </button>
@@ -251,11 +241,11 @@ export default function ContentImportPage() {
 
             {preview.preview.length > 0 ? (
               <AdminCard>
-                <h2 className="text-xl font-black text-[#08183f]">Preview (first {preview.preview.length} valid rows)</h2>
+                <h2 className="text-base font-semibold text-[var(--text)]">Preview (first {preview.preview.length} valid rows)</h2>
                 <div className="mt-4 overflow-x-auto">
                   <table className="min-w-full text-left text-sm">
                     <thead>
-                      <tr className="border-b text-slate-500">
+                      <tr className="border-b border-[var(--border)] text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
                         <th className="py-2 pr-4">Exam</th>
                         <th className="py-2 pr-4">Topic</th>
                         <th className="py-2 pr-4">Stem</th>
@@ -264,13 +254,13 @@ export default function ContentImportPage() {
                     </thead>
                     <tbody>
                       {preview.preview.map((row, i) => (
-                        <tr key={i} className="border-b align-top">
-                          <td className="py-2 pr-4 whitespace-nowrap">{row.exam_type_slug}</td>
-                          <td className="py-2 pr-4 whitespace-nowrap">
+                        <tr key={i} className="border-b border-[var(--border)] align-top last:border-0">
+                          <td className="py-2 pr-4 whitespace-nowrap text-[var(--text-muted)]">{row.exam_type_slug}</td>
+                          <td className="py-2 pr-4 whitespace-nowrap text-[var(--text-muted)]">
                             {row.subject_slug}/{row.topic_slug}
                           </td>
-                          <td className="py-2 pr-4 max-w-md truncate">{row.stem}</td>
-                          <td className="py-2">{row.correct_choice.toUpperCase()}</td>
+                          <td className="py-2 pr-4 max-w-md truncate text-[var(--text)]">{row.stem}</td>
+                          <td className="py-2 font-medium text-[var(--text)]">{row.correct_choice.toUpperCase()}</td>
                         </tr>
                       ))}
                     </tbody>

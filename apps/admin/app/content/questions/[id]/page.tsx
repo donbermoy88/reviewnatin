@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { AdminCard, AdminShell } from '@/components/admin-shell';
+import { AdminCard, AdminShell, Badge } from '@/components/admin-shell';
 
 type QuestionDetail = {
   id: string;
@@ -55,9 +55,9 @@ export default function QuestionEditorPage() {
   }, [params.id]);
 
   useEffect(() => {
-    // Defer to avoid synchronous setState chain inside the effect commit phase
-    // (react-hooks/set-state-in-effect).
-    queueMicrotask(() => { void load(); });
+    queueMicrotask(() => {
+      void load();
+    });
   }, [load]);
 
   const save = async (status?: QuestionDetail['status']) => {
@@ -68,16 +68,11 @@ export default function QuestionEditorPage() {
       const res = await fetch(`/api/content/questions/${params.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          stem,
-          explanationEn,
-          explanationFil,
-          status,
-        }),
+        body: JSON.stringify({ stem, explanationEn, explanationFil, status }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? 'Save failed');
-      setMessage(status === 'published' ? 'Published.' : status ? `Status: ${status}` : 'Saved.');
+      setMessage(status === 'published' ? 'Published.' : status ? `Status set to ${status}.` : 'Saved.');
       await load();
       router.refresh();
     } catch (err) {
@@ -87,11 +82,17 @@ export default function QuestionEditorPage() {
     }
   };
 
+  const backLink = (
+    <Link href="/content/review" className="btn btn-secondary">
+      ← Back to review queue
+    </Link>
+  );
+
   if (loading) {
     return (
-      <AdminShell title="Edit Question" description="Loading the selected QA item." maxWidth="max-w-4xl">
-        <AdminCard>
-          <p className="text-slate-600">Loading question…</p>
+      <AdminShell title="Edit Question" description="Loading the selected QA item." maxWidth="max-w-3xl">
+        <AdminCard padding="lg">
+          <p className="text-[var(--text-muted)]">Loading question…</p>
         </AdminCard>
       </AdminShell>
     );
@@ -99,12 +100,10 @@ export default function QuestionEditorPage() {
 
   if (!question) {
     return (
-      <AdminShell title="Edit Question" description="The selected question could not be loaded." maxWidth="max-w-4xl">
-        <AdminCard>
+      <AdminShell title="Edit Question" description="The selected question could not be loaded." maxWidth="max-w-3xl">
+        <AdminCard padding="lg">
           <p className="text-red-600">{error || 'Question not found.'}</p>
-          <Link href="/content/review" className="mt-4 inline-block text-sm text-blue-600">
-            ← Back to review queue
-          </Link>
+          <div className="mt-4">{backLink}</div>
         </AdminCard>
       </AdminShell>
     );
@@ -113,92 +112,80 @@ export default function QuestionEditorPage() {
   return (
     <AdminShell
       title="Edit Question"
-      description={`${question.examSlug} · ${question.subjectName}/${question.topicName} · ${question.status}`}
-      maxWidth="max-w-4xl"
-      actions={
-        <Link href="/content/review" className="inline-flex rounded-2xl bg-white px-5 py-3 text-sm font-black text-blue-700 shadow-sm">
-          Back to QA queue
-        </Link>
-      }
+      description={`${question.examSlug ?? '—'} · ${question.subjectName ?? '—'}/${question.topicName ?? '—'}`}
+      maxWidth="max-w-3xl"
+      actions={backLink}
     >
-        <AdminCard className="space-y-6">
-          <div>
-            <label className="text-sm font-semibold text-slate-700">Stem</label>
-            <textarea
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm"
-              rows={4}
-              value={stem}
-              onChange={(e) => setStem(e.target.value)}
-            />
-          </div>
+      <AdminCard padding="lg" className="space-y-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge tone={question.status === 'published' ? 'green' : question.status === 'in_review' ? 'amber' : 'neutral'}>
+            {question.status}
+          </Badge>
+          {question.isVerified ? <Badge tone="blue">verified</Badge> : null}
+          <Badge tone="neutral">difficulty {question.difficulty}</Badge>
+        </div>
 
-          <div>
-            <p className="text-sm font-semibold text-slate-700">Choices</p>
-            <ul className="mt-2 space-y-2 text-sm">
-              {question.choices.map((c) => (
+        <label className="block">
+          <span className="field-label">Stem</span>
+          <textarea className="field-input" rows={4} value={stem} onChange={(e) => setStem(e.target.value)} />
+        </label>
+
+        <div>
+          <p className="field-label">Choices</p>
+          <ul className="space-y-2 text-sm">
+            {question.choices.map((c) => {
+              const correct = c.id === question.correctChoiceId;
+              return (
                 <li
                   key={c.id}
-                  className={`rounded-2xl border px-4 py-3 ${c.id === question.correctChoiceId ? 'border-green-400 bg-green-50' : 'border-slate-200 bg-slate-50'}`}
+                  className={`flex items-start gap-2 rounded-lg border px-4 py-3 ${
+                    correct ? 'border-emerald-300 bg-[var(--success-soft)]' : 'border-[var(--border)] bg-[var(--surface-muted)]'
+                  }`}
                 >
-                  <span className="font-medium uppercase">{c.id}.</span> {c.text}
-                  {c.id === question.correctChoiceId ? (
-                    <span className="ml-2 text-xs text-green-700">correct</span>
-                  ) : null}
+                  <span className="font-semibold uppercase text-[var(--text-muted)]">{c.id}.</span>
+                  <span className="flex-1 text-[var(--text)]">{c.text}</span>
+                  {correct ? <Badge tone="green">correct</Badge> : null}
                 </li>
-              ))}
-            </ul>
-          </div>
+              );
+            })}
+          </ul>
+        </div>
 
-          <div>
-            <label className="text-sm font-semibold text-slate-700">Explanation (EN)</label>
-            <textarea
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm"
-              rows={4}
-              value={explanationEn}
-              onChange={(e) => setExplanationEn(e.target.value)}
-            />
-          </div>
+        <label className="block">
+          <span className="field-label">Explanation (EN)</span>
+          <textarea
+            className="field-input"
+            rows={4}
+            value={explanationEn}
+            onChange={(e) => setExplanationEn(e.target.value)}
+          />
+        </label>
 
-          <div>
-            <label className="text-sm font-semibold text-slate-700">Explanation (TL)</label>
-            <textarea
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm"
-              rows={4}
-              value={explanationFil}
-              onChange={(e) => setExplanationFil(e.target.value)}
-            />
-          </div>
+        <label className="block">
+          <span className="field-label">Explanation (TL)</span>
+          <textarea
+            className="field-input"
+            rows={4}
+            value={explanationFil}
+            onChange={(e) => setExplanationFil(e.target.value)}
+          />
+        </label>
 
-          {error ? <p className="text-sm text-red-600">{error}</p> : null}
-          {message ? <p className="text-sm text-green-700">{message}</p> : null}
+        {error ? <p className="text-sm text-red-600">{error}</p> : null}
+        {message ? <p className="text-sm text-emerald-700">{message}</p> : null}
 
-          <div className="flex flex-wrap gap-3">
-            <button
-              type="button"
-              disabled={saving}
-              onClick={() => save()}
-              className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white hover:bg-blue-700 disabled:opacity-50"
-            >
-              Save draft
-            </button>
-            <button
-              type="button"
-              disabled={saving}
-              onClick={() => save('in_review')}
-              className="rounded-2xl bg-amber-500 px-5 py-3 text-sm font-black text-white hover:bg-amber-600 disabled:opacity-50"
-            >
-              Mark in review
-            </button>
-            <button
-              type="button"
-              disabled={saving}
-              onClick={() => save('published')}
-              className="rounded-2xl bg-green-600 px-5 py-3 text-sm font-black text-white hover:bg-green-700 disabled:opacity-50"
-            >
-              Publish
-            </button>
-          </div>
-        </AdminCard>
+        <div className="flex flex-wrap gap-3 border-t border-[var(--border)] pt-5">
+          <button type="button" disabled={saving} onClick={() => save()} className="btn btn-primary">
+            Save draft
+          </button>
+          <button type="button" disabled={saving} onClick={() => save('in_review')} className="btn btn-secondary">
+            Mark in review
+          </button>
+          <button type="button" disabled={saving} onClick={() => save('published')} className="btn btn-success">
+            Publish
+          </button>
+        </div>
+      </AdminCard>
     </AdminShell>
   );
 }

@@ -14,6 +14,7 @@ type WaitlistRow = {
 
 export default function WaitlistAdminPage() {
   const [rows, setRows] = useState<WaitlistRow[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -22,9 +23,11 @@ export default function WaitlistAdminPage() {
       const { data, error: err } = await supabase.rpc('get_waitlist_signups', { p_limit: 200 });
       if (err) {
         setError(err.message);
+        setLoading(false);
         return;
       }
       setRows((data ?? []) as WaitlistRow[]);
+      setLoading(false);
     })();
   }, []);
 
@@ -33,41 +36,49 @@ export default function WaitlistAdminPage() {
       title="Beta Waitlist"
       description="Inspect signups from reviewnatinph.com and identify exam demand before production launch."
     >
-        <div className="grid gap-4 md:grid-cols-3">
-          <AdminMetric label="Signups" value={rows.length} detail="Loaded latest 200" />
-          <AdminMetric label="Source" value="Web" detail="Marketing site" tone="green" />
-          <AdminMetric label="Use" value="Demand" detail="Exam interest planning" tone="amber" />
-        </div>
-        {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <AdminMetric label="Signups" value={loading ? '—' : rows.length} detail="Latest 200" />
+        <AdminMetric label="Source" value="Web" detail="Marketing site" tone="green" />
+        <AdminMetric label="Use" value="Demand" detail="Exam interest planning" tone="amber" />
+      </div>
+      {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
 
-        <AdminCard className="mt-6 overflow-hidden p-0">
+      <AdminCard className="mt-6 overflow-hidden" padding="none">
+        <div className="overflow-x-auto">
           <table className="min-w-full text-sm">
-            <thead className="bg-slate-100 text-left text-xs uppercase text-slate-600">
-              <tr>
+            <thead>
+              <tr className="border-b border-[var(--border)] bg-[var(--surface-muted)] text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Platform</th>
                 <th className="px-4 py-3">Signed up</th>
               </tr>
             </thead>
             <tbody>
-              {rows.length === 0 ? (
+              {loading ? (
                 <tr>
-                  <td colSpan={3} className="px-4 py-8 text-center text-slate-500">
+                  <td colSpan={3} className="px-4 py-10 text-center text-[var(--text-muted)]">
+                    Loading signups…
+                  </td>
+                </tr>
+              ) : rows.length === 0 ? (
+                <tr>
+                  <td colSpan={3} className="px-4 py-10 text-center text-[var(--text-muted)]">
                     No waitlist signups yet.
                   </td>
                 </tr>
               ) : (
                 rows.map((row) => (
-                  <tr key={row.id} className="border-t">
-                    <td className="px-4 py-3">{row.email}</td>
-                    <td className="px-4 py-3">{row.platform ?? '—'}</td>
-                    <td className="px-4 py-3">{new Date(row.created_at).toLocaleString()}</td>
+                  <tr key={row.id} className="border-b border-[var(--border)] last:border-0 hover:bg-[var(--surface-muted)]">
+                    <td className="px-4 py-3 font-medium text-[var(--text)]">{row.email}</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)]">{row.platform ?? '—'}</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)]">{new Date(row.created_at).toLocaleString()}</td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
-        </AdminCard>
+        </div>
+      </AdminCard>
     </AdminShell>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { AdminCard, AdminShell } from '@/components/admin-shell';
+import { AdminCard, AdminShell, Field } from '@/components/admin-shell';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -14,6 +14,7 @@ export default function MaterialsAdminPage() {
   const [materialType, setMaterialType] = useState<'lesson' | 'cheat_sheet'>('lesson');
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState('');
+  const [ok, setOk] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,22 +24,17 @@ export default function MaterialsAdminPage() {
       const res = await fetch('/api/content/materials', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          examSlug,
-          subjectSlug,
-          topicSlug,
-          title,
-          materialBody: body,
-          materialType,
-        }),
+        body: JSON.stringify({ examSlug, subjectSlug, topicSlug, title, materialBody: body, materialType }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? 'Failed');
       setTitle('');
       setBody('');
+      setOk(true);
       setStatus(`Published material ${data.id}`);
       router.refresh();
     } catch (err) {
+      setOk(false);
       setStatus(err instanceof Error ? err.message : 'Failed');
     } finally {
       setBusy(false);
@@ -51,39 +47,41 @@ export default function MaterialsAdminPage() {
       description="Add rich review materials to the mobile Study Notes tab and the next offline pack download."
       maxWidth="max-w-4xl"
     >
-      <AdminCard>
+      <AdminCard padding="lg">
         <form onSubmit={submit} className="grid gap-5 md:grid-cols-3">
-          <label className="block text-sm font-medium text-slate-700">
-            Exam slug
-            <input className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3" value={examSlug} onChange={(e) => setExamSlug(e.target.value)} required />
-          </label>
-          <label className="block text-sm font-medium text-slate-700">
-            Subject slug
-            <input className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3" value={subjectSlug} onChange={(e) => setSubjectSlug(e.target.value)} required />
-          </label>
-          <label className="block text-sm font-medium text-slate-700">
-            Topic slug
-            <input className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3" value={topicSlug} onChange={(e) => setTopicSlug(e.target.value)} required />
-          </label>
-          <label className="block text-sm font-medium text-slate-700">
-            Type
-            <select className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3" value={materialType} onChange={(e) => setMaterialType(e.target.value as 'lesson' | 'cheat_sheet')}>
+          <Field label="Exam slug">
+            <input className="field-input" value={examSlug} onChange={(e) => setExamSlug(e.target.value)} required />
+          </Field>
+          <Field label="Subject slug">
+            <input className="field-input" value={subjectSlug} onChange={(e) => setSubjectSlug(e.target.value)} required />
+          </Field>
+          <Field label="Topic slug">
+            <input className="field-input" value={topicSlug} onChange={(e) => setTopicSlug(e.target.value)} required />
+          </Field>
+          <Field label="Type">
+            <select
+              className="field-input"
+              value={materialType}
+              onChange={(e) => setMaterialType(e.target.value as 'lesson' | 'cheat_sheet')}
+            >
               <option value="lesson">Lesson</option>
               <option value="cheat_sheet">Cheat sheet</option>
             </select>
-          </label>
-          <label className="block text-sm font-medium text-slate-700 md:col-span-2">
-            Title
-            <input className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3" value={title} onChange={(e) => setTitle(e.target.value)} required />
-          </label>
-          <label className="block text-sm font-medium text-slate-700 md:col-span-3">
-            Body
-            <textarea className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3" rows={10} value={body} onChange={(e) => setBody(e.target.value)} required />
-          </label>
-          <button type="submit" disabled={busy} className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/20 disabled:opacity-50 md:col-span-3">
-            {busy ? 'Publishing…' : 'Publish'}
-          </button>
-          {status ? <p className="text-sm text-slate-600 md:col-span-3">{status}</p> : null}
+          </Field>
+          <Field label="Title" className="md:col-span-2">
+            <input className="field-input" value={title} onChange={(e) => setTitle(e.target.value)} required />
+          </Field>
+          <Field label="Body" className="md:col-span-3">
+            <textarea className="field-input" rows={10} value={body} onChange={(e) => setBody(e.target.value)} required />
+          </Field>
+          <div className="flex items-center gap-4 md:col-span-3">
+            <button type="submit" disabled={busy} className="btn btn-primary">
+              {busy ? 'Publishing…' : 'Publish material'}
+            </button>
+            {status ? (
+              <p className={`text-sm ${ok ? 'text-emerald-700' : 'text-red-600'}`}>{status}</p>
+            ) : null}
+          </div>
         </form>
       </AdminCard>
     </AdminShell>

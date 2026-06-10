@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { AdminCard, AdminMetric, AdminShell } from '@/components/admin-shell';
+import { AdminCard, AdminMetric, AdminShell, Badge } from '@/components/admin-shell';
 import { getAdminSupabase, isAdminConfigured } from '@/lib/supabase/admin';
 import { ReportTriageActions } from '@/components/report-triage-actions';
 
@@ -50,11 +50,17 @@ function pickParam(params: SearchParams, key: string, fallback: string): string 
   return value ?? fallback;
 }
 
-function severityClass(severity: string): string {
-  if (severity === 'critical') return 'bg-red-100 text-red-800';
-  if (severity === 'high') return 'bg-orange-100 text-orange-800';
-  if (severity === 'low') return 'bg-slate-100 text-slate-700';
-  return 'bg-amber-100 text-amber-900';
+function severityTone(severity: string): 'red' | 'orange' | 'neutral' | 'amber' {
+  if (severity === 'critical') return 'red';
+  if (severity === 'high') return 'orange';
+  if (severity === 'low') return 'neutral';
+  return 'amber';
+}
+
+function statusTone(status: string): 'green' | 'blue' | 'neutral' {
+  if (status === 'fixed') return 'green';
+  if (status === 'triaged') return 'blue';
+  return 'neutral';
 }
 
 function assigneeName(staff: StaffMember[], id: string | null): string {
@@ -156,64 +162,64 @@ export default async function ReviewQueuePage({
       title="Content QA Review Queue"
       description="Audit draft content and user-submitted reports before incorrect questions, flashcards, or notes stay live in the mobile app."
     >
-      <div className="grid gap-4 md:grid-cols-4">
-        <AdminMetric label="Draft Review" value={drafts?.length ?? 0} detail="Questions pending" />
-        <AdminMetric label="QA Reports" value={contentRows.length} detail={`${statusFilter} filter`} tone="amber" />
-        <AdminMetric label="Legacy Reports" value={reports?.length ?? 0} detail="Open question flags" tone="slate" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <AdminMetric label="Draft review" value={drafts?.length ?? 0} detail="Questions pending" />
+        <AdminMetric label="QA reports" value={contentRows.length} detail={`${statusFilter} filter`} tone="amber" />
+        <AdminMetric label="Legacy reports" value={reports?.length ?? 0} detail="Open question flags" tone="slate" />
         <AdminMetric label="Staff" value={staffRows.length} detail="Review-capable users" tone="green" />
       </div>
 
         <AdminCard className="mt-6">
-          <h2 className="text-xl font-black text-[#08183f]">Draft / in review ({drafts?.length ?? 0})</h2>
-          <ul className="mt-4 divide-y text-sm">
+          <h2 className="text-base font-semibold text-[var(--text)]">Draft / in review ({drafts?.length ?? 0})</h2>
+          <ul className="mt-3 divide-y divide-[var(--border)] text-sm">
             {(drafts ?? []).map((q) => {
               const topic = q.topics as { name?: string; subject_areas?: { name?: string; exam_types?: { slug?: string } } } | null;
               const examSlug = topic?.subject_areas?.exam_types?.slug ?? '—';
               return (
                 <li key={q.id} className="py-3">
-                  <Link href={`/content/questions/${q.id}`} className="font-medium text-blue-700 hover:underline">
+                  <Link href={`/content/questions/${q.id}`} className="font-medium text-[var(--primary)] hover:underline">
                     {q.stem}
                   </Link>
-                  <p className="text-xs text-slate-500">
+                  <p className="mt-0.5 text-xs text-[var(--text-muted)]">
                     {examSlug} · {topic?.subject_areas?.name}/{topic?.name} · {q.status} · {q.id.slice(0, 8)}…
                   </p>
                 </li>
               );
             })}
-            {!drafts?.length ? <li className="py-3 text-slate-500">No pending questions.</li> : null}
+            {!drafts?.length ? <li className="py-3 text-[var(--text-muted)]">No pending questions.</li> : null}
           </ul>
         </AdminCard>
 
         <AdminCard className="mt-6">
-          <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <h2 className="text-xl font-black text-[#08183f]">Content QA reports ({contentRows.length})</h2>
-              <p className="mt-1 text-xs text-slate-500">
+              <h2 className="text-base font-semibold text-[var(--text)]">Content QA reports ({contentRows.length})</h2>
+              <p className="mt-1 text-xs text-[var(--text-muted)]">
                 Filter, assign, group duplicates, and resolve reported questions, flashcards, and lessons.
               </p>
             </div>
-            <form className="grid gap-2 text-xs sm:grid-cols-4">
-              <select name="status" defaultValue={statusFilter} className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+            <form className="grid w-full gap-2 text-xs sm:grid-cols-2 lg:w-auto lg:grid-cols-[repeat(4,9rem)_auto]">
+              <select name="status" defaultValue={statusFilter} className="field-input px-2.5 py-1.5 text-xs">
                 <option value="open">Open</option>
                 <option value="triaged">Triaged</option>
                 <option value="fixed">Fixed</option>
                 <option value="rejected">Rejected</option>
                 <option value="all">All status</option>
               </select>
-              <select name="type" defaultValue={typeFilter} className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+              <select name="type" defaultValue={typeFilter} className="field-input px-2.5 py-1.5 text-xs">
                 <option value="all">All content</option>
                 <option value="question">Questions</option>
                 <option value="flashcard">Flashcards</option>
                 <option value="review_material">Materials</option>
               </select>
-              <select name="severity" defaultValue={severityFilter} className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+              <select name="severity" defaultValue={severityFilter} className="field-input px-2.5 py-1.5 text-xs">
                 <option value="all">All severity</option>
                 <option value="critical">Critical</option>
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
                 <option value="low">Low</option>
               </select>
-              <select name="assignee" defaultValue={assigneeFilter} className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+              <select name="assignee" defaultValue={assigneeFilter} className="field-input px-2.5 py-1.5 text-xs">
                 <option value="all">All assignees</option>
                 <option value="unassigned">Unassigned</option>
                 {staffRows.map((member) => (
@@ -222,12 +228,10 @@ export default async function ReviewQueuePage({
                   </option>
                 ))}
               </select>
-              <button className="rounded-xl bg-[#08183f] px-4 py-2 font-black text-white sm:col-span-4">
-                Apply filters
-              </button>
+              <button className="btn btn-primary btn-sm">Apply filters</button>
             </form>
           </div>
-          <ul className="mt-4 divide-y text-sm">
+          <ul className="mt-4 divide-y divide-[var(--border)] text-sm">
             {contentRows.map((r) => {
               const question = r.questions as { stem?: string } | null;
               const flashcard = r.flashcards as { front?: string; back?: string } | null;
@@ -249,61 +253,51 @@ export default async function ReviewQueuePage({
               return (
                 <li key={r.id} className="py-4">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
-                      {r.content_type.replace('_', ' ')}
-                    </span>
-                    <span className={`rounded-full px-2 py-1 text-xs font-semibold uppercase tracking-wide ${severityClass(r.severity)}`}>
-                      {r.severity}
-                    </span>
-                    <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">
-                      {r.status}
-                    </span>
-                    {duplicateCount > 1 ? (
-                      <span className="rounded-full bg-fuchsia-100 px-2 py-1 text-xs font-semibold text-fuchsia-800">
-                        {duplicateCount} duplicate reports
-                      </span>
-                    ) : null}
-                    <span className="text-xs text-slate-500">
+                    <Badge tone="blue">{r.content_type.replace('_', ' ')}</Badge>
+                    <Badge tone={severityTone(r.severity)}>{r.severity}</Badge>
+                    <Badge tone={statusTone(r.status)}>{r.status}</Badge>
+                    {duplicateCount > 1 ? <Badge tone="purple">{duplicateCount} duplicate reports</Badge> : null}
+                    <span className="text-xs text-[var(--text-muted)]">
                       {r.reason} · {new Date(r.updated_at).toLocaleDateString()} · {assigneeName(staffRows, r.assigned_to)}
                     </span>
                   </div>
                   {href ? (
-                    <Link href={href} className="mt-2 block font-medium text-blue-700 hover:underline">
+                    <Link href={href} className="mt-2 block font-medium text-[var(--primary)] hover:underline">
                       {targetLabel}
                     </Link>
                   ) : (
-                    <p className="mt-2 font-medium text-slate-900">{targetLabel}</p>
+                    <p className="mt-2 font-medium text-[var(--text)]">{targetLabel}</p>
                   )}
-                  {flashcard?.back ? <p className="mt-1 text-xs text-slate-500">Answer: {flashcard.back}</p> : null}
+                  {flashcard?.back ? <p className="mt-1 text-xs text-[var(--text-muted)]">Answer: {flashcard.back}</p> : null}
                   {r.details ? (
-                    <p className="mt-2 rounded-lg bg-amber-50 p-3 text-xs leading-5 text-amber-950">
+                    <p className="mt-2 rounded-lg border border-amber-100 bg-[var(--warning-soft)] p-3 text-xs leading-5 text-amber-900">
                       Reporter note: {r.details}
                     </p>
                   ) : null}
                   {r.admin_notes ? (
-                    <p className="mt-2 rounded-lg bg-slate-100 p-3 text-xs leading-5 text-slate-700">
+                    <p className="mt-2 rounded-lg bg-[var(--surface-sunken)] p-3 text-xs leading-5 text-[var(--text-muted)]">
                       Admin note: {r.admin_notes}
                     </p>
                   ) : null}
                   {r.triage_labels?.length ? (
                     <div className="mt-2 flex flex-wrap gap-1">
                       {r.triage_labels.map((label) => (
-                        <span key={label} className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">
+                        <span key={label} className="rounded-full bg-[var(--surface-sunken)] px-2 py-0.5 text-[11px] text-[var(--text-muted)]">
                           {label}
                         </span>
                       ))}
                     </div>
                   ) : null}
                   {eventsByReport[r.id]?.length ? (
-                    <details className="mt-2 rounded-lg border border-slate-100 bg-slate-50 p-3 text-xs text-slate-600">
-                      <summary className="cursor-pointer font-medium text-slate-700">
+                    <details className="mt-2 rounded-lg border border-[var(--border)] bg-[var(--surface-muted)] p-3 text-xs text-[var(--text-muted)]">
+                      <summary className="cursor-pointer font-medium text-[var(--text)]">
                         Recent history ({eventsByReport[r.id].length})
                       </summary>
                       <ul className="mt-2 space-y-1">
                         {eventsByReport[r.id].slice(0, 5).map((event) => (
                           <li key={event.id}>
                             {eventText(event, staffRows)} · {new Date(event.created_at).toLocaleString()}
-                            {event.note ? <span className="block text-slate-500">“{event.note}”</span> : null}
+                            {event.note ? <span className="block text-[var(--text-subtle)]">“{event.note}”</span> : null}
                           </li>
                         ))}
                       </ul>
@@ -321,25 +315,25 @@ export default async function ReviewQueuePage({
                 </li>
               );
             })}
-            {!contentRows.length ? <li className="py-3 text-slate-500">No content reports match these filters.</li> : null}
+            {!contentRows.length ? <li className="py-3 text-[var(--text-muted)]">No content reports match these filters.</li> : null}
           </ul>
         </AdminCard>
 
         <AdminCard className="mt-6">
-          <h2 className="text-xl font-black text-[#08183f]">Legacy question reports ({reports?.length ?? 0})</h2>
-          <ul className="mt-4 divide-y text-sm">
+          <h2 className="text-base font-semibold text-[var(--text)]">Legacy question reports ({reports?.length ?? 0})</h2>
+          <ul className="mt-3 divide-y divide-[var(--border)] text-sm">
             {(reports ?? []).map((r) => {
               const q = r.questions as { stem?: string } | null;
               return (
                 <li key={r.id} className="py-3">
-                  <Link href={`/content/questions/${r.question_id}`} className="font-medium text-blue-700 hover:underline">
+                  <Link href={`/content/questions/${r.question_id}`} className="font-medium text-[var(--primary)] hover:underline">
                     {q?.stem ?? 'Question'}
                   </Link>
-                  <p className="text-xs text-slate-500">
+                  <p className="mt-0.5 text-xs text-[var(--text-muted)]">
                     {r.reason} · {new Date(r.created_at).toLocaleDateString()}
                   </p>
                   {r.details ? (
-                    <p className="mt-2 rounded-lg bg-amber-50 p-3 text-xs leading-5 text-amber-950">
+                    <p className="mt-2 rounded-lg border border-amber-100 bg-[var(--warning-soft)] p-3 text-xs leading-5 text-amber-900">
                       Reporter note: {r.details}
                     </p>
                   ) : null}
@@ -347,7 +341,7 @@ export default async function ReviewQueuePage({
                 </li>
               );
             })}
-            {!reports?.length ? <li className="py-3 text-slate-500">No open reports.</li> : null}
+            {!reports?.length ? <li className="py-3 text-[var(--text-muted)]">No open reports.</li> : null}
           </ul>
         </AdminCard>
     </AdminShell>

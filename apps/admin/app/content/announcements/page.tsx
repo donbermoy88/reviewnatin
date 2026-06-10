@@ -1,6 +1,6 @@
 'use client';
 
-import { AdminCard, AdminShell } from '@/components/admin-shell';
+import { AdminCard, AdminShell, Field } from '@/components/admin-shell';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -10,6 +10,7 @@ export default function AnnouncementsAdminPage() {
   const [body, setBody] = useState('');
   const [examSlug, setExamSlug] = useState('');
   const [status, setStatus] = useState('');
+  const [ok, setOk] = useState(false);
   const [busy, setBusy] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
@@ -24,12 +25,14 @@ export default function AnnouncementsAdminPage() {
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok || !data.ok) {
+        setOk(false);
         setStatus(data.error ?? 'Failed to publish');
         return;
       }
       setTitle('');
       setBody('');
       setExamSlug('');
+      setOk(true);
       setStatus('Published — visible in app Home + marketing site.');
       router.refresh();
     } finally {
@@ -41,48 +44,32 @@ export default function AnnouncementsAdminPage() {
     <AdminShell
       title="Publish Announcement"
       description="Create mobile Home announcements and marketing updates from one source of truth."
-      maxWidth="max-w-3xl"
+      maxWidth="max-w-2xl"
     >
-        <AdminCard>
+      <AdminCard padding="lg">
         <form onSubmit={submit} className="space-y-5">
-          <label className="block text-sm font-medium text-slate-700">
-            Title
+          <Field label="Title">
+            <input className="field-input" value={title} onChange={(e) => setTitle(e.target.value)} required />
+          </Field>
+          <Field label="Body">
+            <textarea className="field-input" rows={4} value={body} onChange={(e) => setBody(e.target.value)} required />
+          </Field>
+          <Field label="Exam slug" hint="Optional — leave blank to target all exams.">
             <input
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </label>
-          <label className="block text-sm font-medium text-slate-700">
-            Body
-            <textarea
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
-              rows={4}
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              required
-            />
-          </label>
-          <label className="block text-sm font-medium text-slate-700">
-            Exam slug (optional)
-            <input
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
+              className="field-input"
               placeholder="cse-professional"
               value={examSlug}
               onChange={(e) => setExamSlug(e.target.value)}
             />
-          </label>
-          <button
-            type="submit"
-            disabled={busy}
-            className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/20 disabled:opacity-50"
-          >
-            {busy ? 'Publishing…' : 'Publish'}
-          </button>
-          {status ? <p className="text-sm text-slate-600">{status}</p> : null}
+          </Field>
+          <div className="flex items-center gap-4">
+            <button type="submit" disabled={busy} className="btn btn-primary">
+              {busy ? 'Publishing…' : 'Publish'}
+            </button>
+            {status ? <p className={`text-sm ${ok ? 'text-emerald-700' : 'text-red-600'}`}>{status}</p> : null}
+          </div>
         </form>
-        </AdminCard>
+      </AdminCard>
     </AdminShell>
   );
 }

@@ -84,16 +84,18 @@ export function ReportTriageActions({
     );
   };
 
+  const busy = !!loading;
+
   return (
-    <div className="mt-3 space-y-2">
+    <div className="mt-3 space-y-3">
       {reportKind === 'content' ? (
-        <div className="grid gap-2 rounded-lg border border-slate-200 bg-slate-50 p-3 sm:grid-cols-3">
-          <label className="text-xs font-medium text-slate-600">
+        <div className="grid gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface-muted)] p-3 sm:grid-cols-3">
+          <label className="text-xs font-semibold text-[var(--text-muted)]">
             Severity
             <select
               value={selectedSeverity}
               onChange={(event) => setSelectedSeverity(event.target.value as typeof selectedSeverity)}
-              className="mt-1 w-full rounded-md border border-slate-200 bg-white px-2 py-1 text-xs"
+              className="field-input mt-1 px-2 py-1.5 text-xs"
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -101,12 +103,12 @@ export function ReportTriageActions({
               <option value="critical">Critical</option>
             </select>
           </label>
-          <label className="text-xs font-medium text-slate-600">
+          <label className="text-xs font-semibold text-[var(--text-muted)]">
             Assignee
             <select
               value={selectedAssignee}
               onChange={(event) => setSelectedAssignee(event.target.value)}
-              className="mt-1 w-full rounded-md border border-slate-200 bg-white px-2 py-1 text-xs"
+              className="field-input mt-1 px-2 py-1.5 text-xs"
             >
               <option value="">Unassigned</option>
               {staff.map((person) => (
@@ -116,72 +118,49 @@ export function ReportTriageActions({
               ))}
             </select>
           </label>
-          <label className="text-xs font-medium text-slate-600">
+          <label className="text-xs font-semibold text-[var(--text-muted)]">
             Labels
             <input
               type="text"
               value={labelText}
               onChange={(event) => setLabelText(event.target.value)}
               placeholder="grammar, answer-key"
-              className="mt-1 w-full rounded-md border border-slate-200 bg-white px-2 py-1 text-xs"
+              className="field-input mt-1 px-2 py-1.5 text-xs"
             />
           </label>
         </div>
       ) : null}
+
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs text-slate-400">Target: {targetId.slice(0, 8)}…</span>
+        <span className="text-xs text-[var(--text-subtle)]">Target: {targetId.slice(0, 8)}…</span>
         {reportKind === 'content' ? (
           <>
-            <button
-              type="button"
-              disabled={!!loading}
-              onClick={() => updateWorkflow(false)}
-              className="rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-900 hover:bg-blue-200 disabled:opacity-50"
-            >
-              {loading === 'workflow' ? '…' : 'Save QA'}
+            <button type="button" disabled={busy} onClick={() => updateWorkflow(false)} className="btn btn-secondary btn-sm">
+              {loading === 'workflow' ? 'Saving…' : 'Save QA'}
             </button>
-            <button
-              type="button"
-              disabled={!!loading}
-              onClick={() => updateWorkflow(true)}
-              className="rounded-md bg-indigo-100 px-2 py-1 text-xs font-medium text-indigo-900 hover:bg-indigo-200 disabled:opacity-50"
-            >
+            <button type="button" disabled={busy} onClick={() => updateWorkflow(true)} className="btn btn-secondary btn-sm">
               {loading === 'assign-self' ? '…' : 'Assign me'}
             </button>
           </>
         ) : null}
-        <button
-          type="button"
-          disabled={!!loading}
-          onClick={() => resolve('triaged')}
-          className="rounded-md bg-amber-100 px-2 py-1 text-xs font-medium text-amber-900 hover:bg-amber-200 disabled:opacity-50"
-        >
+        <button type="button" disabled={busy} onClick={() => resolve('triaged')} className="btn btn-sm bg-amber-100 text-amber-800 hover:bg-amber-200">
           {loading === 'triaged' ? '…' : 'Triage'}
         </button>
-        <button
-          type="button"
-          disabled={!!loading}
-          onClick={() => resolve('fixed')}
-          className="rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-900 hover:bg-green-200 disabled:opacity-50"
-        >
+        <button type="button" disabled={busy} onClick={() => resolve('fixed')} className="btn btn-success btn-sm">
           {loading === 'fixed' ? '…' : 'Fixed'}
         </button>
-        <button
-          type="button"
-          disabled={!!loading}
-          onClick={() => resolve('rejected')}
-          className="rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-200 disabled:opacity-50"
-        >
+        <button type="button" disabled={busy} onClick={() => resolve('rejected')} className="btn btn-ghost btn-sm border border-[var(--border)]">
           {loading === 'rejected' ? '…' : 'Reject'}
         </button>
         {error ? <span className="text-xs text-red-600">{error}</span> : null}
       </div>
+
       <input
         type="text"
         value={notes}
         onChange={(event) => setNotes(event.target.value)}
-        placeholder="Internal note, optional"
-        className="w-full rounded-md border border-slate-200 px-3 py-2 text-xs text-slate-700 outline-none focus:border-blue-400"
+        placeholder="Internal note (optional)"
+        className="field-input text-xs"
       />
     </div>
   );
