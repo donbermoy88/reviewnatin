@@ -161,13 +161,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
       async signInGoogle() {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
-        const { error, cancelled } = await signInWithGoogle();
+        const { error, cancelled, session: signedInSession } = await signInWithGoogle();
         if (error) {
           captureAppMessage('google sign-in failed', { area: 'auth', action: 'google_sign_in' }, { reason: mapAuthError(error) }, 'warning');
           return { error: mapAuthError(error) };
         }
         if (cancelled) return { error: null, cancelled: true, session: null };
-        const nextSession = await waitForSession();
+        // signInWithIdToken returns the session synchronously; only poll as a fallback.
+        const nextSession = signedInSession ?? (await waitForSession());
         if (nextSession) setSession(nextSession);
         return nextSession
           ? { error: null, session: nextSession }
@@ -175,14 +176,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
       async signInApple() {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
-        const { error, cancelled } = await signInWithApple();
+        const { error, cancelled, fullName, session: signedInSession } = await signInWithApple();
         if (error) {
           captureAppMessage('apple sign-in failed', { area: 'auth', action: 'apple_sign_in' }, { reason: mapAuthError(error) }, 'warning');
           return { error: mapAuthError(error) };
         }
         if (cancelled) return { error: null, cancelled: true, session: null };
-        const nextSession = await waitForSession();
+        // signInWithIdToken returns the session synchronously; only poll as a fallback.
+        const nextSession = signedInSession ?? (await waitForSession());
         if (nextSession) setSession(nextSession);
+
+        // Apple returns the name only on the FIRST authorization. Persist it
+        // when the account doesn't already have a real display name, otherwise
+        // Apple users are left nameless forever.
+        if (nextSession && fullName) {
+          const meta = nextSession.user.user_metadata as { display_name?: string } | undefined;
+          const existing = meta?.display_name?.trim();
+          const emailPrefix = nextSession.user.email?.split('@')[0];
+          if (!existing || existing === emailPrefix) {
+            const validationError = validateDisplayName(fullName);
+            if (!validationError) {
+              const result = await updateUserDisplayName(normalizeDisplayName(fullName));
+              if (result.ok) {
+                const { data } = await supabase.auth.getSession();
+                if (data.session) setSession(data.session);
+              }
+            }
+          }
+        }
+
         return nextSession
           ? { error: null, session: nextSession }
           : { error: 'Sign-in completed, but no session was created. Please try again.' };
