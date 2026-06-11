@@ -29,9 +29,8 @@ import { tabScrollPadding } from '../../lib/layout/content-padding';
 import {
   canStartPractice,
   getMockAccess,
-  hasUsedMiniMockThisWeek,
   isMiniMock,
-  recordMiniMockUsed,
+  isMiniMockAvailable,
 } from '../../lib/paywall';
 import { scheduleDailyReminder, scheduleExamReminders } from '../../lib/notifications';
 import { fetchDueFlashcardCount } from '../../lib/api/flashcards';
@@ -134,32 +133,39 @@ export default function DashboardScreen() {
 
       if (user) {
         try {
-          const [practiceStats, gate] = await Promise.all([
-            fetchPracticeStats(user.id, target).then(async (s) => {
-              // Show streak milestone modal if a milestone was just reached
-              if (isStreakMilestone(s.streakDays)) {
-                const key = `milestone_shown_${user.id}_${s.streakDays}`;
-                const shown = await AsyncStorage.getItem(key).catch(() => null);
-                if (!shown) {
-                  await AsyncStorage.setItem(key, '1').catch(() => {});
-                  setMilestoneVisible(true);
+          // These dashboard sections are independent — fetch them concurrently
+          // instead of in a waterfall. Non-critical fetches fall back to a safe
+          // value so one slow/failed call doesn't blank the rest of the screen.
+          const [practiceStats, gate, todayPasa, latestReadiness, weakest, diagnosticDone] =
+            await Promise.all([
+              fetchPracticeStats(user.id, target).then(async (s) => {
+                // Show streak milestone modal if a milestone was just reached
+                if (isStreakMilestone(s.streakDays)) {
+                  const key = `milestone_shown_${user.id}_${s.streakDays}`;
+                  const shown = await AsyncStorage.getItem(key).catch(() => null);
+                  if (!shown) {
+                    await AsyncStorage.setItem(key, '1').catch(() => {});
+                    setMilestoneVisible(true);
+                  }
                 }
-              }
-              return s;
-            }),
-            fetchContentGateStatus(slug),
-          ]);
+                return s;
+              }),
+              fetchContentGateStatus(slug).catch(() => null),
+              fetchTodayPasaPath(slug).catch(() => null),
+              fetchLatestReadiness(slug).catch(() => null),
+              fetchTopicAnalytics(slug)
+                .then((a) => pickWeakTopic(a.subjects))
+                .catch(() => null),
+              // Treat a lookup failure as "done" so we never force the diagnostic
+              // redirect on a transient error.
+              hasCompletedDiagnostic(slug).catch(() => true),
+            ]);
           setStats(practiceStats);
           setContentGate(gate);
-          setPasapath(await fetchTodayPasaPath(slug));
-          setReadiness(await fetchLatestReadiness(slug));
-          try {
-            const analytics = await fetchTopicAnalytics(slug);
-            setWeakTopic(pickWeakTopic(analytics.subjects));
-          } catch {
-            setWeakTopic(null);
-          }
-          if (gate?.meetsMinimum && !(await hasCompletedDiagnostic(slug))) {
+          setPasapath(todayPasa);
+          setReadiness(latestReadiness);
+          setWeakTopic(weakest);
+          if (gate?.meetsMinimum && !diagnosticDone) {
             const dismissed = await isDiagnosticPromptDismissed(user.id, slug).catch(() => false);
             if (!dismissed) {
               router.replace('/diagnostic/intro');
@@ -290,13 +296,9 @@ export default function DashboardScreen() {
         return;
       }
       const access = getMockAccess(mock, premium);
-      if (access === 'weekly_limit') {
-        const used = await hasUsedMiniMockThisWeek();
-        if (used) {
-          router.push('/subscribe');
-          return;
-        }
-        await recordMiniMockUsed();
+      if (access === 'weekly_limit' && !(await isMiniMockAvailable(examSlug))) {
+        router.push('/subscribe');
+        return;
       }
       if (access === 'preview') {
         router.push({
