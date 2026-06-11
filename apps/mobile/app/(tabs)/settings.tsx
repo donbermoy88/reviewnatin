@@ -428,6 +428,33 @@ export default function SettingsScreen() {
             <SettingsRow
               styles={styles}
               colors={colors}
+              icon={<Ionicons name="document-text-outline" size={18} color={colors.primary} />}
+              label="Study notes"
+              sub="Your private notes — formulas, mnemonics, reminders"
+              onPress={() => router.push('/notes')}
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
+            <SettingsRow
+              styles={styles}
+              colors={colors}
+              icon={<Ionicons name="timer-outline" size={18} color={colors.primary} />}
+              label="Focus timer"
+              sub="Distraction-free study sessions"
+              onPress={() => router.push('/focus')}
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
+            <SettingsRow
+              styles={styles}
+              colors={colors}
+              icon={<Ionicons name="snow-outline" size={18} color={colors.primary} />}
+              label="Streak freeze"
+              sub="Protect your streak from a missed day"
+              onPress={() => router.push('/streak-freeze')}
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
+            <SettingsRow
+              styles={styles}
+              colors={colors}
               icon={<Ionicons name="chatbubbles-outline" size={18} color={colors.primary} />}
               label="AI tutor"
               sub={premiumActive ? 'Chat about weak topics & study plan' : 'Premium feature'}
