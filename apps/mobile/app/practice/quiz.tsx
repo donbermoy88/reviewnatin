@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  AppState,
   Platform,
   Pressable,
   ScrollView,
@@ -37,6 +38,13 @@ import {
   hasOfflinePack,
 } from '../../lib/offline/pack';
 import { queuePendingSession } from '../../lib/offline/answer-queue';
+import {
+  clearExamSnapshot,
+  examResumeKey,
+  loadExamSnapshot,
+  reorderToSnapshot,
+  saveExamSnapshot,
+} from '../../lib/exam-resume';
 import { fetchBookmarkedQuestionIds, toggleBookmark } from '../../lib/api/bookmarks';
 import { fetchMistakeQuestionIds, recordQuizOutcome, recordSessionOutcomes } from '../../lib/api/mistakes';
 import { fetchMockExamById, fetchMockExamQuestions } from '../../lib/api/mock-exams';
@@ -116,6 +124,9 @@ export default function PracticeQuizScreen() {
   const isBoard = mode === 'board';
   const isOffline = mode === 'offline';
   const isStrictExam = isMock || isBoard;
+  const resumeKey = isStrictExam
+    ? examResumeKey({ mode: isMock ? 'mock' : 'board', mockExamId, slug })
+    : null;
   const barkadaLimit = Math.max(Number(questionLimit) || 10, 5);
   const timedDuration = Number(durationSeconds) || 600;
   const { user } = useAuth();
@@ -140,9 +151,10 @@ export default function PracticeQuizScreen() {
   // per question index so the user can answer in any order, revisit, and change
   // answers via the navigator. Grading is deferred to submit.
   const [answersByIndex, setAnswersByIndex] = useState<Record<number, string>>({});
-  // Within-attempt "flag for review" markers (not persisted — exam-session only).
+  // "Flag for review" markers — persisted with the resume snapshot below.
   const [flaggedIndices, setFlaggedIndices] = useState<Set<number>>(new Set());
   const [navigatorOpen, setNavigatorOpen] = useState(false);
+  const [resumed, setResumed] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(
     isMock ? Number(durationSeconds) || 600 : isBoard ? BOARD_DURATION_SECONDS : isTimed ? timedDuration : 0
@@ -162,6 +174,37 @@ export default function PracticeQuizScreen() {
 
   useEffect(() => {
     (async () => {
+      // Strict exams: restore an interrupted attempt (same question order,
+      // answers, flags, position, remaining time) when a valid snapshot exists;
+      // otherwise shuffle fresh and save the starting order so future saves and
+      // resumes stay index-aligned.
+      const applyStrict = async (raw: Question[], fallbackTimeLeft: number) => {
+        const snap = resumeKey ? await loadExamSnapshot(resumeKey) : null;
+        const ordered = snap ? reorderToSnapshot(raw, snap.questionOrder) : null;
+        if (snap && ordered) {
+          setQuestions(ordered);
+          setAnswersByIndex(snap.answers);
+          setFlaggedIndices(new Set(snap.flagged));
+          setIndex(Math.min(snap.index, ordered.length - 1));
+          setSelected(snap.answers[snap.index] ?? null);
+          setTimeLeft(snap.timeLeft);
+          setResumed(true);
+        } else {
+          const shuffled = randomizeQuestionSet(raw);
+          setQuestions(shuffled);
+          if (resumeKey) {
+            void saveExamSnapshot(resumeKey, {
+              questionOrder: shuffled.map((q) => q.id),
+              answers: {},
+              flagged: [],
+              index: 0,
+              timeLeft: fallbackTimeLeft,
+              savedAt: Date.now(),
+            });
+          }
+        }
+      };
+
       try {
         const exam = await fetchExamBySlug(slug);
 
@@ -177,11 +220,12 @@ export default function PracticeQuizScreen() {
               fetchMockExamById(mockExamId),
               fetchMockExamQuestions(mockExamId),
             ]);
+            const fullDuration = mock?.durationSeconds ?? Number(durationSeconds) ?? 600;
             if (mock) {
               setMockTitle(mock.title);
-              setTimeLeft(mock.durationSeconds);
+              setTimeLeft(fullDuration);
             }
-            setQuestions(randomizeQuestionSet(qs.questions));
+            await applyStrict(qs.questions, fullDuration);
           } catch (err) {
             if (isMiniMockLimitError(err as { message?: string })) {
               setPaywallBlocked(true);
@@ -200,8 +244,8 @@ export default function PracticeQuizScreen() {
             return;
           }
           const result = await fetchPracticeQuestions(slug, BOARD_ITEM_COUNT, topicSlug);
-          setQuestions(randomizeQuestionSet(result.questions.slice(0, BOARD_ITEM_COUNT)));
           setTimeLeft(BOARD_DURATION_SECONDS);
+          await applyStrict(result.questions.slice(0, BOARD_ITEM_COUNT), BOARD_DURATION_SECONDS);
         } else if (isMistakeReview) {
           const ids = await fetchMistakeQuestionIds(slug, 12);
           setQuestions(randomizeQuestionSet(await fetchQuestionsByIds(ids)));
@@ -321,6 +365,42 @@ export default function PracticeQuizScreen() {
   );
   const answeredCount = answeredIndices.size;
 
+  // Latest exam state in a ref so background/unmount saves capture the current
+  // values without re-subscribing every render.
+  const examStateRef = useRef({ questions, answersByIndex, flaggedIndices, index, timeLeft });
+  useEffect(() => {
+    examStateRef.current = { questions, answersByIndex, flaggedIndices, index, timeLeft };
+  });
+
+  const saveExamProgress = useCallback(() => {
+    if (!resumeKey) return;
+    const s = examStateRef.current;
+    if (!s.questions.length) return;
+    void saveExamSnapshot(resumeKey, {
+      questionOrder: s.questions.map((q) => q.id),
+      answers: s.answersByIndex,
+      flagged: [...s.flaggedIndices],
+      index: s.index,
+      timeLeft: s.timeLeft,
+      savedAt: Date.now(),
+    });
+  }, [resumeKey]);
+
+  // Persist progress on every answer/flag/navigation change.
+  useEffect(() => {
+    if (!resumeKey || loading || !questions.length) return;
+    saveExamProgress();
+  }, [answersByIndex, flaggedIndices, index, resumeKey, loading, questions.length, saveExamProgress]);
+
+  // Capture the latest state (incl. remaining time) when the app is backgrounded.
+  useEffect(() => {
+    if (!resumeKey) return;
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state === 'inactive' || state === 'background') saveExamProgress();
+    });
+    return () => sub.remove();
+  }, [resumeKey, saveExamProgress]);
+
   const pickChoice = useCallback(
     (choiceId: string) => {
       if (!current || revealed) return;
@@ -438,6 +518,9 @@ export default function PracticeQuizScreen() {
   const finishQuiz = useCallback(async () => {
     if (finishing.current) return;
     finishing.current = true;
+
+    // The attempt is being submitted — discard any resume snapshot.
+    if (resumeKey) void clearExamSnapshot(resumeKey);
 
     const elapsedQ = Math.round((Date.now() - questionStarted.current) / 1000);
     // Strict exams build the answer set from the answer-sheet (any-order, deferred
@@ -587,7 +670,7 @@ export default function PracticeQuizScreen() {
         barkadaChallengeId: barkadaChallengeId ?? '',
       },
     });
-  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, router]);
+  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, resumeKey, router]);
 
   useEffect(() => {
     if ((isStrictExam || isTimed) && timeLeft === 0 && questions.length > 0) {
@@ -836,6 +919,14 @@ export default function PracticeQuizScreen() {
         {isMock ? (
           <View style={styles.mockBanner}>
             <Text style={styles.mockBannerText}>{mockTitle} · Mock exam · Strict timer · Tap ▦ to navigate &amp; review</Text>
+          </View>
+        ) : null}
+
+        {resumed ? (
+          <View style={[styles.mockBanner, { backgroundColor: colors.successBg }]}>
+            <Text style={[styles.mockBannerText, { color: colors.success }]}>
+              ↻ Resumed your in-progress exam — answers, flags, and timer restored.
+            </Text>
           </View>
         ) : null}
 
