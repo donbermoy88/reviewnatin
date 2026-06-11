@@ -66,7 +66,7 @@ export default function PracticeResultScreen() {
   const [aiExtras, setAiExtras] = useState<Record<string, string>>({});
   const [aiRemaining, setAiRemaining] = useState<number | null>(null);
   const captureRef = useRef<(() => Promise<string | undefined>) | null>(null);
-  const { score, total, correct, duration, sessionId, mode, diagnosticReadiness, pasapathTaskId, examSlug: paramExamSlug, barkadaChallengeId } = useLocalSearchParams<{
+  const { score, total, correct, duration, sessionId, mode, diagnosticReadiness, pasapathTaskId, examSlug: paramExamSlug, barkadaChallengeId, flaggedQuestionIds } = useLocalSearchParams<{
     score: string;
     total: string;
     correct: string;
@@ -77,7 +77,13 @@ export default function PracticeResultScreen() {
     pasapathTaskId?: string;
     examSlug?: string;
     barkadaChallengeId?: string;
+    flaggedQuestionIds?: string;
   }>();
+  const flaggedIds = useMemo(
+    () => new Set((flaggedQuestionIds ?? '').split(',').filter(Boolean)),
+    [flaggedQuestionIds]
+  );
+  const [reviewFilter, setReviewFilter] = useState<'all' | 'incorrect' | 'flagged'>('all');
 
   useEffect(() => {
     resolveOnboardingGoal(user?.id).then(async (goal) => {
@@ -141,6 +147,20 @@ export default function PracticeResultScreen() {
   }, [user, barkadaChallengeId, sessionId, scoreNum, correctNum, totalNum]);
 
   const wrongCount = review.filter((r) => r.isCorrect === false).length;
+
+  // Review list, filterable by All / Incorrect / Flagged. Question numbers stay
+  // tied to session order regardless of the active filter.
+  const filteredReview = useMemo(() => {
+    return review
+      .map((item, idx) => ({ item, number: idx + 1 }))
+      .filter(({ item }) =>
+        reviewFilter === 'incorrect'
+          ? item.isCorrect === false
+          : reviewFilter === 'flagged'
+            ? flaggedIds.has(item.questionId)
+            : true
+      );
+  }, [review, reviewFilter, flaggedIds]);
 
   const requestAiExplanation = async (questionId: string) => {
     if (!user) {
@@ -301,12 +321,49 @@ export default function PracticeResultScreen() {
         {sessionId ? (
           <View style={styles.reviewBox}>
             <Text style={styles.reviewTitle}>Review answers</Text>
+            {!reviewLoading && review.length > 0 ? (
+              <View style={{ flexDirection: 'row', gap: spacing.xs, marginBottom: spacing.sm, flexWrap: 'wrap' }}>
+                {([
+                  { id: 'all' as const, label: `All (${review.length})` },
+                  { id: 'incorrect' as const, label: `Incorrect (${wrongCount})` },
+                  ...(flaggedIds.size > 0
+                    ? [{ id: 'flagged' as const, label: `Flagged (${flaggedIds.size})` }]
+                    : []),
+                ]).map((chip) => {
+                  const active = reviewFilter === chip.id;
+                  return (
+                    <Pressable
+                      key={chip.id}
+                      onPress={() => setReviewFilter(chip.id)}
+                      accessibilityRole="button"
+                      accessibilityState={{ selected: active }}
+                      style={{
+                        paddingHorizontal: spacing.md,
+                        paddingVertical: 6,
+                        borderRadius: radii.full,
+                        backgroundColor: active ? colors.primary : colors.surface,
+                        borderWidth: 1,
+                        borderColor: active ? colors.primary : colors.border,
+                      }}
+                    >
+                      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: active ? '#fff' : colors.textMuted }}>
+                        {chip.label}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            ) : null}
             {reviewLoading ? (
               <ActivityIndicator color={colors.primary} />
             ) : review.length === 0 ? (
               <Text style={styles.reviewEmpty}>No saved answers for this session.</Text>
+            ) : filteredReview.length === 0 ? (
+              <Text style={styles.reviewEmpty}>
+                {reviewFilter === 'incorrect' ? 'No incorrect answers — great job!' : 'No flagged questions.'}
+              </Text>
             ) : (
-              review.map((item, idx) => {
+              filteredReview.map(({ item, number: idx }) => {
                 // Respect the user's explanation-language preference (matches
                 // the quiz screen); fall back to whichever translation exists.
                 const explanation =
@@ -329,8 +386,11 @@ export default function PracticeResultScreen() {
                         color={item.isCorrect ? colors.success : colors.error}
                       />
                       <Text style={[styles.reviewQ, { flex: 1 }]} numberOfLines={open ? undefined : 2}>
-                        Q{idx + 1}. {item.stem}
+                        Q{idx}. {item.stem}
                       </Text>
+                      {flaggedIds.has(item.questionId) ? (
+                        <Ionicons name="flag" size={14} color={colors.accentDark} style={{ marginLeft: 4 }} />
+                      ) : null}
                       <Ionicons
                         name={open ? 'chevron-up' : 'chevron-down'}
                         size={16}

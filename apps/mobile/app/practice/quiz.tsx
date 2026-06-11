@@ -668,9 +668,15 @@ export default function PracticeQuizScreen() {
         diagnosticReadiness: diagnosticReadiness != null ? String(diagnosticReadiness) : '',
         pasapathTaskId: pasapathTaskId ?? '',
         barkadaChallengeId: barkadaChallengeId ?? '',
+        flaggedQuestionIds: isStrictExam
+          ? [...flaggedIndices]
+              .map((i) => questions[i]?.id)
+              .filter(Boolean)
+              .join(',')
+          : '',
       },
     });
-  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, resumeKey, router]);
+  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, flaggedIndices, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, resumeKey, router]);
 
   useEffect(() => {
     if ((isStrictExam || isTimed) && timeLeft === 0 && questions.length > 0) {
