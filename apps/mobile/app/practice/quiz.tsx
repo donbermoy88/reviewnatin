@@ -140,6 +140,8 @@ export default function PracticeQuizScreen() {
   // per question index so the user can answer in any order, revisit, and change
   // answers via the navigator. Grading is deferred to submit.
   const [answersByIndex, setAnswersByIndex] = useState<Record<number, string>>({});
+  // Within-attempt "flag for review" markers (not persisted — exam-session only).
+  const [flaggedIndices, setFlaggedIndices] = useState<Set<number>>(new Set());
   const [navigatorOpen, setNavigatorOpen] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(
@@ -334,6 +336,19 @@ export default function PracticeQuizScreen() {
     },
     [current, revealed, isStrictExam, index]
   );
+
+  /** Toggle the current question's "flag for review" marker (strict exams). */
+  const toggleFlag = useCallback(() => {
+    setFlaggedIndices((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+    if (Platform.OS === 'ios') {
+      Haptics.selectionAsync();
+    }
+  }, [index]);
 
   /** Jump to any question (strict-exam navigator). Restores its saved answer. */
   const jumpTo = useCallback(
@@ -819,6 +834,24 @@ export default function PracticeQuizScreen() {
               />
             </Pressable>
           ) : null}
+          {isStrictExam ? (
+            <Pressable
+              onPress={toggleFlag}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={flaggedIndices.has(index) ? 'Unflag this question for review' : 'Flag this question for review'}
+              style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}
+            >
+              <Ionicons
+                name={flaggedIndices.has(index) ? 'flag' : 'flag-outline'}
+                size={18}
+                color={flaggedIndices.has(index) ? colors.accentDark : colors.textMuted}
+              />
+              <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 12, color: flaggedIndices.has(index) ? colors.accentDark : colors.textMuted }}>
+                Review
+              </Text>
+            </Pressable>
+          ) : null}
           <ReportContentButton
             contentType="question"
             contentId={current.id}
@@ -968,6 +1001,7 @@ export default function PracticeQuizScreen() {
           questions={questions}
           currentIndex={index}
           answeredIndices={answeredIndices}
+          flaggedIndices={flaggedIndices}
           onJump={jumpTo}
           onClose={() => setNavigatorOpen(false)}
           onSubmit={() => {

@@ -11,6 +11,7 @@ type Props = {
   questions: Question[];
   currentIndex: number;
   answeredIndices: Set<number>;
+  flaggedIndices: Set<number>;
   onJump: (index: number) => void;
   onClose: () => void;
   onSubmit: () => void;
@@ -45,6 +46,7 @@ export function QuestionNavigator({
   questions,
   currentIndex,
   answeredIndices,
+  flaggedIndices,
   onJump,
   onClose,
   onSubmit,
@@ -54,6 +56,7 @@ export function QuestionNavigator({
   const { colors, fonts, spacing, radii } = theme;
   const sections = useMemo(() => buildSections(questions), [questions]);
   const answeredCount = answeredIndices.size;
+  const flaggedCount = flaggedIndices.size;
 
   return (
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
@@ -69,7 +72,7 @@ export function QuestionNavigator({
             maxHeight: '85%',
           }}
         >
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.md }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.xs }}>
             <Text style={{ fontFamily: fonts.bodyBold, fontSize: 18, color: '#fff' }}>Exam Progress</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
               <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>
@@ -80,6 +83,16 @@ export function QuestionNavigator({
               </Pressable>
             </View>
           </View>
+          {flaggedCount > 0 ? (
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: spacing.md }}>
+              <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: colors.accent }} />
+              <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: 'rgba(255,255,255,0.8)' }}>
+                {flaggedCount} flagged for review
+              </Text>
+            </View>
+          ) : (
+            <View style={{ marginBottom: spacing.md }} />
+          )}
 
           <ScrollView showsVerticalScrollIndicator={false}>
             {sections.map((section) => (
@@ -104,6 +117,7 @@ export function QuestionNavigator({
                   {section.items.map((i) => {
                     const isCurrent = i === currentIndex;
                     const isAnswered = answeredIndices.has(i);
+                    const isFlagged = flaggedIndices.has(i);
                     const bg = isCurrent
                       ? 'rgba(255,255,255,0.18)'
                       : isAnswered
@@ -115,7 +129,7 @@ export function QuestionNavigator({
                         key={i}
                         onPress={() => onJump(i)}
                         accessibilityRole="button"
-                        accessibilityLabel={`Go to question ${i + 1}${isAnswered ? ', answered' : ''}${isCurrent ? ', current' : ''}`}
+                        accessibilityLabel={`Go to question ${i + 1}${isAnswered ? ', answered' : ''}${isFlagged ? ', flagged for review' : ''}${isCurrent ? ', current' : ''}`}
                         style={{
                           width: 48,
                           height: 44,
@@ -128,6 +142,19 @@ export function QuestionNavigator({
                         }}
                       >
                         <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: fg }}>{i + 1}</Text>
+                        {isFlagged ? (
+                          <View
+                            style={{
+                              position: 'absolute',
+                              top: 3,
+                              right: 3,
+                              width: 8,
+                              height: 8,
+                              borderRadius: 4,
+                              backgroundColor: colors.accent,
+                            }}
+                          />
+                        ) : null}
                       </Pressable>
                     );
                   })}
