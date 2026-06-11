@@ -15,6 +15,7 @@ export type SessionReviewItem = {
   explanationFil: string | null;
   timeSpentSeconds: number | null;
   subjectName: string | null;
+  subjectSlug: string | null;
 };
 
 export async function createQuizSession(
@@ -116,6 +117,7 @@ export async function fetchSessionReview(sessionId: string): Promise<SessionRevi
     explanation_fil: string | null;
     time_spent_seconds: number | null;
     subject_name: string | null;
+    subject_slug: string | null;
   }[]).map((row) => ({
     questionId: row.question_id,
     stem: cleanStem(row.stem),
@@ -127,5 +129,6 @@ export async function fetchSessionReview(sessionId: string): Promise<SessionRevi
     explanationFil: row.explanation_fil,
     timeSpentSeconds: row.time_spent_seconds,
     subjectName: row.subject_name,
+    subjectSlug: row.subject_slug,
   }));
 }

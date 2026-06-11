@@ -150,21 +150,30 @@ export default function PracticeResultScreen() {
 
   // Per-subject score breakdown (most useful on multi-subject mock/board exams).
   const subjectBreakdown = useMemo(() => {
-    const map = new Map<string, { correct: number; total: number }>();
+    const map = new Map<string, { correct: number; total: number; slug: string | null }>();
     for (const item of review) {
       const name = item.subjectName ?? 'Other';
-      const entry = map.get(name) ?? { correct: 0, total: 0 };
+      const entry = map.get(name) ?? { correct: 0, total: 0, slug: item.subjectSlug ?? null };
       entry.total += 1;
       if (item.isCorrect) entry.correct += 1;
+      if (!entry.slug && item.subjectSlug) entry.slug = item.subjectSlug;
       map.set(name, entry);
     }
     return Array.from(map.entries()).map(([name, v]) => ({
       name,
+      slug: v.slug,
       correct: v.correct,
       total: v.total,
       pct: v.total ? Math.round((v.correct / v.total) * 100) : 0,
     }));
   }, [review]);
+
+  // Weakest practiceable subject (lowest %, must have a slug to route, not 100%).
+  const weakestSubject = useMemo(() => {
+    const candidates = subjectBreakdown.filter((s) => s.slug && s.pct < 100);
+    if (!candidates.length) return null;
+    return candidates.reduce((min, s) => (s.pct < min.pct ? s : min));
+  }, [subjectBreakdown]);
 
   // Review list, filterable by All / Incorrect / Flagged. Question numbers stay
   // tied to session order regardless of the active filter.
@@ -359,6 +368,20 @@ export default function PracticeResultScreen() {
                 );
               })}
             </View>
+            {weakestSubject ? (
+              <PrimaryButton
+                label={`Practice your weakest: ${weakestSubject.name} →`}
+                variant="outline"
+                size="lg"
+                style={{ marginTop: spacing.md }}
+                onPress={() =>
+                  router.push({
+                    pathname: '/study/[subjectSlug]',
+                    params: { subjectSlug: weakestSubject.slug!, examSlug, subjectName: weakestSubject.name },
+                  })
+                }
+              />
+            ) : null}
           </View>
         ) : null}
 
