@@ -52,9 +52,10 @@
   "submit": {
     "production": {
       "ios": {
-        "appleId": "APPLE_ID_EMAIL_HERE",
-        "ascAppId": "APP_STORE_CONNECT_APP_ID_HERE",
-        "appleTeamId": "APPLE_TEAM_ID_HERE"
+        "ascAppId": "ASC_APP_ID_HERE",
+        "ascApiKeyPath": "./credentials/AuthKey.p8",
+        "ascApiKeyId": "ASC_API_KEY_ID_HERE",
+        "ascApiKeyIssuerId": "ASC_API_KEY_ISSUER_ID_HERE"
       },
       "android": {
         "track": "internal"

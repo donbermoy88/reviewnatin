@@ -46,3 +46,46 @@ In-app purchases, restore, push registration, and real ads only work in
 store-signed builds (TestFlight / App Store) on a physical device — they are
 disabled in dev/simulator by design (`lib/iap/availability.ts`,
 `lib/device-capabilities.ts`).
+
+## iOS submission credentials (no iPhone or Mac required)
+
+You do **not** need an iPhone to set up signing or submit. EAS builds and signs
+in the cloud; submission is API-driven. You only need an **Apple Developer
+Program** membership (~$99/year). An iPhone is only needed later to *verify*
+IAP / push / live ads on hardware (any iPhone via TestFlight works — App Store
+reviewers use their own devices).
+
+`eas.json` is configured for the modern **App Store Connect API key** method
+(non-interactive, no per-submit Apple ID login):
+
+```jsonc
+"submit": { "production": { "ios": {
+  "ascAppId": "ASC_APP_ID_HERE",                  // App Store Connect → your app → App Information → "Apple ID" (numeric)
+  "ascApiKeyPath": "./credentials/AuthKey.p8",    // downloaded key file (gitignored)
+  "ascApiKeyId": "ASC_API_KEY_ID_HERE",           // the Key ID shown next to the key
+  "ascApiKeyIssuerId": "ASC_API_KEY_ISSUER_ID_HERE" // Users and Access → Integrations → Issuer ID
+}}}
+```
+
+One-time setup:
+
+1. Enroll at https://developer.apple.com/programme (gives your **Team ID**).
+2. App Store Connect → **Users and Access → Integrations → App Store Connect API**
+   → generate a key with **App Manager** role → download the `.p8` **once** →
+   put it at `apps/mobile/credentials/AuthKey.p8` (the `credentials/` dir is
+   gitignored; never commit the key).
+3. Create the app record (App Store Connect → **Apps → +**) to get the numeric
+   `ascAppId`.
+4. Fill the three `ASC_*` placeholders in `eas.json`.
+5. Build + submit entirely in the cloud:
+
+   ```bash
+   eas build --profile production --platform ios
+   eas submit --profile production --platform ios
+   ```
+
+EAS manages the signing certificate and provisioning profile automatically
+(`eas credentials` to inspect). Nothing here touches a physical device.
+
+Prefer EAS to hold the key instead of a local file? Store it as an EAS secret
+and drop `ascApiKeyPath` — `eas submit` will use the secret.
