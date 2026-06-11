@@ -14,7 +14,6 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { AppState } from 'react-native';
-import { supabase } from '../lib/supabase';
 
 const PROBE_INTERVAL_MS = 20_000;
 const PROBE_TIMEOUT_MS = 4_000;
@@ -28,20 +27,12 @@ type NetworkStatus = {
 let cachedSupabaseUrl: string | null = null;
 function probeUrl(): string {
   if (cachedSupabaseUrl) return cachedSupabaseUrl;
-  // supabase-js doesn't expose the URL directly. Construct it from the
-  // internal headers if available; otherwise fall back to a known-cheap
-  // endpoint that returns 200 with empty body.
-  try {
-    // @ts-expect-error — accessing internals as a tiny best-effort probe target.
-    const url: string | undefined = supabase?.rest?.url ?? supabase?.supabaseUrl;
-    if (url) {
-      cachedSupabaseUrl = `${url.replace(/\/$/, '')}/rest/v1/`;
-      return cachedSupabaseUrl;
-    }
-  } catch {
-    /* fall through */
-  }
-  cachedSupabaseUrl = 'https://www.gstatic.com/generate_204';
+  // Probe our own backend so "online" means "the API is reachable", not just
+  // "some internet exists". Use the public env value rather than supabase-js
+  // internals (which change across minor versions). Fall back to a known-cheap
+  // 204 endpoint only when the URL isn't configured.
+  const base = process.env.EXPO_PUBLIC_SUPABASE_URL?.replace(/\/$/, '');
+  cachedSupabaseUrl = base ? `${base}/rest/v1/` : 'https://www.gstatic.com/generate_204';
   return cachedSupabaseUrl;
 }
 

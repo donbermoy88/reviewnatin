@@ -58,7 +58,17 @@ export async function fetchUsageLimits(examSlug: string): Promise<UsageLimits | 
   if (!isSupabaseConfigured) return null;
 
   const { data, error } = await supabase.rpc('get_usage_limits', { p_exam_slug: examSlug });
-  if (error) return null;
+  if (error) {
+    // A null return is also "offline/not-configured", so log the server-side
+    // failure separately — otherwise an outage looks identical to "no limits".
+    captureAppMessage(
+      'usage limits fetch failed',
+      { area: 'iap', action: 'fetch_usage_limits' },
+      { examSlug, reason: error.message },
+      'warning'
+    );
+    return null;
+  }
 
   const row = data as Record<string, unknown>;
   return {
