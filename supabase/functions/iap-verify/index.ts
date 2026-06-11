@@ -12,6 +12,7 @@ const APPLE_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
 /** Google Play product IDs → canonical App Store SKU in subscription_products */
 const ANDROID_SKU_MAP: Record<string, string> = {
   plus_monthly: "com.reviewnatin.plus.monthly",
+  plus_six_months: "com.reviewnatin.plus.six_months",
   plus_yearly: "com.reviewnatin.plus.yearly",
   exam_pass_cse_pro: "com.reviewnatin.exampass.cse_pro",
   exam_pass_cse_sub: "com.reviewnatin.exampass.cse_sub",
@@ -268,7 +269,11 @@ Deno.serve(async (req) => {
       const { data: isSubRow } = await adminClient.rpc("iap_product_is_subscription", {
         p_sku: canonicalSku,
       });
-      const isSub = isSubRow === true || productId.includes("monthly") || productId.includes("yearly");
+      const isSub =
+        isSubRow === true ||
+        productId.includes("monthly") ||
+        productId.includes("six_months") ||
+        productId.includes("yearly");
       const google = await verifyGooglePurchase(
         packageName,
         productId,
@@ -277,7 +282,12 @@ Deno.serve(async (req) => {
         isSub
       );
       verified = google.ok;
-      rawReceipt = { ...rawReceipt, google: google.raw };
+      rawReceipt = {
+        ...rawReceipt,
+        google: google.raw,
+        purchaseToken: body.purchase_token,
+        originalTransactionId: body.purchase_token,
+      };
     } else {
       return jsonResponse({ error: "Invalid platform" }, 400);
     }

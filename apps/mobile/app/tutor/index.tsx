@@ -66,7 +66,7 @@ export default function AiTutorScreen() {
     }
 
     if (!isPremium()) {
-      Alert.alert('Exam Pass required', 'AI tutor chat is available for premium subscribers only.', [
+      Alert.alert('ReviewNatin Plus required', 'AI tutor chat is available for premium subscribers only.', [
         { text: 'Not now', style: 'cancel' },
         { text: 'View plans', onPress: () => router.push('/subscribe') },
       ]);
@@ -82,7 +82,7 @@ export default function AiTutorScreen() {
       const result = await sendAiTutorMessage(nextMessages, { examSlug, locale });
       if (!result.ok) {
         if (result.error === 'premium_required') {
-          Alert.alert('Exam Pass required', 'Upgrade to chat with the AI tutor.');
+          Alert.alert('ReviewNatin Plus required', 'Upgrade to chat with the AI tutor.');
           return;
         }
         Alert.alert('Could not send', result.error);

@@ -16,7 +16,13 @@ const sb = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
 const sql = process.argv[2];
 if (!sql) { console.error('Usage: node _db-query.mjs "SQL"'); process.exit(1); }
 
-const { data, error } = await sb.rpc('exec_sql', { sql }).catch(() => ({ data: null, error: { message: 'rpc not available' } }));
+let data = null;
+let error = null;
+try {
+  ({ data, error } = await sb.rpc('exec_sql', { sql }));
+} catch (err) {
+  error = { message: err instanceof Error ? err.message : 'rpc not available' };
+}
 if (error) {
   // Fallback: use PostgREST direct queries via from() for simple selects
   console.error('RPC exec_sql not available. Use specific queries via Supabase client.');

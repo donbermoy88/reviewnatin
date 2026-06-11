@@ -144,7 +144,10 @@ export default function LoginScreen() {
   };
 
   const finishAuth = async (sessionUserId?: string) => {
-    if (!sessionUserId) return;
+    if (!sessionUserId) {
+      setLoading(false);
+      return;
+    }
     const syncError = await syncOnboardingAfterAuth(sessionUserId);
     if (syncError) {
       setInfo(`Logged in, but goal sync failed: ${syncError}`);
@@ -163,6 +166,10 @@ export default function LoginScreen() {
     const result = provider === 'google' ? await signInGoogle() : await signInApple();
     if (result.error) {
       setError(result.error);
+      setLoading(false);
+      return;
+    }
+    if (result.cancelled) {
       setLoading(false);
       return;
     }

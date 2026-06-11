@@ -1,7 +1,6 @@
 'use client';
 
-import { AdminNav } from '@/components/admin-nav';
-import Link from 'next/link';
+import { AdminCard, AdminShell } from '@/components/admin-shell';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -40,20 +39,17 @@ export default function SchedulesAdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="mx-auto max-w-xl">
-        <AdminNav />
-        <Link href="/" className="text-sm font-medium text-blue-600">
-          ← Admin home
-        </Link>
-        <h1 className="mt-4 text-2xl font-bold text-slate-900">Exam schedule</h1>
-        <p className="mt-2 text-sm text-slate-600">Add or update official-style dates for the mobile Exam Calendar.</p>
-
-        <form onSubmit={submit} className="mt-8 space-y-4 rounded-xl border bg-white p-6 shadow-sm">
+    <AdminShell
+      title="Exam Schedule"
+      description="Add or update official-style dates for the mobile Exam Calendar."
+      maxWidth="max-w-3xl"
+    >
+      <AdminCard>
+        <form onSubmit={submit} className="space-y-5">
           <label className="block text-sm font-medium text-slate-700">
             Exam slug
             <input
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
               value={examSlug}
               onChange={(e) => setExamSlug(e.target.value)}
               required
@@ -62,7 +58,7 @@ export default function SchedulesAdminPage() {
           <label className="block text-sm font-medium text-slate-700">
             Event type
             <select
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
               value={eventType}
               onChange={(e) => setEventType(e.target.value)}
             >
@@ -75,7 +71,7 @@ export default function SchedulesAdminPage() {
             Event date
             <input
               type="date"
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
               value={eventDate}
               onChange={(e) => setEventDate(e.target.value)}
               required
@@ -84,7 +80,7 @@ export default function SchedulesAdminPage() {
           <label className="block text-sm font-medium text-slate-700">
             Source URL
             <input
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
               value={sourceUrl}
               onChange={(e) => setSourceUrl(e.target.value)}
             />
@@ -92,7 +88,7 @@ export default function SchedulesAdminPage() {
           <label className="block text-sm font-medium text-slate-700">
             Notes
             <textarea
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
               rows={2}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -101,13 +97,13 @@ export default function SchedulesAdminPage() {
           <button
             type="submit"
             disabled={busy}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+            className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/20 disabled:opacity-50"
           >
             {busy ? 'Saving…' : 'Save schedule'}
           </button>
           {status ? <p className="text-sm text-slate-600">{status}</p> : null}
         </form>
-      </div>
-    </div>
+      </AdminCard>
+    </AdminShell>
   );
 }

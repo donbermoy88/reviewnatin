@@ -4,7 +4,13 @@ import { useColorScheme } from 'react-native';
 import { colors as lightColors } from '@reviewnatin/shared';
 import { darkColors, type ThemeColors } from '../constants/dark-theme';
 import { fetchRemotePreferences, loadLocalPreferences, upsertRemotePreferences, type ExplanationLocale, type UserPreferences } from '../lib/api/preferences';
-import { cancelReminders, registerForPushNotifications, scheduleDailyReminder, canUseLocalNotifications } from '../lib/notifications';
+import {
+  cancelExamReminders,
+  cancelReminders,
+  canUseLocalNotifications,
+  registerForPushNotifications,
+  scheduleDailyReminder,
+} from '../lib/notifications';
 import { useAuth } from './auth-provider';
 
 type PreferencesContextValue = {
@@ -22,6 +28,7 @@ const PreferencesContext = createContext<PreferencesContextValue | null>(null);
 
 export function PreferencesProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
+  const userId = user?.id;
   const systemScheme = useColorScheme(); // Reactive to system appearance changes
   const [prefs, setPrefs] = useState<UserPreferences>({
     darkMode: systemScheme === 'dark', // Follow system before saved prefs load
@@ -36,9 +43,9 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
   useEffect(() => {
     (async () => {
       const local = await loadLocalPreferences();
-      if (user) {
+      if (userId) {
         try {
-          const remote = await fetchRemotePreferences(user.id);
+          const remote = await fetchRemotePreferences(userId);
           if (remote) {
             setPrefs(remote);
             await AsyncStorage.setItem('reviewnatin:prefs', JSON.stringify(remote));
@@ -53,21 +60,21 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
       if (local) setPrefs(local);
       setLoading(false);
     })();
-  }, [user?.id]);
+  }, [userId]);
 
   const persist = useCallback(
     async (next: UserPreferences) => {
       setPrefs(next);
       await AsyncStorage.setItem('reviewnatin:prefs', JSON.stringify(next));
-      if (user) {
+      if (userId) {
         try {
-          await upsertRemotePreferences(user.id, next);
+          await upsertRemotePreferences(userId, next);
         } catch {
           /* local only */
         }
       }
     },
-    [user]
+    [userId]
   );
 
   const setDarkMode = useCallback(async (enabled: boolean) => {
@@ -79,13 +86,13 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
       const next = { ...prefs, notificationsEnabled: enabled };
       await persist(next);
       if (enabled) {
-        await registerForPushNotifications(user?.id);
+        await registerForPushNotifications(userId);
         await scheduleDailyReminder(next.reminderHour, next.reminderMinute);
       } else {
         await cancelReminders();
       }
     },
-    [persist, prefs, user?.id]
+    [persist, prefs, userId]
   );
 
   const setExplanationLocale = useCallback(
@@ -98,16 +105,19 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
   const setExamRemindersEnabled = useCallback(
     async (enabled: boolean) => {
       await persist({ ...prefs, examRemindersEnabled: enabled });
+      if (!enabled) {
+        await cancelExamReminders();
+      }
     },
     [persist, prefs]
   );
 
   useEffect(() => {
     if (!prefs.notificationsEnabled || loading || !canUseLocalNotifications()) return;
-    registerForPushNotifications(user?.id).then(() => {
+    registerForPushNotifications(userId).then(() => {
       scheduleDailyReminder(prefs.reminderHour, prefs.reminderMinute);
     });
-  }, [prefs.notificationsEnabled, prefs.reminderHour, prefs.reminderMinute, user?.id, loading]);
+  }, [prefs.notificationsEnabled, prefs.reminderHour, prefs.reminderMinute, userId, loading]);
 
   const isDark = prefs.darkMode;
   const themeColors = (isDark ? darkColors : lightColors) as ThemeColors;

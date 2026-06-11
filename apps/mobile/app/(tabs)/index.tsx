@@ -15,6 +15,7 @@ import { fetchExamBySlug, fetchSubjectAreas } from '../../lib/api/catalog';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
+import { fetchStreakStatus } from '../../lib/api/streak';
 import { hasCompletedDiagnostic } from '../../lib/api/diagnostic';
 import { fetchPracticeStats } from '../../lib/api/stats';
 import { fetchGuestPracticeStats } from '../../lib/guest-quiz-history';
@@ -29,9 +30,8 @@ import { tabScrollPadding } from '../../lib/layout/content-padding';
 import {
   canStartPractice,
   getMockAccess,
-  hasUsedMiniMockThisWeek,
   isMiniMock,
-  recordMiniMockUsed,
+  isMiniMockAvailable,
 } from '../../lib/paywall';
 import { scheduleDailyReminder, scheduleExamReminders } from '../../lib/notifications';
 import { fetchDueFlashcardCount } from '../../lib/api/flashcards';
@@ -45,6 +45,7 @@ import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StreakMilestoneModal, isStreakMilestone } from '../../components/streak-milestone-modal';
+import { isDiagnosticPromptDismissed } from '../../lib/diagnostic-prompt';
 
 function timeGreeting(): string {
   const h = new Date().getHours();
@@ -117,6 +118,7 @@ export default function DashboardScreen() {
   const [contentGate, setContentGate] = useState<ContentGateStatus | null>(null);
   const [announcements, setAnnouncements] = useState<AppAnnouncement[]>([]);
   const [weakTopic, setWeakTopic] = useState<TopicAnalyticsRow | null>(null);
+  const [streakFreezes, setStreakFreezes] = useState(0);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [readinessSheetOpen, setReadinessSheetOpen] = useState(false);
@@ -125,71 +127,89 @@ export default function DashboardScreen() {
   const [milestoneVisible, setMilestoneVisible] = useState(false);
 
   const load = useCallback(async () => {
-    const merged = await resolveOnboardingGoal(user?.id);
-    setGoal(merged);
-    const slug = merged?.examSlug ?? DEFAULT_EXAM_SLUG;
-    const target = dailyQuestionTarget(merged?.dailyMinutes ?? 30);
+    try {
+      const merged = await resolveOnboardingGoal(user?.id);
+      setGoal(merged);
+      const slug = merged?.examSlug ?? DEFAULT_EXAM_SLUG;
+      const target = dailyQuestionTarget(merged?.dailyMinutes ?? 30);
 
-    if (user) {
-      try {
-        const [practiceStats, gate] = await Promise.all([
-          fetchPracticeStats(user.id, target).then(async (s) => {
-            // Show streak milestone modal if a milestone was just reached
-            if (isStreakMilestone(s.streakDays)) {
-              const key = `milestone_shown_${user.id}_${s.streakDays}`;
-              const shown = await AsyncStorage.getItem(key).catch(() => null);
-              if (!shown) {
-                await AsyncStorage.setItem(key, '1').catch(() => {});
-                setMilestoneVisible(true);
-              }
-            }
-            return s;
-          }),
-          fetchContentGateStatus(slug),
-        ]);
-        setStats(practiceStats);
-        setContentGate(gate);
-        setPasapath(await fetchTodayPasaPath(slug));
-        setReadiness(await fetchLatestReadiness(slug));
+      if (user) {
         try {
-          const analytics = await fetchTopicAnalytics(slug);
-          setWeakTopic(pickWeakTopic(analytics.subjects));
+          // These dashboard sections are independent — fetch them concurrently
+          // instead of in a waterfall. Non-critical fetches fall back to a safe
+          // value so one slow/failed call doesn't blank the rest of the screen.
+          const [practiceStats, gate, todayPasa, latestReadiness, weakest, streak, diagnosticDone] =
+            await Promise.all([
+              fetchPracticeStats(user.id, target).then(async (s) => {
+                // Show streak milestone modal if a milestone was just reached
+                if (isStreakMilestone(s.streakDays)) {
+                  const key = `milestone_shown_${user.id}_${s.streakDays}`;
+                  const shown = await AsyncStorage.getItem(key).catch(() => null);
+                  if (!shown) {
+                    await AsyncStorage.setItem(key, '1').catch(() => {});
+                    setMilestoneVisible(true);
+                  }
+                }
+                return s;
+              }),
+              fetchContentGateStatus(slug).catch(() => null),
+              fetchTodayPasaPath(slug).catch(() => null),
+              fetchLatestReadiness(slug).catch(() => null),
+              fetchTopicAnalytics(slug)
+                .then((a) => pickWeakTopic(a.subjects))
+                .catch(() => null),
+              fetchStreakStatus(user.id).catch(() => null),
+              // Treat a lookup failure as "done" so we never force the diagnostic
+              // redirect on a transient error.
+              hasCompletedDiagnostic(slug).catch(() => true),
+            ]);
+          setStats(practiceStats);
+          setContentGate(gate);
+          setPasapath(todayPasa);
+          setReadiness(latestReadiness);
+          setWeakTopic(weakest);
+          setStreakFreezes(streak?.streakFreezes ?? 0);
+          if (gate?.meetsMinimum && !diagnosticDone) {
+            const dismissed = await isDiagnosticPromptDismissed(user.id, slug).catch(() => false);
+            if (!dismissed) {
+              router.replace('/diagnostic/intro');
+              return;
+            }
+          }
         } catch {
-          setWeakTopic(null);
+          setStats((s) => ({ ...s, questionsTarget: target }));
         }
-        if (gate?.meetsMinimum && !(await hasCompletedDiagnostic(slug))) {
-          router.replace('/diagnostic/intro');
-          return;
+      } else {
+        setPasapath(null);
+        setReadiness(null);
+        setWeakTopic(null);
+        setStreakFreezes(0);
+        try {
+          setStats(await fetchGuestPracticeStats(target));
+        } catch {
+          setStats((s) => ({ ...s, questionsTarget: target }));
         }
-      } catch {
-        setStats((s) => ({ ...s, questionsTarget: target }));
       }
-    } else {
-      setPasapath(null);
-      setReadiness(null);
-      setWeakTopic(null);
-      try {
-        setStats(await fetchGuestPracticeStats(target));
-      } catch {
-        setStats((s) => ({ ...s, questionsTarget: target }));
+
+      const exam = await fetchExamBySlug(slug).catch(() => null);
+      if (exam) {
+        setExamName(exam.name);
+        setExamTypeId(exam.id);
+        const areas = await fetchSubjectAreas(exam.id).catch(() => []);
+        setSubjects(areas.slice(0, 3));
+      } else {
+        const found = EXAM_TYPES.find((e) => e.slug === slug);
+        if (found) setExamName(found.name);
       }
-    }
 
-    const exam = await fetchExamBySlug(slug);
-    if (exam) {
-      setExamName(exam.name);
-      setExamTypeId(exam.id);
-      const areas = await fetchSubjectAreas(exam.id);
-      setSubjects(areas.slice(0, 3));
-    } else {
-      const found = EXAM_TYPES.find((e) => e.slug === slug);
-      if (found) setExamName(found.name);
+      if (!user) {
+        setContentGate(await fetchContentGateStatus(slug).catch(() => null));
+      }
+      setAnnouncements(await fetchAppAnnouncements(slug, 3).catch(() => []));
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
     }
-
-    if (!user) setContentGate(await fetchContentGateStatus(slug));
-    setAnnouncements(await fetchAppAnnouncements(slug, 3).catch(() => []));
-    setLoading(false);
-    setRefreshing(false);
   }, [user, router]);
 
   useEffect(() => {
@@ -281,13 +301,9 @@ export default function DashboardScreen() {
         return;
       }
       const access = getMockAccess(mock, premium);
-      if (access === 'weekly_limit') {
-        const used = await hasUsedMiniMockThisWeek();
-        if (used) {
-          router.push('/subscribe');
-          return;
-        }
-        await recordMiniMockUsed();
+      if (access === 'weekly_limit' && !(await isMiniMockAvailable(examSlug))) {
+        router.push('/subscribe');
+        return;
       }
       if (access === 'preview') {
         router.push({
@@ -398,17 +414,37 @@ export default function DashboardScreen() {
           </View>
 
           <View style={styles.statRow}>
-            <View style={styles.statPill}>
+            <Pressable
+              style={styles.statPill}
+              onPress={() => user && router.push('/streak-freeze')}
+              disabled={!user}
+              accessibilityRole="button"
+              accessibilityLabel={
+                user
+                  ? `${stats.streakDays}-day streak. ${streakFreezes} freeze${streakFreezes === 1 ? '' : 's'}. Tap to manage.`
+                  : `${stats.streakDays}-day streak`
+              }
+            >
               <View style={styles.statIconWrap}>
                 <Ionicons name="flame" size={20} color={colors.flame} />
               </View>
               <View style={styles.statTextWrap}>
                 <Text style={styles.statVal}>{stats.streakDays}</Text>
-                <Text style={styles.statLbl} numberOfLines={2}>
-                  {streakLabel}
-                </Text>
+                {user && streakFreezes > 0 ? (
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                    <Text style={styles.statLbl} numberOfLines={1}>
+                      {streakLabel}
+                    </Text>
+                    <Ionicons name="snow" size={11} color={colors.accent} />
+                    <Text style={[styles.statLbl, { color: colors.accent }]}>{streakFreezes}</Text>
+                  </View>
+                ) : (
+                  <Text style={styles.statLbl} numberOfLines={2}>
+                    {streakLabel}
+                  </Text>
+                )}
               </View>
-            </View>
+            </Pressable>
             <View style={styles.statPill}>
               <View style={styles.statIconWrap}>
                 <Ionicons name="checkmark-done" size={20} color={colors.accent} />

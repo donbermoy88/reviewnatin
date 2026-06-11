@@ -26,7 +26,7 @@ export function mergeOnboardingWithRemote(
     dailyMinutes: remote.daily_minutes ?? local?.dailyMinutes ?? 30,
     level: (remote.current_level as OnboardingData['level']) ?? local?.level ?? 'beginner',
     majorSlug: remote.major_slug ?? local?.majorSlug,
-    completed: local?.completed ?? true,
+    completed: true,
   };
 }
 

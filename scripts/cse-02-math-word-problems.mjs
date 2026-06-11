@@ -141,8 +141,8 @@ const MATH_QUESTIONS = [
     stem: '168 is what percent of 672?',
     choices: [{ id: 'a', text: '25%' }, { id: 'b', text: '50%' }, { id: 'c', text: '400%' }, { id: 'd', text: '80%' }],
     correct: 'a', difficulty: 1, level: 'both', topic: 'basicOps',
-    explanation_en: '168/672 = 1/4 = 25%.',
-    explanation_fil: '168 ÷ 672 = 0.25 = 25%.',
+    explanation_en: 'Use part ÷ whole × 100. 168 ÷ 672 = 0.25, then 0.25 × 100 = 25%.',
+    explanation_fil: 'Gamitin ang bahagi ÷ kabuuan × 100. 168 ÷ 672 = 0.25, kaya 0.25 × 100 = 25%.',
   },
   {
     stem: 'Evaluate: 123 × 0.1 + 123 × 0.01 + 123 × 0.001',
@@ -324,8 +324,8 @@ const MATH_QUESTIONS = [
     stem: 'Of the 300 grocery shoppers surveyed, 96 did not have a regular day of the week on which they shop. What percentage of the shoppers did not have a regular day of shopping?',
     choices: [{ id: 'a', text: '32%' }, { id: 'b', text: '48%' }, { id: 'c', text: '64%' }, { id: 'd', text: '96%' }],
     correct: 'a', difficulty: 1, level: 'both', topic: 'wordProblems',
-    explanation_en: '96 ÷ 300 = 0.32 = 32%.',
-    explanation_fil: '96 ÷ 300 = 0.32 = 32%.',
+    explanation_en: 'Use percentage = part ÷ total × 100. 96 ÷ 300 = 0.32, and 0.32 × 100 = 32%.',
+    explanation_fil: 'Gamitin ang porsiyento = bahagi ÷ kabuuan × 100. 96 ÷ 300 = 0.32, at 0.32 × 100 = 32%.',
   },
   {
     stem: 'A container has 100 mL of water and is 20% full. How many mL of water can this container hold when full?',
@@ -422,8 +422,8 @@ const MATH_QUESTIONS = [
     stem: 'If 560 out of 700 examinees passed the recent Career Service Exam for Sub-Professional level, what percent passed?',
     choices: [{ id: 'a', text: '65%' }, { id: 'b', text: '72%' }, { id: 'c', text: '80%' }, { id: 'd', text: '140%' }],
     correct: 'c', difficulty: 1, level: 'both', topic: 'wordProblems',
-    explanation_en: '560 ÷ 700 = 0.80 = 80%.',
-    explanation_fil: '560 ÷ 700 = 80%.',
+    explanation_en: 'Use passed ÷ total × 100. 560 ÷ 700 = 0.80, and 0.80 × 100 = 80%.',
+    explanation_fil: 'Gamitin ang pumasa ÷ kabuuan × 100. 560 ÷ 700 = 0.80, kaya 0.80 × 100 = 80%.',
   },
   {
     stem: 'Mr. Cruz borrows Php 750,000 from a bank and is charged Php 90,000 interest. What rate of interest did the bank charge?',

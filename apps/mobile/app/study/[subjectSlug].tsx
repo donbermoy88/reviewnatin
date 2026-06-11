@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { MasteryBar } from '../../components/mastery-bar';
@@ -10,7 +10,7 @@ import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { fetchTopicAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
 import { fetchTopicsBySubjectSlug, fetchTopicQuestionCounts } from '../../lib/api/topics';
 import type { TopicRow } from '../../lib/api/topics';
-import { resolveOnboardingGoal } from '../../lib/api/goals';
+import { fetchSubjectFlashcardCount } from '../../lib/api/flashcards';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 
@@ -31,6 +31,7 @@ export default function TopicListScreen() {
   const [topics, setTopics] = useState<TopicRow[]>([]);
   const [topicAnalytics, setTopicAnalytics] = useState<Map<string, TopicAnalyticsRow>>(new Map());
   const [topicCounts, setTopicCounts] = useState<Map<string, number>>(new Map());
+  const [flashcardCount, setFlashcardCount] = useState<number | null>(null);
   // Use the passed subject name (full name from DB), falling back to slug-derived name
   const subjectName = paramSubjectName ?? (subjectSlug ? titleCase(subjectSlug) : 'Subject');
 
@@ -38,14 +39,16 @@ export default function TopicListScreen() {
     if (!subjectSlug) return;
 
     try {
-      const [topicRows, analytics, counts] = await Promise.all([
+      const [topicRows, analytics, counts, cards] = await Promise.all([
         fetchTopicsBySubjectSlug(slug, subjectSlug),
         user ? fetchTopicAnalytics(slug).catch(() => ({ subjects: [], allTopics: [] })) : Promise.resolve({ subjects: [], allTopics: [] }),
         fetchTopicQuestionCounts(slug, subjectSlug),
+        fetchSubjectFlashcardCount(slug, subjectSlug).catch(() => null),
       ]);
 
       setTopics(topicRows);
       setTopicCounts(counts);
+      setFlashcardCount(cards);
 
       const bySlug = new Map<string, TopicAnalyticsRow>();
       for (const t of analytics.allTopics) {
@@ -68,6 +71,31 @@ export default function TopicListScreen() {
     if (rows.length === 0) return null;
     return Math.round(rows.reduce((sum, t) => sum + t.accuracy, 0) / rows.length);
   }, [topicAnalytics]);
+
+  const topicStatus = useMemo(() => {
+    if (topics.length === 0) return { ready: 0, comingSoon: 0, fullyCounted: false };
+    const fullyCounted = topics.every((t) => topicCounts.has(t.slug));
+    if (!fullyCounted) return { ready: topics.length, comingSoon: 0, fullyCounted };
+    const ready = topics.filter((t) => (topicCounts.get(t.slug) ?? 0) > 0).length;
+    return { ready, comingSoon: topics.length - ready, fullyCounted };
+  }, [topics, topicCounts]);
+
+  const headerSub = useMemo(() => {
+    if (topics.length === 0) return 'Content coming soon';
+    if (topicStatus.fullyCounted && topicStatus.comingSoon > 0) {
+      if (topicStatus.ready === 0) return 'Questions coming soon';
+      return `${topicStatus.ready} ready · ${topicStatus.comingSoon} coming soon`;
+    }
+    return `${topics.length} topic${topics.length === 1 ? '' : 's'} · tap to practice`;
+  }, [topics.length, topicStatus]);
+
+  const flashcardsDisabled = flashcardCount === 0;
+  const flashcardSub =
+    flashcardCount == null
+      ? `Due cards for ${subjectName}`
+      : flashcardCount > 0
+        ? `${flashcardCount} card${flashcardCount === 1 ? '' : 's'} for ${subjectName}`
+        : 'Flashcards coming soon';
 
   if (loading) {
     return (
@@ -93,11 +121,7 @@ export default function TopicListScreen() {
         </Pressable>
         <Text style={styles.headerTag}>SUBJECT</Text>
         <Text style={styles.headerTitle}>{subjectName}</Text>
-        <Text style={styles.headerSub}>
-          {topics.length === 0
-            ? 'Content coming soon'
-            : `${topics.length} topic${topics.length === 1 ? '' : 's'} · tap to practice`}
-        </Text>
+        <Text style={styles.headerSub}>{headerSub}</Text>
         {subjectAvg != null ? (
           <View style={styles.progressCard}>
             <View style={styles.progressRow}>
@@ -109,16 +133,25 @@ export default function TopicListScreen() {
         ) : null}
       </LinearGradient>
 
-      <View style={styles.body}>
+      <ScrollView
+        style={styles.contentScroll}
+        contentContainerStyle={[styles.body, { paddingBottom: insets.bottom + spacing.xl }]}
+        contentInsetAdjustmentBehavior="automatic"
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
         <Pressable
-          style={styles.flashcardRow}
-          onPress={() =>
+          style={[styles.flashcardRow, flashcardsDisabled && styles.disabledCard]}
+          disabled={flashcardsDisabled}
+          onPress={() => {
+            if (flashcardsDisabled) return;
             router.push({
               pathname: '/flashcards',
               params: { examSlug: slug, subjectSlug },
-            })
-          }
+            });
+          }}
           accessibilityRole="button"
+          accessibilityState={{ disabled: flashcardsDisabled }}
           accessibilityLabel={`Flashcards for ${subjectName}`}
         >
           <View style={styles.flashcardIcon}>
@@ -126,9 +159,13 @@ export default function TopicListScreen() {
           </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.flashcardTitle}>Flashcards</Text>
-            <Text style={styles.flashcardSub}>Due cards for {subjectName}</Text>
+            <Text style={styles.flashcardSub}>{flashcardSub}</Text>
           </View>
-          <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+          <Ionicons
+            name={flashcardsDisabled ? 'time-outline' : 'chevron-forward'}
+            size={18}
+            color={colors.textMuted}
+          />
         </Pressable>
 
         {topics.length === 0 ? (
@@ -212,7 +249,7 @@ export default function TopicListScreen() {
             );
           })
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -268,6 +305,7 @@ function createSubjectTopicStyles(theme: AppTheme) {
       letterSpacing: 0.4,
     },
     progressPct: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.accent },
+    contentScroll: { flex: 1 },
     body: { padding: spacing.lg, gap: spacing.sm },
     flashcardRow: {
       flexDirection: 'row',
@@ -280,6 +318,7 @@ function createSubjectTopicStyles(theme: AppTheme) {
       borderWidth: 1,
       borderColor: colors.border,
     },
+    disabledCard: { opacity: 0.55 },
     flashcardIcon: {
       width: 44,
       height: 44,

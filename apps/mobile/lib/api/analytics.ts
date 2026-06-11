@@ -3,6 +3,7 @@ import { cleanStem } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 import { isDailyLimitError } from './iap';
 import type { PracticeFetchError } from './catalog';
+import { shuffleQuestionChoices } from '../question-randomization';
 
 type PracticeQuestionRow = {
   id: string;
@@ -32,7 +33,7 @@ export type SubjectAnalytics = {
 };
 
 function mapPracticeQuestion(row: PracticeQuestionRow): Question {
-  return {
+  return shuffleQuestionChoices({
     id: row.id,
     stem: cleanStem(row.stem),
     choices: row.choices,
@@ -44,7 +45,7 @@ function mapPracticeQuestion(row: PracticeQuestionRow): Question {
         exam_slug: row.exam_slug,
       },
     },
-  };
+  });
 }
 
 export async function fetchTopicAnalytics(

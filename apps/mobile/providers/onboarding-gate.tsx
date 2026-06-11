@@ -33,8 +33,10 @@ export function OnboardingGate({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const [complete, setComplete] = useState(false);
 
+  // `ready` means "resolved at least once" — we deliberately do NOT reset it to
+  // false on re-resolves (e.g. when the user id changes), otherwise the whole
+  // app tree unmounts behind a full-screen spinner on every auth transition.
   const refresh = useCallback(async () => {
-    setReady(false);
     const done = await isOnboardingComplete(user?.id);
     setComplete(done);
     setReady(true);

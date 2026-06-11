@@ -1,6 +1,7 @@
 /** Apple App Store product identifiers — see docs/05-pricing-iap.md */
 export const IOS_PRODUCT_SKUS = [
   'com.reviewnatin.plus.monthly',
+  'com.reviewnatin.plus.six_months',
   'com.reviewnatin.plus.yearly',
   'com.reviewnatin.exampass.cse_pro',
   'com.reviewnatin.exampass.cse_sub',
@@ -12,6 +13,7 @@ export const IOS_PRODUCT_SKUS = [
 /** Google Play product IDs — deferred until Play Console setup */
 export const ANDROID_PRODUCT_SKUS = [
   'plus_monthly',
+  'plus_six_months',
   'plus_yearly',
   'exam_pass_cse_pro',
   'exam_pass_cse_sub',

@@ -79,6 +79,35 @@ cse-professional,numerical,word-problems,"If 3 workers finish a job in 8 hours..
 | No duplicate `stem` hash in same topic | Duplicate |
 | `difficulty` 1–5 | Out of range |
 | `explanation_en` min 20 chars | Missing explanation |
+| No duplicate answer choice text | Duplicate choices |
+| Balanced quotes and parentheses in `stem` | Malformed stem |
+
+The CLI importer and admin importer both use the shared import validator. Objective content QA failures block import before any rows are inserted.
+
+### Automated content audit
+
+Run the production content audit before publishing large batches:
+
+```bash
+npm run content:audit
+npm run content:audit:ci
+```
+
+The audit writes:
+
+- `audit/content-quality-report.md`
+- `audit/content-quality-report.json`
+
+Severity policy:
+
+| Severity | CI behavior | Meaning |
+|----------|-------------|---------|
+| `critical` | Fail | Broken correctness, e.g. invalid answer key or duplicate choices |
+| `high` | Fail | Strong content defect, e.g. duplicate stem in the same exam/topic |
+| `medium` | Fail | Objective quality issue, e.g. thin explanation or malformed quotes |
+| `low` | Review only | Heuristic topic/spacing hints for admin QA |
+
+GitHub Actions runs `content:audit:rules` and `content:import:rules` on every PR. The live Supabase gate runs when repository secrets `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are configured.
 
 ### Import script behavior
 
@@ -94,9 +123,10 @@ cse-professional,numerical,word-problems,"If 3 workers finish a job in 8 hours..
 
 Web admin: `/content/import`
 - Upload CSV
-- Preview first 10 rows
-- Show validation errors inline
-- Confirm import → draft queue
+- Preview and validate before import
+- Show grouped validation errors by field
+- Download `.errors.csv` for author corrections
+- Confirm import only after validation passes → draft queue
 
 ---
 

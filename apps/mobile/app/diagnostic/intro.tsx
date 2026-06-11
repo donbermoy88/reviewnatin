@@ -8,6 +8,10 @@ import { PrimaryButton } from '../../components/primary-button';
 import { StackShell } from '../../components/stack-shell';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { hasCompletedDiagnostic } from '../../lib/api/diagnostic';
+import {
+  clearDiagnosticPromptDismissal,
+  dismissDiagnosticPrompt,
+} from '../../lib/diagnostic-prompt';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
@@ -37,6 +41,7 @@ export default function DiagnosticIntroScreen() {
       setExamSlug(slug);
       try {
         if (await hasCompletedDiagnostic(slug)) {
+          await clearDiagnosticPromptDismissal(user.id, slug).catch(() => {});
           router.replace('/(tabs)');
           return;
         }
@@ -117,18 +122,24 @@ export default function DiagnosticIntroScreen() {
         <PrimaryButton
           label="Start diagnostic"
           size="lg"
-          onPress={() =>
+          onPress={() => {
+            void clearDiagnosticPromptDismissal(user.id, examSlug).catch(() => {});
             router.replace({
               pathname: '/practice/quiz',
               params: { examSlug, mode: 'diagnostic' },
-            })
-          }
+            });
+          }}
         />
         <PrimaryButton
           label="Skip for now"
           variant="outline"
           size="lg"
-          onPress={() => router.replace('/(tabs)')}
+          onPress={() => {
+            void (async () => {
+              await dismissDiagnosticPrompt(user.id, examSlug).catch(() => {});
+              router.replace('/(tabs)');
+            })();
+          }}
         />
       </View>
     </StackShell>

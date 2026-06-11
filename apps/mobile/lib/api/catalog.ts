@@ -2,6 +2,8 @@ import type { ExamType, Question, QuestionChoice, SubjectArea } from '../types';
 import { cleanStem } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 import { isDailyLimitError } from './iap';
+import { shuffleQuestionChoices } from '../question-randomization';
+import { cachedJson } from '../cache/json-cache';
 
 export type PracticeFetchError = 'daily_limit' | 'unknown';
 
@@ -31,7 +33,7 @@ export type AnswerCheckResult = {
 };
 
 function mapPracticeQuestion(row: PracticeQuestionRow): Question {
-  return {
+  return shuffleQuestionChoices({
     id: row.id,
     stem: cleanStem(row.stem),
     choices: row.choices,
@@ -44,48 +46,56 @@ function mapPracticeQuestion(row: PracticeQuestionRow): Question {
         exam_slug: row.exam_slug,
       },
     },
-  };
+  });
 }
 
 export async function fetchExamTypes(): Promise<ExamType[]> {
   if (!isSupabaseConfigured) return [];
-  const { data, error } = await supabase.from('exam_types').select('id, slug, name').eq('is_active', true).order('name');
-  if (error) throw error;
-  return data ?? [];
+  return cachedJson('exam-types', async () => {
+    const { data, error } = await supabase.from('exam_types').select('id, slug, name').eq('is_active', true).order('name');
+    if (error) throw error;
+    return data ?? [];
+  }, { ttlMs: 24 * 60 * 60 * 1000, staleTtlMs: 30 * 24 * 60 * 60 * 1000 });
 }
 
 export async function fetchExamBySlug(slug: string): Promise<ExamType | null> {
   if (!isSupabaseConfigured) return null;
-  const { data, error } = await supabase.from('exam_types').select('id, slug, name').eq('slug', slug).maybeSingle();
-  if (error) throw error;
-  return data;
+  return cachedJson(`exam-by-slug:${slug}`, async () => {
+    const { data, error } = await supabase.from('exam_types').select('id, slug, name').eq('slug', slug).maybeSingle();
+    if (error) throw error;
+    return data;
+  }, { ttlMs: 24 * 60 * 60 * 1000, staleTtlMs: 30 * 24 * 60 * 60 * 1000 });
 }
 
 export async function fetchSubjectAreas(examTypeId: string): Promise<SubjectArea[]> {
   if (!isSupabaseConfigured) return [];
-  const { data, error } = await supabase
-    .from('subject_areas')
-    .select('id, slug, name, sort_order')
-    .eq('exam_type_id', examTypeId)
-    .order('sort_order');
-  if (error) throw error;
-  return data ?? [];
+  return cachedJson(`subject-areas:${examTypeId}`, async () => {
+    const { data, error } = await supabase
+      .from('subject_areas')
+      .select('id, slug, name, sort_order')
+      .eq('exam_type_id', examTypeId)
+      .order('sort_order');
+    if (error) throw error;
+    return data ?? [];
+  }, { ttlMs: 24 * 60 * 60 * 1000, staleTtlMs: 30 * 24 * 60 * 60 * 1000 });
 }
 
 export async function fetchExamQuestionCount(examSlug: string): Promise<number> {
   if (!isSupabaseConfigured) return 0;
 
-  // Use get_content_counts (the true published-question total for the exam),
-  // NOT get_practice_questions — the latter is the quiz-serving RPC, which is
-  // capped at p_limit and subject to the per-user daily limit, so counting its
-  // rows undercounts the real bank (e.g. showed "20" instead of 822).
-  const { data, error } = await supabase.rpc('get_content_counts', {
-    p_exam_slug: examSlug,
-  });
+  return cachedJson(`content-counts:questions:${examSlug}`, async () => {
+    // Use get_content_counts (the true published-question total for the exam),
+    // NOT get_practice_questions — the latter is the quiz-serving RPC, which is
+    // capped at p_limit and subject to the per-user daily limit, so counting its
+    // rows undercounts the real bank (e.g. showed "20" instead of 822).
+    const { data, error } = await supabase.rpc('get_content_counts', {
+      p_exam_slug: examSlug,
+    });
 
-  if (error || !data) return 0;
-  const counts = data as { questions?: number } | null;
-  return counts?.questions ?? 0;
+    if (error || !data) return 0;
+    const counts = data as { questions?: number } | null;
+    return counts?.questions ?? 0;
+  }, { ttlMs: 10 * 60 * 1000, staleTtlMs: 7 * 24 * 60 * 60 * 1000 });
 }
 
 export async function fetchPracticeQuestions(
@@ -120,6 +130,26 @@ export async function fetchQuestionsByIds(ids: string[]): Promise<Question[]> {
 
   if (error) throw error;
   return ((data ?? []) as PracticeQuestionRow[]).map(mapPracticeQuestion);
+}
+
+/**
+ * Returns one genuinely incorrect choice id to eliminate for the "hint" feature.
+ * Selected server-side so the answer key never reaches the client and the hint
+ * can never remove the correct answer. Returns null when nothing is eliminable.
+ */
+export async function fetchQuestionHint(
+  questionId: string,
+  selectedChoiceId: string | null
+): Promise<string | null> {
+  if (!isSupabaseConfigured) return null;
+
+  const { data, error } = await supabase.rpc('get_question_hint', {
+    p_question_id: questionId,
+    p_selected_choice_id: selectedChoiceId,
+  });
+
+  if (error) throw error;
+  return typeof data === 'string' && data ? data : null;
 }
 
 /** Grade a single answer server-side — answer key is not in list queries */

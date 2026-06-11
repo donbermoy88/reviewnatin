@@ -50,6 +50,25 @@ describe('mergeOnboardingWithRemote', () => {
     };
     expect(mergeOnboardingWithRemote(local, remote)?.majorSlug).toBe('english');
   });
+
+  it('treats an active remote goal as completed even if a local draft is incomplete', () => {
+    const localDraft: OnboardingData = {
+      examSlug: 'pnle',
+      targetDate: '2026-09-01',
+      dailyMinutes: 15,
+      level: 'beginner',
+      completed: false,
+    };
+    const remote: ActiveGoalRow = {
+      target_exam_date: '2026-10-15',
+      daily_minutes: 45,
+      current_level: 'advanced',
+      major_slug: null,
+      exam_types: { slug: 'cse-professional', name: 'CSE Professional' },
+    };
+
+    expect(mergeOnboardingWithRemote(localDraft, remote)?.completed).toBe(true);
+  });
 });
 
 describe('requiresLetSecondaryMajor', () => {

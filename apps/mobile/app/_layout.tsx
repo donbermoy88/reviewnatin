@@ -60,6 +60,9 @@ function ThemedStack() {
         <Stack.Screen name="changelog/index" options={{ headerShown: false }} />
         <Stack.Screen name="offline-lessons/index" options={{ headerShown: false }} />
         <Stack.Screen name="pasapath/week" options={{ headerShown: false }} />
+        <Stack.Screen name="focus/index" options={{ headerShown: false }} />
+        <Stack.Screen name="notes/index" options={{ headerShown: false }} />
+        <Stack.Screen name="streak-freeze/index" options={{ headerShown: false }} />
         <Stack.Screen name="practice/quiz" options={{ headerShown: false }} />
         <Stack.Screen name="practice/result" options={{ headerShown: false, headerBackVisible: false }} />
         <Stack.Screen name="mock-review/[sessionId]" options={{ headerShown: false }} />

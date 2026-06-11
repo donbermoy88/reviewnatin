@@ -8,16 +8,23 @@ This is the best no-cost workaround until the organization can upgrade to Pro. I
 
 ## Target projects
 
-Primary project from Supabase pause email:
+> Audited 2026-06-11: `tirxigmycjuhaecmbygs` returns DNS `NXDOMAIN` — the
+> dedicated prod project named in the docs was never provisioned. The project
+> the app actually runs on is `yohewfdafdmwntsbzgxx` (its
+> `EXPO_PUBLIC_SUPABASE_URL`, the CLI-linked project, and where all migrations +
+> content live). The workflow now makes the LIVE project the required keepalive
+> and the planned prod project best-effort.
+
+Primary — LIVE project the app uses (required `APP_LINKED_SUPABASE_ANON_KEY`):
+
+- Project ref: `yohewfdafdmwntsbzgxx`
+- Keepalive URL: `https://yohewfdafdmwntsbzgxx.supabase.co/rest/v1/keepalive_pings?select=id,label&limit=1`
+
+Planned dedicated prod project — not provisioned yet (optional `REVIEWNATIN_PH_SUPABASE_ANON_KEY`):
 
 - Project name: `ReviewNatin PH`
 - Project ref: `tirxigmycjuhaecmbygs`
 - Keepalive URL: `https://tirxigmycjuhaecmbygs.supabase.co/rest/v1/keepalive_pings?select=id,label&limit=1`
-
-Optional project currently linked by local mobile env:
-
-- Project ref: `yohewfdafdmwntsbzgxx`
-- Keepalive URL: `https://yohewfdafdmwntsbzgxx.supabase.co/rest/v1/keepalive_pings?select=id,label&limit=1`
 
 ## Required GitHub secret
 

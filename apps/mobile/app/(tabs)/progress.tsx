@@ -14,7 +14,7 @@ import { fetchRecentSessions } from '../../lib/api/quiz';
 import { fetchPracticeStats } from '../../lib/api/stats';
 import { fetchGuestPracticeStats, fetchGuestRecentSessions } from '../../lib/guest-quiz-history';
 import { fetchUserBadges, type UserBadge } from '../../lib/api/achievements';
-import { fetchMockExamHistory, MOCK_PASS_THRESHOLD, type MockExamHistoryRow } from '../../lib/api/mock-history';
+import { fetchMockExamHistory, fetchMockSubjectTrends, MOCK_PASS_THRESHOLD, type MockExamHistoryRow, type SubjectTrend } from '../../lib/api/mock-history';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
 import { fetchWeeklySummary, type WeeklySummary } from '../../lib/api/weekly-summary';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
@@ -95,49 +95,68 @@ export default function ProfileScreen() {
   >([]);
   const [badges, setBadges] = useState<UserBadge[]>([]);
   const [mockHistory, setMockHistory] = useState<MockExamHistoryRow[]>([]);
+  const [subjectTrends, setSubjectTrends] = useState<SubjectTrend[]>([]);
   const [weeklySummary, setWeeklySummary] = useState<WeeklySummary | null>(null);
-  const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
+
+  // Overall mock-score trend (derived from mock history; no extra fetch).
+  const overallTrend = useMemo(() => {
+    if (mockHistory.length < 2) return null;
+    const points = [...mockHistory]
+      .sort((a, b) => new Date(a.completedAt).getTime() - new Date(b.completedAt).getTime())
+      .map((m) => Math.round(m.scorePercent));
+    return {
+      points,
+      first: points[0],
+      latest: points[points.length - 1],
+      delta: points[points.length - 1] - points[0],
+    };
+  }, [mockHistory]);
 
   const load = useCallback(async () => {
-    const goal = await resolveOnboardingGoal(user?.id);
-    const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
-    setExamSlug(slug);
-    const target = dailyQuestionTarget(goal?.dailyMinutes ?? 30);
+    try {
+      const goal = await resolveOnboardingGoal(user?.id);
+      const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
+      const target = dailyQuestionTarget(goal?.dailyMinutes ?? 30);
 
-    if (!user) {
+      if (!user) {
+        try {
+          const [guestSessions, guestStats] = await Promise.all([
+            fetchGuestRecentSessions(),
+            fetchGuestPracticeStats(target),
+          ]);
+          setSessions(guestSessions);
+          setStats(guestStats);
+        } catch {
+          setSessions([]);
+          setStats({ streakDays: 0, totalAnswered: 0, accuracyPercent: null, sessionCount: 0 });
+        }
+        return;
+      }
+
       try {
-        const [guestSessions, guestStats] = await Promise.all([
-          fetchGuestRecentSessions(),
-          fetchGuestPracticeStats(target),
+        const [data, practiceStats, userBadges, mocks, weekly, trends] = await Promise.all([
+          fetchRecentSessions(user.id),
+          fetchPracticeStats(user.id, target),
+          fetchUserBadges(),
+          fetchMockExamHistory(slug),
+          fetchWeeklySummary(slug),
+          fetchMockSubjectTrends(slug).catch(() => []),
         ]);
-        setSessions(guestSessions);
-        setStats(guestStats);
+        setSessions(data);
+        setStats(practiceStats);
+        setBadges(userBadges);
+        setMockHistory(mocks);
+        setWeeklySummary(weekly);
+        setSubjectTrends(trends);
       } catch {
         setSessions([]);
-        setStats({ streakDays: 0, totalAnswered: 0, accuracyPercent: null, sessionCount: 0 });
       }
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const [data, practiceStats, userBadges, mocks, weekly] = await Promise.all([
-        fetchRecentSessions(user.id),
-        fetchPracticeStats(user.id, target),
-        fetchUserBadges(),
-        fetchMockExamHistory(slug),
-        fetchWeeklySummary(slug),
-      ]);
-      setSessions(data);
-      setStats(practiceStats);
-      setBadges(userBadges);
-      setMockHistory(mocks);
-      setWeeklySummary(weekly);
     } catch {
       setSessions([]);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
     }
-    setLoading(false);
-    setRefreshing(false);
   }, [user]);
 
   useEffect(() => {
@@ -173,7 +192,12 @@ export default function ProfileScreen() {
           </View>
           <View style={styles.headerRow}>
             <Text style={styles.headerTitle}>Profile</Text>
-            <Pressable style={styles.settingsBtn} onPress={() => router.push('/(tabs)/settings')}>
+            <Pressable
+              style={styles.settingsBtn}
+              onPress={() => router.push('/(tabs)/settings')}
+              accessibilityRole="button"
+              accessibilityLabel="Open settings"
+            >
               <Ionicons name="settings-outline" size={20} color="#fff" />
             </Pressable>
           </View>
@@ -309,6 +333,101 @@ export default function ProfileScreen() {
                 </Text>
               </Pressable>
             ))}
+          </View>
+        ) : null}
+
+        {user && (subjectTrends.length > 0 || overallTrend) ? (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Subject trends</Text>
+            <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginBottom: spacing.sm }}>
+              Your mock scores across recent attempts.
+            </Text>
+            {overallTrend ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: spacing.md,
+                  paddingVertical: spacing.sm,
+                  borderBottomWidth: 1,
+                  borderBottomColor: colors.border,
+                }}
+              >
+                <View style={{ flex: 1 }}>
+                  <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 14, color: colors.text }}>Overall</Text>
+                  <Text
+                    style={{
+                      fontFamily: theme.fonts.bodyMedium,
+                      fontSize: 12,
+                      marginTop: 2,
+                      color:
+                        overallTrend.latest >= 75 ? colors.success : overallTrend.latest >= 50 ? colors.flame : colors.error,
+                    }}
+                  >
+                    {overallTrend.first}% → {overallTrend.latest}%{'  '}
+                    {overallTrend.delta > 0
+                      ? `↑ +${overallTrend.delta}`
+                      : overallTrend.delta < 0
+                        ? `↓ ${Math.abs(overallTrend.delta)}`
+                        : '— no change'}
+                  </Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 3, height: 28 }}>
+                  {overallTrend.points.map((p, i) => (
+                    <View
+                      key={i}
+                      style={{
+                        width: 6,
+                        height: Math.max(3, Math.round((p / 100) * 28)),
+                        borderRadius: 2,
+                        backgroundColor: p >= 75 ? colors.success : p >= 50 ? colors.flame : colors.error,
+                        opacity: i === overallTrend.points.length - 1 ? 1 : 0.5,
+                      }}
+                    />
+                  ))}
+                </View>
+              </View>
+            ) : null}
+            {subjectTrends.map((t) => {
+              const band = (p: number) => (p >= 75 ? colors.success : p >= 50 ? colors.flame : colors.error);
+              const trendLabel = t.delta > 0 ? `↑ +${t.delta}` : t.delta < 0 ? `↓ ${Math.abs(t.delta)}` : '— no change';
+              return (
+                <View
+                  key={t.subjectName}
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: spacing.md,
+                    paddingVertical: spacing.sm,
+                    borderBottomWidth: 1,
+                    borderBottomColor: colors.border,
+                  }}
+                >
+                  <View style={{ flex: 1 }}>
+                    <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 14, color: colors.text }} numberOfLines={1}>
+                      {t.subjectName}
+                    </Text>
+                    <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: band(t.latestPct), marginTop: 2 }}>
+                      {t.firstPct}% → {t.latestPct}%  {trendLabel}
+                    </Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 3, height: 28 }}>
+                    {t.points.map((pt, i) => (
+                      <View
+                        key={i}
+                        style={{
+                          width: 6,
+                          height: Math.max(3, Math.round((pt.pct / 100) * 28)),
+                          borderRadius: 2,
+                          backgroundColor: band(pt.pct),
+                          opacity: i === t.points.length - 1 ? 1 : 0.5,
+                        }}
+                      />
+                    ))}
+                  </View>
+                </View>
+              );
+            })}
           </View>
         ) : null}
 

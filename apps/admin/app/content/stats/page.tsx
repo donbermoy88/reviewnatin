@@ -1,7 +1,6 @@
 'use client';
 
-import { AdminNav } from '@/components/admin-nav';
-import Link from 'next/link';
+import { AdminCard, AdminMetric, AdminShell } from '@/components/admin-shell';
 import { useEffect, useState } from 'react';
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
 
@@ -66,34 +65,23 @@ export default function AdminStatsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="mx-auto max-w-3xl">
-        <AdminNav />
-        <Link href="/" className="text-sm font-medium text-blue-600">
-          ← Admin home
-        </Link>
-        <h1 className="mt-4 text-2xl font-bold text-slate-900">Content & platform stats</h1>
-
+    <AdminShell
+      title="Content and Platform Stats"
+      description="Monitor catalog readiness, user growth, draft backlog, and open content quality reports."
+    >
         {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
 
         {stats ? (
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {[
-              { label: 'Users', value: stats.users },
-              { label: 'Waitlist', value: stats.waitlist },
-              { label: 'Published Q', value: stats.published_questions },
-              { label: 'Draft Q', value: stats.draft_questions },
-              { label: 'Open reports', value: stats.open_reports },
-            ].map((s) => (
-              <div key={s.label} className="rounded-xl border bg-white p-4 shadow-sm">
-                <p className="text-xs uppercase tracking-wide text-slate-500">{s.label}</p>
-                <p className="mt-1 text-2xl font-bold text-slate-900">{s.value}</p>
-              </div>
-            ))}
+          <div className="grid gap-4 md:grid-cols-5">
+            <AdminMetric label="Users" value={stats.users} detail="Registered" />
+            <AdminMetric label="Waitlist" value={stats.waitlist} detail="Marketing signups" tone="green" />
+            <AdminMetric label="Published Q" value={stats.published_questions} detail="Live catalog" tone="blue" />
+            <AdminMetric label="Draft Q" value={stats.draft_questions} detail="Needs review" tone="amber" />
+            <AdminMetric label="Open Reports" value={stats.open_reports} detail="QA queue" tone="slate" />
           </div>
         ) : null}
 
-        <div className="mt-8 overflow-hidden rounded-xl border bg-white shadow-sm">
+        <AdminCard className="mt-8 overflow-hidden p-0">
           <table className="min-w-full text-sm">
             <thead className="bg-slate-100 text-left text-xs uppercase text-slate-600">
               <tr>
@@ -116,8 +104,7 @@ export default function AdminStatsPage() {
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-    </div>
+        </AdminCard>
+    </AdminShell>
   );
 }

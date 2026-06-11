@@ -3,9 +3,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Alert, Pressable, ScrollView, Text, View } from 'react-native';
-import { AppSheet } from '../../components/app-sheet';
 import { ShareScoreCard } from '../../components/share-score-card';
 import { ShareScoreCapture } from '../../components/share-score-capture';
+import { ReportContentButton } from '../../components/report-content-button';
 import { fetchExamBySlug } from '../../lib/api/catalog';
 import { canUseViewShot, shareQuizScore, shareQuizScoreImage } from '../../lib/share/score-share';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -18,7 +18,6 @@ import { createResultStyles } from '../../lib/themed-styles';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchSessionReview, type SessionReviewItem } from '../../lib/api/quiz';
-import { reportQuestion, type ReportReason } from '../../lib/api/reported-questions';
 import { completePasaPathTask } from '../../lib/api/pasapath';
 import { submitBarkadaChallengeResult } from '../../lib/api/barkada';
 import { MOCK_PASS_THRESHOLD } from '../../lib/api/mock-history';
@@ -31,6 +30,7 @@ import { AdInterstitialModal } from '../../components/ad-interstitial-modal';
 import { tryShowSessionInterstitial } from '../../lib/ads/interstitial';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
+import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -50,10 +50,9 @@ export default function PracticeResultScreen() {
   const styles = useMemo(() => createResultStyles(theme), [theme]);
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
+  const { prefs } = usePreferences();
   const { displayName } = useUserProfile('reviewer');
   const [showInterstitial, setShowInterstitial] = useState(false);
-  const [reportSheetOpen, setReportSheetOpen] = useState(false);
-  const [reportTargetId, setReportTargetId] = useState<string | null>(null);
   const [reportFeedback, setReportFeedback] = useState<string | null>(null);
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
@@ -67,7 +66,7 @@ export default function PracticeResultScreen() {
   const [aiExtras, setAiExtras] = useState<Record<string, string>>({});
   const [aiRemaining, setAiRemaining] = useState<number | null>(null);
   const captureRef = useRef<(() => Promise<string | undefined>) | null>(null);
-  const { score, total, correct, duration, sessionId, mode, diagnosticReadiness, pasapathTaskId, examSlug: paramExamSlug, barkadaChallengeId } = useLocalSearchParams<{
+  const { score, total, correct, duration, sessionId, mode, diagnosticReadiness, pasapathTaskId, examSlug: paramExamSlug, barkadaChallengeId, flaggedQuestionIds } = useLocalSearchParams<{
     score: string;
     total: string;
     correct: string;
@@ -78,7 +77,13 @@ export default function PracticeResultScreen() {
     pasapathTaskId?: string;
     examSlug?: string;
     barkadaChallengeId?: string;
+    flaggedQuestionIds?: string;
   }>();
+  const flaggedIds = useMemo(
+    () => new Set((flaggedQuestionIds ?? '').split(',').filter(Boolean)),
+    [flaggedQuestionIds]
+  );
+  const [reviewFilter, setReviewFilter] = useState<'all' | 'incorrect' | 'flagged'>('all');
 
   useEffect(() => {
     resolveOnboardingGoal(user?.id).then(async (goal) => {
@@ -143,25 +148,46 @@ export default function PracticeResultScreen() {
 
   const wrongCount = review.filter((r) => r.isCorrect === false).length;
 
-  const promptReport = (questionId: string) => {
-    if (!user) {
-      router.push('/(auth)/login');
-      return;
+  // Per-subject score breakdown (most useful on multi-subject mock/board exams).
+  const subjectBreakdown = useMemo(() => {
+    const map = new Map<string, { correct: number; total: number; slug: string | null }>();
+    for (const item of review) {
+      const name = item.subjectName ?? 'Other';
+      const entry = map.get(name) ?? { correct: 0, total: 0, slug: item.subjectSlug ?? null };
+      entry.total += 1;
+      if (item.isCorrect) entry.correct += 1;
+      if (!entry.slug && item.subjectSlug) entry.slug = item.subjectSlug;
+      map.set(name, entry);
     }
-    setReportTargetId(questionId);
-    setReportFeedback(null);
-    setReportSheetOpen(true);
-  };
+    return Array.from(map.entries()).map(([name, v]) => ({
+      name,
+      slug: v.slug,
+      correct: v.correct,
+      total: v.total,
+      pct: v.total ? Math.round((v.correct / v.total) * 100) : 0,
+    }));
+  }, [review]);
 
-  const submitReport = async (questionId: string, reason: ReportReason) => {
-    setReportSheetOpen(false);
-    try {
-      await reportQuestion(questionId, reason);
-      setReportFeedback('Thank you! We\'ll review this within 48 hours.');
-    } catch {
-      setReportFeedback('Report failed. Please try again later.');
-    }
-  };
+  // Weakest practiceable subject (lowest %, must have a slug to route, not 100%).
+  const weakestSubject = useMemo(() => {
+    const candidates = subjectBreakdown.filter((s) => s.slug && s.pct < 100);
+    if (!candidates.length) return null;
+    return candidates.reduce((min, s) => (s.pct < min.pct ? s : min));
+  }, [subjectBreakdown]);
+
+  // Review list, filterable by All / Incorrect / Flagged. Question numbers stay
+  // tied to session order regardless of the active filter.
+  const filteredReview = useMemo(() => {
+    return review
+      .map((item, idx) => ({ item, number: idx + 1 }))
+      .filter(({ item }) =>
+        reviewFilter === 'incorrect'
+          ? item.isCorrect === false
+          : reviewFilter === 'flagged'
+            ? flaggedIds.has(item.questionId)
+            : true
+      );
+  }, [review, reviewFilter, flaggedIds]);
 
   const requestAiExplanation = async (questionId: string) => {
     if (!user) {
@@ -200,7 +226,9 @@ export default function PracticeResultScreen() {
               ? 'Quick 10 · weak areas'
               : mode === 'barkada'
                 ? 'Barkada challenge'
-                : 'Practice quiz';
+                : mode === 'bookmark_review'
+                  ? 'Bookmarks review'
+                  : 'Practice quiz';
 
   const toggleSpeak = async (questionId: string, text: string) => {
     if (speakingId === questionId) {
@@ -212,8 +240,11 @@ export default function PracticeResultScreen() {
       await stopSpeaking();
     }
     setSpeakingId(questionId);
-    await speakText(text);
-    setSpeakingId(null);
+    const started = await speakText(text, 'en', {
+      onDone: () => setSpeakingId(null),
+      onError: () => setSpeakingId(null),
+    });
+    if (!started) setSpeakingId(null);
   };
 
   const handleCaptureReady = useCallback((capture: () => Promise<string | undefined>) => {
@@ -265,7 +296,9 @@ export default function PracticeResultScreen() {
                       ? 'Quick 10 complete!'
                       : mode === 'barkada'
                         ? 'Barkada challenge complete!'
-                        : 'Quiz complete!'}
+                        : mode === 'bookmark_review'
+                          ? 'Bookmarks review complete!'
+                          : 'Quiz complete!'}
           </Text>
           <Text style={styles.heroTitle}>
             {mode === 'diagnostic'
@@ -312,19 +345,98 @@ export default function PracticeResultScreen() {
           </View>
         ) : null}
 
+        {subjectBreakdown.length >= 2 ? (
+          <View style={styles.reviewBox}>
+            <Text style={styles.reviewTitle}>Score by subject</Text>
+            <View style={{ gap: spacing.sm, marginTop: spacing.xs }}>
+              {subjectBreakdown.map((s) => {
+                const barColor = s.pct >= 75 ? colors.success : s.pct >= 50 ? colors.flame : colors.error;
+                return (
+                  <View key={s.name}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 }}>
+                      <Text style={{ fontFamily: fonts.bodySemiBold, fontSize: 13, color: colors.text, flex: 1 }} numberOfLines={1}>
+                        {s.name}
+                      </Text>
+                      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: barColor }}>
+                        {s.correct}/{s.total} · {s.pct}%
+                      </Text>
+                    </View>
+                    <View style={{ height: 6, borderRadius: 999, backgroundColor: colors.border, overflow: 'hidden' }}>
+                      <View style={{ width: `${s.pct}%`, height: '100%', backgroundColor: barColor, borderRadius: 999 }} />
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
+            {weakestSubject ? (
+              <PrimaryButton
+                label={`Practice your weakest: ${weakestSubject.name} →`}
+                variant="outline"
+                size="lg"
+                style={{ marginTop: spacing.md }}
+                onPress={() =>
+                  router.push({
+                    pathname: '/study/[subjectSlug]',
+                    params: { subjectSlug: weakestSubject.slug!, examSlug, subjectName: weakestSubject.name },
+                  })
+                }
+              />
+            ) : null}
+          </View>
+        ) : null}
+
         {sessionId ? (
           <View style={styles.reviewBox}>
             <Text style={styles.reviewTitle}>Review answers</Text>
+            {!reviewLoading && review.length > 0 ? (
+              <View style={{ flexDirection: 'row', gap: spacing.xs, marginBottom: spacing.sm, flexWrap: 'wrap' }}>
+                {([
+                  { id: 'all' as const, label: `All (${review.length})` },
+                  { id: 'incorrect' as const, label: `Incorrect (${wrongCount})` },
+                  ...(flaggedIds.size > 0
+                    ? [{ id: 'flagged' as const, label: `Flagged (${flaggedIds.size})` }]
+                    : []),
+                ]).map((chip) => {
+                  const active = reviewFilter === chip.id;
+                  return (
+                    <Pressable
+                      key={chip.id}
+                      onPress={() => setReviewFilter(chip.id)}
+                      accessibilityRole="button"
+                      accessibilityState={{ selected: active }}
+                      style={{
+                        paddingHorizontal: spacing.md,
+                        paddingVertical: 6,
+                        borderRadius: radii.full,
+                        backgroundColor: active ? colors.primary : colors.surface,
+                        borderWidth: 1,
+                        borderColor: active ? colors.primary : colors.border,
+                      }}
+                    >
+                      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: active ? '#fff' : colors.textMuted }}>
+                        {chip.label}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            ) : null}
             {reviewLoading ? (
               <ActivityIndicator color={colors.primary} />
             ) : review.length === 0 ? (
               <Text style={styles.reviewEmpty}>No saved answers for this session.</Text>
+            ) : filteredReview.length === 0 ? (
+              <Text style={styles.reviewEmpty}>
+                {reviewFilter === 'incorrect' ? 'No incorrect answers — great job!' : 'No flagged questions.'}
+              </Text>
             ) : (
-              review.map((item, idx) => {
+              filteredReview.map(({ item, number: idx }) => {
+                // Respect the user's explanation-language preference (matches
+                // the quiz screen); fall back to whichever translation exists.
                 const explanation =
                   aiExtras[item.questionId] ??
-                  (item.explanationFil && item.explanationEn
-                    ? item.explanationEn
+                  (prefs.explanationLocale === 'fil'
+                    ? item.explanationFil ?? item.explanationEn
                     : item.explanationEn ?? item.explanationFil);
                 const open = expandedId === item.questionId;
                 const showAiCta = user && !explanation && item.isCorrect === false;
@@ -341,8 +453,11 @@ export default function PracticeResultScreen() {
                         color={item.isCorrect ? colors.success : colors.error}
                       />
                       <Text style={[styles.reviewQ, { flex: 1 }]} numberOfLines={open ? undefined : 2}>
-                        Q{idx + 1}. {item.stem}
+                        Q{idx}. {item.stem}
                       </Text>
+                      {flaggedIds.has(item.questionId) ? (
+                        <Ionicons name="flag" size={14} color={colors.accentDark} style={{ marginLeft: 4 }} />
+                      ) : null}
                       <Ionicons
                         name={open ? 'chevron-up' : 'chevron-down'}
                         size={16}
@@ -400,12 +515,13 @@ export default function PracticeResultScreen() {
                             </Text>
                           </Pressable>
                         ) : null}
-                        {user ? (
-                          <Pressable style={styles.reportBtn} onPress={() => promptReport(item.questionId)}>
-                            <Ionicons name="flag-outline" size={16} color={colors.textMuted} />
-                            <Text style={styles.reportBtnText}>Report wrong answer</Text>
-                          </Pressable>
-                        ) : null}
+                        <ReportContentButton
+                          contentType="question"
+                          contentId={item.questionId}
+                          label="Flag question"
+                          style={{ alignSelf: 'flex-start' }}
+                          onReported={() => setReportFeedback('Thank you! We will review this content issue.')}
+                        />
                       </View>
                     ) : null}
                   </Pressable>
@@ -484,19 +600,6 @@ export default function PracticeResultScreen() {
           </ShareScoreCapture>
         </View>
       ) : null}
-
-      <AppSheet
-        visible={reportSheetOpen}
-        title="Report an issue"
-        subtitle="What's wrong with this question?"
-        onClose={() => setReportSheetOpen(false)}
-        actions={[
-          { label: 'Wrong answer key', onPress: () => reportTargetId && void submitReport(reportTargetId, 'wrong_answer') },
-          { label: 'Unclear question', onPress: () => reportTargetId && void submitReport(reportTargetId, 'unclear_question'), variant: 'outline' },
-          { label: 'Typo', onPress: () => reportTargetId && void submitReport(reportTargetId, 'typo'), variant: 'outline' },
-          { label: 'Cancel', onPress: () => setReportSheetOpen(false), variant: 'ghost' },
-        ]}
-      />
 
       <AdInterstitialModal
         visible={showInterstitial}

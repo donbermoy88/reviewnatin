@@ -675,12 +675,36 @@ FROM (
     (
       'verbal-comprehension',
       'CSE Verbal — Quick formulas',
-      '📌 Main idea vs supporting detail
-📌 Synonym trap: pick the closest meaning in context
-📌 Grammar: subject-verb agreement, tense consistency
-📌 Inference: answer must be supported by the passage
+      'CSE Verbal Quick Formulas
 
-⏱ Exam tip: 45–60 sec per item — skip and return if stuck.'
+1. Reading comprehension
+• Main idea = the author’s central message, not one supporting example.
+• Supporting detail = a fact, reason, example, date, number, or explanation that proves the main idea.
+• Inference = a conclusion supported by the passage. Do not choose an answer that adds new facts.
+• Tone = the writer’s attitude. Look for word choice: critical, hopeful, neutral, persuasive, or doubtful.
+
+2. Vocabulary in context
+• Replace the word with each option and read the sentence again.
+• Choose the closest meaning in context, not always the most common dictionary meaning.
+• Watch for synonym traps: two options may be similar, but only one fits the sentence.
+• For antonyms, identify whether the word is positive, negative, formal, or informal before choosing.
+
+3. Grammar and correct usage
+• Subject-verb agreement: singular subject takes singular verb; plural subject takes plural verb.
+• “Each,” “every,” “neither,” and “either” usually take singular verbs.
+• Keep verb tense consistent unless the time clearly changes.
+• Pronouns must match their antecedents in number and person.
+
+4. Paragraph organization
+• Start with the general topic sentence.
+• Follow with details, examples, or causes.
+• End with a conclusion, result, recommendation, or summary.
+• Use clue words: first, however, therefore, as a result, finally.
+
+5. Exam pacing
+• Easy vocabulary/grammar: 30–45 seconds.
+• Reading item with passage: 60–90 seconds.
+• If stuck, eliminate two wrong choices, mark your best answer, and return later.'
     ),
     (
       'numerical-ability',

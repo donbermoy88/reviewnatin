@@ -18,8 +18,12 @@ import {
 } from '../api/quiz';
 import { fetchExamBySlug } from '../api/catalog';
 import { recordQuizOutcome } from '../api/mistakes';
+import { captureAppException, captureAppMessage } from '../monitoring/events';
 
 const QUEUE_KEY = 'reviewnatin:offline:pending-sessions:v1';
+const MAX_QUEUE_ITEMS = 50;
+const BASE_BACKOFF_MS = 30_000;
+const MAX_BACKOFF_MS = 30 * 60 * 1000;
 
 export type PendingAnswer = {
   questionId: string;
@@ -39,6 +43,9 @@ export type PendingSession = {
   answers: PendingAnswer[];
   /** ISO timestamp when the quiz was completed locally. */
   completedAt: string;
+  attemptCount?: number;
+  nextAttemptAt?: string;
+  lastError?: string;
 };
 
 async function readQueue(): Promise<PendingSession[]> {
@@ -51,19 +58,36 @@ async function readQueue(): Promise<PendingSession[]> {
 }
 
 async function writeQueue(items: PendingSession[]): Promise<void> {
-  await AsyncStorage.setItem(QUEUE_KEY, JSON.stringify(items));
+  await AsyncStorage.setItem(QUEUE_KEY, JSON.stringify(items.slice(-MAX_QUEUE_ITEMS)));
+}
+
+function nextRetryAt(attemptCount: number, now = Date.now()): string {
+  const delay = Math.min(BASE_BACKOFF_MS * 2 ** Math.max(attemptCount - 1, 0), MAX_BACKOFF_MS);
+  return new Date(now + delay).toISOString();
+}
+
+function shouldAttempt(session: PendingSession, now = Date.now()): boolean {
+  if (!session.nextAttemptAt) return true;
+  return new Date(session.nextAttemptAt).getTime() <= now;
 }
 
 export async function queuePendingSession(session: PendingSession): Promise<void> {
   const queue = await readQueue();
   // Idempotent: skip if a session with the same localId is already queued.
   if (queue.some((q) => q.localId === session.localId)) return;
-  queue.push(session);
+  captureAppMessage('offline quiz session queued', { area: 'offline_sync', action: 'queue_session' }, { mode: session.mode, itemCount: session.itemCount });
+  queue.push({
+    ...session,
+    attemptCount: session.attemptCount ?? 0,
+    nextAttemptAt: session.nextAttemptAt ?? new Date().toISOString(),
+  });
   await writeQueue(queue);
 }
 
-export async function pendingSessionCount(): Promise<number> {
-  return (await readQueue()).length;
+export async function pendingSessionCount(userId?: string): Promise<number> {
+  const queue = await readQueue();
+  if (!userId) return queue.length;
+  return queue.filter((session) => session.userId === userId).length;
 }
 
 /**
@@ -72,7 +96,7 @@ export async function pendingSessionCount(): Promise<number> {
  * attempt. Safe to call repeatedly; safe to call when offline (every
  * upload will just fail and remain queued).
  */
-export async function flushPendingAnswers(): Promise<{
+export async function flushPendingAnswers(userId: string): Promise<{
   flushed: number;
   failed: number;
   remaining: number;
@@ -85,10 +109,27 @@ export async function flushPendingAnswers(): Promise<{
   let failed = 0;
 
   for (const session of queue) {
+    if (session.userId !== userId) {
+      survivors.push(session);
+      continue;
+    }
+
+    if (!shouldAttempt(session)) {
+      survivors.push(session);
+      continue;
+    }
+
     try {
       const exam = await fetchExamBySlug(session.examSlug);
       if (!exam) {
-        survivors.push(session);
+        const attemptCount = (session.attemptCount ?? 0) + 1;
+        captureAppMessage('offline session flush failed: exam not found', { area: 'offline_sync', action: 'flush_session' }, { examSlug: session.examSlug, attemptCount }, 'warning');
+        survivors.push({
+          ...session,
+          attemptCount,
+          nextAttemptAt: nextRetryAt(attemptCount),
+          lastError: 'exam_not_found',
+        });
         failed++;
         continue;
       }
@@ -99,7 +140,14 @@ export async function flushPendingAnswers(): Promise<{
         session.mode
       );
       if (!sessionId) {
-        survivors.push(session);
+        const attemptCount = (session.attemptCount ?? 0) + 1;
+        captureAppMessage('offline session flush failed: session create returned empty', { area: 'offline_sync', action: 'flush_session' }, { mode: session.mode, attemptCount }, 'warning');
+        survivors.push({
+          ...session,
+          attemptCount,
+          nextAttemptAt: nextRetryAt(attemptCount),
+          lastError: 'session_create_failed',
+        });
         failed++;
         continue;
       }
@@ -120,15 +168,26 @@ export async function flushPendingAnswers(): Promise<{
       // Spaced repetition / mistake bank updates — best effort per answer.
       for (const a of session.answers) {
         try {
-          recordQuizOutcome(a.questionId, a.isCorrect, a.isCorrect ? undefined : a.selectedChoiceId ?? undefined);
+          await recordQuizOutcome(
+            a.questionId,
+            a.isCorrect,
+            a.isCorrect ? undefined : a.selectedChoiceId ?? undefined
+          );
         } catch {
           /* non-blocking */
         }
       }
 
       flushed++;
-    } catch {
-      survivors.push(session);
+    } catch (error) {
+      const attemptCount = (session.attemptCount ?? 0) + 1;
+      captureAppException(error, { area: 'offline_sync', action: 'flush_session' }, { mode: session.mode, attemptCount });
+      survivors.push({
+        ...session,
+        attemptCount,
+        nextAttemptAt: nextRetryAt(attemptCount),
+        lastError: error instanceof Error ? error.message : 'network_error',
+      });
       failed++;
     }
   }

@@ -1,8 +1,8 @@
 import * as AuthSession from 'expo-auth-session';
+import type { Session } from '@supabase/supabase-js';
 import { Platform } from 'react-native';
 import { supabase, isSupabaseConfigured } from '../supabase';
-import { isGoogleSignInConfigured } from './google-config';
-import { getGoogleClientId } from './google-config';
+import { getGoogleClientId, isGoogleSignInConfigured } from './google-config';
 import { getGoogleOAuthRedirectUri, requestGoogleIdToken } from './google-sign-in';
 
 export function getOAuthRedirectUrl() {
@@ -22,7 +22,11 @@ function mapGoogleProviderError(message: string): string {
 }
 
 /** Google → ID token (native) → Supabase session. Works on iOS/Android Expo Go without Safari redirects. */
-export async function signInWithGoogle(): Promise<{ error: string | null }> {
+export async function signInWithGoogle(): Promise<{
+  error: string | null;
+  cancelled?: boolean;
+  session?: Session | null;
+}> {
   if (!isSupabaseConfigured) {
     return { error: 'Supabase is not connected.' };
   }
@@ -36,18 +40,33 @@ export async function signInWithGoogle(): Promise<{ error: string | null }> {
 
   const { idToken, error } = await requestGoogleIdToken();
   if (error) return { error: mapGoogleProviderError(error) };
-  if (!idToken) return { error: null };
+  if (!idToken) return { error: null, cancelled: true };
 
-  const { error: sessionError } = await supabase.auth.signInWithIdToken({
+  const { data, error: sessionError } = await supabase.auth.signInWithIdToken({
     provider: 'google',
     token: idToken,
   });
 
   if (sessionError) return { error: mapGoogleProviderError(sessionError.message) };
-  return { error: null };
+  return { error: null, session: data.session };
 }
 
-export async function signInWithApple(): Promise<{ error: string | null }> {
+/** Apple only returns the user's name on the FIRST authorization — capture it then. */
+function formatAppleFullName(fullName: {
+  givenName?: string | null;
+  familyName?: string | null;
+} | null): string | null {
+  if (!fullName) return null;
+  const name = [fullName.givenName, fullName.familyName].filter(Boolean).join(' ').trim();
+  return name || null;
+}
+
+export async function signInWithApple(): Promise<{
+  error: string | null;
+  cancelled?: boolean;
+  fullName?: string | null;
+  session?: Session | null;
+}> {
   if (!isSupabaseConfigured) {
     return { error: 'Supabase is not connected.' };
   }
@@ -69,16 +88,20 @@ export async function signInWithApple(): Promise<{ error: string | null }> {
       return { error: 'No identity token received from Apple.' };
     }
 
-    const { error } = await supabase.auth.signInWithIdToken({
+    const { data, error } = await supabase.auth.signInWithIdToken({
       provider: 'apple',
       token: credential.identityToken,
     });
 
     if (error) return { error: error.message };
-    return { error: null };
+    return {
+      error: null,
+      fullName: formatAppleFullName(credential.fullName),
+      session: data.session,
+    };
   } catch (e: unknown) {
     const err = e as { code?: string };
-    if (err.code === 'ERR_REQUEST_CANCELED') return { error: null };
+    if (err.code === 'ERR_REQUEST_CANCELED') return { error: null, cancelled: true };
     return { error: 'Unable to sign in with Apple.' };
   }
 }

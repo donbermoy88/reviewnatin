@@ -3,7 +3,7 @@
  * Build ReviewNatin for iOS Simulator (works around expo run:ios signing bug on Xcode 26).
  * Usage: npm run ios:build-sim
  */
-import { execSync, spawnSync } from 'node:child_process';
+import { execSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -19,15 +19,33 @@ function sh(cmd, opts = {}) {
 function pickSimulator() {
   const out = execSync('xcrun simctl list devices available', { encoding: 'utf8' });
   const lines = out.split('\n');
-  let runtime = '';
+  const candidates = [];
+  let currentRuntime = null;
+
   for (const line of lines) {
-    if (line.includes('iOS 26.5')) runtime = '26.5';
-    if (runtime && line.includes('iPhone') && line.includes('(Shutdown)') && !line.includes('Pro Max')) {
+    const runtimeMatch = line.match(/^-- iOS ([0-9.]+) --$/);
+    if (runtimeMatch) {
+      currentRuntime = runtimeMatch[1];
+      continue;
+    }
+
+    if (
+      currentRuntime &&
+      line.includes('iPhone') &&
+      line.includes('(Shutdown)') &&
+      !line.includes('Pro Max')
+    ) {
       const m = line.match(/\(([0-9A-F-]{36})\)/);
-      if (m) return m[1];
+      if (m) candidates.push({ runtime: currentRuntime, udid: m[1] });
     }
   }
-  throw new Error('No iOS 26.5 iPhone simulator found. Run: xcodebuild -downloadPlatform iOS');
+
+  candidates.sort((a, b) =>
+    b.runtime.localeCompare(a.runtime, undefined, { numeric: true, sensitivity: 'base' })
+  );
+
+  if (candidates[0]) return candidates[0].udid;
+  throw new Error('No available iPhone simulator found. Run: xcodebuild -downloadPlatform iOS');
 }
 
 const udid = process.env.IOS_SIM_UDID || pickSimulator();

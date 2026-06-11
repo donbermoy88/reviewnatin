@@ -99,7 +99,7 @@ const QUESTIONS = [
     choices: [
       { id: 'a', text: '12' },
       { id: 'b', text: '24' },
-      { id: 'c', text: '24' },
+      { id: 'c', text: '36' },
       { id: 'd', text: '300' },
     ],
     correct: 'b',

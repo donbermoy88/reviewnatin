@@ -1,4 +1,6 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { shuffleArray } from '../shuffle';
+import { cachedJson } from '../cache/json-cache';
 
 export type Flashcard = {
   id: string;
@@ -37,12 +39,43 @@ function mapRow(row: FlashcardRow): Flashcard {
 export async function fetchDueFlashcardCount(examSlug: string): Promise<number> {
   if (!isSupabaseConfigured) return 0;
 
-  const { data, error } = await supabase.rpc('get_due_flashcard_count', {
-    p_exam_slug: examSlug,
-  });
+  return cachedJson(`due-flashcard-count:${examSlug}`, async () => {
+    const { data, error } = await supabase.rpc('get_due_flashcard_count', {
+      p_exam_slug: examSlug,
+    });
 
-  if (error) return 0;
-  return Number(data ?? 0);
+    if (error) return 0;
+    return Number(data ?? 0);
+  }, { ttlMs: 2 * 60 * 1000, staleTtlMs: 24 * 60 * 60 * 1000 });
+}
+
+export async function fetchSubjectFlashcardCount(
+  examSlug: string,
+  subjectSlug: string
+): Promise<number> {
+  if (!isSupabaseConfigured) return 0;
+
+  return cachedJson(`subject-flashcard-count:${examSlug}:${subjectSlug}`, async () => {
+    const { count, error } = await supabase
+      .from('flashcards')
+      .select(
+        `
+        id,
+        topics!inner (
+          subject_areas!inner (
+            slug,
+            exam_types!inner ( slug )
+          )
+        )
+      `,
+        { count: 'exact', head: true }
+      )
+      .eq('topics.subject_areas.exam_types.slug', examSlug)
+      .eq('topics.subject_areas.slug', subjectSlug);
+
+    if (error) throw error;
+    return count ?? 0;
+  }, { ttlMs: 10 * 60 * 1000, staleTtlMs: 7 * 24 * 60 * 60 * 1000 });
 }
 
 export async function fetchDueFlashcards(
@@ -51,16 +84,18 @@ export async function fetchDueFlashcards(
 ): Promise<Flashcard[]> {
   if (!isSupabaseConfigured) return [];
 
+  const limit = Math.max(options?.limit ?? 20, 1);
+  const fetchLimit = Math.min(limit * 4, 200);
   const { data, error } = await supabase.rpc('get_due_flashcards', {
     p_exam_slug: examSlug,
-    p_limit: options?.limit ?? 20,
+    p_limit: fetchLimit,
     p_topic_slug: options?.topicSlug ?? null,
     p_subject_slug: options?.subjectSlug ?? null,
   });
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<{
+  const cards = ((data ?? []) as {
     id: string;
     front: string;
     back: string;
@@ -68,7 +103,7 @@ export async function fetchDueFlashcards(
     topic_name: string;
     subject_name: string;
     repetitions: number;
-  }>).map((row) => ({
+  }[]).map((row) => ({
     id: row.id,
     front: row.front,
     back: row.back,
@@ -77,6 +112,7 @@ export async function fetchDueFlashcards(
     topicSlug: row.topic_slug,
     repetitions: row.repetitions,
   }));
+  return shuffleArray(cards).slice(0, limit);
 }
 
 export async function reviewFlashcard(
@@ -104,10 +140,16 @@ export async function reviewFlashcard(
  * the `!inner` join on `exam_types.slug`, then apply LIMIT, so we always
  * return up to `limit` cards FOR THAT EXAM.
  */
-export async function fetchFlashcardsByExam(examSlug: string, limit = 50): Promise<Flashcard[]> {
+export async function fetchFlashcardsByExam(
+  examSlug: string,
+  limit = 50,
+  subjectSlug?: string
+): Promise<Flashcard[]> {
   if (!isSupabaseConfigured) return [];
 
-  const { data, error } = await supabase
+  const safeLimit = Math.max(limit, 1);
+  const fetchLimit = Math.min(safeLimit * 4, 200);
+  let query = supabase
     .from('flashcards')
     .select(
       `
@@ -124,12 +166,17 @@ export async function fetchFlashcardsByExam(examSlug: string, limit = 50): Promi
       )
     `
     )
-    .eq('topics.subject_areas.exam_types.slug', examSlug)
-    .limit(limit);
+    .eq('topics.subject_areas.exam_types.slug', examSlug);
+
+  if (subjectSlug) {
+    query = query.eq('topics.subject_areas.slug', subjectSlug);
+  }
+
+  const { data, error } = await query.limit(fetchLimit);
 
   if (error) throw error;
 
-  return ((data ?? []) as unknown as FlashcardRow[]).map(mapRow);
+  return shuffleArray(((data ?? []) as unknown as FlashcardRow[]).map(mapRow)).slice(0, safeLimit);
 }
 
 /**
@@ -162,5 +209,5 @@ export async function fetchFlashcardsByTopic(topicSlug: string, examSlug: string
 
   if (error) throw error;
 
-  return ((data ?? []) as unknown as FlashcardRow[]).map(mapRow);
+  return shuffleArray(((data ?? []) as unknown as FlashcardRow[]).map(mapRow));
 }

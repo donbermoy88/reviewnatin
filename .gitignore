@@ -14,3 +14,7 @@ apps/admin/.env.local
 .DS_Store
 supabase/.branches
 supabase/.temp
+playwright-report/
+test-results/
+apps/admin/playwright-report/
+apps/admin/test-results/

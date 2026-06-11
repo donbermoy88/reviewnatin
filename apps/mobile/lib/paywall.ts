@@ -1,20 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { MockExam } from './api/mock-exams';
+import { fetchUsageLimits } from './api/iap';
 
 export const FREE_DAILY_QUESTIONS = 20;
 export const FREE_MISTAKE_DAYS = 7;
 export const FREE_MOCK_PREVIEW_ITEMS = 10;
-
-const MINI_MOCK_WEEK_KEY = 'reviewnatin:mini-mock-week';
-
-function currentIsoWeek(): string {
-  const d = new Date();
-  const day = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - day);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const week = Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
-  return `${d.getUTCFullYear()}-W${week}`;
-}
 
 export type MockAccess = 'full' | 'preview' | 'weekly_limit' | 'premium_required';
 
@@ -26,13 +15,16 @@ export function isFullMock(mock: MockExam): boolean {
   return mock.itemCount > FREE_MOCK_PREVIEW_ITEMS && !isMiniMock(mock);
 }
 
-export async function hasUsedMiniMockThisWeek(): Promise<boolean> {
-  const stored = await AsyncStorage.getItem(MINI_MOCK_WEEK_KEY);
-  return stored === currentIsoWeek();
-}
-
-export async function recordMiniMockUsed(): Promise<void> {
-  await AsyncStorage.setItem(MINI_MOCK_WEEK_KEY, currentIsoWeek());
+/**
+ * Whether the free-tier user may start a mini-mock this week. Authoritative
+ * source is the server (`get_usage_limits.mini_mock_available`, computed from
+ * completed quiz_sessions) — not a local counter that resets on reinstall.
+ * When the server is unreachable we allow the attempt; `get_mock_exam_questions`
+ * still enforces the limit and the quiz screen handles the rejection.
+ */
+export async function isMiniMockAvailable(examSlug: string): Promise<boolean> {
+  const limits = await fetchUsageLimits(examSlug);
+  return limits ? limits.miniMockAvailable : true;
 }
 
 export function getMockAccess(mock: MockExam, isPremium: boolean): MockAccess {

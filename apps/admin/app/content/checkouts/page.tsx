@@ -1,7 +1,6 @@
 'use client';
 
-import { AdminNav } from '@/components/admin-nav';
-import Link from 'next/link';
+import { AdminCard, AdminShell } from '@/components/admin-shell';
 import { useCallback, useEffect, useState } from 'react';
 
 type CheckoutRow = {
@@ -81,21 +80,14 @@ export default function CheckoutsAdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="mx-auto max-w-4xl">
-        <AdminNav />
-        <Link href="/" className="text-sm font-medium text-blue-600">
-          ← Admin home
-        </Link>
-        <h1 className="mt-4 text-2xl font-bold text-slate-900">Web checkouts</h1>
-        <p className="mt-2 text-sm text-slate-600">
-          GCash / Maya payments awaiting manual verification. Mark paid after confirming transfer.
-        </p>
-
+    <AdminShell
+      title="Web Checkouts"
+      description="GCash and Maya payments awaiting manual verification. Mark paid only after confirming transfer."
+    >
         {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
         {message ? <p className="mt-4 text-sm text-green-700">{message}</p> : null}
 
-        <div className="mt-6 overflow-hidden rounded-xl border bg-white shadow-sm">
+        <AdminCard className="mt-6 overflow-hidden p-0">
           {loading ? (
             <p className="px-4 py-8 text-sm text-slate-500">Loading…</p>
           ) : rows.length === 0 ? (
@@ -131,7 +123,7 @@ export default function CheckoutsAdminPage() {
                           type="button"
                           disabled={fulfilling === row.reference_code}
                           onClick={() => fulfill(row.reference_code)}
-                          className="rounded-md bg-green-600 px-3 py-1 text-xs font-semibold text-white hover:bg-green-700 disabled:opacity-50"
+                          className="rounded-xl bg-green-600 px-3 py-2 text-xs font-black text-white hover:bg-green-700 disabled:opacity-50"
                         >
                           {fulfilling === row.reference_code ? '…' : 'Mark paid'}
                         </button>
@@ -144,8 +136,7 @@ export default function CheckoutsAdminPage() {
               </tbody>
             </table>
           )}
-        </div>
-      </div>
-    </div>
+        </AdminCard>
+    </AdminShell>
   );
 }

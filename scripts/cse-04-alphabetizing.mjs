@@ -46,7 +46,7 @@ const QUESTIONS = [
   },
   {
     stem: 'Arrange in correct alphabetical order:\nA. Presidential Commission on Good Governance\nB. Presidential Commission to Fight Poverty\nC. Presidential Commission for the Urban Poor\nD. Presidential Commission on Human Rights',
-    choices: [{ id: 'a', text: 'C-B-A-D' }, { id: 'b', text: 'C-B-A-D' }, { id: 'c', text: 'C-A-B-D' }, { id: 'd', text: 'C-A-D-B' }],
+    choices: [{ id: 'a', text: 'C-B-A-D' }, { id: 'b', text: 'A-C-D-B' }, { id: 'c', text: 'C-A-B-D' }, { id: 'd', text: 'C-A-D-B' }],
     correct: 'd', difficulty: 2,
     explanation_en: 'After "Presidential Commission": "for" (C) < "on Good" (A) < "on Human" (D) < "to" (B). Order: C, A, D, B → CADB.',
     explanation_fil: '"for" < "on Good" < "on Human" < "to". Pagkakasunod: C, A, D, B.',

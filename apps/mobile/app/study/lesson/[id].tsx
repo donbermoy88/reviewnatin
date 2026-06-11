@@ -2,9 +2,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Pressable, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PrimaryButton } from '../../../components/primary-button';
+import { ReportContentButton } from '../../../components/report-content-button';
+import { RichText } from '../../../components/rich-text';
 import { useAppTheme } from '../../../hooks/use-app-theme';
 import { createStudyStyles } from '../../../lib/themed-styles';
 import { fetchReviewMaterialById } from '../../../lib/api/review-materials';
@@ -34,6 +36,7 @@ export default function LessonReaderScreen() {
   const [topicName, setTopicName] = useState('');
   const [subjectName, setSubjectName] = useState('');
   const [speaking, setSpeaking] = useState(false);
+  const [ttsStarting, setTtsStarting] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
   const [isOffline, setIsOffline] = useState(false);
 
@@ -81,11 +84,46 @@ export default function LessonReaderScreen() {
     } finally {
       setLoading(false);
     }
-  }, [id, paramExamSlug, offlineParam, user?.id]);
+  }, [id, paramExamSlug, offlineParam, user]);
 
   useEffect(() => {
     void load();
   }, [load]);
+
+  useEffect(() => {
+    return () => {
+      void stopSpeaking();
+    };
+  }, []);
+
+  const toggleSpeech = useCallback(async () => {
+    if (ttsStarting) return;
+
+    if (speaking) {
+      setTtsStarting(true);
+      try {
+        await stopSpeaking();
+      } finally {
+        setSpeaking(false);
+        setTtsStarting(false);
+      }
+      return;
+    }
+
+    setTtsStarting(true);
+    const started = await speakText(body, 'en', {
+      onDone: () => setSpeaking(false),
+      onError: () => {
+        setSpeaking(false);
+        Alert.alert('Audio unavailable', 'Text-to-speech could not start on this device. Please try again.');
+      },
+    });
+    setTtsStarting(false);
+    setSpeaking(started);
+    if (!started) {
+      Alert.alert('Audio unavailable', 'Text-to-speech could not start on this device. Please try again.');
+    }
+  }, [body, speaking, ttsStarting]);
 
   if (loading) {
     return (
@@ -148,24 +186,20 @@ export default function LessonReaderScreen() {
           </View>
           {canUseTts() && body ? (
             <PrimaryButton
-              label={speaking ? 'Stop audio' : 'Listen · TTS'}
+              label={ttsStarting ? 'Starting audio...' : speaking ? 'Stop audio' : 'Listen · TTS'}
               variant="outline"
               icon={speaking ? 'stop-circle-outline' : 'volume-high-outline'}
-              onPress={() => {
-                void (async () => {
-                  if (speaking) {
-                    await stopSpeaking();
-                    setSpeaking(false);
-                    return;
-                  }
-                  setSpeaking(true);
-                  await speakText(body);
-                  setSpeaking(false);
-                })();
-              }}
+              disabled={ttsStarting}
+              onPress={() => void toggleSpeech()}
               style={{ marginTop: spacing.md, alignSelf: 'flex-start' }}
             />
           ) : null}
+          <ReportContentButton
+            contentType="review_material"
+            contentId={id}
+            label="Flag this lesson"
+            style={{ marginTop: spacing.sm, alignSelf: 'flex-start' }}
+          />
         </LinearGradient>
 
         <View style={[styles.body, { paddingTop: spacing.lg }]}>
@@ -178,9 +212,7 @@ export default function LessonReaderScreen() {
               borderColor: colors.border,
             }}
           >
-            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 15, color: colors.text, lineHeight: 24 }}>
-              {body}
-            </Text>
+            <RichText content={body} fontSize={15} color={colors.text} />
           </View>
         </View>
       </ScrollView>

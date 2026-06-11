@@ -49,9 +49,12 @@ console.log(`Creating/promoting admin: ${email}`);
 
 // Invite user — they'll get an email to set their password
 const { data: invite, error: inviteErr } = await supabase.auth.admin.inviteUserByEmail(email);
-if (inviteErr && !inviteErr.message.includes('already registered')) {
+if (inviteErr && !inviteErr.message.toLowerCase().includes('already been registered')) {
   console.error('Invite error:', inviteErr.message);
   process.exit(1);
+}
+if (inviteErr) {
+  console.log('User already registered; promoting existing account.');
 }
 
 // Get the user ID (existing or just created)

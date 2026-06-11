@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { ReportContentButton } from '../../components/report-content-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import {
   fetchDueFlashcards,
@@ -24,6 +25,7 @@ import {
 import { getOfflineFlashcards } from '../../lib/offline/pack';
 import { completePasaPathTask } from '../../lib/api/pasapath';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
+import { shuffleArray } from '../../lib/shuffle';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 
@@ -70,22 +72,22 @@ export default function FlashcardsScreen() {
         const offline = await getOfflineFlashcards(slug);
         setOfflineMode(true);
         setCards(
-          offline.slice(0, limit).map((c) => ({
+          shuffleArray(offline).slice(0, limit).map((c) => ({
             id: c.id, front: c.front, back: c.back,
             topicName: c.topic_name, subjectName: c.subject_name, topicSlug: c.topic_slug,
           }))
         );
       } else if (user) {
         const due = await fetchDueFlashcards(slug, { limit, topicSlug: params.topicSlug, subjectSlug: params.subjectSlug });
-        setCards(due.length > 0 ? due : await fetchFlashcardsByExam(slug, limit));
+        setCards(due.length > 0 ? due : await fetchFlashcardsByExam(slug, limit, params.subjectSlug));
       } else {
-        setCards(await fetchFlashcardsByExam(slug, limit));
+        setCards(await fetchFlashcardsByExam(slug, limit, params.subjectSlug));
       }
     } catch {
       const offline = await getOfflineFlashcards(slug);
       if (offline.length) {
         setOfflineMode(true);
-        setCards(offline.slice(0, limit).map((c) => ({
+        setCards(shuffleArray(offline).slice(0, limit).map((c) => ({
           id: c.id, front: c.front, back: c.back,
           topicName: c.topic_name, subjectName: c.subject_name, topicSlug: c.topic_slug,
         })));
@@ -93,7 +95,7 @@ export default function FlashcardsScreen() {
     } finally {
       setLoading(false);
     }
-  }, [user?.id, params.examSlug, params.topicSlug, params.subjectSlug, limit]);
+  }, [user, params.examSlug, params.mode, params.topicSlug, params.subjectSlug, limit]);
 
   useEffect(() => { void load(); }, [load]);
 
@@ -319,6 +321,14 @@ export default function FlashcardsScreen() {
               {card.subjectName?.toUpperCase() ?? 'FLASHCARD'}
             </Text>
           </View>
+        </View>
+        <View style={{ alignItems: 'flex-end', marginBottom: spacing.sm }}>
+          <ReportContentButton
+            contentType="flashcard"
+            contentId={card.id}
+            label="Flag card"
+            compact
+          />
         </View>
 
         {/* 3D Flip Card */}

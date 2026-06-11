@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
@@ -37,7 +37,7 @@ function CrownIcon({ color = '#FFC928' }: { color?: string }) {
 
 /** Podium slot — design-spec version */
 function PodiumSlot({ entry, position, theme }: { entry: LeaderboardEntry; position: 1 | 2 | 3; theme: ReturnType<typeof useAppTheme> }) {
-  const { colors, fonts, spacing } = theme;
+  const { colors, fonts } = theme;
   const isFirst = position === 1;
   const avatarSize = isFirst ? 68 : 54;
   const avatarColor = position === 1 ? colors.primary : position === 2 ? '#7B2CBF' : colors.accentDark;
@@ -89,7 +89,7 @@ export default function LeaderboardScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, fonts, gradients, spacing, radii } = theme;
+  const { colors, fonts, gradients, spacing } = theme;
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
@@ -171,6 +171,8 @@ export default function LeaderboardScreen() {
               <Pressable
                 key={p.id}
                 onPress={() => { setLoading(true); setPeriod(p.id); }}
+                accessibilityRole="button"
+                accessibilityLabel={`Show ${p.label.toLowerCase()} leaderboard`}
                 style={{
                   flex: 1, paddingVertical: 8, borderRadius: 10, alignItems: 'center',
                   backgroundColor: period === p.id ? '#fff' : 'transparent',

@@ -3,13 +3,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import { AppSheet } from '../../components/app-sheet';
-import { Alert, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ManagePlusCard } from '../../components/manage-plus-card';
 import { Pill } from '../../components/pill';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createSettingsStyles } from '../../lib/themed-styles';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
-import { LEGAL, SITE_URL, DISCLAIMERS } from '@reviewnatin/shared';
+import { DEFAULT_EXAM_SLUG, DISCLAIMERS, LEGAL, SITE_URL } from '@reviewnatin/shared';
 import { deleteUserAccount } from '../../lib/auth/delete-account';
 import { clearOnboarding } from '../../lib/onboarding-store';
 import { signOutAndRedirect } from '../../lib/auth/sign-out';
@@ -19,14 +20,19 @@ import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
 import { useOnboardingGate } from '../../providers/onboarding-gate';
 import { useUserProfile } from '../../hooks/use-user-profile';
+import { useNetworkStatus } from '../../hooks/use-network-status';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
-import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import {
   deleteOfflinePack,
   downloadOfflinePack,
   getOfflinePackMeta,
   type OfflinePackMeta,
 } from '../../lib/offline/pack';
+import {
+  flushOfflineSync,
+  getPendingOfflineSyncCount,
+  type OfflineSyncCounts,
+} from '../../lib/offline/sync-status';
 import { formatEntitlementSummary } from '../../lib/entitlements/format';
 
 type SettingsStyles = ReturnType<typeof createSettingsStyles>;
@@ -79,12 +85,15 @@ export default function SettingsScreen() {
   const { isPremium, entitlements, restoreStorePurchases } = useEntitlements();
   const { refresh: refreshOnboarding } = useOnboardingGate();
   const { displayName, initials } = useUserProfile('Guest');
+  const { isOnline, hasProbed } = useNetworkStatus();
   const premiumActive = isPremium();
   const entitlementSummary = formatEntitlementSummary(entitlements);
   const [restoring, setRestoring] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [offlineMeta, setOfflineMeta] = useState<OfflinePackMeta | null>(null);
   const [offlineBusy, setOfflineBusy] = useState(false);
+  const [syncingOffline, setSyncingOffline] = useState(false);
+  const [syncCounts, setSyncCounts] = useState<OfflineSyncCounts>({ answerSessions: 0, contentReports: 0, total: 0 });
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [toast, setToast] = useState<string | null>(null);
   const [sheet, setSheet] = useState<
@@ -107,6 +116,72 @@ export default function SettingsScreen() {
   useEffect(() => {
     void refreshOfflineMeta();
   }, [refreshOfflineMeta]);
+
+  const refreshSyncCounts = useCallback(async () => {
+    setSyncCounts(await getPendingOfflineSyncCount(user?.id));
+  }, [user?.id]);
+
+  useEffect(() => {
+    let alive = true;
+
+    const load = async () => {
+      const counts = await getPendingOfflineSyncCount(user?.id);
+      if (alive) setSyncCounts(counts);
+    };
+
+    void load();
+    const interval = setInterval(() => void load(), 15_000);
+    return () => {
+      alive = false;
+      clearInterval(interval);
+    };
+  }, [user?.id]);
+
+  const syncStatusCopy = useMemo(() => {
+    if (!user) return 'Sign in to sync saved progress and reports';
+    if (!hasProbed) return 'Checking connection…';
+    if (!isOnline) {
+      return syncCounts.total > 0
+        ? `${syncCounts.total} item${syncCounts.total === 1 ? '' : 's'} waiting · syncs when online`
+        : 'Offline · no pending study data';
+    }
+    if (syncingOffline) return 'Syncing saved progress and reports…';
+    if (syncCounts.total === 0) return 'All study progress and reports are synced';
+
+    const parts = [];
+    if (syncCounts.answerSessions > 0) {
+      parts.push(`${syncCounts.answerSessions} quiz session${syncCounts.answerSessions === 1 ? '' : 's'}`);
+    }
+    if (syncCounts.contentReports > 0) {
+      parts.push(`${syncCounts.contentReports} flagged question${syncCounts.contentReports === 1 ? '' : 's'}`);
+    }
+    return `${parts.join(' · ')} waiting to sync`;
+  }, [hasProbed, isOnline, syncCounts.answerSessions, syncCounts.contentReports, syncCounts.total, syncingOffline, user]);
+
+  const handleManualOfflineSync = async () => {
+    if (!user || !hasProbed || !isOnline || syncCounts.total === 0 || syncingOffline) return;
+
+    setSyncingOffline(true);
+    try {
+      const result = await flushOfflineSync(user.id);
+      await refreshSyncCounts();
+      if (result.remaining > 0 || result.failed > 0) {
+        setToast(
+          `${result.flushed} synced. ${result.remaining} item${result.remaining === 1 ? '' : 's'} still waiting for the next retry.`
+        );
+      } else {
+        setToast(`${result.flushed} offline item${result.flushed === 1 ? '' : 's'} synced successfully.`);
+      }
+    } catch {
+      setSheet({
+        kind: 'error',
+        title: 'Sync failed',
+        message: 'Your offline data is still saved on this device. Try again when the connection is stable.',
+      });
+    } finally {
+      setSyncingOffline(false);
+    }
+  };
 
   const handleOfflinePack = async () => {
     if (!premiumActive) {
@@ -229,12 +304,21 @@ export default function SettingsScreen() {
                 <Ionicons name="flash" size={22} color={colors.primaryDark} />
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={styles.premiumTitle}>Upgrade to Premium</Text>
-                <Text style={styles.premiumSub}>Unlimited mocks · AI tutor · No ads</Text>
+                <Text style={styles.premiumTitle}>{premiumActive ? 'ReviewNatin Plus active' : 'Upgrade to Premium'}</Text>
+                <Text style={styles.premiumSub}>
+                  {premiumActive ? 'Manage plan, renewal, and cancellation below' : 'From ₱159/mo · best value 6 months'}
+                </Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#fff" />
             </LinearGradient>
           </Pressable>
+          <ManagePlusCard
+            entitlements={entitlements}
+            restoring={restoring}
+            onRestore={() => void handleRestorePurchases()}
+            onViewPlans={() => router.push('/subscribe')}
+            compact
+          />
           {entitlementSummary ? (
             <Text style={styles.entitlementNote}>{entitlementSummary}</Text>
           ) : entitlements.length > 0 ? (
@@ -344,6 +428,33 @@ export default function SettingsScreen() {
             <SettingsRow
               styles={styles}
               colors={colors}
+              icon={<Ionicons name="document-text-outline" size={18} color={colors.primary} />}
+              label="Study notes"
+              sub="Your private notes — formulas, mnemonics, reminders"
+              onPress={() => router.push('/notes')}
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
+            <SettingsRow
+              styles={styles}
+              colors={colors}
+              icon={<Ionicons name="timer-outline" size={18} color={colors.primary} />}
+              label="Focus timer"
+              sub="Distraction-free study sessions"
+              onPress={() => router.push('/focus')}
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
+            <SettingsRow
+              styles={styles}
+              colors={colors}
+              icon={<Ionicons name="snow-outline" size={18} color={colors.primary} />}
+              label="Streak freeze"
+              sub="Protect your streak from a missed day"
+              onPress={() => router.push('/streak-freeze')}
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
+            <SettingsRow
+              styles={styles}
+              colors={colors}
               icon={<Ionicons name="chatbubbles-outline" size={18} color={colors.primary} />}
               label="AI tutor"
               sub={premiumActive ? 'Chat about weak topics & study plan' : 'Premium feature'}
@@ -373,6 +484,37 @@ export default function SettingsScreen() {
               }
               onPress={handleOfflinePack}
               right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
+            <SettingsRow
+              styles={styles}
+              colors={colors}
+              icon={
+                syncingOffline ? (
+                  <ActivityIndicator size="small" color={colors.primary} />
+                ) : (
+                  <Ionicons
+                    name={syncCounts.total > 0 ? 'cloud-upload-outline' : 'cloud-done-outline'}
+                    size={18}
+                    color={syncCounts.total > 0 ? colors.primary : colors.success}
+                  />
+                )
+              }
+              label="Offline sync"
+              sub={syncStatusCopy}
+              onPress={user && hasProbed && isOnline && syncCounts.total > 0 && !syncingOffline ? handleManualOfflineSync : undefined}
+              right={
+                user && hasProbed && isOnline && syncCounts.total > 0 ? (
+                  <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 12, color: colors.primary }}>
+                    {syncingOffline ? 'Syncing' : 'Sync now'}
+                  </Text>
+                ) : (
+                  <Ionicons
+                    name={isOnline ? 'checkmark-circle-outline' : 'cloud-offline-outline'}
+                    size={16}
+                    color={isOnline ? colors.success : colors.textLight}
+                  />
+                )
+              }
             />
             {offlineMeta ? (
               <>
@@ -563,7 +705,7 @@ export default function SettingsScreen() {
 
       <AppSheet
         visible={sheet === 'premium_offline'}
-        title="Exam Pass required"
+        title="ReviewNatin Plus required"
         subtitle="Offline packs are available for premium subscribers only."
         onClose={() => setSheet(null)}
         actions={[

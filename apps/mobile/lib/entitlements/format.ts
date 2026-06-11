@@ -25,8 +25,8 @@ export function formatEntitlementSummary(entitlements: UserEntitlement[]): strin
   }, null as number | null);
 
   if (nearest != null) {
-    return `Exam Pass · ${nearest} day${nearest === 1 ? '' : 's'} left`;
+    return `ReviewNatin Plus · ${nearest} day${nearest === 1 ? '' : 's'} left`;
   }
 
-  return `Exam Pass · ${passes.length} active`;
+  return `ReviewNatin Plus · ${passes.length} active`;
 }
