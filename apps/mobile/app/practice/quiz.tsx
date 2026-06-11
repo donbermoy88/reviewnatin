@@ -595,15 +595,41 @@ export default function PracticeQuizScreen() {
     }
   }, [isStrictExam, isTimed, timeLeft, questions.length, finishQuiz]);
 
+  /**
+   * Submitting a strict exam routes through here: warn when questions are still
+   * unanswered or flagged for review so the answer-sheet + flag states actually
+   * gate submission. (Timer expiry submits directly without this prompt.)
+   */
+  const confirmSubmit = useCallback(() => {
+    setNavigatorOpen(false);
+    const unanswered = questions.length - Object.keys(answersByIndex).length;
+    const flagged = flaggedIndices.size;
+    if (unanswered === 0 && flagged === 0) {
+      void finishQuiz();
+      return;
+    }
+    const parts: string[] = [];
+    if (unanswered > 0) parts.push(`${unanswered} unanswered`);
+    if (flagged > 0) parts.push(`${flagged} flagged for review`);
+    Alert.alert(
+      'Submit exam?',
+      `You still have ${parts.join(' and ')}. Go back to review them, or submit now.`,
+      [
+        { text: 'Keep reviewing', style: 'cancel' },
+        { text: 'Submit anyway', style: 'destructive', onPress: () => void finishQuiz() },
+      ]
+    );
+  }, [questions.length, answersByIndex, flaggedIndices, finishQuiz]);
+
   const goNext = async () => {
     // Strict exams (mock/board): answer-sheet model — selection is already saved
     // by pickChoice. Advance freely (the navigator allows revisiting); submit on
-    // the last item.
+    // the last item (with an unanswered/flagged confirmation).
     if (isStrictExam) {
       if (index < questions.length - 1) {
         jumpTo(index + 1);
       } else {
-        await finishQuiz();
+        confirmSubmit();
       }
       return;
     }
@@ -1004,10 +1030,7 @@ export default function PracticeQuizScreen() {
           flaggedIndices={flaggedIndices}
           onJump={jumpTo}
           onClose={() => setNavigatorOpen(false)}
-          onSubmit={() => {
-            setNavigatorOpen(false);
-            void finishQuiz();
-          }}
+          onSubmit={confirmSubmit}
         />
       ) : null}
     </View>

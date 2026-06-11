@@ -19,6 +19,15 @@ type Props = {
 
 type Section = { name: string; items: number[] };
 
+/** First index after `start` (wrapping) that matches `pred`, or -1 if none. */
+function findNext(total: number, start: number, pred: (i: number) => boolean): number {
+  for (let k = 1; k <= total; k++) {
+    const i = (start + k) % total;
+    if (pred(i)) return i;
+  }
+  return -1;
+}
+
 /** Group questions into subject sections, preserving first-appearance order. */
 function buildSections(questions: Question[]): Section[] {
   const sections: Section[] = [];
@@ -57,6 +66,8 @@ export function QuestionNavigator({
   const sections = useMemo(() => buildSections(questions), [questions]);
   const answeredCount = answeredIndices.size;
   const flaggedCount = flaggedIndices.size;
+  const nextUnanswered = findNext(questions.length, currentIndex, (i) => !answeredIndices.has(i));
+  const nextFlagged = findNext(questions.length, currentIndex, (i) => flaggedIndices.has(i));
 
   return (
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
@@ -162,6 +173,53 @@ export function QuestionNavigator({
               </View>
             ))}
           </ScrollView>
+
+          {nextUnanswered >= 0 || nextFlagged >= 0 ? (
+            <View style={{ flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm }}>
+              {nextUnanswered >= 0 ? (
+                <Pressable
+                  onPress={() => onJump(nextUnanswered)}
+                  accessibilityRole="button"
+                  accessibilityLabel="Go to next unanswered question"
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 6,
+                    paddingVertical: spacing.sm,
+                    borderRadius: radii.lg,
+                    borderWidth: 1,
+                    borderColor: 'rgba(255,255,255,0.4)',
+                  }}
+                >
+                  <Ionicons name="arrow-forward-circle-outline" size={16} color="#fff" />
+                  <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: '#fff' }}>Next unanswered</Text>
+                </Pressable>
+              ) : null}
+              {nextFlagged >= 0 ? (
+                <Pressable
+                  onPress={() => onJump(nextFlagged)}
+                  accessibilityRole="button"
+                  accessibilityLabel="Go to next flagged question"
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 6,
+                    paddingVertical: spacing.sm,
+                    borderRadius: radii.lg,
+                    borderWidth: 1,
+                    borderColor: 'rgba(255,255,255,0.4)',
+                  }}
+                >
+                  <Ionicons name="flag" size={15} color={colors.accent} />
+                  <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: '#fff' }}>Next flagged</Text>
+                </Pressable>
+              ) : null}
+            </View>
+          ) : null}
 
           <PrimaryButton
             label={`Submit exam (${answeredCount}/${questions.length} answered)`}
