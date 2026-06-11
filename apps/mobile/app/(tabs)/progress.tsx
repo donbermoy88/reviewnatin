@@ -98,6 +98,20 @@ export default function ProfileScreen() {
   const [subjectTrends, setSubjectTrends] = useState<SubjectTrend[]>([]);
   const [weeklySummary, setWeeklySummary] = useState<WeeklySummary | null>(null);
 
+  // Overall mock-score trend (derived from mock history; no extra fetch).
+  const overallTrend = useMemo(() => {
+    if (mockHistory.length < 2) return null;
+    const points = [...mockHistory]
+      .sort((a, b) => new Date(a.completedAt).getTime() - new Date(b.completedAt).getTime())
+      .map((m) => Math.round(m.scorePercent));
+    return {
+      points,
+      first: points[0],
+      latest: points[points.length - 1],
+      delta: points[points.length - 1] - points[0],
+    };
+  }, [mockHistory]);
+
   const load = useCallback(async () => {
     try {
       const goal = await resolveOnboardingGoal(user?.id);
@@ -322,12 +336,58 @@ export default function ProfileScreen() {
           </View>
         ) : null}
 
-        {user && subjectTrends.length > 0 ? (
+        {user && (subjectTrends.length > 0 || overallTrend) ? (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Subject trends</Text>
             <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginBottom: spacing.sm }}>
-              Your mock scores per subject across recent attempts.
+              Your mock scores across recent attempts.
             </Text>
+            {overallTrend ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: spacing.md,
+                  paddingVertical: spacing.sm,
+                  borderBottomWidth: 1,
+                  borderBottomColor: colors.border,
+                }}
+              >
+                <View style={{ flex: 1 }}>
+                  <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 14, color: colors.text }}>Overall</Text>
+                  <Text
+                    style={{
+                      fontFamily: theme.fonts.bodyMedium,
+                      fontSize: 12,
+                      marginTop: 2,
+                      color:
+                        overallTrend.latest >= 75 ? colors.success : overallTrend.latest >= 50 ? colors.flame : colors.error,
+                    }}
+                  >
+                    {overallTrend.first}% → {overallTrend.latest}%{'  '}
+                    {overallTrend.delta > 0
+                      ? `↑ +${overallTrend.delta}`
+                      : overallTrend.delta < 0
+                        ? `↓ ${Math.abs(overallTrend.delta)}`
+                        : '— no change'}
+                  </Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 3, height: 28 }}>
+                  {overallTrend.points.map((p, i) => (
+                    <View
+                      key={i}
+                      style={{
+                        width: 6,
+                        height: Math.max(3, Math.round((p / 100) * 28)),
+                        borderRadius: 2,
+                        backgroundColor: p >= 75 ? colors.success : p >= 50 ? colors.flame : colors.error,
+                        opacity: i === overallTrend.points.length - 1 ? 1 : 0.5,
+                      }}
+                    />
+                  ))}
+                </View>
+              </View>
+            ) : null}
             {subjectTrends.map((t) => {
               const band = (p: number) => (p >= 75 ? colors.success : p >= 50 ? colors.flame : colors.error);
               const trendLabel = t.delta > 0 ? `↑ +${t.delta}` : t.delta < 0 ? `↓ ${Math.abs(t.delta)}` : '— no change';
