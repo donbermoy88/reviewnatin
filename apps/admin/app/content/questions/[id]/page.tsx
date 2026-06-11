@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { AdminCard, AdminShell, Badge } from '@/components/admin-shell';
+import { AdminShell } from '@/components/admin-shell';
+import { ABtn, ACard, AIcon, ATextarea, ExamTag, StatusBadge, T } from '@/components/admin-ui';
 
 type QuestionDetail = {
   id: string;
@@ -15,13 +16,12 @@ type QuestionDetail = {
   difficulty: number;
   status: string;
   isVerified: boolean;
-  topicSlug?: string;
   topicName?: string;
-  subjectSlug?: string;
   subjectName?: string;
   examSlug?: string;
-  examName?: string;
 };
+
+const DIFFICULTY_LABELS = ['—', 'Very easy', 'Easy', 'Medium', 'Hard', 'Very hard'];
 
 export default function QuestionEditorPage() {
   const params = useParams<{ id: string }>();
@@ -55,9 +55,7 @@ export default function QuestionEditorPage() {
   }, [params.id]);
 
   useEffect(() => {
-    queueMicrotask(() => {
-      void load();
-    });
+    queueMicrotask(() => void load());
   }, [load]);
 
   const save = async (status?: QuestionDetail['status']) => {
@@ -72,7 +70,7 @@ export default function QuestionEditorPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? 'Save failed');
-      setMessage(status === 'published' ? 'Published.' : status ? `Status set to ${status}.` : 'Saved.');
+      setMessage(status === 'published' ? 'Approved & published.' : status === 'archived' ? 'Rejected.' : status ? `Status set to ${status}.` : 'Saved.');
       await load();
       router.refresh();
     } catch (err) {
@@ -82,110 +80,135 @@ export default function QuestionEditorPage() {
     }
   };
 
-  const backLink = (
-    <Link href="/content/review" className="btn btn-secondary">
-      ← Back to review queue
-    </Link>
-  );
-
   if (loading) {
     return (
-      <AdminShell title="Edit Question" description="Loading the selected QA item." maxWidth="max-w-3xl">
-        <AdminCard padding="lg">
-          <p className="text-[var(--text-muted)]">Loading question…</p>
-        </AdminCard>
+      <AdminShell title="Question editor" description="Loading the selected QA item." maxWidth="max-w-[980px]">
+        <ACard><p style={{ color: T.textMuted }}>Loading question…</p></ACard>
       </AdminShell>
     );
   }
 
   if (!question) {
     return (
-      <AdminShell title="Edit Question" description="The selected question could not be loaded." maxWidth="max-w-3xl">
-        <AdminCard padding="lg">
-          <p className="text-red-600">{error || 'Question not found.'}</p>
-          <div className="mt-4">{backLink}</div>
-        </AdminCard>
+      <AdminShell title="Question editor" description="The selected question could not be loaded." maxWidth="max-w-[980px]">
+        <ACard>
+          <p style={{ color: T.danger }}>{error || 'Question not found.'}</p>
+          <div style={{ marginTop: 14 }}><Link href="/content/review" style={{ color: T.primary, fontWeight: 600, textDecoration: 'none' }}>← Back to review queue</Link></div>
+        </ACard>
       </AdminShell>
     );
   }
 
+  const explainLen = explanationEn.trim().length;
+  const correctCount = question.choices.filter((c) => c.id === question.correctChoiceId).length;
+  const checks = [
+    { ok: correctCount === 1, label: 'Exactly one correct choice' },
+    { ok: explainLen >= 80, label: 'Rationale present (≥ 80 chars)' },
+    { ok: stem.trim().length > 0, label: 'Question stem is not empty' },
+    { ok: question.choices.length >= 2, label: `Has answer choices (${question.choices.length})` },
+  ];
+
   return (
     <AdminShell
-      title="Edit Question"
-      description={`${question.examSlug ?? '—'} · ${question.subjectName ?? '—'}/${question.topicName ?? '—'}`}
-      maxWidth="max-w-3xl"
-      actions={backLink}
+      title={`Question ${question.id.slice(0, 8)}…`}
+      description={`${question.examSlug ?? '—'} · ${question.subjectName ?? '—'} / ${question.topicName ?? '—'}`}
+      maxWidth="max-w-[1100px]"
+      actions={
+        <>
+          <ABtn variant="dangerSoft" icon="x" disabled={saving} onClick={() => save('archived')}>Reject</ABtn>
+          <ABtn variant="secondary" disabled={saving} onClick={() => save('in_review')}>Mark in review</ABtn>
+          <ABtn variant="success" icon="check" disabled={saving} onClick={() => save('published')}>Approve &amp; publish</ABtn>
+        </>
+      }
     >
-      <AdminCard padding="lg" className="space-y-6">
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge tone={question.status === 'published' ? 'green' : question.status === 'in_review' ? 'amber' : 'neutral'}>
-            {question.status}
-          </Badge>
-          {question.isVerified ? <Badge tone="blue">verified</Badge> : null}
-          <Badge tone="neutral">difficulty {question.difficulty}</Badge>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16, fontSize: 12.5, color: T.textMuted }}>
+        <Link href="/content/review" style={{ color: T.primary, fontWeight: 600, textDecoration: 'none' }}>Review queue</Link>
+        <AIcon name="chevronRight" size={12} />
+        <span>{question.id.slice(0, 8)}…</span>
+      </div>
+
+      <div className="rn-two-col" style={{ display: 'grid', gridTemplateColumns: '1.8fr 1fr', gap: 18, alignItems: 'start' }}>
+        <div style={{ display: 'grid', gap: 18 }}>
+          <ACard title="Question stem">
+            <ATextarea value={stem} onChange={setStem} rows={3} />
+          </ACard>
+
+          <ACard title="Answer choices" subtitle="The highlighted choice is the answer key">
+            <div style={{ display: 'grid', gap: 10 }}>
+              {question.choices.map((c) => {
+                const correct = c.id === question.correctChoiceId;
+                return (
+                  <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 12, border: `1.5px solid ${correct ? T.success : T.border}`, background: correct ? T.successBg : '#fff', borderRadius: 10, padding: '10px 14px' }}>
+                    <span style={{ width: 16, height: 16, borderRadius: '50%', border: `2px solid ${correct ? T.success : T.borderStrong}`, background: correct ? T.success : '#fff', flexShrink: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+                      {correct ? <AIcon name="check" size={10} color="#fff" strokeWidth={3} /> : null}
+                    </span>
+                    <span className="font-head" style={{ fontWeight: 800, fontSize: 13, color: correct ? T.success : T.textMuted, width: 16, textTransform: 'uppercase' }}>{c.id}</span>
+                    <span style={{ flex: 1, fontSize: 13.5, color: T.text }}>{c.text}</span>
+                    {correct ? <span style={{ fontSize: 11, fontWeight: 700, color: T.success, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Correct</span> : null}
+                  </div>
+                );
+              })}
+            </div>
+          </ACard>
+
+          <ACard title="Rationale (English)" subtitle="Shown to learners after answering">
+            <ATextarea value={explanationEn} onChange={setExplanationEn} rows={4} />
+          </ACard>
+          <ACard title="Rationale (Tagalog)" subtitle="Optional translation">
+            <ATextarea value={explanationFil} onChange={setExplanationFil} rows={4} />
+          </ACard>
+
+          {error ? <p style={{ color: T.danger, fontSize: 13 }}>{error}</p> : null}
+          {message ? <p style={{ color: T.success, fontSize: 13, fontWeight: 600 }}>{message}</p> : null}
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <ABtn variant="primary" disabled={saving} onClick={() => save()}>{saving ? 'Saving…' : 'Save changes'}</ABtn>
+            <ABtn variant="secondary" disabled={saving} onClick={() => save('in_review')}>Save &amp; mark in review</ABtn>
+          </div>
         </div>
 
-        <label className="block">
-          <span className="field-label">Stem</span>
-          <textarea className="field-input" rows={4} value={stem} onChange={(e) => setStem(e.target.value)} />
-        </label>
+        <div style={{ display: 'grid', gap: 18 }}>
+          <ACard title="Status" padding={18}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              <StatusBadge status={question.status} />
+              {question.isVerified ? <StatusBadge status="verified" /> : null}
+              {question.examSlug ? <ExamTag slug={question.examSlug} /> : null}
+              <span style={{ background: '#eef1f7', color: T.textMuted, borderRadius: 6, padding: '3px 8px', fontSize: 11, fontWeight: 700 }}>{DIFFICULTY_LABELS[question.difficulty] ?? `Difficulty ${question.difficulty}`}</span>
+            </div>
+          </ACard>
 
-        <div>
-          <p className="field-label">Choices</p>
-          <ul className="space-y-2 text-sm">
-            {question.choices.map((c) => {
-              const correct = c.id === question.correctChoiceId;
-              return (
-                <li
-                  key={c.id}
-                  className={`flex items-start gap-2 rounded-lg border px-4 py-3 ${
-                    correct ? 'border-emerald-300 bg-[var(--success-soft)]' : 'border-[var(--border)] bg-[var(--surface-muted)]'
-                  }`}
-                >
-                  <span className="font-semibold uppercase text-[var(--text-muted)]">{c.id}.</span>
-                  <span className="flex-1 text-[var(--text)]">{c.text}</span>
-                  {correct ? <Badge tone="green">correct</Badge> : null}
-                </li>
-              );
-            })}
-          </ul>
+          <ACard title="Quality checks" padding={18}>
+            <div style={{ display: 'grid', gap: 10, fontSize: 12.5 }}>
+              {checks.map((c, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 9, color: c.ok ? T.text : T.textMuted }}>
+                  <span style={{ width: 18, height: 18, borderRadius: '50%', background: c.ok ? T.successBg : T.warnBg, color: c.ok ? T.success : T.warn, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <AIcon name={c.ok ? 'check' : 'clock'} size={11} />
+                  </span>
+                  {c.label}
+                </div>
+              ))}
+            </div>
+          </ACard>
+
+          <ACard title="Classification" padding={18}>
+            <div style={{ display: 'grid', gap: 10, fontSize: 12.5 }}>
+              <Row label="Exam" value={question.examSlug ?? '—'} />
+              <Row label="Subject" value={question.subjectName ?? '—'} />
+              <Row label="Topic" value={question.topicName ?? '—'} />
+              <Row label="Choices" value={String(question.choices.length)} />
+            </div>
+          </ACard>
         </div>
-
-        <label className="block">
-          <span className="field-label">Explanation (EN)</span>
-          <textarea
-            className="field-input"
-            rows={4}
-            value={explanationEn}
-            onChange={(e) => setExplanationEn(e.target.value)}
-          />
-        </label>
-
-        <label className="block">
-          <span className="field-label">Explanation (TL)</span>
-          <textarea
-            className="field-input"
-            rows={4}
-            value={explanationFil}
-            onChange={(e) => setExplanationFil(e.target.value)}
-          />
-        </label>
-
-        {error ? <p className="text-sm text-red-600">{error}</p> : null}
-        {message ? <p className="text-sm text-emerald-700">{message}</p> : null}
-
-        <div className="flex flex-wrap gap-3 border-t border-[var(--border)] pt-5">
-          <button type="button" disabled={saving} onClick={() => save()} className="btn btn-primary">
-            Save draft
-          </button>
-          <button type="button" disabled={saving} onClick={() => save('in_review')} className="btn btn-secondary">
-            Mark in review
-          </button>
-          <button type="button" disabled={saving} onClick={() => save('published')} className="btn btn-success">
-            Publish
-          </button>
-        </div>
-      </AdminCard>
+      </div>
     </AdminShell>
+  );
+}
+
+function Row({ label, value }: { label: string; value: string }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
+      <span style={{ color: T.textMuted }}>{label}</span>
+      <span style={{ fontWeight: 600, color: T.text, textAlign: 'right' }}>{value}</span>
+    </div>
   );
 }

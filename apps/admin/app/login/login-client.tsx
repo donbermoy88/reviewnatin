@@ -3,27 +3,38 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
+import { T } from '@/components/admin-ui';
+
+function Logo() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.1)" />
+      <circle cx="20" cy="20" r="12" fill={T.primary} />
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((a, i) => {
+        const r = (a * Math.PI) / 180;
+        return <line key={i} x1={20 + 13.5 * Math.cos(r)} y1={20 + 13.5 * Math.sin(r)} x2={20 + 18 * Math.cos(r)} y2={20 + 18 * Math.sin(r)} stroke={T.gold} strokeWidth="2.2" strokeLinecap="round" />;
+      })}
+      <path d="M14 20.5l3.5 3.5 8-8" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const params = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(
-    params.get('error') === 'staff' ? 'Staff account required (admin or content role).' : null
-  );
+  const [error, setError] = useState<string | null>(params.get('error') === 'staff' ? 'Staff account required (admin or content role).' : null);
   const [loading, setLoading] = useState(false);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
     try {
       const supabase = createSupabaseBrowserClient();
       const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
       if (signInError) throw signInError;
-
       const next = params.get('next') ?? '/';
       router.replace(next);
       router.refresh();
@@ -35,83 +46,52 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
+    <div style={{ display: 'grid', minHeight: '100vh', gridTemplateColumns: '1fr 1fr', fontFamily: T.fontBody }} className="rn-two-col">
       {/* Brand panel */}
-      <section className="relative hidden flex-col justify-between bg-[var(--sidebar)] p-12 text-white lg:flex">
-        <div className="flex items-center gap-2.5">
-          <span className="grid size-9 place-items-center rounded-lg bg-[var(--primary)] text-base font-bold">R</span>
-          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-300">ReviewNatin Admin</span>
+      <section className="max-lg:hidden" style={{ position: 'relative', background: `linear-gradient(180deg, ${T.sideBg} 0%, ${T.sideBg2} 100%)`, color: '#fff', padding: 48, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <Logo />
+          <span className="font-head" style={{ fontWeight: 800, fontSize: 18 }}>Review<span style={{ color: T.gold }}>Natin</span></span>
         </div>
         <div>
-          <h1 className="max-w-md text-4xl font-semibold leading-tight tracking-tight">
-            The command center for mobile app quality.
-          </h1>
-          <p className="mt-4 max-w-md text-base leading-7 text-slate-300">
-            Manage content QA, CSV imports, study materials, schedules, checkouts, and platform metrics before they
-            reach ReviewNatin users.
+          <h1 className="font-head" style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em', maxWidth: 420 }}>The command center for mobile app quality.</h1>
+          <p style={{ marginTop: 16, fontSize: 15, lineHeight: 1.6, color: T.sideText, maxWidth: 420 }}>
+            Manage content QA, CSV imports, study materials, schedules, checkouts, and platform metrics before they reach ReviewNatin users.
           </p>
-          <div className="mt-8 grid max-w-md gap-2.5 sm:grid-cols-2">
+          <div style={{ marginTop: 28, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, maxWidth: 420 }}>
             {['Content QA reports', 'Question imports', 'Study materials', 'Plus fulfillment'].map((item) => (
-              <div
-                key={item}
-                className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-slate-200"
-              >
-                {item}
-              </div>
+              <div key={item} style={{ borderRadius: 10, border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', padding: '12px 14px', fontSize: 13, fontWeight: 600, color: '#dbe3f5' }}>{item}</div>
             ))}
           </div>
         </div>
-        <p className="text-xs text-slate-500">© {new Date().getFullYear()} ReviewNatin · Staff access only</p>
+        <p style={{ fontSize: 12, color: 'rgba(147,165,214,0.6)' }}>© {new Date().getFullYear()} ReviewNatin · Staff access only</p>
       </section>
 
       {/* Form panel */}
-      <div className="flex items-center justify-center bg-[var(--app-bg)] px-6 py-12">
-        <form onSubmit={submit} className="w-full max-w-sm">
-          <div className="mb-2 flex items-center gap-2 lg:hidden">
-            <span className="grid size-8 place-items-center rounded-lg bg-[var(--primary)] text-sm font-bold text-white">
-              R
-            </span>
-            <span className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
-              ReviewNatin Admin
-            </span>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: T.bg, padding: 24 }}>
+        <form onSubmit={submit} style={{ width: '100%', maxWidth: 360 }}>
+          <div className="lg:hidden" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+            <Logo /><span className="font-head" style={{ fontWeight: 800, fontSize: 18, color: T.text }}>Review<span style={{ color: T.gold }}>Natin</span></span>
           </div>
-          <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Sign in</h2>
-          <p className="mt-1.5 text-sm text-[var(--text-muted)]">
-            Use an admin, content reviewer, or content author account.
-          </p>
+          <h2 className="font-head" style={{ fontSize: 24, fontWeight: 800, color: T.text, letterSpacing: '-0.02em' }}>Sign in</h2>
+          <p style={{ marginTop: 6, fontSize: 13.5, color: T.textMuted }}>Use an admin, content reviewer, or content author account.</p>
 
           {error ? (
-            <p className="mt-5 rounded-lg border border-red-200 bg-[var(--danger-soft)] px-4 py-3 text-sm font-medium text-red-700">
-              {error}
-            </p>
+            <p style={{ marginTop: 20, borderRadius: 10, border: '1px solid #f6caca', background: T.dangerBg, padding: '10px 14px', fontSize: 13, fontWeight: 600, color: T.danger }}>{error}</p>
           ) : null}
 
-          <div className="mt-6 space-y-4">
-            <label className="block">
+          <div style={{ marginTop: 24, display: 'grid', gap: 16 }}>
+            <label style={{ display: 'block' }}>
               <span className="field-label">Email</span>
-              <input
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="field-input"
-              />
+              <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="field-input" />
             </label>
-            <label className="block">
+            <label style={{ display: 'block' }}>
               <span className="field-label">Password</span>
-              <input
-                type="password"
-                required
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="field-input"
-              />
+              <input type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} className="field-input" />
             </label>
           </div>
 
-          <button type="submit" disabled={loading} className="btn btn-primary mt-6 w-full py-3">
+          <button type="submit" disabled={loading} className="rn-btn rn-btn-primary" style={{ marginTop: 24, width: '100%', padding: '11px 16px', fontSize: 14, fontWeight: 600, borderRadius: 8, background: T.primary, color: '#fff', border: 'none', cursor: 'pointer', boxShadow: '0 1px 2px rgba(37,99,235,.3)' }}>
             {loading ? 'Signing in…' : 'Sign in'}
           </button>
         </form>

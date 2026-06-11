@@ -2,66 +2,90 @@
 
 /* ──────────────────────────────────────────────────────────────
    ReviewNatin Admin — design tokens
-   A restrained, professional enterprise palette: neutral slate
-   surfaces, a single blue primary, and semantic status colors used
-   sparingly. No gradient blobs, no ultra-heavy type.
+   Ported from the ReviewNatin Admin Console design system:
+   blue/navy primary + gold brand accent, professional admin palette.
    ────────────────────────────────────────────────────────────── */
 :root {
-  /* Surfaces */
-  --app-bg: #f6f8fb;
-  --surface: #ffffff;
-  --surface-muted: #f8fafc;
-  --surface-sunken: #f1f5f9;
-
-  /* Sidebar (deep navy) */
-  --sidebar: #0c1b3a;
-  --sidebar-muted: #16284d;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-
-  /* Text */
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --text-subtle: #94a3b8;
-
-  /* Lines */
-  --border: #e5e9f0;
-  --border-strong: #cbd5e1;
-
   /* Brand / primary */
   --primary: #2563eb;
   --primary-hover: #1d4ed8;
-  --primary-soft: #eff4ff;
-  --ring: rgba(37, 99, 235, 0.35);
+  --primary-dark: #1e40af;
+  --navy: #1e3a8a;
+
+  /* Sidebar (navy gradient) */
+  --side-bg: #0d1b3e;
+  --side-bg2: #132451;
+  --side-text: #93a5d6;
+
+  /* Gold brand accent */
+  --gold: #f59e0b;
+  --gold-bg: #fef3c7;
+  --gold-soft: #fdf3df;
+
+  /* Surfaces */
+  --bg: #f5f7fc;
+  --surface: #ffffff;
+  --surface-muted: #fafbfe;
+  --surface-sunken: #eef1f7;
+
+  /* Text */
+  --text: #0f172a;
+  --text-muted: #5b6b85;
+  --text-light: #93a0b8;
+  --text-subtle: #93a0b8;
+  --surface-sunken: #eef1f7;
+
+  /* Lines */
+  --border: #e4e9f4;
+  --border-strong: #d4dcec;
 
   /* Status */
-  --success: #047857;
-  --success-soft: #ecfdf5;
-  --warning: #b45309;
-  --warning-soft: #fffbeb;
+  --success: #059669;
+  --success-bg: #e8f7f0;
   --danger: #dc2626;
-  --danger-soft: #fef2f2;
+  --danger-bg: #fdecec;
+  --warn: #b45309;
+  --warn-bg: #fdf3df;
+  --info: #1e40af;
+  --info-bg: #e4edfd;
+  --purple: #6d28d9;
+  --purple-bg: #f0eafc;
 
-  --radius: 0.75rem;
+  --ring: rgba(37, 99, 235, 0.12);
+  --shadow: 0 1px 3px rgba(15, 29, 62, 0.06), 0 1px 2px rgba(15, 29, 62, 0.04);
+  --shadow-md: 0 4px 16px rgba(15, 29, 62, 0.08);
 }
 
 @theme inline {
-  --color-background: var(--app-bg);
+  --color-background: var(--bg);
   --color-foreground: var(--text);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, monospace;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-head: var(--font-head), ui-sans-serif, system-ui, sans-serif;
 }
 
 * {
   border-color: var(--border);
 }
 
+html,
 body {
-  background: var(--app-bg);
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
   color: var(--text);
-  font-family: var(--font-sans);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+.font-head {
+  font-family: var(--font-head), ui-sans-serif, system-ui, sans-serif;
+}
+
+button {
+  font-family: inherit;
 }
 
 button,
@@ -76,129 +100,209 @@ table {
   border-collapse: collapse;
 }
 
-/* Refined scrollbars */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
-}
-*::-webkit-scrollbar {
+/* Scrollbars */
+::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
-*::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: 9999px;
-  border: 3px solid transparent;
-  background-clip: padding-box;
+::-webkit-scrollbar-thumb {
+  background: #cdd6e6;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 @layer components {
-  /* Form field label */
+  /* ── Form controls ───────────────────────────── */
   .field-label {
     display: block;
-    font-size: 0.8125rem;
+    font-size: 12.5px;
     font-weight: 600;
-    color: #334155;
-    margin-bottom: 0.375rem;
+    color: var(--text);
+    margin-bottom: 6px;
   }
   .field-hint {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 0.375rem;
+    display: block;
+    font-size: 11.5px;
+    color: var(--text-light);
+    margin-top: 5px;
   }
-
-  /* Text inputs / selects / textareas */
   .field-input {
     width: 100%;
-    border-radius: 0.625rem;
-    border: 1px solid var(--border-strong);
-    background: var(--surface);
-    padding: 0.625rem 0.75rem;
-    font-size: 0.875rem;
+    box-sizing: border-box;
+    padding: 9px 12px;
+    font-size: 13.5px;
     color: var(--text);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.14s;
   }
   .field-input::placeholder {
-    color: var(--text-subtle);
+    color: var(--text-light);
   }
   .field-input:focus {
-    outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px var(--ring);
   }
+  textarea.field-input {
+    line-height: 1.55;
+    resize: vertical;
+  }
 
-  /* Buttons */
+  /* ── Buttons ─────────────────────────────────── */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    border-radius: 0.625rem;
-    padding: 0.5625rem 1rem;
-    font-size: 0.875rem;
+    gap: 7px;
+    padding: 9px 16px;
+    font-size: 13.5px;
     font-weight: 600;
-    line-height: 1.25rem;
+    border-radius: 8px;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
-      box-shadow 0.15s ease;
     white-space: nowrap;
+    transition: all 0.14s;
   }
   .btn:disabled {
     opacity: 0.55;
     cursor: not-allowed;
   }
-  .btn:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--ring);
+  .btn-sm {
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+  .btn-lg {
+    padding: 11px 20px;
+    font-size: 14px;
   }
   .btn-primary {
     background: var(--primary);
     color: #fff;
+    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.3);
   }
   .btn-primary:hover:not(:disabled) {
     background: var(--primary-hover);
   }
   .btn-secondary {
-    background: var(--surface);
-    color: #1e293b;
-    border-color: var(--border-strong);
+    background: #fff;
+    color: var(--text);
+    border-color: var(--border);
+    box-shadow: var(--shadow);
   }
   .btn-secondary:hover:not(:disabled) {
-    background: var(--surface-muted);
+    background: #f0f4fc;
+    border-color: var(--border-strong);
   }
   .btn-ghost {
     background: transparent;
     color: var(--text-muted);
   }
   .btn-ghost:hover:not(:disabled) {
-    background: var(--surface-sunken);
-    color: var(--text);
+    background: #eef2fa;
   }
   .btn-success {
     background: var(--success);
     color: #fff;
   }
   .btn-success:hover:not(:disabled) {
-    background: #065f46;
+    background: #047857;
   }
-  .btn-sm {
-    padding: 0.375rem 0.625rem;
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
+  .btn-danger {
+    background: var(--danger);
+    color: #fff;
+  }
+  .btn-danger:hover:not(:disabled) {
+    background: #b91c1c;
+  }
+  .btn-danger-soft {
+    background: var(--danger-bg);
+    color: var(--danger);
+  }
+  .btn-danger-soft:hover:not(:disabled) {
+    background: #fbdcdc;
+  }
+  .btn-gold {
+    background: var(--gold);
+    color: #fff;
+  }
+  .btn-gold:hover:not(:disabled) {
+    background: #d97706;
   }
 
-  /* Status badge */
+  /* ── Badge ───────────────────────────────────── */
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    border-radius: 9999px;
-    padding: 0.1875rem 0.5rem;
-    font-size: 0.6875rem;
+    gap: 5px;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 11.5px;
     font-weight: 600;
-    line-height: 1;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+}
+
+/* ── Interactive states for inline-styled primitives ─────────── */
+.rn-row[data-clickable="1"]:hover {
+  background: #f7f9fd !important;
+}
+.rn-chip:hover {
+  border-color: var(--border-strong) !important;
+}
+.rn-search input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+.rn-btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover) !important;
+}
+.rn-btn-secondary:hover:not(:disabled) {
+  background: #f0f4fc !important;
+  border-color: var(--border-strong) !important;
+}
+.rn-btn-ghost:hover:not(:disabled) {
+  background: #eef2fa !important;
+}
+.rn-btn-success:hover:not(:disabled) {
+  background: #047857 !important;
+}
+.rn-btn-danger:hover:not(:disabled) {
+  background: #b91c1c !important;
+}
+.rn-btn-dangerSoft:hover:not(:disabled) {
+  background: #fbdcdc !important;
+}
+.rn-btn-gold:hover:not(:disabled) {
+  background: #d97706 !important;
+}
+.rn-nav-link:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
+}
+.rn-action:hover {
+  border-color: var(--border-strong) !important;
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-1px);
+}
+
+/* Dashboard / two-column layouts collapse on narrow viewports */
+@media (max-width: 1080px) {
+  .rn-dash-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .rn-two-col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .rn-filters {
+    grid-template-columns: 1fr 1fr !important;
   }
 }

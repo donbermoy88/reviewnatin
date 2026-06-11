@@ -1,7 +1,8 @@
 'use client';
 
-import { AdminCard, AdminShell, Badge } from '@/components/admin-shell';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { AdminShell } from '@/components/admin-shell';
+import { ABtn, ACell, ARow, ATable, Avatar, EmptyState, SegTabs, StatusBadge, T } from '@/components/admin-ui';
 
 type CheckoutRow = {
   id: string;
@@ -22,21 +23,30 @@ function emailFrom(row: CheckoutRow): string {
   if (Array.isArray(u)) return u[0]?.email ?? '—';
   return u?.email ?? '—';
 }
-
 function skuFrom(row: CheckoutRow): string {
   const p = row.subscription_products;
   if (Array.isArray(p)) return p[0]?.sku ?? '—';
   return p?.sku ?? '—';
 }
+function relAge(iso: string | null): string {
+  if (!iso) return '—';
+  const mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+  if (Number.isNaN(mins)) return '—';
+  if (mins < 60) return `${Math.max(mins, 1)}m`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 24) return `${hrs}h`;
+  return `${Math.round(hrs / 24)}d`;
+}
 
-function statusTone(status: string): 'green' | 'amber' | 'neutral' {
-  if (status === 'paid' || status === 'fulfilled') return 'green';
-  if (status === 'submitted') return 'amber';
-  return 'neutral';
+function PayMethod({ m }: { m: string }) {
+  const key = m.toLowerCase();
+  const c = key.includes('maya') ? { bg: '#e8f7f0', color: '#047857' } : { bg: '#e4edfd', color: '#1e40af' };
+  return <span style={{ background: c.bg, color: c.color, borderRadius: 6, padding: '3px 9px', fontSize: 11.5, fontWeight: 700 }}>{m.toUpperCase()}</span>;
 }
 
 export default function CheckoutsAdminPage() {
   const [rows, setRows] = useState<CheckoutRow[]>([]);
+  const [tab, setTab] = useState<'submitted' | 'all'>('submitted');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
@@ -58,9 +68,7 @@ export default function CheckoutsAdminPage() {
   }, []);
 
   useEffect(() => {
-    queueMicrotask(() => {
-      void load();
-    });
+    queueMicrotask(() => void load());
   }, [load]);
 
   const fulfill = async (referenceCode: string) => {
@@ -68,11 +76,7 @@ export default function CheckoutsAdminPage() {
     setMessage('');
     setError('');
     try {
-      const res = await fetch('/api/content/checkouts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ referenceCode }),
-      });
+      const res = await fetch('/api/content/checkouts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ referenceCode }) });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? 'Fulfill failed');
       setMessage(`Fulfilled ${referenceCode}`);
@@ -84,74 +88,68 @@ export default function CheckoutsAdminPage() {
     }
   };
 
+  const submittedCount = rows.filter((r) => r.status === 'submitted').length;
+  const visible = useMemo(() => (tab === 'submitted' ? rows.filter((r) => r.status === 'submitted') : rows), [rows, tab]);
+
   return (
     <AdminShell
-      title="Web Checkouts"
-      description="GCash and Maya payments awaiting manual verification. Mark paid only after confirming the transfer."
-      actions={
-        <button type="button" onClick={() => void load()} disabled={loading} className="btn btn-secondary">
-          {loading ? 'Refreshing…' : 'Refresh'}
-        </button>
-      }
+      title="Web checkouts"
+      description="Manual fulfillment for GCash and Maya payments from the marketing site. Verify the reference number before granting Pro access."
+      actions={<ABtn variant="secondary" icon="refresh" disabled={loading} onClick={() => void load()}>{loading ? 'Refreshing…' : 'Refresh'}</ABtn>}
     >
-      {error ? <p className="mb-4 text-sm text-red-600">{error}</p> : null}
-      {message ? <p className="mb-4 text-sm text-emerald-700">{message}</p> : null}
+      <div style={{ marginBottom: 14 }}>
+        <SegTabs
+          active={tab}
+          onChange={setTab}
+          tabs={[
+            { id: 'submitted', label: 'Needs fulfillment', count: submittedCount },
+            { id: 'all', label: 'All active', count: rows.length },
+          ]}
+        />
+      </div>
 
-      <AdminCard className="overflow-hidden" padding="none">
-        <div className="overflow-x-auto">
-          {loading ? (
-            <p className="px-5 py-10 text-center text-sm text-[var(--text-muted)]">Loading checkouts…</p>
-          ) : rows.length === 0 ? (
-            <p className="px-5 py-10 text-center text-sm text-[var(--text-muted)]">No pending checkouts.</p>
-          ) : (
-            <table className="min-w-full text-sm">
-              <thead>
-                <tr className="border-b border-[var(--border)] bg-[var(--surface-muted)] text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                  <th className="px-5 py-3">Reference</th>
-                  <th className="px-5 py-3">User</th>
-                  <th className="px-5 py-3">Source</th>
-                  <th className="px-5 py-3">Amount</th>
-                  <th className="px-5 py-3">Status</th>
-                  <th className="px-5 py-3 text-right">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row) => (
-                  <tr key={row.id} className="border-b border-[var(--border)] last:border-0 hover:bg-[var(--surface-muted)]">
-                    <td className="px-5 py-3 font-mono text-xs text-[var(--text)]">{row.reference_code}</td>
-                    <td className="px-5 py-3 text-[var(--text)]">{emailFrom(row)}</td>
-                    <td className="px-5 py-3 text-xs text-[var(--text-muted)]">
-                      {row.source ?? '—'}
-                      {row.utm_source ? ` · ${row.utm_source}` : ''}
-                    </td>
-                    <td className="px-5 py-3 text-[var(--text)]">
-                      <span className="font-medium tabular-nums">₱{row.amount_php.toLocaleString('en-PH')}</span>
-                      <span className="text-xs text-[var(--text-muted)]"> · {row.provider.toUpperCase()} · {skuFrom(row)}</span>
-                    </td>
-                    <td className="px-5 py-3">
-                      <Badge tone={statusTone(row.status)}>{row.status}</Badge>
-                    </td>
-                    <td className="px-5 py-3 text-right">
-                      {row.status === 'submitted' ? (
-                        <button
-                          type="button"
-                          disabled={fulfilling === row.reference_code}
-                          onClick={() => fulfill(row.reference_code)}
-                          className="btn btn-success btn-sm"
-                        >
-                          {fulfilling === row.reference_code ? 'Marking…' : 'Mark paid'}
-                        </button>
-                      ) : (
-                        <span className="text-xs text-[var(--text-subtle)]">Awaiting user submit</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </AdminCard>
+      {error ? <p style={{ color: T.danger, fontSize: 13, marginBottom: 12 }}>{error}</p> : null}
+      {message ? <p style={{ color: T.success, fontSize: 13, fontWeight: 600, marginBottom: 12 }}>{message}</p> : null}
+
+      <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 12, boxShadow: T.shadow }}>
+        {loading ? (
+          <p style={{ padding: '40px 20px', textAlign: 'center', color: T.textMuted, fontSize: 13 }}>Loading checkouts…</p>
+        ) : visible.length === 0 ? (
+          <EmptyState icon="card" title="Nothing to fulfill" body="No checkouts match this filter." />
+        ) : (
+          <ATable columns={[{ label: 'Customer' }, { label: 'Plan' }, { label: 'Amount', align: 'right' }, { label: 'Method' }, { label: 'Reference #' }, { label: 'Source' }, { label: 'Status' }, { label: 'Age', align: 'right' }, { label: '', width: 130 }]}>
+            {visible.map((row) => {
+              const email = emailFrom(row);
+              return (
+                <ARow key={row.id}>
+                  <ACell>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <Avatar name={email} size={30} />
+                      <div style={{ fontSize: 12.5, fontWeight: 600 }}>{email}</div>
+                    </div>
+                  </ACell>
+                  <ACell><span style={{ fontSize: 12.5, fontWeight: 600 }}>{skuFrom(row)}</span></ACell>
+                  <ACell align="right"><span style={{ fontWeight: 700 }}>₱{row.amount_php.toLocaleString('en-PH')}</span></ACell>
+                  <ACell><PayMethod m={row.provider} /></ACell>
+                  <ACell><code style={{ background: '#eef1f7', borderRadius: 5, padding: '2px 8px', fontSize: 11.5 }}>{row.reference_code}</code></ACell>
+                  <ACell><span style={{ fontSize: 12, color: T.textMuted }}>{row.source ?? '—'}{row.utm_source ? ` · ${row.utm_source}` : ''}</span></ACell>
+                  <ACell><StatusBadge status={row.status} /></ACell>
+                  <ACell align="right"><span style={{ fontSize: 12.5, color: T.textMuted }}>{relAge(row.submitted_at ?? row.created_at)}</span></ACell>
+                  <ACell align="right">
+                    {row.status === 'submitted' ? (
+                      <ABtn size="sm" variant="success" icon="check" disabled={fulfilling === row.reference_code} onClick={() => fulfill(row.reference_code)}>
+                        {fulfilling === row.reference_code ? '…' : 'Fulfill'}
+                      </ABtn>
+                    ) : (
+                      <span style={{ fontSize: 12, color: T.textLight }}>Awaiting submit</span>
+                    )}
+                  </ACell>
+                </ARow>
+              );
+            })}
+          </ATable>
+        )}
+      </div>
     </AdminShell>
   );
 }

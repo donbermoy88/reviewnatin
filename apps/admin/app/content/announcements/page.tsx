@@ -1,75 +1,62 @@
-'use client';
+import { AdminShell } from '@/components/admin-shell';
+import { ACard, ACell, ARow, ATable, AIcon, EmptyState, ExamTag, StatusBadge, T } from '@/components/admin-ui';
+import { AnnouncementForm } from '@/components/content-forms';
+import { getAdminSupabase, isAdminConfigured } from '@/lib/supabase/admin';
 
-import { AdminCard, AdminShell, Field } from '@/components/admin-shell';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+export const dynamic = 'force-dynamic';
 
-export default function AnnouncementsAdminPage() {
-  const router = useRouter();
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [examSlug, setExamSlug] = useState('');
-  const [status, setStatus] = useState('');
-  const [ok, setOk] = useState(false);
-  const [busy, setBusy] = useState(false);
+type AnnouncementRow = {
+  id: string;
+  title: string;
+  published_at: string | null;
+  exam_types: { slug?: string } | null;
+};
 
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setBusy(true);
-    setStatus('');
-    try {
-      const res = await fetch('/api/content/announcements', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, body, examSlug: examSlug || null }),
-      });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
-      if (!res.ok || !data.ok) {
-        setOk(false);
-        setStatus(data.error ?? 'Failed to publish');
-        return;
-      }
-      setTitle('');
-      setBody('');
-      setExamSlug('');
-      setOk(true);
-      setStatus('Published — visible in app Home + marketing site.');
-      router.refresh();
-    } finally {
-      setBusy(false);
-    }
-  };
+function fmt(value: string | null): string {
+  if (!value) return '—';
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? '—' : new Intl.DateTimeFormat('en-PH', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'Asia/Manila' }).format(d);
+}
+
+export default async function AnnouncementsAdminPage() {
+  let rows: AnnouncementRow[] = [];
+  if (isAdminConfigured()) {
+    const supabase = getAdminSupabase();
+    const { data } = await supabase
+      .from('announcements')
+      .select('id, title, published_at, exam_types ( slug )')
+      .order('published_at', { ascending: false, nullsFirst: false })
+      .limit(100);
+    rows = (data ?? []) as AnnouncementRow[];
+  }
 
   return (
     <AdminShell
-      title="Publish Announcement"
-      description="Create mobile Home announcements and marketing updates from one source of truth."
-      maxWidth="max-w-2xl"
+      title="Announcements"
+      description="In-app banners and Home announcements, published from one source of truth."
+      actions={<a href="#create" className="rn-btn rn-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '9px 16px', fontSize: 13.5, fontWeight: 600, borderRadius: 8, background: T.primary, color: '#fff', textDecoration: 'none', boxShadow: '0 1px 2px rgba(37,99,235,.3)' }}><AIcon name="send" size={15} /> New announcement</a>}
     >
-      <AdminCard padding="lg">
-        <form onSubmit={submit} className="space-y-5">
-          <Field label="Title">
-            <input className="field-input" value={title} onChange={(e) => setTitle(e.target.value)} required />
-          </Field>
-          <Field label="Body">
-            <textarea className="field-input" rows={4} value={body} onChange={(e) => setBody(e.target.value)} required />
-          </Field>
-          <Field label="Exam slug" hint="Optional — leave blank to target all exams.">
-            <input
-              className="field-input"
-              placeholder="cse-professional"
-              value={examSlug}
-              onChange={(e) => setExamSlug(e.target.value)}
-            />
-          </Field>
-          <div className="flex items-center gap-4">
-            <button type="submit" disabled={busy} className="btn btn-primary">
-              {busy ? 'Publishing…' : 'Publish'}
-            </button>
-            {status ? <p className={`text-sm ${ok ? 'text-emerald-700' : 'text-red-600'}`}>{status}</p> : null}
-          </div>
-        </form>
-      </AdminCard>
+      <ACard title={`Published announcements (${rows.length})`} padding={0} style={{ marginBottom: 18 }}>
+        {rows.length === 0 ? (
+          <EmptyState icon="megaphone" title="No announcements yet" body="Publish your first announcement below." />
+        ) : (
+          <ATable columns={[{ label: 'Announcement' }, { label: 'Audience' }, { label: 'Status' }, { label: 'Published', align: 'right' }]}>
+            {rows.map((a) => (
+              <ARow key={a.id}>
+                <ACell><span style={{ fontWeight: 600 }}>{a.title}</span></ACell>
+                <ACell>{a.exam_types?.slug ? <ExamTag slug={a.exam_types.slug} /> : <span style={{ fontSize: 12.5, color: T.textMuted }}>All exams</span>}</ACell>
+                <ACell><StatusBadge status={a.published_at ? 'sent' : 'draft'} label={a.published_at ? 'Published' : 'Draft'} /></ACell>
+                <ACell align="right"><span style={{ fontSize: 12.5, color: T.textMuted }}>{fmt(a.published_at)}</span></ACell>
+              </ARow>
+            ))}
+          </ATable>
+        )}
+      </ACard>
+
+      <ACard title="Publish an announcement" subtitle="Visible in the app Home feed and marketing site" style={{ scrollMarginTop: 80 }}>
+        <div id="create" />
+        <AnnouncementForm />
+      </ACard>
     </AdminShell>
   );
 }

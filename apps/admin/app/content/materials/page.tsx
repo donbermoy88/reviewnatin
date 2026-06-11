@@ -1,89 +1,69 @@
-'use client';
+import { AdminShell } from '@/components/admin-shell';
+import { ACard, ACell, ARow, ATable, AIcon, EmptyState, ExamTag, StatusBadge, T } from '@/components/admin-ui';
+import { MaterialForm } from '@/components/content-forms';
+import { getAdminSupabase, isAdminConfigured } from '@/lib/supabase/admin';
 
-import { AdminCard, AdminShell, Field } from '@/components/admin-shell';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+export const dynamic = 'force-dynamic';
 
-export default function MaterialsAdminPage() {
-  const router = useRouter();
-  const [examSlug, setExamSlug] = useState('cse-professional');
-  const [subjectSlug, setSubjectSlug] = useState('verbal');
-  const [topicSlug, setTopicSlug] = useState('verbal-comprehension');
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [materialType, setMaterialType] = useState<'lesson' | 'cheat_sheet'>('lesson');
-  const [busy, setBusy] = useState(false);
-  const [status, setStatus] = useState('');
-  const [ok, setOk] = useState(false);
+type MaterialRow = {
+  id: string;
+  title: string;
+  material_type: string;
+  is_premium: boolean;
+  topics: { name?: string; subject_areas?: { exam_types?: { slug?: string } } } | null;
+};
 
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setBusy(true);
-    setStatus('');
-    try {
-      const res = await fetch('/api/content/materials', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ examSlug, subjectSlug, topicSlug, title, materialBody: body, materialType }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Failed');
-      setTitle('');
-      setBody('');
-      setOk(true);
-      setStatus(`Published material ${data.id}`);
-      router.refresh();
-    } catch (err) {
-      setOk(false);
-      setStatus(err instanceof Error ? err.message : 'Failed');
-    } finally {
-      setBusy(false);
-    }
-  };
+const TYPE_LABEL: Record<string, string> = { lesson: 'Lesson', cheat_sheet: 'Cheat sheet', formula: 'Formula', note: 'Note' };
+
+export default async function MaterialsAdminPage() {
+  let rows: MaterialRow[] = [];
+  if (isAdminConfigured()) {
+    const supabase = getAdminSupabase();
+    const { data } = await supabase
+      .from('review_materials')
+      .select('id, title, material_type, is_premium, topics ( name, subject_areas ( exam_types ( slug ) ) )')
+      .order('title')
+      .limit(100);
+    rows = (data ?? []) as MaterialRow[];
+  }
 
   return (
     <AdminShell
-      title="Publish Lesson or Cheat Sheet"
-      description="Add rich review materials to the mobile Study Notes tab and the next offline pack download."
-      maxWidth="max-w-4xl"
+      title="Lessons & cheat sheets"
+      description="Study Notes tab content and the offline pack. Publishing adds material to the mobile app."
+      actions={<a href="#create" className="rn-btn rn-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '9px 16px', fontSize: 13.5, fontWeight: 600, borderRadius: 8, background: T.primary, color: '#fff', textDecoration: 'none', boxShadow: '0 1px 2px rgba(37,99,235,.3)' }}><AIcon name="upload" size={15} /> New material</a>}
     >
-      <AdminCard padding="lg">
-        <form onSubmit={submit} className="grid gap-5 md:grid-cols-3">
-          <Field label="Exam slug">
-            <input className="field-input" value={examSlug} onChange={(e) => setExamSlug(e.target.value)} required />
-          </Field>
-          <Field label="Subject slug">
-            <input className="field-input" value={subjectSlug} onChange={(e) => setSubjectSlug(e.target.value)} required />
-          </Field>
-          <Field label="Topic slug">
-            <input className="field-input" value={topicSlug} onChange={(e) => setTopicSlug(e.target.value)} required />
-          </Field>
-          <Field label="Type">
-            <select
-              className="field-input"
-              value={materialType}
-              onChange={(e) => setMaterialType(e.target.value as 'lesson' | 'cheat_sheet')}
-            >
-              <option value="lesson">Lesson</option>
-              <option value="cheat_sheet">Cheat sheet</option>
-            </select>
-          </Field>
-          <Field label="Title" className="md:col-span-2">
-            <input className="field-input" value={title} onChange={(e) => setTitle(e.target.value)} required />
-          </Field>
-          <Field label="Body" className="md:col-span-3">
-            <textarea className="field-input" rows={10} value={body} onChange={(e) => setBody(e.target.value)} required />
-          </Field>
-          <div className="flex items-center gap-4 md:col-span-3">
-            <button type="submit" disabled={busy} className="btn btn-primary">
-              {busy ? 'Publishing…' : 'Publish material'}
-            </button>
-            {status ? (
-              <p className={`text-sm ${ok ? 'text-emerald-700' : 'text-red-600'}`}>{status}</p>
-            ) : null}
-          </div>
-        </form>
-      </AdminCard>
+      <ACard title={`Published materials (${rows.length})`} padding={0} style={{ marginBottom: 18 }}>
+        {rows.length === 0 ? (
+          <EmptyState icon="book" title="No materials yet" body="Publish your first lesson or cheat sheet below." />
+        ) : (
+          <ATable columns={[{ label: 'Material' }, { label: 'Exam' }, { label: 'Type' }, { label: 'Access' }]}>
+            {rows.map((m) => {
+              const slug = m.topics?.subject_areas?.exam_types?.slug;
+              return (
+                <ARow key={m.id}>
+                  <ACell>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
+                      <span style={{ width: 34, height: 34, borderRadius: 9, background: m.material_type === 'cheat_sheet' ? T.goldBg : T.infoBg, color: m.material_type === 'cheat_sheet' ? T.warn : T.primary, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <AIcon name={m.material_type === 'cheat_sheet' ? 'file' : 'book'} size={16} />
+                      </span>
+                      <span style={{ fontWeight: 600, fontSize: 13 }}>{m.title}</span>
+                    </div>
+                  </ACell>
+                  <ACell>{slug ? <ExamTag slug={slug} /> : <span style={{ color: T.textLight }}>—</span>}</ACell>
+                  <ACell><span style={{ fontSize: 12.5, color: T.textMuted }}>{TYPE_LABEL[m.material_type] ?? m.material_type}</span></ACell>
+                  <ACell><StatusBadge status={m.is_premium ? 'verified' : 'published'} label={m.is_premium ? 'Premium' : 'Free'} /></ACell>
+                </ARow>
+              );
+            })}
+          </ATable>
+        )}
+      </ACard>
+
+      <ACard title="Publish a lesson or cheat sheet" subtitle="Added to the Study Notes tab and the next offline pack" style={{ scrollMarginTop: 80 }}>
+        <div id="create" />
+        <MaterialForm />
+      </ACard>
     </AdminShell>
   );
 }
