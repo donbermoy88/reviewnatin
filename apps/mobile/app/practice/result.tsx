@@ -30,6 +30,7 @@ import { AdInterstitialModal } from '../../components/ad-interstitial-modal';
 import { tryShowSessionInterstitial } from '../../lib/ads/interstitial';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
+import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -49,6 +50,7 @@ export default function PracticeResultScreen() {
   const styles = useMemo(() => createResultStyles(theme), [theme]);
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
+  const { prefs } = usePreferences();
   const { displayName } = useUserProfile('reviewer');
   const [showInterstitial, setShowInterstitial] = useState(false);
   const [reportFeedback, setReportFeedback] = useState<string | null>(null);
@@ -301,10 +303,12 @@ export default function PracticeResultScreen() {
               <Text style={styles.reviewEmpty}>No saved answers for this session.</Text>
             ) : (
               review.map((item, idx) => {
+                // Respect the user's explanation-language preference (matches
+                // the quiz screen); fall back to whichever translation exists.
                 const explanation =
                   aiExtras[item.questionId] ??
-                  (item.explanationFil && item.explanationEn
-                    ? item.explanationEn
+                  (prefs.explanationLocale === 'fil'
+                    ? item.explanationFil ?? item.explanationEn
                     : item.explanationEn ?? item.explanationFil);
                 const open = expandedId === item.questionId;
                 const showAiCta = user && !explanation && item.isCorrect === false;
