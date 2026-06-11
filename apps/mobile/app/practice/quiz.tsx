@@ -26,6 +26,7 @@ import {
   checkQuestionAnswer,
   fetchExamBySlug,
   fetchPracticeQuestions,
+  fetchQuestionHint,
   fetchQuestionsByIds,
   type AnswerCheckResult,
 } from '../../lib/api/catalog';
@@ -308,20 +309,24 @@ export default function PracticeQuizScreen() {
   );
 
   /**
-   * Activates a hint: eliminates a random incorrect choice.
-   * Costs 1 hint credit (–10 XP) server-side.
+   * Activates a hint: eliminates one genuinely incorrect choice.
+   * The wrong choice is chosen server-side (get_question_hint) so the hint can
+   * never remove the correct answer. Only deducts a credit (–10 XP) once a real
+   * wrong choice has been eliminated.
    */
   const activateHint = useCallback(async () => {
     if (!current || revealed || !user || hintUsedOnQuestion.has(current.id) || hintCredits <= 0) return;
 
-    // Pick a wrong choice (not already selected, not correct)
-    // We don't know the correct choice yet — eliminate any non-selected choice
-    // that is likely wrong. We pick a random non-selected choice.
-    const candidates = current.choices.filter((c) => c.id !== selected);
-    if (!candidates.length) return;
+    let eliminatedId: string | null;
+    try {
+      eliminatedId = await fetchQuestionHint(current.id, selected);
+    } catch {
+      return;
+    }
+    // No eliminable wrong choice (or offline) — don't charge the user.
+    if (!eliminatedId) return;
 
-    const eliminated = candidates[Math.floor(Math.random() * candidates.length)];
-    setEliminatedChoiceId(eliminated.id);
+    setEliminatedChoiceId(eliminatedId);
 
     if (Platform.OS === 'ios') {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
@@ -329,7 +334,7 @@ export default function PracticeQuizScreen() {
 
     setHintUsedOnQuestion((prev) => new Set([...prev, current.id]));
 
-    // Server deduct (fire-and-forget)
+    // Server deduct (fire-and-forget) now that a real hint was applied.
     deductHint()
       .then((remaining) => setHintCredits(remaining))
       .catch(() => setHintCredits((c) => Math.max(c - 1, 0)));
