@@ -20,7 +20,9 @@ CREATE OR REPLACE FUNCTION public.get_question_hint(
 )
 RETURNS TEXT
 LANGUAGE sql
-STABLE
+-- VOLATILE (not STABLE): the body uses random(), so results vary per call.
+-- Marking it STABLE would let the planner collapse repeated calls in one query.
+VOLATILE
 SECURITY DEFINER
 SET search_path = public
 AS $$
