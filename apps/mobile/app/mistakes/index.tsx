@@ -73,12 +73,12 @@ export default function MistakesScreen() {
 
   if (!user) {
     return (
-      <StackShell title="Mistake Bank" subtitle="Every wrong answer, saved to review">
+      <StackShell title="Mistake Bank" subtitle="Bawat maling sagot, naka-save para i-review">
         <EmptyState
           icon={<Ionicons name="alert-circle-outline" size={32} color={colors.primary} />}
-          title="Log in to continue"
-          description="You need an account to save your Mistake Bank."
-          actionLabel="Log in"
+          title="Mag-log in muna"
+          description="Kailangan mo ng account para sa Mistake Bank mo."
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </StackShell>
@@ -131,15 +131,15 @@ export default function MistakesScreen() {
         ) : mistakes.length === 0 ? (
           <EmptyState
             icon={<Ionicons name="checkmark-circle-outline" size={32} color={colors.success} />}
-            title="No mistakes yet"
-            description="Questions you get wrong in quizzes will automatically be saved here for review."
-            actionLabel="Practice now"
+            title="Wala pang mali"
+            description="Awtomatikong masa-save dito ang mga maling sagot mo sa quiz para i-review."
+            actionLabel="Mag-practice na"
             onAction={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
           />
         ) : (
           <>
             <PrimaryButton
-              label="Review mistakes quiz"
+              label="Quiz ng mga mali"
               size="lg"
               style={{ margin: spacing.lg }}
               onPress={() =>

@@ -46,24 +46,24 @@ export default function StreakFreezeScreen() {
     const result = await buyStreakFreeze();
     if (result.ok) {
       setStatus((prev) => (prev ? { ...prev, streakFreezes: result.streakFreezes, totalXp: result.totalXp } : prev));
-      setMessage('Freeze added! Your streak is protected for one missed day.');
+      setMessage('Nadagdag ang freeze! Protektado ang streak mo sa isang araw na ma-miss.');
     } else if (result.error === 'insufficient_xp') {
-      setMessage(`You need ${STREAK_FREEZE_COST_XP} XP. Earn more by completing quizzes.`);
+      setMessage(`Kailangan mo ng ${STREAK_FREEZE_COST_XP} XP. Mag-quiz para makaipon pa.`);
     } else if (result.error === 'cap_reached') {
-      setMessage(`You already hold the maximum of ${STREAK_FREEZE_CAP} freezes.`);
+      setMessage(`Nasa max ka na — ${STREAK_FREEZE_CAP} freezes.`);
     } else {
-      setMessage('Could not buy a freeze. Please try again.');
+      setMessage('Hindi nabili ang freeze. Pakisubukan ulit.');
     }
     setBuying(false);
   }, [buying]);
 
   if (!user) {
     return (
-      <StackShell title="Streak freeze" subtitle="Protect your daily streak">
+      <StackShell title="Streak freeze" subtitle="Protektahan ang daily streak mo">
         <EmptyState
           icon={<Ionicons name="snow-outline" size={32} color={colors.primary} />}
           title="Log in to continue"
-          description="Streak freezes require a signed-in account."
+          description="Kailangan ng naka-sign in na account para sa streak freeze."
           actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
         />
@@ -77,7 +77,7 @@ export default function StreakFreezeScreen() {
   const canAfford = xp >= STREAK_FREEZE_COST_XP;
 
   return (
-    <StackShell title="Streak freeze" subtitle="Miss a day without losing your streak">
+    <StackShell title="Streak freeze" subtitle="Makaligtaan ang isang araw nang hindi nawawala ang streak">
       {loading ? (
         <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
       ) : (
@@ -96,7 +96,7 @@ export default function StreakFreezeScreen() {
             <Ionicons name="snow" size={40} color={colors.primary} />
             <Text style={{ fontFamily: fonts.display, fontSize: 40, color: colors.text, letterSpacing: -1 }}>{freezes}</Text>
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted }}>
-              freeze{freezes === 1 ? '' : 's'} owned · max {STREAK_FREEZE_CAP}
+              freeze{freezes === 1 ? '' : 's'} · max {STREAK_FREEZE_CAP}
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: spacing.xs }}>
               <Ionicons name="flame" size={16} color={colors.flame} />
@@ -107,8 +107,8 @@ export default function StreakFreezeScreen() {
           </View>
 
           <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, lineHeight: 20 }}>
-            A streak freeze automatically covers one missed day, so your streak keeps going when you return the next day.
-            Each freeze costs {STREAK_FREEZE_COST_XP} XP. Missing two days in a row still resets your streak.
+            Awtomatikong sinasaklaw ng streak freeze ang isang araw na nakaligtaan, kaya tuloy ang streak mo pagbalik.
+            {STREAK_FREEZE_COST_XP} XP bawat freeze. Kung dalawang araw na sunod ang ma-miss, magre-reset pa rin ang streak.
           </Text>
 
           {message ? (
@@ -130,8 +130,8 @@ export default function StreakFreezeScreen() {
               buying
                 ? 'Processing…'
                 : atCap
-                  ? 'Maximum freezes held'
-                  : `Buy a freeze (${STREAK_FREEZE_COST_XP} XP)`
+                  ? 'Max na ang freezes'
+                  : `Bumili ng freeze (${STREAK_FREEZE_COST_XP} XP)`
             }
             size="lg"
             disabled={buying || atCap || !canAfford}
@@ -139,7 +139,7 @@ export default function StreakFreezeScreen() {
           />
           {!atCap && !canAfford ? (
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textLight, textAlign: 'center' }}>
-              Earn {STREAK_FREEZE_COST_XP - xp} more XP to afford a freeze.
+              {STREAK_FREEZE_COST_XP - xp} XP na lang para makabili ng freeze.
             </Text>
           ) : null}
         </View>

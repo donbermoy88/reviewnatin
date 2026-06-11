@@ -114,7 +114,7 @@ export default function LoginScreen() {
     }
 
     if (result.needsEmailConfirmation) {
-      setInfo('Account created! Check your email to confirm before logging in.');
+      setInfo('Nagawa na ang account! I-check ang email mo para i-confirm bago mag-log in.');
       setMode('signin');
       setPassword('');
       setConfirmPassword('');
@@ -124,7 +124,7 @@ export default function LoginScreen() {
 
     const userId = result.session?.user?.id;
     if (!userId) {
-      setError('Signed in but no session found. Please try logging in again.');
+      setError('Naka-sign in pero walang session. Pakisubukan ulit mag-log in.');
       setMode('signin');
       setLoading(false);
       return;
@@ -192,12 +192,12 @@ export default function LoginScreen() {
           <Text style={styles.heroBrand}>
             Review<Text style={{ color: colors.accent }}>Natin</Text>
           </Text>
-          <Text style={styles.heroSub}>Review together. Pass together.</Text>
+          <Text style={styles.heroSub}>Mag-review tayo. Pasa tayo.</Text>
         </LinearGradient>
 
         <View style={[styles.form, { paddingBottom: insets.bottom + spacing.xl }]}>
           <Text style={styles.title}>{mode === 'signin' ? 'Log in' : 'Create account'}</Text>
-          <Text style={styles.subtitle}>Save your progress to the cloud.</Text>
+          <Text style={styles.subtitle}>I-save ang progress mo sa cloud.</Text>
 
           {!isConfigured ? (
             <View style={styles.banner}>
@@ -208,7 +208,7 @@ export default function LoginScreen() {
           ) : null}
 
           <PrimaryButton
-            label="Continue with Google"
+            label="Magpatuloy gamit ang Google"
             variant="outline"
             icon="logo-google"
             iconPosition="left"
@@ -236,12 +236,12 @@ export default function LoginScreen() {
             disabled={loading}
             hitSlop={8}
           >
-            <Text style={styles.guestLinkText}>Continue as guest</Text>
+            <Text style={styles.guestLinkText}>Magpatuloy bilang guest</Text>
           </Pressable>
 
           <View style={styles.dividerRow}>
             <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>or use email</Text>
+            <Text style={styles.dividerText}>o gamitin ang email</Text>
             <View style={styles.dividerLine} />
           </View>
 
@@ -305,7 +305,7 @@ export default function LoginScreen() {
               style={styles.forgotRow}
               hitSlop={8}
             >
-              <Text style={styles.forgotLink}>Forgot your password?</Text>
+              <Text style={styles.forgotLink}>Nakalimutan ang password?</Text>
             </Pressable>
           ) : null}
 
@@ -336,7 +336,7 @@ export default function LoginScreen() {
             disabled={loading}
           >
             <Text style={styles.modeSwitchText}>
-              {mode === 'signin' ? 'No account? ' : 'Already have one? '}
+              {mode === 'signin' ? 'No account? ' : 'May account ka na? '}
               <Text style={styles.modeSwitchBold}>
                 {mode === 'signin' ? 'Sign up' : 'Log in'}
               </Text>

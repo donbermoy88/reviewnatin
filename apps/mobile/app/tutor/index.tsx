@@ -97,12 +97,12 @@ export default function AiTutorScreen() {
 
   if (!user) {
     return (
-      <StackShell title="AI Tutor" subtitle="Ask Kuya AI — step-by-step Taglish help">
+      <StackShell title="AI Tutor" subtitle="Magtanong kay Kuya AI — step-by-step na tulong">
         <EmptyState
           icon={<Ionicons name="chatbubbles-outline" size={32} color={colors.primary} />}
-          title="Log in to continue"
-          description="AI tutor chat requires a signed-in premium account."
-          actionLabel="Log in"
+          title="Mag-log in muna"
+          description="Kailangan ng premium account para sa AI tutor chat."
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </StackShell>
@@ -214,7 +214,7 @@ export default function AiTutorScreen() {
 
       {!isPremium() ? (
         <View style={{ paddingHorizontal: spacing.lg, paddingBottom: insets.bottom + spacing.sm }}>
-          <PrimaryButton label="Unlock AI tutor" size="lg" onPress={() => router.push('/subscribe')} />
+          <PrimaryButton label="I-unlock ang AI tutor" size="lg" onPress={() => router.push('/subscribe')} />
         </View>
       ) : null}
     </KeyboardAvoidingView>

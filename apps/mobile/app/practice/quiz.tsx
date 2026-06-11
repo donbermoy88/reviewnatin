@@ -280,7 +280,7 @@ export default function PracticeQuizScreen() {
         } else if (isOffline) {
           const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
           if (!offlineQs.length) {
-            Alert.alert('No offline pack', 'Download the offline pack in Settings first.');
+            Alert.alert('Walang offline pack', 'I-download muna ang offline pack sa Settings.');
             router.back();
             return;
           }
@@ -698,14 +698,14 @@ export default function PracticeQuizScreen() {
       return;
     }
     const parts: string[] = [];
-    if (unanswered > 0) parts.push(`${unanswered} unanswered`);
-    if (flagged > 0) parts.push(`${flagged} flagged for review`);
+    if (unanswered > 0) parts.push(`${unanswered} hindi pa nasasagot`);
+    if (flagged > 0) parts.push(`${flagged} flagged`);
     Alert.alert(
-      'Submit exam?',
-      `You still have ${parts.join(' and ')}. Go back to review them, or submit now.`,
+      'I-submit ang exam?',
+      `May ${parts.join(' at ')} ka pa. Balikan mo muna o i-submit na.`,
       [
-        { text: 'Keep reviewing', style: 'cancel' },
-        { text: 'Submit anyway', style: 'destructive', onPress: () => void finishQuiz() },
+        { text: 'Balikan muna', style: 'cancel' },
+        { text: 'I-submit na', style: 'destructive', onPress: () => void finishQuiz() },
       ]
     );
   }, [questions.length, answersByIndex, flaggedIndices, finishQuiz]);
@@ -761,11 +761,11 @@ export default function PracticeQuizScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="lock-closed-outline" size={32} color={colors.primary} />}
-          title={paywallReason === 'board' ? 'Board Exam Mode' : 'Daily limit reached'}
+          title={paywallReason === 'board' ? 'Board Exam Mode' : 'Abot na ang daily limit'}
           description={
             paywallReason === 'board'
-              ? 'Simulate real exam pressure with ReviewNatin Plus — strict timer, no hints, no going back.'
-              : `You've used ${FREE_DAILY_QUESTIONS}/${FREE_DAILY_QUESTIONS} free questions today. Unlock unlimited practice.`
+              ? 'Maranasan ang totoong exam pressure gamit ang ReviewNatin Plus — strict timer, walang hint.'
+              : `Nagamit mo na ang ${FREE_DAILY_QUESTIONS}/${FREE_DAILY_QUESTIONS} libreng tanong ngayong araw. I-unlock ang unlimited practice.`
           }
           actionLabel="View plans"
           onAction={() => router.replace('/subscribe')}
@@ -779,8 +779,8 @@ export default function PracticeQuizScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
-          title="No questions yet"
-          description="We're still adding questions for this topic. Try another topic or check back soon — new content drops regularly."
+          title="Wala pang tanong dito"
+          description="Nagdadagdag pa kami ng tanong dito. Subukan ang ibang topic o balikan mamaya — regular ang bagong content."
           actionLabel="Go back"
           onAction={() => router.back()}
         />
@@ -805,12 +805,12 @@ export default function PracticeQuizScreen() {
                 const hasProgress = answers.length > 0 || !!selected;
                 if (isDiagnostic && user) {
                   Alert.alert(
-                    'Leave diagnostic?',
-                    'You can continue with the baseline later from Home. This attempt will not be saved.',
+                    'Aalis sa diagnostic?',
+                    'Pwede mong ituloy ang baseline mamaya sa Home. Hindi maise-save ang attempt na ito.',
                     [
-                      { text: 'Keep going', style: 'cancel' },
+                      { text: 'Ituloy', style: 'cancel' },
                       {
-                        text: 'Leave',
+                        text: 'Umalis',
                         style: 'destructive',
                         onPress: () => {
                           void dismissDiagnosticPrompt(user.id, slug).catch(() => {});
@@ -823,11 +823,11 @@ export default function PracticeQuizScreen() {
                 }
                 if (isTimed || isBarkada || hasProgress) {
                   Alert.alert(
-                    'Leave quiz?',
-                    'Your progress in this session will not be saved.',
+                    'Aalis sa quiz?',
+                    'Hindi maise-save ang progress sa session na ito.',
                     [
-                      { text: 'Keep going', style: 'cancel' },
-                      { text: 'Leave', style: 'destructive', onPress: () => router.back() },
+                      { text: 'Ituloy', style: 'cancel' },
+                      { text: 'Umalis', style: 'destructive', onPress: () => router.back() },
                     ]
                   );
                   return;
@@ -895,21 +895,21 @@ export default function PracticeQuizScreen() {
         {isTimed ? (
           <View style={styles.mockBanner}>
             <Text style={styles.mockBannerText}>
-              Timed practice · {Math.round(timedDuration / 60)} min · Auto-submit when time runs out
+              Timed practice · {Math.round(timedDuration / 60)} min · Auto-submit pag naubos ang oras
             </Text>
           </View>
         ) : null}
 
         {isWeakArea ? (
           <View style={styles.mockBanner}>
-            <Text style={styles.mockBannerText}>Quick 10 · Questions from your weakest topics</Text>
+            <Text style={styles.mockBannerText}>Quick 10 · Mga tanong sa pinakamahina mong topic</Text>
           </View>
         ) : null}
 
         {isBookmarkReview ? (
           <View style={styles.mockBanner}>
             <Text style={styles.mockBannerText}>
-              Bookmarks review · {questions.length} saved question{questions.length === 1 ? '' : 's'}
+              Bookmarks review · {questions.length} naka-save na tanong
             </Text>
           </View>
         ) : null}
@@ -917,14 +917,14 @@ export default function PracticeQuizScreen() {
         {isBoard ? (
           <View style={styles.mockBanner}>
             <Text style={styles.mockBannerText}>
-              Board Exam Mode · {questions.length} items · {Math.round(BOARD_DURATION_SECONDS / 60)} min · No hints · Tap ▦ to navigate
+              Board Exam Mode · {questions.length} items · {Math.round(BOARD_DURATION_SECONDS / 60)} min · Walang hint · I-tap ang ▦ para mag-navigate
             </Text>
           </View>
         ) : null}
 
         {isMock ? (
           <View style={styles.mockBanner}>
-            <Text style={styles.mockBannerText}>{mockTitle} · Mock exam · Strict timer · Tap ▦ to navigate &amp; review</Text>
+            <Text style={styles.mockBannerText}>{mockTitle} · Mock exam · Strict timer · I-tap ang ▦ para mag-navigate</Text>
           </View>
         ) : null}
 
@@ -1021,7 +1021,7 @@ export default function PracticeQuizScreen() {
             </Text>
             {!revealResult?.isCorrect && revealResult?.correctChoiceId ? (
               <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 13, color: colors.text, marginTop: 4 }}>
-                The correct answer is highlighted in green above.
+                Naka-highlight sa green sa itaas ang tamang sagot.
               </Text>
             ) : null}
           </View>
@@ -1030,7 +1030,7 @@ export default function PracticeQuizScreen() {
         {revealed && explanation ? (
           <View style={styles.explanation}>
             <View style={styles.explanationHeader}>
-              <Text style={styles.explanationTitle}>Explanation</Text>
+              <Text style={styles.explanationTitle}>Paliwanag</Text>
               <View style={styles.langToggle}>
                 {(['en', 'fil'] as const).map((l) => (
                   <Pressable
@@ -1060,7 +1060,7 @@ export default function PracticeQuizScreen() {
             <View style={styles.hintRow}>
               <Text style={{ fontSize: 18 }}>💡</Text>
               <Text style={[styles.hintText, { color: colors.textMuted }]}>
-                Hint used — one wrong answer removed
+                Nagamit ang hint — isang maling sagot ang tinanggal
               </Text>
             </View>
           ) : (
@@ -1071,13 +1071,13 @@ export default function PracticeQuizScreen() {
             >
               <Text style={{ fontSize: 18 }}>💡</Text>
               <Text style={[styles.hintText, hintCredits <= 0 && { color: colors.textMuted }]}>
-                Use hint <Text style={styles.hintXp}>(–10 XP)</Text>
+                Gamitin ang hint <Text style={styles.hintXp}>(–10 XP)</Text>
               </Text>
               <Pill
                 color={hintCredits > 0 ? colors.accentDark : colors.textMuted}
                 bg={colors.surface}
               >
-                {`${hintCredits} LEFT`}
+                {`${hintCredits} NATITIRA`}
               </Pill>
             </Pressable>
           )
@@ -1086,10 +1086,10 @@ export default function PracticeQuizScreen() {
           <PrimaryButton
             label={
               index < questions.length - 1
-                ? 'Next question →'
+                ? 'Susunod na tanong →'
                 : isDiagnostic
-                  ? 'View baseline result →'
-                  : 'View results →'
+                  ? 'Tingnan ang baseline →'
+                  : 'Tingnan ang resulta →'
             }
             size="lg"
             onPress={goNext}
@@ -1100,17 +1100,17 @@ export default function PracticeQuizScreen() {
             // the current question — unanswered items can be revisited via ▦.
             label={
               index < questions.length - 1
-                ? 'Next question →'
+                ? 'Susunod na tanong →'
                 : isBoard
-                  ? 'Submit board exam'
-                  : 'Submit mock exam'
+                  ? 'I-submit ang board exam'
+                  : 'I-submit ang mock exam'
             }
             size="lg"
             onPress={goNext}
           />
         ) : (
           <PrimaryButton
-            label={checking ? 'Checking…' : 'Check answer'}
+            label={checking ? 'Chini-check…' : 'I-check ang sagot'}
             size="lg"
             disabled={!selected || checking}
             onPress={checkAnswer}

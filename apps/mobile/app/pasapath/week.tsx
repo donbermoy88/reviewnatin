@@ -111,9 +111,9 @@ export default function PasaPathWeekScreen() {
       <StackShell title="PasaPath week">
         <EmptyState
           icon={<Ionicons name="calendar-outline" size={32} color={colors.primary} />}
-          title="See your weekly path"
+          title="Tingnan ang weekly path mo"
           description="Log in to track your PasaPath week — daily tasks, completion streaks, and personalized study targets."
-          actionLabel="Log in"
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </StackShell>
@@ -130,9 +130,9 @@ export default function PasaPathWeekScreen() {
       ) : days.length === 0 ? (
         <EmptyState
           icon={<Ionicons name="calendar-outline" size={32} color={colors.primary} />}
-          title="No plan for this week yet"
+          title="Wala pang plano ngayong linggo"
           description="Complete a practice quiz on the Home tab to generate your personalized weekly study plan."
-          actionLabel="Go to Home"
+          actionLabel="Pumunta sa Home"
           onAction={() => router.replace('/(tabs)')}
         />
       ) : (

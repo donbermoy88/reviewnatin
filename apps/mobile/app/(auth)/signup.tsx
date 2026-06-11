@@ -70,7 +70,7 @@ export default function SignUpScreen() {
     setInfo(null);
 
     if (!displayName.trim()) {
-      setError('Please enter your name.');
+      setError('Pakilagay ang pangalan mo.');
       return;
     }
 
@@ -101,14 +101,14 @@ export default function SignUpScreen() {
     }
 
     if (result.needsEmailConfirmation) {
-      setInfo('Account created. Check your email to confirm before logging in.');
+      setInfo('Nagawa na ang account. I-check ang email mo para i-confirm bago mag-log in.');
       setLoading(false);
       return;
     }
 
     const userId = result.session?.user?.id;
     if (!userId) {
-      setError('Account created, but no session was returned. Please log in.');
+      setError('Nagawa na ang account, pero walang session. Pakilog-in na lang.');
       setLoading(false);
       return;
     }
@@ -179,12 +179,12 @@ export default function SignUpScreen() {
           <Text style={styles.heroBrand}>
             Review<Text style={{ color: colors.accent }}>Natin</Text>
           </Text>
-          <Text style={styles.heroSub}>Review together. Pass together.</Text>
+          <Text style={styles.heroSub}>Mag-review tayo. Pasa tayo.</Text>
         </LinearGradient>
 
         <View style={[styles.form, { paddingBottom: insets.bottom + spacing.xl }]}>
-          <Text style={styles.title}>Create your account</Text>
-          <Text style={styles.subtitle}>Start your review journey.</Text>
+          <Text style={styles.title}>Gumawa ng account</Text>
+          <Text style={styles.subtitle}>Simulan ang review mo.</Text>
 
           {!isConfigured ? (
             <View style={styles.banner}>
@@ -195,7 +195,7 @@ export default function SignUpScreen() {
           ) : null}
 
           <PrimaryButton
-            label="Continue with Google"
+            label="Magpatuloy gamit ang Google"
             variant="outline"
             icon="logo-google"
             iconPosition="left"
@@ -215,14 +215,14 @@ export default function SignUpScreen() {
 
           <View style={styles.dividerRow}>
             <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>or use email</Text>
+            <Text style={styles.dividerText}>o gamitin ang email</Text>
             <View style={styles.dividerLine} />
           </View>
 
           <LabeledField label="Name" styles={styles}>
             <TextInput
               style={styles.input}
-              placeholder="Your name"
+              placeholder="Pangalan mo"
               placeholderTextColor={colors.textLight}
               autoCapitalize="words"
               autoComplete="name"
@@ -292,7 +292,7 @@ export default function SignUpScreen() {
             <ActivityIndicator color={colors.primary} style={{ marginVertical: spacing.md }} />
           ) : (
             <PrimaryButton
-              label="Create account"
+              label="Gumawa ng account"
               size="lg"
               icon="person-add-outline"
               iconPosition="left"
