@@ -18,6 +18,7 @@ import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { QuestionImage } from '../../components/question-image';
 import { ReportContentButton } from '../../components/report-content-button';
+import { QuestionNavigator } from '../../components/question-navigator';
 import { RichText } from '../../components/rich-text';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createQuizStyles } from '../../lib/themed-styles';
@@ -37,7 +38,7 @@ import {
 } from '../../lib/offline/pack';
 import { queuePendingSession } from '../../lib/offline/answer-queue';
 import { fetchBookmarkedQuestionIds, toggleBookmark } from '../../lib/api/bookmarks';
-import { fetchMistakeQuestionIds, recordQuizOutcome } from '../../lib/api/mistakes';
+import { fetchMistakeQuestionIds, recordQuizOutcome, recordSessionOutcomes } from '../../lib/api/mistakes';
 import { fetchMockExamById, fetchMockExamQuestions } from '../../lib/api/mock-exams';
 import { fetchDiagnosticQuestions, completeDiagnostic } from '../../lib/api/diagnostic';
 import {
@@ -123,7 +124,6 @@ export default function PracticeQuizScreen() {
   const [paywallBlocked, setPaywallBlocked] = useState(false);
   const [paywallReason, setPaywallReason] = useState<'daily' | 'board'>('daily');
   const [softTimerWarn, setSoftTimerWarn] = useState(false);
-  const [sectionBreak, setSectionBreak] = useState<string | null>(null);
   const [offlineMode, setOfflineMode] = useState(isOffline);
 
   const [loading, setLoading] = useState(true);
@@ -136,6 +136,11 @@ export default function PracticeQuizScreen() {
   const [revealResult, setRevealResult] = useState<AnswerCheckResult | null>(null);
   const [lang, setLang] = useState<'en' | 'fil'>(prefs.explanationLocale ?? 'en');
   const [answers, setAnswers] = useState<QuizAnswerRecord[]>([]);
+  // Strict exams (mock/board) use an answer-sheet model: selections are stored
+  // per question index so the user can answer in any order, revisit, and change
+  // answers via the navigator. Grading is deferred to submit.
+  const [answersByIndex, setAnswersByIndex] = useState<Record<number, string>>({});
+  const [navigatorOpen, setNavigatorOpen] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(
     isMock ? Number(durationSeconds) || 600 : isBoard ? BOARD_DURATION_SECONDS : isTimed ? timedDuration : 0
@@ -308,6 +313,11 @@ export default function PracticeQuizScreen() {
   };
 
   const current = questions[index];
+  const answeredIndices = useMemo(
+    () => new Set(Object.keys(answersByIndex).map(Number)),
+    [answersByIndex]
+  );
+  const answeredCount = answeredIndices.size;
 
   const pickChoice = useCallback(
     (choiceId: string) => {
@@ -316,8 +326,28 @@ export default function PracticeQuizScreen() {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
       }
       setSelected(choiceId);
+      // Answer-sheet: remember the selection for this question so it survives
+      // navigating away and back (strict exams only).
+      if (isStrictExam) {
+        setAnswersByIndex((prev) => ({ ...prev, [index]: choiceId }));
+      }
     },
-    [current, revealed]
+    [current, revealed, isStrictExam, index]
+  );
+
+  /** Jump to any question (strict-exam navigator). Restores its saved answer. */
+  const jumpTo = useCallback(
+    (target: number) => {
+      if (target < 0 || target >= questions.length) return;
+      setNavigatorOpen(false);
+      setIndex(target);
+      setSelected(answersByIndex[target] ?? null);
+      setRevealed(false);
+      setRevealResult(null);
+      setEliminatedChoiceId(null);
+      questionStarted.current = Date.now();
+    },
+    [questions.length, answersByIndex]
   );
 
   /**
@@ -395,7 +425,15 @@ export default function PracticeQuizScreen() {
     finishing.current = true;
 
     const elapsedQ = Math.round((Date.now() - questionStarted.current) / 1000);
-    const finalAnswers = finalizeAnswers(answers, current, selected, revealed || isStrictExam, elapsedQ, revealResult);
+    // Strict exams build the answer set from the answer-sheet (any-order, deferred
+    // grading — server computes correctness). Other modes use the live record.
+    const finalAnswers: QuizAnswerRecord[] = isStrictExam
+      ? questions.flatMap((q, i) =>
+          answersByIndex[i]
+            ? [{ questionId: q.id, selectedChoiceId: answersByIndex[i], isCorrect: false, timeSpentSeconds: 0 }]
+            : []
+        )
+      : finalizeAnswers(answers, current, selected, revealed, elapsedQ, revealResult);
     const totalCorrect = finalAnswers.filter((a) => a.isCorrect).length;
     const score = questions.length ? Math.round((totalCorrect / questions.length) * 100) : 0;
     const duration = Math.round((Date.now() - startedAt.current) / 1000);
@@ -469,6 +507,11 @@ export default function PracticeQuizScreen() {
               if (graded != null) serverScore = Math.round(graded);
               // Award XP for this session (fire-and-forget, non-blocking)
               awardSessionXp(sessionId).catch(() => {});
+              // Strict exams defer grading, so apply topic-mastery + mistake-bank
+              // outcomes server-side once here (practice mode does this per-answer).
+              if (isStrictExam) {
+                recordSessionOutcomes(sessionId).catch(() => {});
+              }
               if (!isDiagnostic) {
                 const newBadges = await awardUserBadges();
                 if (newBadges.length > 0) {
@@ -529,7 +572,7 @@ export default function PracticeQuizScreen() {
         barkadaChallengeId: barkadaChallengeId ?? '',
       },
     });
-  }, [answers, current, selected, revealed, revealResult, questions.length, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, router]);
+  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, router]);
 
   useEffect(() => {
     if ((isStrictExam || isTimed) && timeLeft === 0 && questions.length > 0) {
@@ -537,22 +580,21 @@ export default function PracticeQuizScreen() {
     }
   }, [isStrictExam, isTimed, timeLeft, questions.length, finishQuiz]);
 
-  const subjectName = (q: Question | undefined) => q?.topic?.subject?.name ?? '';
-
   const goNext = async () => {
-    if (isStrictExam && !revealed && selected && current) {
-      await checkAnswer();
+    // Strict exams (mock/board): answer-sheet model — selection is already saved
+    // by pickChoice. Advance freely (the navigator allows revisiting); submit on
+    // the last item.
+    if (isStrictExam) {
+      if (index < questions.length - 1) {
+        jumpTo(index + 1);
+      } else {
+        await finishQuiz();
+      }
+      return;
     }
 
     if (index < questions.length - 1) {
-      const nextIndex = index + 1;
-      const nextSubject = subjectName(questions[nextIndex]);
-      const currentSubject = subjectName(current);
-      if (isStrictExam && nextSubject && currentSubject && nextSubject !== currentSubject) {
-        setSectionBreak(nextSubject);
-        return;
-      }
-      setIndex(nextIndex);
+      setIndex(index + 1);
       setSelected(null);
       setRevealed(false);
       setRevealResult(null);
@@ -562,16 +604,6 @@ export default function PracticeQuizScreen() {
     }
 
     await finishQuiz();
-  };
-
-  const continueAfterSectionBreak = () => {
-    setSectionBreak(null);
-    setIndex((i) => i + 1);
-    setSelected(null);
-    setRevealed(false);
-    setRevealResult(null);
-    setEliminatedChoiceId(null);
-    questionStarted.current = Date.now();
   };
 
   const toggleBookmarkCurrent = async () => {
@@ -632,24 +664,6 @@ export default function PracticeQuizScreen() {
       : revealResult.explanationEn
     : null;
 
-  if (sectionBreak) {
-    return (
-      <View style={[styles.root, styles.center, { paddingTop: insets.top, paddingHorizontal: spacing.lg }]}>
-        <Ionicons name="layers-outline" size={40} color={colors.primary} />
-        <Text style={[styles.mockBannerText, { fontSize: 22, marginTop: spacing.md, textAlign: 'center' }]}>
-          Next section
-        </Text>
-        <Text style={{ fontFamily: theme.fonts.bodyMedium, color: colors.textMuted, marginTop: spacing.sm, textAlign: 'center' }}>
-          {sectionBreak}
-        </Text>
-        <Text style={{ fontFamily: theme.fonts.bodyMedium, color: colors.textLight, marginTop: spacing.md, textAlign: 'center', lineHeight: 20 }}>
-          Take a breath. Board exam mode — no going back to previous sections.
-        </Text>
-        <PrimaryButton label="Continue section →" size="lg" onPress={continueAfterSectionBreak} style={{ marginTop: spacing.xl, alignSelf: 'stretch' }} />
-      </View>
-    );
-  }
-
   return (
     <View style={styles.root}>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 140 }}>
@@ -696,22 +710,41 @@ export default function PracticeQuizScreen() {
               <Ionicons name="close" size={18} color={colors.text} />
             </Pressable>
           ) : (
-            <View style={styles.closeBtn}>
-              <Ionicons name="lock-closed" size={16} color={colors.textMuted} />
+            <Pressable
+              style={styles.closeBtn}
+              onPress={() => setNavigatorOpen(true)}
+              accessibilityRole="button"
+              accessibilityLabel="Open question navigator"
+            >
+              <Ionicons name="grid-outline" size={16} color={colors.primary} />
+            </Pressable>
+          )}
+          {isStrictExam ? (
+            <Pressable
+              style={[styles.segments, { alignItems: 'center', justifyContent: 'center' }]}
+              onPress={() => setNavigatorOpen(true)}
+              accessibilityRole="button"
+              accessibilityLabel={`Question ${index + 1} of ${questions.length}. Open navigator.`}
+            >
+              <Text style={styles.metaText}>
+                {index + 1} / {questions.length}
+                {answeredCount > 0 ? ` · ${answeredCount} answered` : ''}
+              </Text>
+            </Pressable>
+          ) : (
+            <View style={styles.segments}>
+              {questions.map((_, i) => (
+                <View
+                  key={i}
+                  style={[
+                    styles.segment,
+                    i < index && styles.segmentDone,
+                    i === index && styles.segmentActive,
+                  ]}
+                />
+              ))}
             </View>
           )}
-          <View style={styles.segments}>
-            {questions.map((_, i) => (
-              <View
-                key={i}
-                style={[
-                  styles.segment,
-                  i < index && styles.segmentDone,
-                  i === index && styles.segmentActive,
-                ]}
-              />
-            ))}
-          </View>
           <View style={[styles.timer, (isStrictExam || isTimed) && timeLeft < 60 && { backgroundColor: colors.errorBg }]}>
             <Ionicons name="time-outline" size={14} color={(isStrictExam || isTimed) && timeLeft < 60 ? colors.error : colors.accentDark} />
             <Text style={[styles.timerText, (isStrictExam || isTimed) && timeLeft < 60 && { color: colors.error }]}>
@@ -754,14 +787,14 @@ export default function PracticeQuizScreen() {
         {isBoard ? (
           <View style={styles.mockBanner}>
             <Text style={styles.mockBannerText}>
-              Board Exam Mode · {questions.length} items · {Math.round(BOARD_DURATION_SECONDS / 60)} min · No hints · No going back
+              Board Exam Mode · {questions.length} items · {Math.round(BOARD_DURATION_SECONDS / 60)} min · No hints · Tap ▦ to navigate
             </Text>
           </View>
         ) : null}
 
         {isMock ? (
           <View style={styles.mockBanner}>
-            <Text style={styles.mockBannerText}>{mockTitle} · Mock exam · Strict timer · No going back</Text>
+            <Text style={styles.mockBannerText}>{mockTitle} · Mock exam · Strict timer · Tap ▦ to navigate &amp; review</Text>
           </View>
         ) : null}
 
@@ -907,6 +940,8 @@ export default function PracticeQuizScreen() {
           />
         ) : isStrictExam || revealed ? (
           <PrimaryButton
+            // Free navigation: advancing/submitting never requires an answer on
+            // the current question — unanswered items can be revisited via ▦.
             label={
               index < questions.length - 1
                 ? 'Next question →'
@@ -915,7 +950,6 @@ export default function PracticeQuizScreen() {
                   : 'Submit mock exam'
             }
             size="lg"
-            disabled={!selected || checking}
             onPress={goNext}
           />
         ) : (
@@ -927,6 +961,21 @@ export default function PracticeQuizScreen() {
           />
         )}
       </View>
+
+      {isStrictExam ? (
+        <QuestionNavigator
+          visible={navigatorOpen}
+          questions={questions}
+          currentIndex={index}
+          answeredIndices={answeredIndices}
+          onJump={jumpTo}
+          onClose={() => setNavigatorOpen(false)}
+          onSubmit={() => {
+            setNavigatorOpen(false);
+            void finishQuiz();
+          }}
+        />
+      ) : null}
     </View>
   );
 }
