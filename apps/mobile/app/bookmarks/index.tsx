@@ -161,36 +161,49 @@ export default function BookmarksScreen() {
               onAction={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
             />
           ) : (
-            questions.map((item) => (
-              <View key={item.questionId} style={styles.card}>
-                <Text style={styles.cardSubject}>
-                  {item.subjectName}
-                  {item.topicName ? ` · ${item.topicName}` : ''}
-                </Text>
-                <Text style={styles.cardStem}>{item.stem}</Text>
-                <View style={{ flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm }}>
-                  <PrimaryButton
-                    label="Practice"
-                    variant="outline"
-                    onPress={() =>
-                      router.push({
-                        pathname: '/practice/quiz',
-                        params: { examSlug },
-                      })
-                    }
-                  />
-                  <ReportContentButton
-                    contentType="question"
-                    contentId={item.questionId}
-                    label="Flag"
-                    compact
-                  />
-                  <Pressable onPress={() => removeQuestion(item.questionId)} hitSlop={8} style={{ justifyContent: 'center' }}>
-                    <Ionicons name="trash-outline" size={20} color={colors.error} />
-                  </Pressable>
+            <>
+              <PrimaryButton
+                label={`Practice all bookmarks (${questions.length})`}
+                size="lg"
+                style={{ margin: spacing.lg }}
+                onPress={() =>
+                  router.push({
+                    pathname: '/practice/quiz',
+                    params: { examSlug, mode: 'bookmark_review' },
+                  })
+                }
+              />
+              {questions.map((item) => (
+                <View key={item.questionId} style={styles.card}>
+                  <Text style={styles.cardSubject}>
+                    {item.subjectName}
+                    {item.topicName ? ` · ${item.topicName}` : ''}
+                  </Text>
+                  <Text style={styles.cardStem}>{item.stem}</Text>
+                  <View style={{ flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm }}>
+                    <PrimaryButton
+                      label="Practice this"
+                      variant="outline"
+                      onPress={() =>
+                        router.push({
+                          pathname: '/practice/quiz',
+                          params: { examSlug, mode: 'bookmark_review', focusQuestionId: item.questionId },
+                        })
+                      }
+                    />
+                    <ReportContentButton
+                      contentType="question"
+                      contentId={item.questionId}
+                      label="Flag"
+                      compact
+                    />
+                    <Pressable onPress={() => removeQuestion(item.questionId)} hitSlop={8} style={{ justifyContent: 'center' }}>
+                      <Ionicons name="trash-outline" size={20} color={colors.error} />
+                    </Pressable>
+                  </View>
                 </View>
-              </View>
-            ))
+              ))}
+            </>
           )
         ) : materials.length === 0 ? (
           <EmptyState

@@ -179,7 +179,9 @@ export default function PracticeResultScreen() {
               ? 'Quick 10 · weak areas'
               : mode === 'barkada'
                 ? 'Barkada challenge'
-                : 'Practice quiz';
+                : mode === 'bookmark_review'
+                  ? 'Bookmarks review'
+                  : 'Practice quiz';
 
   const toggleSpeak = async (questionId: string, text: string) => {
     if (speakingId === questionId) {
@@ -247,7 +249,9 @@ export default function PracticeResultScreen() {
                       ? 'Quick 10 complete!'
                       : mode === 'barkada'
                         ? 'Barkada challenge complete!'
-                        : 'Quiz complete!'}
+                        : mode === 'bookmark_review'
+                          ? 'Bookmarks review complete!'
+                          : 'Quiz complete!'}
           </Text>
           <Text style={styles.heroTitle}>
             {mode === 'diagnostic'

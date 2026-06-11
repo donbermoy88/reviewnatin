@@ -92,7 +92,7 @@ export default function PracticeQuizScreen() {
   const theme = useAppTheme();
   const { colors, spacing } = theme;
   const styles = useMemo(() => createQuizStyles(theme), [theme]);
-  const { examSlug, topicSlug, mode, mockExamId, durationSeconds, previewLimit, pasapathTaskId, barkadaChallengeId, questionLimit } = useLocalSearchParams<{
+  const { examSlug, topicSlug, mode, mockExamId, durationSeconds, previewLimit, pasapathTaskId, barkadaChallengeId, questionLimit, focusQuestionId } = useLocalSearchParams<{
     examSlug?: string;
     topicSlug?: string;
     mode?: string;
@@ -102,10 +102,12 @@ export default function PracticeQuizScreen() {
     pasapathTaskId?: string;
     barkadaChallengeId?: string;
     questionLimit?: string;
+    focusQuestionId?: string;
   }>();
   const slug = examSlug ?? DEFAULT_EXAM_SLUG;
   const isMock = mode === 'mock';
   const isMistakeReview = mode === 'mistake_review';
+  const isBookmarkReview = mode === 'bookmark_review';
   const isDiagnostic = mode === 'diagnostic';
   const isTimed = mode === 'timed';
   const isWeakArea = mode === 'weak_area';
@@ -196,6 +198,16 @@ export default function PracticeQuizScreen() {
         } else if (isMistakeReview) {
           const ids = await fetchMistakeQuestionIds(slug, 12);
           setQuestions(randomizeQuestionSet(await fetchQuestionsByIds(ids)));
+        } else if (isBookmarkReview) {
+          if (!user) {
+            router.replace('/(auth)/login');
+            return;
+          }
+          // Focus a single bookmarked question, or drill all of them.
+          const ids = focusQuestionId
+            ? [focusQuestionId]
+            : [...(await fetchBookmarkedQuestionIds(user.id))];
+          setQuestions(randomizeQuestionSet(await fetchQuestionsByIds(ids)));
         } else if (isWeakArea) {
           if (!user) {
             router.replace('/(auth)/login');
@@ -258,7 +270,7 @@ export default function PracticeQuizScreen() {
           setHintCredits(xpStats.hintCredits);
         }
       } catch {
-        if (!isMock && !isBoard && !isDiagnostic && !isWeakArea && !isBarkada && (await hasOfflinePack(slug))) {
+        if (!isMock && !isBoard && !isDiagnostic && !isWeakArea && !isBarkada && !isBookmarkReview && (await hasOfflinePack(slug))) {
           const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
           if (offlineQs.length) {
             setOfflineMode(true);
@@ -269,7 +281,7 @@ export default function PracticeQuizScreen() {
         setLoading(false);
       }
     })();
-  }, [slug, topicSlug, isMock, isBoard, isOffline, isMistakeReview, isDiagnostic, isTimed, isWeakArea, isBarkada, barkadaLimit, mockExamId, previewLimit, user, isPremium, router]);
+  }, [slug, topicSlug, isMock, isBoard, isOffline, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, barkadaLimit, mockExamId, previewLimit, focusQuestionId, user, isPremium, router]);
 
   useEffect(() => {
     setLang(prefs.explanationLocale ?? 'en');
@@ -511,13 +523,13 @@ export default function PracticeQuizScreen() {
         duration: String(duration),
         sessionId: sessionId ?? '',
         examSlug: slug,
-        mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : offlineMode ? 'offline' : 'practice',
+        mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isBookmarkReview ? 'bookmark_review' : offlineMode ? 'offline' : 'practice',
         diagnosticReadiness: diagnosticReadiness != null ? String(diagnosticReadiness) : '',
         pasapathTaskId: pasapathTaskId ?? '',
         barkadaChallengeId: barkadaChallengeId ?? '',
       },
     });
-  }, [answers, current, selected, revealed, revealResult, questions.length, user, slug, isMock, isBoard, isMistakeReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, router]);
+  }, [answers, current, selected, revealed, revealResult, questions.length, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, router]);
 
   useEffect(() => {
     if ((isStrictExam || isTimed) && timeLeft === 0 && questions.length > 0) {
@@ -728,6 +740,14 @@ export default function PracticeQuizScreen() {
         {isWeakArea ? (
           <View style={styles.mockBanner}>
             <Text style={styles.mockBannerText}>Quick 10 · Questions from your weakest topics</Text>
+          </View>
+        ) : null}
+
+        {isBookmarkReview ? (
+          <View style={styles.mockBanner}>
+            <Text style={styles.mockBannerText}>
+              Bookmarks review · {questions.length} saved question{questions.length === 1 ? '' : 's'}
+            </Text>
           </View>
         ) : null}
 
