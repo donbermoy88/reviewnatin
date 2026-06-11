@@ -148,6 +148,24 @@ export default function PracticeResultScreen() {
 
   const wrongCount = review.filter((r) => r.isCorrect === false).length;
 
+  // Per-subject score breakdown (most useful on multi-subject mock/board exams).
+  const subjectBreakdown = useMemo(() => {
+    const map = new Map<string, { correct: number; total: number }>();
+    for (const item of review) {
+      const name = item.subjectName ?? 'Other';
+      const entry = map.get(name) ?? { correct: 0, total: 0 };
+      entry.total += 1;
+      if (item.isCorrect) entry.correct += 1;
+      map.set(name, entry);
+    }
+    return Array.from(map.entries()).map(([name, v]) => ({
+      name,
+      correct: v.correct,
+      total: v.total,
+      pct: v.total ? Math.round((v.correct / v.total) * 100) : 0,
+    }));
+  }, [review]);
+
   // Review list, filterable by All / Incorrect / Flagged. Question numbers stay
   // tied to session order regardless of the active filter.
   const filteredReview = useMemo(() => {
@@ -315,6 +333,32 @@ export default function PracticeResultScreen() {
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.text, lineHeight: 20 }}>
               {reportFeedback}
             </Text>
+          </View>
+        ) : null}
+
+        {subjectBreakdown.length >= 2 ? (
+          <View style={styles.reviewBox}>
+            <Text style={styles.reviewTitle}>Score by subject</Text>
+            <View style={{ gap: spacing.sm, marginTop: spacing.xs }}>
+              {subjectBreakdown.map((s) => {
+                const barColor = s.pct >= 75 ? colors.success : s.pct >= 50 ? colors.flame : colors.error;
+                return (
+                  <View key={s.name}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 }}>
+                      <Text style={{ fontFamily: fonts.bodySemiBold, fontSize: 13, color: colors.text, flex: 1 }} numberOfLines={1}>
+                        {s.name}
+                      </Text>
+                      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: barColor }}>
+                        {s.correct}/{s.total} · {s.pct}%
+                      </Text>
+                    </View>
+                    <View style={{ height: 6, borderRadius: 999, backgroundColor: colors.border, overflow: 'hidden' }}>
+                      <View style={{ width: `${s.pct}%`, height: '100%', backgroundColor: barColor, borderRadius: 999 }} />
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
           </View>
         ) : null}
 
