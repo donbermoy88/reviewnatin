@@ -49,9 +49,9 @@ import { isDiagnosticPromptDismissed } from '../../lib/diagnostic-prompt';
 
 function timeGreeting(): string {
   const h = new Date().getHours();
-  if (h < 12) return 'Good morning,';
-  if (h < 18) return 'Good afternoon,';
-  return 'Good evening,';
+  if (h < 12) return 'Magandang umaga,';
+  if (h < 18) return 'Magandang hapon,';
+  return 'Magandang gabi,';
 }
 
 function examAbbr(slug: string): string {
@@ -256,7 +256,7 @@ export default function DashboardScreen() {
   const showAccuracy = stats.totalAnswered >= 20 && stats.accuracyPercent != null;
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
   const firstName = displayName.split(/\s+/)[0] ?? displayName;
-  const streakLabel = stats.streakDays > 0 ? 'day streak' : 'start today';
+  const streakLabel = stats.streakDays > 0 ? 'day streak' : 'simulan na';
 
   const ensurePracticeAllowed = () => {
     if (!user) return true;
@@ -561,25 +561,25 @@ export default function DashboardScreen() {
             <View style={[styles.pasapathCard, { marginBottom: spacing.md }]}>
               <Text style={styles.pasapathLbl}>Today&apos;s PasaPath</Text>
               <Text style={[styles.pasapathMeta, { marginBottom: spacing.md }]}>
-                Complete your first quiz to generate your daily study plan.
+                Tapusin ang unang quiz para mabuo ang daily study plan mo.
               </Text>
-              <PrimaryButton label="Start practicing" onPress={() => void startPractice()} />
+              <PrimaryButton label="Magsimulang mag-practice" onPress={() => void startPractice()} />
             </View>
           ) : null}
 
           <LinearGradient colors={[...gradients.gold]} style={styles.goalCard}>
             <GoalRing percent={dailyGoalPct} />
             <View style={{ flex: 1 }}>
-              <Text style={styles.goalLbl}>Today&apos;s goal</Text>
+              <Text style={styles.goalLbl}>Goal ngayong araw</Text>
               <Text style={styles.goalTitle}>
                 {questionsDone} / {questionsTarget} questions
               </Text>
               <Text style={styles.goalHint}>
                 {questionsDone >= questionsTarget
-                  ? 'Goal done for today! 🎉'
+                  ? 'Tapos na ang goal mo ngayon! 🎉'
                   : user
-                    ? `${questionsTarget - questionsDone} to go — keep going! 💪`
-                    : `${questionsTarget - questionsDone} to go — let's go! 💪`}
+                    ? `${questionsTarget - questionsDone} na lang — kaya mo 'yan! 💪`
+                    : `${questionsTarget - questionsDone} na lang — tara na! 💪`}
               </Text>
               {showAccuracy ? (
                 <Text style={[styles.goalHint, { marginTop: 6 }]}>
@@ -605,7 +605,7 @@ export default function DashboardScreen() {
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.continueLbl}>
-                  {hasActivity ? 'Continue reviewing' : 'Start reviewing'}
+                  {hasActivity ? 'Ituloy ang review' : 'Simulan ang review'}
                 </Text>
                 <Text style={styles.continueTitle}>{examName || 'Your exam'}</Text>
               </View>
@@ -614,7 +614,7 @@ export default function DashboardScreen() {
             <Text style={styles.continueMeta}>
               {hasActivity
                 ? `${stats.sessionCount} quiz${stats.sessionCount === 1 ? '' : 'zes'} completed`
-                : 'Start your first quiz — no fake progress here.'}
+                : 'Simulan ang unang quiz mo.'}
             </Text>
           </Pressable>
 
@@ -639,7 +639,7 @@ export default function DashboardScreen() {
           {subjects.length > 0 ? (
             <>
               <View style={styles.sectionHead}>
-                <Text style={styles.sectionTitle}>Quick practice</Text>
+                <Text style={styles.sectionTitle}>Mabilis na practice</Text>
               </View>
               {subjects.map((subject, index) => (
                 <Pressable
@@ -657,7 +657,7 @@ export default function DashboardScreen() {
                   </View>
                   <View style={{ flex: 1 }}>
                     <Text style={styles.quickName}>{subject.name}</Text>
-                    <Text style={styles.quickMeta}>Tap to browse topics</Text>
+                    <Text style={styles.quickMeta}>I-tap para sa mga topic</Text>
                   </View>
                   <View style={[styles.playBtn, { backgroundColor: colors.primary }]}>
                     <Ionicons name="play" size={14} color="#fff" />
@@ -670,9 +670,9 @@ export default function DashboardScreen() {
           <View style={styles.lowerSection}>
             {!user ? (
               <Pressable style={styles.guestBanner} onPress={() => router.push('/(auth)/login')}>
-                <Text style={styles.guestBannerTitle}>Log in to save your progress</Text>
+                <Text style={styles.guestBannerTitle}>Mag-log in para ma-save ang progress mo</Text>
                 <Text style={styles.guestBannerSub}>
-                  PasaPath, streak, Mistake Bank, and readiness — all synced when you have an account.
+                  PasaPath, streak, Mistake Bank, at readiness — naka-sync lahat kapag may account ka.
                 </Text>
               </Pressable>
             ) : null}

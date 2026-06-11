@@ -67,7 +67,7 @@ export default function NotesScreen() {
       setNotes(await fetchNotes(user.id));
       setEditing(null);
     } catch {
-      Alert.alert('Could not save', 'Please try again.');
+      Alert.alert('Hindi na-save', 'Pakisubukan ulit.');
     } finally {
       setSaving(false);
     }
@@ -75,7 +75,7 @@ export default function NotesScreen() {
 
   const remove = useCallback(
     (note: StudyNote) => {
-      Alert.alert('Delete note?', 'This cannot be undone.', [
+      Alert.alert('I-delete ang note?', 'Hindi na ito maibabalik.', [
         { text: 'Cancel', style: 'cancel' },
         {
           text: 'Delete',
@@ -87,7 +87,7 @@ export default function NotesScreen() {
                 setNotes((prev) => prev.filter((n) => n.id !== note.id));
                 setEditing(null);
               } catch {
-                Alert.alert('Could not delete', 'Please try again.');
+                Alert.alert('Hindi na-delete', 'Pakisubukan ulit.');
               }
             })();
           },
@@ -99,11 +99,11 @@ export default function NotesScreen() {
 
   if (!user) {
     return (
-      <StackShell title="Study notes" subtitle="Your private study notes">
+      <StackShell title="Study notes" subtitle="Mga personal mong study notes">
         <EmptyState
           icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
           title="Log in to continue"
-          description="You need an account to save study notes."
+          description="Kailangan mo ng account para mag-save ng notes."
           actionLabel="Log in"
           onAction={() => router.push('/(auth)/login')}
         />
@@ -119,7 +119,7 @@ export default function NotesScreen() {
           <TextInput
             value={editing.title}
             onChangeText={(t) => setEditing((e) => (e ? { ...e, title: t } : e))}
-            placeholder="Title"
+            placeholder="Pamagat"
             placeholderTextColor={colors.textLight}
             style={{
               fontFamily: fonts.bodyBold,
@@ -136,7 +136,7 @@ export default function NotesScreen() {
           <TextInput
             value={editing.body}
             onChangeText={(t) => setEditing((e) => (e ? { ...e, body: t } : e))}
-            placeholder="Write your notes…"
+            placeholder="Isulat ang notes mo…"
             placeholderTextColor={colors.textLight}
             multiline
             textAlignVertical="top"
@@ -154,12 +154,12 @@ export default function NotesScreen() {
               minHeight: 220,
             }}
           />
-          <PrimaryButton label={saving ? 'Saving…' : 'Save note'} size="lg" disabled={saving} onPress={() => void save()} />
+          <PrimaryButton label={saving ? 'Sina-save…' : 'I-save ang note'} size="lg" disabled={saving} onPress={() => void save()} />
           <View style={{ flexDirection: 'row', gap: spacing.sm }}>
-            <PrimaryButton label="Cancel" variant="outline" style={{ flex: 1 }} onPress={() => setEditing(null)} />
+            <PrimaryButton label="Kanselahin" variant="outline" style={{ flex: 1 }} onPress={() => setEditing(null)} />
             {editing.id ? (
               <PrimaryButton
-                label="Delete"
+                label="I-delete"
                 variant="outline"
                 style={{ flex: 1 }}
                 onPress={() => {
@@ -178,7 +178,7 @@ export default function NotesScreen() {
   return (
     <StackShell title="Study notes" subtitle={`${notes.length} note${notes.length === 1 ? '' : 's'}`}>
       <PrimaryButton
-        label="+ New note"
+        label="+ Bagong note"
         size="lg"
         style={{ marginBottom: spacing.md }}
         onPress={() => setEditing({ id: null, title: '', body: '' })}
@@ -188,8 +188,8 @@ export default function NotesScreen() {
       ) : notes.length === 0 ? (
         <EmptyState
           icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
-          title="No notes yet"
-          description="Jot down key formulas, mnemonics, and reminders. Tap “New note” to start."
+          title="Wala pang notes"
+          description="Itala ang mga formula, mnemonics, at paalala. I-tap ang “Bagong note” para magsimula."
         />
       ) : (
         <View style={{ gap: spacing.sm, paddingBottom: insets.bottom + spacing.xl }}>
@@ -201,7 +201,7 @@ export default function NotesScreen() {
             >
               <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: spacing.sm }}>
                 <Text style={[styles.cardStem, { flex: 1 }]} numberOfLines={1}>
-                  {note.title || 'Untitled note'}
+                  {note.title || 'Walang pamagat'}
                 </Text>
                 <Pressable onPress={() => remove(note)} hitSlop={8} style={{ justifyContent: 'center' }}>
                   <Ionicons name="trash-outline" size={18} color={colors.error} />

@@ -129,7 +129,7 @@ export default function FocusTimerScreen() {
 
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: 'rgba(255,255,255,0.7)', marginBottom: spacing.sm }}>
-            {done ? 'Session complete 🎉' : running ? 'Stay focused — you’ve got this' : 'Pick a duration and begin'}
+            {done ? 'Tapos na ang session 🎉' : running ? 'Focus lang — kaya mo ’yan' : 'Pumili ng tagal at magsimula'}
           </Text>
 
           <Text
@@ -146,7 +146,7 @@ export default function FocusTimerScreen() {
 
           {completedCount > 0 ? (
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: 'rgba(255,255,255,0.6)', marginTop: spacing.md }}>
-              {completedCount} session{completedCount === 1 ? '' : 's'} completed today
+              {completedCount} session{completedCount === 1 ? '' : 's'} na tapos ngayon
             </Text>
           ) : null}
 
@@ -181,12 +181,12 @@ export default function FocusTimerScreen() {
         {/* Controls */}
         <View style={{ gap: spacing.sm }}>
           {done ? (
-            <PrimaryButton label="Start another session" variant="white" size="lg" onPress={reset} />
+            <PrimaryButton label="Magsimula ng panibago" variant="white" size="lg" onPress={reset} />
           ) : running ? (
-            <PrimaryButton label="Pause" variant="white" size="lg" icon="pause" onPress={pause} />
+            <PrimaryButton label="I-pause" variant="white" size="lg" icon="pause" onPress={pause} />
           ) : (
             <PrimaryButton
-              label={remaining < total ? 'Resume' : 'Start focusing'}
+              label={remaining < total ? 'Ituloy' : 'Magsimulang mag-focus'}
               variant="white"
               size="lg"
               icon="play"
@@ -195,7 +195,7 @@ export default function FocusTimerScreen() {
           )}
           {!done && remaining < total ? (
             <Pressable onPress={reset} hitSlop={8} style={{ alignSelf: 'center', paddingVertical: spacing.sm }}>
-              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: 'rgba(255,255,255,0.8)' }}>Reset</Text>
+              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: 'rgba(255,255,255,0.8)' }}>I-reset</Text>
             </Pressable>
           ) : null}
         </View>

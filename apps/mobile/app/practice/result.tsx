@@ -200,9 +200,9 @@ export default function PracticeResultScreen() {
       const result = await fetchAiExplanation(questionId, { examSlug });
       if (!result.ok) {
         if (result.error === 'daily_limit_reached') {
-          Alert.alert('Daily limit reached', 'Free tier: 5 AI explanations per day. Upgrade for unlimited.');
+          Alert.alert('Abot na ang daily limit', 'Free tier: 5 AI explanations kada araw. Mag-upgrade para unlimited.');
         } else {
-          Alert.alert('Not available', 'Please try again later.');
+          Alert.alert('Hindi available', 'Pakisubukan ulit mamaya.');
         }
         return;
       }
@@ -285,20 +285,20 @@ export default function PracticeResultScreen() {
           </View>
           <Text style={styles.heroLbl}>
             {mode === 'diagnostic'
-              ? 'Diagnostic complete!'
+              ? 'Tapos na ang diagnostic!'
               : mode === 'mock'
-                ? 'Mock exam complete!'
+                ? 'Tapos na ang mock exam!'
                 : mode === 'board'
-                  ? 'Board exam complete!'
+                  ? 'Tapos na ang board exam!'
                   : mode === 'timed'
-                    ? 'Timed practice complete!'
+                    ? 'Tapos na ang timed practice!'
                     : mode === 'weak_area'
-                      ? 'Quick 10 complete!'
+                      ? 'Tapos na ang Quick 10!'
                       : mode === 'barkada'
-                        ? 'Barkada challenge complete!'
+                        ? 'Tapos na ang Barkada challenge!'
                         : mode === 'bookmark_review'
-                          ? 'Bookmarks review complete!'
-                          : 'Quiz complete!'}
+                          ? 'Tapos na ang Bookmarks review!'
+                          : 'Tapos na ang quiz!'}
           </Text>
           <Text style={styles.heroTitle}>
             {mode === 'diagnostic'
@@ -306,18 +306,18 @@ export default function PracticeResultScreen() {
               : mode === 'mock' || mode === 'board'
                 ? scoreNum >= MOCK_PASS_THRESHOLD
                   ? `${mode === 'board' ? 'Board exam' : 'Mock'} PASS — ${scoreNum}% 🎉`
-                  : `Score: ${scoreNum}% — aim for ${MOCK_PASS_THRESHOLD}%+`
+                  : `Score: ${scoreNum}% — target ay ${MOCK_PASS_THRESHOLD}%+`
                 : scoreNum >= 70
-                  ? `Great work, ${displayName}! 🎉`
-                  : 'Keep going! 💪'}
+                  ? `Galing, ${displayName}! 🎉`
+                  : 'Kaya mo pa! 💪'}
           </Text>
           <ScoreRing percent={scoreNum} correct={correctNum} total={totalNum} />
         </LinearGradient>
 
         <View style={styles.statsRow}>
           {[
-            { v: `${correctNum}/${totalNum}`, l: 'Correct', c: colors.primary },
-            { v: formatDuration(duration ?? '0'), l: 'Time taken', c: colors.accentDark },
+            { v: `${correctNum}/${totalNum}`, l: 'Tama', c: colors.primary },
+            { v: formatDuration(duration ?? '0'), l: 'Oras', c: colors.accentDark },
             { v: `${scoreNum}%`, l: 'Score', c: scoreNum >= 75 ? colors.success : scoreNum >= 50 ? colors.flame : colors.error },
           ].map((s) => (
             <View key={s.l} style={styles.statCard}>
@@ -347,7 +347,7 @@ export default function PracticeResultScreen() {
 
         {subjectBreakdown.length >= 2 ? (
           <View style={styles.reviewBox}>
-            <Text style={styles.reviewTitle}>Score by subject</Text>
+            <Text style={styles.reviewTitle}>Score kada subject</Text>
             <View style={{ gap: spacing.sm, marginTop: spacing.xs }}>
               {subjectBreakdown.map((s) => {
                 const barColor = s.pct >= 75 ? colors.success : s.pct >= 50 ? colors.flame : colors.error;
@@ -370,7 +370,7 @@ export default function PracticeResultScreen() {
             </View>
             {weakestSubject ? (
               <PrimaryButton
-                label={`Practice your weakest: ${weakestSubject.name} →`}
+                label={`I-practice ang pinakamahina: ${weakestSubject.name} →`}
                 variant="outline"
                 size="lg"
                 style={{ marginTop: spacing.md }}
@@ -387,12 +387,12 @@ export default function PracticeResultScreen() {
 
         {sessionId ? (
           <View style={styles.reviewBox}>
-            <Text style={styles.reviewTitle}>Review answers</Text>
+            <Text style={styles.reviewTitle}>I-review ang mga sagot</Text>
             {!reviewLoading && review.length > 0 ? (
               <View style={{ flexDirection: 'row', gap: spacing.xs, marginBottom: spacing.sm, flexWrap: 'wrap' }}>
                 {([
-                  { id: 'all' as const, label: `All (${review.length})` },
-                  { id: 'incorrect' as const, label: `Incorrect (${wrongCount})` },
+                  { id: 'all' as const, label: `Lahat (${review.length})` },
+                  { id: 'incorrect' as const, label: `Mali (${wrongCount})` },
                   ...(flaggedIds.size > 0
                     ? [{ id: 'flagged' as const, label: `Flagged (${flaggedIds.size})` }]
                     : []),
@@ -424,10 +424,10 @@ export default function PracticeResultScreen() {
             {reviewLoading ? (
               <ActivityIndicator color={colors.primary} />
             ) : review.length === 0 ? (
-              <Text style={styles.reviewEmpty}>No saved answers for this session.</Text>
+              <Text style={styles.reviewEmpty}>Walang naka-save na sagot para sa session na ito.</Text>
             ) : filteredReview.length === 0 ? (
               <Text style={styles.reviewEmpty}>
-                {reviewFilter === 'incorrect' ? 'No incorrect answers — great job!' : 'No flagged questions.'}
+                {reviewFilter === 'incorrect' ? 'Walang maling sagot — galing!' : 'Walang naka-flag na tanong.'}
               </Text>
             ) : (
               filteredReview.map(({ item, number: idx }) => {
@@ -493,7 +493,7 @@ export default function PracticeResultScreen() {
                                   color={colors.primary}
                                 />
                                 <Text style={[styles.reportBtnText, { color: colors.primary }]}>
-                                  {speakingId === item.questionId ? 'Stop · TTS' : 'Listen · TTS'}
+                                  {speakingId === item.questionId ? 'Itigil · TTS' : 'Pakinggan · TTS'}
                                 </Text>
                               </Pressable>
                             ) : null}
@@ -508,7 +508,7 @@ export default function PracticeResultScreen() {
                             <Ionicons name="sparkles-outline" size={16} color={colors.primary} />
                             <Text style={[styles.reportBtnText, { color: colors.primary }]}>
                               {aiLoadingId === item.questionId
-                                ? 'Generating…'
+                                ? 'Ginagawa…'
                                 : aiRemaining != null
                                   ? `AI explain (${aiRemaining} left today)`
                                   : 'AI explain'}
@@ -520,7 +520,7 @@ export default function PracticeResultScreen() {
                           contentId={item.questionId}
                           label="Flag question"
                           style={{ alignSelf: 'flex-start' }}
-                          onReported={() => setReportFeedback('Thank you! We will review this content issue.')}
+                          onReported={() => setReportFeedback('Salamat! Ire-review namin ang isyung ito.')}
                         />
                       </View>
                     ) : null}
@@ -536,7 +536,7 @@ export default function PracticeResultScreen() {
             <AdBanner onPress={() => router.push('/subscribe')} />
           ) : null}
           <PrimaryButton
-            label={sharing ? 'Preparing…' : 'Share score'}
+            label={sharing ? 'Hinahanda…' : 'I-share ang score'}
             variant="outline"
             icon="share-outline"
             size="lg"
@@ -545,21 +545,21 @@ export default function PracticeResultScreen() {
           />
           {wrongCount > 0 && user ? (
             <PrimaryButton
-              label="Review mistakes"
+              label="I-review ang mga mali"
               size="lg"
               onPress={() => router.push('/mistakes')}
               style={{ marginBottom: spacing.sm }}
             />
           ) : null}
           <PrimaryButton
-            label={mode === 'mock' || mode === 'diagnostic' || mode === 'board' ? 'Done' : 'Back to Home'}
+            label={mode === 'mock' || mode === 'diagnostic' || mode === 'board' ? 'Tapos' : 'Balik sa Home'}
             variant={wrongCount > 0 && user ? 'outline' : undefined}
             size="lg"
             onPress={() => router.replace('/(tabs)')}
           />
           {mode === 'diagnostic' ? (
             <PrimaryButton
-              label="View your PasaPath →"
+              label="Tingnan ang PasaPath mo →"
               variant="outline"
               size="lg"
               onPress={() => router.replace('/pasapath/week')}
@@ -567,7 +567,7 @@ export default function PracticeResultScreen() {
             />
           ) : (
             <PrimaryButton
-              label={mode === 'mock' || mode === 'board' ? 'New mock →' : mode === 'weak_area' ? 'Another Quick 10 →' : 'Next quiz →'}
+              label={mode === 'mock' || mode === 'board' ? 'Bagong mock →' : mode === 'weak_area' ? 'Isa pang Quick 10 →' : 'Susunod na quiz →'}
               variant="outline"
               size="lg"
               onPress={() => {
