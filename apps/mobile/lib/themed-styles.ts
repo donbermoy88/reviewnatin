@@ -46,7 +46,7 @@ export function createChoiceOptionStyles(theme: AppTheme) {
 }
 
 export function createPrimaryButtonStyles(theme: AppTheme) {
-  const { colors, type, radii, spacing, touchTarget, shadows } = theme;
+  const { colors, type, radii, spacing, shadows } = theme;
   return StyleSheet.create({
     base: {
       paddingVertical: spacing.md,

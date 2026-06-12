@@ -132,6 +132,26 @@ export async function fetchQuestionsByIds(ids: string[]): Promise<Question[]> {
   return ((data ?? []) as PracticeQuestionRow[]).map(mapPracticeQuestion);
 }
 
+/**
+ * Returns one genuinely incorrect choice id to eliminate for the "hint" feature.
+ * Selected server-side so the answer key never reaches the client and the hint
+ * can never remove the correct answer. Returns null when nothing is eliminable.
+ */
+export async function fetchQuestionHint(
+  questionId: string,
+  selectedChoiceId: string | null
+): Promise<string | null> {
+  if (!isSupabaseConfigured) return null;
+
+  const { data, error } = await supabase.rpc('get_question_hint', {
+    p_question_id: questionId,
+    p_selected_choice_id: selectedChoiceId,
+  });
+
+  if (error) throw error;
+  return typeof data === 'string' && data ? data : null;
+}
+
 /** Grade a single answer server-side — answer key is not in list queries */
 export async function checkQuestionAnswer(
   questionId: string,

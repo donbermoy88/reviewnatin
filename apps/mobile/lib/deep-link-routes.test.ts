@@ -11,7 +11,7 @@ vi.mock('expo-linking', () => ({
   },
 }));
 
-import { routeFromUrl } from './deep-link-routes';
+import { isAuthDeepLink, routeFromUrl } from './deep-link-routes';
 
 describe('routeFromUrl', () => {
   it('routes custom scheme subscribe links', () => {
@@ -20,5 +20,18 @@ describe('routeFromUrl', () => {
 
   it('routes custom scheme checkout links with refs', () => {
     expect(routeFromUrl('reviewnatin://checkout?ref=RN-123')).toBe('/subscribe?ref=RN-123');
+  });
+});
+
+describe('isAuthDeepLink', () => {
+  it('flags recovery and token links so the nav handler skips them', () => {
+    expect(isAuthDeepLink('reviewnatin://auth/callback#access_token=abc')).toBe(true);
+    expect(isAuthDeepLink('reviewnatin://(auth)/reset-password?type=recovery')).toBe(true);
+    expect(isAuthDeepLink('https://reviewnatinph.com/reset-password')).toBe(true);
+  });
+
+  it('does not flag normal navigation links', () => {
+    expect(isAuthDeepLink('reviewnatin://subscribe')).toBe(false);
+    expect(isAuthDeepLink('reviewnatin://barkada?code=XY')).toBe(false);
   });
 });

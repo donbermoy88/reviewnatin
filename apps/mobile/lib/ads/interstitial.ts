@@ -36,9 +36,3 @@ export async function tryShowSessionInterstitial(
 
   return 'fallback';
 }
-
-/** @deprecated Use tryShowSessionInterstitial */
-export async function maybeShowSessionInterstitial(isPremium: boolean, duringQuiz: boolean): Promise<boolean> {
-  const outcome = await tryShowSessionInterstitial(isPremium, duringQuiz);
-  return outcome === 'fallback';
-}

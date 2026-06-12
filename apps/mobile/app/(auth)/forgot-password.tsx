@@ -53,12 +53,12 @@ export default function ForgotPasswordScreen() {
       setError(result.error);
       return;
     }
-    setInfo('Reset link sent to your email. Open it to set a new password.');
+    setInfo('Naipadala ang reset link sa email mo. Buksan para mag-set ng bagong password.');
   };
 
   return (
     <AuthShell
-      title="Forgot your password?"
+      title="Nakalimutan ang password?"
       subtitle="We'll send a reset link to your email."
     >
       <LabeledField label="Email" styles={styles}>
@@ -79,10 +79,10 @@ export default function ForgotPasswordScreen() {
       {loading ? (
         <ActivityIndicator color={theme.colors.primary} />
       ) : (
-        <PrimaryButton label="Send reset link" size="lg" onPress={submit} />
+        <PrimaryButton label="Ipadala ang reset link" size="lg" onPress={submit} />
       )}
       <Pressable onPress={() => router.back()} style={{ marginTop: theme.spacing.lg }} hitSlop={8}>
-        <Text style={styles.backLink}>← Back to login</Text>
+        <Text style={styles.backLink}>← Balik sa login</Text>
       </Pressable>
     </AuthShell>
   );

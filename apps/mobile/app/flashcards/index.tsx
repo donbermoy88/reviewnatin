@@ -175,9 +175,9 @@ export default function FlashcardsScreen() {
       <View style={{ flex: 1, backgroundColor: colors.background, paddingTop: insets.top }}>
         <EmptyState
           icon={<Ionicons name="layers-outline" size={32} color={colors.primary} />}
-          title="No flashcards yet"
-          description="Flashcard decks will appear here once content is added for your exam track."
-          actionLabel="Go back"
+          title="Wala pang flashcards"
+          description="Lalabas dito ang mga flashcard deck kapag may content na para sa exam track mo."
+          actionLabel="Bumalik"
           onAction={() => router.back()}
         />
       </View>
@@ -362,7 +362,7 @@ export default function FlashcardsScreen() {
               ) : null}
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: spacing.lg }}>
                 <Ionicons name="refresh" size={13} color={colors.textLight} />
-                <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textLight }}>Tap to reveal answer</Text>
+                <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textLight }}>I-tap para makita ang sagot</Text>
               </View>
             </Animated.View>
 
@@ -436,7 +436,7 @@ export default function FlashcardsScreen() {
                 onPress={triggerFlip}
                 style={{ flex: 1, height: 50, borderRadius: 14, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center' }}
               >
-                <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' }}>Reveal Answer</Text>
+                <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' }}>Ipakita ang sagot</Text>
               </Pressable>
               <Pressable
                 onPress={() => index < totalCards - 1 && (setIndex(i => i + 1), setFlipped(false), flipAnim.setValue(0))}

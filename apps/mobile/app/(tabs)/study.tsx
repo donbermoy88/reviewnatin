@@ -19,9 +19,8 @@ import { MasteryBar } from '../../components/mastery-bar';
 import {
   FREE_MOCK_PREVIEW_ITEMS,
   getMockAccess,
-  hasUsedMiniMockThisWeek,
   isMiniMock,
-  recordMiniMockUsed,
+  isMiniMockAvailable,
 } from '../../lib/paywall';
 import type { SubjectArea } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
@@ -121,20 +120,16 @@ export default function StudyScreen() {
     const premium = isPremium(examTypeId);
     const access = getMockAccess(mock, premium);
 
-    if (access === 'weekly_limit') {
-      const used = await hasUsedMiniMockThisWeek();
-      if (used) {
-        Alert.alert(
-          'Weekly limit',
-          '1 mini-mock per week on the free tier. Upgrade for unlimited mocks.',
-          [
-            { text: 'Not now', style: 'cancel' },
-            { text: 'View plans', onPress: () => router.push('/subscribe') },
-          ]
-        );
-        return;
-      }
-      await recordMiniMockUsed();
+    if (access === 'weekly_limit' && !(await isMiniMockAvailable(examSlug))) {
+      Alert.alert(
+        'Weekly limit',
+        '1 mini-mock per week on the free tier. Upgrade for unlimited mocks.',
+        [
+          { text: 'Not now', style: 'cancel' },
+          { text: 'View plans', onPress: () => router.push('/subscribe') },
+        ]
+      );
+      return;
     }
 
     if (access === 'preview') {

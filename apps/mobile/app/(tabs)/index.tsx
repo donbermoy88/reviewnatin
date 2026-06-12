@@ -15,6 +15,7 @@ import { fetchExamBySlug, fetchSubjectAreas } from '../../lib/api/catalog';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
+import { fetchStreakStatus } from '../../lib/api/streak';
 import { hasCompletedDiagnostic } from '../../lib/api/diagnostic';
 import { fetchPracticeStats } from '../../lib/api/stats';
 import { fetchGuestPracticeStats } from '../../lib/guest-quiz-history';
@@ -29,9 +30,8 @@ import { tabScrollPadding } from '../../lib/layout/content-padding';
 import {
   canStartPractice,
   getMockAccess,
-  hasUsedMiniMockThisWeek,
   isMiniMock,
-  recordMiniMockUsed,
+  isMiniMockAvailable,
 } from '../../lib/paywall';
 import { scheduleDailyReminder, scheduleExamReminders } from '../../lib/notifications';
 import { fetchDueFlashcardCount } from '../../lib/api/flashcards';
@@ -49,9 +49,9 @@ import { isDiagnosticPromptDismissed } from '../../lib/diagnostic-prompt';
 
 function timeGreeting(): string {
   const h = new Date().getHours();
-  if (h < 12) return 'Good morning,';
-  if (h < 18) return 'Good afternoon,';
-  return 'Good evening,';
+  if (h < 12) return 'Magandang umaga,';
+  if (h < 18) return 'Magandang hapon,';
+  return 'Magandang gabi,';
 }
 
 function examAbbr(slug: string): string {
@@ -118,6 +118,7 @@ export default function DashboardScreen() {
   const [contentGate, setContentGate] = useState<ContentGateStatus | null>(null);
   const [announcements, setAnnouncements] = useState<AppAnnouncement[]>([]);
   const [weakTopic, setWeakTopic] = useState<TopicAnalyticsRow | null>(null);
+  const [streakFreezes, setStreakFreezes] = useState(0);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [readinessSheetOpen, setReadinessSheetOpen] = useState(false);
@@ -134,32 +135,41 @@ export default function DashboardScreen() {
 
       if (user) {
         try {
-          const [practiceStats, gate] = await Promise.all([
-            fetchPracticeStats(user.id, target).then(async (s) => {
-              // Show streak milestone modal if a milestone was just reached
-              if (isStreakMilestone(s.streakDays)) {
-                const key = `milestone_shown_${user.id}_${s.streakDays}`;
-                const shown = await AsyncStorage.getItem(key).catch(() => null);
-                if (!shown) {
-                  await AsyncStorage.setItem(key, '1').catch(() => {});
-                  setMilestoneVisible(true);
+          // These dashboard sections are independent — fetch them concurrently
+          // instead of in a waterfall. Non-critical fetches fall back to a safe
+          // value so one slow/failed call doesn't blank the rest of the screen.
+          const [practiceStats, gate, todayPasa, latestReadiness, weakest, streak, diagnosticDone] =
+            await Promise.all([
+              fetchPracticeStats(user.id, target).then(async (s) => {
+                // Show streak milestone modal if a milestone was just reached
+                if (isStreakMilestone(s.streakDays)) {
+                  const key = `milestone_shown_${user.id}_${s.streakDays}`;
+                  const shown = await AsyncStorage.getItem(key).catch(() => null);
+                  if (!shown) {
+                    await AsyncStorage.setItem(key, '1').catch(() => {});
+                    setMilestoneVisible(true);
+                  }
                 }
-              }
-              return s;
-            }),
-            fetchContentGateStatus(slug),
-          ]);
+                return s;
+              }),
+              fetchContentGateStatus(slug).catch(() => null),
+              fetchTodayPasaPath(slug).catch(() => null),
+              fetchLatestReadiness(slug).catch(() => null),
+              fetchTopicAnalytics(slug)
+                .then((a) => pickWeakTopic(a.subjects))
+                .catch(() => null),
+              fetchStreakStatus(user.id).catch(() => null),
+              // Treat a lookup failure as "done" so we never force the diagnostic
+              // redirect on a transient error.
+              hasCompletedDiagnostic(slug).catch(() => true),
+            ]);
           setStats(practiceStats);
           setContentGate(gate);
-          setPasapath(await fetchTodayPasaPath(slug));
-          setReadiness(await fetchLatestReadiness(slug));
-          try {
-            const analytics = await fetchTopicAnalytics(slug);
-            setWeakTopic(pickWeakTopic(analytics.subjects));
-          } catch {
-            setWeakTopic(null);
-          }
-          if (gate?.meetsMinimum && !(await hasCompletedDiagnostic(slug))) {
+          setPasapath(todayPasa);
+          setReadiness(latestReadiness);
+          setWeakTopic(weakest);
+          setStreakFreezes(streak?.streakFreezes ?? 0);
+          if (gate?.meetsMinimum && !diagnosticDone) {
             const dismissed = await isDiagnosticPromptDismissed(user.id, slug).catch(() => false);
             if (!dismissed) {
               router.replace('/diagnostic/intro');
@@ -173,6 +183,7 @@ export default function DashboardScreen() {
         setPasapath(null);
         setReadiness(null);
         setWeakTopic(null);
+        setStreakFreezes(0);
         try {
           setStats(await fetchGuestPracticeStats(target));
         } catch {
@@ -245,7 +256,7 @@ export default function DashboardScreen() {
   const showAccuracy = stats.totalAnswered >= 20 && stats.accuracyPercent != null;
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
   const firstName = displayName.split(/\s+/)[0] ?? displayName;
-  const streakLabel = stats.streakDays > 0 ? 'day streak' : 'start today';
+  const streakLabel = stats.streakDays > 0 ? 'day streak' : 'simulan na';
 
   const ensurePracticeAllowed = () => {
     if (!user) return true;
@@ -290,13 +301,9 @@ export default function DashboardScreen() {
         return;
       }
       const access = getMockAccess(mock, premium);
-      if (access === 'weekly_limit') {
-        const used = await hasUsedMiniMockThisWeek();
-        if (used) {
-          router.push('/subscribe');
-          return;
-        }
-        await recordMiniMockUsed();
+      if (access === 'weekly_limit' && !(await isMiniMockAvailable(examSlug))) {
+        router.push('/subscribe');
+        return;
       }
       if (access === 'preview') {
         router.push({
@@ -407,17 +414,37 @@ export default function DashboardScreen() {
           </View>
 
           <View style={styles.statRow}>
-            <View style={styles.statPill}>
+            <Pressable
+              style={styles.statPill}
+              onPress={() => user && router.push('/streak-freeze')}
+              disabled={!user}
+              accessibilityRole="button"
+              accessibilityLabel={
+                user
+                  ? `${stats.streakDays}-day streak. ${streakFreezes} freeze${streakFreezes === 1 ? '' : 's'}. Tap to manage.`
+                  : `${stats.streakDays}-day streak`
+              }
+            >
               <View style={styles.statIconWrap}>
                 <Ionicons name="flame" size={20} color={colors.flame} />
               </View>
               <View style={styles.statTextWrap}>
                 <Text style={styles.statVal}>{stats.streakDays}</Text>
-                <Text style={styles.statLbl} numberOfLines={2}>
-                  {streakLabel}
-                </Text>
+                {user && streakFreezes > 0 ? (
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                    <Text style={styles.statLbl} numberOfLines={1}>
+                      {streakLabel}
+                    </Text>
+                    <Ionicons name="snow" size={11} color={colors.accent} />
+                    <Text style={[styles.statLbl, { color: colors.accent }]}>{streakFreezes}</Text>
+                  </View>
+                ) : (
+                  <Text style={styles.statLbl} numberOfLines={2}>
+                    {streakLabel}
+                  </Text>
+                )}
               </View>
-            </View>
+            </Pressable>
             <View style={styles.statPill}>
               <View style={styles.statIconWrap}>
                 <Ionicons name="checkmark-done" size={20} color={colors.accent} />
@@ -534,25 +561,25 @@ export default function DashboardScreen() {
             <View style={[styles.pasapathCard, { marginBottom: spacing.md }]}>
               <Text style={styles.pasapathLbl}>Today&apos;s PasaPath</Text>
               <Text style={[styles.pasapathMeta, { marginBottom: spacing.md }]}>
-                Complete your first quiz to generate your daily study plan.
+                Tapusin ang unang quiz para mabuo ang daily study plan mo.
               </Text>
-              <PrimaryButton label="Start practicing" onPress={() => void startPractice()} />
+              <PrimaryButton label="Magsimulang mag-practice" onPress={() => void startPractice()} />
             </View>
           ) : null}
 
           <LinearGradient colors={[...gradients.gold]} style={styles.goalCard}>
             <GoalRing percent={dailyGoalPct} />
             <View style={{ flex: 1 }}>
-              <Text style={styles.goalLbl}>Today&apos;s goal</Text>
+              <Text style={styles.goalLbl}>Goal ngayong araw</Text>
               <Text style={styles.goalTitle}>
                 {questionsDone} / {questionsTarget} questions
               </Text>
               <Text style={styles.goalHint}>
                 {questionsDone >= questionsTarget
-                  ? 'Goal done for today! 🎉'
+                  ? 'Tapos na ang goal mo ngayon! 🎉'
                   : user
-                    ? `${questionsTarget - questionsDone} to go — keep going! 💪`
-                    : `${questionsTarget - questionsDone} to go — let's go! 💪`}
+                    ? `${questionsTarget - questionsDone} na lang — kaya mo 'yan! 💪`
+                    : `${questionsTarget - questionsDone} na lang — tara na! 💪`}
               </Text>
               {showAccuracy ? (
                 <Text style={[styles.goalHint, { marginTop: 6 }]}>
@@ -578,7 +605,7 @@ export default function DashboardScreen() {
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.continueLbl}>
-                  {hasActivity ? 'Continue reviewing' : 'Start reviewing'}
+                  {hasActivity ? 'Ituloy ang review' : 'Simulan ang review'}
                 </Text>
                 <Text style={styles.continueTitle}>{examName || 'Your exam'}</Text>
               </View>
@@ -587,7 +614,7 @@ export default function DashboardScreen() {
             <Text style={styles.continueMeta}>
               {hasActivity
                 ? `${stats.sessionCount} quiz${stats.sessionCount === 1 ? '' : 'zes'} completed`
-                : 'Start your first quiz — no fake progress here.'}
+                : 'Simulan ang unang quiz mo.'}
             </Text>
           </Pressable>
 
@@ -612,7 +639,7 @@ export default function DashboardScreen() {
           {subjects.length > 0 ? (
             <>
               <View style={styles.sectionHead}>
-                <Text style={styles.sectionTitle}>Quick practice</Text>
+                <Text style={styles.sectionTitle}>Mabilis na practice</Text>
               </View>
               {subjects.map((subject, index) => (
                 <Pressable
@@ -630,7 +657,7 @@ export default function DashboardScreen() {
                   </View>
                   <View style={{ flex: 1 }}>
                     <Text style={styles.quickName}>{subject.name}</Text>
-                    <Text style={styles.quickMeta}>Tap to browse topics</Text>
+                    <Text style={styles.quickMeta}>I-tap para sa mga topic</Text>
                   </View>
                   <View style={[styles.playBtn, { backgroundColor: colors.primary }]}>
                     <Ionicons name="play" size={14} color="#fff" />
@@ -643,9 +670,9 @@ export default function DashboardScreen() {
           <View style={styles.lowerSection}>
             {!user ? (
               <Pressable style={styles.guestBanner} onPress={() => router.push('/(auth)/login')}>
-                <Text style={styles.guestBannerTitle}>Log in to save your progress</Text>
+                <Text style={styles.guestBannerTitle}>Mag-log in para ma-save ang progress mo</Text>
                 <Text style={styles.guestBannerSub}>
-                  PasaPath, streak, Mistake Bank, and readiness — all synced when you have an account.
+                  PasaPath, streak, Mistake Bank, at readiness — naka-sync lahat kapag may account ka.
                 </Text>
               </Pressable>
             ) : null}

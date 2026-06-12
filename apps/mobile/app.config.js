@@ -23,10 +23,19 @@ module.exports = () => {
   const easProjectId =
     process.env.EAS_PROJECT_ID ?? base.extra?.eas?.projectId ?? undefined;
 
+  // Native config (Sentry, AdMob) is injected at PREBUILD time from env. A
+  // release build prebuilt without these silently ships with no crash
+  // reporting and a misconfigured AdMob (missing GADApplicationIdentifier can
+  // crash the Google Mobile Ads SDK on launch). Fail loudly instead of
+  // shipping a broken store binary. Only enforced for store-bound profiles;
+  // local `development` builds are unaffected.
+  const isStoreBuild = buildProfile === 'production';
+
   const plugins = [...(base.plugins ?? [])];
   if (isDevClient) {
     plugins.push('expo-dev-client');
   }
+
   if (process.env.EXPO_PUBLIC_SENTRY_DSN) {
     plugins.push([
       '@sentry/react-native/expo',
@@ -35,14 +44,31 @@ module.exports = () => {
         project: process.env.SENTRY_PROJECT,
       },
     ]);
+  } else if (isStoreBuild) {
+    throw new Error(
+      'EXPO_PUBLIC_SENTRY_DSN is required for production builds (crash reporting). ' +
+        'Set it in the EAS build profile env before prebuild.'
+    );
   }
 
-  if (process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID && process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID) {
+  const admobIos = process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID;
+  const admobAndroid = process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID;
+  if (admobIos || admobAndroid) {
+    if (!admobIos || !admobAndroid) {
+      throw new Error(
+        'AdMob is partially configured. Set BOTH EXPO_PUBLIC_ADMOB_IOS_APP_ID and ' +
+          'EXPO_PUBLIC_ADMOB_ANDROID_APP_ID, or neither — a missing GADApplicationIdentifier ' +
+          'crashes the Google Mobile Ads SDK at launch.'
+      );
+    }
     plugins.push([
       'react-native-google-mobile-ads',
       {
-        androidAppId: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID,
-        iosAppId: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID,
+        androidAppId: admobAndroid,
+        iosAppId: admobIos,
+        // Required by Apple when the App Tracking Transparency prompt may show.
+        userTrackingUsageDescription:
+          'This identifier is used to deliver and measure relevant ads. You can keep using ReviewNatin without allowing tracking.',
       },
     ]);
   }

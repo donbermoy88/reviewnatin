@@ -1,18 +1,27 @@
 name: Keep Supabase Alive
 
-# Free Supabase projects can be paused after inactivity. This workflow creates
+# Free Supabase projects can be paused after inactivity, which breaks Auth,
+# PostgREST, Edge Functions, Storage, and the mobile app. This workflow creates
 # real external activity by querying a public PostgREST table several times a
-# day. It intentionally runs outside Supabase, so the schedule is independent
-# of the Supabase project itself.
+# day. It runs outside Supabase so the schedule is independent of the project.
+#
+# CURRENT REALITY (audited 2026-06-11):
+#   - The LIVE project the app actually uses is `yohewfdafdmwntsbzgxx` — it is
+#     the app's EXPO_PUBLIC_SUPABASE_URL, the CLI-linked project, and where all
+#     migrations + content live. Its keepalive is REQUIRED below.
+#   - `tirxigmycjuhaecmbygs` ("ReviewNatin PH") is the PLANNED dedicated prod
+#     project from docs/06-app-store-production.md, but it is NOT provisioned
+#     yet (DNS returns NXDOMAIN). Its keepalive is best-effort / non-fatal so
+#     this workflow does not fail while that project does not exist. Once it is
+#     created and `REVIEWNATIN_PH_SUPABASE_ANON_KEY` is set, it will be pinged.
 #
 # Required GitHub secret:
-# - REVIEWNATIN_PH_SUPABASE_ANON_KEY
-#   Supabase Dashboard -> ReviewNatin PH (tirxigmycjuhaecmbygs)
-#   Project Settings -> API -> Project API keys -> anon public
-#
-# Optional GitHub secret:
 # - APP_LINKED_SUPABASE_ANON_KEY
-#   Only set this if the mobile app remains linked to yohewfdafdmwntsbzgxx.
+#   Supabase Dashboard -> project `yohewfdafdmwntsbzgxx` -> Project Settings ->
+#   API -> Project API keys -> anon public
+#
+# Optional GitHub secret (only once the planned prod project exists):
+# - REVIEWNATIN_PH_SUPABASE_ANON_KEY  (project `tirxigmycjuhaecmbygs`)
 
 on:
   schedule:
@@ -29,27 +38,27 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  ping-reviewnatin-ph:
-    name: Keep ReviewNatin PH Supabase project active
+  ping-live-app-project:
+    name: Keep the LIVE app Supabase project active (required)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions: {}
 
     steps:
-      - name: Query ReviewNatin PH database through PostgREST
+      - name: Query the live app database through PostgREST
         env:
-          SUPABASE_URL: https://tirxigmycjuhaecmbygs.supabase.co
-          SUPABASE_ANON_KEY: ${{ secrets.REVIEWNATIN_PH_SUPABASE_ANON_KEY }}
+          SUPABASE_URL: https://yohewfdafdmwntsbzgxx.supabase.co
+          SUPABASE_ANON_KEY: ${{ secrets.APP_LINKED_SUPABASE_ANON_KEY }}
         run: |
           set -euo pipefail
 
           if [ -z "${SUPABASE_ANON_KEY:-}" ]; then
-            echo "::error::Missing REVIEWNATIN_PH_SUPABASE_ANON_KEY. Add it in GitHub repo Settings -> Secrets and variables -> Actions."
+            echo "::error::Missing APP_LINKED_SUPABASE_ANON_KEY. This is the LIVE project the app uses (yohewfdafdmwntsbzgxx) and MUST be kept alive. Add it in repo Settings -> Secrets and variables -> Actions."
             exit 1
           fi
 
           URL="${SUPABASE_URL}/rest/v1/keepalive_pings?select=id,label&limit=1"
-          echo "Querying ReviewNatin PH Supabase project at ${SUPABASE_URL}"
+          echo "Querying the live app Supabase project at ${SUPABASE_URL}"
           HTTP_CODE="$(
             curl --silent --show-error --location \
               --max-time 30 \
@@ -66,54 +75,57 @@ jobs:
           echo
 
           if [ "${HTTP_CODE}" -lt 200 ] || [ "${HTTP_CODE}" -ge 300 ]; then
-            echo "::error::Supabase keepalive failed for tirxigmycjuhaecmbygs. Expected 2xx from PostgREST database query."
+            echo "::error::Supabase keepalive failed for the live project yohewfdafdmwntsbzgxx. Expected 2xx from PostgREST."
             exit 1
           fi
 
-          echo "ReviewNatin PH Supabase keepalive succeeded at $(date -u '+%Y-%m-%d %H:%M:%S UTC')."
+          echo "Live app Supabase keepalive succeeded at $(date -u '+%Y-%m-%d %H:%M:%S UTC')."
 
-  ping-app-linked-project:
-    name: Keep app-linked Supabase project active if configured
+  ping-planned-prod-project:
+    name: Keep planned prod project active (best-effort, not yet provisioned)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions: {}
 
     steps:
-      - name: Query app-linked database if optional secret exists
+      - name: Query the planned prod database if it exists and its secret is set
         env:
-          SUPABASE_URL: https://yohewfdafdmwntsbzgxx.supabase.co
-          SUPABASE_ANON_KEY: ${{ secrets.APP_LINKED_SUPABASE_ANON_KEY }}
+          SUPABASE_URL: https://tirxigmycjuhaecmbygs.supabase.co
+          SUPABASE_ANON_KEY: ${{ secrets.REVIEWNATIN_PH_SUPABASE_ANON_KEY }}
         run: |
-          set -euo pipefail
+          set -uo pipefail
 
           if [ -z "${SUPABASE_ANON_KEY:-}" ]; then
-            echo "::notice::APP_LINKED_SUPABASE_ANON_KEY is not set. Skipping optional app-linked project keepalive."
+            echo "::notice::REVIEWNATIN_PH_SUPABASE_ANON_KEY is not set. The dedicated prod project (tirxigmycjuhaecmbygs) is not in use yet — skipping."
             exit 0
           fi
 
           URL="${SUPABASE_URL}/rest/v1/keepalive_pings?select=id,label&limit=1"
-          echo "Querying optional app-linked Supabase project at ${SUPABASE_URL}"
+          echo "Querying the planned prod Supabase project at ${SUPABASE_URL}"
           HTTP_CODE="$(
             curl --silent --show-error --location \
               --max-time 30 \
-              --output /tmp/supabase-keepalive-app-linked.json \
+              --output /tmp/supabase-keepalive-prod.json \
               --write-out "%{http_code}" \
               --header "apikey: ${SUPABASE_ANON_KEY}" \
               --header "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
               --header "Accept: application/json" \
-              "${URL}"
+              "${URL}" || true
           )"
 
           echo "HTTP ${HTTP_CODE}"
-          cat /tmp/supabase-keepalive-app-linked.json
+          cat /tmp/supabase-keepalive-prod.json 2>/dev/null || true
           echo
 
+          # Non-fatal: this project is not provisioned yet (DNS NXDOMAIN gives
+          # HTTP 000). Warn instead of failing the whole workflow so the live
+          # keepalive above is never blocked by the not-yet-existing prod project.
           if [ "${HTTP_CODE}" -lt 200 ] || [ "${HTTP_CODE}" -ge 300 ]; then
-            echo "::error::Optional app-linked Supabase keepalive failed for yohewfdafdmwntsbzgxx."
-            exit 1
+            echo "::warning::Planned prod project tirxigmycjuhaecmbygs returned HTTP ${HTTP_CODE} (likely not provisioned yet). Skipping without failing."
+            exit 0
           fi
 
-          echo "Optional app-linked Supabase keepalive succeeded at $(date -u '+%Y-%m-%d %H:%M:%S UTC')."
+          echo "Planned prod Supabase keepalive succeeded at $(date -u '+%Y-%m-%d %H:%M:%S UTC')."
 
   repo-heartbeat:
     name: Repo heartbeat to keep scheduled workflows enabled

@@ -11,6 +11,22 @@ function pathFromParsed(parsed: Linking.ParsedURL): string {
   return path || hostname || '';
 }
 
+/**
+ * Auth links (OAuth callback, password recovery, magic links) carry Supabase
+ * tokens and are owned by the auth screens — `app/auth/callback.tsx` and
+ * `app/(auth)/reset-password.tsx`. The generic navigation handler must NOT
+ * touch them, or it races those screens.
+ */
+export function isAuthDeepLink(url: string): boolean {
+  return (
+    url.includes('access_token') ||
+    url.includes('refresh_token') ||
+    url.includes('type=recovery') ||
+    url.includes('/auth/callback') ||
+    url.includes('reset-password')
+  );
+}
+
 /** Map reviewnatin:// and https://reviewnatinph.com URLs to Expo Router hrefs. */
 export function routeFromUrl(url: string): string | null {
   try {

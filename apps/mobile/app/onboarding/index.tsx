@@ -32,18 +32,18 @@ const GOALS = [
 const READY_ITEMS = [
   {
     icon: 'school-outline' as const,
-    label: 'Practice quiz ready',
-    sub: 'Based on your self-assessed level',
+    label: 'Handa na ang practice quiz',
+    sub: 'Base sa level na pinili mo',
   },
   {
     icon: 'calendar-outline' as const,
-    label: 'Daily tasks scheduled',
-    sub: 'Based on your target exam date',
+    label: 'Naka-schedule na ang daily tasks',
+    sub: 'Base sa target exam date mo',
   },
   {
     icon: 'bookmark-outline' as const,
-    label: 'Mistake Bank active',
-    sub: 'Auto-tracks all wrong answers',
+    label: 'Active na ang Mistake Bank',
+    sub: 'Awtomatikong tina-track ang mga maling sagot',
   },
 ];
 
@@ -118,7 +118,7 @@ export default function OnboardingScreen() {
 
     if (step === 1) {
       if (examSlug === 'let-secondary' && !majorSlug) {
-        setStepError('Please choose a major field for LET Secondary.');
+        setStepError('Pumili ng major field para sa LET Secondary.');
         return;
       }
       await saveOnboardingDraft({
@@ -188,7 +188,7 @@ export default function OnboardingScreen() {
           <Text style={styles.welcomeBrand}>
             Review<Text style={{ color: colors.accent }}>Natin</Text>
           </Text>
-          <Text style={styles.welcomeTag}>Review together. Pass together.</Text>
+          <Text style={styles.welcomeTag}>Mag-review tayo. Pasa tayo.</Text>
         </LinearGradient>
 
         <View style={[styles.welcomeBody, { paddingBottom: insets.bottom + spacing.lg }]}>
@@ -238,7 +238,7 @@ export default function OnboardingScreen() {
               <Pill color={colors.accentDark} bg={colors.accentLight}>
                 PASAPATH READY
               </Pill>
-              <Text style={styles.readyTitle}>You&apos;re ready for PasaPath</Text>
+              <Text style={styles.readyTitle}>Handa ka na para sa PasaPath</Text>
               <Text style={styles.readySub}>
                 Your daily study path starts now — weak topics, mistake review, and new lessons every day.
               </Text>
@@ -275,7 +275,7 @@ export default function OnboardingScreen() {
         >
           <View style={styles.stickyFooterInner}>
             <PrimaryButton
-              label={isSwitchMode ? 'Save new track' : 'Go to Dashboard'}
+              label={isSwitchMode ? 'Save new track' : 'Pumunta sa Dashboard'}
               size="lg"
               icon="arrow-forward"
               onPress={finish}
@@ -294,25 +294,25 @@ export default function OnboardingScreen() {
           {step === 1 && (
             <>
               <Text style={styles.pageTitle}>
-                {isSwitchMode ? 'Switch exam track' : 'Which exam are you reviewing for?'}
+                {isSwitchMode ? 'Switch exam track' : 'Anong exam ang nire-review mo?'}
               </Text>
               <Text style={styles.pageSub}>
                 {isSwitchMode
                   ? 'Choose your new exam — we\'ll sync your goal and PasaPath.'
-                  : 'Pick one for now — you can change it later.'}
+                  : 'Pumili muna — pwede mong baguhin mamaya.'}
               </Text>
             </>
           )}
           {step === 2 && (
             <>
-              <Text style={styles.pageTitle}>Set your daily goal</Text>
+              <Text style={styles.pageTitle}>Itakda ang daily goal mo</Text>
               <Text style={styles.pageSub}>{'Even a little each day adds up. Let\'s build that streak!'}</Text>
             </>
           )}
           {step === 3 && (
             <>
-              <Text style={styles.pageTitle}>Save your progress</Text>
-              <Text style={styles.pageSub}>Sync quiz scores, mistake bank, and PasaPath to the cloud.</Text>
+              <Text style={styles.pageTitle}>I-save ang progress mo</Text>
+              <Text style={styles.pageSub}>I-sync ang quiz scores, Mistake Bank, at PasaPath sa cloud.</Text>
             </>
           )}
         </View>
@@ -395,7 +395,7 @@ export default function OnboardingScreen() {
 
           {step === 2 && (
             <>
-              <Text style={styles.fieldLabel}>What&apos;s your current level?</Text>
+              <Text style={styles.fieldLabel}>Ano ang level mo ngayon?</Text>
               <View style={styles.list}>
                 {ONBOARDING_LEVELS.map((lv) => {
                   const on = level === lv.id;
@@ -490,7 +490,7 @@ export default function OnboardingScreen() {
             <>
               <View style={[styles.infoCard, { marginTop: spacing.sm }]}>
                 <Ionicons name="cloud-upload-outline" size={22} color={colors.primary} />
-                <Text style={styles.infoText}>Progress syncs to your account — safe even if you switch phones.</Text>
+                <Text style={styles.infoText}>Naka-sync ang progress sa account mo — ligtas kahit magpalit ka ng phone.</Text>
               </View>
               {user ? (
                 <>
@@ -499,7 +499,7 @@ export default function OnboardingScreen() {
                       <Ionicons name="checkmark-circle" size={28} color={colors.success} />
                     </View>
                     <View style={{ flex: 1 }}>
-                      <Text style={styles.signedInTitle}>You&apos;re signed in</Text>
+                      <Text style={styles.signedInTitle}>Naka-sign in ka na</Text>
                       <Text style={styles.signedInEmail}>{user.email}</Text>
                     </View>
                   </View>
@@ -514,13 +514,13 @@ export default function OnboardingScreen() {
               ) : (
                 <>
                   <PrimaryButton
-                    label="Sign up / Log in"
+                    label="Mag-sign up / Mag-log in"
                     icon="log-in-outline"
                     iconPosition="left"
                     onPress={() => router.push({ pathname: '/(auth)/login', params: { returnTo: 'onboarding' } })}
                     style={{ marginTop: spacing.lg }}
                   />
-                  <PrimaryButton label="Skip for now (guest)" variant="outline" onPress={() => setStep(4)} style={{ marginTop: spacing.sm }} />
+                  <PrimaryButton label="Skip muna (guest)" variant="outline" onPress={() => setStep(4)} style={{ marginTop: spacing.sm }} />
                 </>
               )}
             </>
@@ -535,7 +535,7 @@ export default function OnboardingScreen() {
         >
           <View style={styles.stickyFooterInner}>
             <PrimaryButton
-              label={step === 2 ? (isSwitchMode ? 'Save new track →' : "I'm committed →") : 'Continue →'}
+              label={step === 2 ? (isSwitchMode ? 'I-save ang bagong track →' : "I'm committed →") : 'Continue →'}
               size="lg"
               onPress={advanceStep}
             />

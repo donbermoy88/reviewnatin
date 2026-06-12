@@ -66,6 +66,17 @@ npm run db:push
 
 ReviewNatin production uses Supabase project `ReviewNatin PH` (`tirxigmycjuhaecmbygs`) under organization `ReviewNatin PH` (`uzuxqdnyigbnxqopxgwt`).
 
+> **⚠️ Current reality (audited 2026-06-11):** the dedicated prod project
+> `tirxigmycjuhaecmbygs` is **not provisioned** — its hostname returns DNS
+> `NXDOMAIN`. The app currently runs entirely on `yohewfdafdmwntsbzgxx` (the
+> app's `EXPO_PUBLIC_SUPABASE_URL`, the CLI-linked project, and where all
+> migrations + content live). Before relying on `tirxigmycjuhaecmbygs` as prod,
+> you must: (1) create the project, (2) push all repo migrations to it
+> (`supabase link --project-ref tirxigmycjuhaecmbygs && supabase db push`),
+> (3) migrate content/users, (4) repoint the production EAS build's
+> `EXPO_PUBLIC_SUPABASE_URL`, and (5) set `REVIEWNATIN_PH_SUPABASE_ANON_KEY` for
+> keepalive. Until then, `yohewfdafdmwntsbzgxx` IS production.
+
 This organization should be on Supabase Pro or higher before accepting production traffic. Supabase Free projects can be paused for inactivity, which breaks Auth, PostgREST, Edge Functions, Storage, and mobile app sign-in/data flows. Until Pro is affordable, use the external GitHub Actions keepalive documented in [supabase-keepalive.md](./supabase-keepalive.md).
 
 Release blocker:

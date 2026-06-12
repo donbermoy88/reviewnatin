@@ -52,8 +52,7 @@
           "resizeMode": "cover",
           "backgroundColor": "#08245C"
         }
-      ],
-      "expo-web-browser"
+      ]
     ]
   }
 }

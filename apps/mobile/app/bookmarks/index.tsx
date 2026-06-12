@@ -84,9 +84,9 @@ export default function BookmarksScreen() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <EmptyState
           icon={<Ionicons name="bookmark-outline" size={32} color={colors.primary} />}
-          title="Log in to continue"
-          description="You need an account to save bookmarks."
-          actionLabel="Log in"
+          title="Mag-log in muna"
+          description="Kailangan mo ng account para mag-save ng bookmarks."
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </View>
@@ -155,49 +155,62 @@ export default function BookmarksScreen() {
           questions.length === 0 ? (
             <EmptyState
               icon={<Ionicons name="bookmark-outline" size={32} color={colors.primary} />}
-              title="No bookmarks yet"
-              description="Tap the bookmark icon during a quiz to save questions here."
-              actionLabel="Practice now"
+              title="Wala pang bookmarks"
+              description="I-tap ang bookmark icon habang nag-quiz para ma-save dito ang tanong."
+              actionLabel="Mag-practice na"
               onAction={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
             />
           ) : (
-            questions.map((item) => (
-              <View key={item.questionId} style={styles.card}>
-                <Text style={styles.cardSubject}>
-                  {item.subjectName}
-                  {item.topicName ? ` · ${item.topicName}` : ''}
-                </Text>
-                <Text style={styles.cardStem}>{item.stem}</Text>
-                <View style={{ flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm }}>
-                  <PrimaryButton
-                    label="Practice"
-                    variant="outline"
-                    onPress={() =>
-                      router.push({
-                        pathname: '/practice/quiz',
-                        params: { examSlug },
-                      })
-                    }
-                  />
-                  <ReportContentButton
-                    contentType="question"
-                    contentId={item.questionId}
-                    label="Flag"
-                    compact
-                  />
-                  <Pressable onPress={() => removeQuestion(item.questionId)} hitSlop={8} style={{ justifyContent: 'center' }}>
-                    <Ionicons name="trash-outline" size={20} color={colors.error} />
-                  </Pressable>
+            <>
+              <PrimaryButton
+                label={`Practice all bookmarks (${questions.length})`}
+                size="lg"
+                style={{ margin: spacing.lg }}
+                onPress={() =>
+                  router.push({
+                    pathname: '/practice/quiz',
+                    params: { examSlug, mode: 'bookmark_review' },
+                  })
+                }
+              />
+              {questions.map((item) => (
+                <View key={item.questionId} style={styles.card}>
+                  <Text style={styles.cardSubject}>
+                    {item.subjectName}
+                    {item.topicName ? ` · ${item.topicName}` : ''}
+                  </Text>
+                  <Text style={styles.cardStem}>{item.stem}</Text>
+                  <View style={{ flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm }}>
+                    <PrimaryButton
+                      label="Practice this"
+                      variant="outline"
+                      onPress={() =>
+                        router.push({
+                          pathname: '/practice/quiz',
+                          params: { examSlug, mode: 'bookmark_review', focusQuestionId: item.questionId },
+                        })
+                      }
+                    />
+                    <ReportContentButton
+                      contentType="question"
+                      contentId={item.questionId}
+                      label="Flag"
+                      compact
+                    />
+                    <Pressable onPress={() => removeQuestion(item.questionId)} hitSlop={8} style={{ justifyContent: 'center' }}>
+                      <Ionicons name="trash-outline" size={20} color={colors.error} />
+                    </Pressable>
+                  </View>
                 </View>
-              </View>
-            ))
+              ))}
+            </>
           )
         ) : materials.length === 0 ? (
           <EmptyState
             icon={<Ionicons name="reader-outline" size={32} color={colors.primary} />}
-            title="No saved lessons"
-            description="Bookmark lessons and cheat sheets from the Notes tab."
-            actionLabel="Go to Study"
+            title="Walang naka-save na lesson"
+            description="I-bookmark ang mga lesson at cheat sheet mula sa Notes tab."
+            actionLabel="Pumunta sa Study"
             onAction={() => router.push('/(tabs)/study')}
           />
         ) : (

@@ -80,6 +80,17 @@ export async function recordQuizOutcome(questionId: string, isCorrect: boolean, 
   }
 }
 
+/**
+ * Apply topic-mastery + mistake-bank updates for a completed session in one
+ * server call. Used by strict exams (mock/board) which defer grading to submit
+ * instead of recording per-answer. Practice mode uses recordQuizOutcome and must
+ * NOT call this, to avoid double-counting.
+ */
+export async function recordSessionOutcomes(sessionId: string): Promise<void> {
+  if (!isSupabaseConfigured || !sessionId) return;
+  await supabase.rpc('record_session_outcomes', { p_session_id: sessionId });
+}
+
 export async function fetchMistakeQuestionIds(examSlug: string, limit = 12): Promise<string[]> {
   const mistakes = await fetchMistakes(examSlug, limit);
   return mistakes.map((m) => m.questionId);
