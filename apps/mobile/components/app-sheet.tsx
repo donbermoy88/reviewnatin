@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAppTheme } from '../hooks/use-app-theme';
 import { PrimaryButton } from './primary-button';
@@ -28,14 +28,16 @@ export function AppSheet({ visible, title, subtitle, onClose, children, actions 
 
   return (
     <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
-      <Pressable
+      <View
         style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.45)', justifyContent: 'flex-end' }}
-        onPress={onClose}
-        accessibilityRole="button"
-        accessibilityLabel="Close dialog"
       >
         <Pressable
-          onPress={(e) => e.stopPropagation()}
+          style={StyleSheet.absoluteFill}
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel={`Dismiss ${title}`}
+        />
+        <View
           style={{
             backgroundColor: colors.surface,
             borderTopLeftRadius: radii.xl,
@@ -66,8 +68,8 @@ export function AppSheet({ visible, title, subtitle, onClose, children, actions 
               style={action.destructive ? { borderColor: colors.error } : undefined}
             />
           ))}
-        </Pressable>
-      </Pressable>
+        </View>
+      </View>
     </Modal>
   );
 }

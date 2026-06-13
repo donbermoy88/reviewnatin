@@ -1,19 +1,23 @@
 # Building ReviewNatin (iOS / Android)
 
-## Native projects are NOT committed (Expo Continuous Native Generation)
+## Native project ownership
 
-`ios/` and `android/` are gitignored (`.gitignore`). They are **generated**, not
-authored — the source of truth is `app.json` + `app.config.js`. Never hand-edit a
-file under `ios/`/`android/` and expect it to survive; regenerate instead:
+This repo currently includes an iOS project under `ios/` so simulator and native
+module QA can run locally. Treat `app.json` + `app.config.js` as the source of
+truth for generated native settings, and only hand-edit `ios/` when the change is
+intentionally native-only and reviewed as native code.
+
+When native config drifts from Expo config, regenerate instead of debugging a
+stale artifact:
 
 ```bash
 npx expo prebuild --clean
 ```
 
-A local `ios/` left over from an older prebuild can be **stale** (e.g. missing the
-IAP / AdMob / view-shot / Sentry pods if it was generated before those were added).
-If a native module "isn't linked," run `expo prebuild --clean && pod install` (or
-let EAS do it) rather than debugging the old artifact.
+An older prebuild can be **stale** (for example missing IAP / AdMob / view-shot /
+Sentry pods if it was generated before those were added). If a native module
+"isn't linked," run `expo prebuild --clean && pod install` on a review branch, then
+commit the resulting native diff intentionally.
 
 ## Prebuild env contract (enforced)
 

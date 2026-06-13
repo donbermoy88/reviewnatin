@@ -194,7 +194,7 @@ export default function ProfileScreen() {
             <Text style={styles.headerTitle}>Profile</Text>
             <Pressable
               style={styles.settingsBtn}
-              onPress={() => router.push('/(tabs)/settings')}
+              onPress={() => router.push('/settings')}
               accessibilityRole="button"
               accessibilityLabel="Open settings"
             >

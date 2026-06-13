@@ -66,7 +66,7 @@ export default function PracticeResultScreen() {
   const [aiExtras, setAiExtras] = useState<Record<string, string>>({});
   const [aiRemaining, setAiRemaining] = useState<number | null>(null);
   const captureRef = useRef<(() => Promise<string | undefined>) | null>(null);
-  const { score, total, correct, duration, sessionId, mode, diagnosticReadiness, pasapathTaskId, examSlug: paramExamSlug, barkadaChallengeId, flaggedQuestionIds } = useLocalSearchParams<{
+  const { score, total, correct, duration, sessionId, mode, diagnosticReadiness, pasapathTaskId, examSlug: paramExamSlug, barkadaChallengeId, flaggedQuestionIds, saveStatus } = useLocalSearchParams<{
     score: string;
     total: string;
     correct: string;
@@ -78,6 +78,7 @@ export default function PracticeResultScreen() {
     examSlug?: string;
     barkadaChallengeId?: string;
     flaggedQuestionIds?: string;
+    saveStatus?: string;
   }>();
   const flaggedIds = useMemo(
     () => new Set((flaggedQuestionIds ?? '').split(',').filter(Boolean)),
@@ -341,6 +342,30 @@ export default function PracticeResultScreen() {
           >
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.text, lineHeight: 20 }}>
               {reportFeedback}
+            </Text>
+          </View>
+        ) : null}
+
+        {saveStatus === 'queued' || saveStatus === 'failed' ? (
+          <View
+            style={{
+              marginHorizontal: spacing.lg,
+              marginBottom: spacing.sm,
+              padding: spacing.md,
+              borderRadius: radii.lg,
+              backgroundColor: saveStatus === 'queued' ? colors.warnBg : colors.errorBg,
+              borderWidth: 1,
+              borderColor: saveStatus === 'queued' ? colors.warnBorder : colors.error,
+            }}
+            accessibilityRole="alert"
+          >
+            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text, marginBottom: 4 }}>
+              {saveStatus === 'queued' ? 'Saved on this device' : 'Progress was not saved'}
+            </Text>
+            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, lineHeight: 19 }}>
+              {saveStatus === 'queued'
+                ? 'We could not reach the server, so this session is queued and will sync automatically when your connection is stable.'
+                : 'The score is shown here, but the app could not save this session. Please try another quiz when the connection is stable.'}
             </Text>
           </View>
         ) : null}

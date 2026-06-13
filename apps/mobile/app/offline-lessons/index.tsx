@@ -50,7 +50,7 @@ export default function OfflineLessonsScreen() {
           title="No offline lessons"
           description="Download the offline pack in Settings to view lessons here."
           actionLabel="Go to Settings"
-          onAction={() => router.push('/(tabs)/settings')}
+          onAction={() => router.push('/settings')}
         />
       ) : (
         <View style={{ gap: spacing.sm }}>

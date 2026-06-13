@@ -45,6 +45,7 @@ export function ManagePlusCard({
   const isDemo = plus?.source === 'demo';
   const isStoreSubscription = !plus || plus.source === 'iap' || !plus.source;
   const hasStoreManager = canOpenStoreSubscriptionManager();
+  const statusLabel = plus ? entitlementStatusLabel(plus) : 'FREE PLAN';
 
   const manage = async () => {
     if (!hasStoreManager) {
@@ -87,12 +88,12 @@ export function ManagePlusCard({
         </View>
         <View style={{ flex: 1 }}>
           <Text style={{ fontFamily: fonts.display, fontSize: compact ? 17 : 19, color: colors.text }}>
-            {plus ? 'Manage ReviewNatin Plus' : 'ReviewNatin Plus'}
+            {plus ? 'Manage ReviewNatin Plus' : 'Free plan'}
           </Text>
           <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, lineHeight: 19, marginTop: 3 }}>
             {plus
               ? `${plusPlanLabel(plus.sku)} · ${sourceLabel(plus.source)}`
-              : 'Subscribe through the App Store or Google Play. Billing renews through your store account.'}
+              : 'No active Plus subscription. Upgrade when you want unlimited practice and premium tools.'}
           </Text>
         </View>
         <View
@@ -104,7 +105,7 @@ export function ManagePlusCard({
           }}
         >
           <Text style={{ fontFamily: fonts.bodyBold, fontSize: 11, color: plus ? colors.success : colors.textMuted }}>
-            {entitlementStatusLabel(plus)}
+            {statusLabel}
           </Text>
         </View>
       </View>

@@ -3,7 +3,7 @@ import { Platform, ScrollView, StyleSheet, type ScrollViewProps } from 'react-na
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAppTheme } from '../hooks/use-app-theme';
 
-import { stackScrollPadding, TAB_BAR_BASE } from '../lib/layout/content-padding';
+import { TAB_BAR_BASE } from '../lib/layout/content-padding';
 
 type Props = ScrollViewProps & {
   children: ReactNode;

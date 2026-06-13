@@ -53,6 +53,7 @@ import {
   completePracticeSession,
   createQuizSession,
   saveQuizAnswers,
+  type QuizMode,
 } from '../../lib/api/quiz';
 import { fetchUsageLimits, isMiniMockLimitError } from '../../lib/api/iap';
 import { fetchWeakAreaQuestions } from '../../lib/api/analytics';
@@ -138,6 +139,7 @@ export default function PracticeQuizScreen() {
   const [offlineMode, setOfflineMode] = useState(isOffline);
 
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
   const [index, setIndex] = useState(0);
@@ -206,6 +208,7 @@ export default function PracticeQuizScreen() {
       };
 
       try {
+        setLoadError(null);
         const exam = await fetchExamBySlug(slug);
 
         if (isDiagnostic) {
@@ -320,19 +323,29 @@ export default function PracticeQuizScreen() {
           setBookmarkedIds(bookmarks);
           setHintCredits(xpStats.hintCredits);
         }
-      } catch {
+      } catch (error) {
+        captureAppException(error, { area: 'quiz', action: 'load_questions' }, {
+          mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
+          examSlug: slug,
+        });
+        let usedOfflineFallback = false;
         if (!isMock && !isBoard && !isDiagnostic && !isWeakArea && !isBarkada && !isBookmarkReview && (await hasOfflinePack(slug))) {
           const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
           if (offlineQs.length) {
             setOfflineMode(true);
             setQuestions(randomizeQuestionSet(offlineQs));
+            usedOfflineFallback = true;
           }
+        }
+        if (!usedOfflineFallback) {
+          setLoadError('Hindi ma-load ang quiz. Check your connection and try again.');
+          setQuestions([]);
         }
       } finally {
         setLoading(false);
       }
     })();
-  }, [slug, topicSlug, isMock, isBoard, isOffline, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, barkadaLimit, mockExamId, previewLimit, focusQuestionId, user, isPremium, router]);
+  }, [slug, topicSlug, isMock, isBoard, isOffline, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, barkadaLimit, mockExamId, previewLimit, focusQuestionId, user, isPremium, router, resumeKey, durationSeconds]);
 
   useEffect(() => {
     setLang(prefs.explanationLocale ?? 'en');
@@ -508,12 +521,13 @@ export default function PracticeQuizScreen() {
           result.isCorrect ? undefined : selected
         ).catch(() => {});
       }
-    } catch {
-      /* grading failed */
+    } catch (error) {
+      captureAppException(error, { area: 'quiz', action: 'check_answer' }, { questionId: current.id, offline: effectiveOffline });
+      Alert.alert('Hindi ma-check ang sagot', 'May problema sa connection o server. Hindi pa na-save ang sagot na ito. Subukan ulit.');
     } finally {
       setChecking(false);
     }
-  }, [current, selected, revealed, checking, isStrictExam, user, router, offlineMode]);
+  }, [current, selected, revealed, checking, isStrictExam, user, offlineMode]);
 
   const finishQuiz = useCallback(async () => {
     if (finishing.current) return;
@@ -539,6 +553,22 @@ export default function PracticeQuizScreen() {
     let sessionId: string | null = null;
     let serverScore = score;
     let diagnosticReadiness: number | null = null;
+    let saveStatus: 'synced' | 'queued' | 'failed' = 'synced';
+    const sessionMode: QuizMode = isDiagnostic
+      ? 'diagnostic'
+      : isMock
+        ? 'mock'
+        : isBoard
+          ? 'board'
+          : isTimed
+            ? 'timed'
+            : isMistakeReview
+              ? 'mistake_review'
+              : isBarkada
+                ? 'barkada'
+                : isWeakArea
+                  ? 'weak_area'
+                  : 'practice';
 
     // OFFLINE QUEUE — if user is signed in but quiz ran offline, persist
     // the session locally so we can sync it the next time we're online.
@@ -577,19 +607,7 @@ export default function PracticeQuizScreen() {
             user.id,
             exam.id,
             questions.length,
-            isDiagnostic
-              ? 'diagnostic'
-              : isMock
-                ? 'mock'
-                : isBoard
-                  ? 'board'
-                  : isTimed
-                  ? 'timed'
-                  : isMistakeReview
-                    ? 'mistake_review'
-                    : isBarkada
-                      ? 'barkada'
-                      : 'practice',
+            sessionMode,
             mockExamId
           );
           if (sessionId) {
@@ -624,10 +642,38 @@ export default function PracticeQuizScreen() {
         }
       } catch (error) {
         captureAppException(error, { area: 'quiz', action: 'save_server_session' }, {
-          mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
+          mode: sessionMode,
           itemCount: questions.length,
         });
-        /* session save failed */
+        if (!isDiagnostic) {
+          try {
+            const localId = `${user.id}-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+            await queuePendingSession({
+              localId,
+              userId: user.id,
+              examSlug: slug,
+              itemCount: questions.length,
+              durationSeconds: duration,
+              mode: sessionMode,
+              answers: finalAnswers.map((a) => ({
+                questionId: a.questionId,
+                selectedChoiceId: a.selectedChoiceId,
+                isCorrect: a.isCorrect,
+                timeSpentSeconds: a.timeSpentSeconds,
+              })),
+              completedAt: new Date().toISOString(),
+            });
+            saveStatus = 'queued';
+          } catch (queueError) {
+            saveStatus = 'failed';
+            captureAppException(queueError, { area: 'quiz', action: 'queue_failed_online_session' }, {
+              mode: sessionMode,
+              itemCount: questions.length,
+            });
+          }
+        } else {
+          saveStatus = 'failed';
+        }
       }
     }
 
@@ -635,7 +681,7 @@ export default function PracticeQuizScreen() {
       score,
       itemCount: questions.length,
       offline: offlineMode,
-      mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
+      mode: sessionMode,
     });
 
     const totalCorrectFinal = Math.round((serverScore / 100) * questions.length);
@@ -665,6 +711,7 @@ export default function PracticeQuizScreen() {
         sessionId: sessionId ?? '',
         examSlug: slug,
         mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isBookmarkReview ? 'bookmark_review' : offlineMode ? 'offline' : 'practice',
+        saveStatus,
         diagnosticReadiness: diagnosticReadiness != null ? String(diagnosticReadiness) : '',
         pasapathTaskId: pasapathTaskId ?? '',
         barkadaChallengeId: barkadaChallengeId ?? '',
@@ -769,6 +816,20 @@ export default function PracticeQuizScreen() {
           }
           actionLabel="View plans"
           onAction={() => router.replace('/subscribe')}
+        />
+      </View>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <View style={[styles.root, { paddingTop: insets.top }]}>
+        <EmptyState
+          icon={<Ionicons name="cloud-offline-outline" size={32} color={colors.primary} />}
+          title="Hindi ma-load ang quiz"
+          description={loadError}
+          actionLabel="Try again"
+          onAction={() => router.replace({ pathname: '/practice/quiz', params: { examSlug: slug, topicSlug, mode } })}
         />
       </View>
     );

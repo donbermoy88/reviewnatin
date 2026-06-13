@@ -10,7 +10,7 @@
  */
 
 import React, { memo, useMemo } from 'react';
-import { StyleSheet, Text, View, type ViewStyle, type TextStyle } from 'react-native';
+import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { useAppTheme, fonts } from '../hooks/use-app-theme';
 
 // ─── Inline tokens ────────────────────────────────────────────────────────────

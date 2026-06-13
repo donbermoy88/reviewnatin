@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
+import { isAuthDeepLink, routeFromUrl } from './deep-link-routes';
+
 vi.mock('expo-linking', () => ({
   parse: (url: string) => {
     const parsed = new URL(url);
@@ -10,8 +12,6 @@ vi.mock('expo-linking', () => ({
     };
   },
 }));
-
-import { isAuthDeepLink, routeFromUrl } from './deep-link-routes';
 
 describe('routeFromUrl', () => {
   it('routes custom scheme subscribe links', () => {

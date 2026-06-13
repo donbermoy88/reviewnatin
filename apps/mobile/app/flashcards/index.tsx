@@ -103,7 +103,7 @@ export default function FlashcardsScreen() {
   useEffect(() => {
     flipAnim.setValue(0);
     setFlipped(false);
-  }, [index]);
+  }, [flipAnim, index]);
 
   const frontInterpolate = flipAnim.interpolate({ inputRange: [0, 180], outputRange: ['0deg', '180deg'] });
   const backInterpolate  = flipAnim.interpolate({ inputRange: [0, 180], outputRange: ['180deg', '360deg'] });
@@ -130,7 +130,6 @@ export default function FlashcardsScreen() {
 
   const card = filteredCards[index < filteredCards.length ? index : 0];
   const totalCards = filteredCards.length;
-  const progressPct = totalCards > 0 ? Math.round(((knowCount + reviewCount) / totalCards) * 100) : 0;
 
   const finishDeck = async () => {
     setFinished(true);

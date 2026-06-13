@@ -2,38 +2,38 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMemo, useState, useEffect, useCallback } from 'react';
-import { AppSheet } from '../../components/app-sheet';
+import { AppSheet } from '../components/app-sheet';
 import { ActivityIndicator, Alert, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ManagePlusCard } from '../../components/manage-plus-card';
-import { Pill } from '../../components/pill';
-import { useAppTheme } from '../../hooks/use-app-theme';
-import { createSettingsStyles } from '../../lib/themed-styles';
-import { tabScrollPadding } from '../../lib/layout/content-padding';
+import { ManagePlusCard } from '../components/manage-plus-card';
+import { Pill } from '../components/pill';
+import { useAppTheme } from '../hooks/use-app-theme';
+import { createSettingsStyles } from '../lib/themed-styles';
+import { tabScrollPadding } from '../lib/layout/content-padding';
 import { DEFAULT_EXAM_SLUG, DISCLAIMERS, LEGAL, SITE_URL } from '@reviewnatin/shared';
-import { deleteUserAccount } from '../../lib/auth/delete-account';
-import { clearOnboarding } from '../../lib/onboarding-store';
-import { signOutAndRedirect } from '../../lib/auth/sign-out';
-import { isSupabaseConfigured } from '../../lib/supabase';
-import { useAuth } from '../../providers/auth-provider';
-import { useEntitlements } from '../../providers/entitlements-provider';
-import { usePreferences } from '../../providers/preferences-provider';
-import { useOnboardingGate } from '../../providers/onboarding-gate';
-import { useUserProfile } from '../../hooks/use-user-profile';
-import { useNetworkStatus } from '../../hooks/use-network-status';
-import { resolveOnboardingGoal } from '../../lib/api/goals';
+import { deleteUserAccount } from '../lib/auth/delete-account';
+import { clearOnboarding } from '../lib/onboarding-store';
+import { signOutAndRedirect } from '../lib/auth/sign-out';
+import { isSupabaseConfigured } from '../lib/supabase';
+import { useAuth } from '../providers/auth-provider';
+import { useEntitlements } from '../providers/entitlements-provider';
+import { usePreferences } from '../providers/preferences-provider';
+import { useOnboardingGate } from '../providers/onboarding-gate';
+import { useUserProfile } from '../hooks/use-user-profile';
+import { useNetworkStatus } from '../hooks/use-network-status';
+import { resolveOnboardingGoal } from '../lib/api/goals';
 import {
   deleteOfflinePack,
   downloadOfflinePack,
   getOfflinePackMeta,
   type OfflinePackMeta,
-} from '../../lib/offline/pack';
+} from '../lib/offline/pack';
 import {
   flushOfflineSync,
   getPendingOfflineSyncCount,
   type OfflineSyncCounts,
-} from '../../lib/offline/sync-status';
-import { formatEntitlementSummary } from '../../lib/entitlements/format';
+} from '../lib/offline/sync-status';
+import { formatEntitlementSummary } from '../lib/entitlements/format';
 
 type SettingsStyles = ReturnType<typeof createSettingsStyles>;
 
@@ -62,14 +62,30 @@ function SettingsRow({
   last?: boolean;
   onPress?: () => void;
 }) {
-  return (
-    <Pressable style={[styles.row, !last && styles.rowBorder]} onPress={onPress} disabled={!onPress}>
+  const accessibilityLabel = sub ? `${label}. ${sub}` : label;
+  const content = (
+    <>
       <View style={[styles.rowIcon, danger && { backgroundColor: colors.errorBg }]}>{icon}</View>
       <View style={styles.rowText}>
         <Text style={[styles.rowLabel, danger && { color: colors.error }]}>{label}</Text>
         {sub ? <Text style={styles.rowSub}>{sub}</Text> : null}
       </View>
       {right}
+    </>
+  );
+
+  if (!onPress) {
+    return <View style={[styles.row, !last && styles.rowBorder]}>{content}</View>;
+  }
+
+  return (
+    <Pressable
+      style={[styles.row, !last && styles.rowBorder]}
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
+    >
+      {content}
     </Pressable>
   );
 }
@@ -284,6 +300,9 @@ export default function SettingsScreen() {
             style={styles.userCard}
             onPress={user ? () => router.push('/profile/edit') : undefined}
             disabled={!user}
+            accessibilityRole={user ? 'button' : undefined}
+            accessibilityLabel={user ? `Edit profile for ${displayName}` : `Profile. ${displayName}. Not signed in`}
+            accessibilityState={{ disabled: !user }}
           >
             <View style={styles.userAvatar}>
               <Text style={styles.userInitial}>{initials}</Text>
@@ -298,7 +317,11 @@ export default function SettingsScreen() {
             </View>
           </Pressable>
 
-          <Pressable onPress={() => router.push('/subscribe')}>
+          <Pressable
+            onPress={() => router.push('/subscribe')}
+            accessibilityRole="button"
+            accessibilityLabel={premiumActive ? 'Manage ReviewNatin Plus plan' : 'View ReviewNatin Plus plans'}
+          >
             <LinearGradient colors={[...gradients.challenge]} style={styles.premiumCard}>
               <View style={styles.premiumIcon}>
                 <Ionicons name="flash" size={22} color={colors.primaryDark} />
@@ -340,6 +363,8 @@ export default function SettingsScreen() {
                   value={prefs.notificationsEnabled}
                   onValueChange={setNotificationsEnabled}
                   trackColor={switchTrack}
+                  accessibilityLabel="Notifications"
+                  accessibilityRole="switch"
                 />
               }
             />
@@ -354,6 +379,8 @@ export default function SettingsScreen() {
                   value={prefs.examRemindersEnabled}
                   onValueChange={setExamRemindersEnabled}
                   trackColor={switchTrack}
+                  accessibilityLabel="Exam date reminders"
+                  accessibilityRole="switch"
                 />
               }
             />
@@ -369,6 +396,9 @@ export default function SettingsScreen() {
                     <Pressable
                       key={l}
                       onPress={() => void setExplanationLocale(l)}
+                      accessibilityRole="radio"
+                      accessibilityLabel={l === 'en' ? 'English explanations' : 'Taglish explanations'}
+                      accessibilityState={{ selected: prefs.explanationLocale === l }}
                       style={{
                         paddingHorizontal: 10,
                         paddingVertical: 4,
@@ -399,7 +429,13 @@ export default function SettingsScreen() {
               label="Dark mode"
               sub="Override automatic appearance"
               right={
-                <Switch value={prefs.darkMode} onValueChange={setDarkMode} trackColor={switchTrack} />
+                <Switch
+                  value={prefs.darkMode}
+                  onValueChange={setDarkMode}
+                  trackColor={switchTrack}
+                  accessibilityLabel="Dark mode"
+                  accessibilityRole="switch"
+                />
               }
               last
             />

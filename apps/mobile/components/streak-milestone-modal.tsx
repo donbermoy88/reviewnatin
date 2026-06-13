@@ -48,12 +48,15 @@ type Props = {
 export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, spacing, fonts, radii } = theme;
+  const { colors, spacing, fonts } = theme;
 
   const xp = milestoneXp(streakDays);
 
-  const confettiColors = [colors.accent, '#fff', colors.primaryMuted, colors.flame, '#4ADE80'];
-  const particles = useMemo(() => generateConfetti(confettiColors), []);
+  const confettiColors = useMemo(
+    () => [colors.accent, '#fff', colors.primaryMuted, colors.flame, '#4ADE80'],
+    [colors.accent, colors.flame, colors.primaryMuted]
+  );
+  const particles = useMemo(() => generateConfetti(confettiColors), [confettiColors]);
 
   // Fade-in animation — Animated.Value is a long-lived mutable object;
   // useMemo gives a stable identity without tripping the react-hooks/refs rule.
@@ -70,7 +73,7 @@ export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
       fadeAnim.setValue(0);
       scaleAnim.setValue(0.85);
     }
-  }, [visible]);
+  }, [fadeAnim, scaleAnim, visible]);
 
   // Pulse animation for the flame — Animated.Value via useMemo (not useRef).
   const pulseAnim = useMemo(() => new Animated.Value(1), []);
@@ -84,7 +87,7 @@ export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
     );
     loop.start();
     return () => loop.stop();
-  }, [visible]);
+  }, [pulseAnim, visible]);
 
   const handleShare = useCallback(async () => {
     try {

@@ -17,7 +17,7 @@ import {
   type QuizMode,
 } from '../api/quiz';
 import { fetchExamBySlug } from '../api/catalog';
-import { recordQuizOutcome } from '../api/mistakes';
+import { recordQuizOutcome, recordSessionOutcomes } from '../api/mistakes';
 import { captureAppException, captureAppMessage } from '../monitoring/events';
 
 const QUEUE_KEY = 'reviewnatin:offline:pending-sessions:v1';
@@ -165,16 +165,20 @@ export async function flushPendingAnswers(userId: string): Promise<{
       );
       await completePracticeSession(sessionId, session.durationSeconds);
 
-      // Spaced repetition / mistake bank updates — best effort per answer.
-      for (const a of session.answers) {
-        try {
-          await recordQuizOutcome(
-            a.questionId,
-            a.isCorrect,
-            a.isCorrect ? undefined : a.selectedChoiceId ?? undefined
-          );
-        } catch {
-          /* non-blocking */
+      if (session.mode === 'mock' || session.mode === 'board') {
+        await recordSessionOutcomes(sessionId).catch(() => {});
+      } else {
+        // Spaced repetition / mistake bank updates — best effort per answer.
+        for (const a of session.answers) {
+          try {
+            await recordQuizOutcome(
+              a.questionId,
+              a.isCorrect,
+              a.isCorrect ? undefined : a.selectedChoiceId ?? undefined
+            );
+          } catch {
+            /* non-blocking */
+          }
         }
       }
 

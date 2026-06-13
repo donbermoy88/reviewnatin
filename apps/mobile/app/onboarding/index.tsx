@@ -66,7 +66,7 @@ export default function OnboardingScreen() {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [reminderOn, setReminderOn] = useState(true);
   const theme = useAppTheme();
-  const { colors, gradients, spacing } = theme;
+  const { colors, spacing } = theme;
   const styles = useMemo(() => createOnboardingStyles(theme), [theme]);
 
   useEffect(() => {
@@ -328,6 +328,9 @@ export default function OnboardingScreen() {
                     <Pressable
                       key={ex.slug}
                       style={[styles.examCard, on && styles.examCardOn]}
+                      accessibilityRole="radio"
+                      accessibilityLabel={`${ex.name}. ${ex.sub}`}
+                      accessibilityState={{ selected: on }}
                       onPress={() => {
                         setExamSlug(ex.slug);
                         if (ex.slug !== 'let-secondary') setMajorSlug(undefined);
@@ -372,6 +375,9 @@ export default function OnboardingScreen() {
                         <Pressable
                           key={major.slug}
                           style={[styles.examCard, on && styles.examCardOn]}
+                          accessibilityRole="radio"
+                          accessibilityLabel={`Major field ${major.name}`}
+                          accessibilityState={{ selected: on }}
                           onPress={() => setMajorSlug(major.slug)}
                         >
                           <View style={[styles.examIcon, { backgroundColor: '#F1E8FA' }]}>
@@ -403,6 +409,9 @@ export default function OnboardingScreen() {
                     <Pressable
                       key={lv.id}
                       style={[styles.goalCard, on && styles.goalCardOn]}
+                      accessibilityRole="radio"
+                      accessibilityLabel={`${lv.label}. ${lv.sub}`}
+                      accessibilityState={{ selected: on }}
                       onPress={() => setLevel(lv.id)}
                     >
                       <View style={[styles.goalEmoji, on && styles.goalEmojiOn]}>
@@ -428,6 +437,9 @@ export default function OnboardingScreen() {
                     <Pressable
                       key={g.id}
                       style={[styles.goalCard, on && styles.goalCardOn]}
+                      accessibilityRole="radio"
+                      accessibilityLabel={`${g.label}. ${g.sub}. ${g.q}`}
+                      accessibilityState={{ selected: on }}
                       onPress={() => setGoalId(g.id)}
                     >
                       <View style={[styles.goalEmoji, on && styles.goalEmojiOn]}>
@@ -457,6 +469,9 @@ export default function OnboardingScreen() {
                 </View>
                 <Pressable
                   style={[styles.reminderToggle, reminderOn && styles.reminderToggleOn]}
+                  accessibilityRole="switch"
+                  accessibilityLabel="Daily reminder"
+                  accessibilityState={{ checked: reminderOn }}
                   onPress={() => setReminderOn((v) => !v)}
                 >
                   <View style={[styles.reminderKnob, reminderOn && styles.reminderKnobOn]} />

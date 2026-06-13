@@ -598,7 +598,13 @@ export default function DashboardScreen() {
             />
           ) : null}
 
-          <Pressable style={styles.continueCard} onPress={() => void startPractice()}>
+          <Pressable
+            style={styles.continueCard}
+            onPress={() => void startPractice()}
+            accessibilityRole="button"
+            accessibilityLabel={`${hasActivity ? 'Continue review' : 'Start review'} for ${examName || 'your exam'}`}
+            accessibilityHint="Starts a practice quiz"
+          >
             <View style={styles.continueRow}>
               <View style={styles.continueIcon}>
                 <Text style={styles.continueAbbr}>{examAbbr(examSlug)}</Text>
@@ -629,7 +635,13 @@ export default function DashboardScreen() {
                 onPress: () => router.push({ pathname: '/flashcards', params: { examSlug } }),
               },
             ].map((action) => (
-              <Pressable key={action.label} style={styles.quickAction} onPress={action.onPress}>
+              <Pressable
+                key={action.label}
+                style={styles.quickAction}
+                onPress={action.onPress}
+                accessibilityRole="button"
+                accessibilityLabel={action.label}
+              >
                 <Ionicons name={action.icon} size={20} color={colors.primary} />
                 <Text style={styles.quickActionText}>{action.label}</Text>
               </Pressable>
@@ -645,6 +657,8 @@ export default function DashboardScreen() {
                 <Pressable
                   key={subject.id}
                   style={styles.quickRow}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Open ${subject.name} subject`}
                   onPress={() =>
                     router.push({
                       pathname: '/study/[subjectSlug]',
@@ -669,7 +683,12 @@ export default function DashboardScreen() {
 
           <View style={styles.lowerSection}>
             {!user ? (
-              <Pressable style={styles.guestBanner} onPress={() => router.push('/(auth)/login')}>
+              <Pressable
+                style={styles.guestBanner}
+                onPress={() => router.push('/(auth)/login')}
+                accessibilityRole="button"
+                accessibilityLabel="Log in to save progress"
+              >
                 <Text style={styles.guestBannerTitle}>Mag-log in para ma-save ang progress mo</Text>
                 <Text style={styles.guestBannerSub}>
                   PasaPath, streak, Mistake Bank, at readiness — naka-sync lahat kapag may account ka.
@@ -723,7 +742,7 @@ export default function DashboardScreen() {
                   label: 'Go to Settings',
                   onPress: () => {
                     setNotificationSheetOpen(false);
-                    router.push('/(tabs)/settings');
+                    router.push('/settings');
                   },
                 },
                 { label: 'OK', onPress: () => setNotificationSheetOpen(false), variant: 'outline' },
@@ -740,7 +759,7 @@ export default function DashboardScreen() {
                   label: 'Go to Settings',
                   onPress: () => {
                     setNotificationSheetOpen(false);
-                    router.push('/(tabs)/settings');
+                    router.push('/settings');
                   },
                   variant: 'outline',
                 },

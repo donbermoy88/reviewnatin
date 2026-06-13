@@ -31,6 +31,12 @@ module.exports = () => {
   // local `development` builds are unaffected.
   const isStoreBuild = buildProfile === 'production';
 
+  if (isStoreBuild && (!urlIsSet(process.env.EXPO_PUBLIC_SUPABASE_URL) || !process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY)) {
+    throw new Error(
+      'EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY are required for production builds.'
+    );
+  }
+
   const plugins = [...(base.plugins ?? [])];
   if (isDevClient) {
     plugins.push('expo-dev-client');
@@ -53,11 +59,11 @@ module.exports = () => {
 
   const admobIos = process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID;
   const admobAndroid = process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID;
-  if (admobIos || admobAndroid) {
+  if (admobIos || admobAndroid || isStoreBuild) {
     if (!admobIos || !admobAndroid) {
       throw new Error(
         'AdMob is partially configured. Set BOTH EXPO_PUBLIC_ADMOB_IOS_APP_ID and ' +
-          'EXPO_PUBLIC_ADMOB_ANDROID_APP_ID, or neither — a missing GADApplicationIdentifier ' +
+          'EXPO_PUBLIC_ADMOB_ANDROID_APP_ID for production, or neither for non-store builds — a missing GADApplicationIdentifier ' +
           'crashes the Google Mobile Ads SDK at launch.'
       );
     }
@@ -120,3 +126,7 @@ module.exports = () => {
     },
   };
 };
+
+function urlIsSet(value) {
+  return Boolean(value && !value.includes('YOUR_PROJECT') && !value.includes('placeholder'));
+}
