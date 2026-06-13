@@ -55,7 +55,7 @@ export function ScoreRing({ percent, correct, total, size = 180 }: Props) {
 const styles = StyleSheet.create({
   center: { alignItems: 'center', justifyContent: 'center' },
   scoreLine: { flexDirection: 'row', alignItems: 'baseline' },
-  scoreBig: { fontSize: 52, color: '#fff', letterSpacing: -2 },
+  scoreBig: { fontSize: 52, color: '#fff', letterSpacing: 0 },
   scoreSlash: { fontSize: 32, color: 'rgba(255,255,255,0.5)' },
   accuracy: {
     fontSize: 12,

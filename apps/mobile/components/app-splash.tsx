@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '800',
     color: '#fff',
-    letterSpacing: -0.8,
+    letterSpacing: 0,
     textAlign: 'center',
   },
   titleAccent: {

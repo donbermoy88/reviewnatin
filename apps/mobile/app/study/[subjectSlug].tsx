@@ -287,7 +287,7 @@ function createSubjectTopicStyles(theme: AppTheme) {
       color: '#fff',
       marginTop: spacing.xs,
       lineHeight: 30,
-      letterSpacing: -0.6,
+      letterSpacing: 0,
     },
     headerSub: { fontFamily: fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.75)', marginTop: 6 },
     progressCard: {

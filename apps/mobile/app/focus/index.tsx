@@ -134,7 +134,7 @@ export default function FocusTimerScreen() {
 
           <Text
             accessibilityLabel={`${formatClock(remaining)} remaining`}
-            style={{ fontFamily: fonts.display, fontSize: 84, color: '#fff', letterSpacing: -2, fontVariant: ['tabular-nums'] }}
+            style={{ fontFamily: fonts.display, fontSize: 84, color: '#fff', letterSpacing: 0, fontVariant: ['tabular-nums'] }}
           >
             {formatClock(remaining)}
           </Text>

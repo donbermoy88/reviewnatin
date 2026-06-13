@@ -192,7 +192,7 @@ export default function FlashcardsScreen() {
       >
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: spacing.xl }}>
           <Text style={{ fontSize: 72, marginBottom: spacing.md }}>🎉</Text>
-          <Text style={{ fontFamily: fonts.displayBold, fontSize: 28, color: '#fff', marginBottom: spacing.sm, textAlign: 'center', letterSpacing: -0.5 }}>
+          <Text style={{ fontFamily: fonts.displayBold, fontSize: 28, color: '#fff', marginBottom: spacing.sm, textAlign: 'center', letterSpacing: 0 }}>
             Deck Complete!
           </Text>
           <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 15, color: 'rgba(255,255,255,0.75)', marginBottom: spacing.xl, textAlign: 'center' }}>
@@ -202,12 +202,12 @@ export default function FlashcardsScreen() {
           {/* Stats */}
           <View style={{ flexDirection: 'row', gap: spacing.xl, marginBottom: spacing.xl }}>
             <View style={{ alignItems: 'center' }}>
-              <Text style={{ fontFamily: fonts.displayBold, fontSize: 36, color: '#4ADE80', letterSpacing: -1 }}>{knowCount}</Text>
+              <Text style={{ fontFamily: fonts.displayBold, fontSize: 36, color: '#4ADE80', letterSpacing: 0 }}>{knowCount}</Text>
               <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>I Know This</Text>
             </View>
             <View style={{ width: 1, backgroundColor: 'rgba(255,255,255,0.2)' }} />
             <View style={{ alignItems: 'center' }}>
-              <Text style={{ fontFamily: fonts.displayBold, fontSize: 36, color: '#FB7185', letterSpacing: -1 }}>{reviewCount}</Text>
+              <Text style={{ fontFamily: fonts.displayBold, fontSize: 36, color: '#FB7185', letterSpacing: 0 }}>{reviewCount}</Text>
               <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>Review Again</Text>
             </View>
           </View>
@@ -351,7 +351,7 @@ export default function FlashcardsScreen() {
               <View style={{ width: 48, height: 48, borderRadius: 14, backgroundColor: colors.primaryMuted, alignItems: 'center', justifyContent: 'center', marginBottom: spacing.md }}>
                 <Ionicons name="eye-outline" size={24} color={colors.primary} />
               </View>
-              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 18, color: colors.text, textAlign: 'center', lineHeight: 26, letterSpacing: -0.3 }}>
+              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 18, color: colors.text, textAlign: 'center', lineHeight: 26, letterSpacing: 0 }}>
                 {card.front}
               </Text>
               {card.topicName ? (

@@ -61,5 +61,5 @@ export function GoalRing({
 
 const styles = StyleSheet.create({
   center: { alignItems: 'center', justifyContent: 'center' },
-  label: { letterSpacing: -0.5 },
+  label: { letterSpacing: 0 },
 });

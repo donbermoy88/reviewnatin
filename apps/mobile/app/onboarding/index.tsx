@@ -588,7 +588,7 @@ function createOnboardingStyles(theme: AppTheme) {
     fontSize: 34,
     color: '#fff',
     marginTop: spacing.lg,
-    letterSpacing: -0.5,
+    letterSpacing: 0,
   },
   welcomeTag: {
     fontFamily: type.bodyMedium.fontFamily,
@@ -630,7 +630,7 @@ function createOnboardingStyles(theme: AppTheme) {
     fontFamily: fonts.display,
     fontSize: 26,
     lineHeight: 31,
-    letterSpacing: -0.65,
+    letterSpacing: 0,
     color: colors.text,
   },
   pageSub: {
@@ -802,7 +802,7 @@ function createOnboardingStyles(theme: AppTheme) {
     fontFamily: fonts.display,
     fontSize: 28,
     lineHeight: 34,
-    letterSpacing: -0.84,
+    letterSpacing: 0,
     color: colors.text,
     textAlign: 'center',
     marginTop: spacing.xs,
@@ -841,7 +841,7 @@ function createOnboardingStyles(theme: AppTheme) {
     fontFamily: fonts.bodyBold,
     fontSize: 15,
     lineHeight: 20,
-    letterSpacing: -0.15,
+    letterSpacing: 0,
     color: colors.text,
   },
   readyItemSub: {

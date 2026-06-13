@@ -181,7 +181,7 @@ export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
                   <Text style={{
                     position: 'absolute', bottom: 28,
                     fontFamily: fonts.displayBold, fontSize: streakDays >= 100 ? 36 : 44,
-                    color: colors.primaryDark, letterSpacing: -2,
+                    color: colors.primaryDark, letterSpacing: 0,
                     textShadowColor: 'rgba(255,255,255,0.4)',
                     textShadowOffset: { width: 0, height: 2 },
                     textShadowRadius: 8,
@@ -205,7 +205,7 @@ export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
             {/* Headline */}
             <Text style={{
               fontFamily: fonts.displayBold, fontSize: 36, color: '#fff',
-              letterSpacing: -1, lineHeight: 40, textAlign: 'center',
+              letterSpacing: 0, lineHeight: 40, textAlign: 'center',
               marginBottom: spacing.sm,
             }}>
               {streakDays}-day streak!
@@ -262,7 +262,7 @@ export function StreakMilestoneModal({ visible, streakDays, onClose }: Props) {
                   elevation: 8,
                 }}
               >
-                <Text style={{ fontFamily: fonts.bodyBold, fontSize: 16, color: colors.primaryDark, letterSpacing: -0.3 }}>
+                <Text style={{ fontFamily: fonts.bodyBold, fontSize: 16, color: colors.primaryDark, letterSpacing: 0 }}>
                   Share my streak
                 </Text>
                 <Ionicons name="share-outline" size={18} color={colors.primaryDark} />

@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
   wordmark: {
     fontFamily: type.brand.fontFamily,
     fontWeight: '800',
-    letterSpacing: -0.5,
+    letterSpacing: 0,
   },
 });

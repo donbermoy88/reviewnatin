@@ -84,6 +84,11 @@ function taskIcon(task: PasaPathTask, completed: boolean): keyof typeof Ionicons
   return 'layers-outline';
 }
 
+function subjectIcon(index: number): keyof typeof Ionicons.glyphMap {
+  const icons: (keyof typeof Ionicons.glyphMap)[] = ['book-outline', 'school-outline', 'analytics-outline'];
+  return icons[index % icons.length];
+}
+
 function pickWeakTopic(subjects: { weakTopics: TopicAnalyticsRow[] }[]): TopicAnalyticsRow | null {
   for (const subject of subjects) {
     if (subject.weakTopics.length > 0) return subject.weakTopics[0];
@@ -257,6 +262,7 @@ export default function DashboardScreen() {
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
   const firstName = displayName.split(/\s+/)[0] ?? displayName;
   const streakLabel = stats.streakDays > 0 ? 'day streak' : 'simulan na';
+  const remainingQuestions = Math.max(questionsTarget - questionsDone, 0);
 
   const ensurePracticeAllowed = () => {
     if (!user) return true;
@@ -396,14 +402,17 @@ export default function DashboardScreen() {
           </View>
 
           <View style={styles.heroTop}>
-            <View style={{ flex: 1, minWidth: 0, paddingRight: spacing.xs }}>
+            <View style={styles.heroCopy}>
               <Text style={styles.heroGreet}>{timeGreeting()}</Text>
               <Text style={styles.heroName} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.85}>
-                {firstName}! 👋
+                {firstName}
+              </Text>
+              <Text style={styles.heroTrack} numberOfLines={1}>
+                {examName || 'Review track'} · {premium ? 'Plus' : 'Free'}
               </Text>
             </View>
             <Pressable
-              style={styles.bellBtn}
+              style={({ pressed }) => [styles.bellBtn, pressed && styles.pressedSoft]}
               onPress={() => setNotificationSheetOpen(true)}
               hitSlop={8}
               accessibilityRole="button"
@@ -413,9 +422,24 @@ export default function DashboardScreen() {
             </Pressable>
           </View>
 
+          <View style={styles.heroFocusCard}>
+            <View style={styles.heroFocusTop}>
+              <Text style={styles.heroFocusLabel}>{"Today's focus"}</Text>
+              <Text style={styles.heroFocusValue}>{dailyGoalPct}%</Text>
+            </View>
+            <View style={styles.heroProgressTrack}>
+              <View style={[styles.heroProgressFill, { width: `${dailyGoalPct}%` }]} />
+            </View>
+            <Text style={styles.heroFocusText}>
+              {remainingQuestions === 0
+                ? 'Daily target complete. Use Mock or Mistakes next.'
+                : `${remainingQuestions} questions left for today's target.`}
+            </Text>
+          </View>
+
           <View style={styles.statRow}>
             <Pressable
-              style={styles.statPill}
+              style={({ pressed }) => [styles.statPill, pressed && styles.pressedSoft]}
               onPress={() => user && router.push('/streak-freeze')}
               disabled={!user}
               accessibilityRole="button"
@@ -431,7 +455,7 @@ export default function DashboardScreen() {
               <View style={styles.statTextWrap}>
                 <Text style={styles.statVal}>{stats.streakDays}</Text>
                 {user && streakFreezes > 0 ? (
-                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                  <View style={styles.statFreezeRow}>
                     <Text style={styles.statLbl} numberOfLines={1}>
                       {streakLabel}
                     </Text>
@@ -457,7 +481,7 @@ export default function DashboardScreen() {
               </View>
             </View>
             <Pressable
-              style={styles.statPillReadiness}
+              style={({ pressed }) => [styles.statPillReadiness, pressed && styles.pressedSoft]}
               onPress={() => readinessScore != null && setReadinessSheetOpen(true)}
               disabled={readinessScore == null}
               accessibilityRole="button"
@@ -475,7 +499,7 @@ export default function DashboardScreen() {
                   labelColor="#fff"
                 />
               ) : (
-                <View style={{ width: 42, height: 42, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={styles.statEmptyRing}>
                   <Text style={[styles.statVal, { fontSize: 15 }]}>—</Text>
                 </View>
               )}
@@ -488,14 +512,17 @@ export default function DashboardScreen() {
           {user && pasapath ? (
             <View style={styles.pasapathCard}>
               <View style={styles.pasapathHead}>
-                <Text style={styles.pasapathLbl}>Today&apos;s PasaPath</Text>
+                <Text style={styles.pasapathLbl}>{"Today's PasaPath"}</Text>
                 <Pressable
                   onPress={() => router.push('/pasapath/week')}
                   hitSlop={8}
                   accessibilityRole="button"
                   accessibilityLabel="View PasaPath week"
                 >
-                  <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.primary }}>Week →</Text>
+                  <View style={styles.weekLink}>
+                    <Text style={styles.weekLinkText}>Week</Text>
+                    <Ionicons name="chevron-forward" size={14} color={colors.primary} />
+                  </View>
                 </Pressable>
               </View>
               <Text style={styles.pasapathMeta}>
@@ -518,14 +545,14 @@ export default function DashboardScreen() {
                   accessibilityLabel={primaryCtaLabel(nextTask)}
                 >
                   <Ionicons name="play" size={18} color="#fff" />
-                  <Text style={styles.primaryCtaText}>
+                  <Text style={styles.primaryCtaText} numberOfLines={1}>
                     {nextTask.title} · {nextTask.minutes} min
                   </Text>
                 </Pressable>
               ) : pasapathComplete ? (
                 <View style={[styles.primaryCta, { backgroundColor: colors.success }]}>
                   <Ionicons name="checkmark-circle" size={18} color="#fff" />
-                  <Text style={styles.primaryCtaText}>PasaPath complete for today! 🎉</Text>
+                  <Text style={styles.primaryCtaText}>PasaPath complete for today</Text>
                 </View>
               ) : null}
 
@@ -541,11 +568,11 @@ export default function DashboardScreen() {
                     size={18}
                     color={task.completed ? colors.success : colors.primary}
                   />
-                  <View style={{ flex: 1 }}>
+                  <View style={styles.pasapathTaskCopy}>
                     <Text style={styles.pasapathTaskTitle}>{task.title}</Text>
                     <Text style={styles.pasapathTaskSub}>
                       {task.completed
-                        ? 'Done for today ✓'
+                        ? 'Done for today'
                         : task.type === 'mistakes' && task.question_count === 0
                           ? 'Take a quiz first to build mistakes'
                           : `${task.minutes} min · ${task.question_count} items`}
@@ -559,7 +586,7 @@ export default function DashboardScreen() {
             </View>
           ) : user ? (
             <View style={[styles.pasapathCard, { marginBottom: spacing.md }]}>
-              <Text style={styles.pasapathLbl}>Today&apos;s PasaPath</Text>
+              <Text style={styles.pasapathLbl}>{"Today's PasaPath"}</Text>
               <Text style={[styles.pasapathMeta, { marginBottom: spacing.md }]}>
                 Tapusin ang unang quiz para mabuo ang daily study plan mo.
               </Text>
@@ -576,10 +603,10 @@ export default function DashboardScreen() {
               </Text>
               <Text style={styles.goalHint}>
                 {questionsDone >= questionsTarget
-                  ? 'Tapos na ang goal mo ngayon! 🎉'
+                  ? 'Tapos na ang goal mo ngayon.'
                   : user
-                    ? `${questionsTarget - questionsDone} na lang — kaya mo 'yan! 💪`
-                    : `${questionsTarget - questionsDone} na lang — tara na! 💪`}
+                    ? `${remainingQuestions} na lang para matapos ang target.`
+                    : `${remainingQuestions} na lang para matapos ang target.`}
               </Text>
               {showAccuracy ? (
                 <Text style={[styles.goalHint, { marginTop: 6 }]}>
@@ -609,7 +636,7 @@ export default function DashboardScreen() {
               <View style={styles.continueIcon}>
                 <Text style={styles.continueAbbr}>{examAbbr(examSlug)}</Text>
               </View>
-              <View style={{ flex: 1 }}>
+              <View style={styles.continueCopy}>
                 <Text style={styles.continueLbl}>
                   {hasActivity ? 'Ituloy ang review' : 'Simulan ang review'}
                 </Text>
@@ -626,24 +653,45 @@ export default function DashboardScreen() {
 
           <View style={styles.quickActions}>
             {[
-              { label: 'Practice', icon: 'flash-outline' as const, onPress: () => void startPractice() },
-              { label: 'Mock', icon: 'document-text-outline' as const, onPress: () => void launchMock() },
-              { label: 'Mistakes', icon: 'alert-circle-outline' as const, onPress: () => router.push('/mistakes') },
+              {
+                label: 'Practice',
+                sub: '12-item set',
+                icon: 'flash-outline' as const,
+                onPress: () => void startPractice(),
+              },
+              {
+                label: 'Mock',
+                sub: 'Timed exam',
+                icon: 'document-text-outline' as const,
+                onPress: () => void launchMock(),
+              },
+              {
+                label: 'Mistakes',
+                sub: 'Review misses',
+                icon: 'alert-circle-outline' as const,
+                onPress: () => router.push('/mistakes'),
+              },
               {
                 label: 'Flashcards',
+                sub: 'Due cards',
                 icon: 'layers-outline' as const,
                 onPress: () => router.push({ pathname: '/flashcards', params: { examSlug } }),
               },
             ].map((action) => (
               <Pressable
                 key={action.label}
-                style={styles.quickAction}
+                style={({ pressed }) => [styles.quickAction, pressed && styles.cardPressed]}
                 onPress={action.onPress}
                 accessibilityRole="button"
                 accessibilityLabel={action.label}
               >
-                <Ionicons name={action.icon} size={20} color={colors.primary} />
-                <Text style={styles.quickActionText}>{action.label}</Text>
+                <View style={styles.quickActionIcon}>
+                  <Ionicons name={action.icon} size={20} color={colors.primary} />
+                </View>
+                <View style={styles.quickActionCopy}>
+                  <Text style={styles.quickActionText}>{action.label}</Text>
+                  <Text style={styles.quickActionSub}>{action.sub}</Text>
+                </View>
               </Pressable>
             ))}
           </View>
@@ -667,9 +715,9 @@ export default function DashboardScreen() {
                   }
                 >
                   <View style={[styles.quickIcon, { backgroundColor: colors.primaryMuted }]}>
-                    <Text style={{ fontSize: 20 }}>{['📚', '🎓', '🔬'][index % 3]}</Text>
+                    <Ionicons name={subjectIcon(index)} size={21} color={colors.primary} />
                   </View>
-                  <View style={{ flex: 1 }}>
+                  <View style={styles.quickCopy}>
                     <Text style={styles.quickName}>{subject.name}</Text>
                     <Text style={styles.quickMeta}>I-tap para sa mga topic</Text>
                   </View>

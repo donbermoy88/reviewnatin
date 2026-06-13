@@ -74,7 +74,7 @@ function PodiumSlot({ entry, position, theme }: { entry: LeaderboardEntry; posit
       </View>
 
       <View style={{ alignItems: 'center', marginTop: 6 }}>
-        <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: '#fff', letterSpacing: -0.2 }} numberOfLines={1}>
+        <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: '#fff', letterSpacing: 0 }} numberOfLines={1}>
           {entry.isCurrentUser ? 'You' : entry.displayName}
         </Text>
         <Text style={{ fontFamily: fonts.bodyBold, fontSize: 11, color: colors.accent, marginTop: 2 }}>
@@ -143,7 +143,7 @@ export default function LeaderboardScreen() {
         >
           {/* Title row */}
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.sm }}>
-            <Text style={{ fontFamily: fonts.displayBold, fontSize: 22, color: '#fff', letterSpacing: -0.5 }}>
+            <Text style={{ fontFamily: fonts.displayBold, fontSize: 22, color: '#fff', letterSpacing: 0 }}>
               Leaderboard
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 12, paddingVertical: 6, backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: 999 }}>
@@ -239,7 +239,7 @@ export default function LeaderboardScreen() {
                 </View>
                 {/* Name + XP */}
                 <View style={{ flex: 1 }}>
-                  <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: isYou ? colors.primary : colors.text, letterSpacing: -0.2 }}>
+                  <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: isYou ? colors.primary : colors.text, letterSpacing: 0 }}>
                     {isYou ? 'You' : e.displayName}
                   </Text>
                   <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 11, color: colors.textMuted, marginTop: 1 }}>

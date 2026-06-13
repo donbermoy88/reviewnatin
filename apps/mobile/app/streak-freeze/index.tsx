@@ -94,7 +94,7 @@ export default function StreakFreezeScreen() {
             }}
           >
             <Ionicons name="snow" size={40} color={colors.primary} />
-            <Text style={{ fontFamily: fonts.display, fontSize: 40, color: colors.text, letterSpacing: -1 }}>{freezes}</Text>
+            <Text style={{ fontFamily: fonts.display, fontSize: 40, color: colors.text, letterSpacing: 0 }}>{freezes}</Text>
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted }}>
               freeze{freezes === 1 ? '' : 's'} · max {STREAK_FREEZE_CAP}
             </Text>
