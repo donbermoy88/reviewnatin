@@ -78,6 +78,19 @@ type ProductRow = {
   examTypeId?: string | null;
 };
 
+type HighlightItem = {
+  icon: keyof typeof Ionicons.glyphMap;
+  title: string;
+  subtitle: string;
+};
+
+const PLUS_HIGHLIGHTS: HighlightItem[] = [
+  { icon: 'infinite-outline', title: 'Unlimited practice', subtitle: 'No daily question cap' },
+  { icon: 'document-text-outline', title: 'Full mock exams', subtitle: 'Exam-style timed sets' },
+  { icon: 'cloud-download-outline', title: 'Offline packs', subtitle: 'Review kahit mahina signal' },
+  { icon: 'sparkles-outline', title: 'AI tutor', subtitle: 'Premium study help' },
+];
+
 function formatSkuLabel(sku: string): string {
   const normalized = sku.toLowerCase();
   if (normalized.includes('six_months')) return 'Plus 6 Months';
@@ -151,6 +164,18 @@ function planSavingsLabel(product: ProductRow): string | null {
   return `Save around ${savingsPct}%`;
 }
 
+function planMonthlyEquivalentLabel(product: ProductRow): string | null {
+  const months = isSixMonthPlus(product.sku) ? 6 : isYearlyPlus(product.sku) ? 12 : null;
+  if (!months) return null;
+  return `~${formatPeso(Math.ceil(product.pricePhp / months))}/mo`;
+}
+
+function planDurationLabel(product: ProductRow): string {
+  if (isSixMonthPlus(product.sku)) return '6 months';
+  if (isYearlyPlus(product.sku)) return '12 months';
+  return 'Monthly';
+}
+
 function FeatureList({ items, styles }: { items: string[]; styles: ReturnType<typeof createStyles> }) {
   return (
     <View style={styles.featureList}>
@@ -158,6 +183,24 @@ function FeatureList({ items, styles }: { items: string[]; styles: ReturnType<ty
         <View key={item} style={styles.featureRow}>
           <Ionicons name="checkmark-circle" size={16} color="#0B5FFF" />
           <Text style={styles.featureText}>{item}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function PlusHighlights({ colors, styles }: { colors: AppTheme['colors']; styles: ReturnType<typeof createStyles> }) {
+  return (
+    <View style={styles.highlightsGrid}>
+      {PLUS_HIGHLIGHTS.map((item) => (
+        <View key={item.title} style={styles.highlightCard}>
+          <View style={styles.highlightIcon}>
+            <Ionicons name={item.icon} size={18} color={colors.primary} />
+          </View>
+          <View style={styles.highlightCopy}>
+            <Text style={styles.highlightTitle}>{item.title}</Text>
+            <Text style={styles.highlightSub}>{item.subtitle}</Text>
+          </View>
         </View>
       ))}
     </View>
@@ -367,6 +410,7 @@ export default function SubscribeScreen() {
     const isBusy = busy === product.id || purchasingSku === product.sku;
     const plusActive = hasAccess;
     const savingsLabel = planSavingsLabel(product);
+    const monthlyEquivalent = planMonthlyEquivalentLabel(product);
 
     const primaryLabel = isDevBuild
       ? isBusy
@@ -402,6 +446,16 @@ export default function SubscribeScreen() {
             <View style={styles.priceRow}>
               <Text style={styles.planPrice}>{formatPeso(product.pricePhp)}</Text>
               <Text style={styles.planSuffix}>{suffix}</Text>
+            </View>
+            <View style={styles.planMetaRow}>
+              <View style={styles.planMetaPill}>
+                <Text style={styles.planMetaPillText}>{planDurationLabel(product)}</Text>
+              </View>
+              {monthlyEquivalent ? (
+                <View style={styles.planMetaPill}>
+                  <Text style={styles.planMetaPillText}>{monthlyEquivalent}</Text>
+                </View>
+              ) : null}
             </View>
             {savingsLabel ? (
               <Text style={styles.savingsCallout}>{savingsLabel}</Text>
@@ -515,6 +569,8 @@ export default function SubscribeScreen() {
               </Text>
             </View>
           ) : null}
+
+          <PlusHighlights colors={colors} styles={styles} />
 
           <ManagePlusCard
             entitlements={entitlements}
@@ -636,7 +692,7 @@ function createStyles(theme: AppTheme) {
       fontFamily: fonts.display,
       fontSize: 26,
       color: '#fff',
-      letterSpacing: -0.6,
+      letterSpacing: 0,
       lineHeight: 32,
     },
     headerSub: {
@@ -667,11 +723,51 @@ function createStyles(theme: AppTheme) {
       color: 'rgba(255,255,255,0.9)',
     },
     body: { padding: spacing.lg, marginTop: -spacing.sm },
+    highlightsGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: spacing.sm,
+      marginBottom: spacing.md,
+    },
+    highlightCard: {
+      width: '48%',
+      minHeight: 92,
+      backgroundColor: colors.surface,
+      borderRadius: radii.lg,
+      borderWidth: 1,
+      borderColor: colors.border,
+      padding: spacing.md,
+      gap: spacing.sm,
+    },
+    highlightIcon: {
+      width: 32,
+      height: 32,
+      borderRadius: radii.md,
+      backgroundColor: colors.primaryMuted,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    highlightCopy: {
+      flex: 1,
+    },
+    highlightTitle: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 13,
+      color: colors.text,
+      lineHeight: 17,
+    },
+    highlightSub: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 11,
+      color: colors.textMuted,
+      lineHeight: 15,
+      marginTop: 2,
+    },
     sectionTitle: {
       fontFamily: fonts.bodyBold,
       fontSize: 18,
       color: colors.text,
-      letterSpacing: -0.2,
+      letterSpacing: 0,
       marginBottom: spacing.xs,
     },
     sectionSub: {
@@ -735,7 +831,7 @@ function createStyles(theme: AppTheme) {
       fontFamily: fonts.bodyBold,
       fontSize: 17,
       color: colors.text,
-      letterSpacing: -0.2,
+      letterSpacing: 0,
     },
     planPositioning: {
       fontFamily: fonts.bodyMedium,
@@ -745,8 +841,28 @@ function createStyles(theme: AppTheme) {
       marginTop: 3,
     },
     priceRow: { flexDirection: 'row', alignItems: 'baseline', gap: 4, marginTop: 4 },
-    planPrice: { fontFamily: fonts.display, fontSize: 28, color: colors.primary, letterSpacing: -0.8 },
+    planPrice: { fontFamily: fonts.display, fontSize: 28, color: colors.primary, letterSpacing: 0 },
     planSuffix: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted },
+    planMetaRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: spacing.xs,
+      marginTop: spacing.xs,
+    },
+    planMetaPill: {
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 4,
+      borderRadius: radii.full,
+      backgroundColor: colors.background,
+      borderWidth: 1,
+      borderColor: colors.border,
+    },
+    planMetaPillText: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 11,
+      color: colors.textMuted,
+      lineHeight: 14,
+    },
     savingsCallout: {
       fontFamily: fonts.bodyBold,
       fontSize: 12,
