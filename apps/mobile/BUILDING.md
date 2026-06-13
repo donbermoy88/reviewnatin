@@ -64,15 +64,20 @@ npm run qa:plus
 ```
 
 If the script reports that demo entitlements are disabled, enable them only for
-the local/dev Supabase database:
+the local/dev Supabase database. By default this allowlists only the QA email,
+not every authenticated user:
 
 ```bash
-npm run db:enable-demo-iap
+QA_PLUS_EMAIL=qa.plus@reviewnatin.test npm run db:enable-demo-iap
 ```
 
 Then rerun `npm run qa:plus` and log into the mobile app with the same QA email
 and password. This uses the authenticated `grant_demo_entitlement()` RPC and
 does not require service-role keys in the mobile app.
+
+For an isolated local database only, `DEMO_ENTITLEMENTS_ALLOW_ALL=true npm run
+db:enable-demo-iap` restores broad demo grants. Do not use that on shared,
+staging, or production databases.
 
 ## iOS submission credentials (no iPhone or Mac required)
 

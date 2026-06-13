@@ -102,6 +102,12 @@ async function main() {
           'Enable local/dev demo grants with: npm run db:enable-demo-iap'
       );
     }
+    if (grant.error.message?.includes('restricted to QA accounts')) {
+      fail(
+        `QA account ${email} exists, but this email is not in app.demo_entitlement_emails.\n` +
+          `Enable it with: QA_PLUS_EMAIL=${email} npm run db:enable-demo-iap`
+      );
+    }
     throw grant.error;
   }
 
