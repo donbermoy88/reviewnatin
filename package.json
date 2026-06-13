@@ -34,6 +34,7 @@
     "db:seed-content": "npm run db:seed-cse-topics && npm run db:seed-questions && npm run db:refresh-mocks",
     "db:apply-all": "node scripts/db-apply-all.mjs",
     "db:enable-demo-iap": "node scripts/enable-demo-iap.mjs",
+    "qa:plus": "node scripts/bootstrap-qa-plus.mjs",
     "content:audit": "node scripts/audit-content-quality.mjs",
     "content:audit:ci": "node scripts/audit-content-quality.mjs --fail-on medium",
     "content:audit:rules": "node --test scripts/lib/content-quality-rules.test.mjs",

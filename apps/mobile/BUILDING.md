@@ -51,6 +51,29 @@ store-signed builds (TestFlight / App Store) on a physical device — they are
 disabled in dev/simulator by design (`lib/iap/availability.ts`,
 `lib/device-capabilities.ts`).
 
+## QA Plus account for simulator/dev builds
+
+Use a dedicated QA account plus a demo entitlement for premium-mode simulator
+testing. The password must come from your shell or local secret store; never
+commit it.
+
+```bash
+QA_PLUS_EMAIL=qa.plus@reviewnatin.test \
+QA_PLUS_PASSWORD='replace-with-local-secret' \
+npm run qa:plus
+```
+
+If the script reports that demo entitlements are disabled, enable them only for
+the local/dev Supabase database:
+
+```bash
+npm run db:enable-demo-iap
+```
+
+Then rerun `npm run qa:plus` and log into the mobile app with the same QA email
+and password. This uses the authenticated `grant_demo_entitlement()` RPC and
+does not require service-role keys in the mobile app.
+
 ## iOS submission credentials (no iPhone or Mac required)
 
 You do **not** need an iPhone to set up signing or submit. EAS builds and signs

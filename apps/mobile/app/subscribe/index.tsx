@@ -196,6 +196,7 @@ export default function SubscribeScreen() {
   const [sheet, setSheet] = useState<
     | null
     | { kind: 'purchase_error'; message: string }
+    | { kind: 'demo_error'; message: string }
     | { kind: 'restore'; ok: boolean; message: string }
     | { kind: 'ewallet'; provider: 'gcash' | 'maya'; reference: string; amount: number }
     | { kind: 'checkout_error'; message: string }
@@ -290,7 +291,13 @@ export default function SubscribeScreen() {
       captureAppMessage('demo entitlement activated', { area: 'paywall', action: 'demo_activate' }, { tier });
     } catch (error) {
       captureAppException(error, { area: 'paywall', action: 'demo_activate' }, { tier });
-      throw error;
+      const message = error instanceof Error ? error.message : 'Demo activation failed.';
+      setSheet({
+        kind: 'demo_error',
+        message: message.includes('Demo entitlements are disabled')
+          ? 'Demo Plus is disabled for this Supabase database. Run npm run db:enable-demo-iap for local/dev QA, then try Activate (demo) again.'
+          : message,
+      });
     } finally {
       setBusy(null);
     }
@@ -548,6 +555,13 @@ export default function SubscribeScreen() {
         visible={sheet?.kind === 'purchase_error'}
         title="Purchase"
         subtitle={sheet?.kind === 'purchase_error' ? sheet.message : undefined}
+        onClose={() => setSheet(null)}
+        actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}
+      />
+      <AppSheet
+        visible={sheet?.kind === 'demo_error'}
+        title="Demo Plus is not enabled"
+        subtitle={sheet?.kind === 'demo_error' ? sheet.message : undefined}
         onClose={() => setSheet(null)}
         actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}
       />
