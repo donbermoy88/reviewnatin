@@ -32,7 +32,7 @@ The service role key only appears in:
 
 ## Third-party API keys
 
-- `grep -rn "sk-ant\|ANTHROPIC" apps/mobile/` returns NO hits. Anthropic AI usage is server-side only via the `ai-tutor` and `ai-explain` Supabase Edge Functions.
+- `grep -rn "sk-ant\|ANTHROPIC" apps/mobile/` returns NO hits. Anthropic usage is server-side only for optional per-question explanations.
 - No OpenAI key embedded in client.
 - AdMob unit IDs are public IDs (intended for client embedding). Not secrets.
 
@@ -70,7 +70,7 @@ NO sensitive keys with `EXPO_PUBLIC_` prefix detected.
 ## Edge functions
 
 - `iap-verify` validates Apple/Google receipts server-side — receipt data never leaves trusted environments.
-- `ai-tutor` and `ai-explain` keep the Anthropic key server-side.
+- Optional AI explanations keep the Anthropic key server-side.
 - `web-checkout-submit` and `readiness-cron` use service role server-side.
 
 Rate limiting (Phase 18) was added to `iap-verify` and a `rate_limit_checks` table was introduced in `20260529000002_rate_limiting.sql` to support it.

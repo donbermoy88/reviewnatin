@@ -218,7 +218,6 @@
 **STUDY:**
 - Switch exam track — "Change CSE / LET / PNLE goal — may prompt new diagnostic" ✅
 - Bookmarks ✅
-- AI tutor — "Premium feature" (links to AI Tutor screen)
 - Content updates ✅
 - Offline pack — "Premium · save content for offline review"
 - Practice offline — "Download pack first"
@@ -298,10 +297,9 @@
 
 ---
 
-### 2.29 AI Tutor Screen (Guest)
-- **Status: ✅ PASS — expected gate**
-- "Log in to continue" + "AI tutor chat requires a signed-in premium account." + "Log in" CTA ✅
-- The gate message correctly specifies premium account requirement ✅
+### 2.29 Removed Chat Screen (Guest)
+- **Status: Removed**
+- The former token-backed chat surface is no longer part of the product.
 
 ---
 
@@ -365,7 +363,7 @@ This is likely a `.toLowerCase()` or `.toTitleCase()` call being applied to the 
 | Bookmarks | Full-page: icon + title + description + primary button |
 | Analytics | Full-page: icon + title + description + primary button |
 | Barkada | Full-page: icon + title + description + primary button |
-| AI Tutor | Full-page: icon + title + description + primary button |
+| Removed chat | No active screen |
 | **PasaPath Week** | **Inline text link: "Log in →"** |
 | Diagnostic | **Full redirect to Login screen** |
 
@@ -517,7 +515,7 @@ The icon navigates to Settings. While the functionality is useful, the placement
 | Sign Up | N/A | ❌ Not found |
 | Legal & Disclaimers | `/legal` | 🔴 Filipino subtitle |
 | Offline Lessons | `/offline-lessons` | ✅ (empty) |
-| AI Tutor | `/tutor` | ✅ (premium gate) |
+| Removed chat | `/tutor` | Removed |
 | Diagnostic Intro | `/diagnostic/intro` | ⚠️ Login redirect |
 
 ---
@@ -721,15 +719,11 @@ CSE Professional subject detail:
 
 ---
 
-### 9.8 AI Tutor Screen (`/tutor`) — Authenticated (Free)
+### 9.8 Removed Chat Route (`/tutor`) — Authenticated (Free)
 
-- **Status: ✅ PASS — paywall preview UX works**
+- **Status: Removed**
 
-- Header: "AI Tutor" (white text on dark blue) + "Premium feature — upgrade to unlock" subtitle
-- Chat area renders correctly with initial greeting: "Hi! I'm your AI tutor. Ask me about weak topics, your study plan, or mock exam prep. What would you like to talk about?" ✅
-- Input field "Ask your AI tutor..." is visible (appears enabled but sends to paywall on submit, unverified)
-- "Unlock AI tutor" primary button overlays bottom ✅
-- UX design: shows a teaser of the chat interface to make the feature feel tangible before upgrading — effective freemium pattern ✅
+- The former token-backed chat surface is no longer part of the product. Legacy route should redirect to Plus instead of rendering a chat UI.
 
 ---
 
@@ -797,7 +791,7 @@ CSE Professional subject detail:
 | # | Issue | Location | Notes |
 |---|-------|----------|-------|
 | P8 | Log out has no confirmation dialog — destructive action with one tap | Settings | Could add "Are you sure?" |
-| P9 | AI Tutor input field visible but unclear if tappable before upgrade | AI Tutor screen | May cause user confusion |
+| P9 | Removed chat route must not expose a chat input | Removed chat route | Prevents misleading paid-token claims |
 
 ---
 
@@ -836,7 +830,7 @@ CSE Professional subject detail:
 | Mock Review | `/mock-review/[id]` | Free | ✅ + clip bug |
 | Study Subjects | `/(tabs)/study` | Free | ✅ |
 | Mock Exam dialogs | Study → Mock tab | Free | ✅ |
-| AI Tutor | `/tutor` | Free (premium gate) | ✅ |
+| Removed chat | `/tutor` | Removed | ✅ |
 | Analytics | `/analytics` | Free | ✅ |
 | Mistake Bank | `/mistakes` | Free | ✅ + duplicate bug |
 | Barkada | `/barkada` | Free | ✅ |

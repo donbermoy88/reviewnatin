@@ -22,14 +22,14 @@ describe('routeFromUrl', () => {
     expect(routeFromUrl('reviewnatin://checkout?ref=RN-123')).toBe('/subscribe?ref=RN-123');
   });
 
-  it('routes removed AI tutor deep links to subscribe instead of a live tutor screen', () => {
+  it('routes removed tutor deep links to subscribe instead of a live tutor screen', () => {
     expect(routeFromUrl('reviewnatin://tutor')).toBe('/subscribe');
     expect(routeFromUrl('reviewnatin://ai-tutor')).toBe('/subscribe');
   });
 });
 
 describe('routeFromNotificationData', () => {
-  it('routes removed AI tutor notification targets to subscribe instead of a live tutor screen', () => {
+  it('routes removed tutor notification targets to subscribe instead of a live tutor screen', () => {
     expect(routeFromNotificationData({ screen: 'tutor' })).toBe('/subscribe');
     expect(routeFromNotificationData({ url: 'reviewnatin://tutor' })).toBe('/subscribe');
   });

@@ -132,32 +132,6 @@ export type Database = {
           },
         ]
       }
-      ai_tutor_usage: {
-        Row: {
-          message_count: number
-          usage_date: string
-          user_id: string
-        }
-        Insert: {
-          message_count?: number
-          usage_date: string
-          user_id: string
-        }
-        Update: {
-          message_count?: number
-          usage_date?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "ai_tutor_usage_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       announcements: {
         Row: {
           body: string

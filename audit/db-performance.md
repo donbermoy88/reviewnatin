@@ -35,7 +35,6 @@ against tables that lacked composite covering indexes. The migration above adds
 | `idx_user_push_tokens_user` | `user_push_tokens` | `(user_id)` | Notification dispatch |
 | `idx_mock_exam_questions_mock_seq` | `mock_exam_questions` | `(mock_exam_id, sequence)` | Mock exam Q order |
 | `idx_ai_explanation_usage_user_created` | `ai_explanation_usage` | `(user_id, created_at DESC)` | Per-user-per-hour rate limit |
-| `idx_ai_tutor_usage_user_created` | `ai_tutor_usage` | `(user_id, created_at DESC)` | Per-user-per-hour rate limit |
 | `idx_readiness_snapshots_user_created` | `readiness_snapshots` | `(user_id, created_at DESC)` | Most-recent score lookup |
 | `idx_diagnostic_sessions_user_exam` | `diagnostic_sessions` | `(user_id, exam_type_id)` | Has-completed-diagnostic check |
 | `idx_reported_questions_open_created` | `reported_questions` | `(created_at DESC)` partial | Admin "open reports" queue |

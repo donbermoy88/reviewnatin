@@ -139,7 +139,7 @@
 
 ## PHASE 19: Database Performance and Indexing
 
-- `supabase/migrations/20260529000000_performance_indexes.sql` — NEW. 26 `IF NOT EXISTS` indexes covering quiz_answers, quiz_sessions, bookmarks, mistake_logs, flashcard_reviews, topic_mastery, user_entitlements, payment_transactions, exam_schedules, user_exam_goals, barkada_members, barkada_challenge_results, user_push_tokens, mock_exam_questions, ai_explanation_usage, ai_tutor_usage, readiness_snapshots, diagnostic_sessions, and reported_questions.
+- `supabase/migrations/20260529000000_performance_indexes.sql` — NEW. 26 `IF NOT EXISTS` indexes covering quiz_answers, quiz_sessions, bookmarks, mistake_logs, flashcard_reviews, topic_mastery, user_entitlements, payment_transactions, exam_schedules, user_exam_goals, barkada_members, barkada_challenge_results, user_push_tokens, mock_exam_questions, ai_explanation_usage, readiness_snapshots, diagnostic_sessions, and reported_questions.
 - `audit/db-performance.md` — documents each index and its read pattern.
 
 ## PHASE 20: Mobile App Performance
