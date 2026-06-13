@@ -229,7 +229,7 @@ Full-length or mini-mock per `exam_blueprints.mock_exam_config`.
 | Admin Dashboard | Web only |
 | Content Editor | Web only |
 | Reports Dashboard | Web only |
-| AI Tutor chat | Phase 2 — Taglish button on explanations only |
+| AI Tutor chat | Removed — no token-backed tutor chat in MVP |
 
 ---
 

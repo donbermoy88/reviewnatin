@@ -491,15 +491,6 @@ export default function SettingsScreen() {
             <SettingsRow
               styles={styles}
               colors={colors}
-              icon={<Ionicons name="chatbubbles-outline" size={18} color={colors.primary} />}
-              label="AI tutor"
-              sub={premiumActive ? 'Chat about weak topics & study plan' : 'Premium feature'}
-              onPress={() => router.push('/tutor')}
-              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
-            />
-            <SettingsRow
-              styles={styles}
-              colors={colors}
               icon={<Ionicons name="newspaper-outline" size={18} color={colors.primary} />}
               label="Content updates"
               sub="New questions, lessons, and fixes"

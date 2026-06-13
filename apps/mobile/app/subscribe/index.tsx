@@ -88,7 +88,7 @@ const PLUS_HIGHLIGHTS: HighlightItem[] = [
   { icon: 'infinite-outline', title: 'Unlimited practice', subtitle: 'No daily question cap' },
   { icon: 'document-text-outline', title: 'Full mock exams', subtitle: 'Exam-style timed sets' },
   { icon: 'cloud-download-outline', title: 'Offline packs', subtitle: 'Review kahit mahina signal' },
-  { icon: 'sparkles-outline', title: 'AI tutor', subtitle: 'Premium study help' },
+  { icon: 'trending-up-outline', title: 'Smart review', subtitle: 'Weakness-based next steps' },
 ];
 
 function formatSkuLabel(sku: string): string {

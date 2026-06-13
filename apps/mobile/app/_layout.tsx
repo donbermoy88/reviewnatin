@@ -56,7 +56,6 @@ function ThemedStack() {
         <Stack.Screen name="legal/index" options={{ headerShown: false }} />
         <Stack.Screen name="profile/edit" options={{ headerShown: false }} />
         <Stack.Screen name="analytics/index" options={{ headerShown: false }} />
-        <Stack.Screen name="tutor/index" options={{ headerShown: false }} />
         <Stack.Screen name="changelog/index" options={{ headerShown: false }} />
         <Stack.Screen name="offline-lessons/index" options={{ headerShown: false }} />
         <Stack.Screen name="pasapath/week" options={{ headerShown: false }} />

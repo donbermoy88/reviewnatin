@@ -256,7 +256,7 @@ Weekly mock tasks use:
 | Feature | MVP | Phase 2 |
 |---------|-----|---------|
 | PasaPath task list | Rule-based engine (this spec) | Optional AI reorder |
-| Taglish explanation | Cached templates + optional AI gen per question | Full AI tutor chat |
+| Taglish explanation | Cached templates + optional AI gen per question | No token-backed tutor chat |
 | Study plan copy | Template strings | AI-personalized messaging |
 
 **Guardrails when AI generates explanations:**

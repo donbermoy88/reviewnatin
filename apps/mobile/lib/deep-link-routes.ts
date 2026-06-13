@@ -54,7 +54,7 @@ export function routeFromUrl(url: string): string | null {
       return '/subscribe';
     }
     if (path === 'exam-calendar' || path === 'calendar') return '/exam-calendar';
-    if (path === 'tutor' || path === 'ai-tutor') return '/tutor';
+    if (path === 'tutor' || path === 'ai-tutor') return '/subscribe';
     if (path === 'changelog' || path === 'updates') return '/changelog';
     if (path === 'study' || path === 'aral') return '/(tabs)/study';
     if (path === 'pasapath' || path === 'pasapath/week') return '/pasapath/week';
@@ -84,7 +84,7 @@ export function routeFromNotificationData(data: Record<string, unknown> | undefi
       profile: '/(tabs)/progress',
       leaderboard: '/(tabs)/leaderboard',
       subscribe: '/subscribe',
-      tutor: '/tutor',
+      tutor: '/subscribe',
       pasapath: '/pasapath/week',
       exam_calendar: '/exam-calendar',
       calendar: '/exam-calendar',

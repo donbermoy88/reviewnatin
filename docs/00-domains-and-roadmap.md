@@ -74,7 +74,7 @@ If starting today, pick **one** of these parallel tracks:
 
 ## Deferred (do not start yet)
 
-- Leaderboard, Barkada mode, AI tutor chat
+- Leaderboard, Barkada mode
 - GCash/Maya payments
 - Exams beyond CSE / LET / PNLE
 - Bar, PSHS, scholarship modules

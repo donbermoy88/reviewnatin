@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { isAuthDeepLink, routeFromUrl } from './deep-link-routes';
+import { isAuthDeepLink, routeFromNotificationData, routeFromUrl } from './deep-link-routes';
 
 vi.mock('expo-linking', () => ({
   parse: (url: string) => {
@@ -20,6 +20,18 @@ describe('routeFromUrl', () => {
 
   it('routes custom scheme checkout links with refs', () => {
     expect(routeFromUrl('reviewnatin://checkout?ref=RN-123')).toBe('/subscribe?ref=RN-123');
+  });
+
+  it('routes removed AI tutor deep links to subscribe instead of a live tutor screen', () => {
+    expect(routeFromUrl('reviewnatin://tutor')).toBe('/subscribe');
+    expect(routeFromUrl('reviewnatin://ai-tutor')).toBe('/subscribe');
+  });
+});
+
+describe('routeFromNotificationData', () => {
+  it('routes removed AI tutor notification targets to subscribe instead of a live tutor screen', () => {
+    expect(routeFromNotificationData({ screen: 'tutor' })).toBe('/subscribe');
+    expect(routeFromNotificationData({ url: 'reviewnatin://tutor' })).toBe('/subscribe');
   });
 });
 
