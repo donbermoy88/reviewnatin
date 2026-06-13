@@ -19,6 +19,7 @@ import { useIap } from '../../providers/iap-provider';
 import { createWebCheckoutSession, fetchWebCheckoutStatus, checkoutAttributionOptions } from '../../lib/api/web-checkout';
 import { captureAttributionFromQuery, loadCheckoutAttribution } from '../../lib/checkout-attribution';
 import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
+import { demoEntitlementFailureMessage } from '../../lib/demo-entitlements';
 import {
   clearPendingCheckoutRef,
   getPendingCheckoutRef,
@@ -291,12 +292,9 @@ export default function SubscribeScreen() {
       captureAppMessage('demo entitlement activated', { area: 'paywall', action: 'demo_activate' }, { tier });
     } catch (error) {
       captureAppException(error, { area: 'paywall', action: 'demo_activate' }, { tier });
-      const message = error instanceof Error ? error.message : 'Demo activation failed.';
       setSheet({
         kind: 'demo_error',
-        message: message.includes('Demo entitlements are disabled')
-          ? 'Demo Plus is disabled for this Supabase database. Run npm run db:enable-demo-iap for local/dev QA, then try Activate (demo) again.'
-          : message,
+        message: demoEntitlementFailureMessage(error),
       });
     } finally {
       setBusy(null);

@@ -39,6 +39,7 @@
     "content:audit:ci": "node scripts/audit-content-quality.mjs --fail-on medium",
     "content:audit:rules": "node --test scripts/lib/content-quality-rules.test.mjs",
     "content:import:rules": "node --test scripts/lib/question-import.test.mjs",
+    "qa:plus:rules": "node --test scripts/lib/qa-plus-safety.test.mjs",
     "content:admin-import:ui": "node --test scripts/lib/admin-import-ui.test.mjs",
     "admin:proxy:rules": "node --test scripts/lib/admin-proxy.test.mjs",
     "mobile:ios:run": "npm run ios:run --workspace=apps/mobile",
@@ -61,7 +62,7 @@
     "admin:reset-password": "node scripts/reset-admin-password.mjs",
     "vercel:deploy:marketing": "npx vercel link --yes --project reviewnatin-marketing && npx vercel deploy --prod --yes --archive=tgz",
     "vercel:deploy:admin": "npx vercel link --yes --project reviewnatin-admin && npx vercel deploy --prod --yes --archive=tgz",
-    "ci:local": "npm run mobile:lint && npm run lint --workspace=apps/admin && npm run lint --workspace=apps/marketing && npm run test && npm run content:audit:rules && npm run content:import:rules && npm run content:admin-import:ui && npm run admin:proxy:rules && npm run web:build",
+    "ci:local": "npm run mobile:lint && npm run lint --workspace=apps/admin && npm run lint --workspace=apps/marketing && npm run test && npm run content:audit:rules && npm run content:import:rules && npm run qa:plus:rules && npm run content:admin-import:ui && npm run admin:proxy:rules && npm run web:build",
     "prepare": "simple-git-hooks || true"
   },
   "simple-git-hooks": {
