@@ -9,11 +9,12 @@ import { PrimaryButton } from '../../components/primary-button';
 import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createStudyStyles } from '../../lib/themed-styles';
-import { tabScrollPaddingWithFooter } from '../../lib/layout/content-padding';
+import { tabScrollPadding, tabScrollPaddingWithFooter } from '../../lib/layout/content-padding';
 import { fetchExamBySlug, fetchExamQuestionCount, fetchSubjectAreas } from '../../lib/api/catalog';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchMockExams, type MockExam } from '../../lib/api/mock-exams';
 import { fetchTopicAnalytics, type SubjectAnalytics } from '../../lib/api/analytics';
+import { fetchTopicQuestionCounts, fetchTopicsBySubjectId } from '../../lib/api/topics';
 import { fetchReviewMaterialsByExam, type ReviewMaterial } from '../../lib/api/review-materials';
 import { MasteryBar } from '../../components/mastery-bar';
 import {
@@ -32,6 +33,32 @@ import { fetchContentGateStatus, type ContentGateStatus } from '../../lib/conten
 
 const TABS = ['Subjects', 'Mock Exam', 'Notes'];
 
+type SubjectStudySummary = {
+  topicCount: number;
+  readyTopicCount: number;
+  questionCount: number | null;
+  countsKnown: boolean;
+};
+
+function subjectIcon(index: number): keyof typeof Ionicons.glyphMap {
+  const icons: (keyof typeof Ionicons.glyphMap)[] = [
+    'book-outline',
+    'school-outline',
+    'analytics-outline',
+    'newspaper-outline',
+    'shapes-outline',
+  ];
+  return icons[index % icons.length];
+}
+
+function subjectSummaryText(summary?: SubjectStudySummary): string {
+  if (!summary) return 'Topics loading';
+  if (summary.topicCount === 0) return 'Topics coming soon';
+  if (!summary.countsKnown) return `${summary.topicCount} topic${summary.topicCount === 1 ? '' : 's'}`;
+  if (summary.questionCount === 0) return `${summary.topicCount} topic${summary.topicCount === 1 ? '' : 's'} · questions coming soon`;
+  return `${summary.readyTopicCount}/${summary.topicCount} topics ready · ${summary.questionCount} question${summary.questionCount === 1 ? '' : 's'}`;
+}
+
 export default function StudyScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -40,11 +67,11 @@ export default function StudyScreen() {
   const styles = useMemo(() => createStudyStyles(theme), [theme]);
   const subjectMeta = useMemo(
     () => [
-      { emoji: '📚', color: colors.primary, bg: colors.primaryMuted },
-      { emoji: '🎓', color: '#7B2CBF', bg: theme.isDark ? '#2D1F45' : '#F1E8FA' },
-      { emoji: '🔬', color: colors.accentDark, bg: colors.accentLight },
-      { emoji: '🧮', color: colors.success, bg: colors.successBg },
-      { emoji: '📝', color: colors.flame, bg: colors.errorBg },
+      { color: colors.primary, bg: colors.primaryMuted },
+      { color: '#7B2CBF', bg: theme.isDark ? '#2D1F45' : '#F1E8FA' },
+      { color: colors.accentDark, bg: colors.accentLight },
+      { color: colors.success, bg: colors.successBg },
+      { color: colors.flame, bg: colors.errorBg },
     ],
     [colors, theme.isDark]
   );
@@ -53,6 +80,7 @@ export default function StudyScreen() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [subjects, setSubjects] = useState<SubjectArea[]>([]);
+  const [subjectSummaries, setSubjectSummaries] = useState<Record<string, SubjectStudySummary>>({});
   const [examName, setExamName] = useState('');
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
@@ -88,6 +116,31 @@ export default function StudyScreen() {
       setMockExams(mocks);
       setSubjectAnalytics(analytics);
       setMaterials(notes);
+      const summaries = await Promise.all(
+        areas.map(async (subject) => {
+          const [topics, topicCounts] = await Promise.all([
+            fetchTopicsBySubjectId(subject.id).catch(() => []),
+            fetchTopicQuestionCounts(slug, subject.slug).catch(() => new Map<string, number>()),
+          ]);
+          const countsKnown = topics.length > 0 && topics.every((topic) => topicCounts.has(topic.slug));
+          const readyTopicCount = countsKnown
+            ? topics.filter((topic) => (topicCounts.get(topic.slug) ?? 0) > 0).length
+            : topics.length;
+          const questionCountForSubject = countsKnown
+            ? topics.reduce((sum, topic) => sum + (topicCounts.get(topic.slug) ?? 0), 0)
+            : null;
+          return [
+            subject.id,
+            {
+              topicCount: topics.length,
+              readyTopicCount,
+              questionCount: questionCountForSubject,
+              countsKnown,
+            },
+          ] as const;
+        })
+      );
+      setSubjectSummaries(Object.fromEntries(summaries));
       setContentGate(await fetchContentGateStatus(slug));
     } catch {
       /* load failed */
@@ -308,10 +361,12 @@ export default function StudyScreen() {
     );
   }
 
+  const showFixedFooter = activeTab === 1 && mockExams.length > 0;
+
   return (
     <View style={styles.root}>
       <ScrollView
-        contentContainerStyle={tabScrollPaddingWithFooter(insets)}
+        contentContainerStyle={showFixedFooter ? tabScrollPaddingWithFooter(insets) : tabScrollPadding(insets)}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -438,65 +493,89 @@ export default function StudyScreen() {
               onAction={load}
             />
           ) : (
-            subjects.map((s, i) => {
-              const meta = subjectMeta[i % subjectMeta.length];
-              const analytics = analyticsBySubject.get(s.name.toLowerCase());
-              const avg = analytics?.averageAccuracy ?? 0;
-              const attempts = analytics?.topics.reduce((sum, t) => sum + t.attempts, 0) ?? 0;
-              return (
-                <Pressable
-                  key={s.id}
-                  style={styles.subjectCard}
-                  accessibilityRole="button"
-                  accessibilityLabel={`Open ${s.name} subject`}
-                  onPress={() =>
-                    router.push({
-                      pathname: '/study/[subjectSlug]',
-                      params: { subjectSlug: s.slug, examSlug, subjectName: s.name },
-                    })
-                  }
-                >
-                  <View style={styles.subjectTop}>
-                    <View style={[styles.subjectIcon, { backgroundColor: meta.bg }]}>
-                      <Text style={{ fontSize: 22 }}>{meta.emoji}</Text>
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.subjectName}>{s.name}</Text>
-                      <Text style={styles.subjectMeta}>
-                        {attempts > 0 ? `${avg}% mastery · ${attempts} attempts` : 'Tap to view topics & practice'}
-                      </Text>
-                      {attempts > 0 ? (
-                        <MasteryBar accuracy={avg} attempts={attempts} style={{ marginTop: spacing.sm }} />
-                      ) : null}
-                    </View>
-                    <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+            <>
+              <Pressable
+                style={({ pressed }) => [styles.subjectCard, pressed && styles.subjectCardPressed]}
+                accessibilityRole="button"
+                accessibilityLabel={`Start mixed practice for ${examName || 'selected exam'}`}
+                onPress={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
+              >
+                <View style={styles.subjectTop}>
+                  <View style={[styles.subjectIcon, { backgroundColor: colors.primaryMuted }]}>
+                    <Ionicons name="flash" size={22} color={colors.primary} />
                   </View>
-                </Pressable>
-              );
-            })
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.subjectName}>Mixed practice</Text>
+                    <Text style={styles.subjectMeta}>
+                      Random questions from {subjects.length} subject{subjects.length === 1 ? '' : 's'}
+                    </Text>
+                  </View>
+                  <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+                </View>
+              </Pressable>
+
+              {subjects.map((s, i) => {
+                const meta = subjectMeta[i % subjectMeta.length];
+                const analytics = analyticsBySubject.get(s.name.toLowerCase());
+                const avg = analytics?.averageAccuracy ?? 0;
+                const attempts = analytics?.topics.reduce((sum, t) => sum + t.attempts, 0) ?? 0;
+                return (
+                  <Pressable
+                    key={s.id}
+                    style={({ pressed }) => [styles.subjectCard, pressed && styles.subjectCardPressed]}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Open ${s.name} subject. ${subjectSummaryText(subjectSummaries[s.id])}`}
+                    onPress={() =>
+                      router.push({
+                        pathname: '/study/[subjectSlug]',
+                        params: { subjectSlug: s.slug, examSlug, subjectName: s.name },
+                      })
+                    }
+                  >
+                    <View style={styles.subjectTop}>
+                      <View style={[styles.subjectIcon, { backgroundColor: meta.bg }]}>
+                        <Ionicons name={subjectIcon(i)} size={22} color={meta.color} />
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.subjectName}>{s.name}</Text>
+                        <Text style={styles.subjectMeta}>{subjectSummaryText(subjectSummaries[s.id])}</Text>
+                        {attempts > 0 ? (
+                          <View style={styles.subjectStatsRow}>
+                            <Text style={styles.subjectStatPill}>{avg}% mastery</Text>
+                            <Text style={styles.subjectStatPill}>{attempts} attempt{attempts === 1 ? '' : 's'}</Text>
+                          </View>
+                        ) : null}
+                        {attempts > 0 ? (
+                          <MasteryBar accuracy={avg} attempts={attempts} style={{ marginTop: spacing.sm }} />
+                        ) : null}
+                      </View>
+                      <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+                    </View>
+                  </Pressable>
+                );
+              })}
+            </>
           )}
         </View>
       </ScrollView>
 
-      <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md, pointerEvents: 'box-none' }]}>
-        <LinearGradient
-          colors={[colors.footerFade, colors.background]}
-          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}
-        />
-        <PrimaryButton
-          label={activeTab === 1 && mockExams.length > 0 ? 'Start mock exam' : 'Start practice quiz'}
-          icon={activeTab === 1 && mockExams.length > 0 ? 'timer-outline' : 'flash'}
-          iconPosition="left"
-          size="lg"
-          onPress={() => {
-            if (activeTab === 1 && mockExams.length > 0) {
+      {showFixedFooter ? (
+        <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md, pointerEvents: 'box-none' }]}>
+          <LinearGradient
+            colors={[colors.footerFade, colors.background]}
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}
+          />
+          <PrimaryButton
+            label="Start mock exam"
+            icon="timer-outline"
+            iconPosition="left"
+            size="lg"
+            onPress={() => {
               void launchMock(mockExams[0]);
-            } else {
-              router.push({ pathname: '/practice/quiz', params: { examSlug } });
-            }
-          }}
-        />
-      </View>
+            }}
+          />
+        </View>
+      ) : null}
     </View>
   );
 }
