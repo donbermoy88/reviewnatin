@@ -12,6 +12,7 @@ import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createDashboardStyles } from '../../lib/themed-styles';
 import { fetchExamBySlug, fetchSubjectAreas } from '../../lib/api/catalog';
+import { fetchTopicQuestionCounts, fetchTopicsBySubjectSlug, type TopicRow } from '../../lib/api/topics';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
@@ -39,6 +40,7 @@ import { fetchTopicAnalytics, type TopicAnalyticsRow } from '../../lib/api/analy
 import { fetchMockExams } from '../../lib/api/mock-exams';
 import { DEFAULT_EXAM_SLUG, EXAM_TYPES } from '@reviewnatin/shared';
 import type { OnboardingData } from '../../lib/onboarding-store';
+import type { SubjectArea } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
@@ -89,6 +91,21 @@ function subjectIcon(index: number): keyof typeof Ionicons.glyphMap {
   return icons[index % icons.length];
 }
 
+type HomeSubjectCard = SubjectArea & {
+  topics: TopicRow[];
+  readyTopicCount: number;
+  questionCount: number | null;
+  countsKnown: boolean;
+};
+
+function subjectCardMeta(subject: HomeSubjectCard): string {
+  const topicCount = subject.topics.length;
+  if (topicCount === 0) return 'Topics coming soon';
+  if (!subject.countsKnown) return `${topicCount} topic${topicCount === 1 ? '' : 's'} · open list`;
+  if (subject.questionCount === 0) return `${topicCount} topic${topicCount === 1 ? '' : 's'} · questions coming soon`;
+  return `${subject.readyTopicCount}/${topicCount} topics ready · ${subject.questionCount} question${subject.questionCount === 1 ? '' : 's'}`;
+}
+
 function pickWeakTopic(subjects: { weakTopics: TopicAnalyticsRow[] }[]): TopicAnalyticsRow | null {
   for (const subject of subjects) {
     if (subject.weakTopics.length > 0) return subject.weakTopics[0];
@@ -110,7 +127,7 @@ export default function DashboardScreen() {
   const [examName, setExamName] = useState('');
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
   const [readiness, setReadiness] = useState<ReadinessSnapshot | null>(null);
-  const [subjects, setSubjects] = useState<{ id: string; name: string; slug: string }[]>([]);
+  const [subjects, setSubjects] = useState<HomeSubjectCard[]>([]);
   const [stats, setStats] = useState({
     questionsToday: 0,
     questionsTarget: 15,
@@ -201,7 +218,30 @@ export default function DashboardScreen() {
         setExamName(exam.name);
         setExamTypeId(exam.id);
         const areas = await fetchSubjectAreas(exam.id).catch(() => []);
-        setSubjects(areas.slice(0, 3));
+        const previewSubjects = areas.slice(0, 3);
+        const subjectCards = await Promise.all(
+          previewSubjects.map(async (subject) => {
+            const [topicRows, topicCounts] = await Promise.all([
+              fetchTopicsBySubjectSlug(slug, subject.slug).catch(() => []),
+              fetchTopicQuestionCounts(slug, subject.slug).catch(() => new Map<string, number>()),
+            ]);
+            const countsKnown = topicRows.length > 0 && topicRows.every((topic) => topicCounts.has(topic.slug));
+            const readyTopicCount = countsKnown
+              ? topicRows.filter((topic) => (topicCounts.get(topic.slug) ?? 0) > 0).length
+              : topicRows.length;
+            const questionCount = countsKnown
+              ? topicRows.reduce((sum, topic) => sum + (topicCounts.get(topic.slug) ?? 0), 0)
+              : null;
+            return {
+              ...subject,
+              topics: topicRows,
+              readyTopicCount,
+              questionCount,
+              countsKnown,
+            };
+          })
+        );
+        setSubjects(subjectCards);
       } else {
         const found = EXAM_TYPES.find((e) => e.slug === slug);
         if (found) setExamName(found.name);
@@ -704,9 +744,9 @@ export default function DashboardScreen() {
               {subjects.map((subject, index) => (
                 <Pressable
                   key={subject.id}
-                  style={styles.quickRow}
+                  style={({ pressed }) => [styles.quickRow, pressed && styles.cardPressed]}
                   accessibilityRole="button"
-                  accessibilityLabel={`Open ${subject.name} subject`}
+                  accessibilityLabel={`Open ${subject.name} topics. ${subjectCardMeta(subject)}`}
                   onPress={() =>
                     router.push({
                       pathname: '/study/[subjectSlug]',
@@ -719,10 +759,26 @@ export default function DashboardScreen() {
                   </View>
                   <View style={styles.quickCopy}>
                     <Text style={styles.quickName}>{subject.name}</Text>
-                    <Text style={styles.quickMeta}>I-tap para sa mga topic</Text>
+                    <Text style={styles.quickMeta}>{subjectCardMeta(subject)}</Text>
+                    {subject.topics.length > 0 ? (
+                      <View style={styles.quickTopics}>
+                        {subject.topics.slice(0, 3).map((topic) => (
+                          <View key={topic.id} style={styles.quickTopicChip}>
+                            <Text style={styles.quickTopicText} numberOfLines={1}>
+                              {topic.name}
+                            </Text>
+                          </View>
+                        ))}
+                        {subject.topics.length > 3 ? (
+                          <Text style={styles.quickTopicMore}>+{subject.topics.length - 3} more</Text>
+                        ) : null}
+                      </View>
+                    ) : null}
                   </View>
-                  <View style={[styles.playBtn, { backgroundColor: colors.primary }]}>
-                    <Ionicons name="play" size={14} color="#fff" />
+                  <View style={styles.quickTopicAction}>
+                    <Text style={styles.quickTopicActionCount}>{subject.readyTopicCount || subject.topics.length}</Text>
+                    <Text style={styles.quickTopicActionLabel}>topics</Text>
+                    <Ionicons name="chevron-forward" size={16} color={colors.primary} />
                   </View>
                 </Pressable>
               ))}
