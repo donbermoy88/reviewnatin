@@ -269,7 +269,12 @@ export default function SettingsScreen() {
     <View style={styles.root}>
       <ScrollView contentContainerStyle={tabScrollPadding(insets)}>
         <View style={[styles.header, { paddingTop: insets.top + spacing.sm }]}>
-          <Pressable onPress={() => router.back()} style={styles.backBtn} hitSlop={8}>
+          <Pressable
+            onPress={() => router.back()}
+            style={({ pressed }) => [styles.backBtn, pressed && styles.backBtnPressed]}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+          >
             <Ionicons name="chevron-back" size={22} color={colors.text} />
           </Pressable>
           <Text style={styles.headerTitle}>Settings</Text>

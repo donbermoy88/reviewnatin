@@ -74,6 +74,10 @@ function scoreColor(
   return palette.error;
 }
 
+function scoreLabel(score: number | null | undefined): string {
+  return score == null ? '—' : `${score}%`;
+}
+
 export default function ProfileScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -193,7 +197,7 @@ export default function ProfileScreen() {
           <View style={styles.headerRow}>
             <Text style={styles.headerTitle}>Profile</Text>
             <Pressable
-              style={styles.settingsBtn}
+              style={({ pressed }) => [styles.settingsBtn, pressed && styles.settingsBtnPressed]}
               onPress={() => router.push('/settings')}
               accessibilityRole="button"
               accessibilityLabel="Open settings"
@@ -203,9 +207,11 @@ export default function ProfileScreen() {
           </View>
 
           <Pressable
-            style={styles.avatarRow}
+            style={({ pressed }) => [styles.avatarRow, user && pressed && styles.avatarRowPressed]}
             onPress={user ? () => router.push('/profile/edit') : undefined}
             disabled={!user}
+            accessibilityRole={user ? 'button' : undefined}
+            accessibilityLabel={user ? 'Edit profile' : undefined}
           >
             <View style={styles.avatar}>
               <Text style={styles.avatarText}>{initials}</Text>
@@ -262,14 +268,36 @@ export default function ProfileScreen() {
         ) : null}
 
         <View style={styles.section}>
-          <PrimaryButton
-            label="View analytics"
-            variant="outline"
-            icon="analytics-outline"
-            iconPosition="left"
-            size="lg"
-            onPress={() => router.push('/analytics')}
-          />
+          <View style={styles.quickActionGrid}>
+            <Pressable
+              style={({ pressed }) => [styles.quickActionCard, pressed && styles.sessionCardPressed]}
+              onPress={() => router.push('/settings')}
+              accessibilityRole="button"
+              accessibilityLabel="Open settings"
+            >
+              <View style={styles.quickActionIcon}>
+                <Ionicons name="settings-outline" size={20} color={colors.primary} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.quickActionTitle}>Settings</Text>
+                <Text style={styles.quickActionSub}>Account, reminders, offline packs</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [styles.quickActionCard, pressed && styles.sessionCardPressed]}
+              onPress={() => router.push('/analytics')}
+              accessibilityRole="button"
+              accessibilityLabel="View analytics"
+            >
+              <View style={styles.quickActionIcon}>
+                <Ionicons name="analytics-outline" size={20} color={colors.primary} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.quickActionTitle}>Analytics</Text>
+                <Text style={styles.quickActionSub}>Readiness and weak topics</Text>
+              </View>
+            </Pressable>
+          </View>
         </View>
 
         {user && badges.length > 0 ? (
@@ -305,7 +333,9 @@ export default function ProfileScreen() {
             {mockHistory.map((m) => (
               <Pressable
                 key={m.sessionId}
-                style={styles.sessionCard}
+                style={({ pressed }) => [styles.sessionCard, pressed && styles.sessionCardPressed]}
+                accessibilityRole="button"
+                accessibilityLabel={`Review ${m.mockTitle}. Score ${Math.round(m.scorePercent)} percent. ${m.passed ? 'Passed' : 'Needs review'}.`}
                 onPress={() =>
                   router.push({
                     pathname: '/mock-review/[sessionId]',
@@ -318,7 +348,7 @@ export default function ProfileScreen() {
                 }
               >
                 <View style={{ flex: 1 }}>
-                  <Text style={styles.sessionTitle}>{m.mockTitle}</Text>
+                  <Text style={styles.sessionTitle} numberOfLines={2}>{m.mockTitle}</Text>
                   <Text style={styles.sessionDate}>
                     {new Date(m.completedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} · {m.passed ? '✓ Passed' : 'Needs review'} (target ≥{MOCK_PASS_THRESHOLD}%)
                   </Text>
@@ -436,19 +466,29 @@ export default function ProfileScreen() {
             <Text style={styles.sectionTitle}>Quiz history (on this device)</Text>
             {loading && <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.lg }} />}
             {!loading && sessions.length === 0 && (
-              <EmptyState
-                icon={<Ionicons name="person-outline" size={32} color={colors.primary} />}
-                title="Guest mode"
-                description="Quiz results are saved on this device. Sign up to sync across devices."
-                actionLabel="Log in"
-                onAction={() => router.push('/(auth)/login')}
-              />
+              <View style={styles.guestPromptCard}>
+                <View style={styles.guestPromptIcon}>
+                  <Ionicons name="person-outline" size={24} color={colors.primary} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.guestPromptTitle}>Guest mode</Text>
+                  <Text style={styles.guestPromptText}>
+                    Results stay on this device. Log in to sync progress across devices.
+                  </Text>
+                </View>
+                <PrimaryButton
+                  label="Log in"
+                  size="md"
+                  onPress={() => router.push('/(auth)/login')}
+                  accessibilityLabel="Log in to sync progress"
+                />
+              </View>
             )}
             {!loading &&
               sessions.map((s) => (
                 <View key={s.id} style={styles.sessionCard}>
-                  <View>
-                    <Text style={styles.sessionTitle}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.sessionTitle} numberOfLines={2}>
                       {sessionModeLabel(s.mode)} · {s.item_count} items
                     </Text>
                     <Text style={styles.sessionDate}>
@@ -461,7 +501,7 @@ export default function ProfileScreen() {
                       { color: scoreColor(s.score_percent, colors) },
                     ]}
                   >
-                    {s.score_percent ?? '—'}%
+                    {scoreLabel(s.score_percent)}
                   </Text>
                 </View>
               ))}
@@ -482,8 +522,8 @@ export default function ProfileScreen() {
             {!loading &&
               sessions.map((s) => (
                 <View key={s.id} style={styles.sessionCard}>
-                  <View>
-                    <Text style={styles.sessionTitle}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.sessionTitle} numberOfLines={2}>
                       {sessionModeLabel(s.mode)} · {s.item_count} items
                     </Text>
                     <Text style={styles.sessionDate}>
@@ -496,7 +536,7 @@ export default function ProfileScreen() {
                       { color: scoreColor(s.score_percent, colors) },
                     ]}
                   >
-                    {s.score_percent ?? '—'}%
+                    {scoreLabel(s.score_percent)}
                   </Text>
                 </View>
               ))}
