@@ -21,10 +21,16 @@ export async function fetchTopicsBySubjectSlug(
   const subject = subjects.find((s) => s.slug === subjectSlug);
   if (!subject) return [];
 
+  return fetchTopicsBySubjectId(subject.id);
+}
+
+export async function fetchTopicsBySubjectId(subjectAreaId: string): Promise<TopicRow[]> {
+  if (!isSupabaseConfigured) return [];
+
   const { data, error } = await supabase
     .from('topics')
     .select('id, slug, name, sort_order')
-    .eq('subject_area_id', subject.id)
+    .eq('subject_area_id', subjectAreaId)
     .order('sort_order');
 
   if (error) throw error;

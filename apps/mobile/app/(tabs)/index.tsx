@@ -12,7 +12,7 @@ import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createDashboardStyles } from '../../lib/themed-styles';
 import { fetchExamBySlug, fetchSubjectAreas } from '../../lib/api/catalog';
-import { fetchTopicQuestionCounts, fetchTopicsBySubjectSlug, type TopicRow } from '../../lib/api/topics';
+import { fetchTopicQuestionCounts, fetchTopicsBySubjectId, type TopicRow } from '../../lib/api/topics';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
@@ -128,6 +128,7 @@ export default function DashboardScreen() {
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
   const [readiness, setReadiness] = useState<ReadinessSnapshot | null>(null);
   const [subjects, setSubjects] = useState<HomeSubjectCard[]>([]);
+  const [subjectCount, setSubjectCount] = useState(0);
   const [stats, setStats] = useState({
     questionsToday: 0,
     questionsTarget: 15,
@@ -218,11 +219,12 @@ export default function DashboardScreen() {
         setExamName(exam.name);
         setExamTypeId(exam.id);
         const areas = await fetchSubjectAreas(exam.id).catch(() => []);
+        setSubjectCount(areas.length);
         const previewSubjects = areas.slice(0, 3);
         const subjectCards = await Promise.all(
           previewSubjects.map(async (subject) => {
             const [topicRows, topicCounts] = await Promise.all([
-              fetchTopicsBySubjectSlug(slug, subject.slug).catch(() => []),
+              fetchTopicsBySubjectId(subject.id).catch(() => []),
               fetchTopicQuestionCounts(slug, subject.slug).catch(() => new Map<string, number>()),
             ]);
             const countsKnown = topicRows.length > 0 && topicRows.every((topic) => topicCounts.has(topic.slug));
@@ -245,6 +247,7 @@ export default function DashboardScreen() {
       } else {
         const found = EXAM_TYPES.find((e) => e.slug === slug);
         if (found) setExamName(found.name);
+        setSubjectCount(0);
       }
 
       if (!user) {
@@ -740,6 +743,16 @@ export default function DashboardScreen() {
             <>
               <View style={styles.sectionHead}>
                 <Text style={styles.sectionTitle}>Mabilis na practice</Text>
+                {subjectCount > subjects.length ? (
+                  <Pressable
+                    onPress={() => router.push('/(tabs)/study')}
+                    accessibilityRole="button"
+                    accessibilityLabel={`View all ${subjectCount} subjects`}
+                    hitSlop={8}
+                  >
+                    <Text style={styles.sectionLink}>All {subjectCount}</Text>
+                  </Pressable>
+                ) : null}
               </View>
               {subjects.map((subject, index) => (
                 <Pressable

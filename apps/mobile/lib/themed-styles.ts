@@ -532,6 +532,7 @@ export function createDashboardStyles(theme: AppTheme) {
     goalHint: { fontFamily: fonts.bodySemiBold, fontSize: 12, color: colors.textMuted, marginTop: 3 },
     sectionHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: spacing.sm },
     sectionTitle: { fontFamily: fonts.bodyBold, fontSize: 17, color: colors.text, letterSpacing: 0 },
+    sectionLink: { fontFamily: fonts.bodyBold, fontSize: 13, color: colors.primary, letterSpacing: 0 },
     quickRow: {
       flexDirection: 'row',
       alignItems: 'flex-start',
