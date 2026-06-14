@@ -743,16 +743,6 @@ export default function DashboardScreen() {
             <>
               <View style={styles.sectionHead}>
                 <Text style={styles.sectionTitle}>Mabilis na practice</Text>
-                {subjectCount > subjects.length ? (
-                  <Pressable
-                    onPress={() => router.push('/(tabs)/study')}
-                    accessibilityRole="button"
-                    accessibilityLabel={`View all ${subjectCount} subjects`}
-                    hitSlop={8}
-                  >
-                    <Text style={styles.sectionLink}>All {subjectCount}</Text>
-                  </Pressable>
-                ) : null}
               </View>
               {subjects.map((subject, index) => (
                 <Pressable
@@ -795,6 +785,25 @@ export default function DashboardScreen() {
                   </View>
                 </Pressable>
               ))}
+              {subjectCount > subjects.length ? (
+                <Pressable
+                  style={({ pressed }) => [styles.quickAllSubjectsRow, pressed && styles.cardPressed]}
+                  onPress={() => router.push('/(tabs)/study')}
+                  accessibilityRole="button"
+                  accessibilityLabel={`View all ${subjectCount} subjects`}
+                >
+                  <View style={styles.quickAllSubjectsIcon}>
+                    <Ionicons name="grid-outline" size={18} color={colors.primary} />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.quickAllSubjectsTitle}>Tingnan lahat ng subjects</Text>
+                    <Text style={styles.quickAllSubjectsMeta}>
+                      {subjectCount - subjects.length} more subject{subjectCount - subjects.length === 1 ? '' : 's'} sa Review tab
+                    </Text>
+                  </View>
+                  <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+                </Pressable>
+              ) : null}
             </>
           ) : null}
 
