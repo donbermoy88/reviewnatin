@@ -2,10 +2,10 @@
 
 ## Native project ownership
 
-This repo currently includes an iOS project under `ios/` so simulator and native
-module QA can run locally. Treat `app.json` + `app.config.js` as the source of
-truth for generated native settings, and only hand-edit `ios/` when the change is
-intentionally native-only and reviewed as native code.
+The `ios/` and `android/` folders are generated locally and ignored by Git.
+Simulator and native-module QA can still run against the generated `ios/`
+project, but durable native settings must live in `app.json`, `app.config.js`,
+or tracked Expo config plugins.
 
 When native config drifts from Expo config, regenerate instead of debugging a
 stale artifact:
@@ -17,7 +17,20 @@ npx expo prebuild --clean
 An older prebuild can be **stale** (for example missing IAP / AdMob / view-shot /
 Sentry pods if it was generated before those were added). If a native module
 "isn't linked," run `expo prebuild --clean && pod install` on a review branch, then
-commit the resulting native diff intentionally.
+commit the tracked config/plugin changes that generated the correct native
+project.
+
+Local simulator QA defaults to iPhone 17 Pro / iOS 26.5 when available:
+
+```bash
+npm run ios:build-sim
+```
+
+Override the target without editing code:
+
+```bash
+IOS_SIMULATOR_NAME="iPhone 17 Pro" IOS_SIMULATOR_RUNTIME="26.5" npm run ios:build-sim
+```
 
 ## Prebuild env contract (enforced)
 
@@ -33,7 +46,7 @@ Required for `production`:
 |---|---|---|
 | `EXPO_PUBLIC_SUPABASE_URL` / `_ANON_KEY` | Backend | runtime (`isSupabaseConfigured`) |
 | `EXPO_PUBLIC_SENTRY_DSN` | Crash reporting | **prebuild throws if missing** |
-| `EXPO_PUBLIC_ADMOB_IOS_APP_ID` + `_ANDROID_APP_ID` | Ads | **prebuild throws if only one is set** |
+| `EXPO_PUBLIC_ADMOB_IOS_APP_ID` + `_ANDROID_APP_ID` | Ads | **prebuild throws if only one is set or if ad unit IDs are set without app IDs** |
 
 AdMob, when enabled, also injects `SKAdNetworkItems` and the App Tracking
 Transparency usage string (`userTrackingUsageDescription`) via the

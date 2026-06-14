@@ -21,6 +21,8 @@ function pickSimulator() {
   const lines = out.split('\n');
   const candidates = [];
   let currentRuntime = null;
+  const preferredName = process.env.IOS_SIMULATOR_NAME || 'iPhone 17 Pro';
+  const preferredRuntime = process.env.IOS_SIMULATOR_RUNTIME || '26.5';
 
   for (const line of lines) {
     const runtimeMatch = line.match(/^-- iOS ([0-9.]+) --$/);
@@ -29,20 +31,31 @@ function pickSimulator() {
       continue;
     }
 
-    if (
-      currentRuntime &&
-      line.includes('iPhone') &&
-      line.includes('(Shutdown)') &&
-      !line.includes('Pro Max')
-    ) {
-      const m = line.match(/\(([0-9A-F-]{36})\)/);
-      if (m) candidates.push({ runtime: currentRuntime, udid: m[1] });
+    if (currentRuntime && line.includes('iPhone')) {
+      const match = line.match(/^\s+(.+?) \(([0-9A-F-]{36})\) \((Booted|Shutdown)\)/);
+      if (match) {
+        candidates.push({
+          name: match[1],
+          runtime: currentRuntime,
+          state: match[3],
+          udid: match[2],
+        });
+      }
     }
   }
+
+  const exactPreferred = candidates.find(
+    (candidate) =>
+      candidate.name === preferredName && candidate.runtime === preferredRuntime
+  );
+  if (exactPreferred) return exactPreferred.udid;
 
   candidates.sort((a, b) =>
     b.runtime.localeCompare(a.runtime, undefined, { numeric: true, sensitivity: 'base' })
   );
+
+  const preferred = candidates.find((candidate) => candidate.name === preferredName);
+  if (preferred) return preferred.udid;
 
   if (candidates[0]) return candidates[0].udid;
   throw new Error('No available iPhone simulator found. Run: xcodebuild -downloadPlatform iOS');

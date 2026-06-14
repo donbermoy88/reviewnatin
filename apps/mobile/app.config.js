@@ -59,12 +59,16 @@ module.exports = () => {
 
   const admobIos = process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID;
   const admobAndroid = process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID;
-  if (admobIos || admobAndroid || isStoreBuild) {
+  const hasAdUnits = Boolean(
+    process.env.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID ||
+      process.env.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID
+  );
+  if (admobIos || admobAndroid || hasAdUnits || isStoreBuild) {
     if (!admobIos || !admobAndroid) {
       throw new Error(
         'AdMob is partially configured. Set BOTH EXPO_PUBLIC_ADMOB_IOS_APP_ID and ' +
-          'EXPO_PUBLIC_ADMOB_ANDROID_APP_ID for production, or neither for non-store builds — a missing GADApplicationIdentifier ' +
-          'crashes the Google Mobile Ads SDK at launch.'
+          'EXPO_PUBLIC_ADMOB_ANDROID_APP_ID when ad unit IDs are set, or leave all AdMob env vars empty. ' +
+          'A missing GADApplicationIdentifier can crash the Google Mobile Ads SDK at launch.'
       );
     }
     plugins.push([
@@ -78,6 +82,8 @@ module.exports = () => {
       },
     ]);
   }
+
+  plugins.push('./plugins/with-xcode-run-script-policies');
 
   return {
     expo: {
