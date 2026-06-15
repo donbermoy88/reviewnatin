@@ -12,6 +12,7 @@ import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createDashboardStyles } from '../../lib/themed-styles';
 import { fetchExamBySlug, fetchSubjectAreas } from '../../lib/api/catalog';
+import { fetchTopicQuestionCounts, fetchTopicsBySubjectId, type TopicRow } from '../../lib/api/topics';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
@@ -22,6 +23,7 @@ import { fetchGuestPracticeStats } from '../../lib/guest-quiz-history';
 import { ExamCountdownCard } from '../../components/exam-countdown-card';
 import { ContentGateBanner } from '../../components/content-gate-banner';
 import { AdBanner } from '../../components/ad-banner';
+import { ScreenBackground } from '../../components/screen-background';
 import { fetchContentGateStatus, type ContentGateStatus } from '../../lib/content-gate';
 import { fetchAppAnnouncements, type AppAnnouncement } from '../../lib/api/announcements';
 import { fetchExamSchedules } from '../../lib/api/exam-calendar';
@@ -39,6 +41,7 @@ import { fetchTopicAnalytics, type TopicAnalyticsRow } from '../../lib/api/analy
 import { fetchMockExams } from '../../lib/api/mock-exams';
 import { DEFAULT_EXAM_SLUG, EXAM_TYPES } from '@reviewnatin/shared';
 import type { OnboardingData } from '../../lib/onboarding-store';
+import type { SubjectArea } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
@@ -84,6 +87,26 @@ function taskIcon(task: PasaPathTask, completed: boolean): keyof typeof Ionicons
   return 'layers-outline';
 }
 
+function subjectIcon(index: number): keyof typeof Ionicons.glyphMap {
+  const icons: (keyof typeof Ionicons.glyphMap)[] = ['book-outline', 'school-outline', 'analytics-outline'];
+  return icons[index % icons.length];
+}
+
+type HomeSubjectCard = SubjectArea & {
+  topics: TopicRow[];
+  readyTopicCount: number;
+  questionCount: number | null;
+  countsKnown: boolean;
+};
+
+function subjectCardMeta(subject: HomeSubjectCard): string {
+  const topicCount = subject.topics.length;
+  if (topicCount === 0) return 'Topics coming soon';
+  if (!subject.countsKnown) return `${topicCount} topic${topicCount === 1 ? '' : 's'} · open list`;
+  if (subject.questionCount === 0) return `${topicCount} topic${topicCount === 1 ? '' : 's'} · questions coming soon`;
+  return `${subject.readyTopicCount}/${topicCount} topics ready · ${subject.questionCount} question${subject.questionCount === 1 ? '' : 's'}`;
+}
+
 function pickWeakTopic(subjects: { weakTopics: TopicAnalyticsRow[] }[]): TopicAnalyticsRow | null {
   for (const subject of subjects) {
     if (subject.weakTopics.length > 0) return subject.weakTopics[0];
@@ -105,7 +128,8 @@ export default function DashboardScreen() {
   const [examName, setExamName] = useState('');
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
   const [readiness, setReadiness] = useState<ReadinessSnapshot | null>(null);
-  const [subjects, setSubjects] = useState<{ id: string; name: string; slug: string }[]>([]);
+  const [subjects, setSubjects] = useState<HomeSubjectCard[]>([]);
+  const [subjectCount, setSubjectCount] = useState(0);
   const [stats, setStats] = useState({
     questionsToday: 0,
     questionsTarget: 15,
@@ -196,10 +220,35 @@ export default function DashboardScreen() {
         setExamName(exam.name);
         setExamTypeId(exam.id);
         const areas = await fetchSubjectAreas(exam.id).catch(() => []);
-        setSubjects(areas.slice(0, 3));
+        setSubjectCount(areas.length);
+        const previewSubjects = areas.slice(0, 3);
+        const subjectCards = await Promise.all(
+          previewSubjects.map(async (subject) => {
+            const [topicRows, topicCounts] = await Promise.all([
+              fetchTopicsBySubjectId(subject.id).catch(() => []),
+              fetchTopicQuestionCounts(slug, subject.slug).catch(() => new Map<string, number>()),
+            ]);
+            const countsKnown = topicRows.length > 0 && topicRows.every((topic) => topicCounts.has(topic.slug));
+            const readyTopicCount = countsKnown
+              ? topicRows.filter((topic) => (topicCounts.get(topic.slug) ?? 0) > 0).length
+              : topicRows.length;
+            const questionCount = countsKnown
+              ? topicRows.reduce((sum, topic) => sum + (topicCounts.get(topic.slug) ?? 0), 0)
+              : null;
+            return {
+              ...subject,
+              topics: topicRows,
+              readyTopicCount,
+              questionCount,
+              countsKnown,
+            };
+          })
+        );
+        setSubjects(subjectCards);
       } else {
         const found = EXAM_TYPES.find((e) => e.slug === slug);
         if (found) setExamName(found.name);
+        setSubjectCount(0);
       }
 
       if (!user) {
@@ -253,10 +302,19 @@ export default function DashboardScreen() {
   const nextTask = pasapath ? primaryPasapathTask(pasapath.tasks) : null;
   const pasapathComplete =
     visiblePasapathTasks.length > 0 && visiblePasapathTasks.every((task) => task.completed);
+  const completedPasapathTasks = visiblePasapathTasks.filter((task) => task.completed).length;
+  const remainingPasapathTasks = Math.max(visiblePasapathTasks.length - completedPasapathTasks, 0);
   const showAccuracy = stats.totalAnswered >= 20 && stats.accuracyPercent != null;
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
   const firstName = displayName.split(/\s+/)[0] ?? displayName;
   const streakLabel = stats.streakDays > 0 ? 'day streak' : 'simulan na';
+  const remainingQuestions = Math.max(questionsTarget - questionsDone, 0);
+  const readinessLabel = readinessScore != null ? `${readinessScore}% ready` : 'Build readiness';
+  const planStatusText = pasapathComplete
+    ? 'Plan complete. Use Mock or Mistakes for extra reps.'
+    : nextTask
+      ? `${nextTask.title} is the best next step.`
+      : 'Start a practice set to generate a smarter plan.';
 
   const ensurePracticeAllowed = () => {
     if (!user) return true;
@@ -370,6 +428,7 @@ export default function DashboardScreen() {
 
   return (
     <View style={styles.root}>
+      <ScreenBackground />
       <ScrollView
         contentContainerStyle={tabScrollPadding(insets)}
         showsVerticalScrollIndicator={false}
@@ -396,14 +455,22 @@ export default function DashboardScreen() {
           </View>
 
           <View style={styles.heroTop}>
-            <View style={{ flex: 1, minWidth: 0, paddingRight: spacing.xs }}>
-              <Text style={styles.heroGreet}>{timeGreeting()}</Text>
-              <Text style={styles.heroName} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.85}>
-                {firstName}! 👋
+            <View style={styles.heroCopy}>
+              <View style={styles.heroBadgeRow}>
+                <View style={styles.heroBadge}>
+                  <Text style={styles.heroBadgeText}>{premium ? 'Plus dashboard' : 'Free dashboard'}</Text>
+                </View>
+                <Text style={styles.heroGreet}>{timeGreeting()}</Text>
+              </View>
+              <Text style={styles.heroName} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.82}>
+                {firstName}, focus on the next win.
+              </Text>
+              <Text style={styles.heroTrack} numberOfLines={2}>
+                {examName || 'Review track'} · {remainingQuestions === 0 ? 'Daily goal complete' : `${remainingQuestions} to hit today's goal`}
               </Text>
             </View>
             <Pressable
-              style={styles.bellBtn}
+              style={({ pressed }) => [styles.bellBtn, pressed && styles.pressedSoft]}
               onPress={() => setNotificationSheetOpen(true)}
               hitSlop={8}
               accessibilityRole="button"
@@ -413,9 +480,46 @@ export default function DashboardScreen() {
             </Pressable>
           </View>
 
-          <View style={styles.statRow}>
+          <View style={styles.heroDashboardCard}>
+            <View style={styles.heroReadinessBlock}>
+              <Pressable
+                style={({ pressed }) => [styles.readinessHeroBtn, pressed && styles.pressedSoft]}
+                onPress={() => readinessScore != null && setReadinessSheetOpen(true)}
+                disabled={readinessScore == null}
+                accessibilityRole="button"
+                accessibilityLabel={
+                  readinessScore != null ? `${readinessScore}% ready. Tap for breakdown.` : 'No readiness score yet'
+                }
+              >
+                {readinessScore != null ? (
+                  <GoalRing
+                    percent={readinessScore}
+                    size={72}
+                    strokeWidth={7}
+                    trackColor="rgba(255,255,255,0.18)"
+                    fillColor={colors.accent}
+                    labelColor="#fff"
+                  />
+                ) : (
+                  <View style={styles.heroEmptyRing}>
+                    <Text style={styles.heroEmptyRingText}>—</Text>
+                  </View>
+                )}
+              </Pressable>
+              <View style={styles.heroReadinessCopy}>
+                <Text style={styles.heroFocusLabel}>Readiness</Text>
+                <Text style={styles.heroFocusValue}>{readinessLabel}</Text>
+                <Text style={styles.heroFocusText}>{planStatusText}</Text>
+              </View>
+            </View>
+            <View style={styles.heroProgressTrack}>
+              <View style={[styles.heroProgressFill, { width: `${dailyGoalPct}%` }]} />
+            </View>
+          </View>
+
+          <View style={styles.heroMetricRail}>
             <Pressable
-              style={styles.statPill}
+              style={({ pressed }) => [styles.statPill, pressed && styles.pressedSoft]}
               onPress={() => user && router.push('/streak-freeze')}
               disabled={!user}
               accessibilityRole="button"
@@ -431,7 +535,7 @@ export default function DashboardScreen() {
               <View style={styles.statTextWrap}>
                 <Text style={styles.statVal}>{stats.streakDays}</Text>
                 {user && streakFreezes > 0 ? (
-                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                  <View style={styles.statFreezeRow}>
                     <Text style={styles.statLbl} numberOfLines={1}>
                       {streakLabel}
                     </Text>
@@ -456,31 +560,17 @@ export default function DashboardScreen() {
                 </Text>
               </View>
             </View>
-            <Pressable
-              style={styles.statPillReadiness}
-              onPress={() => readinessScore != null && setReadinessSheetOpen(true)}
-              disabled={readinessScore == null}
-              accessibilityRole="button"
-              accessibilityLabel={
-                readinessScore != null ? `${readinessScore}% ready. Tap for breakdown.` : 'No readiness score yet'
-              }
-            >
-              {readinessScore != null ? (
-                <GoalRing
-                  percent={readinessScore}
-                  size={42}
-                  strokeWidth={4}
-                  trackColor="rgba(255,255,255,0.2)"
-                  fillColor={colors.accent}
-                  labelColor="#fff"
-                />
-              ) : (
-                <View style={{ width: 42, height: 42, alignItems: 'center', justifyContent: 'center' }}>
-                  <Text style={[styles.statVal, { fontSize: 15 }]}>—</Text>
-                </View>
-              )}
-              <Text style={styles.statLblCenter}>ready</Text>
-            </Pressable>
+            <View style={styles.statPill}>
+              <View style={styles.statIconWrap}>
+                <Ionicons name="trophy-outline" size={20} color="#fff" />
+              </View>
+              <View style={styles.statTextWrap}>
+                <Text style={styles.statVal}>{dailyGoalPct}%</Text>
+                <Text style={styles.statLbl} numberOfLines={2}>
+                  daily goal
+                </Text>
+              </View>
+            </View>
           </View>
         </LinearGradient>
 
@@ -488,20 +578,38 @@ export default function DashboardScreen() {
           {user && pasapath ? (
             <View style={styles.pasapathCard}>
               <View style={styles.pasapathHead}>
-                <Text style={styles.pasapathLbl}>Today&apos;s PasaPath</Text>
+                <Text style={styles.pasapathLbl}>{"Today's PasaPath"}</Text>
                 <Pressable
                   onPress={() => router.push('/pasapath/week')}
                   hitSlop={8}
                   accessibilityRole="button"
                   accessibilityLabel="View PasaPath week"
                 >
-                  <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.primary }}>Week →</Text>
+                  <View style={styles.weekLink}>
+                    <Text style={styles.weekLinkText}>Week</Text>
+                    <Ionicons name="chevron-forward" size={14} color={colors.primary} />
+                  </View>
                 </Pressable>
               </View>
               <Text style={styles.pasapathMeta}>
                 {pasapath.days_until_exam} days left · {pasapath.daily_minutes} min planned
                 {examCountdown ? ` · ${examCountdown.targetLabel}` : ''}
               </Text>
+
+              <View style={styles.planSummaryRow}>
+                <View style={styles.planSummaryPill}>
+                  <Text style={styles.planSummaryValue}>{completedPasapathTasks}</Text>
+                  <Text style={styles.planSummaryLabel}>done</Text>
+                </View>
+                <View style={styles.planSummaryPill}>
+                  <Text style={styles.planSummaryValue}>{remainingPasapathTasks}</Text>
+                  <Text style={styles.planSummaryLabel}>left</Text>
+                </View>
+                <View style={styles.planSummaryPillWide}>
+                  <Ionicons name="time-outline" size={15} color={colors.primary} />
+                  <Text style={styles.planSummaryLabel}>{pasapath.daily_minutes} min plan</Text>
+                </View>
+              </View>
 
               {weakTopic ? (
                 <Pressable style={styles.weakChip} onPress={startWeakAreaPractice}>
@@ -511,21 +619,27 @@ export default function DashboardScreen() {
               ) : null}
 
               {nextTask && !pasapathComplete ? (
-                <Pressable
-                  style={styles.primaryCta}
-                  onPress={() => runPasapathTask(nextTask)}
-                  accessibilityRole="button"
-                  accessibilityLabel={primaryCtaLabel(nextTask)}
-                >
-                  <Ionicons name="play" size={18} color="#fff" />
-                  <Text style={styles.primaryCtaText}>
-                    {nextTask.title} · {nextTask.minutes} min
+                <View style={styles.nextStepBlock}>
+                  <Text style={styles.nextStepLabel}>Recommended next</Text>
+                  <Text style={styles.nextStepTitle} numberOfLines={2}>
+                    {nextTask.title}
                   </Text>
-                </Pressable>
+                  <Pressable
+                    style={styles.primaryCta}
+                    onPress={() => runPasapathTask(nextTask)}
+                    accessibilityRole="button"
+                    accessibilityLabel={primaryCtaLabel(nextTask)}
+                  >
+                    <Ionicons name="play" size={18} color="#fff" />
+                    <Text style={styles.primaryCtaText} numberOfLines={1}>
+                      Start next step · {nextTask.minutes} min
+                    </Text>
+                  </Pressable>
+                </View>
               ) : pasapathComplete ? (
                 <View style={[styles.primaryCta, { backgroundColor: colors.success }]}>
                   <Ionicons name="checkmark-circle" size={18} color="#fff" />
-                  <Text style={styles.primaryCtaText}>PasaPath complete for today! 🎉</Text>
+                  <Text style={styles.primaryCtaText}>PasaPath complete for today</Text>
                 </View>
               ) : null}
 
@@ -541,11 +655,11 @@ export default function DashboardScreen() {
                     size={18}
                     color={task.completed ? colors.success : colors.primary}
                   />
-                  <View style={{ flex: 1 }}>
+                  <View style={styles.pasapathTaskCopy}>
                     <Text style={styles.pasapathTaskTitle}>{task.title}</Text>
                     <Text style={styles.pasapathTaskSub}>
                       {task.completed
-                        ? 'Done for today ✓'
+                        ? 'Done for today'
                         : task.type === 'mistakes' && task.question_count === 0
                           ? 'Take a quiz first to build mistakes'
                           : `${task.minutes} min · ${task.question_count} items`}
@@ -559,7 +673,7 @@ export default function DashboardScreen() {
             </View>
           ) : user ? (
             <View style={[styles.pasapathCard, { marginBottom: spacing.md }]}>
-              <Text style={styles.pasapathLbl}>Today&apos;s PasaPath</Text>
+              <Text style={styles.pasapathLbl}>{"Today's PasaPath"}</Text>
               <Text style={[styles.pasapathMeta, { marginBottom: spacing.md }]}>
                 Tapusin ang unang quiz para mabuo ang daily study plan mo.
               </Text>
@@ -567,27 +681,41 @@ export default function DashboardScreen() {
             </View>
           ) : null}
 
-          <LinearGradient colors={[...gradients.gold]} style={styles.goalCard}>
-            <GoalRing percent={dailyGoalPct} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.goalLbl}>Goal ngayong araw</Text>
-              <Text style={styles.goalTitle}>
-                {questionsDone} / {questionsTarget} questions
-              </Text>
-              <Text style={styles.goalHint}>
-                {questionsDone >= questionsTarget
-                  ? 'Tapos na ang goal mo ngayon! 🎉'
-                  : user
-                    ? `${questionsTarget - questionsDone} na lang — kaya mo 'yan! 💪`
-                    : `${questionsTarget - questionsDone} na lang — tara na! 💪`}
-              </Text>
-              {showAccuracy ? (
-                <Text style={[styles.goalHint, { marginTop: 6 }]}>
-                  Overall accuracy: {stats.accuracyPercent}% ({stats.totalAnswered} answered)
+          <View style={styles.progressSnapshotCard}>
+            <View style={styles.progressSnapshotTop}>
+              <View style={styles.progressSnapshotTitle}>
+                <Text style={styles.goalLbl}>Progress snapshot</Text>
+                <Text style={styles.goalTitle}>
+                  {questionsDone} / {questionsTarget} questions today
                 </Text>
-              ) : null}
+              </View>
+              <View style={styles.progressPercentBadge}>
+                <Text style={styles.progressPercentText}>{dailyGoalPct}%</Text>
+              </View>
             </View>
-          </LinearGradient>
+            <View style={styles.snapshotProgressTrack}>
+              <View style={[styles.snapshotProgressFill, { width: `${dailyGoalPct}%` }]} />
+            </View>
+            <View style={styles.snapshotFooter}>
+              <View style={styles.snapshotMetric}>
+                <Text style={styles.snapshotMetricValue}>{stats.totalAnswered}</Text>
+                <Text style={styles.snapshotMetricLabel}>answered</Text>
+              </View>
+              <View style={styles.snapshotMetric}>
+                <Text style={styles.snapshotMetricValue}>{showAccuracy ? `${stats.accuracyPercent}%` : '—'}</Text>
+                <Text style={styles.snapshotMetricLabel}>accuracy</Text>
+              </View>
+              <View style={styles.snapshotMetric}>
+                <Text style={styles.snapshotMetricValue}>{stats.sessionCount}</Text>
+                <Text style={styles.snapshotMetricLabel}>sessions</Text>
+              </View>
+            </View>
+            <Text style={styles.goalHint}>
+              {questionsDone >= questionsTarget
+                ? 'Daily target complete. Add a mock or mistake review if you still have energy.'
+                : `${remainingQuestions} more question${remainingQuestions === 1 ? '' : 's'} to finish today's target.`}
+            </Text>
+          </View>
 
           {examCountdown ? (
             <ExamCountdownCard
@@ -598,18 +726,27 @@ export default function DashboardScreen() {
             />
           ) : null}
 
-          <Pressable style={styles.continueCard} onPress={() => void startPractice()}>
+          <Pressable
+            style={styles.continueCard}
+            onPress={() => void startPractice()}
+            accessibilityRole="button"
+            accessibilityLabel={`${hasActivity ? 'Continue review' : 'Start review'} for ${examName || 'your exam'}`}
+            accessibilityHint="Starts a practice quiz"
+          >
             <View style={styles.continueRow}>
               <View style={styles.continueIcon}>
                 <Text style={styles.continueAbbr}>{examAbbr(examSlug)}</Text>
               </View>
-              <View style={{ flex: 1 }}>
+              <View style={styles.continueCopy}>
                 <Text style={styles.continueLbl}>
                   {hasActivity ? 'Ituloy ang review' : 'Simulan ang review'}
                 </Text>
                 <Text style={styles.continueTitle}>{examName || 'Your exam'}</Text>
               </View>
-              <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+              <View style={styles.continueActionPill}>
+                <Text style={styles.continueActionText}>Start</Text>
+                <Ionicons name="chevron-forward" size={14} color="#fff" />
+              </View>
             </View>
             <Text style={styles.continueMeta}>
               {hasActivity
@@ -618,20 +755,50 @@ export default function DashboardScreen() {
             </Text>
           </Pressable>
 
+          <View style={styles.sectionHead}>
+            <Text style={styles.sectionTitle}>Review tools</Text>
+          </View>
           <View style={styles.quickActions}>
             {[
-              { label: 'Practice', icon: 'flash-outline' as const, onPress: () => void startPractice() },
-              { label: 'Mock', icon: 'document-text-outline' as const, onPress: () => void launchMock() },
-              { label: 'Mistakes', icon: 'alert-circle-outline' as const, onPress: () => router.push('/mistakes') },
+              {
+                label: 'Practice',
+                sub: '12-item set',
+                icon: 'flash-outline' as const,
+                onPress: () => void startPractice(),
+              },
+              {
+                label: 'Mock',
+                sub: 'Timed exam',
+                icon: 'document-text-outline' as const,
+                onPress: () => void launchMock(),
+              },
+              {
+                label: 'Mistakes',
+                sub: 'Review misses',
+                icon: 'alert-circle-outline' as const,
+                onPress: () => router.push('/mistakes'),
+              },
               {
                 label: 'Flashcards',
+                sub: 'Due cards',
                 icon: 'layers-outline' as const,
                 onPress: () => router.push({ pathname: '/flashcards', params: { examSlug } }),
               },
             ].map((action) => (
-              <Pressable key={action.label} style={styles.quickAction} onPress={action.onPress}>
-                <Ionicons name={action.icon} size={20} color={colors.primary} />
-                <Text style={styles.quickActionText}>{action.label}</Text>
+              <Pressable
+                key={action.label}
+                style={({ pressed }) => [styles.quickAction, pressed && styles.cardPressed]}
+                onPress={action.onPress}
+                accessibilityRole="button"
+                accessibilityLabel={action.label}
+              >
+                <View style={styles.quickActionIcon}>
+                  <Ionicons name={action.icon} size={20} color={colors.primary} />
+                </View>
+                <View style={styles.quickActionCopy}>
+                  <Text style={styles.quickActionText}>{action.label}</Text>
+                  <Text style={styles.quickActionSub}>{action.sub}</Text>
+                </View>
               </Pressable>
             ))}
           </View>
@@ -639,12 +806,17 @@ export default function DashboardScreen() {
           {subjects.length > 0 ? (
             <>
               <View style={styles.sectionHead}>
-                <Text style={styles.sectionTitle}>Mabilis na practice</Text>
+                <View style={styles.sectionHeadCopy}>
+                  <Text style={styles.sectionTitle}>Subject shortcuts</Text>
+                  <Text style={styles.sectionSub}>Jump into the review areas with ready questions.</Text>
+                </View>
               </View>
               {subjects.map((subject, index) => (
                 <Pressable
                   key={subject.id}
-                  style={styles.quickRow}
+                  style={({ pressed }) => [styles.quickRow, pressed && styles.cardPressed]}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Open ${subject.name} topics. ${subjectCardMeta(subject)}`}
                   onPress={() =>
                     router.push({
                       pathname: '/study/[subjectSlug]',
@@ -653,23 +825,72 @@ export default function DashboardScreen() {
                   }
                 >
                   <View style={[styles.quickIcon, { backgroundColor: colors.primaryMuted }]}>
-                    <Text style={{ fontSize: 20 }}>{['📚', '🎓', '🔬'][index % 3]}</Text>
+                    <Ionicons name={subjectIcon(index)} size={21} color={colors.primary} />
                   </View>
-                  <View style={{ flex: 1 }}>
+                  <View style={styles.quickCopy}>
                     <Text style={styles.quickName}>{subject.name}</Text>
-                    <Text style={styles.quickMeta}>I-tap para sa mga topic</Text>
+                    <Text style={styles.quickMeta}>{subjectCardMeta(subject)}</Text>
+                    {subject.topics.length > 0 ? (
+                      <View style={styles.quickTopics}>
+                        {subject.topics.slice(0, 3).map((topic) => (
+                          <View key={topic.id} style={styles.quickTopicChip}>
+                            <Text style={styles.quickTopicText} numberOfLines={1}>
+                              {topic.name}
+                            </Text>
+                          </View>
+                        ))}
+                        {subject.topics.length > 3 ? (
+                          <Text style={styles.quickTopicMore}>+{subject.topics.length - 3} more</Text>
+                        ) : null}
+                      </View>
+                    ) : null}
                   </View>
-                  <View style={[styles.playBtn, { backgroundColor: colors.primary }]}>
-                    <Ionicons name="play" size={14} color="#fff" />
+                  <View style={styles.quickTopicAction}>
+                    <Text style={styles.quickTopicActionCount}>{subject.readyTopicCount || subject.topics.length}</Text>
+                    <Text style={styles.quickTopicActionLabel}>ready</Text>
+                    <Ionicons name="chevron-forward" size={16} color={colors.primary} />
                   </View>
                 </Pressable>
               ))}
+              {subjectCount > subjects.length ? (
+                <Pressable
+                  style={({ pressed }) => [styles.quickAllSubjectsRow, pressed && styles.cardPressed]}
+                  onPress={() => router.push('/(tabs)/study')}
+                  accessibilityRole="button"
+                  accessibilityLabel={`View all ${subjectCount} subjects`}
+                >
+                  <View style={styles.quickAllSubjectsIcon}>
+                    <Ionicons name="grid-outline" size={18} color={colors.primary} />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.quickAllSubjectsTitle}>Tingnan lahat ng subjects</Text>
+                    <Text style={styles.quickAllSubjectsMeta}>
+                      {subjectCount - subjects.length} more subject{subjectCount - subjects.length === 1 ? '' : 's'} sa Review tab
+                    </Text>
+                  </View>
+                  <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+                </Pressable>
+              ) : null}
             </>
           ) : null}
 
           <View style={styles.lowerSection}>
+            {!user || (contentGate && !contentGate.meetsMinimum) || !premium || announcements.length > 0 ? (
+              <View style={styles.sectionHead}>
+                <View style={styles.sectionHeadCopy}>
+                  <Text style={styles.sectionTitle}>Updates and access</Text>
+                  <Text style={styles.sectionSub}>Account, content, and subscription notices.</Text>
+                </View>
+              </View>
+            ) : null}
+
             {!user ? (
-              <Pressable style={styles.guestBanner} onPress={() => router.push('/(auth)/login')}>
+              <Pressable
+                style={styles.guestBanner}
+                onPress={() => router.push('/(auth)/login')}
+                accessibilityRole="button"
+                accessibilityLabel="Log in to save progress"
+              >
                 <Text style={styles.guestBannerTitle}>Mag-log in para ma-save ang progress mo</Text>
                 <Text style={styles.guestBannerSub}>
                   PasaPath, streak, Mistake Bank, at readiness — naka-sync lahat kapag may account ka.
@@ -690,10 +911,17 @@ export default function DashboardScreen() {
                 accessibilityRole="button"
                 accessibilityLabel={`${announcements.length} updates`}
               >
-                <Ionicons name="megaphone-outline" size={18} color={colors.primary} />
-                <Text style={styles.updatesChipText} numberOfLines={1}>
-                  {announcements.length} update{announcements.length === 1 ? '' : 's'} · {announcements[0].title}
-                </Text>
+                <View style={styles.updatesIcon}>
+                  <Ionicons name="megaphone-outline" size={18} color={colors.primary} />
+                </View>
+                <View style={styles.updatesCopy}>
+                  <Text style={styles.updatesChipText} numberOfLines={1}>
+                    {announcements.length} update{announcements.length === 1 ? '' : 's'}
+                  </Text>
+                  <Text style={styles.updatesChipSub} numberOfLines={1}>
+                    {announcements[0].title}
+                  </Text>
+                </View>
                 <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
               </Pressable>
             ) : null}
@@ -723,7 +951,7 @@ export default function DashboardScreen() {
                   label: 'Go to Settings',
                   onPress: () => {
                     setNotificationSheetOpen(false);
-                    router.push('/(tabs)/settings');
+                    router.push('/settings');
                   },
                 },
                 { label: 'OK', onPress: () => setNotificationSheetOpen(false), variant: 'outline' },
@@ -740,7 +968,7 @@ export default function DashboardScreen() {
                   label: 'Go to Settings',
                   onPress: () => {
                     setNotificationSheetOpen(false);
-                    router.push('/(tabs)/settings');
+                    router.push('/settings');
                   },
                   variant: 'outline',
                 },
