@@ -49,7 +49,7 @@ export function StackShell({
           }}
         >
           <Pressable
-            onPress={() => router.back()}
+            onPress={() => (router.canGoBack() ? router.back() : router.replace('/(tabs)'))}
             hitSlop={8}
             accessibilityRole="button"
             accessibilityLabel="Go back"

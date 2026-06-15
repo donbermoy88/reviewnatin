@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Circle, Defs, LinearGradient as SvgLinearGradient, Path, Stop } from 'react-native-svg';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
+import { ScreenBackground } from '../../components/screen-background';
 import { SparkleStar } from '../../components/sparkle-star';
 import { StreakWeek } from '../../components/streak-week';
 import { useAppTheme } from '../../hooks/use-app-theme';
@@ -272,9 +273,13 @@ export default function ProfileScreen() {
   }, [load]);
 
   const hasActivity = stats.sessionCount > 0;
+  const progressHeadline = hasActivity
+    ? `${stats.sessionCount} session${stats.sessionCount === 1 ? '' : 's'} logged`
+    : 'Start your progress record';
 
   return (
     <View style={styles.root}>
+      <ScreenBackground />
       <ScrollView
         contentContainerStyle={tabScrollPadding(insets)}
         refreshControl={
@@ -294,7 +299,13 @@ export default function ProfileScreen() {
             <SparkleStar size={80} opacity={0.1} />
           </View>
           <View style={styles.headerRow}>
-            <Text style={styles.headerTitle}>Profile</Text>
+            <View style={styles.headerCopy}>
+              <View style={styles.profileBadge}>
+                <Ionicons name="analytics-outline" size={14} color={colors.accent} />
+                <Text style={styles.profileBadgeText}>Progress profile</Text>
+              </View>
+              <Text style={styles.headerTitle}>Track the reviewer you are becoming.</Text>
+            </View>
             <Pressable
               style={({ pressed }) => [styles.settingsBtn, pressed && styles.settingsBtnPressed]}
               onPress={() => router.push('/settings')}
@@ -322,6 +333,15 @@ export default function ProfileScreen() {
               </Text>
             </View>
           </Pressable>
+          <View style={styles.profileSummaryCard}>
+            <Text style={styles.profileSummaryLabel}>Current record</Text>
+            <Text style={styles.profileSummaryTitle}>{progressHeadline}</Text>
+            <Text style={styles.profileSummarySub}>
+              {hasActivity
+                ? 'Use this page to spot consistency, accuracy, and mock-exam momentum.'
+                : 'Finish your first quiz to unlock streaks, trends, badges, and history.'}
+            </Text>
+          </View>
         </LinearGradient>
 
         <Animated.View style={[styles.statsCard, entranceStyle, { marginTop: -46 }]}>

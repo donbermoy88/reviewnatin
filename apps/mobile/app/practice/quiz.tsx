@@ -1031,12 +1031,9 @@ export default function PracticeQuizScreen() {
             >
               <Ionicons
                 name={flaggedIndices.has(index) ? 'flag' : 'flag-outline'}
-                size={18}
+                size={20}
                 color={flaggedIndices.has(index) ? colors.accentDark : colors.textMuted}
               />
-              <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 12, color: flaggedIndices.has(index) ? colors.accentDark : colors.textMuted }}>
-                Review
-              </Text>
             </Pressable>
           ) : null}
           <ReportContentButton

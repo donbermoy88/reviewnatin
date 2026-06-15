@@ -23,6 +23,7 @@ import { fetchGuestPracticeStats } from '../../lib/guest-quiz-history';
 import { ExamCountdownCard } from '../../components/exam-countdown-card';
 import { ContentGateBanner } from '../../components/content-gate-banner';
 import { AdBanner } from '../../components/ad-banner';
+import { ScreenBackground } from '../../components/screen-background';
 import { fetchContentGateStatus, type ContentGateStatus } from '../../lib/content-gate';
 import { fetchAppAnnouncements, type AppAnnouncement } from '../../lib/api/announcements';
 import { fetchExamSchedules } from '../../lib/api/exam-calendar';
@@ -301,11 +302,19 @@ export default function DashboardScreen() {
   const nextTask = pasapath ? primaryPasapathTask(pasapath.tasks) : null;
   const pasapathComplete =
     visiblePasapathTasks.length > 0 && visiblePasapathTasks.every((task) => task.completed);
+  const completedPasapathTasks = visiblePasapathTasks.filter((task) => task.completed).length;
+  const remainingPasapathTasks = Math.max(visiblePasapathTasks.length - completedPasapathTasks, 0);
   const showAccuracy = stats.totalAnswered >= 20 && stats.accuracyPercent != null;
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
   const firstName = displayName.split(/\s+/)[0] ?? displayName;
   const streakLabel = stats.streakDays > 0 ? 'day streak' : 'simulan na';
   const remainingQuestions = Math.max(questionsTarget - questionsDone, 0);
+  const readinessLabel = readinessScore != null ? `${readinessScore}% ready` : 'Build readiness';
+  const planStatusText = pasapathComplete
+    ? 'Plan complete. Use Mock or Mistakes for extra reps.'
+    : nextTask
+      ? `${nextTask.title} is the best next step.`
+      : 'Start a practice set to generate a smarter plan.';
 
   const ensurePracticeAllowed = () => {
     if (!user) return true;
@@ -419,6 +428,7 @@ export default function DashboardScreen() {
 
   return (
     <View style={styles.root}>
+      <ScreenBackground />
       <ScrollView
         contentContainerStyle={tabScrollPadding(insets)}
         showsVerticalScrollIndicator={false}
@@ -446,12 +456,17 @@ export default function DashboardScreen() {
 
           <View style={styles.heroTop}>
             <View style={styles.heroCopy}>
-              <Text style={styles.heroGreet}>{timeGreeting()}</Text>
-              <Text style={styles.heroName} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.85}>
-                {firstName}
+              <View style={styles.heroBadgeRow}>
+                <View style={styles.heroBadge}>
+                  <Text style={styles.heroBadgeText}>{premium ? 'Plus dashboard' : 'Free dashboard'}</Text>
+                </View>
+                <Text style={styles.heroGreet}>{timeGreeting()}</Text>
+              </View>
+              <Text style={styles.heroName} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.82}>
+                {firstName}, focus on the next win.
               </Text>
-              <Text style={styles.heroTrack} numberOfLines={1}>
-                {examName || 'Review track'} · {premium ? 'Plus' : 'Free'}
+              <Text style={styles.heroTrack} numberOfLines={2}>
+                {examName || 'Review track'} · {remainingQuestions === 0 ? 'Daily goal complete' : `${remainingQuestions} to hit today's goal`}
               </Text>
             </View>
             <Pressable
@@ -465,22 +480,44 @@ export default function DashboardScreen() {
             </Pressable>
           </View>
 
-          <View style={styles.heroFocusCard}>
-            <View style={styles.heroFocusTop}>
-              <Text style={styles.heroFocusLabel}>{"Today's focus"}</Text>
-              <Text style={styles.heroFocusValue}>{dailyGoalPct}%</Text>
+          <View style={styles.heroDashboardCard}>
+            <View style={styles.heroReadinessBlock}>
+              <Pressable
+                style={({ pressed }) => [styles.readinessHeroBtn, pressed && styles.pressedSoft]}
+                onPress={() => readinessScore != null && setReadinessSheetOpen(true)}
+                disabled={readinessScore == null}
+                accessibilityRole="button"
+                accessibilityLabel={
+                  readinessScore != null ? `${readinessScore}% ready. Tap for breakdown.` : 'No readiness score yet'
+                }
+              >
+                {readinessScore != null ? (
+                  <GoalRing
+                    percent={readinessScore}
+                    size={72}
+                    strokeWidth={7}
+                    trackColor="rgba(255,255,255,0.18)"
+                    fillColor={colors.accent}
+                    labelColor="#fff"
+                  />
+                ) : (
+                  <View style={styles.heroEmptyRing}>
+                    <Text style={styles.heroEmptyRingText}>—</Text>
+                  </View>
+                )}
+              </Pressable>
+              <View style={styles.heroReadinessCopy}>
+                <Text style={styles.heroFocusLabel}>Readiness</Text>
+                <Text style={styles.heroFocusValue}>{readinessLabel}</Text>
+                <Text style={styles.heroFocusText}>{planStatusText}</Text>
+              </View>
             </View>
             <View style={styles.heroProgressTrack}>
               <View style={[styles.heroProgressFill, { width: `${dailyGoalPct}%` }]} />
             </View>
-            <Text style={styles.heroFocusText}>
-              {remainingQuestions === 0
-                ? 'Daily target complete. Use Mock or Mistakes next.'
-                : `${remainingQuestions} questions left for today's target.`}
-            </Text>
           </View>
 
-          <View style={styles.statRow}>
+          <View style={styles.heroMetricRail}>
             <Pressable
               style={({ pressed }) => [styles.statPill, pressed && styles.pressedSoft]}
               onPress={() => user && router.push('/streak-freeze')}
@@ -523,31 +560,17 @@ export default function DashboardScreen() {
                 </Text>
               </View>
             </View>
-            <Pressable
-              style={({ pressed }) => [styles.statPillReadiness, pressed && styles.pressedSoft]}
-              onPress={() => readinessScore != null && setReadinessSheetOpen(true)}
-              disabled={readinessScore == null}
-              accessibilityRole="button"
-              accessibilityLabel={
-                readinessScore != null ? `${readinessScore}% ready. Tap for breakdown.` : 'No readiness score yet'
-              }
-            >
-              {readinessScore != null ? (
-                <GoalRing
-                  percent={readinessScore}
-                  size={42}
-                  strokeWidth={4}
-                  trackColor="rgba(255,255,255,0.2)"
-                  fillColor={colors.accent}
-                  labelColor="#fff"
-                />
-              ) : (
-                <View style={styles.statEmptyRing}>
-                  <Text style={[styles.statVal, { fontSize: 15 }]}>—</Text>
-                </View>
-              )}
-              <Text style={styles.statLblCenter}>ready</Text>
-            </Pressable>
+            <View style={styles.statPill}>
+              <View style={styles.statIconWrap}>
+                <Ionicons name="trophy-outline" size={20} color="#fff" />
+              </View>
+              <View style={styles.statTextWrap}>
+                <Text style={styles.statVal}>{dailyGoalPct}%</Text>
+                <Text style={styles.statLbl} numberOfLines={2}>
+                  daily goal
+                </Text>
+              </View>
+            </View>
           </View>
         </LinearGradient>
 
@@ -573,6 +596,21 @@ export default function DashboardScreen() {
                 {examCountdown ? ` · ${examCountdown.targetLabel}` : ''}
               </Text>
 
+              <View style={styles.planSummaryRow}>
+                <View style={styles.planSummaryPill}>
+                  <Text style={styles.planSummaryValue}>{completedPasapathTasks}</Text>
+                  <Text style={styles.planSummaryLabel}>done</Text>
+                </View>
+                <View style={styles.planSummaryPill}>
+                  <Text style={styles.planSummaryValue}>{remainingPasapathTasks}</Text>
+                  <Text style={styles.planSummaryLabel}>left</Text>
+                </View>
+                <View style={styles.planSummaryPillWide}>
+                  <Ionicons name="time-outline" size={15} color={colors.primary} />
+                  <Text style={styles.planSummaryLabel}>{pasapath.daily_minutes} min plan</Text>
+                </View>
+              </View>
+
               {weakTopic ? (
                 <Pressable style={styles.weakChip} onPress={startWeakAreaPractice}>
                   <Ionicons name="trending-down" size={14} color={colors.error} />
@@ -581,17 +619,23 @@ export default function DashboardScreen() {
               ) : null}
 
               {nextTask && !pasapathComplete ? (
-                <Pressable
-                  style={styles.primaryCta}
-                  onPress={() => runPasapathTask(nextTask)}
-                  accessibilityRole="button"
-                  accessibilityLabel={primaryCtaLabel(nextTask)}
-                >
-                  <Ionicons name="play" size={18} color="#fff" />
-                  <Text style={styles.primaryCtaText} numberOfLines={1}>
-                    {nextTask.title} · {nextTask.minutes} min
+                <View style={styles.nextStepBlock}>
+                  <Text style={styles.nextStepLabel}>Recommended next</Text>
+                  <Text style={styles.nextStepTitle} numberOfLines={2}>
+                    {nextTask.title}
                   </Text>
-                </Pressable>
+                  <Pressable
+                    style={styles.primaryCta}
+                    onPress={() => runPasapathTask(nextTask)}
+                    accessibilityRole="button"
+                    accessibilityLabel={primaryCtaLabel(nextTask)}
+                  >
+                    <Ionicons name="play" size={18} color="#fff" />
+                    <Text style={styles.primaryCtaText} numberOfLines={1}>
+                      Start next step · {nextTask.minutes} min
+                    </Text>
+                  </Pressable>
+                </View>
               ) : pasapathComplete ? (
                 <View style={[styles.primaryCta, { backgroundColor: colors.success }]}>
                   <Ionicons name="checkmark-circle" size={18} color="#fff" />
@@ -637,27 +681,41 @@ export default function DashboardScreen() {
             </View>
           ) : null}
 
-          <LinearGradient colors={[...gradients.gold]} style={styles.goalCard}>
-            <GoalRing percent={dailyGoalPct} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.goalLbl}>Goal ngayong araw</Text>
-              <Text style={styles.goalTitle}>
-                {questionsDone} / {questionsTarget} questions
-              </Text>
-              <Text style={styles.goalHint}>
-                {questionsDone >= questionsTarget
-                  ? 'Tapos na ang goal mo ngayon.'
-                  : user
-                    ? `${remainingQuestions} na lang para matapos ang target.`
-                    : `${remainingQuestions} na lang para matapos ang target.`}
-              </Text>
-              {showAccuracy ? (
-                <Text style={[styles.goalHint, { marginTop: 6 }]}>
-                  Overall accuracy: {stats.accuracyPercent}% ({stats.totalAnswered} answered)
+          <View style={styles.progressSnapshotCard}>
+            <View style={styles.progressSnapshotTop}>
+              <View style={styles.progressSnapshotTitle}>
+                <Text style={styles.goalLbl}>Progress snapshot</Text>
+                <Text style={styles.goalTitle}>
+                  {questionsDone} / {questionsTarget} questions today
                 </Text>
-              ) : null}
+              </View>
+              <View style={styles.progressPercentBadge}>
+                <Text style={styles.progressPercentText}>{dailyGoalPct}%</Text>
+              </View>
             </View>
-          </LinearGradient>
+            <View style={styles.snapshotProgressTrack}>
+              <View style={[styles.snapshotProgressFill, { width: `${dailyGoalPct}%` }]} />
+            </View>
+            <View style={styles.snapshotFooter}>
+              <View style={styles.snapshotMetric}>
+                <Text style={styles.snapshotMetricValue}>{stats.totalAnswered}</Text>
+                <Text style={styles.snapshotMetricLabel}>answered</Text>
+              </View>
+              <View style={styles.snapshotMetric}>
+                <Text style={styles.snapshotMetricValue}>{showAccuracy ? `${stats.accuracyPercent}%` : '—'}</Text>
+                <Text style={styles.snapshotMetricLabel}>accuracy</Text>
+              </View>
+              <View style={styles.snapshotMetric}>
+                <Text style={styles.snapshotMetricValue}>{stats.sessionCount}</Text>
+                <Text style={styles.snapshotMetricLabel}>sessions</Text>
+              </View>
+            </View>
+            <Text style={styles.goalHint}>
+              {questionsDone >= questionsTarget
+                ? 'Daily target complete. Add a mock or mistake review if you still have energy.'
+                : `${remainingQuestions} more question${remainingQuestions === 1 ? '' : 's'} to finish today's target.`}
+            </Text>
+          </View>
 
           {examCountdown ? (
             <ExamCountdownCard
@@ -685,7 +743,10 @@ export default function DashboardScreen() {
                 </Text>
                 <Text style={styles.continueTitle}>{examName || 'Your exam'}</Text>
               </View>
-              <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+              <View style={styles.continueActionPill}>
+                <Text style={styles.continueActionText}>Start</Text>
+                <Ionicons name="chevron-forward" size={14} color="#fff" />
+              </View>
             </View>
             <Text style={styles.continueMeta}>
               {hasActivity
@@ -694,6 +755,9 @@ export default function DashboardScreen() {
             </Text>
           </Pressable>
 
+          <View style={styles.sectionHead}>
+            <Text style={styles.sectionTitle}>Review tools</Text>
+          </View>
           <View style={styles.quickActions}>
             {[
               {
@@ -742,7 +806,10 @@ export default function DashboardScreen() {
           {subjects.length > 0 ? (
             <>
               <View style={styles.sectionHead}>
-                <Text style={styles.sectionTitle}>Mabilis na practice</Text>
+                <View style={styles.sectionHeadCopy}>
+                  <Text style={styles.sectionTitle}>Subject shortcuts</Text>
+                  <Text style={styles.sectionSub}>Jump into the review areas with ready questions.</Text>
+                </View>
               </View>
               {subjects.map((subject, index) => (
                 <Pressable
@@ -780,7 +847,7 @@ export default function DashboardScreen() {
                   </View>
                   <View style={styles.quickTopicAction}>
                     <Text style={styles.quickTopicActionCount}>{subject.readyTopicCount || subject.topics.length}</Text>
-                    <Text style={styles.quickTopicActionLabel}>topics</Text>
+                    <Text style={styles.quickTopicActionLabel}>ready</Text>
                     <Ionicons name="chevron-forward" size={16} color={colors.primary} />
                   </View>
                 </Pressable>
@@ -808,6 +875,15 @@ export default function DashboardScreen() {
           ) : null}
 
           <View style={styles.lowerSection}>
+            {!user || (contentGate && !contentGate.meetsMinimum) || !premium || announcements.length > 0 ? (
+              <View style={styles.sectionHead}>
+                <View style={styles.sectionHeadCopy}>
+                  <Text style={styles.sectionTitle}>Updates and access</Text>
+                  <Text style={styles.sectionSub}>Account, content, and subscription notices.</Text>
+                </View>
+              </View>
+            ) : null}
+
             {!user ? (
               <Pressable
                 style={styles.guestBanner}
@@ -835,10 +911,17 @@ export default function DashboardScreen() {
                 accessibilityRole="button"
                 accessibilityLabel={`${announcements.length} updates`}
               >
-                <Ionicons name="megaphone-outline" size={18} color={colors.primary} />
-                <Text style={styles.updatesChipText} numberOfLines={1}>
-                  {announcements.length} update{announcements.length === 1 ? '' : 's'} · {announcements[0].title}
-                </Text>
+                <View style={styles.updatesIcon}>
+                  <Ionicons name="megaphone-outline" size={18} color={colors.primary} />
+                </View>
+                <View style={styles.updatesCopy}>
+                  <Text style={styles.updatesChipText} numberOfLines={1}>
+                    {announcements.length} update{announcements.length === 1 ? '' : 's'}
+                  </Text>
+                  <Text style={styles.updatesChipSub} numberOfLines={1}>
+                    {announcements[0].title}
+                  </Text>
+                </View>
                 <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
               </Pressable>
             ) : null}

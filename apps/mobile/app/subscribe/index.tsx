@@ -313,6 +313,9 @@ export default function SubscribeScreen() {
     return order(a.sku) - order(b.sku);
   });
   const hasAccess = isPremium(examTypeId);
+  // SKUs the user actually owns (active entitlements). Used to mark only the
+  // owned plan ACTIVE — not every Plus tier — so users can still switch plans.
+  const activePlusSkus = new Set(entitlements.map((e) => e.sku).filter(Boolean));
 
   const requireLogin = () => {
     addAppBreadcrumb('paywall', 'login required from subscribe screen');
@@ -408,7 +411,9 @@ export default function SubscribeScreen() {
     const label = formatSkuLabel(product.sku);
     const suffix = priceSuffix(product.sku);
     const isBusy = busy === product.id || purchasingSku === product.sku;
-    const plusActive = hasAccess;
+    // Only the plan the user actually owns is "Active"; other tiers stay
+    // purchasable so a subscriber can upgrade / cross-grade.
+    const plusActive = activePlusSkus.has(product.sku);
     const savingsLabel = planSavingsLabel(product);
     const monthlyEquivalent = planMonthlyEquivalentLabel(product);
 

@@ -60,6 +60,7 @@
     "ios:run": "expo run:ios",
     "ios:build-sim": "node scripts/build-ios-simulator.mjs",
     "web": "expo start --web",
+    "verify:pods": "node scripts/verify-native-pods.mjs",
     "lint": "eslint .",
     "test": "vitest run",
     "generate-icons": "node scripts/generate-app-icons.mjs"

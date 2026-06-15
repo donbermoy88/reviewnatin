@@ -7,6 +7,7 @@ import { ActivityIndicator, Alert, Linking, Pressable, ScrollView, Switch, Text,
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ManagePlusCard } from '../components/manage-plus-card';
 import { Pill } from '../components/pill';
+import { ScreenBackground } from '../components/screen-background';
 import { useAppTheme } from '../hooks/use-app-theme';
 import { createSettingsStyles } from '../lib/themed-styles';
 import { tabScrollPadding } from '../lib/layout/content-padding';
@@ -267,37 +268,44 @@ export default function SettingsScreen() {
 
   return (
     <View style={styles.root}>
+      <ScreenBackground />
       <ScrollView contentContainerStyle={tabScrollPadding(insets)}>
-        <View style={[styles.header, { paddingTop: insets.top + spacing.sm }]}>
-          <Pressable
-            onPress={() => router.back()}
-            style={({ pressed }) => [styles.backBtn, pressed && styles.backBtnPressed]}
-            accessibilityRole="button"
-            accessibilityLabel="Go back"
-          >
-            <Ionicons name="chevron-back" size={22} color={colors.text} />
-          </Pressable>
-          <Text style={styles.headerTitle}>Settings</Text>
-        </View>
+        <LinearGradient
+          colors={[...gradients.hero]}
+          style={[styles.header, { paddingTop: insets.top + spacing.md }]}
+        >
+          <View style={styles.headerTop}>
+            <Pressable
+              onPress={() => router.back()}
+              style={({ pressed }) => [styles.backBtn, pressed && styles.backBtnPressed]}
+              accessibilityRole="button"
+              accessibilityLabel="Go back"
+            >
+              <Ionicons name="chevron-back" size={22} color="#fff" />
+            </Pressable>
+            <View style={styles.headerCopy}>
+              <View style={styles.headerBadge}>
+                <Ionicons name="options-outline" size={14} color={colors.accent} />
+                <Text style={styles.headerBadgeText}>Control center</Text>
+              </View>
+              <Text style={styles.headerTitle}>Settings that keep review reliable.</Text>
+              <Text style={styles.headerSub}>Manage your account, study tools, offline access, and reminders.</Text>
+            </View>
+          </View>
+        </LinearGradient>
 
         <View style={styles.body}>
           {toast ? (
-            <View
-              style={{
-                marginBottom: spacing.md,
-                padding: spacing.md,
-                borderRadius: 12,
-                backgroundColor: colors.successBg,
-                borderWidth: 1,
-                borderColor: colors.success,
-              }}
-            >
-              <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 14, color: colors.text, lineHeight: 20 }}>
+            <View style={styles.toast}>
+              <Ionicons name="checkmark-circle-outline" size={18} color={colors.success} />
+              <View style={styles.toastCopy}>
+                <Text style={styles.toastText}>
                 {toast}
               </Text>
-              <Pressable onPress={() => setToast(null)} hitSlop={8} style={{ marginTop: spacing.xs }}>
-                <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 12, color: colors.primary }}>OK</Text>
+                <Pressable onPress={() => setToast(null)} hitSlop={8} style={styles.toastAction}>
+                  <Text style={styles.toastActionText}>OK</Text>
               </Pressable>
+              </View>
             </View>
           ) : null}
 
@@ -396,7 +404,7 @@ export default function SettingsScreen() {
               label="Explanation language"
               sub={prefs.explanationLocale === 'fil' ? 'Taglish / Filipino default' : 'English default'}
               right={
-                <View style={{ flexDirection: 'row', gap: 6 }}>
+                <View style={styles.localeSwitch}>
                   {(['en', 'fil'] as const).map((l) => (
                     <Pressable
                       key={l}
@@ -404,22 +412,9 @@ export default function SettingsScreen() {
                       accessibilityRole="radio"
                       accessibilityLabel={l === 'en' ? 'English explanations' : 'Taglish explanations'}
                       accessibilityState={{ selected: prefs.explanationLocale === l }}
-                      style={{
-                        paddingHorizontal: 10,
-                        paddingVertical: 4,
-                        borderRadius: 8,
-                        backgroundColor: prefs.explanationLocale === l ? colors.primary : colors.surface,
-                        borderWidth: 1,
-                        borderColor: prefs.explanationLocale === l ? colors.primary : colors.border,
-                      }}
+                      style={[styles.localeOption, prefs.explanationLocale === l && styles.localeOptionActive]}
                     >
-                      <Text
-                        style={{
-                          fontFamily: theme.fonts.bodyBold,
-                          fontSize: 12,
-                          color: prefs.explanationLocale === l ? '#fff' : colors.textMuted,
-                        }}
-                      >
+                      <Text style={[styles.localeOptionText, prefs.explanationLocale === l && styles.localeOptionTextActive]}>
                         {l === 'en' ? 'EN' : 'TL'}
                       </Text>
                     </Pressable>

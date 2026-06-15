@@ -61,6 +61,9 @@ function pickSimulator() {
   throw new Error('No available iPhone simulator found. Run: xcodebuild -downloadPlatform iOS');
 }
 
+// Guard against the AdMob nil-Fabric-component launch crash before building.
+execSync('node scripts/verify-native-pods.mjs', { stdio: 'inherit', cwd: ROOT });
+
 const udid = process.env.IOS_SIM_UDID || pickSimulator();
 console.log(`\nBuilding for simulator ${udid}…\n`);
 

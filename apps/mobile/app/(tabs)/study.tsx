@@ -6,6 +6,7 @@ import { ActivityIndicator, Alert, Pressable, RefreshControl, ScrollView, Text, 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
+import { ScreenBackground } from '../../components/screen-background';
 import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createStudyStyles } from '../../lib/themed-styles';
@@ -247,6 +248,11 @@ export default function StudyScreen() {
     return materials.filter((m) => m.materialType === notesFilter);
   }, [materials, notesFilter]);
 
+  const readySubjectCount = useMemo(
+    () => subjects.filter((subject) => (subjectSummaries[subject.id]?.readyTopicCount ?? 0) > 0).length,
+    [subjects, subjectSummaries]
+  );
+
   const materialsBySubject = useMemo(() => {
     const map = new Map<string, ReviewMaterial[]>();
     for (const m of filteredMaterials) {
@@ -270,7 +276,7 @@ export default function StudyScreen() {
 
     return (
       <>
-        <View style={{ flexDirection: 'row', gap: spacing.sm, marginBottom: spacing.md, flexWrap: 'wrap' }}>
+        <View style={styles.filterRow}>
           {filters.map((f) => (
             <Pressable
               key={f.id}
@@ -278,22 +284,9 @@ export default function StudyScreen() {
               accessibilityRole="button"
               accessibilityLabel={`Show ${f.label.toLowerCase()} notes`}
               accessibilityState={{ selected: notesFilter === f.id }}
-              style={{
-                paddingHorizontal: spacing.md,
-                paddingVertical: spacing.sm,
-                borderRadius: 999,
-                backgroundColor: notesFilter === f.id ? colors.primaryMuted : colors.surface,
-                borderWidth: 1,
-                borderColor: notesFilter === f.id ? colors.primary : colors.border,
-              }}
+              style={[styles.filterChip, notesFilter === f.id && styles.filterChipActive]}
             >
-              <Text
-                style={{
-                  fontFamily: theme.fonts.bodyBold,
-                  fontSize: 13,
-                  color: notesFilter === f.id ? colors.primary : colors.textMuted,
-                }}
-              >
+              <Text style={[styles.filterChipText, notesFilter === f.id && styles.filterChipTextActive]}>
                 {f.label}
               </Text>
             </Pressable>
@@ -309,7 +302,7 @@ export default function StudyScreen() {
         ) : (
           [...materialsBySubject.entries()].map(([subjectName, items]) => (
             <View key={subjectName}>
-              <Text style={[styles.subjectName, { marginBottom: spacing.sm, marginTop: spacing.sm }]}>{subjectName}</Text>
+              <Text style={styles.groupTitle}>{subjectName}</Text>
               {items.map((m) => (
                 <Pressable
                   key={m.id}
@@ -365,6 +358,7 @@ export default function StudyScreen() {
 
   return (
     <View style={styles.root}>
+      <ScreenBackground />
       <ScrollView
         contentContainerStyle={showFixedFooter ? tabScrollPaddingWithFooter(insets) : tabScrollPadding(insets)}
         refreshControl={
@@ -384,13 +378,29 @@ export default function StudyScreen() {
             <SparkleStar size={80} opacity={0.12} />
           </View>
           <View style={styles.headerNav}>
-            <Text style={styles.headerTag}>{getExamCategoryLabel(examSlug)}</Text>
+            <View style={styles.headerBadge}>
+              <Text style={styles.headerTag}>{getExamCategoryLabel(examSlug)}</Text>
+            </View>
+            <Text style={styles.headerEyebrow}>Review library</Text>
           </View>
-          <Text style={styles.headerTitle}>{examName || 'Your exam'}</Text>
+          <Text style={styles.headerTitle}>Choose your next review set.</Text>
           <Text style={styles.headerSub}>
-            {subjects.length} subject{subjects.length === 1 ? '' : 's'} · {questionCount} published question
-            {questionCount === 1 ? '' : 's'}
+            {examName || 'Your exam'} · organized subjects, mocks, and notes in one place.
           </Text>
+          <View style={styles.headerStats}>
+            <View style={styles.headerStatCard}>
+              <Text style={styles.headerStatValue}>{readySubjectCount}</Text>
+              <Text style={styles.headerStatLabel}>ready subjects</Text>
+            </View>
+            <View style={styles.headerStatCard}>
+              <Text style={styles.headerStatValue}>{questionCount}</Text>
+              <Text style={styles.headerStatLabel}>questions</Text>
+            </View>
+            <View style={styles.headerStatCard}>
+              <Text style={styles.headerStatValue}>{mockExams.length}</Text>
+              <Text style={styles.headerStatLabel}>mocks</Text>
+            </View>
+          </View>
           {questionCount === 0 ? (
             <View style={styles.noticeCard}>
               <Text style={styles.noticeText}>
@@ -401,7 +411,7 @@ export default function StudyScreen() {
         </LinearGradient>
 
         {contentGate ? (
-          <View style={{ paddingHorizontal: spacing.lg, marginTop: spacing.md }}>
+          <View style={styles.contentGateWrap}>
             <ContentGateBanner theme={theme} status={contentGate} />
           </View>
         ) : null}
@@ -416,6 +426,23 @@ export default function StudyScreen() {
               accessibilityLabel={`${t} tab`}
               accessibilityState={{ selected: activeTab === i }}
             >
+              <Ionicons
+                name={
+                  i === 0
+                    ? activeTab === i
+                      ? 'grid'
+                      : 'grid-outline'
+                    : i === 1
+                      ? activeTab === i
+                        ? 'timer'
+                        : 'timer-outline'
+                      : activeTab === i
+                        ? 'document-text'
+                        : 'document-text-outline'
+                }
+                size={16}
+                color={activeTab === i ? '#fff' : colors.textMuted}
+              />
               <Text style={[styles.tabText, activeTab === i && styles.tabTextActive]}>{t}</Text>
             </Pressable>
           ))}

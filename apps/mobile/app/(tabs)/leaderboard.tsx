@@ -6,6 +6,7 @@ import { ActivityIndicator, Pressable, RefreshControl, ScrollView, StyleSheet, T
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
+import { ScreenBackground } from '../../components/screen-background';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardPeriod } from '../../lib/api/leaderboard';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
@@ -79,20 +80,37 @@ function createStyles(theme: ReturnType<typeof useAppTheme>) {
       paddingBottom: spacing.xl,
       borderBottomLeftRadius: radii.xxl,
       borderBottomRightRadius: radii.xxl,
+      overflow: 'hidden',
     },
     headerTop: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'space-between',
       gap: spacing.md,
+      marginBottom: spacing.md,
+    },
+    headerCopy: { flex: 1, minWidth: 0 },
+    headerBadge: {
+      alignSelf: 'flex-start',
+      minHeight: 30,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 6,
+      paddingHorizontal: spacing.sm,
+      borderRadius: radii.full,
+      backgroundColor: 'rgba(255,255,255,0.14)',
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.12)',
       marginBottom: spacing.sm,
     },
-    headerTitle: { fontFamily: fonts.displayBold, fontSize: 24, color: '#fff', letterSpacing: 0 },
+    headerBadgeText: { fontFamily: fonts.bodyBold, fontSize: 11, color: '#fff', letterSpacing: 0.4, textTransform: 'uppercase' },
+    headerTitle: { fontFamily: fonts.displayBold, fontSize: 27, color: '#fff', lineHeight: 33, letterSpacing: 0 },
     headerSub: {
       fontFamily: fonts.bodyMedium,
       fontSize: 13,
-      color: 'rgba(255,255,255,0.72)',
+      color: 'rgba(255,255,255,0.76)',
       marginBottom: spacing.md,
+      lineHeight: 19,
     },
     periodBadge: {
       minHeight: 32,
@@ -102,19 +120,53 @@ function createStyles(theme: ReturnType<typeof useAppTheme>) {
       paddingHorizontal: spacing.md,
       backgroundColor: 'rgba(255,255,255,0.15)',
       borderRadius: radii.full,
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.12)',
     },
     periodBadgeText: { fontFamily: fonts.bodyBold, fontSize: 12, color: '#fff' },
+    rankSummaryCard: {
+      minHeight: 96,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.md,
+      padding: spacing.lg,
+      borderRadius: radii.xl,
+      backgroundColor: 'rgba(255,255,255,0.12)',
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.12)',
+      marginBottom: spacing.md,
+    },
+    rankSummaryIcon: {
+      width: 52,
+      height: 52,
+      borderRadius: radii.lg,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    rankSummaryCopy: { flex: 1, minWidth: 0 },
+    rankSummaryLabel: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 11,
+      color: 'rgba(255,255,255,0.68)',
+      letterSpacing: 0.5,
+      textTransform: 'uppercase',
+    },
+    rankSummaryTitle: { fontFamily: fonts.displayBold, fontSize: 20, color: '#fff', marginTop: 3, letterSpacing: 0 },
+    rankSummarySub: { fontFamily: fonts.bodySemiBold, fontSize: 12, color: 'rgba(255,255,255,0.72)', marginTop: 3, lineHeight: 17 },
     periodControl: {
       flexDirection: 'row',
       backgroundColor: 'rgba(255,255,255,0.12)',
       padding: 4,
-      borderRadius: radii.lg,
+      borderRadius: radii.full,
       marginBottom: spacing.xl,
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.1)',
     },
     periodTab: {
       minHeight: 44,
       flex: 1,
-      borderRadius: radii.md,
+      borderRadius: radii.full,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -128,15 +180,38 @@ function createStyles(theme: ReturnType<typeof useAppTheme>) {
       justifyContent: 'center',
       gap: spacing.md,
     },
-    body: { paddingHorizontal: spacing.lg, paddingTop: spacing.md, gap: spacing.sm },
+    body: { paddingHorizontal: spacing.lg, paddingTop: spacing.lg, gap: spacing.sm },
+    listHeader: {
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'space-between',
+      gap: spacing.md,
+      marginBottom: spacing.sm,
+    },
+    listTitle: { fontFamily: fonts.bodyBold, fontSize: 17, color: colors.text, letterSpacing: 0 },
+    listSub: { fontFamily: fonts.bodySemiBold, fontSize: 12, color: colors.textMuted, marginTop: 3 },
+    listCount: {
+      minWidth: 36,
+      minHeight: 32,
+      textAlign: 'center',
+      textAlignVertical: 'center',
+      borderRadius: radii.full,
+      overflow: 'hidden',
+      backgroundColor: colors.primaryMuted,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 6,
+      fontFamily: fonts.bodyBold,
+      fontSize: 12,
+      color: colors.primary,
+    },
     rankRow: {
-      minHeight: 68,
+      minHeight: 76,
       flexDirection: 'row',
       alignItems: 'center',
       gap: spacing.md,
       backgroundColor: colors.surface,
-      borderRadius: radii.lg,
-      paddingVertical: spacing.sm,
+      borderRadius: radii.xl,
+      paddingVertical: spacing.md,
       paddingHorizontal: spacing.md,
       borderWidth: 1,
       borderColor: colors.border,
@@ -153,6 +228,14 @@ function createStyles(theme: ReturnType<typeof useAppTheme>) {
     rankName: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text, letterSpacing: 0 },
     rankNameYou: { color: colors.primary },
     rankXp: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 },
+    rankAvatar: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    rankInitial: { fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' },
     youBadge: {
       borderRadius: radii.sm,
       paddingHorizontal: spacing.sm,
@@ -162,13 +245,21 @@ function createStyles(theme: ReturnType<typeof useAppTheme>) {
     youBadgeText: { fontFamily: fonts.bodyBold, fontSize: 11, color: '#fff' },
     inviteCard: {
       marginTop: spacing.sm,
-      padding: spacing.md,
+      padding: spacing.lg,
       backgroundColor: colors.primaryMuted,
-      borderRadius: radii.lg,
+      borderRadius: radii.xl,
       alignItems: 'center',
       gap: spacing.sm,
       borderWidth: 1,
       borderColor: colors.border,
+    },
+    inviteIcon: {
+      width: 48,
+      height: 48,
+      borderRadius: radii.lg,
+      backgroundColor: colors.surface,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     inviteTitle: {
       fontFamily: fonts.bodyBold,
@@ -214,7 +305,7 @@ export default function LeaderboardScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, fonts, gradients, spacing } = theme;
+  const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -249,6 +340,7 @@ export default function LeaderboardScreen() {
 
   return (
     <View style={styles.root}>
+      <ScreenBackground />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[
@@ -262,7 +354,13 @@ export default function LeaderboardScreen() {
           style={[styles.header, { paddingTop: insets.top + spacing.md }]}
         >
           <View style={styles.headerTop}>
-            <Text style={styles.headerTitle}>Ranks</Text>
+            <View style={styles.headerCopy}>
+              <View style={styles.headerBadge}>
+                <Ionicons name="trophy" size={14} color={colors.accent} />
+                <Text style={styles.headerBadgeText}>XP league</Text>
+              </View>
+              <Text style={styles.headerTitle}>Climb the reviewer ranks.</Text>
+            </View>
             <View style={styles.periodBadge}>
               <Ionicons name="flash" size={14} color={colors.accent} />
               <Text style={styles.periodBadgeText}>
@@ -272,8 +370,23 @@ export default function LeaderboardScreen() {
           </View>
 
           <Text style={styles.headerSub}>
-            {period === 'week' ? 'Weekly XP' : 'All-time XP'} — {examName}
+            {period === 'week' ? 'Weekly XP race' : 'All-time XP board'} for {examName}. Practice sessions move you up.
           </Text>
+
+          <View style={styles.rankSummaryCard}>
+            <View style={styles.rankSummaryIcon}>
+              <Ionicons name={currentUser ? 'medal' : 'rocket-outline'} size={22} color={colors.primary} />
+            </View>
+            <View style={styles.rankSummaryCopy}>
+              <Text style={styles.rankSummaryLabel}>Your standing</Text>
+              <Text style={styles.rankSummaryTitle}>
+                {currentUser ? `#${currentUser.rank} · ${currentUser.xp.toLocaleString()} XP` : 'No rank yet'}
+              </Text>
+              <Text style={styles.rankSummarySub}>
+                {currentUser ? 'Keep your streak active to defend your place.' : 'Finish a quiz to enter the board.'}
+              </Text>
+            </View>
+          </View>
 
           <View style={styles.periodControl}>
             {([
@@ -311,6 +424,16 @@ export default function LeaderboardScreen() {
         </LinearGradient>
 
         <View style={styles.body}>
+          {!loading && entries.length > 0 ? (
+            <View style={styles.listHeader}>
+              <View>
+                <Text style={styles.listTitle}>Leaderboard</Text>
+                <Text style={styles.listSub}>Top reviewers by {period === 'week' ? 'weekly' : 'lifetime'} XP</Text>
+              </View>
+              <Text style={styles.listCount}>{entries.length}</Text>
+            </View>
+          ) : null}
+
           {!loading && entries.length === 0 && (
             <EmptyState
               icon={<Ionicons name="trophy-outline" size={32} color={colors.primary} />}
@@ -335,8 +458,8 @@ export default function LeaderboardScreen() {
                 <Text style={styles.rankNumber}>
                   {e.rank}
                 </Text>
-                <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: isYou ? colors.primary : avatarColor, alignItems: 'center', justifyContent: 'center' }}>
-                  <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: '#fff' }}>
+                <View style={[styles.rankAvatar, { backgroundColor: isYou ? colors.primary : avatarColor }]}>
+                  <Text style={styles.rankInitial}>
                     {e.displayName[0]?.toUpperCase() ?? '?'}
                   </Text>
                 </View>
@@ -345,7 +468,7 @@ export default function LeaderboardScreen() {
                     {isYou ? 'You' : e.displayName}
                   </Text>
                   <Text style={styles.rankXp}>
-                    {e.xp.toLocaleString()} XP this {period === 'week' ? 'week' : 'time'}
+                    {e.xp.toLocaleString()} {period === 'week' ? 'weekly' : 'lifetime'} XP
                   </Text>
                 </View>
                 {isYou && (
@@ -360,6 +483,9 @@ export default function LeaderboardScreen() {
           {/* Invite prompt when list is short */}
           {!loading && entries.length > 0 && entries.length < 5 && (
             <View style={styles.inviteCard}>
+              <View style={styles.inviteIcon}>
+                <Ionicons name="people-outline" size={22} color={colors.primary} />
+              </View>
               <Text style={styles.inviteTitle}>
                 Challenge your study group
               </Text>
