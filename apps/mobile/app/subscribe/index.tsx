@@ -468,9 +468,6 @@ export default function SubscribeScreen() {
           ) : null}
         </View>
 
-        <Text style={styles.featureIntro}>{meta.featureIntro}</Text>
-        <FeatureList items={meta.features} styles={styles} />
-
         <PrimaryButton
           label={primaryLabel}
           variant={highlighted ? 'primary' : 'outline'}
@@ -478,6 +475,13 @@ export default function SubscribeScreen() {
           onPress={onPrimary}
           accessibilityLabel={`${primaryLabel} — ${label}`}
         />
+
+        <Text style={styles.billingNote}>
+          {isDevBuild ? 'Demo activation only in this build.' : 'Auto-renewal and cancellation are managed by your app store account.'}
+        </Text>
+
+        <Text style={styles.featureIntro}>{meta.featureIntro}</Text>
+        <FeatureList items={meta.features} styles={styles} />
 
         {!isDevBuild && !plusActive ? (
           <View style={styles.ewalletRow}>
@@ -511,8 +515,7 @@ export default function SubscribeScreen() {
           <View style={styles.headerNav}>
             <Pressable
               onPress={() => router.back()}
-              hitSlop={8}
-              style={styles.backBtn}
+              style={({ pressed }) => [styles.backBtn, pressed && styles.backBtnPressed]}
               accessibilityRole="button"
               accessibilityLabel="Go back"
             >
@@ -545,7 +548,7 @@ export default function SubscribeScreen() {
 
           {pendingRef && !hasAccess ? (
             <Pressable
-              style={styles.pendingCard}
+              style={({ pressed }) => [styles.pendingCard, pressed && styles.pendingCardPressed]}
               onPress={() => void pollCheckoutStatus()}
               accessibilityRole="button"
               accessibilityLabel="Refresh checkout status"
@@ -679,8 +682,8 @@ function createStyles(theme: AppTheme) {
       marginBottom: spacing.md,
     },
     backBtn: {
-      width: 40,
-      height: 40,
+      width: 44,
+      height: 44,
       borderRadius: radii.lg,
       backgroundColor: 'rgba(255,255,255,0.14)',
       alignItems: 'center',
@@ -688,6 +691,7 @@ function createStyles(theme: AppTheme) {
       borderWidth: 1,
       borderColor: 'rgba(255,255,255,0.12)',
     },
+    backBtnPressed: { opacity: 0.82, transform: [{ scale: 0.98 }] },
     headerTitle: {
       fontFamily: fonts.display,
       fontSize: 26,
@@ -740,8 +744,8 @@ function createStyles(theme: AppTheme) {
       gap: spacing.sm,
     },
     highlightIcon: {
-      width: 32,
-      height: 32,
+      width: 40,
+      height: 40,
       borderRadius: radii.md,
       backgroundColor: colors.primaryMuted,
       alignItems: 'center',
@@ -870,6 +874,13 @@ function createStyles(theme: AppTheme) {
       marginTop: 4,
       letterSpacing: 0.2,
     },
+    billingNote: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 11,
+      color: colors.textLight,
+      lineHeight: 16,
+      marginTop: -spacing.xs,
+    },
     featureIntro: {
       fontFamily: fonts.bodyBold,
       fontSize: 12,
@@ -909,6 +920,7 @@ function createStyles(theme: AppTheme) {
       borderWidth: 1,
       borderColor: colors.border,
     },
+    pendingCardPressed: { opacity: 0.9, transform: [{ scale: 0.99 }] },
     pendingTitle: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text },
     pendingSub: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 },
     footerBlock: { marginTop: spacing.md, gap: spacing.sm },

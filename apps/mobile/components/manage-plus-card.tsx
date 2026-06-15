@@ -76,8 +76,8 @@ export function ManagePlusCard({
       <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: spacing.md }}>
         <View
           style={{
-            width: 42,
-            height: 42,
+            width: 44,
+            height: 44,
             borderRadius: radii.lg,
             backgroundColor: plus ? colors.primaryMuted : colors.background,
             alignItems: 'center',
@@ -167,7 +167,16 @@ export function ManagePlusCard({
       </Text>
 
       {isDemo ? (
-        <Pressable onPress={onViewPlans} accessibilityRole="button">
+        <Pressable
+          onPress={onViewPlans}
+          accessibilityRole="button"
+          accessibilityLabel="View production Plus plans"
+          style={({ pressed }) => ({
+            minHeight: 44,
+            justifyContent: 'center',
+            opacity: pressed ? 0.75 : 1,
+          })}
+        >
           <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: colors.primary }}>
             Demo access is not a real subscription. View production plans.
           </Text>
