@@ -742,7 +742,7 @@ export function createStudyStyles(theme: AppTheme) {
 }
 
 export function createProfileStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii } = theme;
+  const { colors, fonts, spacing, radii, shadows } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     header: {
@@ -784,6 +784,7 @@ export function createProfileStyles(theme: AppTheme) {
       padding: spacing.lg,
       flexDirection: 'row',
       justifyContent: 'space-around',
+      ...shadows.card,
     },
     statItem: { alignItems: 'center' },
     statVal: { fontFamily: fonts.display, fontSize: 22, letterSpacing: 0 },
@@ -797,6 +798,26 @@ export function createProfileStyles(theme: AppTheme) {
     },
     section: { paddingHorizontal: spacing.lg, marginTop: spacing.lg },
     sectionTitle: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, letterSpacing: 0, marginBottom: spacing.sm },
+    weeklyCard: {
+      borderRadius: radii.xl,
+      padding: spacing.md,
+      marginTop: spacing.sm,
+      overflow: 'hidden',
+    },
+    weeklyTitle: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 15,
+      color: '#fff',
+      marginTop: spacing.xs,
+      letterSpacing: 0,
+    },
+    weeklySub: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 13,
+      color: 'rgba(255,255,255,0.75)',
+      marginTop: 4,
+      lineHeight: 18,
+    },
     quickActionGrid: { gap: spacing.sm },
     quickActionCard: {
       minHeight: 64,
@@ -819,6 +840,59 @@ export function createProfileStyles(theme: AppTheme) {
     },
     quickActionTitle: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text },
     quickActionSub: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 },
+    achievementGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+    achievementCard: {
+      minWidth: '30%',
+      flexGrow: 1,
+      minHeight: 88,
+      backgroundColor: colors.surface,
+      borderRadius: radii.lg,
+      padding: spacing.sm,
+      borderWidth: 1,
+      borderColor: colors.border,
+      justifyContent: 'space-between',
+    },
+    achievementEmoji: { fontSize: 22 },
+    achievementTitle: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 13,
+      color: colors.text,
+      marginTop: 4,
+      lineHeight: 17,
+    },
+    trendIntro: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 12,
+      color: colors.textMuted,
+      marginBottom: spacing.sm,
+      lineHeight: 17,
+    },
+    trendCard: {
+      minHeight: 88,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.md,
+      backgroundColor: colors.surface,
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      marginBottom: spacing.sm,
+      ...shadows.card,
+    },
+    trendCopy: { flex: 1, minWidth: 0 },
+    trendName: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 14,
+      color: colors.text,
+      letterSpacing: 0,
+    },
+    trendMeta: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 12,
+      marginTop: 4,
+      lineHeight: 17,
+    },
     guestPromptCard: {
       flexDirection: 'row',
       alignItems: 'center',

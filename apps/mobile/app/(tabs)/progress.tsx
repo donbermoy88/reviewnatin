@@ -2,8 +2,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Animated, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Svg, { Circle, Defs, LinearGradient as SvgLinearGradient, Path, Stop } from 'react-native-svg';
 import { EmptyState } from '../../components/empty-state';
 import { PrimaryButton } from '../../components/primary-button';
 import { SparkleStar } from '../../components/sparkle-star';
@@ -78,12 +79,86 @@ function scoreLabel(score: number | null | undefined): string {
   return score == null ? '—' : `${score}%`;
 }
 
+function trendTone(
+  score: number,
+  palette: { success: string; flame: string; error: string }
+): string {
+  if (score >= 75) return palette.success;
+  if (score >= 50) return palette.flame;
+  return palette.error;
+}
+
+function buildSparklinePath(points: number[], width: number, height: number): string {
+  if (!points.length) return '';
+  if (points.length === 1) {
+    const y = height - (Math.max(0, Math.min(100, points[0])) / 100) * height;
+    return `M 0 ${y} L ${width} ${y}`;
+  }
+
+  return points
+    .map((point, index) => {
+      const x = (index / (points.length - 1)) * width;
+      const y = height - (Math.max(0, Math.min(100, point)) / 100) * height;
+      return `${index === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
+    })
+    .join(' ');
+}
+
+function TrendSparkline({
+  points,
+  color,
+  width = 132,
+  height = 52,
+}: {
+  points: number[];
+  color: string;
+  width?: number;
+  height?: number;
+}) {
+  const safePoints = points.length ? points : [0];
+  const path = buildSparklinePath(safePoints, width, height);
+  const last = safePoints[safePoints.length - 1] ?? 0;
+  const lastX = safePoints.length <= 1 ? width : width;
+  const lastY = height - (Math.max(0, Math.min(100, last)) / 100) * height;
+
+  return (
+    <View
+      accessible
+      accessibilityRole="image"
+      accessibilityLabel={`Trend chart from ${safePoints[0]} percent to ${last} percent`}
+    >
+      <Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        <Defs>
+          <SvgLinearGradient id="trendFade" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0" stopColor={color} stopOpacity="0.18" />
+            <Stop offset="1" stopColor={color} stopOpacity="0" />
+          </SvgLinearGradient>
+        </Defs>
+        <Path
+          d={`${path} L ${width} ${height} L 0 ${height} Z`}
+          fill="url(#trendFade)"
+        />
+        <Path
+          d={path}
+          fill="none"
+          stroke={color}
+          strokeWidth={3}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Circle cx={lastX} cy={lastY} r={4} fill={color} />
+      </Svg>
+    </View>
+  );
+}
+
 export default function ProfileScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
   const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createProfileStyles(theme), [theme]);
+  const entrance = useMemo(() => new Animated.Value(0), []);
   const { user } = useAuth();
   const { displayName, initials } = useUserProfile('Guest reviewer');
   const [loading, setLoading] = useState(true);
@@ -167,6 +242,30 @@ export default function ProfileScreen() {
     load();
   }, [load]);
 
+  useEffect(() => {
+    Animated.spring(entrance, {
+      toValue: 1,
+      friction: 9,
+      tension: 55,
+      useNativeDriver: true,
+    }).start();
+  }, [entrance]);
+
+  const entranceStyle = useMemo(
+    () => ({
+      opacity: entrance,
+      transform: [
+        {
+          translateY: entrance.interpolate({
+            inputRange: [0, 1],
+            outputRange: [16, 0],
+          }),
+        },
+      ],
+    }),
+    [entrance]
+  );
+
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     void load();
@@ -225,7 +324,7 @@ export default function ProfileScreen() {
           </Pressable>
         </LinearGradient>
 
-        <View style={[styles.statsCard, { marginTop: -46 }]}>
+        <Animated.View style={[styles.statsCard, entranceStyle, { marginTop: -46 }]}>
           {[
             { v: hasActivity ? String(stats.streakDays) : '0', l: 'Day streak', c: colors.flame },
             { v: hasActivity ? String(stats.totalAnswered) : '0', l: 'Answered', c: colors.primary },
@@ -240,24 +339,20 @@ export default function ProfileScreen() {
               <Text style={styles.statLbl}>{s.l}</Text>
             </View>
           ))}
-        </View>
+        </Animated.View>
 
         {user && weeklySummary ? (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>This week</Text>
             <LinearGradient
               colors={[...gradients.hero]}
-              style={{
-                borderRadius: 16,
-                padding: spacing.md,
-                marginTop: spacing.sm,
-              }}
+              style={styles.weeklyCard}
             >
               <StreakWeek completedDays={buildCompletedDays(weeklySummary.streakDays)} />
-              <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 15, color: '#fff', marginTop: spacing.xs }}>
+              <Text style={styles.weeklyTitle}>
                 {weeklySummary.questionsAnswered} questions · {weeklySummary.sessionsCompleted} sessions
               </Text>
-              <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.75)', marginTop: 4 }}>
+              <Text style={styles.weeklySub}>
                 {weeklySummary.accuracyPercent != null
                   ? `${weeklySummary.accuracyPercent}% accuracy`
                   : 'Accuracy —'}{' '}
@@ -303,22 +398,14 @@ export default function ProfileScreen() {
         {user && badges.length > 0 ? (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Achievements</Text>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm }}>
+            <View style={styles.achievementGrid}>
               {badges.map((b) => (
                 <View
                   key={b.slug}
-                  style={{
-                    backgroundColor: colors.surface,
-                    borderRadius: 12,
-                    padding: spacing.sm,
-                    minWidth: '30%',
-                    flexGrow: 1,
-                    borderWidth: 1,
-                    borderColor: colors.border,
-                  }}
+                  style={styles.achievementCard}
                 >
-                  <Text style={{ fontSize: 22 }}>{b.emoji}</Text>
-                  <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 13, color: colors.text, marginTop: 4 }}>
+                  <Text style={styles.achievementEmoji}>{b.emoji}</Text>
+                  <Text style={styles.achievementTitle}>
                     {b.title}
                   </Text>
                 </View>
@@ -369,92 +456,42 @@ export default function ProfileScreen() {
         {user && (subjectTrends.length > 0 || overallTrend) ? (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Subject trends</Text>
-            <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginBottom: spacing.sm }}>
+            <Text style={styles.trendIntro}>
               Your mock scores across recent attempts.
             </Text>
             {overallTrend ? (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: spacing.md,
-                  paddingVertical: spacing.sm,
-                  borderBottomWidth: 1,
-                  borderBottomColor: colors.border,
-                }}
-              >
-                <View style={{ flex: 1 }}>
-                  <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 14, color: colors.text }}>Overall</Text>
-                  <Text
-                    style={{
-                      fontFamily: theme.fonts.bodyMedium,
-                      fontSize: 12,
-                      marginTop: 2,
-                      color:
-                        overallTrend.latest >= 75 ? colors.success : overallTrend.latest >= 50 ? colors.flame : colors.error,
-                    }}
-                  >
-                    {overallTrend.first}% → {overallTrend.latest}%{'  '}
+              <View style={styles.trendCard}>
+                <View style={styles.trendCopy}>
+                  <Text style={styles.trendName}>Overall</Text>
+                  <Text style={[styles.trendMeta, { color: trendTone(overallTrend.latest, colors) }]}>
+                    {overallTrend.first}% to {overallTrend.latest}%{'  '}
                     {overallTrend.delta > 0
-                      ? `↑ +${overallTrend.delta}`
+                      ? `up ${overallTrend.delta}`
                       : overallTrend.delta < 0
-                        ? `↓ ${Math.abs(overallTrend.delta)}`
-                        : '— no change'}
+                        ? `down ${Math.abs(overallTrend.delta)}`
+                        : 'no change'}
                   </Text>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 3, height: 28 }}>
-                  {overallTrend.points.map((p, i) => (
-                    <View
-                      key={i}
-                      style={{
-                        width: 6,
-                        height: Math.max(3, Math.round((p / 100) * 28)),
-                        borderRadius: 2,
-                        backgroundColor: p >= 75 ? colors.success : p >= 50 ? colors.flame : colors.error,
-                        opacity: i === overallTrend.points.length - 1 ? 1 : 0.5,
-                      }}
-                    />
-                  ))}
-                </View>
+                <TrendSparkline
+                  points={overallTrend.points}
+                  color={trendTone(overallTrend.latest, colors)}
+                />
               </View>
             ) : null}
             {subjectTrends.map((t) => {
-              const band = (p: number) => (p >= 75 ? colors.success : p >= 50 ? colors.flame : colors.error);
-              const trendLabel = t.delta > 0 ? `↑ +${t.delta}` : t.delta < 0 ? `↓ ${Math.abs(t.delta)}` : '— no change';
+              const tone = trendTone(t.latestPct, colors);
+              const trendLabel = t.delta > 0 ? `up ${t.delta}` : t.delta < 0 ? `down ${Math.abs(t.delta)}` : 'no change';
               return (
-                <View
-                  key={t.subjectName}
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    gap: spacing.md,
-                    paddingVertical: spacing.sm,
-                    borderBottomWidth: 1,
-                    borderBottomColor: colors.border,
-                  }}
-                >
-                  <View style={{ flex: 1 }}>
-                    <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 14, color: colors.text }} numberOfLines={1}>
+                <View key={t.subjectName} style={styles.trendCard}>
+                  <View style={styles.trendCopy}>
+                    <Text style={styles.trendName} numberOfLines={1}>
                       {t.subjectName}
                     </Text>
-                    <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: band(t.latestPct), marginTop: 2 }}>
-                      {t.firstPct}% → {t.latestPct}%  {trendLabel}
+                    <Text style={[styles.trendMeta, { color: tone }]}>
+                      {t.firstPct}% to {t.latestPct}%  {trendLabel}
                     </Text>
                   </View>
-                  <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 3, height: 28 }}>
-                    {t.points.map((pt, i) => (
-                      <View
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: Math.max(3, Math.round((pt.pct / 100) * 28)),
-                          borderRadius: 2,
-                          backgroundColor: band(pt.pct),
-                          opacity: i === t.points.length - 1 ? 1 : 0.5,
-                        }}
-                      />
-                    ))}
-                  </View>
+                  <TrendSparkline points={t.points.map((pt) => pt.pct)} color={tone} />
                 </View>
               );
             })}
