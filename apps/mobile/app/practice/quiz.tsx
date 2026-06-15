@@ -861,7 +861,7 @@ export default function PracticeQuizScreen() {
         <View style={[styles.topBar, { paddingTop: insets.top + spacing.sm }]}>
           {!isStrictExam ? (
             <Pressable
-              style={styles.closeBtn}
+              style={({ pressed }) => [styles.closeBtn, pressed && styles.closeBtnPressed]}
               onPress={() => {
                 const hasProgress = answers.length > 0 || !!selected;
                 if (isDiagnostic && user) {
@@ -902,7 +902,7 @@ export default function PracticeQuizScreen() {
             </Pressable>
           ) : (
             <Pressable
-              style={styles.closeBtn}
+              style={({ pressed }) => [styles.closeBtn, pressed && styles.closeBtnPressed]}
               onPress={() => setNavigatorOpen(true)}
               accessibilityRole="button"
               accessibilityLabel="Open question navigator"
@@ -1007,7 +1007,7 @@ export default function PracticeQuizScreen() {
           {user ? (
             <Pressable
               onPress={toggleBookmarkCurrent}
-              hitSlop={8}
+              style={({ pressed }) => [styles.metaIconBtn, pressed && styles.closeBtnPressed]}
               accessibilityRole="button"
               accessibilityLabel={bookmarkedIds.has(current.id) ? 'Remove bookmark' : 'Save bookmark'}
             >
@@ -1021,10 +1021,13 @@ export default function PracticeQuizScreen() {
           {isStrictExam ? (
             <Pressable
               onPress={toggleFlag}
-              hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel={flaggedIndices.has(index) ? 'Unflag this question for review' : 'Flag this question for review'}
-              style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}
+              style={({ pressed }) => [
+                styles.flagBtn,
+                flaggedIndices.has(index) && styles.flagBtnActive,
+                pressed && styles.closeBtnPressed,
+              ]}
             >
               <Ionicons
                 name={flaggedIndices.has(index) ? 'flag' : 'flag-outline'}
@@ -1096,8 +1099,15 @@ export default function PracticeQuizScreen() {
                 {(['en', 'fil'] as const).map((l) => (
                   <Pressable
                     key={l}
-                    style={[styles.langBtn, lang === l && styles.langBtnActive]}
+                    style={({ pressed }) => [
+                      styles.langBtn,
+                      lang === l && styles.langBtnActive,
+                      pressed && styles.langBtnPressed,
+                    ]}
                     onPress={() => setLang(l)}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Show explanation in ${l === 'en' ? 'English' : 'Tagalog'}`}
+                    accessibilityState={{ selected: lang === l }}
                   >
                     <Text style={[styles.langText, lang === l && styles.langTextActive]}>
                       {l === 'en' ? 'EN' : 'TL'}
@@ -1119,18 +1129,20 @@ export default function PracticeQuizScreen() {
         {!revealed && !isStrictExam && !isDiagnostic && !isTimed && user ? (
           hintUsedOnQuestion.has(current?.id ?? '') ? (
             <View style={styles.hintRow}>
-              <Text style={{ fontSize: 18 }}>💡</Text>
+              <Ionicons name="bulb" size={20} color={colors.accentDark} />
               <Text style={[styles.hintText, { color: colors.textMuted }]}>
                 Nagamit ang hint — isang maling sagot ang tinanggal
               </Text>
             </View>
           ) : (
             <Pressable
-              style={styles.hintRow}
+              style={({ pressed }) => [styles.hintRow, pressed && styles.hintRowPressed]}
               onPress={activateHint}
               disabled={hintCredits <= 0}
+              accessibilityRole="button"
+              accessibilityLabel={`Use hint. Costs 10 XP. ${hintCredits} hints remaining.`}
             >
-              <Text style={{ fontSize: 18 }}>💡</Text>
+              <Ionicons name="bulb-outline" size={20} color={hintCredits > 0 ? colors.accentDark : colors.textMuted} />
               <Text style={[styles.hintText, hintCredits <= 0 && { color: colors.textMuted }]}>
                 Gamitin ang hint <Text style={styles.hintXp}>(–10 XP)</Text>
               </Text>
