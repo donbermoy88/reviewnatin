@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Animated, Pressable, ScrollView, Text, View } from 'react-native';
 import { ShareScoreCard } from '../../components/share-score-card';
 import { ShareScoreCapture } from '../../components/share-score-capture';
 import { ReportContentButton } from '../../components/report-content-button';
@@ -46,8 +46,9 @@ export default function PracticeResultScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, fonts, gradients, spacing, radii } = theme;
+  const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createResultStyles(theme), [theme]);
+  const entrance = useMemo(() => new Animated.Value(0), []);
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
   const { prefs } = usePreferences();
@@ -85,6 +86,30 @@ export default function PracticeResultScreen() {
     [flaggedQuestionIds]
   );
   const [reviewFilter, setReviewFilter] = useState<'all' | 'incorrect' | 'flagged'>('all');
+
+  useEffect(() => {
+    Animated.spring(entrance, {
+      toValue: 1,
+      friction: 9,
+      tension: 55,
+      useNativeDriver: true,
+    }).start();
+  }, [entrance]);
+
+  const entranceStyle = useMemo(
+    () => ({
+      opacity: entrance,
+      transform: [
+        {
+          translateY: entrance.interpolate({
+            inputRange: [0, 1],
+            outputRange: [16, 0],
+          }),
+        },
+      ],
+    }),
+    [entrance]
+  );
 
   useEffect(() => {
     resolveOnboardingGoal(user?.id).then(async (goal) => {
@@ -274,6 +299,67 @@ export default function PracticeResultScreen() {
     }
   };
 
+  const goToRecommendedNext = () => {
+    if (mode === 'diagnostic') {
+      router.replace('/pasapath/week');
+      return;
+    }
+    if (weakestSubject) {
+      router.push({
+        pathname: '/study/[subjectSlug]',
+        params: { subjectSlug: weakestSubject.slug!, examSlug, subjectName: weakestSubject.name },
+      });
+      return;
+    }
+    if (wrongCount > 0 && user) {
+      router.push('/mistakes');
+      return;
+    }
+    if (wrongCount > 0) {
+      setReviewFilter('incorrect');
+      return;
+    }
+    if (mode === 'mock' || mode === 'board') {
+      router.replace('/(tabs)/study');
+      return;
+    }
+    router.replace({
+      pathname: '/practice/quiz',
+      params: { examSlug, ...(mode === 'weak_area' ? { mode: 'weak_area' } : {}) },
+    });
+  };
+
+  const resultTone =
+    mode === 'diagnostic'
+      ? {
+          icon: 'compass-outline' as const,
+          title: 'Baseline captured',
+          body: 'Use PasaPath next so your daily tasks focus on weak areas first.',
+        }
+      : weakestSubject
+        ? {
+            icon: 'analytics-outline' as const,
+            title: `Next focus: ${weakestSubject.name}`,
+            body: `${weakestSubject.pct}% in this session. Practice this topic before starting another full quiz.`,
+          }
+        : wrongCount > 0 && user
+          ? {
+              icon: 'refresh-circle-outline' as const,
+              title: `${wrongCount} item${wrongCount === 1 ? '' : 's'} need review`,
+              body: 'Open Mistake Bank now while the questions are still fresh.',
+            }
+          : wrongCount > 0
+            ? {
+                icon: 'refresh-circle-outline' as const,
+                title: `${wrongCount} item${wrongCount === 1 ? '' : 's'} need review`,
+                body: 'Tap here to filter the incorrect answers below before starting another quiz.',
+              }
+          : {
+              icon: 'checkmark-done-circle-outline' as const,
+              title: 'Clean session',
+              body: 'Keep momentum with the next quiz or continue your study plan.',
+            };
+
   return (
     <View style={styles.root}>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}>
@@ -306,16 +392,16 @@ export default function PracticeResultScreen() {
               ? `Baseline readiness: ${diagnosticReadiness ?? scoreNum}%`
               : mode === 'mock' || mode === 'board'
                 ? scoreNum >= MOCK_PASS_THRESHOLD
-                  ? `${mode === 'board' ? 'Board exam' : 'Mock'} PASS — ${scoreNum}% 🎉`
-                  : `Score: ${scoreNum}% — target ay ${MOCK_PASS_THRESHOLD}%+`
+                  ? `${mode === 'board' ? 'Board exam' : 'Mock'} PASS - ${scoreNum}%`
+                  : `Score: ${scoreNum}% - target ay ${MOCK_PASS_THRESHOLD}%+`
                 : scoreNum >= 70
-                  ? `Galing, ${displayName}! 🎉`
-                  : 'Kaya mo pa! 💪'}
+                  ? `Galing, ${displayName}!`
+                  : 'Kaya mo pa.'}
           </Text>
           <ScoreRing percent={scoreNum} correct={correctNum} total={totalNum} />
         </LinearGradient>
 
-        <View style={styles.statsRow}>
+        <Animated.View style={[styles.statsRow, entranceStyle]}>
           {[
             { v: `${correctNum}/${totalNum}`, l: 'Tama', c: colors.primary },
             { v: formatDuration(duration ?? '0'), l: 'Oras', c: colors.accentDark },
@@ -326,21 +412,30 @@ export default function PracticeResultScreen() {
               <Text style={[styles.statVal, { color: s.c }]}>{s.v}</Text>
             </View>
           ))}
-        </View>
+        </Animated.View>
+
+        <Animated.View style={[styles.nextStepWrap, entranceStyle]}>
+          <Pressable
+            style={({ pressed }) => [styles.nextStepCard, pressed && styles.nextStepPressed]}
+            onPress={goToRecommendedNext}
+            accessibilityRole="button"
+            accessibilityLabel={`Recommended next step. ${resultTone.title}`}
+          >
+            <View style={styles.nextStepIcon}>
+              <Ionicons name={resultTone.icon} size={22} color={colors.primary} />
+            </View>
+            <View style={styles.nextStepCopy}>
+              <Text style={styles.nextStepKicker}>Recommended next step</Text>
+              <Text style={styles.nextStepTitle}>{resultTone.title}</Text>
+              <Text style={styles.nextStepBody}>{resultTone.body}</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
+          </Pressable>
+        </Animated.View>
 
         {reportFeedback ? (
-          <View
-            style={{
-              marginHorizontal: spacing.lg,
-              marginBottom: spacing.sm,
-              padding: spacing.md,
-              borderRadius: radii.lg,
-              backgroundColor: colors.successBg,
-              borderWidth: 1,
-              borderColor: colors.success,
-            }}
-          >
-            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.text, lineHeight: 20 }}>
+          <View style={[styles.noticeCard, styles.noticeSuccess]}>
+            <Text style={styles.noticeText}>
               {reportFeedback}
             </Text>
           </View>
@@ -348,21 +443,13 @@ export default function PracticeResultScreen() {
 
         {saveStatus === 'queued' || saveStatus === 'failed' ? (
           <View
-            style={{
-              marginHorizontal: spacing.lg,
-              marginBottom: spacing.sm,
-              padding: spacing.md,
-              borderRadius: radii.lg,
-              backgroundColor: saveStatus === 'queued' ? colors.warnBg : colors.errorBg,
-              borderWidth: 1,
-              borderColor: saveStatus === 'queued' ? colors.warnBorder : colors.error,
-            }}
+            style={[styles.noticeCard, saveStatus === 'queued' ? styles.noticeWarn : styles.noticeError]}
             accessibilityRole="alert"
           >
-            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text, marginBottom: 4 }}>
+            <Text style={styles.noticeTitle}>
               {saveStatus === 'queued' ? 'Saved on this device' : 'Progress was not saved'}
             </Text>
-            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, lineHeight: 19 }}>
+            <Text style={styles.noticeText}>
               {saveStatus === 'queued'
                 ? 'We could not reach the server, so this session is queued and will sync automatically when your connection is stable.'
                 : 'The score is shown here, but the app could not save this session. Please try another quiz when the connection is stable.'}
@@ -373,21 +460,21 @@ export default function PracticeResultScreen() {
         {subjectBreakdown.length >= 2 ? (
           <View style={styles.reviewBox}>
             <Text style={styles.reviewTitle}>Score kada subject</Text>
-            <View style={{ gap: spacing.sm, marginTop: spacing.xs }}>
+            <View style={styles.subjectList}>
               {subjectBreakdown.map((s) => {
                 const barColor = s.pct >= 75 ? colors.success : s.pct >= 50 ? colors.flame : colors.error;
                 return (
                   <View key={s.name}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 }}>
-                      <Text style={{ fontFamily: fonts.bodySemiBold, fontSize: 13, color: colors.text, flex: 1 }} numberOfLines={1}>
+                    <View style={styles.subjectHead}>
+                      <Text style={styles.subjectName} numberOfLines={1}>
                         {s.name}
                       </Text>
-                      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: barColor }}>
+                      <Text style={[styles.subjectScore, { color: barColor }]}>
                         {s.correct}/{s.total} · {s.pct}%
                       </Text>
                     </View>
-                    <View style={{ height: 6, borderRadius: 999, backgroundColor: colors.border, overflow: 'hidden' }}>
-                      <View style={{ width: `${s.pct}%`, height: '100%', backgroundColor: barColor, borderRadius: 999 }} />
+                    <View style={styles.subjectBarTrack}>
+                      <View style={[styles.subjectBarFill, { width: `${s.pct}%`, backgroundColor: barColor }]} />
                     </View>
                   </View>
                 );
@@ -414,7 +501,7 @@ export default function PracticeResultScreen() {
           <View style={styles.reviewBox}>
             <Text style={styles.reviewTitle}>I-review ang mga sagot</Text>
             {!reviewLoading && review.length > 0 ? (
-              <View style={{ flexDirection: 'row', gap: spacing.xs, marginBottom: spacing.sm, flexWrap: 'wrap' }}>
+              <View style={styles.filterRow}>
                 {([
                   { id: 'all' as const, label: `Lahat (${review.length})` },
                   { id: 'incorrect' as const, label: `Mali (${wrongCount})` },
@@ -429,16 +516,13 @@ export default function PracticeResultScreen() {
                       onPress={() => setReviewFilter(chip.id)}
                       accessibilityRole="button"
                       accessibilityState={{ selected: active }}
-                      style={{
-                        paddingHorizontal: spacing.md,
-                        paddingVertical: 6,
-                        borderRadius: radii.full,
-                        backgroundColor: active ? colors.primary : colors.surface,
-                        borderWidth: 1,
-                        borderColor: active ? colors.primary : colors.border,
-                      }}
+                      style={({ pressed }) => [
+                        styles.filterChip,
+                        pressed && styles.nextStepPressed,
+                        active && styles.filterChipActive,
+                      ]}
                     >
-                      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: active ? '#fff' : colors.textMuted }}>
+                      <Text style={[styles.filterChipText, active && styles.filterChipTextActive]}>
                         {chip.label}
                       </Text>
                     </Pressable>
@@ -560,14 +644,6 @@ export default function PracticeResultScreen() {
           {!isPremium(examTypeId) && mode !== 'mock' && mode !== 'diagnostic' && mode !== 'board' ? (
             <AdBanner onPress={() => router.push('/subscribe')} />
           ) : null}
-          <PrimaryButton
-            label={sharing ? 'Hinahanda…' : 'I-share ang score'}
-            variant="outline"
-            icon="share-outline"
-            size="lg"
-            onPress={shareScore}
-            style={{ marginBottom: spacing.sm }}
-          />
           {wrongCount > 0 && user ? (
             <PrimaryButton
               label="I-review ang mga mali"
@@ -576,16 +652,10 @@ export default function PracticeResultScreen() {
               style={{ marginBottom: spacing.sm }}
             />
           ) : null}
-          <PrimaryButton
-            label={mode === 'mock' || mode === 'diagnostic' || mode === 'board' ? 'Tapos' : 'Balik sa Home'}
-            variant={wrongCount > 0 && user ? 'outline' : undefined}
-            size="lg"
-            onPress={() => router.replace('/(tabs)')}
-          />
           {mode === 'diagnostic' ? (
             <PrimaryButton
               label="Tingnan ang PasaPath mo →"
-              variant="outline"
+              variant={wrongCount > 0 && user ? 'outline' : undefined}
               size="lg"
               onPress={() => router.replace('/pasapath/week')}
               style={{ marginTop: spacing.sm }}
@@ -607,6 +677,21 @@ export default function PracticeResultScreen() {
               style={{ marginTop: spacing.sm }}
             />
           )}
+          <PrimaryButton
+            label={sharing ? 'Hinahanda...' : 'I-share ang score'}
+            variant="outline"
+            icon="share-outline"
+            size="lg"
+            onPress={shareScore}
+            style={{ marginTop: spacing.sm }}
+          />
+          <PrimaryButton
+            label={mode === 'mock' || mode === 'diagnostic' || mode === 'board' ? 'Tapos' : 'Balik sa Home'}
+            variant="outline"
+            size="lg"
+            onPress={() => router.replace('/(tabs)')}
+            style={{ marginTop: spacing.sm }}
+          />
         </View>
       </ScrollView>
 

@@ -2,8 +2,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
-import { Alert, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useMemo, useState, type ComponentProps } from 'react';
+import { Alert, Animated, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Card } from '../../components/card';
 import { SparkleStar } from '../../components/sparkle-star';
@@ -23,11 +23,19 @@ import { usePreferences } from '../../providers/preferences-provider';
 import { useOnboardingGate } from '../../providers/onboarding-gate';
 
 const GOALS = [
-  { id: '15' as const, label: 'Casual', sub: '5 mins / day', q: '5 questions', emoji: '🌱', minutes: 15 },
-  { id: '30' as const, label: 'Regular', sub: '10 mins / day', q: '15 questions', emoji: '⚡', minutes: 30 },
-  { id: '45' as const, label: 'Serious', sub: '20 mins / day', q: '30 questions', emoji: '🔥', minutes: 45 },
-  { id: '60' as const, label: 'Intense', sub: '40 mins / day', q: '60 questions', emoji: '🚀', minutes: 60 },
+  { id: '15' as const, label: 'Casual', sub: '5 mins / day', q: '5 questions', icon: 'leaf-outline' as const, minutes: 15 },
+  { id: '30' as const, label: 'Regular', sub: '10 mins / day', q: '15 questions', icon: 'checkmark-circle-outline' as const, minutes: 30 },
+  { id: '45' as const, label: 'Serious', sub: '20 mins / day', q: '30 questions', icon: 'flame-outline' as const, minutes: 45 },
+  { id: '60' as const, label: 'Intense', sub: '40 mins / day', q: '60 questions', icon: 'rocket-outline' as const, minutes: 60 },
 ];
+
+const LEVEL_ICONS: Record<string, ComponentProps<typeof Ionicons>['name']> = {
+  beginner: 'trail-sign-outline',
+  average: 'library-outline',
+  advanced: 'ribbon-outline',
+};
+
+const WELCOME_POINTS = ['Diagnostic', 'PasaPath', 'Mistake Bank'];
 
 const READY_ITEMS = [
   {
@@ -68,6 +76,32 @@ export default function OnboardingScreen() {
   const theme = useAppTheme();
   const { colors, spacing } = theme;
   const styles = useMemo(() => createOnboardingStyles(theme), [theme]);
+  const entrance = useMemo(() => new Animated.Value(0), []);
+
+  useEffect(() => {
+    entrance.setValue(0);
+    Animated.spring(entrance, {
+      toValue: 1,
+      friction: 9,
+      tension: 55,
+      useNativeDriver: true,
+    }).start();
+  }, [entrance, step]);
+
+  const entranceStyle = useMemo(
+    () => ({
+      opacity: entrance,
+      transform: [
+        {
+          translateY: entrance.interpolate({
+            inputRange: [0, 1],
+            outputRange: [14, 0],
+          }),
+        },
+      ],
+    }),
+    [entrance]
+  );
 
   useEffect(() => {
     fetchExamCatalog().then((rows) => {
@@ -191,15 +225,23 @@ export default function OnboardingScreen() {
           <Text style={styles.welcomeTag}>Mag-review tayo. Pasa tayo.</Text>
         </LinearGradient>
 
-        <View style={[styles.welcomeBody, { paddingBottom: insets.bottom + spacing.lg }]}>
+        <Animated.View style={[styles.welcomeBody, entranceStyle, { paddingBottom: insets.bottom + spacing.lg }]}>
           <Text style={styles.welcomeTitle}>
-            Your study buddy for{'\n'}every Filipino board exam.
+            Board exam review na malinaw, araw-araw, at exam-ready.
           </Text>
           <Text style={styles.welcomeSub}>
-            CSE Full, CSE Sub, PNLE, LET Elementary & Secondary — one app, one streak, one goal.
+            Civil Service, LET, PNLE, and more. Piliin ang exam mo, tapusin ang daily path, at i-review ang mali.
           </Text>
+          <View style={styles.welcomeChips}>
+            {WELCOME_POINTS.map((point) => (
+              <View key={point} style={styles.welcomeChip}>
+                <Ionicons name="checkmark-circle" size={14} color={colors.primary} />
+                <Text style={styles.welcomeChipText}>{point}</Text>
+              </View>
+            ))}
+          </View>
           <PrimaryButton
-            label="Get started — it's free"
+            label="Simulan ang review"
             size="lg"
             onPress={() => setStep(1)}
             style={{ marginTop: spacing.lg }}
@@ -209,7 +251,7 @@ export default function OnboardingScreen() {
               Already have an account? <Text style={styles.loginBold}>Log in</Text>
             </Text>
           </Pressable>
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -230,7 +272,7 @@ export default function OnboardingScreen() {
         </LinearGradient>
 
         <ScreenScroll contentContainerStyle={{ paddingBottom: insets.bottom + 120 }}>
-          <View style={styles.readyBody}>
+          <Animated.View style={[styles.readyBody, entranceStyle]}>
             <View style={styles.readyHero}>
               <View style={styles.readyMarkWrap}>
                 <LogoMark size={88} />
@@ -266,7 +308,7 @@ export default function OnboardingScreen() {
               <Ionicons name="information-circle-outline" size={18} color={colors.accentDark} />
               <Text style={styles.disclaimer}>{DISCLAIMERS.short}</Text>
             </View>
-          </View>
+          </Animated.View>
         </ScreenScroll>
 
         <LinearGradient
@@ -289,7 +331,7 @@ export default function OnboardingScreen() {
   return (
     <View style={styles.root}>
       <View style={[styles.stepHeader, { paddingTop: insets.top + spacing.sm }]}>
-        <View style={styles.pagePad}>
+        <Animated.View style={[styles.pagePad, entranceStyle]}>
           <OnboardingHeader step={step} total={5} onBack={() => setStep(step - 1)} />
           {step === 1 && (
             <>
@@ -315,11 +357,11 @@ export default function OnboardingScreen() {
               <Text style={styles.pageSub}>I-sync ang quiz scores, Mistake Bank, at PasaPath sa cloud.</Text>
             </>
           )}
-        </View>
+        </Animated.View>
       </View>
 
       <ScreenScroll contentContainerStyle={{ paddingBottom: insets.bottom + 100 }}>
-        <View style={styles.pagePad}>
+        <Animated.View style={[styles.pagePad, entranceStyle]}>
           {step === 1 && (
             <View style={styles.list}>
                 {exams.map((ex) => {
@@ -327,7 +369,7 @@ export default function OnboardingScreen() {
                   return (
                     <Pressable
                       key={ex.slug}
-                      style={[styles.examCard, on && styles.examCardOn]}
+                      style={({ pressed }) => [styles.examCard, pressed && styles.cardPressed, on && styles.examCardOn]}
                       accessibilityRole="radio"
                       accessibilityLabel={`${ex.name}. ${ex.sub}`}
                       accessibilityState={{ selected: on }}
@@ -374,7 +416,7 @@ export default function OnboardingScreen() {
                       return (
                         <Pressable
                           key={major.slug}
-                          style={[styles.examCard, on && styles.examCardOn]}
+                          style={({ pressed }) => [styles.examCard, pressed && styles.cardPressed, on && styles.examCardOn]}
                           accessibilityRole="radio"
                           accessibilityLabel={`Major field ${major.name}`}
                           accessibilityState={{ selected: on }}
@@ -406,16 +448,16 @@ export default function OnboardingScreen() {
                 {ONBOARDING_LEVELS.map((lv) => {
                   const on = level === lv.id;
                   return (
-                    <Pressable
+                      <Pressable
                       key={lv.id}
-                      style={[styles.goalCard, on && styles.goalCardOn]}
+                      style={({ pressed }) => [styles.goalCard, pressed && styles.cardPressed, on && styles.goalCardOn]}
                       accessibilityRole="radio"
                       accessibilityLabel={`${lv.label}. ${lv.sub}`}
                       accessibilityState={{ selected: on }}
                       onPress={() => setLevel(lv.id)}
                     >
-                      <View style={[styles.goalEmoji, on && styles.goalEmojiOn]}>
-                        <Text style={{ fontSize: 24 }}>{lv.emoji}</Text>
+                      <View style={[styles.goalIcon, on && styles.goalIconOn]}>
+                        <Ionicons name={LEVEL_ICONS[lv.id] ?? 'school-outline'} size={22} color={on ? '#fff' : colors.primary} />
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text style={[styles.goalLabel, on && styles.goalLabelOn]}>{lv.label}</Text>
@@ -436,14 +478,14 @@ export default function OnboardingScreen() {
                   return (
                     <Pressable
                       key={g.id}
-                      style={[styles.goalCard, on && styles.goalCardOn]}
+                      style={({ pressed }) => [styles.goalCard, pressed && styles.cardPressed, on && styles.goalCardOn]}
                       accessibilityRole="radio"
                       accessibilityLabel={`${g.label}. ${g.sub}. ${g.q}`}
                       accessibilityState={{ selected: on }}
                       onPress={() => setGoalId(g.id)}
                     >
-                      <View style={[styles.goalEmoji, on && styles.goalEmojiOn]}>
-                        <Text style={{ fontSize: 24 }}>{g.emoji}</Text>
+                      <View style={[styles.goalIcon, on && styles.goalIconOn]}>
+                        <Ionicons name={g.icon} size={22} color={on ? '#fff' : colors.primary} />
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text style={[styles.goalLabel, on && styles.goalLabelOn]}>{g.label}</Text>
@@ -468,7 +510,11 @@ export default function OnboardingScreen() {
                   <Text style={styles.reminderSub}>Every day at 7:00 PM</Text>
                 </View>
                 <Pressable
-                  style={[styles.reminderToggle, reminderOn && styles.reminderToggleOn]}
+                  style={({ pressed }) => [
+                    styles.reminderToggle,
+                    pressed && styles.cardPressed,
+                    reminderOn && styles.reminderToggleOn,
+                  ]}
                   accessibilityRole="switch"
                   accessibilityLabel="Daily reminder"
                   accessibilityState={{ checked: reminderOn }}
@@ -540,7 +586,7 @@ export default function OnboardingScreen() {
               )}
             </>
           )}
-        </View>
+        </Animated.View>
       </ScreenScroll>
 
       {step >= 1 && step < 3 && (
@@ -616,6 +662,29 @@ function createOnboardingStyles(theme: AppTheme) {
     marginTop: spacing.sm,
     lineHeight: 22,
   },
+  welcomeChips: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+    marginTop: spacing.md,
+  },
+  welcomeChip: {
+    minHeight: 32,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: spacing.sm + 2,
+    borderRadius: radii.full,
+    backgroundColor: colors.primaryMuted,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  welcomeChipText: {
+    fontFamily: fonts.bodyBold,
+    fontSize: 12,
+    color: colors.primaryDark,
+  },
   loginLink: { marginTop: spacing.md, alignItems: 'center', padding: spacing.sm },
   loginText: { ...type.subtitle, color: colors.textMuted },
   loginBold: { color: colors.primary, fontFamily: type.label.fontFamily },
@@ -652,6 +721,7 @@ function createOnboardingStyles(theme: AppTheme) {
     borderWidth: 2,
     borderColor: 'transparent',
   },
+  cardPressed: { opacity: 0.9, transform: [{ scale: 0.99 }] },
   examCardOn: { borderColor: colors.primary, ...shadows.soft },
   examIcon: {
     width: 52,
@@ -687,7 +757,7 @@ function createOnboardingStyles(theme: AppTheme) {
     padding: spacing.md,
   },
   goalCardOn: { backgroundColor: colors.primary, ...shadows.button },
-  goalEmoji: {
+  goalIcon: {
     width: 48,
     height: 48,
     borderRadius: radii.lg,
@@ -695,7 +765,7 @@ function createOnboardingStyles(theme: AppTheme) {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  goalEmojiOn: { backgroundColor: 'rgba(255,255,255,0.18)' },
+  goalIconOn: { backgroundColor: 'rgba(255,255,255,0.18)' },
   goalLabel: { ...type.label, fontSize: 16 },
   goalLabelOn: { color: '#fff' },
   goalSub: { ...type.caption, color: colors.textMuted, marginTop: 2, textTransform: 'none', letterSpacing: 0 },

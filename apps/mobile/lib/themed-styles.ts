@@ -1133,7 +1133,7 @@ export function createFlashcardStyles(theme: AppTheme) {
 }
 
 export function createResultStyles(theme: AppTheme) {
-  const { colors, fonts, spacing } = theme;
+  const { colors, fonts, radii, shadows, spacing } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     hero: {
@@ -1166,9 +1166,90 @@ export function createResultStyles(theme: AppTheme) {
       borderRadius: 16,
       padding: spacing.md,
       alignItems: 'center',
+      ...shadows.card,
     },
     statLbl: { fontFamily: fonts.bodyBold, fontSize: 10, color: colors.textLight, letterSpacing: 0.5 },
     statVal: { fontFamily: fonts.display, fontSize: 22, marginTop: 4, letterSpacing: 0 },
+    nextStepWrap: {
+      paddingHorizontal: spacing.lg,
+      marginTop: -spacing.sm,
+      marginBottom: spacing.md,
+    },
+    nextStepCard: {
+      minHeight: 92,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.md,
+      backgroundColor: colors.surface,
+      borderRadius: radii.xl,
+      padding: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.primaryMuted,
+      ...shadows.card,
+    },
+    nextStepPressed: { opacity: 0.9, transform: [{ scale: 0.99 }] },
+    nextStepIcon: {
+      width: 48,
+      height: 48,
+      borderRadius: radii.lg,
+      backgroundColor: colors.primaryMuted,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    nextStepCopy: { flex: 1 },
+    nextStepKicker: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 11,
+      color: colors.primary,
+      letterSpacing: 0.5,
+      textTransform: 'uppercase',
+      marginBottom: 2,
+    },
+    nextStepTitle: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 16,
+      lineHeight: 21,
+      color: colors.text,
+      letterSpacing: 0,
+    },
+    nextStepBody: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 13,
+      lineHeight: 19,
+      color: colors.textMuted,
+      marginTop: 3,
+    },
+    noticeCard: {
+      marginHorizontal: spacing.lg,
+      marginBottom: spacing.sm,
+      padding: spacing.md,
+      borderRadius: radii.lg,
+      borderWidth: 1,
+    },
+    noticeSuccess: {
+      backgroundColor: colors.successBg,
+      borderColor: colors.success,
+    },
+    noticeWarn: {
+      backgroundColor: colors.warnBg,
+      borderColor: colors.warnBorder,
+    },
+    noticeError: {
+      backgroundColor: colors.errorBg,
+      borderColor: colors.error,
+    },
+    noticeTitle: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 14,
+      color: colors.text,
+      marginBottom: 4,
+    },
+    noticeText: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 13,
+      color: colors.textMuted,
+      lineHeight: 19,
+    },
     reviewBox: {
       marginHorizontal: spacing.lg,
       backgroundColor: colors.surface,
@@ -1178,6 +1259,28 @@ export function createResultStyles(theme: AppTheme) {
     },
     reviewTitle: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, marginBottom: spacing.sm },
     reviewEmpty: { fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.textMuted },
+    subjectList: { gap: spacing.sm, marginTop: spacing.xs },
+    subjectHead: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4, gap: spacing.sm },
+    subjectName: { fontFamily: fonts.bodySemiBold, fontSize: 13, color: colors.text, flex: 1 },
+    subjectScore: { fontFamily: fonts.bodyBold, fontSize: 13, flexShrink: 0 },
+    subjectBarTrack: { height: 6, borderRadius: radii.full, backgroundColor: colors.border, overflow: 'hidden' },
+    subjectBarFill: { height: '100%', borderRadius: radii.full },
+    filterRow: { flexDirection: 'row', gap: spacing.xs, marginBottom: spacing.sm, flexWrap: 'wrap' },
+    filterChip: {
+      minHeight: 40,
+      justifyContent: 'center',
+      paddingHorizontal: spacing.md,
+      borderRadius: radii.full,
+      backgroundColor: colors.background,
+      borderWidth: 1,
+      borderColor: colors.border,
+    },
+    filterChipActive: {
+      backgroundColor: colors.primary,
+      borderColor: colors.primary,
+    },
+    filterChipText: { fontFamily: fonts.bodyBold, fontSize: 12, color: colors.textMuted },
+    filterChipTextActive: { color: '#fff' },
     reviewItem: { borderTopWidth: 1, borderTopColor: colors.border, paddingVertical: spacing.sm },
     reviewHead: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.sm },
     reviewQ: { flex: 1, fontFamily: fonts.bodySemiBold, fontSize: 14, color: colors.text },
