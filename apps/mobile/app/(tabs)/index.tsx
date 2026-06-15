@@ -12,7 +12,7 @@ import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createDashboardStyles } from '../../lib/themed-styles';
 import { fetchExamBySlug, fetchSubjectAreas } from '../../lib/api/catalog';
-import { fetchTopicQuestionCounts, fetchTopicsBySubjectId, type TopicRow } from '../../lib/api/topics';
+import { fetchTopicQuestionCounts, fetchTopicsBySubjectSlug, type TopicRow } from '../../lib/api/topics';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
@@ -225,7 +225,7 @@ export default function DashboardScreen() {
         const subjectCards = await Promise.all(
           previewSubjects.map(async (subject) => {
             const [topicRows, topicCounts] = await Promise.all([
-              fetchTopicsBySubjectId(subject.id).catch(() => []),
+              fetchTopicsBySubjectSlug(slug, subject.slug).catch(() => []),
               fetchTopicQuestionCounts(slug, subject.slug).catch(() => new Map<string, number>()),
             ]);
             const countsKnown = topicRows.length > 0 && topicRows.every((topic) => topicCounts.has(topic.slug));
