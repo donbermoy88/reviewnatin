@@ -494,8 +494,8 @@ export default function DashboardScreen() {
                 {readinessScore != null ? (
                   <GoalRing
                     percent={readinessScore}
-                    size={72}
-                    strokeWidth={7}
+                    size={58}
+                    strokeWidth={6}
                     trackColor="rgba(255,255,255,0.18)"
                     fillColor={colors.accent}
                     labelColor="#fff"
