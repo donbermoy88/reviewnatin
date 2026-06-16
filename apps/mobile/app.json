@@ -20,6 +20,7 @@
     },
     "android": {
       "package": "ph.reviewnatin.app",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#08245C",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -40,7 +41,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/icon.png",
+          "icon": "./assets/android-icon-monochrome.png",
           "color": "#0B5FFF"
         }
       ],
