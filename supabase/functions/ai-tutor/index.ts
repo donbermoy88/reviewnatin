@@ -54,29 +54,36 @@ async function generateWithClaude(
 Respond in ${lang}. Keep answers concise (2–4 short paragraphs), exam-focused, and encouraging.
 Do not invent official exam dates or passing scores. Remind users to verify schedules on CSC/PRC sites when relevant.`;
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-    },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 600,
-      system,
-      messages: messages.slice(-10).map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
-    }),
-  });
+  // A network/DNS failure on the upstream call must NOT crash the handler — it
+  // should degrade to the canned fallback reply. Without this, a thrown fetch
+  // bubbles up and the whole function returns a 500 ("non-2xx status code").
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 600,
+        system,
+        messages: messages.slice(-10).map((m) => ({
+          role: m.role,
+          content: m.content,
+        })),
+      }),
+    });
 
-  if (!res.ok) return null;
+    if (!res.ok) return null;
 
-  const data = (await res.json()) as { content?: Array<{ type: string; text?: string }> };
-  const text = data.content?.find((b) => b.type === "text")?.text?.trim();
-  return text || null;
+    const data = (await res.json()) as { content?: Array<{ type: string; text?: string }> };
+    const text = data.content?.find((b) => b.type === "text")?.text?.trim();
+    return text || null;
+  } catch {
+    return null;
+  }
 }
 
 Deno.serve(async (req) => {

@@ -60,20 +60,23 @@ async function generateWithClaude(
   const correct = choices.find((c) => c.id === correctId);
   const lang = locale === "fil" ? "Filipino (Taglish OK)" : "English";
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-    },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 400,
-      messages: [
-        {
-          role: "user",
-          content: `You are a friendly Philippine licensure exam tutor. Explain in ${lang} (2–4 short paragraphs, bullet points OK).
+  // Degrade to the canned fallback on any upstream network failure instead of
+  // letting a thrown fetch 500 the whole function.
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 400,
+        messages: [
+          {
+            role: "user",
+            content: `You are a friendly Philippine licensure exam tutor. Explain in ${lang} (2–4 short paragraphs, bullet points OK).
 
 Question: ${stem}
 
@@ -83,16 +86,19 @@ ${choiceLines}
 Correct answer: ${correct?.text ?? "unknown"}
 
 Explain WHY the correct answer is right and briefly why common wrong choices fail. Be concise and exam-focused.`,
-        },
-      ],
-    }),
-  });
+          },
+        ],
+      }),
+    });
 
-  if (!res.ok) return null;
+    if (!res.ok) return null;
 
-  const data = (await res.json()) as { content?: Array<{ type: string; text?: string }> };
-  const text = data.content?.find((b) => b.type === "text")?.text?.trim();
-  return text || null;
+    const data = (await res.json()) as { content?: Array<{ type: string; text?: string }> };
+    const text = data.content?.find((b) => b.type === "text")?.text?.trim();
+    return text || null;
+  } catch {
+    return null;
+  }
 }
 
 Deno.serve(async (req) => {
