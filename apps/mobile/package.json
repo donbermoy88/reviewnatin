@@ -49,6 +49,8 @@
     "start": "expo start",
     "start:clear": "expo start -c",
     "android": "expo run:android",
+    "android:dev": "node scripts/start-android-device.mjs",
+    "android:dev:tunnel": "node scripts/start-android-device.mjs --tunnel",
     "ios": "expo run:ios",
     "ios:dev": "APP_VARIANT=development expo start --dev-client --ios",
     "eas:init": "eas init",
