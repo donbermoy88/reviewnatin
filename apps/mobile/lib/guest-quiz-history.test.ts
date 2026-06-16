@@ -95,4 +95,44 @@ describe('guest quiz history', () => {
 
     expect(letSessions).toHaveLength(0);
   });
+
+  it('does not show PNLE-only guest history when CSE is active', async () => {
+    await saveGuestQuizSession({
+      examSlug: 'pnle',
+      mode: 'practice',
+      itemCount: 25,
+      scorePercent: 64,
+      correct: 16,
+      durationSeconds: 900,
+    });
+
+    const cseStats = await fetchGuestPracticeStats('cse-professional', 15);
+    const cseSessions = await fetchGuestRecentSessions('cse-professional');
+
+    expect(cseStats.totalAnswered).toBe(0);
+    expect(cseStats.questionsToday).toBe(0);
+    expect(cseStats.accuracyPercent).toBeNull();
+    expect(cseStats.sessionCount).toBe(0);
+    expect(cseSessions).toHaveLength(0);
+  });
+
+  it('does not show CSE-only guest history when PNLE is active', async () => {
+    await saveGuestQuizSession({
+      examSlug: 'cse-professional',
+      mode: 'mock',
+      itemCount: 30,
+      scorePercent: 77,
+      correct: 23,
+      durationSeconds: 1200,
+    });
+
+    const pnleStats = await fetchGuestPracticeStats('pnle', 15);
+    const pnleSessions = await fetchGuestRecentSessions('pnle');
+
+    expect(pnleStats.totalAnswered).toBe(0);
+    expect(pnleStats.questionsToday).toBe(0);
+    expect(pnleStats.accuracyPercent).toBeNull();
+    expect(pnleStats.sessionCount).toBe(0);
+    expect(pnleSessions).toHaveLength(0);
+  });
 });
