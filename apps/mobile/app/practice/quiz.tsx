@@ -1000,7 +1000,7 @@ export default function PracticeQuizScreen() {
             const isEliminated = c.id === eliminatedChoiceId;
             return (
               <ChoiceOption
-                key={c.id}
+                key={`${c.id}-${i}`}
                 letter={LETTERS[i] ?? String(i + 1)}
                 label={c.text}
                 selected={selected === c.id}

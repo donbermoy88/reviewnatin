@@ -1,5 +1,8 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
-import { colors, radii, spacing, touchTarget, type } from '../constants/theme';
+import { Pressable, Text } from 'react-native';
+import { useAppTheme } from '../hooks/use-app-theme';
+
+/** Brand ink for text sitting on the gold accent — readable in light and dark. */
+const INK_ON_ACCENT = '#0E1B3D';
 
 type Props = {
   label: string;
@@ -8,28 +11,35 @@ type Props = {
 };
 
 export function Chip({ label, selected, onPress }: Props) {
+  const { colors, radii, spacing, touchTarget, type } = useAppTheme();
+
   return (
     <Pressable
-      style={[styles.chip, selected && styles.selected]}
+      style={{
+        paddingHorizontal: spacing.md,
+        paddingVertical: spacing.sm,
+        borderRadius: radii.full,
+        borderWidth: 1,
+        borderColor: selected ? colors.accentDark : colors.border,
+        backgroundColor: selected ? colors.accent : 'transparent',
+        minHeight: touchTarget.min,
+        justifyContent: 'center',
+      }}
       onPress={onPress}
       accessibilityRole="button"
+      accessibilityState={{ selected: !!selected }}
     >
-      <Text style={[styles.text, selected && styles.textSelected]}>{label}</Text>
+      <Text
+        style={[
+          type.subtitle,
+          {
+            color: selected ? INK_ON_ACCENT : colors.text,
+            fontFamily: selected ? type.label.fontFamily : type.subtitle.fontFamily,
+          },
+        ]}
+      >
+        {label}
+      </Text>
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  chip: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: radii.full,
-    borderWidth: 1,
-    borderColor: colors.border,
-    minHeight: touchTarget.min,
-    justifyContent: 'center',
-  },
-  selected: { backgroundColor: colors.accent, borderColor: colors.accentDark },
-  text: { ...type.subtitle, color: colors.text },
-  textSelected: { ...type.subtitle, color: colors.text, fontFamily: type.label.fontFamily },
-});

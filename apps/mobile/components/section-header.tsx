@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { spacing, type } from '../constants/theme';
+import { Text, View } from 'react-native';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type Props = {
   title: string;
@@ -7,16 +7,12 @@ type Props = {
 };
 
 export function SectionHeader({ title, subtitle }: Props) {
+  const { spacing, type } = useAppTheme();
+
   return (
-    <View style={styles.wrap}>
-      <Text style={styles.title}>{title}</Text>
-      {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+    <View style={{ marginBottom: spacing.md }}>
+      <Text style={type.title}>{title}</Text>
+      {subtitle ? <Text style={[type.subtitle, { marginTop: spacing.xs }]}>{subtitle}</Text> : null}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  wrap: { marginBottom: spacing.md },
-  title: { ...type.title },
-  subtitle: { ...type.subtitle, marginTop: spacing.xs },
-});

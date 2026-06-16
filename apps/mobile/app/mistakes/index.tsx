@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { StackShell } from '../../components/stack-shell';
@@ -85,10 +85,94 @@ export default function MistakesScreen() {
     );
   }
 
+  const ListHeader = (
+    <>
+      <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
+        <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Go back">
+          <Ionicons name="chevron-back" size={22} color={colors.text} />
+        </Pressable>
+        <Text style={styles.title}>Mistake Bank</Text>
+        <Text style={styles.sub}>{mistakes.length} item{mistakes.length === 1 ? '' : 's'} to review</Text>
+      </View>
+
+      {!isPremium(examTypeId) && showFreeLimitBanner ? (
+        <Pressable
+          style={{
+            marginHorizontal: spacing.lg,
+            marginBottom: spacing.sm,
+            backgroundColor: colors.warnBg,
+            borderRadius: 12,
+            padding: spacing.md,
+          }}
+          onPress={() => router.push('/subscribe')}
+        >
+          <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text }}>
+            Full Mistake Bank history is a premium feature
+          </Text>
+          <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 4 }}>
+            Free tier shows last {FREE_MISTAKE_DAYS} days. Upgrade for complete history.
+          </Text>
+        </Pressable>
+      ) : null}
+
+      {!loading && mistakes.length > 0 ? (
+        <PrimaryButton
+          label="Quiz ng mga mali"
+          size="lg"
+          style={{ margin: spacing.lg }}
+          onPress={() =>
+            router.push({
+              pathname: '/practice/quiz',
+              params: { examSlug, mode: 'mistake_review' },
+            })
+          }
+        />
+      ) : null}
+    </>
+  );
+
+  const ListEmpty = loading ? (
+    <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
+  ) : (
+    <EmptyState
+      icon={<Ionicons name="checkmark-circle-outline" size={32} color={colors.success} />}
+      title="Wala pang mali"
+      description="Awtomatikong masa-save dito ang mga maling sagot mo sa quiz para i-review."
+      actionLabel="Mag-practice na"
+      onAction={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
+    />
+  );
+
   return (
     <View style={styles.root}>
-      <ScrollView
+      <FlatList
+        data={loading ? [] : mistakes}
+        keyExtractor={(m) => m.id}
+        ListHeaderComponent={ListHeader}
+        ListEmptyComponent={ListEmpty}
+        initialNumToRender={10}
+        windowSize={11}
         contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
+        renderItem={({ item: m }) => (
+          <View style={styles.card}>
+            <Text style={styles.cardSubject}>
+              {m.subjectName} · {m.topicName}
+            </Text>
+            <Text style={styles.cardStem} numberOfLines={2}>
+              {m.stem}
+            </Text>
+            <Text style={styles.cardMeta}>
+              Wrong {m.timesWrong}x · Last {new Date(m.lastWrongAt).toLocaleDateString()}
+            </Text>
+            <ReportContentButton
+              contentType="question"
+              contentId={m.questionId}
+              label="Flag question"
+              compact
+              style={{ alignSelf: 'flex-start', marginTop: spacing.sm }}
+            />
+          </View>
+        )}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -97,81 +181,7 @@ export default function MistakesScreen() {
             colors={[colors.primary]}
           />
         }
-      >
-        <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
-          <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Go back">
-            <Ionicons name="chevron-back" size={22} color={colors.text} />
-          </Pressable>
-          <Text style={styles.title}>Mistake Bank</Text>
-          <Text style={styles.sub}>{mistakes.length} item{mistakes.length === 1 ? '' : 's'} to review</Text>
-        </View>
-
-        {!isPremium(examTypeId) && showFreeLimitBanner ? (
-          <Pressable
-            style={{
-              marginHorizontal: spacing.lg,
-              marginBottom: spacing.sm,
-              backgroundColor: colors.warnBg,
-              borderRadius: 12,
-              padding: spacing.md,
-            }}
-            onPress={() => router.push('/subscribe')}
-          >
-            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text }}>
-              Full Mistake Bank history is a premium feature
-            </Text>
-            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 4 }}>
-              Free tier shows last {FREE_MISTAKE_DAYS} days. Upgrade for complete history.
-            </Text>
-          </Pressable>
-        ) : null}
-
-        {loading ? (
-          <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
-        ) : mistakes.length === 0 ? (
-          <EmptyState
-            icon={<Ionicons name="checkmark-circle-outline" size={32} color={colors.success} />}
-            title="Wala pang mali"
-            description="Awtomatikong masa-save dito ang mga maling sagot mo sa quiz para i-review."
-            actionLabel="Mag-practice na"
-            onAction={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
-          />
-        ) : (
-          <>
-            <PrimaryButton
-              label="Quiz ng mga mali"
-              size="lg"
-              style={{ margin: spacing.lg }}
-              onPress={() =>
-                router.push({
-                  pathname: '/practice/quiz',
-                  params: { examSlug, mode: 'mistake_review' },
-                })
-              }
-            />
-            {mistakes.map((m) => (
-              <View key={m.id} style={styles.card}>
-                <Text style={styles.cardSubject}>
-                  {m.subjectName} · {m.topicName}
-                </Text>
-                <Text style={styles.cardStem} numberOfLines={2}>
-                  {m.stem}
-                </Text>
-                <Text style={styles.cardMeta}>
-                  Wrong {m.timesWrong}x · Last {new Date(m.lastWrongAt).toLocaleDateString()}
-                </Text>
-                <ReportContentButton
-                  contentType="question"
-                  contentId={m.questionId}
-                  label="Flag question"
-                  compact
-                  style={{ alignSelf: 'flex-start', marginTop: spacing.sm }}
-                />
-              </View>
-            ))}
-          </>
-        )}
-      </ScrollView>
+      />
     </View>
   );
 }

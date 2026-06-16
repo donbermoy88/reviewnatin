@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
-import { Alert, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, BackHandler, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Card } from '../../components/card';
 import { SparkleStar } from '../../components/sparkle-star';
@@ -109,6 +109,21 @@ export default function OnboardingScreen() {
       setStep(1);
     });
   }, [isSwitchMode]);
+
+  // Android hardware back: step backwards through onboarding instead of
+  // exiting the app. At step 0 (intro) we let the default fire so back leaves
+  // the app as expected. No-op on iOS (BackHandler only emits on Android).
+  useEffect(() => {
+    const onHardwareBack = () => {
+      if (step > 0) {
+        setStep((current) => Math.max(0, current - 1));
+        return true;
+      }
+      return false;
+    };
+    const sub = BackHandler.addEventListener('hardwareBackPress', onHardwareBack);
+    return () => sub.remove();
+  }, [step]);
 
   const dailyMinutes = GOALS.find((g) => g.id === goalId)?.minutes ?? 30;
   const dateStr = targetDate.toISOString().slice(0, 10);

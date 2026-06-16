@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { IconBadge } from './icon-badge';
-import { colors, spacing, type } from '../constants/theme';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type IconName = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -22,32 +22,29 @@ export function FeatureRow({
   compact = false,
   isLast = false,
 }: Props) {
+  const { spacing, type } = useAppTheme();
+
   return (
-    <View style={[styles.row, compact && styles.rowCompact, isLast && styles.rowLast]}>
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        gap: compact ? spacing.sm : spacing.md,
+        marginBottom: isLast ? 0 : compact ? spacing.sm : spacing.md,
+      }}
+    >
       <IconBadge name={icon} size="sm" variant={variant} />
-      <View style={styles.text}>
-        <Text style={[styles.title, compact && styles.titleCompact]}>{title}</Text>
-        <Text style={[styles.desc, compact && styles.descCompact]}>{description}</Text>
+      <View style={{ flex: 1 }}>
+        <Text style={[type.label, { fontSize: compact ? 14 : 15 }]}>{title}</Text>
+        <Text
+          style={[
+            type.caption,
+            { marginTop: 2, lineHeight: compact ? 16 : 18, fontSize: compact ? 12 : type.caption.fontSize },
+          ]}
+        >
+          {description}
+        </Text>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: spacing.md,
-    marginBottom: spacing.md,
-  },
-  rowCompact: {
-    gap: spacing.sm,
-    marginBottom: spacing.sm,
-  },
-  rowLast: { marginBottom: 0 },
-  text: { flex: 1 },
-  title: { ...type.label, fontSize: 15 },
-  titleCompact: { fontSize: 14 },
-  desc: { ...type.caption, marginTop: 2, lineHeight: 18 },
-  descCompact: { fontSize: 12, lineHeight: 16 },
-});

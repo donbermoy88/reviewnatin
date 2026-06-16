@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
+import { Text, View, type ViewStyle } from 'react-native';
 import { LogoMark } from './logo-mark';
-import { colors, spacing, type } from '../constants/theme';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type Props = {
   size?: 'sm' | 'md' | 'lg';
@@ -16,25 +16,23 @@ const SIZES = {
 };
 
 export function BrandWordmark({ size = 'md', white = false, showMark = true, style }: Props) {
+  const { colors, spacing, fonts } = useAppTheme();
   const s = SIZES[size];
   const ink = white ? '#fff' : colors.text;
-  const natin = white ? colors.accent : colors.accent;
 
   return (
-    <View style={[styles.row, style]} accessibilityRole="header">
+    <View style={[{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }, style]} accessibilityRole="header">
       {showMark ? <LogoMark size={s.mark} /> : null}
-      <Text style={[styles.wordmark, { fontSize: s.text, color: ink }]}>
-        Review<Text style={{ color: natin }}>Natin</Text>
+      <Text
+        style={{
+          fontFamily: fonts.display,
+          fontSize: s.text,
+          color: ink,
+          letterSpacing: -0.5,
+        }}
+      >
+        Review<Text style={{ color: colors.accent }}>Natin</Text>
       </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  wordmark: {
-    fontFamily: type.brand.fontFamily,
-    fontWeight: '800',
-    letterSpacing: -0.5,
-  },
-});

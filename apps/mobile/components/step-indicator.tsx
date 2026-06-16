@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View } from 'react-native';
-import { colors, radii, spacing, type } from '../constants/theme';
+import { Text, View } from 'react-native';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -14,18 +14,38 @@ type Props = {
 };
 
 export function StepIndicator({ current, total, labels, icons, compact = false }: Props) {
+  const { colors, radii, spacing, type } = useAppTheme();
+
   return (
-    <View style={[styles.wrap, compact && styles.wrapCompact]}>
-      <View style={styles.dots}>
+    <View style={{ marginBottom: compact ? spacing.sm : spacing.lg }}>
+      <View style={{ flexDirection: 'row', gap: spacing.sm, marginBottom: spacing.xs }}>
         {Array.from({ length: total }).map((_, i) => {
           const active = i <= current;
           const done = i < current;
 
           return (
-            <View key={i} style={styles.stepCol}>
-              <View style={[styles.dot, active && styles.dotActive, done && styles.dotDone]} />
+            <View key={i} style={{ flex: 1, alignItems: 'center', gap: 6 }}>
+              <View
+                style={{
+                  width: '100%',
+                  height: 4,
+                  borderRadius: radii.full,
+                  backgroundColor: done ? colors.accent : active ? colors.primary : colors.border,
+                }}
+              />
               {!compact && icons?.[i] ? (
-                <View style={[styles.iconBubble, i === current && styles.iconBubbleActive]}>
+                <View
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: 14,
+                    backgroundColor: i === current ? colors.primaryMuted : colors.surface,
+                    borderWidth: 1,
+                    borderColor: i === current ? colors.primary : colors.border,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
                   <Ionicons
                     name={icons[i]}
                     size={14}
@@ -39,18 +59,20 @@ export function StepIndicator({ current, total, labels, icons, compact = false }
       </View>
       {labels?.[current] ? (
         compact ? (
-          <Text style={styles.compactMeta}>
+          <Text style={[type.caption, { color: colors.primary, fontFamily: type.label.fontFamily }]}>
             {labels[current]} · Step {current + 1} of {total}
           </Text>
         ) : (
           <>
-            <View style={styles.labelRow}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               {icons?.[current] ? (
                 <Ionicons name={icons[current]} size={16} color={colors.primary} style={{ marginRight: 6 }} />
               ) : null}
-              <Text style={styles.label}>{labels[current]}</Text>
+              <Text style={[type.subtitle, { color: colors.primary, fontFamily: type.label.fontFamily }]}>
+                {labels[current]}
+              </Text>
             </View>
-            <Text style={styles.step}>
+            <Text style={[type.caption, { marginTop: 2 }]}>
               Step {current + 1} of {total}
             </Text>
           </>
@@ -59,40 +81,3 @@ export function StepIndicator({ current, total, labels, icons, compact = false }
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  wrap: { marginBottom: spacing.lg },
-  wrapCompact: { marginBottom: spacing.sm },
-  dots: { flexDirection: 'row', gap: spacing.sm, marginBottom: spacing.xs },
-  compactMeta: {
-    ...type.caption,
-    color: colors.primary,
-    fontFamily: type.label.fontFamily,
-  },
-  stepCol: { flex: 1, alignItems: 'center', gap: 6 },
-  dot: {
-    width: '100%',
-    height: 4,
-    borderRadius: radii.full,
-    backgroundColor: colors.border,
-  },
-  dotActive: { backgroundColor: colors.primary },
-  dotDone: { backgroundColor: colors.accent },
-  iconBubble: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  iconBubbleActive: {
-    borderColor: colors.primary,
-    backgroundColor: colors.primaryMuted,
-  },
-  labelRow: { flexDirection: 'row', alignItems: 'center' },
-  label: { ...type.subtitle, color: colors.primary, fontFamily: type.label.fontFamily },
-  step: { ...type.caption, marginTop: 2 },
-});

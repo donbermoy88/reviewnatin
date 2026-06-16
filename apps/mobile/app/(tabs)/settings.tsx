@@ -312,10 +312,12 @@ export default function SettingsScreen() {
               <Ionicons name="chevron-forward" size={18} color="#fff" />
             </LinearGradient>
           </Pressable>
+          {/* Restore attaches store purchases to an account — hidden for
+              signed-out guests (onRestore undefined hides the button). */}
           <ManagePlusCard
             entitlements={entitlements}
             restoring={restoring}
-            onRestore={() => void handleRestorePurchases()}
+            onRestore={user ? () => void handleRestorePurchases() : undefined}
             onViewPlans={() => router.push('/subscribe')}
             compact
           />

@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, AppState, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, AppState, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
@@ -150,12 +150,20 @@ function planSavingsLabel(product: ProductRow): string | null {
   return `Save around ${savingsPct}%`;
 }
 
-function FeatureList({ items, styles }: { items: string[]; styles: ReturnType<typeof createStyles> }) {
+function FeatureList({
+  items,
+  styles,
+  iconColor,
+}: {
+  items: string[];
+  styles: ReturnType<typeof createStyles>;
+  iconColor: string;
+}) {
   return (
     <View style={styles.featureList}>
       {items.map((item) => (
         <View key={item} style={styles.featureRow}>
-          <Ionicons name="checkmark-circle" size={16} color="#0B5FFF" />
+          <Ionicons name="checkmark-circle" size={16} color={iconColor} />
           <Text style={styles.featureText}>{item}</Text>
         </View>
       ))}
@@ -410,7 +418,7 @@ export default function SubscribeScreen() {
         </View>
 
         <Text style={styles.featureIntro}>{meta.featureIntro}</Text>
-        <FeatureList items={meta.features} styles={styles} />
+        <FeatureList items={meta.features} styles={styles} iconColor={colors.primary} />
 
         <PrimaryButton
           label={primaryLabel}
@@ -506,7 +514,9 @@ export default function SubscribeScreen() {
             <View style={styles.devBanner}>
               <Ionicons name="code-slash" size={16} color={colors.accentDark} />
               <Text style={styles.devBannerText}>
-                Dev build — purchases are simulated. On TestFlight/App Store, real StoreKit billing applies.
+                {Platform.OS === 'android'
+                  ? 'Dev build — purchases are simulated. On a Google Play build, real Play Billing applies.'
+                  : 'Dev build — purchases are simulated. On TestFlight/App Store, real StoreKit billing applies.'}
               </Text>
             </View>
           ) : null}
@@ -514,7 +524,7 @@ export default function SubscribeScreen() {
           <ManagePlusCard
             entitlements={entitlements}
             restoring={restoring}
-            onRestore={() => void handleRestore()}
+            onRestore={user ? () => void handleRestore() : undefined}
             compact
           />
 
@@ -594,7 +604,7 @@ export default function SubscribeScreen() {
 }
 
 function createStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii } = theme;
+  const { colors, fonts, spacing, radii, shadows } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     header: {
@@ -692,11 +702,12 @@ function createStyles(theme: AppTheme) {
       gap: spacing.md,
       borderWidth: 1,
       borderColor: colors.border,
+      ...shadows.card,
     },
     planCardHighlighted: {
       borderColor: colors.primary,
       borderWidth: 2,
-      backgroundColor: colors.primaryMuted,
+      backgroundColor: theme.isDark ? colors.surface : colors.primaryMuted,
     },
     planCardTop: {
       flexDirection: 'row',
@@ -707,7 +718,7 @@ function createStyles(theme: AppTheme) {
     bestValueBadge: {
       alignSelf: 'flex-start',
       backgroundColor: colors.accent,
-      borderRadius: radii.full,
+      borderRadius: radii.sm,
       paddingHorizontal: spacing.sm,
       paddingVertical: 3,
       marginBottom: spacing.xs,
@@ -780,6 +791,7 @@ function createStyles(theme: AppTheme) {
       marginBottom: spacing.md,
       borderWidth: 1,
       borderColor: colors.border,
+      ...shadows.card,
     },
     pendingTitle: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text },
     pendingSub: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 },

@@ -49,22 +49,23 @@ export function createPrimaryButtonStyles(theme: AppTheme) {
   const { colors, type, radii, spacing, shadows } = theme;
   return StyleSheet.create({
     base: {
-      paddingVertical: spacing.md,
+      paddingVertical: 0,
       paddingHorizontal: spacing.lg,
       borderRadius: radii.lg,
       alignItems: 'center',
       justifyContent: 'center',
+      borderWidth: 1,
+      borderColor: 'transparent',
     },
     inner: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
     primary: { backgroundColor: colors.primary, ...shadows.button },
-    accent: { backgroundColor: colors.accent },
+    accent: { backgroundColor: colors.accent, ...shadows.soft },
     outline: {
-      backgroundColor: 'transparent',
-      borderWidth: 2,
+      backgroundColor: theme.isDark ? 'rgba(59,130,255,0.12)' : colors.primaryMuted,
       borderColor: colors.primary,
     },
     white: { backgroundColor: colors.surface },
-    ghost: { backgroundColor: 'transparent' },
+    ghost: { backgroundColor: 'transparent', borderColor: colors.border },
     success: { backgroundColor: colors.success },
     pressed: { opacity: 0.92, transform: [{ scale: 0.98 }] },
     disabled: { opacity: 0.5 },
@@ -79,20 +80,22 @@ export function createPrimaryButtonStyles(theme: AppTheme) {
 }
 
 export function createEmptyStateStyles(theme: AppTheme) {
-  const { colors, spacing, type } = theme;
+  const { colors, spacing, type, radii } = theme;
   return StyleSheet.create({
-    wrap: { alignItems: 'center', paddingVertical: spacing.xl, paddingHorizontal: spacing.lg },
+    wrap: { alignItems: 'center', paddingVertical: spacing.xxl, paddingHorizontal: spacing.lg },
     iconWrap: {
-      width: 64,
-      height: 64,
-      borderRadius: 32,
+      width: 84,
+      height: 84,
+      borderRadius: radii.xl,
       backgroundColor: colors.primaryMuted,
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: spacing.md,
+      marginBottom: spacing.lg,
+      borderWidth: 1,
+      borderColor: colors.border,
     },
     title: { ...type.title, textAlign: 'center' },
-    description: { ...type.bodyMuted, textAlign: 'center', marginTop: spacing.sm },
+    description: { ...type.bodyMuted, textAlign: 'center', marginTop: spacing.sm, maxWidth: 300 },
     btn: { marginTop: spacing.lg, alignSelf: 'stretch', width: '100%' },
   });
 }
@@ -220,7 +223,7 @@ export function createSettingsStyles(theme: AppTheme) {
 }
 
 export function createTabLayoutStyles(theme: AppTheme) {
-  const { colors, fonts } = theme;
+  const { colors, fonts, radii } = theme;
   return StyleSheet.create({
     tabItem: { paddingTop: 2, minHeight: 44 },
     tabLabel: {
@@ -228,14 +231,23 @@ export function createTabLayoutStyles(theme: AppTheme) {
       fontSize: 10,
       marginTop: 2,
     },
-    iconWrap: { alignItems: 'center', justifyContent: 'center', minHeight: 28 },
+    iconWrap: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: 32,
+      minWidth: 42,
+      borderRadius: radii.full,
+    },
+    iconWrapActive: {
+      backgroundColor: colors.primaryMuted,
+    },
     activeBar: {
       position: 'absolute',
       top: -8,
-      width: 28,
-      height: 2,
+      width: 4,
+      height: 4,
       backgroundColor: colors.primary,
-      borderRadius: 1,
+      borderRadius: 2,
     },
     loading: {
       flex: 1,
@@ -255,6 +267,8 @@ export function createScreenShellStyles(theme: AppTheme) {
       backgroundColor: colors.surface,
       borderRadius: radii.xl,
       padding: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.border,
     },
     cardTitle: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text, letterSpacing: -0.15 },
     cardMeta: { fontFamily: fonts.bodySemiBold, fontSize: 12, color: colors.textMuted, marginTop: 2 },
@@ -370,6 +384,9 @@ export function createDashboardStyles(theme: AppTheme) {
       borderRadius: radii.xl,
       padding: spacing.md,
       marginBottom: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
     },
     continueRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginBottom: spacing.sm },
     continueIcon: {
@@ -395,6 +412,9 @@ export function createDashboardStyles(theme: AppTheme) {
       borderRadius: radii.xl,
       padding: spacing.md,
       marginBottom: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
     },
     pasapathHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
     pasapathLbl: {
@@ -436,6 +456,7 @@ export function createDashboardStyles(theme: AppTheme) {
       marginBottom: spacing.lg,
       borderWidth: 1,
       borderColor: 'rgba(245,166,35,0.2)',
+      ...shadows.card,
     },
     goalLbl: {
       fontFamily: fonts.bodyBold,
@@ -662,6 +683,7 @@ export function createDashboardStyles(theme: AppTheme) {
       marginBottom: spacing.md,
       borderWidth: 1,
       borderColor: colors.border,
+      ...shadows.card,
     },
     progressSnapshotTop: {
       flexDirection: 'row',
@@ -782,7 +804,7 @@ export function createDashboardStyles(theme: AppTheme) {
 }
 
 export function createStudyStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii } = theme;
+  const { colors, fonts, spacing, radii, shadows } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
@@ -832,6 +854,9 @@ export function createStudyStyles(theme: AppTheme) {
       backgroundColor: colors.surface,
       borderRadius: radii.xl,
       padding: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
     },
     subjectTop: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
     subjectIcon: { width: 44, height: 44, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center' },
@@ -849,7 +874,7 @@ export function createStudyStyles(theme: AppTheme) {
 }
 
 export function createProfileStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii } = theme;
+  const { colors, fonts, spacing, radii, shadows } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     header: {
@@ -889,6 +914,9 @@ export function createProfileStyles(theme: AppTheme) {
       padding: spacing.lg,
       flexDirection: 'row',
       justifyContent: 'space-around',
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
     },
     statItem: { alignItems: 'center' },
     statVal: { fontFamily: fonts.display, fontSize: 22, letterSpacing: -0.5 },
@@ -910,6 +938,8 @@ export function createProfileStyles(theme: AppTheme) {
       borderRadius: radii.lg,
       padding: spacing.md,
       marginTop: spacing.sm,
+      borderWidth: 1,
+      borderColor: colors.border,
     },
     sessionTitle: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text },
     sessionDate: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 },
@@ -918,7 +948,7 @@ export function createProfileStyles(theme: AppTheme) {
 }
 
 export function createLeaderboardStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii } = theme;
+  const { colors, fonts, spacing, radii, shadows } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     header: {
@@ -954,6 +984,9 @@ export function createLeaderboardStyles(theme: AppTheme) {
       borderRadius: radii.lg,
       padding: spacing.md,
       marginBottom: spacing.sm,
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
     },
     rowYou: { borderWidth: 1.5, borderColor: colors.primary },
     rowRank: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.textMuted, width: 28 },
@@ -973,7 +1006,7 @@ export function createLeaderboardStyles(theme: AppTheme) {
 }
 
 export function createQuizStyles(theme: AppTheme) {
-  const { colors, type, spacing, radii } = theme;
+  const { colors, type, spacing, radii, shadows } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
@@ -991,6 +1024,8 @@ export function createQuizStyles(theme: AppTheme) {
       backgroundColor: colors.surface,
       alignItems: 'center',
       justifyContent: 'center',
+      borderWidth: 1,
+      borderColor: colors.border,
     },
     segments: { flex: 1, flexDirection: 'row', gap: 4 },
     segment: { flex: 1, height: 6, borderRadius: radii.full, backgroundColor: colors.border },
@@ -1032,6 +1067,9 @@ export function createQuizStyles(theme: AppTheme) {
       backgroundColor: colors.surface,
       borderRadius: radii.xl,
       padding: spacing.lg,
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
     },
     stem: { ...type.label, fontSize: 19, lineHeight: 26, letterSpacing: -0.2 },
     options: { paddingHorizontal: spacing.lg, paddingTop: spacing.md },
@@ -1078,7 +1116,7 @@ export function createQuizStyles(theme: AppTheme) {
 }
 
 export function createListScreenStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii } = theme;
+  const { colors, fonts, spacing, radii, shadows } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
@@ -1098,6 +1136,9 @@ export function createListScreenStyles(theme: AppTheme) {
       backgroundColor: colors.surface,
       borderRadius: radii.xl,
       padding: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
     },
     cardSubject: { fontFamily: fonts.bodyBold, fontSize: 11, color: colors.primary, textTransform: 'uppercase' },
     cardStem: { fontFamily: fonts.bodySemiBold, fontSize: 14, color: colors.text, marginTop: 4 },

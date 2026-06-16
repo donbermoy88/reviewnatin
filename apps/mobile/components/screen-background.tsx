@@ -11,32 +11,11 @@ export function ScreenBackground() {
         colors={
           isDark
             ? [colors.background, colors.surface, colors.background]
-            : ['#E8EFFF', colors.background, '#FFFBEB']
+            : ['#E8F0FF', colors.background, '#F8FAFF']
         }
-        locations={[0, 0.55, 1]}
+        locations={[0, 0.58, 1]}
         style={StyleSheet.absoluteFill}
       />
-      <View style={[styles.blobGold, { backgroundColor: colors.accent, opacity: isDark ? 0.08 : 0.18 }]} />
-      <View style={[styles.blobBlue, { backgroundColor: colors.primary, opacity: isDark ? 0.06 : 0.1 }]} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  blobGold: {
-    position: 'absolute',
-    top: -60,
-    right: -80,
-    width: 220,
-    height: 220,
-    borderRadius: 110,
-  },
-  blobBlue: {
-    position: 'absolute',
-    bottom: 120,
-    left: -70,
-    width: 180,
-    height: 180,
-    borderRadius: 90,
-  },
-});

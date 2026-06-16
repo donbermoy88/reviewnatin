@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Alert, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { Badge } from '../../components/badge';
 import { PrimaryButton } from '../../components/primary-button';
 import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
@@ -389,42 +390,56 @@ export default function StudyScreen() {
                     <View style={[styles.subjectIcon, { backgroundColor: colors.primaryMuted }]}>
                       <Ionicons name="shield-checkmark" size={22} color={colors.primary} />
                     </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.subjectName}>Board Exam Mode</Text>
-                      <Text style={styles.subjectMeta}>
-                        Full-length · Strict timer · No hints
-                        {!isPremium(examTypeId) ? ' · Premium' : ''}
-                      </Text>
+                    <View style={{ flex: 1, gap: 4 }}>
+                      <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs, flexWrap: 'wrap' }}>
+                        <Text style={styles.subjectName}>Board Exam Mode</Text>
+                        {!isPremium(examTypeId) ? <Badge label="Plus" variant="premium" icon="lock-closed" /> : null}
+                      </View>
+                      <Text style={styles.subjectMeta}>Full-length · Strict timer · No hints</Text>
                     </View>
                     <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
                   </View>
                 </Pressable>
-                {mockExams.map((mock) => (
-                <Pressable
-                  key={mock.id}
-                  style={styles.subjectCard}
-                  onPress={() => launchMock(mock)}
-                  accessibilityRole="button"
-                  accessibilityLabel={`Start mock exam: ${mock.title}`}
-                >
-                  <View style={styles.subjectTop}>
-                    <View style={[styles.subjectIcon, { backgroundColor: colors.errorBg }]}>
-                      <Ionicons name="timer" size={22} color={colors.flame} />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.subjectName}>{mock.title}</Text>
-                      <Text style={styles.subjectMeta}>
-                        {mock.itemCount} items · {Math.round(mock.durationSeconds / 60)} min
-                        {!isPremium(examTypeId) && isMiniMock(mock) ? ' · 1/week free' : ''}
-                        {!isPremium(examTypeId) && mock.itemCount > FREE_MOCK_PREVIEW_ITEMS && !isMiniMock(mock)
-                          ? ` · Preview ${FREE_MOCK_PREVIEW_ITEMS}`
-                          : ''}
-                      </Text>
-                    </View>
-                    <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
-                  </View>
-                </Pressable>
-              ))}
+                {mockExams.map((mock) => {
+                  const mini = isMiniMock(mock);
+                  const free = !isPremium(examTypeId);
+                  const preview = free && !mini && mock.itemCount > FREE_MOCK_PREVIEW_ITEMS;
+                  const tierBadge = mini && free
+                    ? <Badge label="1/week free" variant="success" />
+                    : preview
+                      ? <Badge label={`Preview ${FREE_MOCK_PREVIEW_ITEMS}`} variant="accent" icon="eye-outline" />
+                      : free
+                        ? <Badge label="Plus" variant="premium" icon="lock-closed" />
+                        : null;
+                  const iconName: keyof typeof Ionicons.glyphMap = mini ? 'flash' : 'document-text';
+                  const iconBg = mini ? colors.accentLight : colors.primaryMuted;
+                  const iconColor = mini ? colors.accentDark : colors.primary;
+                  return (
+                    <Pressable
+                      key={mock.id}
+                      style={styles.subjectCard}
+                      onPress={() => launchMock(mock)}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Start mock exam: ${mock.title}`}
+                    >
+                      <View style={styles.subjectTop}>
+                        <View style={[styles.subjectIcon, { backgroundColor: iconBg }]}>
+                          <Ionicons name={iconName} size={22} color={iconColor} />
+                        </View>
+                        <View style={{ flex: 1, gap: 4 }}>
+                          <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs, flexWrap: 'wrap' }}>
+                            <Text style={styles.subjectName}>{mock.title}</Text>
+                            {tierBadge}
+                          </View>
+                          <Text style={styles.subjectMeta}>
+                            {mock.itemCount} items · {Math.round(mock.durationSeconds / 60)} min
+                          </Text>
+                        </View>
+                        <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+                      </View>
+                    </Pressable>
+                  );
+                })}
               </>
             )
           ) : activeTab === 2 ? (

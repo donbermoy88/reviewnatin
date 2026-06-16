@@ -2,13 +2,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
 import { GoalRing } from '../../components/goal-ring';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReadinessBreakdownSheet } from '../../components/readiness-breakdown-sheet';
-import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createDashboardStyles } from '../../lib/themed-styles';
 import { fetchExamBySlug, fetchSubjectAreas } from '../../lib/api/catalog';
@@ -22,6 +21,8 @@ import { fetchPracticeStats } from '../../lib/api/stats';
 import { fetchGuestPracticeStats } from '../../lib/guest-quiz-history';
 import { ExamCountdownCard } from '../../components/exam-countdown-card';
 import { ContentGateBanner } from '../../components/content-gate-banner';
+import { PremiumLock } from '../../components/premium-lock';
+import { Skeleton, SkeletonCard } from '../../components/skeleton';
 import { AdBanner } from '../../components/ad-banner';
 import { ScreenBackground } from '../../components/screen-background';
 import { fetchContentGateStatus, type ContentGateStatus } from '../../lib/content-gate';
@@ -420,8 +421,30 @@ export default function DashboardScreen() {
 
   if (loading) {
     return (
-      <View style={[styles.root, { justifyContent: 'center', alignItems: 'center' }]}>
-        <ActivityIndicator size="large" color={colors.primary} />
+      <View style={styles.root}>
+        <ScreenBackground />
+        <ScrollView
+          contentContainerStyle={tabScrollPadding(insets)}
+          showsVerticalScrollIndicator={false}
+          scrollEnabled={false}
+        >
+          <LinearGradient
+            colors={[...gradients.hero]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.5, y: 1 }}
+            style={[styles.hero, { paddingTop: insets.top + spacing.md }]}
+          >
+            <Skeleton width="55%" height={14} radius={7} style={{ backgroundColor: 'rgba(255,255,255,0.22)' }} />
+            <Skeleton width="80%" height={26} radius={8} style={{ marginTop: spacing.md, backgroundColor: 'rgba(255,255,255,0.22)' }} />
+            <Skeleton width="100%" height={92} radius={20} style={{ marginTop: spacing.md, backgroundColor: 'rgba(255,255,255,0.16)' }} />
+            <Skeleton width="100%" height={64} radius={16} style={{ marginTop: spacing.md, backgroundColor: 'rgba(255,255,255,0.16)' }} />
+          </LinearGradient>
+          <View style={styles.sectionPad}>
+            <SkeletonCard lines={3} style={{ marginBottom: spacing.md }} />
+            <SkeletonCard lines={2} style={{ marginBottom: spacing.md }} />
+            <SkeletonCard lines={2} />
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -447,13 +470,6 @@ export default function DashboardScreen() {
           end={{ x: 0.5, y: 1 }}
           style={[styles.hero, { paddingTop: insets.top + spacing.md }]}
         >
-          <View style={styles.sparkleTop}>
-            <SparkleStar size={14} opacity={0.6} />
-          </View>
-          <View style={styles.sparkleMid}>
-            <SparkleStar size={10} opacity={0.35} />
-          </View>
-
           <View style={styles.heroTop}>
             <View style={styles.heroCopy}>
               <View style={styles.heroBadgeRow}>
@@ -900,6 +916,16 @@ export default function DashboardScreen() {
 
             {contentGate && !contentGate.meetsMinimum ? (
               <ContentGateBanner theme={theme} status={contentGate} compact />
+            ) : null}
+
+            {user && !premium ? (
+              <PremiumLock
+                title="Unlock ReviewNatin Plus"
+                description="Unlimited mocks, offline packs, at walang ads."
+                ctaLabel="See plans"
+                onPress={() => router.push('/subscribe')}
+                style={{ marginBottom: spacing.md }}
+              />
             ) : null}
 
             {!premium ? <AdBanner onPress={() => router.push('/subscribe')} /> : null}

@@ -20,7 +20,7 @@ function TabIcon({
   styles: ReturnType<typeof createTabLayoutStyles>;
 }) {
   return (
-    <View style={styles.iconWrap}>
+    <View style={[styles.iconWrap, focused && styles.iconWrapActive]}>
       {focused ? <View style={styles.activeBar} /> : null}
       <Ionicons name={name} size={21} color={focused ? colors.primary : colors.textLight} />
     </View>
@@ -48,7 +48,7 @@ export default function TabsLayout() {
           borderTopColor: colors.border,
           borderTopWidth: StyleSheet.hairlineWidth,
           height: tabBarHeight,
-          paddingTop: 6,
+          paddingTop: 8,
           paddingBottom: bottomInset,
           ...Platform.select({
             android: { elevation: 12 },

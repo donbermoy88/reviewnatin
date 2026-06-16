@@ -1,10 +1,11 @@
 import { Redirect } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
-import { colors } from '../constants/theme';
+import { useAppTheme } from '../hooks/use-app-theme';
 import { useOnboardingGate } from '../providers/onboarding-gate';
 
 /** Entry redirect — onboarding routing is enforced by OnboardingGate only. */
 export default function Index() {
+  const { colors } = useAppTheme();
   const { ready, complete } = useOnboardingGate();
 
   if (!ready) {

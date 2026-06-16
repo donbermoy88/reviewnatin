@@ -1,22 +1,31 @@
 import type { ReactNode } from 'react';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
-import { colors, radii, shadows, spacing } from '../constants/theme';
+import { View, type ViewStyle } from 'react-native';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type Props = {
   children: ReactNode;
   style?: ViewStyle;
-  variant?: 'default' | 'elevated' | 'flat';
+  variant?: 'default' | 'elevated' | 'flat' | 'premium';
   padding?: number;
 };
 
-export function Card({ children, style, variant = 'default', padding = spacing.lg }: Props) {
+export function Card({ children, style, variant = 'default', padding }: Props) {
+  const { colors, radii, shadows, spacing } = useAppTheme();
+  const pad = padding ?? spacing.md;
+  const isFlat = variant === 'flat';
+  const isPremium = variant === 'premium';
+
   return (
     <View
       style={[
-        styles.card,
-        { padding },
-        variant === 'elevated' && shadows.card,
-        variant === 'flat' && styles.flat,
+        {
+          backgroundColor: isFlat ? colors.primaryMuted : isPremium ? colors.primaryDark : colors.surface,
+          borderRadius: radii.xl,
+          borderWidth: isFlat ? 0 : 1,
+          borderColor: isPremium ? 'rgba(255,255,255,0.14)' : colors.border,
+          padding: pad,
+        },
+        (variant === 'elevated' || variant === 'premium') && shadows.card,
         style,
       ]}
     >
@@ -24,16 +33,3 @@ export function Card({ children, style, variant = 'default', padding = spacing.l
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: colors.surface,
-    borderRadius: radii.xl,
-    borderWidth: 1,
-    borderColor: '#f1f5f9',
-  },
-  flat: {
-    borderWidth: 0,
-    backgroundColor: colors.primaryMuted,
-  },
-});

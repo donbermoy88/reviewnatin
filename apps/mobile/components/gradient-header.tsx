@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
-import { colors, radii } from '../constants/theme';
+import { View, type ViewStyle } from 'react-native';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type Props = {
   children: React.ReactNode;
@@ -9,25 +9,20 @@ type Props = {
 };
 
 export function GradientHeader({ children, style, rounded = true }: Props) {
+  const { gradients, radii } = useAppTheme();
+
   return (
     <LinearGradient
-      colors={[colors.primary, colors.primaryDark]}
+      colors={[...gradients.hero]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      style={[styles.header, rounded && styles.rounded, style]}
+      style={[
+        { paddingBottom: 24, overflow: 'hidden' },
+        rounded && { borderBottomLeftRadius: radii.xxl, borderBottomRightRadius: radii.xxl },
+        style,
+      ]}
     >
-      {children}
+      <View>{children}</View>
     </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    paddingBottom: 24,
-    overflow: 'hidden',
-  },
-  rounded: {
-    borderBottomLeftRadius: radii.xxl,
-    borderBottomRightRadius: radii.xxl,
-  },
-});

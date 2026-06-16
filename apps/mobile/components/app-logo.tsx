@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
-import { colors, radii, spacing, type } from '../constants/theme';
+import { Text, View, type ViewStyle } from 'react-native';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type Props = {
   size?: 'sm' | 'md' | 'lg';
@@ -14,43 +14,26 @@ const SIZES = {
 };
 
 export function AppLogo({ size = 'md', showWordmark = true, style }: Props) {
+  const { colors, radii, spacing, fonts, type } = useAppTheme();
   const s = SIZES[size];
 
   return (
-    <View style={[styles.row, style]} accessibilityRole="header">
+    <View style={[{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }, style]} accessibilityRole="header">
       <View
-        style={[
-          styles.badge,
-          {
-            width: s.badge,
-            height: s.badge,
-            borderRadius: radii.md,
-          },
-        ]}
+        style={{
+          width: s.badge,
+          height: s.badge,
+          borderRadius: radii.md,
+          backgroundColor: colors.primary,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
-        <Text style={[styles.badgeText, { fontSize: s.badgeText }]}>RN</Text>
+        <Text style={{ color: '#fff', fontFamily: fonts.display, fontSize: s.badgeText }}>RN</Text>
       </View>
       {showWordmark ? (
-        <Text style={[styles.wordmark, { fontSize: s.wordmark }]}>ReviewNatin</Text>
+        <Text style={[type.brand, { fontSize: s.wordmark }]}>ReviewNatin</Text>
       ) : null}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  badge: {
-    backgroundColor: colors.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  badgeText: {
-    color: '#fff',
-    fontFamily: type.brand.fontFamily,
-    fontWeight: '800',
-  },
-  wordmark: {
-    ...type.brand,
-    fontSize: 22,
-  },
-});

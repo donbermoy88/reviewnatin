@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { colors, radii, spacing, touchTarget, type } from '../constants/theme';
+import { Pressable, Text, View } from 'react-native';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -14,19 +14,41 @@ type Props = {
 };
 
 export function SelectOption({ label, subtitle, icon, selected, onPress }: Props) {
+  const { colors, radii, spacing, touchTarget, type } = useAppTheme();
+
   return (
     <Pressable
-      style={[styles.option, selected && styles.optionActive]}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: spacing.md,
+        borderRadius: radii.lg,
+        borderWidth: 1.5,
+        borderColor: selected ? colors.primary : colors.border,
+        backgroundColor: selected ? colors.primaryMuted : colors.surface,
+        marginBottom: spacing.sm,
+        minHeight: touchTarget.min,
+        gap: spacing.md,
+      }}
       onPress={onPress}
       accessibilityRole="radio"
       accessibilityState={{ selected }}
     >
-      <View style={[styles.iconWrap, selected && styles.iconWrapActive]}>
+      <View
+        style={{
+          width: 40,
+          height: 40,
+          borderRadius: radii.md,
+          backgroundColor: selected ? colors.surface : colors.iconBg,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <Ionicons name={icon} size={22} color={selected ? colors.primary : colors.textMuted} />
       </View>
-      <View style={styles.content}>
-        <Text style={[styles.label, selected && styles.labelActive]}>{label}</Text>
-        {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+      <View style={{ flex: 1 }}>
+        <Text style={[type.label, { fontSize: 15 }, selected && { color: colors.primary }]}>{label}</Text>
+        {subtitle ? <Text style={[type.caption, { marginTop: 2 }]}>{subtitle}</Text> : null}
       </View>
       <Ionicons
         name={selected ? 'checkmark-circle' : 'ellipse-outline'}
@@ -36,37 +58,3 @@ export function SelectOption({ label, subtitle, icon, selected, onPress }: Props
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  option: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: spacing.md,
-    borderRadius: radii.lg,
-    borderWidth: 1.5,
-    borderColor: colors.border,
-    marginBottom: spacing.sm,
-    minHeight: touchTarget.min,
-    backgroundColor: colors.surface,
-    gap: spacing.md,
-  },
-  optionActive: {
-    borderColor: colors.primary,
-    backgroundColor: colors.primaryMuted,
-  },
-  iconWrap: {
-    width: 40,
-    height: 40,
-    borderRadius: radii.md,
-    backgroundColor: colors.background,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  iconWrapActive: {
-    backgroundColor: '#fff',
-  },
-  content: { flex: 1 },
-  label: { ...type.label, fontSize: 15 },
-  labelActive: { color: colors.primary },
-  subtitle: { ...type.caption, marginTop: 2 },
-});

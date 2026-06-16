@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAppTheme } from '../hooks/use-app-theme';
 import { getAdMobConfig } from '../lib/ads/config';
+import { useEntitlements } from '../providers/entitlements-provider';
 
 type Props = {
   onPress?: () => void;
@@ -88,6 +89,12 @@ function UpgradePrompt({ onPress }: { onPress: () => void }) {
 export function AdBanner({ onPress }: Props) {
   const router = useRouter();
   const adConfig = getAdMobConfig();
+  const { isPremium } = useEntitlements();
+
+  // Defense-in-depth: never render a banner (ad or upgrade CTA) for a Plus
+  // member, even if a call site forgets to gate on entitlement. Exam-pass
+  // scoping stays at the call site since it is exam-specific.
+  if (isPremium()) return null;
 
   const openSubscribe = () => {
     if (onPress) {
