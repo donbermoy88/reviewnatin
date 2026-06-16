@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { EXAM_TYPES } from '@reviewnatin/shared';
 import {
   fetchGuestPracticeStats,
   fetchGuestRecentSessions,
@@ -96,43 +97,54 @@ describe('guest quiz history', () => {
     expect(letSessions).toHaveLength(0);
   });
 
-  it('does not show PNLE-only guest history when CSE is active', async () => {
-    await saveGuestQuizSession({
-      examSlug: 'pnle',
-      mode: 'practice',
-      itemCount: 25,
-      scorePercent: 64,
-      correct: 16,
-      durationSeconds: 900,
-    });
+  it('isolates guest history for every configured exam type', async () => {
+    for (const [index, exam] of EXAM_TYPES.entries()) {
+      await saveGuestQuizSession({
+        examSlug: exam.slug,
+        mode: index % 2 === 0 ? 'practice' : 'mock',
+        itemCount: 10 + index,
+        scorePercent: 50 + index,
+        correct: 5 + index,
+        durationSeconds: 300 + index,
+      });
+    }
 
-    const cseStats = await fetchGuestPracticeStats('cse-professional', 15);
-    const cseSessions = await fetchGuestRecentSessions('cse-professional');
+    for (const [index, exam] of EXAM_TYPES.entries()) {
+      const stats = await fetchGuestPracticeStats(exam.slug, 15);
+      const sessions = await fetchGuestRecentSessions(exam.slug);
 
-    expect(cseStats.totalAnswered).toBe(0);
-    expect(cseStats.questionsToday).toBe(0);
-    expect(cseStats.accuracyPercent).toBeNull();
-    expect(cseStats.sessionCount).toBe(0);
-    expect(cseSessions).toHaveLength(0);
+      expect(stats.totalAnswered).toBe(10 + index);
+      expect(stats.questionsToday).toBe(10 + index);
+      expect(stats.accuracyPercent).toBe(50 + index);
+      expect(stats.sessionCount).toBe(1);
+      expect(sessions).toHaveLength(1);
+      expect(sessions[0].item_count).toBe(10 + index);
+      expect(sessions[0].score_percent).toBe(50 + index);
+    }
   });
 
-  it('does not show CSE-only guest history when PNLE is active', async () => {
-    await saveGuestQuizSession({
-      examSlug: 'cse-professional',
-      mode: 'mock',
-      itemCount: 30,
-      scorePercent: 77,
-      correct: 23,
-      durationSeconds: 1200,
-    });
+  it.each(EXAM_TYPES.map((activeExam) => [activeExam.slug] as const))(
+    'shows empty guest history for %s when only other exam types have attempts',
+    async (activeSlug) => {
+      for (const [index, exam] of EXAM_TYPES.filter((exam) => exam.slug !== activeSlug).entries()) {
+        await saveGuestQuizSession({
+          examSlug: exam.slug,
+          mode: 'practice',
+          itemCount: 20 + index,
+          scorePercent: 60 + index,
+          correct: 12 + index,
+          durationSeconds: 600 + index,
+        });
+      }
 
-    const pnleStats = await fetchGuestPracticeStats('pnle', 15);
-    const pnleSessions = await fetchGuestRecentSessions('pnle');
+      const stats = await fetchGuestPracticeStats(activeSlug, 15);
+      const sessions = await fetchGuestRecentSessions(activeSlug);
 
-    expect(pnleStats.totalAnswered).toBe(0);
-    expect(pnleStats.questionsToday).toBe(0);
-    expect(pnleStats.accuracyPercent).toBeNull();
-    expect(pnleStats.sessionCount).toBe(0);
-    expect(pnleSessions).toHaveLength(0);
-  });
+      expect(stats.totalAnswered).toBe(0);
+      expect(stats.questionsToday).toBe(0);
+      expect(stats.accuracyPercent).toBeNull();
+      expect(stats.sessionCount).toBe(0);
+      expect(sessions).toHaveLength(0);
+    }
+  );
 });
