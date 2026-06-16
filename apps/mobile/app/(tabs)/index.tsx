@@ -164,7 +164,7 @@ export default function DashboardScreen() {
           // value so one slow/failed call doesn't blank the rest of the screen.
           const [practiceStats, gate, todayPasa, latestReadiness, weakest, streak, diagnosticDone] =
             await Promise.all([
-              fetchPracticeStats(user.id, target).then(async (s) => {
+              fetchPracticeStats(user.id, target, slug).then(async (s) => {
                 // Show streak milestone modal if a milestone was just reached
                 if (isStreakMilestone(s.streakDays)) {
                   const key = `milestone_shown_${user.id}_${s.streakDays}`;
@@ -209,7 +209,7 @@ export default function DashboardScreen() {
         setWeakTopic(null);
         setStreakFreezes(0);
         try {
-          setStats(await fetchGuestPracticeStats(target));
+          setStats(await fetchGuestPracticeStats(slug, target));
         } catch {
           setStats((s) => ({ ...s, questionsTarget: target }));
         }

@@ -47,21 +47,28 @@ function computeStreak(sessionDates: string[]): number {
 
 export async function fetchPracticeStats(
   userId: string,
-  dailyTarget: number
+  dailyTarget: number,
+  examSlug?: string
 ): Promise<PracticeStats> {
   if (!isSupabaseConfigured || !userId) {
     return { ...EMPTY, questionsTarget: dailyTarget };
   }
 
   try {
+    let sessionsQuery = supabase
+      .from('quiz_sessions')
+      .select('id, item_count, score_percent, completed_at, exam_types!inner(slug)')
+      .eq('user_id', userId)
+      .not('completed_at', 'is', null)
+      .order('completed_at', { ascending: false })
+      .limit(100);
+
+    if (examSlug) {
+      sessionsQuery = sessionsQuery.eq('exam_types.slug', examSlug);
+    }
+
     const [sessionsResult, userResult] = await Promise.all([
-      supabase
-        .from('quiz_sessions')
-        .select('id, item_count, score_percent, completed_at')
-        .eq('user_id', userId)
-        .not('completed_at', 'is', null)
-        .order('completed_at', { ascending: false })
-        .limit(100),
+      sessionsQuery,
       supabase
         .from('users')
         .select('streak_count')
@@ -72,7 +79,7 @@ export async function fetchPracticeStats(
     if (sessionsResult.error) throw sessionsResult.error;
 
     const rows = sessionsResult.data ?? [];
-    const dbStreak = userResult.data?.streak_count ?? 0;
+    const dbStreak = examSlug ? 0 : (userResult.data?.streak_count ?? 0);
 
     const todayStart = startOfTodayIso();
     const questionsToday = rows

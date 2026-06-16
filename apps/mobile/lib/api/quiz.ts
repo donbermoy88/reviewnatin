@@ -82,16 +82,22 @@ export async function saveQuizAnswers(sessionId: string, answers: QuizAnswerReco
   if (error) throw error;
 }
 
-export async function fetchRecentSessions(userId: string, limit = 5) {
+export async function fetchRecentSessions(userId: string, limit = 5, examSlug?: string) {
   if (!isSupabaseConfigured) return [];
 
-  const { data, error } = await supabase
+  let query = supabase
     .from('quiz_sessions')
-    .select('id, score_percent, item_count, completed_at, mode')
+    .select('id, score_percent, item_count, completed_at, mode, exam_types!inner(slug)')
     .eq('user_id', userId)
     .not('completed_at', 'is', null)
     .order('completed_at', { ascending: false })
     .limit(limit);
+
+  if (examSlug) {
+    query = query.eq('exam_types.slug', examSlug);
+  }
+
+  const { data, error } = await query;
 
   if (error) throw error;
   return data ?? [];

@@ -15,6 +15,10 @@ export type GuestQuizSession = {
 const KEY = 'reviewnatin:guest-quiz-history';
 const MAX_SESSIONS = 50;
 
+function sessionsForExam(sessions: GuestQuizSession[], examSlug: string): GuestQuizSession[] {
+  return sessions.filter((session) => session.examSlug === examSlug);
+}
+
 export async function loadGuestQuizHistory(): Promise<GuestQuizSession[]> {
   try {
     const raw = await AsyncStorage.getItem(KEY);
@@ -66,8 +70,11 @@ function computeStreak(sessionDates: string[]): number {
   return streak;
 }
 
-export async function fetchGuestPracticeStats(dailyTarget: number): Promise<PracticeStats> {
-  const sessions = await loadGuestQuizHistory();
+export async function fetchGuestPracticeStats(
+  examSlug: string,
+  dailyTarget: number
+): Promise<PracticeStats> {
+  const sessions = sessionsForExam(await loadGuestQuizHistory(), examSlug);
   const todayStart = startOfTodayIso();
 
   const questionsToday = sessions
@@ -93,7 +100,10 @@ export async function fetchGuestPracticeStats(dailyTarget: number): Promise<Prac
   };
 }
 
-export async function fetchGuestRecentSessions(limit = 5): Promise<
+export async function fetchGuestRecentSessions(
+  examSlug: string,
+  limit = 5
+): Promise<
   {
     id: string;
     score_percent: number | null;
@@ -102,7 +112,7 @@ export async function fetchGuestRecentSessions(limit = 5): Promise<
     mode: string;
   }[]
 > {
-  const sessions = await loadGuestQuizHistory();
+  const sessions = sessionsForExam(await loadGuestQuizHistory(), examSlug);
   return sessions.slice(0, limit).map((s) => ({
     id: s.id,
     score_percent: s.scorePercent,

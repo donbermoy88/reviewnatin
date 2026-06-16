@@ -121,8 +121,8 @@ export default function ProfileScreen() {
       if (!user) {
         try {
           const [guestSessions, guestStats] = await Promise.all([
-            fetchGuestRecentSessions(),
-            fetchGuestPracticeStats(target),
+            fetchGuestRecentSessions(slug),
+            fetchGuestPracticeStats(slug, target),
           ]);
           setSessions(guestSessions);
           setStats(guestStats);
@@ -135,8 +135,8 @@ export default function ProfileScreen() {
 
       try {
         const [data, practiceStats, userBadges, mocks, weekly, trends] = await Promise.all([
-          fetchRecentSessions(user.id),
-          fetchPracticeStats(user.id, target),
+          fetchRecentSessions(user.id, 5, slug),
+          fetchPracticeStats(user.id, target, slug),
           fetchUserBadges(),
           fetchMockExamHistory(slug),
           fetchWeeklySummary(slug),
