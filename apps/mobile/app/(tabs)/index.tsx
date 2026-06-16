@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Animated, Easing, Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
 import { GoalRing } from '../../components/goal-ring';
@@ -15,13 +15,11 @@ import { fetchTopicQuestionCounts, fetchTopicsBySubjectSlug, type TopicRow } fro
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
-import { fetchStreakStatus } from '../../lib/api/streak';
 import { hasCompletedDiagnostic } from '../../lib/api/diagnostic';
 import { fetchPracticeStats } from '../../lib/api/stats';
 import { fetchGuestPracticeStats } from '../../lib/guest-quiz-history';
 import { ExamCountdownCard } from '../../components/exam-countdown-card';
 import { ContentGateBanner } from '../../components/content-gate-banner';
-import { PremiumLock } from '../../components/premium-lock';
 import { Skeleton, SkeletonCard } from '../../components/skeleton';
 import { AdBanner } from '../../components/ad-banner';
 import { ScreenBackground } from '../../components/screen-background';
@@ -30,16 +28,10 @@ import { fetchAppAnnouncements, type AppAnnouncement } from '../../lib/api/annou
 import { fetchExamSchedules } from '../../lib/api/exam-calendar';
 import { formatExamCountdown } from '../../lib/exam-countdown';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
-import {
-  canStartPractice,
-  getMockAccess,
-  isMiniMock,
-  isMiniMockAvailable,
-} from '../../lib/paywall';
+import { canStartPractice } from '../../lib/paywall';
 import { scheduleDailyReminder, scheduleExamReminders } from '../../lib/notifications';
 import { fetchDueFlashcardCount } from '../../lib/api/flashcards';
-import { fetchTopicAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
-import { fetchMockExams } from '../../lib/api/mock-exams';
+import { fetchTopicAnalytics, type SubjectAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
 import { DEFAULT_EXAM_SLUG, EXAM_TYPES } from '@reviewnatin/shared';
 import type { OnboardingData } from '../../lib/onboarding-store';
 import type { SubjectArea } from '../../lib/types';
@@ -51,18 +43,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StreakMilestoneModal, isStreakMilestone } from '../../components/streak-milestone-modal';
 import { isDiagnosticPromptDismissed } from '../../lib/diagnostic-prompt';
 
+const APP_ICON = require('../../assets/icon.png');
+
 function timeGreeting(): string {
   const h = new Date().getHours();
   if (h < 12) return 'Magandang umaga,';
   if (h < 18) return 'Magandang hapon,';
   return 'Magandang gabi,';
-}
-
-function examAbbr(slug: string): string {
-  if (slug.includes('let')) return 'LET';
-  if (slug.includes('cse')) return 'CSE';
-  if (slug.includes('pnle')) return 'PNLE';
-  return 'RN';
 }
 
 function dailyQuestionTarget(dailyMinutes: number): number {
@@ -108,11 +95,121 @@ function subjectCardMeta(subject: HomeSubjectCard): string {
   return `${subject.readyTopicCount}/${topicCount} topics ready · ${subject.questionCount} question${subject.questionCount === 1 ? '' : 's'}`;
 }
 
+function cleanExamName(name: string): string {
+  return name
+    .replace(/CSE[\s\u200B-\u200D\uFEFF]*Professional/gi, 'CSE Professional')
+    .replace(/\b([A-Z]{2,})([A-Z][a-z])/g, '$1 $2')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/\bCse\b/g, 'CSE')
+    .replace(/\bPnle\b/g, 'PNLE')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function formatExamDisplayName(examSlug: string, examName: string): string {
+  const source = examName || examSlug;
+  const canonical = source
+    .normalize('NFKC')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/[^a-z0-9]/gi, '')
+    .toLowerCase();
+  if (canonical.includes('cseprofessional')) return 'CSE Professional';
+  if (canonical.includes('csesubprofessional') || canonical.includes('csesub')) return 'CSE Subprofessional';
+  return cleanExamName(source || 'Your exam');
+}
+
 function pickWeakTopic(subjects: { weakTopics: TopicAnalyticsRow[] }[]): TopicAnalyticsRow | null {
   for (const subject of subjects) {
     if (subject.weakTopics.length > 0) return subject.weakTopics[0];
   }
   return null;
+}
+
+type ReadinessStage = {
+  label: 'Diagnostic' | 'Mocks' | 'Coverage' | 'Mistakes';
+  value: number | null;
+};
+
+function ReadinessStageProgress({
+  stages,
+  styles,
+  colors,
+}: {
+  stages: ReadinessStage[];
+  styles: ReturnType<typeof createDashboardStyles>;
+  colors: ReturnType<typeof useAppTheme>['colors'];
+}) {
+  const firstIncomplete = stages.findIndex((stage) => stage.value == null || stage.value < 70);
+  const currentIndex = firstIncomplete === -1 ? stages.length - 1 : firstIncomplete;
+
+  return (
+    <View style={styles.stageWrap}>
+      <View style={styles.stageTrackRow}>
+        {stages.map((stage, index) => {
+          const done = (stage.value ?? 0) >= 70;
+          const current = index === currentIndex && !done;
+          const known = stage.value != null;
+          const active = done || current || known;
+          const nodeColor = done ? colors.accent : active ? 'rgba(255,255,255,0.82)' : 'rgba(255,255,255,0.28)';
+          const connectorColor = index < currentIndex || done ? colors.accent : 'rgba(255,255,255,0.24)';
+
+          return (
+            <View key={stage.label} style={styles.stageTrackSegment}>
+              <View style={[styles.stageNode, { backgroundColor: nodeColor }]}>
+                {done ? <Ionicons name="checkmark" size={13} color={colors.primaryDark} /> : null}
+              </View>
+              {index < stages.length - 1 ? (
+                <View style={[styles.stageConnector, { backgroundColor: connectorColor }]} />
+              ) : null}
+            </View>
+          );
+        })}
+      </View>
+      <View style={styles.stageLabelRow}>
+        {stages.map((stage) => (
+          <Text key={stage.label} style={styles.stageLabel} numberOfLines={1}>
+            {stage.label}
+          </Text>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+function PremiumStudyPackArt({
+  styles,
+  colors,
+  floatAnim,
+}: {
+  styles: ReturnType<typeof createDashboardStyles>;
+  colors: ReturnType<typeof useAppTheme>['colors'];
+  floatAnim: Animated.Value;
+}) {
+  const floatStyle = {
+    transform: [
+      {
+        translateY: floatAnim.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -5],
+        }),
+      },
+      { rotate: '-7deg' },
+    ],
+  };
+
+  return (
+    <Animated.View style={[styles.plusArtScene, floatStyle]} pointerEvents="none">
+      <View style={styles.plusArtGlow} />
+      <View style={styles.plusArtBase}>
+        <Image source={APP_ICON} style={styles.plusArtIcon} resizeMode="cover" />
+      </View>
+      <View style={styles.plusArtCrown}>
+        <Ionicons name="sparkles" size={23} color={colors.primaryDark} />
+      </View>
+      <Ionicons name="star" size={10} color={colors.accent} style={styles.plusArtSparkleA} />
+      <Ionicons name="sparkles" size={12} color="rgba(255,255,255,0.72)" style={styles.plusArtSparkleB} />
+    </Animated.View>
+  );
 }
 
 export default function DashboardScreen() {
@@ -122,9 +219,11 @@ export default function DashboardScreen() {
   const { colors, fonts, gradients, spacing } = theme;
   const styles = useMemo(() => createDashboardStyles(theme), [theme]);
   const { user } = useAuth();
-  const { isPremium } = useEntitlements();
+  const { isPremium, products } = useEntitlements();
   const { displayName } = useUserProfile('Reviewer');
   const { prefs, setNotificationsEnabled } = usePreferences();
+  const [introAnim] = useState(() => new Animated.Value(0));
+  const [floatAnim] = useState(() => new Animated.Value(0));
   const [goal, setGoal] = useState<OnboardingData | null>(null);
   const [examName, setExamName] = useState('');
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
@@ -143,13 +242,41 @@ export default function DashboardScreen() {
   const [contentGate, setContentGate] = useState<ContentGateStatus | null>(null);
   const [announcements, setAnnouncements] = useState<AppAnnouncement[]>([]);
   const [weakTopic, setWeakTopic] = useState<TopicAnalyticsRow | null>(null);
-  const [streakFreezes, setStreakFreezes] = useState(0);
+  const [subjectAnalytics, setSubjectAnalytics] = useState<SubjectAnalytics[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [readinessSheetOpen, setReadinessSheetOpen] = useState(false);
   const [notificationSheetOpen, setNotificationSheetOpen] = useState(false);
   const [updatesSheetOpen, setUpdatesSheetOpen] = useState(false);
   const [milestoneVisible, setMilestoneVisible] = useState(false);
+
+  useEffect(() => {
+    Animated.timing(introAnim, {
+      toValue: 1,
+      duration: 380,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: true,
+    }).start();
+
+    const floating = Animated.loop(
+      Animated.sequence([
+        Animated.timing(floatAnim, {
+          toValue: 1,
+          duration: 1400,
+          easing: Easing.inOut(Easing.quad),
+          useNativeDriver: true,
+        }),
+        Animated.timing(floatAnim, {
+          toValue: 0,
+          duration: 1400,
+          easing: Easing.inOut(Easing.quad),
+          useNativeDriver: true,
+        }),
+      ])
+    );
+    floating.start();
+    return () => floating.stop();
+  }, [floatAnim, introAnim]);
 
   const load = useCallback(async () => {
     try {
@@ -163,7 +290,7 @@ export default function DashboardScreen() {
           // These dashboard sections are independent — fetch them concurrently
           // instead of in a waterfall. Non-critical fetches fall back to a safe
           // value so one slow/failed call doesn't blank the rest of the screen.
-          const [practiceStats, gate, todayPasa, latestReadiness, weakest, streak, diagnosticDone] =
+          const [practiceStats, gate, todayPasa, latestReadiness, weakest, diagnosticDone] =
             await Promise.all([
               fetchPracticeStats(user.id, target, slug).then(async (s) => {
                 // Show streak milestone modal if a milestone was just reached
@@ -181,9 +308,11 @@ export default function DashboardScreen() {
               fetchTodayPasaPath(slug).catch(() => null),
               fetchLatestReadiness(slug).catch(() => null),
               fetchTopicAnalytics(slug)
-                .then((a) => pickWeakTopic(a.subjects))
+                .then((a) => {
+                  setSubjectAnalytics(a.subjects);
+                  return pickWeakTopic(a.subjects);
+                })
                 .catch(() => null),
-              fetchStreakStatus(user.id).catch(() => null),
               // Treat a lookup failure as "done" so we never force the diagnostic
               // redirect on a transient error.
               hasCompletedDiagnostic(slug).catch(() => true),
@@ -193,7 +322,6 @@ export default function DashboardScreen() {
           setPasapath(todayPasa);
           setReadiness(latestReadiness);
           setWeakTopic(weakest);
-          setStreakFreezes(streak?.streakFreezes ?? 0);
           if (gate?.meetsMinimum && !diagnosticDone) {
             const dismissed = await isDiagnosticPromptDismissed(user.id, slug).catch(() => false);
             if (!dismissed) {
@@ -208,7 +336,6 @@ export default function DashboardScreen() {
         setPasapath(null);
         setReadiness(null);
         setWeakTopic(null);
-        setStreakFreezes(0);
         try {
           setStats(await fetchGuestPracticeStats(slug, target));
         } catch {
@@ -305,17 +432,32 @@ export default function DashboardScreen() {
     visiblePasapathTasks.length > 0 && visiblePasapathTasks.every((task) => task.completed);
   const completedPasapathTasks = visiblePasapathTasks.filter((task) => task.completed).length;
   const remainingPasapathTasks = Math.max(visiblePasapathTasks.length - completedPasapathTasks, 0);
-  const showAccuracy = stats.totalAnswered >= 20 && stats.accuracyPercent != null;
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
   const firstName = displayName.split(/\s+/)[0] ?? displayName;
-  const streakLabel = stats.streakDays > 0 ? 'day streak' : 'simulan na';
   const remainingQuestions = Math.max(questionsTarget - questionsDone, 0);
-  const readinessLabel = readinessScore != null ? `${readinessScore}% ready` : 'Build readiness';
+  const monthlyPlusPrice =
+    products.find((product) => product.tier === 'plus' && product.sku.toLowerCase().includes('monthly'))?.pricePhp ?? 159;
+  const displayExamName = formatExamDisplayName(examSlug, examName);
+  const dailyGoalText =
+    questionsDone >= questionsTarget
+      ? 'Goal complete today'
+      : `${remainingQuestions} question${remainingQuestions === 1 ? '' : 's'} left`;
+  const completedQuizText =
+    stats.sessionCount > 0
+      ? `${stats.sessionCount} quiz${stats.sessionCount === 1 ? '' : 'zes'} completed`
+      : 'Start your first quiz';
   const planStatusText = pasapathComplete
     ? 'Plan complete. Use Mock or Mistakes for extra reps.'
     : nextTask
       ? `${nextTask.title} is the best next step.`
       : 'Start a practice set to generate a smarter plan.';
+  const readinessFactors = readiness?.factors;
+  const readinessStages: ReadinessStage[] = [
+    { label: 'Diagnostic', value: readinessFactors?.diagnostic_score ?? (readinessScore != null ? readinessScore : null) },
+    { label: 'Mocks', value: readinessFactors?.mock_score_avg ?? null },
+    { label: 'Coverage', value: readinessFactors?.topic_coverage_pct ?? null },
+    { label: 'Mistakes', value: readinessFactors?.mistake_mastery_pct ?? null },
+  ];
 
   const ensurePracticeAllowed = () => {
     if (!user) return true;
@@ -347,49 +489,6 @@ export default function DashboardScreen() {
     router.push({ pathname: '/practice/quiz', params: { examSlug, mode: 'weak_area' } });
   };
 
-  const launchMock = async () => {
-    if (!user) {
-      router.push('/(auth)/login');
-      return;
-    }
-    try {
-      const mocks = await fetchMockExams(examSlug);
-      const mock = mocks.find((m) => isMiniMock(m)) ?? mocks[0];
-      if (!mock) {
-        router.push('/(tabs)/study');
-        return;
-      }
-      const access = getMockAccess(mock, premium);
-      if (access === 'weekly_limit' && !(await isMiniMockAvailable(examSlug))) {
-        router.push('/subscribe');
-        return;
-      }
-      if (access === 'preview') {
-        router.push({
-          pathname: '/practice/quiz',
-          params: {
-            examSlug,
-            mode: 'mock',
-            mockExamId: mock.id,
-            durationSeconds: String(Math.min(mock.durationSeconds, 900)),
-          },
-        });
-        return;
-      }
-      router.push({
-        pathname: '/practice/quiz',
-        params: {
-          examSlug,
-          mode: 'mock',
-          mockExamId: mock.id,
-          durationSeconds: String(mock.durationSeconds),
-        },
-      });
-    } catch {
-      router.push('/(tabs)/study');
-    }
-  };
-
   const runPasapathTask = (task: PasaPathTask) => {
     if (task.completed) return;
     if (task.type === 'practice' || task.type === 'mock') {
@@ -419,6 +518,53 @@ export default function DashboardScreen() {
     return 'Start practice quiz';
   };
 
+  const quickPracticeItems = (subjectAnalytics.length > 0
+    ? subjectAnalytics.slice(0, 3).map((s) => {
+        const topic = s.weakTopics[0] ?? s.topics[0] ?? null;
+        return {
+          name: s.subjectName,
+          pct: Math.round(s.averageAccuracy),
+          hasData: s.topics.some((t) => t.attempts > 0),
+          topicSlug: topic?.topicSlug,
+          subjectSlug: subjects.find((subject) => subject.name === s.subjectName)?.slug,
+        };
+      })
+    : subjects.slice(0, 3).map((s) => ({
+        name: s.name,
+        pct: 0,
+        hasData: false,
+        topicSlug: s.topics[0]?.slug,
+        subjectSlug: s.slug,
+      }))
+  ).slice(0, 3);
+
+  const openQuickPractice = (item: { topicSlug?: string; subjectSlug?: string; name: string }) => {
+    if (!ensurePracticeAllowed()) return;
+    if (item.topicSlug) {
+      router.push({ pathname: '/practice/quiz', params: { examSlug, topicSlug: item.topicSlug } });
+      return;
+    }
+    if (item.subjectSlug) {
+      router.push({
+        pathname: '/study/[subjectSlug]',
+        params: { subjectSlug: item.subjectSlug, examSlug, subjectName: item.name },
+      });
+      return;
+    }
+    void startPractice();
+  };
+  const entranceStyle = {
+    opacity: introAnim,
+    transform: [
+      {
+        translateY: introAnim.interpolate({
+          inputRange: [0, 1],
+          outputRange: [10, 0],
+        }),
+      },
+    ],
+  };
+
   if (loading) {
     return (
       <View style={styles.root}>
@@ -432,12 +578,25 @@ export default function DashboardScreen() {
             colors={[...gradients.hero]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0.5, y: 1 }}
-            style={[styles.hero, { paddingTop: insets.top + spacing.md }]}
+            style={[styles.homeHeroCard, { marginTop: insets.top + spacing.sm }]}
           >
-            <Skeleton width="55%" height={14} radius={7} style={{ backgroundColor: 'rgba(255,255,255,0.22)' }} />
-            <Skeleton width="80%" height={26} radius={8} style={{ marginTop: spacing.md, backgroundColor: 'rgba(255,255,255,0.22)' }} />
-            <Skeleton width="100%" height={92} radius={20} style={{ marginTop: spacing.md, backgroundColor: 'rgba(255,255,255,0.16)' }} />
-            <Skeleton width="100%" height={64} radius={16} style={{ marginTop: spacing.md, backgroundColor: 'rgba(255,255,255,0.16)' }} />
+            <View style={styles.homeHeroHeader}>
+              <Skeleton width={58} height={58} radius={29} style={{ backgroundColor: 'rgba(255,255,255,0.18)' }} />
+              <View style={{ flex: 1 }}>
+                <Skeleton width="46%" height={14} radius={7} style={{ backgroundColor: 'rgba(255,255,255,0.22)' }} />
+                <Skeleton width="64%" height={24} radius={8} style={{ marginTop: 6, backgroundColor: 'rgba(255,255,255,0.22)' }} />
+              </View>
+              <Skeleton width={52} height={52} radius={16} style={{ backgroundColor: 'rgba(255,255,255,0.18)' }} />
+            </View>
+            <View style={styles.homeHeroDivider} />
+            <View style={styles.homeHeroRow}>
+              <Skeleton width={104} height={104} radius={52} style={{ backgroundColor: 'rgba(255,255,255,0.18)' }} />
+              <View style={{ flex: 1, gap: 6 }}>
+                <Skeleton width="70%" height={16} radius={6} style={{ backgroundColor: 'rgba(255,255,255,0.22)' }} />
+                <Skeleton width="90%" height={12} radius={6} style={{ backgroundColor: 'rgba(255,255,255,0.18)' }} />
+                <Skeleton width="100%" height={20} radius={10} style={{ marginTop: spacing.sm, backgroundColor: 'rgba(255,255,255,0.18)' }} />
+              </View>
+            </View>
           </LinearGradient>
           <View style={styles.sectionPad}>
             <SkeletonCard lines={3} style={{ marginBottom: spacing.md }} />
@@ -464,133 +623,204 @@ export default function DashboardScreen() {
           />
         }
       >
-        <LinearGradient
-          colors={[...gradients.hero]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0.5, y: 1 }}
-          style={[styles.hero, { paddingTop: insets.top + spacing.md }]}
-        >
-          <View style={styles.heroTop}>
-            <View style={styles.heroCopy}>
-              <View style={styles.heroBadgeRow}>
-                <View style={styles.heroBadge}>
-                  <Text style={styles.heroBadgeText}>{premium ? 'Plus dashboard' : 'Free dashboard'}</Text>
-                </View>
-                <Text style={styles.heroGreet}>{timeGreeting()}</Text>
-              </View>
-              <Text style={styles.heroName} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.82}>
-                {firstName}, focus on the next win.
-              </Text>
-              <Text style={styles.heroTrack} numberOfLines={2}>
-                {examName || 'Review track'} · {remainingQuestions === 0 ? 'Daily goal complete' : `${remainingQuestions} to hit today's goal`}
-              </Text>
+        <Animated.View style={entranceStyle}>
+          <LinearGradient
+            colors={[...gradients.hero]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.5, y: 1 }}
+            style={[styles.homeHeroCard, { marginTop: insets.top + spacing.sm }]}
+          >
+          <View style={styles.homeHeroHeader}>
+            <View style={styles.homeAvatar}>
+              <Text style={styles.homeAvatarText}>{(firstName[0] ?? 'R').toUpperCase()}</Text>
+            </View>
+            <View style={styles.homeGreetCol}>
+              <Text style={styles.homeGreetTop} numberOfLines={1}>{timeGreeting()}</Text>
+              <Text style={styles.homeGreetName} numberOfLines={1}>{firstName} 👋</Text>
             </View>
             <Pressable
-              style={({ pressed }) => [styles.bellBtn, pressed && styles.pressedSoft]}
+              style={({ pressed }) => [styles.homeBell, pressed && styles.pressedSoft]}
               onPress={() => setNotificationSheetOpen(true)}
-              hitSlop={8}
               accessibilityRole="button"
-              accessibilityLabel="Daily reminders"
+              accessibilityLabel={
+                announcements.length > 0
+                  ? `${announcements.length} update${announcements.length === 1 ? '' : 's'} and daily reminders`
+                  : 'Daily reminders'
+              }
             >
               <Ionicons name="notifications-outline" size={22} color="#fff" />
+              {announcements.length > 0 ? (
+                <View style={styles.homeBellBadge}>
+                  <Text style={styles.homeBellBadgeText}>{Math.min(announcements.length, 9)}</Text>
+                </View>
+              ) : null}
             </Pressable>
           </View>
-
-          <View style={styles.heroDashboardCard}>
-            <View style={styles.heroReadinessBlock}>
-              <Pressable
-                style={({ pressed }) => [styles.readinessHeroBtn, pressed && styles.pressedSoft]}
-                onPress={() => readinessScore != null && setReadinessSheetOpen(true)}
-                disabled={readinessScore == null}
-                accessibilityRole="button"
-                accessibilityLabel={
-                  readinessScore != null ? `${readinessScore}% ready. Tap for breakdown.` : 'No readiness score yet'
-                }
-              >
+          <View style={styles.homeHeroDivider} />
+          <View style={styles.homeHeroRow}>
+            <Pressable
+              onPress={() => readinessScore != null && setReadinessSheetOpen(true)}
+              disabled={readinessScore == null}
+              accessibilityRole="button"
+              accessibilityLabel={
+                readinessScore != null ? `${readinessScore}% ready. Tap for breakdown.` : 'No readiness score yet'
+              }
+            >
+              <View style={styles.homeReadinessBlock}>
                 {readinessScore != null ? (
                   <GoalRing
                     percent={readinessScore}
-                    size={58}
-                    strokeWidth={6}
-                    trackColor="rgba(255,255,255,0.18)"
+                    size={84}
+                    strokeWidth={9}
+                    trackColor="rgba(255,255,255,0.14)"
                     fillColor={colors.accent}
                     labelColor="#fff"
                   />
                 ) : (
-                  <View style={styles.heroEmptyRing}>
-                    <Text style={styles.heroEmptyRingText}>—</Text>
+                  <View style={[styles.heroEmptyRing, { width: 84, height: 84, borderRadius: 42, borderWidth: 9 }]}>
+                    <Text style={[styles.heroEmptyRingText, { fontSize: 24 }]}>—</Text>
                   </View>
                 )}
-              </Pressable>
-              <View style={styles.heroReadinessCopy}>
-                <Text style={styles.heroFocusLabel}>Readiness</Text>
-                <Text style={styles.heroFocusValue}>{readinessLabel}</Text>
-                <Text style={styles.heroFocusText}>{planStatusText}</Text>
-              </View>
-            </View>
-            <View style={styles.heroProgressTrack}>
-              <View style={[styles.heroProgressFill, { width: `${dailyGoalPct}%` }]} />
-            </View>
-          </View>
-
-          <View style={styles.heroMetricRail}>
-            <Pressable
-              style={({ pressed }) => [styles.statPill, pressed && styles.pressedSoft]}
-              onPress={() => user && router.push('/streak-freeze')}
-              disabled={!user}
-              accessibilityRole="button"
-              accessibilityLabel={
-                user
-                  ? `${stats.streakDays}-day streak. ${streakFreezes} freeze${streakFreezes === 1 ? '' : 's'}. Tap to manage.`
-                  : `${stats.streakDays}-day streak`
-              }
-            >
-              <View style={styles.statIconWrap}>
-                <Ionicons name="flame" size={20} color={colors.flame} />
-              </View>
-              <View style={styles.statTextWrap}>
-                <Text style={styles.statVal}>{stats.streakDays}</Text>
-                {user && streakFreezes > 0 ? (
-                  <View style={styles.statFreezeRow}>
-                    <Text style={styles.statLbl} numberOfLines={1}>
-                      {streakLabel}
-                    </Text>
-                    <Ionicons name="snow" size={11} color={colors.accent} />
-                    <Text style={[styles.statLbl, { color: colors.accent }]}>{streakFreezes}</Text>
-                  </View>
-                ) : (
-                  <Text style={styles.statLbl} numberOfLines={2}>
-                    {streakLabel}
-                  </Text>
-                )}
+                <Text style={styles.homeReadinessLabel}>Readiness</Text>
               </View>
             </Pressable>
-            <View style={styles.statPill}>
-              <View style={styles.statIconWrap}>
-                <Ionicons name="checkmark-done" size={20} color={colors.accent} />
-              </View>
-              <View style={styles.statTextWrap}>
-                <Text style={styles.statVal}>{questionsDone}</Text>
-                <Text style={styles.statLbl} numberOfLines={2}>
-                  questions today
+            <View style={{ flex: 1 }}>
+              <Text style={styles.homeHeroExam} numberOfLines={1}>{displayExamName}</Text>
+              {examCountdown ? (
+                <Text style={styles.homeHeroSub} numberOfLines={2}>
+                  Exam in <Text style={styles.homeHeroSubAccent}>{examCountdown.daysLeft} days</Text>
+                  {examCountdown.targetLabel ? ` · ${examCountdown.targetLabel}` : ''}
                 </Text>
-              </View>
-            </View>
-            <View style={styles.statPill}>
-              <View style={styles.statIconWrap}>
-                <Ionicons name="trophy-outline" size={20} color="#fff" />
-              </View>
-              <View style={styles.statTextWrap}>
-                <Text style={styles.statVal}>{dailyGoalPct}%</Text>
-                <Text style={styles.statLbl} numberOfLines={2}>
-                  daily goal
-                </Text>
-              </View>
+              ) : (
+                <Text style={styles.homeHeroSub} numberOfLines={2}>{planStatusText}</Text>
+              )}
+              <ReadinessStageProgress stages={readinessStages} styles={styles} colors={colors} />
             </View>
           </View>
-        </LinearGradient>
+          </LinearGradient>
+        </Animated.View>
 
-        <View style={styles.sectionPad}>
+        <Animated.View style={[styles.sectionPad, entranceStyle]}>
+          <View style={styles.planRow}>
+            <View style={styles.planGoalCard}>
+              <GoalRing
+                percent={dailyGoalPct}
+                size={62}
+                strokeWidth={7}
+                trackColor={colors.primaryMuted}
+                fillColor={colors.primary}
+                labelColor={colors.text}
+              />
+              <View style={{ alignItems: 'center' }}>
+                <Text style={styles.planGoalTitle}>Daily goal</Text>
+                <Text style={styles.planGoalHint}>
+                  {dailyGoalText}
+                </Text>
+              </View>
+            </View>
+            <Pressable
+              style={({ pressed }) => [styles.planContinueCard, pressed && styles.cardPressed]}
+              onPress={() => void startPractice()}
+              accessibilityRole="button"
+              accessibilityLabel={`${hasActivity ? 'Continue review' : 'Start review'} for ${displayExamName}`}
+            >
+              <View>
+                <Text style={styles.planContinueLbl}>Continue</Text>
+                <Text style={styles.planContinueTitle} numberOfLines={2}>{displayExamName}</Text>
+                <Text style={styles.planContinueMeta}>
+                  {completedQuizText}
+                </Text>
+              </View>
+              <View style={styles.planResumeBtn}>
+                <Text style={styles.planResumeBtnText}>{hasActivity ? 'Resume' : 'Start'}</Text>
+                <Ionicons name="play" size={13} color={colors.primary} />
+              </View>
+            </Pressable>
+          </View>
+
+          {examCountdown ? (
+            <ExamCountdownCard
+              theme={theme}
+              countdown={examCountdown}
+              examName={displayExamName}
+              onPress={() => router.push('/exam-calendar')}
+            />
+          ) : null}
+
+          <View style={styles.sectionHead}>
+            <View style={styles.sectionHeadCopy}>
+              <Text style={styles.sectionTitle}>Quick practice</Text>
+            </View>
+            <Pressable
+              onPress={() => router.push('/(tabs)/study')}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel="See all subjects"
+            >
+              <View style={styles.weekLink}>
+                <Text style={styles.weekLinkText}>See all</Text>
+                <Ionicons name="chevron-forward" size={15} color={colors.primary} />
+              </View>
+            </Pressable>
+          </View>
+          <View style={styles.qpTrioWrap}>
+            {quickPracticeItems.map((qp, i) => {
+              const barColor =
+                !qp.hasData ? colors.border : qp.pct >= 75 ? colors.success : qp.pct >= 50 ? colors.accentDark : colors.error;
+              const textColor =
+                !qp.hasData ? colors.textMuted : qp.pct >= 75 ? colors.success : qp.pct >= 50 ? colors.accentDark : colors.error;
+              return (
+                <Pressable
+                  key={qp.name + i}
+                  style={({ pressed }) => [styles.qpCard, pressed && styles.cardPressed]}
+                  onPress={() => openQuickPractice(qp)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${qp.name}${qp.hasData ? ` ${qp.pct}% mastery` : ''}`}
+                >
+                  <View style={styles.qpCardIcon}>
+                    <Ionicons name="flash" size={17} color={colors.primary} />
+                  </View>
+                  <Text style={styles.qpCardName} numberOfLines={2}>{qp.name}</Text>
+                  <Text style={[styles.qpCardMeta, { color: textColor }]} numberOfLines={1}>
+                    {qp.hasData ? `${qp.pct}% mastery` : 'Start quiz'}
+                  </Text>
+                  <View style={styles.qpCardBar}>
+                    <View
+                      style={[
+                        styles.qpCardBarFill,
+                        { width: `${qp.hasData ? qp.pct : 0}%`, backgroundColor: barColor },
+                      ]}
+                    />
+                  </View>
+                </Pressable>
+              );
+            })}
+          </View>
+
+          {!premium ? (
+            <Pressable
+              onPress={() => router.push('/subscribe')}
+              accessibilityRole="button"
+              accessibilityLabel="See ReviewNatin Plus plans"
+              style={({ pressed }) => pressed && styles.cardPressed}
+            >
+              <LinearGradient
+                colors={[...gradients.hero]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.plusUpsell}
+              >
+                <View style={styles.plusUpsellBadge}>
+                  <Ionicons name="star" size={11} color={colors.primaryDark} />
+                  <Text style={styles.plusUpsellBadgeText}>PLUS</Text>
+                </View>
+                <Text style={styles.plusUpsellTitle}>Full mocks & offline packs{'\n'}No ads while you study</Text>
+                <Text style={styles.plusUpsellSub}>From ₱{monthlyPlusPrice}/mo · cancel anytime</Text>
+                <PremiumStudyPackArt styles={styles} colors={colors} floatAnim={floatAnim} />
+              </LinearGradient>
+            </Pressable>
+          ) : null}
+
           {user && pasapath ? (
             <View style={styles.pasapathCard}>
               <View style={styles.pasapathHead}>
@@ -691,140 +921,18 @@ export default function DashboardScreen() {
             <View style={[styles.pasapathCard, { marginBottom: spacing.md }]}>
               <Text style={styles.pasapathLbl}>{"Today's PasaPath"}</Text>
               <Text style={[styles.pasapathMeta, { marginBottom: spacing.md }]}>
-                Tapusin ang unang quiz para mabuo ang daily study plan mo.
+                Finish one quiz to build your daily study plan.
               </Text>
-              <PrimaryButton label="Magsimulang mag-practice" onPress={() => void startPractice()} />
+              <PrimaryButton label="Start practice" onPress={() => void startPractice()} />
             </View>
           ) : null}
-
-          <View style={styles.progressSnapshotCard}>
-            <View style={styles.progressSnapshotTop}>
-              <View style={styles.progressSnapshotTitle}>
-                <Text style={styles.goalLbl}>Progress snapshot</Text>
-                <Text style={styles.goalTitle}>
-                  {questionsDone} / {questionsTarget} questions today
-                </Text>
-              </View>
-              <View style={styles.progressPercentBadge}>
-                <Text style={styles.progressPercentText}>{dailyGoalPct}%</Text>
-              </View>
-            </View>
-            <View style={styles.snapshotProgressTrack}>
-              <View style={[styles.snapshotProgressFill, { width: `${dailyGoalPct}%` }]} />
-            </View>
-            <View style={styles.snapshotFooter}>
-              <View style={styles.snapshotMetric}>
-                <Text style={styles.snapshotMetricValue}>{stats.totalAnswered}</Text>
-                <Text style={styles.snapshotMetricLabel}>answered</Text>
-              </View>
-              <View style={styles.snapshotMetric}>
-                <Text style={styles.snapshotMetricValue}>{showAccuracy ? `${stats.accuracyPercent}%` : '—'}</Text>
-                <Text style={styles.snapshotMetricLabel}>accuracy</Text>
-              </View>
-              <View style={styles.snapshotMetric}>
-                <Text style={styles.snapshotMetricValue}>{stats.sessionCount}</Text>
-                <Text style={styles.snapshotMetricLabel}>sessions</Text>
-              </View>
-            </View>
-            <Text style={styles.goalHint}>
-              {questionsDone >= questionsTarget
-                ? 'Daily target complete. Add a mock or mistake review if you still have energy.'
-                : `${remainingQuestions} more question${remainingQuestions === 1 ? '' : 's'} to finish today's target.`}
-            </Text>
-          </View>
-
-          {examCountdown ? (
-            <ExamCountdownCard
-              theme={theme}
-              countdown={examCountdown}
-              examName={examName || 'Your exam'}
-              onPress={() => router.push('/exam-calendar')}
-            />
-          ) : null}
-
-          <Pressable
-            style={styles.continueCard}
-            onPress={() => void startPractice()}
-            accessibilityRole="button"
-            accessibilityLabel={`${hasActivity ? 'Continue review' : 'Start review'} for ${examName || 'your exam'}`}
-            accessibilityHint="Starts a practice quiz"
-          >
-            <View style={styles.continueRow}>
-              <View style={styles.continueIcon}>
-                <Text style={styles.continueAbbr}>{examAbbr(examSlug)}</Text>
-              </View>
-              <View style={styles.continueCopy}>
-                <Text style={styles.continueLbl}>
-                  {hasActivity ? 'Ituloy ang review' : 'Simulan ang review'}
-                </Text>
-                <Text style={styles.continueTitle}>{examName || 'Your exam'}</Text>
-              </View>
-              <View style={styles.continueActionPill}>
-                <Text style={styles.continueActionText}>Start</Text>
-                <Ionicons name="chevron-forward" size={14} color="#fff" />
-              </View>
-            </View>
-            <Text style={styles.continueMeta}>
-              {hasActivity
-                ? `${stats.sessionCount} quiz${stats.sessionCount === 1 ? '' : 'zes'} completed`
-                : 'Simulan ang unang quiz mo.'}
-            </Text>
-          </Pressable>
-
-          <View style={styles.sectionHead}>
-            <Text style={styles.sectionTitle}>Review tools</Text>
-          </View>
-          <View style={styles.quickActions}>
-            {[
-              {
-                label: 'Practice',
-                sub: '12-item set',
-                icon: 'flash-outline' as const,
-                onPress: () => void startPractice(),
-              },
-              {
-                label: 'Mock',
-                sub: 'Timed exam',
-                icon: 'document-text-outline' as const,
-                onPress: () => void launchMock(),
-              },
-              {
-                label: 'Mistakes',
-                sub: 'Review misses',
-                icon: 'alert-circle-outline' as const,
-                onPress: () => router.push('/mistakes'),
-              },
-              {
-                label: 'Flashcards',
-                sub: 'Due cards',
-                icon: 'layers-outline' as const,
-                onPress: () => router.push({ pathname: '/flashcards', params: { examSlug } }),
-              },
-            ].map((action) => (
-              <Pressable
-                key={action.label}
-                style={({ pressed }) => [styles.quickAction, pressed && styles.cardPressed]}
-                onPress={action.onPress}
-                accessibilityRole="button"
-                accessibilityLabel={action.label}
-              >
-                <View style={styles.quickActionIcon}>
-                  <Ionicons name={action.icon} size={20} color={colors.primary} />
-                </View>
-                <View style={styles.quickActionCopy}>
-                  <Text style={styles.quickActionText}>{action.label}</Text>
-                  <Text style={styles.quickActionSub}>{action.sub}</Text>
-                </View>
-              </Pressable>
-            ))}
-          </View>
 
           {subjects.length > 0 ? (
             <>
               <View style={styles.sectionHead}>
                 <View style={styles.sectionHeadCopy}>
                   <Text style={styles.sectionTitle}>Subject shortcuts</Text>
-                  <Text style={styles.sectionSub}>Jump into the review areas with ready questions.</Text>
+                  <Text style={styles.sectionSub}>Jump into review areas with ready questions.</Text>
                 </View>
               </View>
               {subjects.map((subject, index) => (
@@ -879,9 +987,9 @@ export default function DashboardScreen() {
                     <Ionicons name="grid-outline" size={18} color={colors.primary} />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Text style={styles.quickAllSubjectsTitle}>Tingnan lahat ng subjects</Text>
+                    <Text style={styles.quickAllSubjectsTitle}>View all subjects</Text>
                     <Text style={styles.quickAllSubjectsMeta}>
-                      {subjectCount - subjects.length} more subject{subjectCount - subjects.length === 1 ? '' : 's'} sa Review tab
+                      {subjectCount - subjects.length} more subject{subjectCount - subjects.length === 1 ? '' : 's'} in Review
                     </Text>
                   </View>
                   <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
@@ -894,7 +1002,7 @@ export default function DashboardScreen() {
             {!user || (contentGate && !contentGate.meetsMinimum) || !premium || announcements.length > 0 ? (
               <View style={styles.sectionHead}>
                 <View style={styles.sectionHeadCopy}>
-                  <Text style={styles.sectionTitle}>Updates and access</Text>
+                  <Text style={styles.sectionTitle}>Updates</Text>
                   <Text style={styles.sectionSub}>Account, content, and subscription notices.</Text>
                 </View>
               </View>
@@ -907,25 +1015,15 @@ export default function DashboardScreen() {
                 accessibilityRole="button"
                 accessibilityLabel="Log in to save progress"
               >
-                <Text style={styles.guestBannerTitle}>Mag-log in para ma-save ang progress mo</Text>
+                <Text style={styles.guestBannerTitle}>Log in to save your progress</Text>
                 <Text style={styles.guestBannerSub}>
-                  PasaPath, streak, Mistake Bank, at readiness — naka-sync lahat kapag may account ka.
+                  Sync PasaPath, streaks, Mistake Bank, and readiness across devices.
                 </Text>
               </Pressable>
             ) : null}
 
             {contentGate && !contentGate.meetsMinimum ? (
               <ContentGateBanner theme={theme} status={contentGate} compact />
-            ) : null}
-
-            {user && !premium ? (
-              <PremiumLock
-                title="Unlock ReviewNatin Plus"
-                description="Unlimited mocks, offline packs, at walang ads."
-                ctaLabel="See plans"
-                onPress={() => router.push('/subscribe')}
-                style={{ marginBottom: spacing.md }}
-              />
             ) : null}
 
             {!premium ? <AdBanner onPress={() => router.push('/subscribe')} /> : null}
@@ -952,7 +1050,7 @@ export default function DashboardScreen() {
               </Pressable>
             ) : null}
           </View>
-        </View>
+        </Animated.View>
       </ScrollView>
 
       <ReadinessBreakdownSheet

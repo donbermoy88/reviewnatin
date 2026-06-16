@@ -29,6 +29,11 @@ export type UserEntitlement = {
   storeProductId?: string | null;
 };
 
+// Last-resort offline fallback ONLY. Source-of-truth precedence for the
+// displayed price is: store-reported localized price (resolved at display time
+// via fetchStoreProductPricing) > DB `price_php` > this map. It exists so a
+// build with no store connection and an incomplete `subscription_products` row
+// still renders *something*; it must never silently shadow the DB or the store.
 const CANONICAL_PRODUCT_PRICING: Record<string, { pricePhp: number; durationDays: number | null }> = {
   'com.reviewnatin.plus.monthly': { pricePhp: 159, durationDays: 30 },
   'com.reviewnatin.plus.six_months': { pricePhp: 699, durationDays: 180 },
@@ -68,8 +73,10 @@ export async function fetchSubscriptionProducts(): Promise<SubscriptionProduct[]
       sku: row.sku,
       tier: row.tier,
       examTypeId: row.exam_type_id,
-      pricePhp: canonical?.pricePhp ?? row.price_php,
-      durationDays: canonical?.durationDays ?? row.duration_days,
+      // DB is authoritative over the offline fallback map; the store-localized
+      // price (resolved in the UI) overrides both.
+      pricePhp: row.price_php ?? canonical?.pricePhp ?? 0,
+      durationDays: row.duration_days ?? canonical?.durationDays ?? null,
     };
   });
 }

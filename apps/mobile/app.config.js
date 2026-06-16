@@ -51,27 +51,40 @@ module.exports = () => {
     );
   }
 
-  const admobIos = process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID;
-  const admobAndroid = process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID;
-  if (admobIos || admobAndroid) {
-    if (!admobIos || !admobAndroid) {
+  // react-native-google-mobile-ads is always autolinked, and its
+  // MobileAdsInitProvider crashes the app at process start if the manifest has
+  // no GADApplicationIdentifier / com.google.android.gms.ads.APPLICATION_ID. So
+  // we ALWAYS inject the plugin with a valid app ID. Production must supply the
+  // REAL ids (test ids would serve test ads / violate AdMob policy); non-store
+  // builds fall back to Google's official public TEST app ids so no dev/preview
+  // build can ever crash on launch. (Ad *unit* ids are separate — ads stay off
+  // until EXPO_PUBLIC_ADMOB_*_UNIT_ID are set; see lib/ads/config.ts.)
+  const ADMOB_TEST_ANDROID_APP_ID = 'ca-app-pub-3940256099942544~3347511713';
+  const ADMOB_TEST_IOS_APP_ID = 'ca-app-pub-3940256099942544~1458002511';
+  let admobAndroid = process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID;
+  let admobIos = process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID;
+  if (isStoreBuild) {
+    if (!admobAndroid || !admobIos) {
       throw new Error(
-        'AdMob is partially configured. Set BOTH EXPO_PUBLIC_ADMOB_IOS_APP_ID and ' +
-          'EXPO_PUBLIC_ADMOB_ANDROID_APP_ID, or neither — a missing GADApplicationIdentifier ' +
-          'crashes the Google Mobile Ads SDK at launch.'
+        'Both EXPO_PUBLIC_ADMOB_ANDROID_APP_ID and EXPO_PUBLIC_ADMOB_IOS_APP_ID are ' +
+          'required for production builds. Set your REAL AdMob app ids in the EAS ' +
+          'production profile env — test ids must never ship to the store.'
       );
     }
-    plugins.push([
-      'react-native-google-mobile-ads',
-      {
-        androidAppId: admobAndroid,
-        iosAppId: admobIos,
-        // Required by Apple when the App Tracking Transparency prompt may show.
-        userTrackingUsageDescription:
-          'This identifier is used to deliver and measure relevant ads. You can keep using ReviewNatin without allowing tracking.',
-      },
-    ]);
+  } else {
+    admobAndroid = admobAndroid || ADMOB_TEST_ANDROID_APP_ID;
+    admobIos = admobIos || ADMOB_TEST_IOS_APP_ID;
   }
+  plugins.push([
+    'react-native-google-mobile-ads',
+    {
+      androidAppId: admobAndroid,
+      iosAppId: admobIos,
+      // Required by Apple when the App Tracking Transparency prompt may show.
+      userTrackingUsageDescription:
+        'This identifier is used to deliver and measure relevant ads. You can keep using ReviewNatin without allowing tracking.',
+    },
+  ]);
 
   return {
     expo: {

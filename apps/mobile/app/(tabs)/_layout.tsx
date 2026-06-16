@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { useMemo } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createTabLayoutStyles } from '../../lib/themed-styles';
@@ -13,26 +13,43 @@ function TabIcon({
   focused,
   colors,
   styles,
+  iconSize,
 }: {
   name: keyof typeof Ionicons.glyphMap;
   focused: boolean;
   colors: ReturnType<typeof useAppTheme>['colors'];
   styles: ReturnType<typeof createTabLayoutStyles>;
+  iconSize: number;
 }) {
   return (
     <View style={[styles.iconWrap, focused && styles.iconWrapActive]}>
       {focused ? <View style={styles.activeBar} /> : null}
-      <Ionicons name={name} size={21} color={focused ? colors.primary : colors.textLight} />
+      <Ionicons name={name} size={iconSize} color={focused ? colors.primary : colors.textLight} />
     </View>
   );
 }
 
+const TABS: {
+  name: string;
+  label: string;
+  icon: keyof typeof Ionicons.glyphMap;
+  activeIcon: keyof typeof Ionicons.glyphMap;
+}[] = [
+  { name: 'index', label: 'Home', icon: 'home-outline', activeIcon: 'home' },
+  { name: 'study', label: 'Review', icon: 'layers-outline', activeIcon: 'layers' },
+  { name: 'leaderboard', label: 'Ranks', icon: 'trophy-outline', activeIcon: 'trophy' },
+  { name: 'progress', label: 'Profile', icon: 'person-outline', activeIcon: 'person' },
+];
+
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
   const theme = useAppTheme();
   const { colors, fonts } = theme;
   const styles = useMemo(() => createTabLayoutStyles(theme), [theme]);
-  const bottomInset = Math.max(insets.bottom, Platform.OS === 'android' ? 8 : 0);
+  const bottomInset = Math.max(insets.bottom, Platform.OS === 'android' ? 12 : 0);
+  // Responsive icon size: 20px on narrow phones (<360w), 22px on large (≥412w), else 21px.
+  const iconSize = width < 360 ? 20 : width >= 412 ? 22 : 21;
   const tabBarHeight = TAB_BAR_BASE + bottomInset;
 
   return (
@@ -49,7 +66,9 @@ export default function TabsLayout() {
           borderTopWidth: StyleSheet.hairlineWidth,
           height: tabBarHeight,
           paddingTop: 8,
-          paddingBottom: bottomInset,
+          // Reserve the device safe-area inset so the bar (and its labels) sit above
+          // the system gesture / 3-button nav bar on every device.
+          paddingBottom: bottomInset + 4,
           ...Platform.select({
             android: { elevation: 12 },
             ios: {
@@ -66,46 +85,25 @@ export default function TabsLayout() {
         sceneStyle: { backgroundColor: colors.background },
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'home' : 'home-outline'} focused={focused} colors={colors} styles={styles} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="study"
-        options={{
-          title: 'Review',
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'layers' : 'layers-outline'} focused={focused} colors={colors} styles={styles} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="leaderboard"
-        options={{
-          title: 'Ranks',
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'trophy' : 'trophy-outline'} focused={focused} colors={colors} styles={styles} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="progress"
-        options={{
-          title: 'Profile',
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon name={focused ? 'person' : 'person-outline'} focused={focused} colors={colors} styles={styles} />
-          ),
-        }}
-      />
+      {TABS.map((tab) => (
+        <Tabs.Screen
+          key={tab.name}
+          name={tab.name}
+          options={{
+            title: tab.label,
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <TabIcon
+                name={focused ? tab.activeIcon : tab.icon}
+                focused={focused}
+                colors={colors}
+                styles={styles}
+                iconSize={iconSize}
+              />
+            ),
+          }}
+        />
+      ))}
       <Tabs.Screen name="settings" options={{ href: null, headerShown: false }} />
     </Tabs>
   );

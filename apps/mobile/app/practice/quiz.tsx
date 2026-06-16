@@ -532,6 +532,23 @@ export default function PracticeQuizScreen() {
             : []
         )
       : finalizeAnswers(answers, current, selected, revealed, elapsedQ, revealResult);
+
+    // Strict exams (mock/board) defer grading to the server, but guests have no
+    // server session — without this their answer sheet stays isCorrect:false and
+    // the score is always 0%. Grade it client-side via the anon check RPC.
+    if (isStrictExam && !user && !offlineMode) {
+      await Promise.all(
+        finalAnswers.map(async (a, i) => {
+          if (!a.selectedChoiceId) return;
+          try {
+            const r = await checkQuestionAnswer(a.questionId, a.selectedChoiceId);
+            if (r) finalAnswers[i] = { ...a, isCorrect: r.isCorrect };
+          } catch {
+            /* leave as-is — a failed grade just counts the item wrong */
+          }
+        })
+      );
+    }
     const totalCorrect = finalAnswers.filter((a) => a.isCorrect).length;
     const score = questions.length ? Math.round((totalCorrect / questions.length) * 100) : 0;
     const duration = Math.round((Date.now() - startedAt.current) / 1000);
@@ -862,17 +879,19 @@ export default function PracticeQuizScreen() {
               </Text>
             </Pressable>
           ) : (
-            <View style={styles.segments}>
-              {questions.map((_, i) => (
+            <View style={styles.progressWrap}>
+              <View style={styles.progressTrack}>
                 <View
-                  key={i}
                   style={[
-                    styles.segment,
-                    i < index && styles.segmentDone,
-                    i === index && styles.segmentActive,
+                    styles.progressFill,
+                    { width: `${((index + 1) / questions.length) * 100}%` },
                   ]}
                 />
-              ))}
+              </View>
+              <Text style={styles.progressCounter}>
+                {index + 1}
+                <Text style={styles.progressCounterMute}>/{questions.length}</Text>
+              </Text>
             </View>
           )}
           <View style={[styles.timer, (isStrictExam || isTimed) && timeLeft < 60 && { backgroundColor: colors.errorBg }]}>

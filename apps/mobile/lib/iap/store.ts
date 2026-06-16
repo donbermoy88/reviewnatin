@@ -2,7 +2,12 @@ import { Platform } from 'react-native';
 import { verifyPurchaseWithServer } from '../api/iap';
 import { isSubscriptionSku } from './sku-types';
 import { canUseStorePurchases } from './availability';
-import { ANDROID_PRODUCT_SKUS, IOS_PRODUCT_SKUS, type RestorePurchasesResult } from './product-skus';
+import {
+  ANDROID_PRODUCT_SKUS,
+  IOS_PRODUCT_SKUS,
+  canonicalSkuForStore,
+  type RestorePurchasesResult,
+} from './product-skus';
 
 type IapModule = typeof import('react-native-iap');
 type Purchase = import('react-native-iap').Purchase;
@@ -174,6 +179,46 @@ export async function prefetchStoreProducts(): Promise<void> {
     await iap.fetchProducts({ skus, type: 'all' });
     await iap.endConnection().catch(() => undefined);
   } catch {
+    await iap.endConnection().catch(() => undefined);
+  }
+}
+
+/** The store-reported localized price for a product. */
+export type StorePrice = {
+  /** Formatted, locale + currency aware string from the store, e.g. "₱159.00". */
+  displayPrice: string;
+  /** Numeric price in the currency's major units (e.g. 159), or null if unknown. */
+  amount: number | null;
+  /** ISO 4217 currency code reported by the store. */
+  currency: string;
+};
+
+/**
+ * Fetch live, store-reported localized prices keyed by canonical (DB) SKU.
+ * This is the source of truth for what the user is actually charged — Google
+ * Play / App Store require the displayed price to match it. Returns {} when the
+ * store is unavailable (dev/simulator/guest builds) so callers fall back to the
+ * DB price.
+ */
+export async function fetchStoreProductPricing(): Promise<Record<string, StorePrice>> {
+  const iap = await connectStore();
+  if (!iap) return {};
+
+  try {
+    const products = await iap.fetchProducts({ skus: storeSkus(), type: 'all' });
+    const out: Record<string, StorePrice> = {};
+    for (const product of products ?? []) {
+      if (!product?.id || !product.displayPrice) continue;
+      out[canonicalSkuForStore(product.id)] = {
+        displayPrice: product.displayPrice,
+        amount: typeof product.price === 'number' ? product.price : null,
+        currency: product.currency ?? '',
+      };
+    }
+    return out;
+  } catch {
+    return {};
+  } finally {
     await iap.endConnection().catch(() => undefined);
   }
 }

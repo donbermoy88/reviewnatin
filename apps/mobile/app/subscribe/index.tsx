@@ -7,8 +7,6 @@ import * as WebBrowser from 'expo-web-browser';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
 import { ManagePlusCard } from '../../components/manage-plus-card';
-import { Pill } from '../../components/pill';
-import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { fetchExamBySlug } from '../../lib/api/catalog';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
@@ -27,6 +25,14 @@ import {
 
 const isDevBuild = __DEV__;
 const MONTHLY_BASE_PRICE_PHP = 159;
+
+const PLUS_FEATURES = [
+  'All exams unlocked (CSE, LET, PNLE)',
+  'Unlimited practice & full mock exams',
+  'Offline review packs',
+  'AI tutor & explanations',
+  'No ads',
+];
 
 const MONTHLY_FEATURES = [
   'Access to all Phase 1 exams',
@@ -77,29 +83,6 @@ type ProductRow = {
   examTypeId?: string | null;
 };
 
-function formatSkuLabel(sku: string): string {
-  const normalized = sku.toLowerCase();
-  if (normalized.includes('six_months')) return 'Plus 6 Months';
-  if (normalized.includes('yearly')) return 'Plus Yearly';
-  if (normalized.includes('monthly')) return 'Plus Monthly';
-  if (normalized.includes('cse_pro')) return 'CSE Professional';
-  if (normalized.includes('cse_sub')) return 'CSE Subprofessional';
-  if (normalized.includes('let_elem')) return 'LET Elementary';
-  if (normalized.includes('let_sec')) return 'LET Secondary';
-  if (normalized.includes('pnle')) return 'PNLE';
-  return sku
-    .replace(/com\.reviewnatin\.(exampass\.|plus\.|)/g, '')
-    .replace(/[._]/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-function priceSuffix(sku: string): string {
-  if (sku.includes('six_months')) return '/6 months';
-  if (sku.includes('yearly')) return '/year';
-  if (sku.includes('monthly')) return '/month';
-  return ' one-time';
-}
-
 function isYearlyPlus(sku: string): boolean {
   return sku.toLowerCase().includes('yearly');
 }
@@ -140,37 +123,6 @@ function formatPeso(amount: number): string {
   return `₱${amount.toLocaleString('en-PH')}`;
 }
 
-function planSavingsLabel(product: ProductRow): string | null {
-  const durationMonths = isSixMonthPlus(product.sku) ? 6 : isYearlyPlus(product.sku) ? 12 : null;
-  if (!durationMonths) return null;
-
-  const monthlyEquivalent = MONTHLY_BASE_PRICE_PHP * durationMonths;
-  if (monthlyEquivalent <= product.pricePhp) return null;
-  const savingsPct = Math.round(((monthlyEquivalent - product.pricePhp) / monthlyEquivalent) * 100);
-  return `Save around ${savingsPct}%`;
-}
-
-function FeatureList({
-  items,
-  styles,
-  iconColor,
-}: {
-  items: string[];
-  styles: ReturnType<typeof createStyles>;
-  iconColor: string;
-}) {
-  return (
-    <View style={styles.featureList}>
-      {items.map((item) => (
-        <View key={item} style={styles.featureRow}>
-          <Ionicons name="checkmark-circle" size={16} color={iconColor} />
-          <Text style={styles.featureText}>{item}</Text>
-        </View>
-      ))}
-    </View>
-  );
-}
-
 export default function SubscribeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -188,6 +140,7 @@ export default function SubscribeScreen() {
   const {
     products,
     entitlements,
+    storePrices,
     loading,
     activateDemoPass,
     isPremium,
@@ -201,6 +154,9 @@ export default function SubscribeScreen() {
   const [restoring, setRestoring] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
+  const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
+  const [comparePlansOpen, setComparePlansOpen] = useState(false);
+  const [ewalletPickerOpen, setEwalletPickerOpen] = useState(false);
   const [sheet, setSheet] = useState<
     | null
     | { kind: 'purchase_error'; message: string }
@@ -276,6 +232,60 @@ export default function SubscribeScreen() {
     return order(a.sku) - order(b.sku);
   });
   const hasAccess = isPremium(examTypeId);
+
+  useEffect(() => {
+    if (selectedPlanId) return;
+    const best = sortedPlus.find((p) => isSixMonthPlus(p.sku)) ?? sortedPlus[0];
+    if (best) setSelectedPlanId(best.id);
+  }, [sortedPlus, selectedPlanId]);
+
+  const selectedProduct = sortedPlus.find((p) => p.id === selectedPlanId) ?? null;
+
+  // Source of truth for what the user is charged is the store's localized price.
+  // Fall back to the DB price only when the store is unavailable (dev/guest).
+  const resolvePrice = (product: ProductRow): { display: string; amount: number } => {
+    const store = storePrices[product.sku];
+    const amount = typeof store?.amount === 'number' && store.amount > 0 ? store.amount : product.pricePhp;
+    return { display: store?.displayPrice ?? formatPeso(product.pricePhp), amount };
+  };
+
+  // Per-month savings are benchmarked against the actual monthly plan's resolved
+  // price, not a hardcoded constant, so the "save X%" label stays truthful.
+  const monthlyPlan = sortedPlus.find((p) => p.sku.toLowerCase().includes('monthly'));
+  const monthlyBaseAmount = monthlyPlan ? resolvePrice(monthlyPlan).amount : MONTHLY_BASE_PRICE_PHP;
+
+  function planMonthlyEquiv(product: ProductRow): number {
+    const { amount } = resolvePrice(product);
+    if (isSixMonthPlus(product.sku)) return Math.round(amount / 6);
+    if (isYearlyPlus(product.sku)) return Math.round(amount / 12);
+    return amount;
+  }
+
+  function planSubLabel(product: ProductRow): string {
+    if (isSixMonthPlus(product.sku) || isYearlyPlus(product.sku)) {
+      const monthly = planMonthlyEquiv(product);
+      const total = resolvePrice(product).amount;
+      const baselineMonths = isSixMonthPlus(product.sku) ? 6 : 12;
+      const baseline = monthlyBaseAmount * baselineMonths;
+      const savePct = baseline > total ? Math.round(((baseline - total) / baseline) * 100) : 0;
+      return savePct > 0
+        ? `₱${monthly}/mo · save ${savePct}%`
+        : `₱${monthly}/mo`;
+    }
+    return 'Starter access';
+  }
+
+  function planShortName(product: ProductRow): string {
+    if (isSixMonthPlus(product.sku)) return '6-Month Pass';
+    if (isYearlyPlus(product.sku)) return 'Yearly';
+    return 'Monthly';
+  }
+
+  function planSuffix(product: ProductRow): string {
+    if (isSixMonthPlus(product.sku)) return '/6 mo';
+    if (isYearlyPlus(product.sku)) return '/year';
+    return '/month';
+  }
 
   const requireLogin = () => {
     addAppBreadcrumb('paywall', 'login required from subscribe screen');
@@ -362,197 +372,194 @@ export default function SubscribeScreen() {
     }
   };
 
-  const renderPlanCard = (product: ProductRow) => {
-    const meta = getPlusPlanMeta(product.sku);
-    const highlighted = meta.kind === 'six_months';
-    const label = formatSkuLabel(product.sku);
-    const suffix = priceSuffix(product.sku);
-    const isBusy = busy === product.id || purchasingSku === product.sku;
-    const plusActive = hasAccess;
-    const savingsLabel = planSavingsLabel(product);
+  const ctaLabel = hasAccess
+    ? 'Plus active'
+    : busy || purchasingSku
+      ? 'Processing…'
+      : selectedProduct
+        ? `Start ${planShortName(selectedProduct)} · ${resolvePrice(selectedProduct).display}`
+        : 'Choose a plan';
 
-    const primaryLabel = isDevBuild
-      ? isBusy
-        ? 'Activating…'
-        : plusActive
-          ? 'Active'
-          : 'Activate (demo)'
-        : isBusy
-          ? 'Processing…'
-          : plusActive
-            ? 'Active'
-            : 'Subscribe';
-
-    const onPrimary = () => {
-      if (isDevBuild) void buyDemo(product.id, product.tier);
-      else void buyStore(product.sku);
-    };
-
-    return (
-      <View
-        key={product.id}
-        style={[styles.planCard, highlighted && styles.planCardHighlighted]}
-      >
-        <View style={styles.planCardTop}>
-          <View style={{ flex: 1 }}>
-            {meta.badge ? (
-              <View style={styles.bestValueBadge}>
-                <Text style={styles.bestValueText}>{meta.badge}</Text>
-              </View>
-            ) : null}
-            <Text style={styles.planName}>{label}</Text>
-            <Text style={styles.planPositioning}>{meta.positioning}</Text>
-            <View style={styles.priceRow}>
-              <Text style={styles.planPrice}>{formatPeso(product.pricePhp)}</Text>
-              <Text style={styles.planSuffix}>{suffix}</Text>
-            </View>
-            {savingsLabel ? (
-              <Text style={styles.savingsCallout}>{savingsLabel}</Text>
-            ) : null}
-          </View>
-          {plusActive ? (
-            <Pill color={colors.accentDark} bg={colors.accent}>
-              ACTIVE
-            </Pill>
-          ) : null}
-        </View>
-
-        <Text style={styles.featureIntro}>{meta.featureIntro}</Text>
-        <FeatureList items={meta.features} styles={styles} iconColor={colors.primary} />
-
-        <PrimaryButton
-          label={primaryLabel}
-          variant={highlighted ? 'primary' : 'outline'}
-          disabled={!!busy || !!purchasingSku || plusActive}
-          onPress={onPrimary}
-          accessibilityLabel={`${primaryLabel} — ${label}`}
-        />
-
-        {!isDevBuild && !plusActive ? (
-          <View style={styles.ewalletRow}>
-            <PrimaryButton
-              label="GCash"
-              variant="outline"
-              style={{ flex: 1 }}
-              onPress={() => void payWithEwallet(product.sku, 'gcash')}
-            />
-            <PrimaryButton
-              label="Maya"
-              variant="outline"
-              style={{ flex: 1 }}
-              onPress={() => void payWithEwallet(product.sku, 'maya')}
-            />
-          </View>
-        ) : null}
-      </View>
-    );
+  const onCtaPress = () => {
+    if (hasAccess || !selectedProduct) return;
+    if (isDevBuild) void buyDemo(selectedProduct.id, selectedProduct.tier);
+    else void buyStore(selectedProduct.sku);
   };
 
   return (
     <View style={styles.root}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }} showsVerticalScrollIndicator={false}>
-        <LinearGradient
-          colors={[...gradients.hero]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0.5, y: 1 }}
-          style={[styles.header, { paddingTop: insets.top + spacing.md }]}
-        >
-          <View style={styles.headerNav}>
-            <Pressable
-              onPress={() => router.back()}
-              hitSlop={8}
-              style={styles.backBtn}
-              accessibilityRole="button"
-              accessibilityLabel="Go back"
-            >
-              <Ionicons name="chevron-back" size={22} color="#fff" />
-            </Pressable>
-            {hasAccess ? <Pill color={colors.accentDark} bg={colors.accent}>ACTIVE</Pill> : null}
+      <LinearGradient
+        colors={[...gradients.hero]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.5, y: 1 }}
+        style={StyleSheet.absoluteFill}
+      />
+      <ScrollView
+        contentContainerStyle={{
+          paddingTop: insets.top + spacing.sm,
+          paddingHorizontal: spacing.lg,
+          paddingBottom: insets.bottom + 240,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.topRow}>
+          <View style={styles.plusBadge}>
+            <Ionicons name="star" size={12} color={colors.primaryDark} />
+            <Text style={styles.plusBadgeText}>PLUS</Text>
           </View>
-
-          <Text style={styles.headerTitle}>ReviewNatin Plus</Text>
-          <Text style={styles.headerSub}>
-            Study without limits — mocks, Mistake Bank, offline packs, and no ads.
-          </Text>
-
-          <View style={styles.headerPills}>
-            {['Unlimited', 'PasaPath', 'Offline', 'No ads'].map((item) => (
-              <View key={item} style={styles.headerPill}>
-                <Text style={styles.headerPillText}>{item}</Text>
-              </View>
-            ))}
-          </View>
-        </LinearGradient>
-
-        <View style={styles.body}>
-          {paymentConfirmed ? (
-            <View style={styles.successBanner}>
-              <Ionicons name="checkmark-circle" size={20} color={colors.success} />
-              <Text style={styles.successBannerText}>Payment confirmed — your subscription is now active!</Text>
-            </View>
-          ) : null}
-
-          {pendingRef && !hasAccess ? (
-            <Pressable
-              style={styles.pendingCard}
-              onPress={() => void pollCheckoutStatus()}
-              accessibilityRole="button"
-              accessibilityLabel="Refresh checkout status"
-            >
-              <Ionicons name="time-outline" size={20} color={colors.primary} />
-              <View style={{ flex: 1 }}>
-                <Text style={styles.pendingTitle}>Payment pending</Text>
-                <Text style={styles.pendingSub}>
-                  {checkingPayment ? 'Checking…' : `Ref ${pendingRef} · Tap to refresh`}
-                </Text>
-              </View>
-              <Ionicons name="refresh" size={18} color={colors.textMuted} />
-            </Pressable>
-          ) : null}
-
-          {isDevBuild ? (
-            <View style={styles.devBanner}>
-              <Ionicons name="code-slash" size={16} color={colors.accentDark} />
-              <Text style={styles.devBannerText}>
-                {Platform.OS === 'android'
-                  ? 'Dev build — purchases are simulated. On a Google Play build, real Play Billing applies.'
-                  : 'Dev build — purchases are simulated. On TestFlight/App Store, real StoreKit billing applies.'}
-              </Text>
-            </View>
-          ) : null}
-
-          <ManagePlusCard
-            entitlements={entitlements}
-            restoring={restoring}
-            onRestore={user ? () => void handleRestore() : undefined}
-            compact
-          />
-
-          {loading ? (
-            <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.lg }} />
-          ) : (
-            <>
-              <Text style={styles.sectionTitle}>Choose your plan</Text>
-              <Text style={styles.sectionSub}>
-                Choose a Plus duration. Access remains ReviewNatin Plus; duration controls how long it stays active.
-              </Text>
-
-              {sortedPlus.length > 0 ? (
-                <View style={styles.planGroup}>
-                  <Text style={styles.planGroupLabel}>ReviewNatin Plus</Text>
-                  <Text style={styles.planGroupSub}>Monthly, 6 Months, and Yearly all activate Plus entitlement.</Text>
-                  {sortedPlus.map((p) => renderPlanCard(p))}
-                </View>
-              ) : null}
-            </>
-          )}
-
-          <View style={styles.footerBlock}>
-            <Text style={styles.disclaimer}>{DISCLAIMERS.subscription}</Text>
-            <Text style={styles.disclaimer}>{DISCLAIMERS.short}</Text>
-          </View>
+          <Pressable
+            onPress={() => router.back()}
+            style={({ pressed }) => [styles.closeBtn, pressed && { opacity: 0.7 }]}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="Close"
+          >
+            <Ionicons name="close" size={20} color="#fff" />
+          </Pressable>
         </View>
+
+        <Text style={styles.headlineDark}>
+          Everything you need{'\n'}to pass, in one plan
+        </Text>
+
+        <View style={styles.featuresList}>
+          {PLUS_FEATURES.map((f) => (
+            <View key={f} style={styles.featureRowDark}>
+              <View style={styles.checkCircle}>
+                <Ionicons name="checkmark" size={13} color="#fff" />
+              </View>
+              <Text style={styles.featureTextDark}>{f}</Text>
+            </View>
+          ))}
+        </View>
+
+        {paymentConfirmed ? (
+          <View style={styles.successBannerDark}>
+            <Ionicons name="checkmark-circle" size={20} color={colors.accent} />
+            <Text style={styles.successBannerDarkText}>Payment confirmed — your subscription is now active!</Text>
+          </View>
+        ) : null}
+
+        {hasAccess ? (
+          <View style={styles.manageBlock}>
+            <ManagePlusCard
+              entitlements={entitlements}
+              restoring={restoring}
+              onRestore={user ? () => void handleRestore() : undefined}
+              compact
+            />
+          </View>
+        ) : loading ? (
+          <ActivityIndicator color={colors.accent} style={{ marginTop: spacing.lg }} />
+        ) : (
+          <View style={{ gap: spacing.sm, marginTop: spacing.lg }}>
+            {sortedPlus.map((p) => {
+              const selected = selectedPlanId === p.id;
+              const isBest = isSixMonthPlus(p.sku);
+              return (
+                <Pressable
+                  key={p.id}
+                  onPress={() => setSelectedPlanId(p.id)}
+                  style={({ pressed }) => [
+                    styles.planRow,
+                    selected && styles.planRowSelected,
+                    pressed && { opacity: 0.92 },
+                  ]}
+                  accessibilityRole="radio"
+                  accessibilityState={{ selected }}
+                  accessibilityLabel={`${planShortName(p)} ${resolvePrice(p).display}${planSuffix(p)}`}
+                >
+                  <View style={[styles.planRadio, selected && styles.planRadioSelected]}>
+                    {selected ? <Ionicons name="checkmark" size={14} color={colors.primaryDark} /> : null}
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.planRowName}>{planShortName(p)}</Text>
+                    <Text style={styles.planRowSub}>{planSubLabel(p)}</Text>
+                  </View>
+                  <View style={{ alignItems: 'flex-end' }}>
+                    <Text style={styles.planRowPrice}>
+                      {resolvePrice(p).display}
+                      <Text style={styles.planRowPriceSuffix}>{planSuffix(p)}</Text>
+                    </Text>
+                  </View>
+                  {isBest ? (
+                    <View style={styles.bestValuePillDark}>
+                      <Text style={styles.bestValuePillDarkText}>BEST VALUE</Text>
+                    </View>
+                  ) : null}
+                </Pressable>
+              );
+            })}
+          </View>
+        )}
+
+        {pendingRef && !hasAccess ? (
+          <Pressable
+            style={styles.pendingCardDark}
+            onPress={() => void pollCheckoutStatus()}
+            accessibilityRole="button"
+            accessibilityLabel="Refresh checkout status"
+          >
+            <Ionicons name="time-outline" size={18} color={colors.accent} />
+            <View style={{ flex: 1 }}>
+              <Text style={styles.pendingTitleDark}>Payment pending</Text>
+              <Text style={styles.pendingSubDark}>
+                {checkingPayment ? 'Checking…' : `Ref ${pendingRef} · Tap to refresh`}
+              </Text>
+            </View>
+            <Ionicons name="refresh" size={16} color="rgba(255,255,255,0.6)" />
+          </Pressable>
+        ) : null}
+
+        {isDevBuild ? (
+          <View style={styles.devBannerDark}>
+            <Ionicons name="code-slash" size={14} color={colors.accent} />
+            <Text style={styles.devBannerDarkText}>
+              Dev build — purchases are simulated. {Platform.OS === 'android' ? 'Play Billing' : 'StoreKit'} applies on production.
+            </Text>
+          </View>
+        ) : null}
       </ScrollView>
+
+      {!hasAccess ? (
+        <View style={[styles.stickyCta, { paddingBottom: insets.bottom + spacing.md }]}>
+          <Pressable
+            onPress={onCtaPress}
+            disabled={!selectedProduct || !!busy || !!purchasingSku}
+            style={({ pressed }) => [
+              styles.bigCta,
+              (!selectedProduct || busy || purchasingSku) && { opacity: 0.6 },
+              pressed && { opacity: 0.9 },
+            ]}
+            accessibilityRole="button"
+            accessibilityLabel={ctaLabel}
+          >
+            <Text style={styles.bigCtaText}>{ctaLabel}</Text>
+          </Pressable>
+          <View style={styles.ctaLinksRow}>
+            <Pressable
+              onPress={() => (user ? void handleRestore() : requireLogin())}
+              hitSlop={8}
+              disabled={restoring}
+            >
+              <Text style={styles.ctaLinkText}>
+                {restoring ? 'Restoring…' : 'Restore purchase'}
+              </Text>
+            </Pressable>
+            <Pressable onPress={() => setComparePlansOpen(true)} hitSlop={8}>
+              <Text style={styles.ctaLinkText}>Compare plans</Text>
+            </Pressable>
+            {!isDevBuild ? (
+              <Pressable onPress={() => setEwalletPickerOpen(true)} hitSlop={8}>
+                <Text style={styles.ctaLinkText}>GCash/Maya</Text>
+              </Pressable>
+            ) : null}
+          </View>
+          <Text style={styles.footnoteDark}>
+            {DISCLAIMERS.subscription} {DISCLAIMERS.short}
+          </Text>
+        </View>
+      ) : null}
 
       <AppSheet
         visible={sheet?.kind === 'purchase_error'}
@@ -598,6 +605,73 @@ export default function SubscribeScreen() {
         subtitle={sheet?.kind === 'checkout_error' ? sheet.message : undefined}
         onClose={() => setSheet(null)}
         actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}
+      />
+      <AppSheet
+        visible={comparePlansOpen}
+        title="Compare plans"
+        subtitle="Every Plus tier unlocks the same features. Longer durations save money per month."
+        onClose={() => setComparePlansOpen(false)}
+        actions={[{ label: 'Close', onPress: () => setComparePlansOpen(false), variant: 'outline' }]}
+      >
+        {sortedPlus.map((p) => {
+          const meta = getPlusPlanMeta(p.sku);
+          return (
+            <View key={p.id} style={{ marginBottom: spacing.md }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 15, color: colors.text }}>
+                  {planShortName(p)}
+                </Text>
+                <Text style={{ fontFamily: theme.fonts.display, fontSize: 16, color: colors.primary }}>
+                  {resolvePrice(p).display}
+                  <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted }}>
+                    {planSuffix(p)}
+                  </Text>
+                </Text>
+              </View>
+              <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 }}>
+                {meta.positioning}
+              </Text>
+              <View style={{ marginTop: spacing.sm, gap: 4 }}>
+                {meta.features.slice(0, 4).map((f) => (
+                  <View key={f} style={{ flexDirection: 'row', gap: 6, alignItems: 'center' }}>
+                    <Ionicons name="checkmark-circle" size={13} color={colors.success} />
+                    <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted, flex: 1 }}>
+                      {f}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          );
+        })}
+      </AppSheet>
+      <AppSheet
+        visible={ewalletPickerOpen}
+        title="Pay with e-wallet"
+        subtitle={selectedProduct ? `${planShortName(selectedProduct)} · ${resolvePrice(selectedProduct).display}` : 'Select a plan first'}
+        onClose={() => setEwalletPickerOpen(false)}
+        actions={
+          selectedProduct
+            ? [
+                {
+                  label: 'GCash',
+                  onPress: () => {
+                    setEwalletPickerOpen(false);
+                    void payWithEwallet(selectedProduct.sku, 'gcash');
+                  },
+                },
+                {
+                  label: 'Maya',
+                  onPress: () => {
+                    setEwalletPickerOpen(false);
+                    void payWithEwallet(selectedProduct.sku, 'maya');
+                  },
+                  variant: 'outline',
+                },
+                { label: 'Cancel', onPress: () => setEwalletPickerOpen(false), variant: 'ghost' },
+              ]
+            : [{ label: 'OK', onPress: () => setEwalletPickerOpen(false), variant: 'outline' }]
+        }
       />
     </View>
   );
@@ -810,5 +884,222 @@ function createStyles(theme: AppTheme) {
       borderColor: colors.success,
     },
     successBannerText: { fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.text, flex: 1, lineHeight: 20 },
+    topRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      marginBottom: spacing.lg,
+    },
+    plusBadge: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+      backgroundColor: colors.accent,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 5,
+      borderRadius: radii.full,
+    },
+    plusBadgeText: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 11,
+      color: colors.primaryDark,
+      letterSpacing: 0.5,
+    },
+    closeBtn: {
+      width: 40,
+      height: 40,
+      borderRadius: 13,
+      backgroundColor: 'rgba(255,255,255,0.14)',
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.12)',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    headlineDark: {
+      fontFamily: fonts.display,
+      fontSize: 28,
+      color: '#fff',
+      letterSpacing: -0.6,
+      lineHeight: 34,
+      marginBottom: spacing.lg,
+    },
+    featuresList: { gap: spacing.sm },
+    featureRowDark: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+    checkCircle: {
+      width: 24,
+      height: 24,
+      borderRadius: 12,
+      backgroundColor: colors.success,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    featureTextDark: {
+      flex: 1,
+      fontFamily: fonts.bodySemiBold,
+      fontSize: 14,
+      color: '#fff',
+      letterSpacing: -0.1,
+    },
+    manageBlock: { marginTop: spacing.lg },
+    planRow: {
+      position: 'relative',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.md,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.md,
+      borderRadius: radii.lg,
+      borderWidth: 1.5,
+      borderColor: 'rgba(255,255,255,0.18)',
+      backgroundColor: 'rgba(255,255,255,0.04)',
+    },
+    planRowSelected: {
+      borderColor: colors.accent,
+      backgroundColor: 'rgba(255,201,40,0.10)',
+    },
+    planRadio: {
+      width: 24,
+      height: 24,
+      borderRadius: 12,
+      borderWidth: 2,
+      borderColor: 'rgba(255,255,255,0.4)',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    planRadioSelected: {
+      backgroundColor: colors.accent,
+      borderColor: colors.accent,
+    },
+    planRowName: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 16,
+      color: '#fff',
+      letterSpacing: -0.2,
+    },
+    planRowSub: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: 12,
+      color: 'rgba(255,255,255,0.66)',
+      marginTop: 2,
+    },
+    planRowPrice: {
+      fontFamily: fonts.display,
+      fontSize: 18,
+      color: '#fff',
+      letterSpacing: -0.4,
+    },
+    planRowPriceSuffix: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: 12,
+      color: 'rgba(255,255,255,0.6)',
+    },
+    bestValuePillDark: {
+      position: 'absolute',
+      top: -10,
+      right: spacing.md,
+      backgroundColor: colors.accent,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 3,
+      borderRadius: radii.sm,
+    },
+    bestValuePillDarkText: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 10,
+      color: colors.primaryDark,
+      letterSpacing: 0.5,
+    },
+    pendingCardDark: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      backgroundColor: 'rgba(255,255,255,0.08)',
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      marginTop: spacing.md,
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.12)',
+    },
+    pendingTitleDark: { fontFamily: fonts.bodyBold, fontSize: 14, color: '#fff' },
+    pendingSubDark: { fontFamily: fonts.bodyMedium, fontSize: 12, color: 'rgba(255,255,255,0.6)', marginTop: 2 },
+    devBannerDark: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: spacing.sm,
+      backgroundColor: 'rgba(255,201,40,0.10)',
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      marginTop: spacing.md,
+      borderWidth: 1,
+      borderColor: 'rgba(255,201,40,0.18)',
+    },
+    devBannerDarkText: {
+      flex: 1,
+      fontFamily: fonts.bodyMedium,
+      fontSize: 12,
+      color: 'rgba(255,255,255,0.78)',
+      lineHeight: 17,
+    },
+    successBannerDark: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      backgroundColor: 'rgba(34,197,94,0.16)',
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      marginTop: spacing.md,
+      borderWidth: 1,
+      borderColor: 'rgba(34,197,94,0.3)',
+    },
+    successBannerDarkText: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: 13,
+      color: '#fff',
+      flex: 1,
+      lineHeight: 19,
+    },
+    stickyCta: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      paddingHorizontal: spacing.lg,
+      paddingTop: spacing.md,
+      backgroundColor: 'rgba(8,36,92,0.92)',
+      borderTopWidth: 1,
+      borderTopColor: 'rgba(255,255,255,0.08)',
+    },
+    bigCta: {
+      backgroundColor: colors.accent,
+      borderRadius: radii.md,
+      paddingVertical: 16,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    bigCtaText: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 16,
+      color: colors.primaryDark,
+      letterSpacing: -0.2,
+    },
+    ctaLinksRow: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      gap: spacing.lg,
+      marginTop: spacing.md,
+      flexWrap: 'wrap',
+    },
+    ctaLinkText: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: 13,
+      color: '#fff',
+    },
+    footnoteDark: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 11,
+      color: 'rgba(255,255,255,0.52)',
+      textAlign: 'center',
+      lineHeight: 16,
+      marginTop: spacing.sm,
+    },
   });
 }

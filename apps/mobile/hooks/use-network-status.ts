@@ -55,15 +55,30 @@ export function useNetworkStatus(): NetworkStatus {
   const [isOnline, setIsOnline] = useState(true);
   const [hasProbed, setHasProbed] = useState(false);
   const mounted = useRef(true);
+  const consecutiveFailures = useRef(0);
 
   useEffect(() => {
     mounted.current = true;
     let intervalId: ReturnType<typeof setInterval> | null = null;
 
+    // Require two consecutive failures before declaring offline. A single HEAD
+    // probe routinely times out during the heavy JS cold start even when the
+    // network is fine, which flashed a false "Offline" banner for ~20s.
+    // Recovery is immediate: any successful probe clears the offline state.
+    const FAILURES_BEFORE_OFFLINE = 2;
+
     const probe = async () => {
       const online = await probeOnce();
-      if (mounted.current) {
-        setIsOnline(online);
+      if (!mounted.current) return;
+      if (online) {
+        consecutiveFailures.current = 0;
+        setIsOnline(true);
+        setHasProbed(true);
+        return;
+      }
+      consecutiveFailures.current += 1;
+      if (consecutiveFailures.current >= FAILURES_BEFORE_OFFLINE) {
+        setIsOnline(false);
         setHasProbed(true);
       }
     };

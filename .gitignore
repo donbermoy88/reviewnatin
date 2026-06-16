@@ -18,3 +18,8 @@ playwright-report/
 test-results/
 apps/admin/playwright-report/
 apps/admin/test-results/
+
+# Local AI tooling artifacts (Claude Code)
+.claude/
+.agents/
+skills-lock.json

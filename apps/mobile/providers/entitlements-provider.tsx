@@ -8,11 +8,15 @@ import {
   type UserEntitlement,
 } from '../lib/api/entitlements';
 import type { RestorePurchasesResult } from '../lib/iap/product-skus';
+import type { StorePrice } from '../lib/iap/store';
+import { canUseStorePurchases } from '../lib/iap/availability';
 import { useAuth } from './auth-provider';
 
 type EntitlementsContextValue = {
   products: SubscriptionProduct[];
   entitlements: UserEntitlement[];
+  /** Live store-reported localized prices, keyed by canonical SKU. Empty off-store. */
+  storePrices: Record<string, StorePrice>;
   loading: boolean;
   isPremium: (examTypeId?: string | null) => boolean;
   refresh: () => Promise<void>;
@@ -27,6 +31,7 @@ export function EntitlementsProvider({ children }: { children: React.ReactNode }
   const userId = user?.id;
   const [products, setProducts] = useState<SubscriptionProduct[]>([]);
   const [entitlements, setEntitlements] = useState<UserEntitlement[]>([]);
+  const [storePrices, setStorePrices] = useState<Record<string, StorePrice>>({});
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
@@ -49,6 +54,22 @@ export function EntitlementsProvider({ children }: { children: React.ReactNode }
   useEffect(() => {
     refresh();
   }, [refresh]);
+
+  // Resolve live store-reported localized prices once on store-capable builds.
+  // The display layer must show what the store actually charges; this never
+  // runs in dev/simulator/guest builds, where the DB price stays the fallback.
+  useEffect(() => {
+    if (!canUseStorePurchases()) return;
+    let active = true;
+    void (async () => {
+      const { fetchStoreProductPricing } = await import('../lib/iap/store');
+      const prices = await fetchStoreProductPricing();
+      if (active && Object.keys(prices).length > 0) setStorePrices(prices);
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const isPremium = useCallback(
     (examTypeId?: string | null) => hasPremiumAccess(entitlements, examTypeId),
@@ -74,13 +95,14 @@ export function EntitlementsProvider({ children }: { children: React.ReactNode }
     () => ({
       products,
       entitlements,
+      storePrices,
       loading,
       isPremium,
       refresh,
       activateDemoPass,
       restoreStorePurchases,
     }),
-    [products, entitlements, loading, isPremium, refresh, activateDemoPass, restoreStorePurchases]
+    [products, entitlements, storePrices, loading, isPremium, refresh, activateDemoPass, restoreStorePurchases]
   );
 
   return <EntitlementsContext.Provider value={value}>{children}</EntitlementsContext.Provider>;
