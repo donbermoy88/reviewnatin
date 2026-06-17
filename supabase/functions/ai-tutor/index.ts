@@ -151,8 +151,8 @@ Deno.serve(async (req) => {
 
   // Daily message cap — applies even to premium so one user can't run up
   // unbounded Anthropic spend. Checked BEFORE the model call. Tune as revenue
-  // allows; ~20/day is a generous study session while bounding worst-case cost.
-  const DAILY_TUTOR_MESSAGE_LIMIT = 20;
+  // allows; 5/day keeps worst-case cost low (~$50/mo at 100 premium on Haiku).
+  const DAILY_TUTOR_MESSAGE_LIMIT = 5;
   const { data: usageRow } = await admin
     .from("ai_tutor_usage")
     .select("message_count")
