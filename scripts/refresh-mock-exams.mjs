@@ -71,6 +71,51 @@ async function publishedQuestionIds(examTypeId, limit) {
   return (questions ?? []).map((q) => q.id);
 }
 
+// Subject-balanced selection: round-robin one published question per subject
+// per pass, so a long mock spans all subjects instead of clustering on whatever
+// was imported first (which `publishedQuestionIds` returns by created_at).
+async function balancedQuestionIds(examTypeId, limit) {
+  const { data: subjects, error: subErr } = await sb
+    .from('subject_areas')
+    .select('id')
+    .eq('exam_type_id', examTypeId)
+    .order('sort_order');
+  if (subErr) throw subErr;
+  const subjectIds = (subjects ?? []).map((s) => s.id);
+  if (!subjectIds.length) return [];
+
+  const perSubject = [];
+  for (const sid of subjectIds) {
+    const { data: topics } = await sb.from('topics').select('id').eq('subject_area_id', sid);
+    const topicIds = (topics ?? []).map((t) => t.id);
+    if (!topicIds.length) {
+      perSubject.push([]);
+      continue;
+    }
+    const { data: qs } = await sb
+      .from('questions')
+      .select('id')
+      .in('topic_id', topicIds)
+      .eq('status', 'published')
+      .order('created_at', { ascending: true });
+    perSubject.push((qs ?? []).map((q) => q.id));
+  }
+
+  const out = [];
+  for (let i = 0; out.length < limit; i++) {
+    let advanced = false;
+    for (const list of perSubject) {
+      if (i < list.length) {
+        out.push(list[i]);
+        advanced = true;
+        if (out.length >= limit) break;
+      }
+    }
+    if (!advanced) break; // all subject pools exhausted
+  }
+  return out;
+}
+
 async function replaceMockQuestions(mockExamId, questionIds) {
   await sb.from('mock_exam_questions').delete().eq('mock_exam_id', mockExamId);
   if (!questionIds.length) return;
@@ -159,7 +204,8 @@ for (const exam of exams ?? []) {
     .eq('title', fullTitle)
     .maybeSingle();
   if (fullMock?.id) {
-    const fullIds = await publishedQuestionIds(exam.id, fullMock.item_count);
+    // Full-length mocks span the whole exam — use a subject-balanced spread.
+    const fullIds = await balancedQuestionIds(exam.id, fullMock.item_count);
     if (fullIds.length >= 10) {
       await replaceMockQuestions(fullMock.id, fullIds);
       // Keep item_count truthful to how many we could actually link.
