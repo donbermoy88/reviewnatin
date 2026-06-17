@@ -79,7 +79,12 @@ export async function fetchPracticeStats(
     if (sessionsResult.error) throw sessionsResult.error;
 
     const rows = sessionsResult.data ?? [];
-    const dbStreak = examSlug ? 0 : (userResult.data?.streak_count ?? 0);
+    // Streak is a GLOBAL day-streak (trigger-maintained users.streak_count, also
+    // the source for the streak-freeze feature and get_weekly_summary). It is not
+    // per-exam, so use streak_count even when stats are scoped to one exam —
+    // previously this was forced to 0 for exam-scoped calls, which made the
+    // Profile headline ("0 day streak") disagree with the weekly card ("1-day").
+    const dbStreak = userResult.data?.streak_count ?? 0;
 
     const todayStart = startOfTodayIso();
     const questionsToday = rows
