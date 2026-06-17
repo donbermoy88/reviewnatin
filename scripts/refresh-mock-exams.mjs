@@ -147,6 +147,30 @@ for (const exam of exams ?? []) {
       console.log(`  (skip practice mock — need at least 10 published questions, have ${practiceIds.length})`);
     }
   }
+
+  // Full Length Mock — populate existing full-length rows that were created with
+  // item_count set but never linked to questions. Without this, premium users
+  // who start the full mock hit an empty "Wala pang tanong dito" screen.
+  const fullTitle = `${exam.name} — Full Length Mock`;
+  const { data: fullMock } = await sb
+    .from('mock_exams')
+    .select('id, item_count')
+    .eq('exam_type_id', exam.id)
+    .eq('title', fullTitle)
+    .maybeSingle();
+  if (fullMock?.id) {
+    const fullIds = await publishedQuestionIds(exam.id, fullMock.item_count);
+    if (fullIds.length >= 10) {
+      await replaceMockQuestions(fullMock.id, fullIds);
+      // Keep item_count truthful to how many we could actually link.
+      if (fullIds.length !== fullMock.item_count) {
+        await sb.from('mock_exams').update({ item_count: fullIds.length }).eq('id', fullMock.id);
+      }
+      console.log(`✓ ${exam.slug} full mock: ${fullIds.length} questions`);
+    } else {
+      console.log(`  (skip full mock — only ${fullIds.length} published questions)`);
+    }
+  }
 }
 
 console.log('\nMock exams refreshed.');
