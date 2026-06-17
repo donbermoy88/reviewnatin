@@ -1,5 +1,6 @@
 import type { Session, User } from '@supabase/supabase-js';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { AppState } from 'react-native';
 import { updateUserDisplayName } from '../lib/api/profile';
 import { mapAuthError } from '../lib/auth/errors';
 import { sendPasswordResetEmail, signInWithApple, signInWithGoogle, updatePassword } from '../lib/auth/oauth';
@@ -68,17 +69,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setLoading(false);
-    });
+    // Restore the persisted session on boot. Never hard-fail here: a transient
+    // error must not hang the splash (loading stuck) — keep whatever is cached
+    // and let onAuthStateChange / auto-refresh recover.
+    supabase.auth
+      .getSession()
+      .then(({ data }) => setSession(data.session))
+      .catch(() => {})
+      .finally(() => setLoading(false));
 
     const { data: sub } = supabase.auth.onAuthStateChange((_event, next) => {
       setSession(next);
       setLoading(false);
     });
 
-    return () => sub.subscription.unsubscribe();
+    // React Native requires explicit auto-refresh management tied to app focus
+    // (https://supabase.com/docs/guides/auth/quickstarts/react-native). Without
+    // it the access token is not reliably refreshed, so a backgrounded or
+    // relaunched app can drop to a signed-out state. Start now (app is active)
+    // and toggle on foreground/background.
+    supabase.auth.startAutoRefresh();
+    const appStateSub = AppState.addEventListener('change', (state) => {
+      if (state === 'active') supabase.auth.startAutoRefresh();
+      else supabase.auth.stopAutoRefresh();
+    });
+
+    return () => {
+      sub.subscription.unsubscribe();
+      appStateSub.remove();
+      supabase.auth.stopAutoRefresh();
+    };
   }, []);
 
   useEffect(() => {
