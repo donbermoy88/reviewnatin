@@ -47,6 +47,7 @@ export default function AiTutorScreen() {
   const [messages, setMessages] = useState<AiTutorMessage[]>([STARTER]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
+  const [remaining, setRemaining] = useState<number | null>(null);
 
   useEffect(() => {
     resolveOnboardingGoal(user?.id).then((goal) => {
@@ -86,13 +87,29 @@ export default function AiTutorScreen() {
           return;
         }
         if (result.error === 'daily_limit_reached') {
+          setRemaining(0);
           Alert.alert('Daily limit reached', "You've used today's AI tutor messages. It resets tomorrow — keep practicing in the meantime!");
           return;
         }
-        Alert.alert('Could not send', result.error);
+        if (result.error === 'cooldown') {
+          Alert.alert(
+            'Slow down 🙂',
+            result.retryAfter
+              ? `Please wait ${result.retryAfter}s before sending another message.`
+              : 'Please wait a few seconds before sending another message.'
+          );
+          return;
+        }
+        if (result.error === 'input_too_long') {
+          Alert.alert('Message too long', 'Please shorten your question and try again.');
+          return;
+        }
+        // Never surface raw provider/server errors to the user.
+        Alert.alert('Could not send', 'Something went wrong. Please try again in a moment.');
         return;
       }
       setMessages((prev) => [...prev, { role: 'assistant', content: result.reply }]);
+      if (typeof result.remaining === 'number') setRemaining(result.remaining);
     } finally {
       setSending(false);
       setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 100);
@@ -128,7 +145,11 @@ export default function AiTutorScreen() {
         </Pressable>
         <Text style={styles.headerTitle}>AI Tutor</Text>
         <Text style={styles.headerSub}>
-          {isPremium() ? 'Premium · Ask anything about your exam prep' : 'Premium feature — upgrade to unlock'}
+          {isPremium()
+            ? remaining != null
+              ? `Premium · ${remaining} message${remaining === 1 ? '' : 's'} left today`
+              : 'Premium · Ask anything about your exam prep'
+            : 'Premium feature — upgrade to unlock'}
         </Text>
       </LinearGradient>
 
