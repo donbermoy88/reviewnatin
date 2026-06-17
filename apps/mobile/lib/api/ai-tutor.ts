@@ -23,9 +23,23 @@ export async function sendAiTutorMessage(
   });
 
   if (error) {
-    if (error.message?.includes('403') || error.message?.includes('premium')) {
+    // functions.invoke surfaces non-2xx as FunctionsHttpError and does NOT parse
+    // the body — read the structured { error } code off the Response in .context
+    // so we can distinguish premium_required / daily_limit_reached from a generic
+    // failure (otherwise every non-2xx shows the same opaque message).
+    let code: string | undefined;
+    try {
+      const ctx = (error as { context?: Response }).context;
+      if (ctx && typeof ctx.json === 'function') {
+        code = ((await ctx.json()) as { error?: string } | null)?.error;
+      }
+    } catch {
+      /* body unavailable — fall back to message heuristics below */
+    }
+    if (code === 'premium_required' || error.message?.includes('403') || error.message?.includes('premium')) {
       return { ok: false, error: 'premium_required' };
     }
+    if (code) return { ok: false, error: code };
     return { ok: false, error: error.message };
   }
 

@@ -66,7 +66,8 @@ Do not invent official exam dates or passing scores. Remind users to verify sche
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
+        // Haiku: ~5x cheaper than Sonnet, ample for exam Q&A tutoring (cost control).
+        model: "claude-haiku-4-5-20251001",
         max_tokens: 600,
         system,
         messages: messages.slice(-10).map((m) => ({
@@ -148,11 +149,10 @@ Deno.serve(async (req) => {
     return jsonResponse({ success: false, error: "premium_required" }, 403);
   }
 
-  const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
-  let reply =
-    (apiKey ? await generateWithClaude(apiKey, messages, examSlug, locale) : null) ??
-    buildFallbackReply(locale, examSlug);
-
+  // Daily message cap — applies even to premium so one user can't run up
+  // unbounded Anthropic spend. Checked BEFORE the model call. Tune as revenue
+  // allows; ~20/day is a generous study session while bounding worst-case cost.
+  const DAILY_TUTOR_MESSAGE_LIMIT = 20;
   const { data: usageRow } = await admin
     .from("ai_tutor_usage")
     .select("message_count")
@@ -160,13 +160,24 @@ Deno.serve(async (req) => {
     .eq("usage_date", today)
     .maybeSingle();
 
-  const nextCount = ((usageRow?.message_count as number | undefined) ?? 0) + 1;
+  const used = (usageRow?.message_count as number | undefined) ?? 0;
+  if (used >= DAILY_TUTOR_MESSAGE_LIMIT) {
+    return jsonResponse(
+      { success: false, error: "daily_limit_reached", limit: DAILY_TUTOR_MESSAGE_LIMIT },
+      429,
+    );
+  }
+
+  const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
+  const reply =
+    (apiKey ? await generateWithClaude(apiKey, messages, examSlug, locale) : null) ??
+    buildFallbackReply(locale, examSlug);
 
   await admin.from("ai_tutor_usage").upsert(
     {
       user_id: userData.user.id,
       usage_date: today,
-      message_count: nextCount,
+      message_count: used + 1,
     },
     { onConflict: "user_id,usage_date" }
   );
@@ -174,6 +185,7 @@ Deno.serve(async (req) => {
   return jsonResponse({
     success: true,
     reply,
+    remaining: DAILY_TUTOR_MESSAGE_LIMIT - (used + 1),
     source: apiKey ? "ai" : "fallback",
   });
 });

@@ -85,6 +85,10 @@ export default function AiTutorScreen() {
           Alert.alert('ReviewNatin Plus required', 'Upgrade to chat with the AI tutor.');
           return;
         }
+        if (result.error === 'daily_limit_reached') {
+          Alert.alert('Daily limit reached', "You've used today's AI tutor messages. It resets tomorrow — keep practicing in the meantime!");
+          return;
+        }
         Alert.alert('Could not send', result.error);
         return;
       }
