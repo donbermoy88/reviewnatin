@@ -224,7 +224,22 @@ no new lint errors/warnings.
   covered by unit tests (the core answer-assembly/scoring path previously had
   none). Screen logic is unchanged; the helpers are byte-equivalent.
 
-### 6.5 Split the `themed-styles.ts` monolith
+### 6.5 Request de-duplication (query-layer foundation)
+- **New `lib/data/dedupe.ts`** — `dedupeAsync(key, loader)` coalesces concurrent
+  calls that share a key onto one in-flight promise (removed on settle, so it's
+  coalescing, not caching), with 4 unit tests covering concurrency, distinct
+  keys, post-settle re-run, and shared rejection.
+- Wired transparently into `cachedJson` so simultaneous cache-misses for the same
+  catalog/config key fire a single network round-trip — directly addressing the
+  §3.5 "two screens mounting both call `fetchExamBySlug` → two requests" risk.
+  The observable contract is unchanged (same value, same cache write).
+- This is the safe, behavior-transparent core of a query layer. A full
+  TanStack-Query migration (refetch-on-focus + replacing the ~25 hand-rolled
+  fetch effects) remains a follow-up: each screen's `load()` is bespoke
+  (multi-state, e.g. leaderboard sets `examSlug` + `entries` from one call), so
+  those migrations need component/E2E coverage rather than a `tsc`-only change.
+
+### 6.6 Split the `themed-styles.ts` monolith
 - The 1,782-line file (16 unrelated `createXStyles` factories) is now a
   **`lib/themed-styles/` directory** grouped by domain (`components`,
   `navigation`, `dashboard`, `study`, `profile`, `leaderboard`, `quiz`, `lists`,
@@ -242,8 +257,10 @@ no new lint errors/warnings.
    (§6.4) are step one; the stateful hooks share `timeLeft`/answer state across
    the component, so they should land behind component/E2E tests rather than be
    moved on `tsc` alone.
-2. **Introduce a query layer** (TanStack Query is Expo-compatible) to get
-   dedupe + cache + refetch-on-focus and delete ~25 hand-rolled fetch effects.
+2. **Complete the query layer**: the de-dup + cache foundation is in place
+   (§6.5); the remaining work is refetch-on-focus and replacing the ~25
+   hand-rolled fetch effects (TanStack Query is Expo-compatible). Each screen's
+   `load()` is bespoke, so migrate them behind component/E2E coverage.
 3. **One data-access contract**: a thin `supabase` wrapper + shared `mapRow`
    helpers + a single `Result<T>`/throw policy; migrate `lib/api/*` module by
    module (high churn; each module's bespoke mapping must be diffed carefully).

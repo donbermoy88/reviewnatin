@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StorageKeyPrefix } from '../storage-keys';
+import { dedupeAsync } from '../data/dedupe';
 
 const CACHE_PREFIX = StorageKeyPrefix.cache;
 const DEFAULT_STALE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
@@ -59,7 +60,11 @@ export async function cachedJson<T>(
   }
 
   try {
-    const value = await loader();
+    // Coalesce concurrent cache-misses for the same key so the loader (a network
+    // round-trip) runs once across simultaneous callers. The cache key doubles as
+    // the in-flight key. Behavior is transparent: every caller still gets the
+    // value and writes the (idempotent) cache entry.
+    const value = await dedupeAsync(key, loader);
     await writeEntry(key, value, options.ttlMs);
     return value;
   } catch (error) {
