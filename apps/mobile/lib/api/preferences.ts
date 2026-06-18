@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { StorageKeys } from '../storage-keys';
 
 export type ExplanationLocale = 'en' | 'fil';
 
@@ -12,7 +13,8 @@ export type UserPreferences = {
   examRemindersEnabled: boolean;
 };
 
-const LOCAL_KEY = 'reviewnatin:prefs';
+/** Exported so the preferences provider writes through the same key. */
+export const LOCAL_KEY = StorageKeys.prefs;
 
 const DEFAULTS: UserPreferences = {
   darkMode: false,

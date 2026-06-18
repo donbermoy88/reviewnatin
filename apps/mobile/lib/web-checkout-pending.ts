@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StorageKeys } from './storage-keys';
 
-const KEY = 'reviewnatin:pending_checkout_ref';
+const KEY = StorageKeys.pendingCheckoutRef;
 
 export async function savePendingCheckoutRef(referenceCode: string): Promise<void> {
   await AsyncStorage.setItem(KEY, referenceCode);

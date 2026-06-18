@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { PracticeStats } from './api/stats';
+import { StorageKeys } from './storage-keys';
 
 export type GuestQuizSession = {
   id: string;
@@ -12,7 +13,7 @@ export type GuestQuizSession = {
   completedAt: string;
 };
 
-const KEY = 'reviewnatin:guest-quiz-history';
+const KEY = StorageKeys.guestQuizHistory;
 const MAX_SESSIONS = 50;
 
 function sessionsForExam(sessions: GuestQuizSession[], examSlug: string): GuestQuizSession[] {

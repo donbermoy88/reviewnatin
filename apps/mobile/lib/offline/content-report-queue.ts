@@ -1,12 +1,13 @@
 import type { ReportContentType, ReportReason } from '../api/content-reports';
 import { createQueueStorage } from './queue-storage';
 import { nextRetryAt } from './retry-policy';
+import { StorageKeys } from '../storage-keys';
 
 // Re-exported so existing consumers (lib/api/content-reports.ts) keep importing
 // the backoff schedule from the queue module.
 export { nextRetryAt };
 
-const QUEUE_KEY = 'reviewnatin:offline:content-reports:v1';
+const QUEUE_KEY = StorageKeys.offlineContentReports;
 const MAX_QUEUE_ITEMS = 100;
 
 export type PendingContentReport = {

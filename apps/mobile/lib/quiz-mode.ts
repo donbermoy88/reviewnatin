@@ -25,6 +25,11 @@ export type QuizModeInput = {
  * Descriptive mode used for analytics, guest history, and result routing.
  * Falls back to `offline`/`practice` for any unrecognized mode, matching the
  * original "no specific mode matched" branch.
+ *
+ * `mistake_review` is a first-class value here: the result screen renders it
+ * identically to `practice` (it is not special-cased in any branch), so routing
+ * it through is behavior-preserving while keeping analytics/guest-history/DB all
+ * in agreement.
  */
 export function resolveQuizMode({ mode, offline = false }: QuizModeInput): string {
   switch (mode) {
@@ -35,6 +40,7 @@ export function resolveQuizMode({ mode, offline = false }: QuizModeInput): strin
     case 'weak_area':
     case 'barkada':
     case 'bookmark_review':
+    case 'mistake_review':
       return mode;
     default:
       return offline ? 'offline' : 'practice';

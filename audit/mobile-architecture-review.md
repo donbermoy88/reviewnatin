@@ -179,11 +179,11 @@ screen forces a diff in the same file as the quiz/leaderboard/profile styles.
 
 ---
 
-## 6. Refactors applied in this pass (behavior-preserving)
+## 6. Refactors applied (behavior-preserving)
 
 Each change below is provably output-identical (or telemetry-only) and is covered
-by new unit tests. Full suite: **13 files / 71 tests pass**; `tsc --noEmit` clean;
-no new lint errors.
+by new unit tests. Full suite: **14 files / 77 tests pass**; `tsc --noEmit` clean;
+no new lint errors/warnings.
 
 ### 6.1 Unified offline retry policy + queue storage
 - **New `lib/offline/retry-policy.ts`** — single home for `nextRetryAt()`,
@@ -197,33 +197,47 @@ no new lint errors.
   (`lib/api/content-reports.ts`) is untouched. Net: the duplicated backoff/storage
   logic is gone; each queue keeps only its own enqueue semantics.
 
-### 6.2 Canonical quiz-mode resolver
-- **New `lib/quiz-mode.ts`** with two pure functions + 7 unit tests:
+### 6.2 Canonical quiz-mode resolver — all call sites unified
+- **New `lib/quiz-mode.ts`** with two pure functions + unit tests:
   - `resolveQuizMode({ mode, offline })` — the descriptive/result-route label.
   - `toQuizSessionMode({ mode })` — the DB `quiz_sessions.mode` enum value.
-- Wired into `quiz.tsx` at the two **provably-identical** call sites: the
-  `createQuizSession` DB-mode argument and the result-screen `mode` route param.
-  The remaining (drifted) telemetry/guest-history ternaries are intentionally
-  left in place this pass to guarantee zero behavior change; reconciling them onto
-  `resolveQuizMode` is the documented follow-up (it would _fix_ the §3.2 Sentry
-  mislabeling, but that is a visible telemetry change and belongs in its own PR).
+- The result screen renders `mistake_review` identically to `practice` in every
+  branch, so `mistake_review` is now a first-class resolver value — which let
+  **all five** drifted ternaries in `quiz.tsx` collapse onto a single
+  `descriptiveMode` constant + the two resolvers, with no behavior change. This
+  also fixes the §3.2 Sentry mislabeling (telemetry now reports the true mode for
+  `weak_area`/`barkada`/`bookmark_review`/`offline` instead of `practice`).
+
+### 6.3 Central storage-key registry
+- **New `lib/storage-keys.ts`** — `StorageKeys`, `StorageKeyPrefix`, and
+  `storageKeyFor.*` builders holding the _exact existing_ literal strings (a
+  persistence contract — values unchanged).
+- Migrated all 15 ad-hoc call sites across `lib/`, `providers/`, and `app/` to
+  import from the registry. This removes the real duplication where
+  `reviewnatin:prefs` was hard-coded in both `lib/api/preferences.ts` and
+  `providers/preferences-provider.tsx`. A grep confirms no `reviewnatin:` storage
+  literal remains outside the registry.
+
+### 6.4 Extracted pure quiz-session logic out of the god-function
+- **New `lib/quiz-session.ts`** — `finalizeAnswers`, `buildStrictAnswers`, and
+  `computeSessionScore`, moved out of `practice/quiz.tsx`'s `finishQuiz` and
+  covered by unit tests (the core answer-assembly/scoring path previously had
+  none). Screen logic is unchanged; the helpers are byte-equivalent.
 
 ---
 
-## 7. Recommended next steps (not done here — need test scaffolding first)
+## 7. Recommended next steps (need runtime/integration test scaffolding first)
 
-1. **Decompose `quiz.tsx`**: extract `useQuizSession` (load + state machine),
-   `useQuizTimer`, `useExamResume`, `useHints`, and a `finishQuiz` service; cover
-   each with unit tests _before_ moving UI. This is the single highest-leverage
-   refactor and must be done incrementally behind tests.
+1. **Finish decomposing `quiz.tsx`**: extract `useQuizSession` (load + state
+   machine), `useQuizTimer`, `useExamResume`, and `useHints`. The pure helpers
+   (§6.4) are step one; the stateful hooks should land behind component/E2E tests
+   since they can't be verified by `tsc` alone.
 2. **Introduce a query layer** (TanStack Query is Expo-compatible) to get
    dedupe + cache + refetch-on-focus and delete ~25 hand-rolled fetch effects.
 3. **One data-access contract**: a thin `supabase` wrapper + shared `mapRow`
    helpers + a single `Result<T>`/throw policy; migrate `lib/api/*` module by
-   module.
-4. **Central storage-key registry** (`lib/storage-keys.ts`) — re-export the
-   _existing_ literal strings (no value change) and forbid ad-hoc keys via lint.
-5. **Split `themed-styles.ts`** by co-locating each `createXStyles` next to its
+   module (high churn; each module's bespoke mapping must be diffed carefully).
+4. **Split `themed-styles.ts`** by co-locating each `createXStyles` next to its
    screen/component; standardize on one styling convention.
-6. **Type `mode` as a discriminated union** exported from `lib/quiz-mode.ts` and
+5. **Type `mode` as a discriminated union** exported from `lib/quiz-mode.ts` and
    thread it through routing instead of stringly-typed params + boolean flags.

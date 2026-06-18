@@ -25,6 +25,7 @@ import { useAppTheme } from '../../hooks/use-app-theme';
 import { createQuizStyles } from '../../lib/themed-styles';
 import { randomizeQuestionSet } from '../../lib/question-randomization';
 import { resolveQuizMode, toQuizSessionMode } from '../../lib/quiz-mode';
+import { buildStrictAnswers, computeSessionScore, finalizeAnswers } from '../../lib/quiz-session';
 import {
   checkQuestionAnswer,
   fetchExamBySlug,
@@ -68,27 +69,6 @@ import type { Question, QuizAnswerRecord } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
-
-function finalizeAnswers(
-  prev: QuizAnswerRecord[],
-  current: Question | undefined,
-  selected: string | null,
-  revealed: boolean,
-  timeSpentSeconds: number,
-  revealResult: AnswerCheckResult | null
-): QuizAnswerRecord[] {
-  if (!current || !selected || !revealed || !revealResult) return prev;
-  if (prev.some((a) => a.questionId === current.id)) return prev;
-  return [
-    ...prev,
-    {
-      questionId: current.id,
-      selectedChoiceId: selected,
-      isCorrect: revealResult.isCorrect,
-      timeSpentSeconds,
-    },
-  ];
-}
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 const DIAGNOSTIC_ITEM_COUNT = 40;
@@ -520,6 +500,10 @@ export default function PracticeQuizScreen() {
     if (finishing.current) return;
     finishing.current = true;
 
+    // Single source of truth for the descriptive mode label used by analytics,
+    // the guest-history record, and the result route (see lib/quiz-mode).
+    const descriptiveMode = resolveQuizMode({ mode, offline: offlineMode });
+
     // The attempt is being submitted — discard any resume snapshot.
     if (resumeKey) void clearExamSnapshot(resumeKey);
 
@@ -527,11 +511,7 @@ export default function PracticeQuizScreen() {
     // Strict exams build the answer set from the answer-sheet (any-order, deferred
     // grading — server computes correctness). Other modes use the live record.
     const finalAnswers: QuizAnswerRecord[] = isStrictExam
-      ? questions.flatMap((q, i) =>
-          answersByIndex[i]
-            ? [{ questionId: q.id, selectedChoiceId: answersByIndex[i], isCorrect: false, timeSpentSeconds: 0 }]
-            : []
-        )
+      ? buildStrictAnswers(questions, answersByIndex)
       : finalizeAnswers(answers, current, selected, revealed, elapsedQ, revealResult);
 
     // Strict exams (mock/board) defer grading to the server, but guests have no
@@ -550,8 +530,7 @@ export default function PracticeQuizScreen() {
         })
       );
     }
-    const totalCorrect = finalAnswers.filter((a) => a.isCorrect).length;
-    const score = questions.length ? Math.round((totalCorrect / questions.length) * 100) : 0;
+    const score = computeSessionScore(finalAnswers, questions.length);
     const duration = Math.round((Date.now() - startedAt.current) / 1000);
 
     let sessionId: string | null = null;
@@ -630,7 +609,7 @@ export default function PracticeQuizScreen() {
         }
       } catch (error) {
         captureAppException(error, { area: 'quiz', action: 'save_server_session' }, {
-          mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
+          mode: descriptiveMode,
           itemCount: questions.length,
         });
         /* session save failed */
@@ -641,7 +620,7 @@ export default function PracticeQuizScreen() {
       score,
       itemCount: questions.length,
       offline: offlineMode,
-      mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
+      mode: descriptiveMode,
     });
 
     const totalCorrectFinal = Math.round((serverScore / 100) * questions.length);
@@ -650,7 +629,7 @@ export default function PracticeQuizScreen() {
       try {
         await saveGuestQuizSession({
           examSlug: slug,
-          mode: isMock ? 'mock' : isBoard ? 'board' : isMistakeReview ? 'mistake_review' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isDiagnostic ? 'diagnostic' : offlineMode ? 'offline' : 'practice',
+          mode: descriptiveMode,
           itemCount: questions.length,
           scorePercent: serverScore,
           correct: totalCorrectFinal,
@@ -670,7 +649,7 @@ export default function PracticeQuizScreen() {
         duration: String(duration),
         sessionId: sessionId ?? '',
         examSlug: slug,
-        mode: resolveQuizMode({ mode, offline: offlineMode }),
+        mode: descriptiveMode,
         diagnosticReadiness: diagnosticReadiness != null ? String(diagnosticReadiness) : '',
         pasapathTaskId: pasapathTaskId ?? '',
         barkadaChallengeId: barkadaChallengeId ?? '',
@@ -682,7 +661,7 @@ export default function PracticeQuizScreen() {
           : '',
       },
     });
-  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, flaggedIndices, user, slug, mode, isMock, isBoard, isStrictExam, isMistakeReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, resumeKey, router]);
+  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, flaggedIndices, user, slug, mode, isStrictExam, isDiagnostic, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, resumeKey, router]);
 
   useEffect(() => {
     if ((isStrictExam || isTimed) && timeLeft === 0 && questions.length > 0) {

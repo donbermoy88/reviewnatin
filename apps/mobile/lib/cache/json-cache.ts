@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StorageKeyPrefix } from '../storage-keys';
 
-const CACHE_PREFIX = 'reviewnatin:cache:v1:';
+const CACHE_PREFIX = StorageKeyPrefix.cache;
 const DEFAULT_STALE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 type CacheEntry<T> = {

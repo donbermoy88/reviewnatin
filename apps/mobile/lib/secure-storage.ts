@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { canUseSecureKeychain } from './device-capabilities';
 import { addAppBreadcrumb } from './monitoring/events';
+import { StorageKeyPrefix } from './storage-keys';
 
-const prefix = 'reviewnatin:secure:';
+const prefix = StorageKeyPrefix.secure;
 
 // On a device that should support the keychain, a SecureStore failure silently
 // downgrades sensitive values to plain AsyncStorage. Surface it once so the

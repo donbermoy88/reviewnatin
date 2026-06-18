@@ -20,8 +20,9 @@ import { recordQuizOutcome } from '../api/mistakes';
 import { captureAppException, captureAppMessage } from '../monitoring/events';
 import { createQueueStorage } from './queue-storage';
 import { isRetryDue, nextRetryAt } from './retry-policy';
+import { StorageKeys } from '../storage-keys';
 
-const QUEUE_KEY = 'reviewnatin:offline:pending-sessions:v1';
+const QUEUE_KEY = StorageKeys.offlinePendingSessions;
 const MAX_QUEUE_ITEMS = 50;
 
 export type PendingAnswer = {

@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storageKeyFor } from './storage-keys';
 
-function dismissalKey(userId: string, examSlug: string) {
-  return `reviewnatin:diagnostic-dismissed:${userId}:${examSlug}`;
-}
+const dismissalKey = storageKeyFor.diagnosticDismissed;
 
 function todayStamp() {
   return new Date().toISOString().slice(0, 10);

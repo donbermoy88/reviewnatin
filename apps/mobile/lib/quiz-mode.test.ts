@@ -3,13 +3,9 @@ import { resolveQuizMode, toQuizSessionMode } from './quiz-mode';
 
 describe('resolveQuizMode (descriptive / result-route mode)', () => {
   it('passes through modes that have a dedicated descriptive label', () => {
-    for (const mode of ['diagnostic', 'mock', 'board', 'timed', 'weak_area', 'barkada', 'bookmark_review']) {
+    for (const mode of ['diagnostic', 'mock', 'board', 'timed', 'weak_area', 'barkada', 'bookmark_review', 'mistake_review']) {
       expect(resolveQuizMode({ mode })).toBe(mode);
     }
-  });
-
-  it('maps mistake_review to practice (matches the result-route mapping)', () => {
-    expect(resolveQuizMode({ mode: 'mistake_review' })).toBe('practice');
   });
 
   it('falls back to practice for an unknown online mode', () => {
