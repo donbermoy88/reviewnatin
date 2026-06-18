@@ -224,20 +224,35 @@ no new lint errors/warnings.
   covered by unit tests (the core answer-assembly/scoring path previously had
   none). Screen logic is unchanged; the helpers are byte-equivalent.
 
+### 6.5 Split the `themed-styles.ts` monolith
+- The 1,782-line file (16 unrelated `createXStyles` factories) is now a
+  **`lib/themed-styles/` directory** grouped by domain (`components`,
+  `navigation`, `dashboard`, `study`, `profile`, `leaderboard`, `quiz`, `lists`,
+  `result`, `analytics`) behind an `index.ts` barrel. Every factory body is
+  byte-identical; consumers import the same `'../../lib/themed-styles'` path and
+  resolve through the barrel, so no call site changed. Editing the home-screen
+  styles no longer collides with the quiz/leaderboard/profile styles.
+
 ---
 
 ## 7. Recommended next steps (need runtime/integration test scaffolding first)
 
 1. **Finish decomposing `quiz.tsx`**: extract `useQuizSession` (load + state
    machine), `useQuizTimer`, `useExamResume`, and `useHints`. The pure helpers
-   (§6.4) are step one; the stateful hooks should land behind component/E2E tests
-   since they can't be verified by `tsc` alone.
+   (§6.4) are step one; the stateful hooks share `timeLeft`/answer state across
+   the component, so they should land behind component/E2E tests rather than be
+   moved on `tsc` alone.
 2. **Introduce a query layer** (TanStack Query is Expo-compatible) to get
    dedupe + cache + refetch-on-focus and delete ~25 hand-rolled fetch effects.
 3. **One data-access contract**: a thin `supabase` wrapper + shared `mapRow`
    helpers + a single `Result<T>`/throw policy; migrate `lib/api/*` module by
    module (high churn; each module's bespoke mapping must be diffed carefully).
-4. **Split `themed-styles.ts`** by co-locating each `createXStyles` next to its
-   screen/component; standardize on one styling convention.
-5. **Type `mode` as a discriminated union** exported from `lib/quiz-mode.ts` and
+4. **Type `mode` as a discriminated union** exported from `lib/quiz-mode.ts` and
    thread it through routing instead of stringly-typed params + boolean flags.
+
+### Convention follow-up
+Six screens (`subscribe`, `onboarding`, `login`, `signup`, `legal`,
+`study/[subjectSlug]`) still define their own local `createStyles(theme)`. With
+the registry now split by domain, the cleanest end-state is to co-locate each
+screen's styles in its own file and drop the central registry entirely — but that
+is a larger move and should follow the screen-by-screen decomposition.

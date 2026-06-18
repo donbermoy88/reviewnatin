@@ -1,0 +1,76 @@
+import { StyleSheet } from 'react-native';
+import type { AppTheme } from '../../hooks/use-app-theme';
+
+export function createProfileStyles(theme: AppTheme) {
+  const { colors, fonts, spacing, radii, shadows } = theme;
+  return StyleSheet.create({
+    root: { flex: 1, backgroundColor: colors.background },
+    header: {
+      paddingHorizontal: spacing.lg,
+      paddingBottom: 56,
+      overflow: 'hidden',
+    },
+    sparkle: { position: 'absolute', right: -30, top: 20 },
+    headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacing.lg },
+    headerTitle: { fontFamily: fonts.display, fontSize: 22, color: '#fff', letterSpacing: -0.4 },
+    settingsBtn: {
+      width: 40,
+      height: 40,
+      borderRadius: radii.md,
+      backgroundColor: 'rgba(255,255,255,0.15)',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    avatarRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
+    avatar: {
+      width: 76,
+      height: 76,
+      borderRadius: 22,
+      backgroundColor: colors.accent,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderWidth: 3,
+      borderColor: 'rgba(255,255,255,0.25)',
+    },
+    avatarText: { fontFamily: fonts.display, fontSize: 28, color: colors.primaryDark },
+    userName: { fontFamily: fonts.display, fontSize: 20, color: '#fff', letterSpacing: -0.3 },
+    userSub: { fontFamily: fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.7)', marginTop: 2 },
+    statsCard: {
+      marginHorizontal: spacing.lg,
+      backgroundColor: colors.surface,
+      borderRadius: radii.xl,
+      padding: spacing.lg,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
+    },
+    statItem: { alignItems: 'center' },
+    statVal: { fontFamily: fonts.display, fontSize: 22, letterSpacing: -0.5 },
+    statLbl: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 11,
+      color: colors.textMuted,
+      marginTop: 4,
+      letterSpacing: 0.4,
+      textTransform: 'uppercase',
+    },
+    section: { paddingHorizontal: spacing.lg, marginTop: spacing.lg },
+    sectionTitle: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, letterSpacing: -0.15, marginBottom: spacing.sm },
+    sessionCard: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: colors.surface,
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      marginTop: spacing.sm,
+      borderWidth: 1,
+      borderColor: colors.border,
+    },
+    sessionTitle: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text },
+    sessionDate: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 },
+    sessionScore: { fontFamily: fonts.display, fontSize: 22, color: colors.primary },
+  });
+}
