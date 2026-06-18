@@ -24,6 +24,7 @@ import { RichText } from '../../components/rich-text';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createQuizStyles } from '../../lib/themed-styles';
 import { randomizeQuestionSet } from '../../lib/question-randomization';
+import { resolveQuizMode, toQuizSessionMode } from '../../lib/quiz-mode';
 import {
   checkQuestionAnswer,
   fetchExamBySlug,
@@ -594,19 +595,7 @@ export default function PracticeQuizScreen() {
             user.id,
             exam.id,
             questions.length,
-            isDiagnostic
-              ? 'diagnostic'
-              : isMock
-                ? 'mock'
-                : isBoard
-                  ? 'board'
-                  : isTimed
-                  ? 'timed'
-                  : isMistakeReview
-                    ? 'mistake_review'
-                    : isBarkada
-                      ? 'barkada'
-                      : 'practice',
+            toQuizSessionMode({ mode }),
             mockExamId
           );
           if (sessionId) {
@@ -681,7 +670,7 @@ export default function PracticeQuizScreen() {
         duration: String(duration),
         sessionId: sessionId ?? '',
         examSlug: slug,
-        mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isBookmarkReview ? 'bookmark_review' : offlineMode ? 'offline' : 'practice',
+        mode: resolveQuizMode({ mode, offline: offlineMode }),
         diagnosticReadiness: diagnosticReadiness != null ? String(diagnosticReadiness) : '',
         pasapathTaskId: pasapathTaskId ?? '',
         barkadaChallengeId: barkadaChallengeId ?? '',
@@ -693,7 +682,7 @@ export default function PracticeQuizScreen() {
           : '',
       },
     });
-  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, flaggedIndices, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, resumeKey, router]);
+  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, flaggedIndices, user, slug, mode, isMock, isBoard, isStrictExam, isMistakeReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, resumeKey, router]);
 
   useEffect(() => {
     if ((isStrictExam || isTimed) && timeLeft === 0 && questions.length > 0) {

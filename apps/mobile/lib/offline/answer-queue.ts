@@ -9,7 +9,6 @@
  * This guarantees that offline practice never silently loses progress,
  * mistake bank entries, or XP.
  */
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   createQuizSession,
   completePracticeSession,
@@ -19,11 +18,11 @@ import {
 import { fetchExamBySlug } from '../api/catalog';
 import { recordQuizOutcome } from '../api/mistakes';
 import { captureAppException, captureAppMessage } from '../monitoring/events';
+import { createQueueStorage } from './queue-storage';
+import { isRetryDue, nextRetryAt } from './retry-policy';
 
 const QUEUE_KEY = 'reviewnatin:offline:pending-sessions:v1';
 const MAX_QUEUE_ITEMS = 50;
-const BASE_BACKOFF_MS = 30_000;
-const MAX_BACKOFF_MS = 30 * 60 * 1000;
 
 export type PendingAnswer = {
   questionId: string;
@@ -48,28 +47,9 @@ export type PendingSession = {
   lastError?: string;
 };
 
-async function readQueue(): Promise<PendingSession[]> {
-  try {
-    const raw = await AsyncStorage.getItem(QUEUE_KEY);
-    return raw ? (JSON.parse(raw) as PendingSession[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-async function writeQueue(items: PendingSession[]): Promise<void> {
-  await AsyncStorage.setItem(QUEUE_KEY, JSON.stringify(items.slice(-MAX_QUEUE_ITEMS)));
-}
-
-function nextRetryAt(attemptCount: number, now = Date.now()): string {
-  const delay = Math.min(BASE_BACKOFF_MS * 2 ** Math.max(attemptCount - 1, 0), MAX_BACKOFF_MS);
-  return new Date(now + delay).toISOString();
-}
-
-function shouldAttempt(session: PendingSession, now = Date.now()): boolean {
-  if (!session.nextAttemptAt) return true;
-  return new Date(session.nextAttemptAt).getTime() <= now;
-}
+const storage = createQueueStorage<PendingSession>(QUEUE_KEY, MAX_QUEUE_ITEMS);
+const readQueue = storage.read;
+const writeQueue = storage.write;
 
 export async function queuePendingSession(session: PendingSession): Promise<void> {
   const queue = await readQueue();
@@ -114,7 +94,7 @@ export async function flushPendingAnswers(userId: string): Promise<{
       continue;
     }
 
-    if (!shouldAttempt(session)) {
+    if (!isRetryDue(session.nextAttemptAt)) {
       survivors.push(session);
       continue;
     }
@@ -197,5 +177,5 @@ export async function flushPendingAnswers(userId: string): Promise<{
 }
 
 export async function clearPendingAnswers(): Promise<void> {
-  await AsyncStorage.removeItem(QUEUE_KEY);
+  await storage.clear();
 }
