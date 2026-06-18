@@ -4,6 +4,7 @@ import { supabase, isSupabaseConfigured } from '../supabase';
 import { isDailyLimitError } from './iap';
 import { shuffleQuestionChoices } from '../question-randomization';
 import { cachedJson } from '../cache/json-cache';
+import { rowList } from './result';
 
 export type PracticeFetchError = 'daily_limit' | 'unknown';
 
@@ -117,7 +118,7 @@ export async function fetchPracticeQuestions(
   }
 
   return {
-    questions: ((data ?? []) as PracticeQuestionRow[]).map(mapPracticeQuestion),
+    questions: rowList<PracticeQuestionRow>(data).map(mapPracticeQuestion),
   };
 }
 
@@ -129,7 +130,7 @@ export async function fetchQuestionsByIds(ids: string[]): Promise<Question[]> {
   });
 
   if (error) throw error;
-  return ((data ?? []) as PracticeQuestionRow[]).map(mapPracticeQuestion);
+  return rowList<PracticeQuestionRow>(data).map(mapPracticeQuestion);
 }
 
 /**

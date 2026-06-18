@@ -3,6 +3,7 @@ import { cleanStem } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 import { shuffleQuestionChoices } from '../question-randomization';
 import { cachedJson } from '../cache/json-cache';
+import { rowList } from './result';
 
 export type MockExam = {
   id: string;
@@ -64,7 +65,7 @@ export async function fetchMockExamQuestions(mockExamId: string): Promise<MockEx
 
   if (error) throw error;
 
-  const rows = (data ?? []) as MockQuestionRow[];
+  const rows = rowList<MockQuestionRow>(data);
   const isPreview = rows.some((r) => r.is_preview);
   const previewLimit = rows.find((r) => r.preview_limit != null)?.preview_limit ?? null;
 

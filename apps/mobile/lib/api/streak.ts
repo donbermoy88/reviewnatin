@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { firstRow } from './result';
 
 export type StreakStatus = {
   streakCount: number;
@@ -38,6 +39,6 @@ export async function buyStreakFreeze(): Promise<BuyFreezeResult> {
     if (msg.includes('streak_freeze_cap_reached')) return { ok: false, error: 'cap_reached' };
     return { ok: false, error: 'unknown' };
   }
-  const row = (data as { streak_freezes: number; total_xp: number }[] | null)?.[0];
+  const row = firstRow<{ streak_freezes: number; total_xp: number }>(data);
   return { ok: true, streakFreezes: row?.streak_freezes ?? 0, totalXp: row?.total_xp ?? 0 };
 }

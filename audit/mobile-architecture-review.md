@@ -248,6 +248,20 @@ no new lint errors/warnings.
   resolve through the barrel, so no call site changed. Editing the home-screen
   styles no longer collides with the quiz/leaderboard/profile styles.
 
+### 6.7 Shared data-access result helpers (`lib/api/*` contract — first slice)
+- **New `lib/api/result.ts`** — `rowList<T>` (`(data ?? []) as T[]`), `firstRow<T>`
+  (single-row RPC → first element), and `asNumber(data, fallback)` (scalar RPC),
+  with unit tests. These centralize only the Supabase result-shape unwrapping that
+  was hand-rolled in ~25 places.
+- Migrated the **exact-match** call sites (`streak`, `xp`, `notes`, `achievements`,
+  `mock-exams`, `diagnostic`, `mock-history`, `catalog`, `analytics`); each is
+  byte-equivalent. Per-module field mapping and coercion (e.g. `Number(...)`,
+  nested flattening) intentionally stay in each module — that logic is bespoke and
+  behavior-bearing, so it is **not** blanket-rewritten. The remaining inline
+  `as Array<{…}>` anonymous-shape casts were left as-is (wrapping them is no
+  clearer). Unifying the divergent _error policy_ (throw vs silent-swallow) is the
+  larger follow-up and changes behavior, so it is out of scope here.
+
 ---
 
 ## 7. Recommended next steps (need runtime/integration test scaffolding first)
@@ -261,9 +275,11 @@ no new lint errors/warnings.
    (§6.5); the remaining work is refetch-on-focus and replacing the ~25
    hand-rolled fetch effects (TanStack Query is Expo-compatible). Each screen's
    `load()` is bespoke, so migrate them behind component/E2E coverage.
-3. **One data-access contract**: a thin `supabase` wrapper + shared `mapRow`
-   helpers + a single `Result<T>`/throw policy; migrate `lib/api/*` module by
-   module (high churn; each module's bespoke mapping must be diffed carefully).
+3. **Finish the data-access contract**: the result-shape helpers are in place
+   (§6.7). The remaining work is the divergent _error policy_ — some functions
+   `throw`, some swallow to `null`/`[]`/`0` with no logging. Unifying it (or at
+   least adding observability to the silent swallows) changes behavior/telemetry,
+   so it should land deliberately, module by module.
 4. **Type `mode` as a discriminated union** exported from `lib/quiz-mode.ts` and
    thread it through routing instead of stringly-typed params + boolean flags.
 
