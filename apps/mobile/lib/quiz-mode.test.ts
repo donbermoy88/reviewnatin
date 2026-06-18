@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { resolveQuizMode, toQuizSessionMode } from './quiz-mode';
+import {
+  isQuizRouteMode,
+  resolveQuizMode,
+  toQuizSessionMode,
+  type DescriptiveQuizMode,
+} from './quiz-mode';
 
 describe('resolveQuizMode (descriptive / result-route mode)', () => {
   it('passes through modes that have a dedicated descriptive label', () => {
@@ -20,6 +25,28 @@ describe('resolveQuizMode (descriptive / result-route mode)', () => {
 
   it('keeps the specific mode even when offline (mode wins over offline)', () => {
     expect(resolveQuizMode({ mode: 'mock', offline: true })).toBe('mock');
+  });
+
+  it('returns a value typed as the DescriptiveQuizMode union (compile-time lock)', () => {
+    const mode: DescriptiveQuizMode = resolveQuizMode({ mode: 'weak_area' });
+    expect(mode).toBe('weak_area');
+  });
+});
+
+describe('isQuizRouteMode', () => {
+  it('accepts every recognized route mode', () => {
+    for (const mode of [
+      'practice', 'timed', 'mock', 'board', 'diagnostic',
+      'mistake_review', 'bookmark_review', 'weak_area', 'barkada', 'offline',
+    ]) {
+      expect(isQuizRouteMode(mode)).toBe(true);
+    }
+  });
+
+  it('rejects unknown values and undefined', () => {
+    expect(isQuizRouteMode('nope')).toBe(false);
+    expect(isQuizRouteMode(undefined)).toBe(false);
+    expect(isQuizRouteMode('')).toBe(false);
   });
 });
 

@@ -262,6 +262,15 @@ no new lint errors/warnings.
   clearer). Unifying the divergent _error policy_ (throw vs silent-swallow) is the
   larger follow-up and changes behavior, so it is out of scope here.
 
+### 6.8 Typed quiz-mode unions
+- `lib/quiz-mode.ts` now exports `QuizRouteMode` (recognized route params) and
+  `DescriptiveQuizMode` (resolver output), plus an `isQuizRouteMode` guard.
+  `resolveQuizMode` is annotated to return `DescriptiveQuizMode` instead of
+  `string` — a compile-time-only tightening (the grouped `return mode` already
+  narrows to the case-literal union, so no body changed and the inferred type of
+  the screen's `descriptiveMode` constant flows through unchanged). Replaces a
+  stringly-typed surface with an explicit, discoverable mode set.
+
 ---
 
 ## 7. Recommended next steps (need runtime/integration test scaffolding first)
@@ -280,8 +289,10 @@ no new lint errors/warnings.
    `throw`, some swallow to `null`/`[]`/`0` with no logging. Unifying it (or at
    least adding observability to the silent swallows) changes behavior/telemetry,
    so it should land deliberately, module by module.
-4. **Type `mode` as a discriminated union** exported from `lib/quiz-mode.ts` and
-   thread it through routing instead of stringly-typed params + boolean flags.
+4. **Thread the mode unions through routing** (done at the resolver layer in
+   §6.8): the screens still derive boolean flags from the raw `mode` string and
+   expo-router params are untyped. Fully propagating `QuizRouteMode` into the
+   route param types is the remaining step.
 
 ### Convention follow-up
 Six screens (`subscribe`, `onboarding`, `login`, `signup`, `legal`,

@@ -14,8 +14,56 @@
  */
 import type { QuizMode } from './api/quiz';
 
+/**
+ * The `mode` values the practice quiz route understands. The raw param is still
+ * typed `string` (expo-router hands back arbitrary strings), but this union
+ * documents the recognized set and is the input to {@link isQuizRouteMode}.
+ */
+export type QuizRouteMode =
+  | 'practice'
+  | 'timed'
+  | 'mock'
+  | 'board'
+  | 'diagnostic'
+  | 'mistake_review'
+  | 'bookmark_review'
+  | 'weak_area'
+  | 'barkada'
+  | 'offline';
+
+/** The descriptive mode {@link resolveQuizMode} produces. */
+export type DescriptiveQuizMode =
+  | 'diagnostic'
+  | 'mock'
+  | 'board'
+  | 'timed'
+  | 'weak_area'
+  | 'barkada'
+  | 'bookmark_review'
+  | 'mistake_review'
+  | 'offline'
+  | 'practice';
+
+const QUIZ_ROUTE_MODES = new Set<string>([
+  'practice',
+  'timed',
+  'mock',
+  'board',
+  'diagnostic',
+  'mistake_review',
+  'bookmark_review',
+  'weak_area',
+  'barkada',
+  'offline',
+]);
+
+/** Narrow a raw route param to a recognized {@link QuizRouteMode}. */
+export function isQuizRouteMode(value: string | undefined): value is QuizRouteMode {
+  return value != null && QUIZ_ROUTE_MODES.has(value);
+}
+
 export type QuizModeInput = {
-  /** Raw `mode` route param (e.g. 'mock', 'board', 'weak_area', undefined). */
+  /** Raw `mode` route param (one of {@link QuizRouteMode}, or undefined). */
   mode?: string;
   /** Whether the session ran against the offline pack. */
   offline?: boolean;
@@ -31,7 +79,7 @@ export type QuizModeInput = {
  * it through is behavior-preserving while keeping analytics/guest-history/DB all
  * in agreement.
  */
-export function resolveQuizMode({ mode, offline = false }: QuizModeInput): string {
+export function resolveQuizMode({ mode, offline = false }: QuizModeInput): DescriptiveQuizMode {
   switch (mode) {
     case 'diagnostic':
     case 'mock':
