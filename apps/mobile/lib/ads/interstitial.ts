@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { showGoogleInterstitial } from './google-interstitial';
+import { StorageKeys } from '../storage-keys';
 
-const INTERSTITIAL_KEY = 'reviewnatin:last-interstitial';
+const INTERSTITIAL_KEY = StorageKeys.lastInterstitial;
 const COOLDOWN_MS = 30 * 60 * 1000;
 
 export type SessionInterstitialOutcome = 'shown' | 'fallback' | 'skipped';

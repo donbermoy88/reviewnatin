@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StorageKeys } from './storage-keys';
 
-const STORAGE_KEY = 'reviewnatin:checkout-attribution';
+const STORAGE_KEY = StorageKeys.checkoutAttribution;
 
 export type CheckoutAttribution = {
   utmSource?: string;

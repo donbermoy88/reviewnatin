@@ -8,8 +8,9 @@ import { Platform, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
+import { StorageKeys } from '../../lib/storage-keys';
 
-const DURATION_KEY = 'reviewnatin:focus:last-minutes';
+const DURATION_KEY = StorageKeys.focusLastMinutes;
 const PRESETS = [15, 25, 50] as const;
 
 function formatClock(totalSeconds: number): string {

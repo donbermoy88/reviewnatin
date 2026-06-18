@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { useColorScheme } from 'react-native';
 import { colors as lightColors } from '@reviewnatin/shared';
 import { darkColors, type ThemeColors } from '../constants/dark-theme';
-import { fetchRemotePreferences, loadLocalPreferences, upsertRemotePreferences, type ExplanationLocale, type UserPreferences } from '../lib/api/preferences';
+import { fetchRemotePreferences, loadLocalPreferences, upsertRemotePreferences, LOCAL_KEY, type ExplanationLocale, type UserPreferences } from '../lib/api/preferences';
 import {
   cancelExamReminders,
   cancelReminders,
@@ -48,7 +48,7 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
           const remote = await fetchRemotePreferences(userId);
           if (remote) {
             setPrefs(remote);
-            await AsyncStorage.setItem('reviewnatin:prefs', JSON.stringify(remote));
+            await AsyncStorage.setItem(LOCAL_KEY, JSON.stringify(remote));
             setLoading(false);
             return;
           }
@@ -65,7 +65,7 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
   const persist = useCallback(
     async (next: UserPreferences) => {
       setPrefs(next);
-      await AsyncStorage.setItem('reviewnatin:prefs', JSON.stringify(next));
+      await AsyncStorage.setItem(LOCAL_KEY, JSON.stringify(next));
       if (userId) {
         try {
           await upsertRemotePreferences(userId, next);

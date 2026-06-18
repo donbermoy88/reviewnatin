@@ -3,6 +3,7 @@ import type { Question } from '../types';
 import { supabase, isSupabaseConfigured } from '../supabase';
 import { shuffleArray } from '../shuffle';
 import { shuffleQuestionChoices } from '../question-randomization';
+import { storageKeyFor } from '../storage-keys';
 
 export type OfflinePackMeta = {
   examSlug: string;
@@ -20,7 +21,7 @@ type OfflinePackContent = {
   review_materials: unknown[];
 };
 
-const packKey = (examSlug: string) => `reviewnatin:offline:${examSlug}`;
+const packKey = storageKeyFor.offlinePack;
 
 type OfflineQuestionRow = {
   id: string;

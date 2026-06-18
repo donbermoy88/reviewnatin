@@ -1,10 +1,14 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { ReportContentType, ReportReason } from '../api/content-reports';
+import { createQueueStorage } from './queue-storage';
+import { nextRetryAt } from './retry-policy';
+import { StorageKeys } from '../storage-keys';
 
-const QUEUE_KEY = 'reviewnatin:offline:content-reports:v1';
+// Re-exported so existing consumers (lib/api/content-reports.ts) keep importing
+// the backoff schedule from the queue module.
+export { nextRetryAt };
+
+const QUEUE_KEY = StorageKeys.offlineContentReports;
 const MAX_QUEUE_ITEMS = 100;
-const BASE_BACKOFF_MS = 30_000;
-const MAX_BACKOFF_MS = 30 * 60 * 1000;
 
 export type PendingContentReport = {
   localId: string;
@@ -27,22 +31,14 @@ export function createPendingReportId(params: {
   return `${params.userId}:${params.contentType}:${params.contentId}`;
 }
 
-export function nextRetryAt(attemptCount: number, now = Date.now()): string {
-  const delay = Math.min(BASE_BACKOFF_MS * 2 ** Math.max(attemptCount - 1, 0), MAX_BACKOFF_MS);
-  return new Date(now + delay).toISOString();
-}
+const storage = createQueueStorage<PendingContentReport>(QUEUE_KEY, MAX_QUEUE_ITEMS);
 
 export async function readPendingContentReports(): Promise<PendingContentReport[]> {
-  try {
-    const raw = await AsyncStorage.getItem(QUEUE_KEY);
-    return raw ? (JSON.parse(raw) as PendingContentReport[]) : [];
-  } catch {
-    return [];
-  }
+  return storage.read();
 }
 
 export async function writePendingContentReports(items: PendingContentReport[]): Promise<void> {
-  await AsyncStorage.setItem(QUEUE_KEY, JSON.stringify(items.slice(-MAX_QUEUE_ITEMS)));
+  return storage.write(items);
 }
 
 export async function queueContentReport(report: PendingContentReport): Promise<void> {
@@ -75,5 +71,5 @@ export async function pendingContentReportCount(userId?: string): Promise<number
 }
 
 export async function clearPendingContentReports(): Promise<void> {
-  await AsyncStorage.removeItem(QUEUE_KEY);
+  await storage.clear();
 }

@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { rowList } from './result';
 
 export type StudyNote = {
   id: string;
@@ -35,7 +36,7 @@ export async function fetchNotes(userId: string): Promise<StudyNote[]> {
     .order('updated_at', { ascending: false })
     .limit(200);
   if (error) throw error;
-  return ((data ?? []) as NoteRow[]).map(mapNote);
+  return rowList<NoteRow>(data).map(mapNote);
 }
 
 export async function createNote(

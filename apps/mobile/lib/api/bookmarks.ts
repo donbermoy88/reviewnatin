@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetchQuestionsByIds } from './catalog';
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { storageKeyFor } from '../storage-keys';
 
 export type BookmarkItem = {
   questionId: string;
@@ -152,7 +153,7 @@ export async function cacheBookmarkIds(userId: string): Promise<void> {
     fetchBookmarkedMaterialIds(userId),
   ]);
   await AsyncStorage.setItem(
-    `reviewnatin:bookmarks:${userId}`,
+    storageKeyFor.bookmarks(userId),
     JSON.stringify({ questions: [...questions], materials: [...materials] })
   );
 }

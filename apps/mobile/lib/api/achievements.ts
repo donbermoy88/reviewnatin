@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { rowList } from './result';
 
 export type UserBadge = {
   slug: string;
@@ -43,5 +44,5 @@ export async function awardUserBadges(): Promise<NewBadge[]> {
 
   if (error) return [];
 
-  return (data ?? []) as NewBadge[];
+  return rowList<NewBadge>(data);
 }

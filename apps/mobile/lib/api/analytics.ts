@@ -4,6 +4,7 @@ import { supabase, isSupabaseConfigured } from '../supabase';
 import { isDailyLimitError } from './iap';
 import type { PracticeFetchError } from './catalog';
 import { shuffleQuestionChoices } from '../question-randomization';
+import { rowList } from './result';
 
 type PracticeQuestionRow = {
   id: string;
@@ -123,6 +124,6 @@ export async function fetchWeakAreaQuestions(
   }
 
   return {
-    questions: ((data ?? []) as PracticeQuestionRow[]).map(mapPracticeQuestion),
+    questions: rowList<PracticeQuestionRow>(data).map(mapPracticeQuestion),
   };
 }

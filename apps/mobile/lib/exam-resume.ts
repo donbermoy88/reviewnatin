@@ -9,8 +9,9 @@
  * would point at the wrong questions.
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StorageKeyPrefix } from './storage-keys';
 
-const PREFIX = 'reviewnatin:exam-resume:';
+const PREFIX = StorageKeyPrefix.examResume;
 const MAX_AGE_MS = 24 * 60 * 60 * 1000; // only resume within a day
 
 export type ExamSnapshot = {

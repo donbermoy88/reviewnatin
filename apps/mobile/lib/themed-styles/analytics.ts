@@ -1,0 +1,147 @@
+import { StyleSheet } from 'react-native';
+import type { AppTheme } from '../../hooks/use-app-theme';
+
+export function createAnalyticsStyles(theme: AppTheme) {
+  const { colors, fonts, spacing, radii, shadows, isDark } = theme;
+  const cardShadow = isDark ? {} : shadows.card;
+  const headlineBlue = isDark ? colors.text : colors.primaryDark;
+  return StyleSheet.create({
+    root: { flex: 1, backgroundColor: colors.background },
+    center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      paddingHorizontal: spacing.md,
+      paddingBottom: spacing.sm,
+    },
+    backBtn: {
+      width: 40,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginLeft: -4,
+    },
+    headerTitle: {
+      fontFamily: fonts.display,
+      fontSize: 26,
+      color: headlineBlue,
+      letterSpacing: -0.4,
+    },
+    body: { paddingHorizontal: spacing.md, paddingTop: spacing.xs },
+    summaryCard: {
+      backgroundColor: isDark ? colors.surface : colors.surface,
+      borderRadius: radii.xl,
+      padding: spacing.lg,
+      marginBottom: spacing.md,
+      borderWidth: 1,
+      borderColor: isDark ? colors.border : colors.primaryMuted,
+      borderTopWidth: 3,
+      borderTopColor: colors.primary,
+      ...cardShadow,
+    },
+    summarySettings: {
+      position: 'absolute',
+      top: spacing.md,
+      right: spacing.md,
+      width: 40,
+      height: 40,
+      borderRadius: radii.full,
+      backgroundColor: colors.primaryMuted,
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 1,
+    },
+    summaryTitle: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 17,
+      color: headlineBlue,
+      paddingRight: 44,
+      letterSpacing: -0.2,
+    },
+    summarySub: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 14,
+      color: colors.textMuted,
+      marginTop: 4,
+      lineHeight: 20,
+    },
+    summarySegments: { marginTop: spacing.md },
+    weakBox: {
+      marginTop: spacing.md,
+      backgroundColor: colors.errorBg,
+      borderRadius: radii.md,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm + 2,
+    },
+    weakBoxText: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: 13,
+      color: colors.error,
+      lineHeight: 19,
+    },
+    subjectCard: {
+      backgroundColor: colors.surface,
+      borderRadius: radii.xl,
+      padding: spacing.lg,
+      marginBottom: spacing.md,
+      borderWidth: isDark ? 1 : 0,
+      borderColor: colors.border,
+      ...cardShadow,
+    },
+    subjectHead: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      marginBottom: spacing.md,
+      gap: spacing.sm,
+    },
+    subjectName: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 17,
+      color: headlineBlue,
+      flex: 1,
+      letterSpacing: -0.2,
+    },
+    subjectPct: {
+      fontFamily: fonts.display,
+      fontSize: 22,
+      color: colors.primary,
+      letterSpacing: -0.3,
+    },
+    topicRow: {
+      marginTop: spacing.md,
+      paddingTop: spacing.md,
+      borderTopWidth: 1,
+      borderTopColor: colors.border,
+    },
+    topicRowFirst: {
+      marginTop: 0,
+      paddingTop: 0,
+      borderTopWidth: 0,
+    },
+    topicMeta: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      gap: spacing.md,
+      marginBottom: spacing.sm,
+    },
+    topicName: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: 15,
+      color: headlineBlue,
+      flex: 1,
+      lineHeight: 20,
+    },
+    topicPct: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 13,
+      color: colors.textMuted,
+      textAlign: 'right',
+      flexShrink: 0,
+    },
+    topicBar: { height: 6, borderRadius: 3 },
+    cta: { marginTop: spacing.xs },
+  });
+}

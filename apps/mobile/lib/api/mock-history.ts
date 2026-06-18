@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { rowList } from './result';
 
 export type MockExamHistoryRow = {
   sessionId: string;
@@ -44,7 +45,7 @@ export async function fetchMockSubjectTrends(examSlug: string, limit = 5): Promi
     correct: number;
     total: number;
   };
-  for (const row of (data ?? []) as TrendRow[]) {
+  for (const row of rowList<TrendRow>(data)) {
     const entry = bySubject.get(row.subject_name) ?? { slug: row.subject_slug, points: [] };
     const pct = row.total > 0 ? Math.round((row.correct / row.total) * 100) : 0;
     entry.points.push({ date: row.completed_at, pct });
