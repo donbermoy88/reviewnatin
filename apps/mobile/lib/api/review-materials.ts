@@ -27,7 +27,7 @@ export async function fetchReviewMaterialsByExam(
 
     if (error) throw error;
 
-    return ((data ?? []) as Array<{
+    return ((data ?? []) as {
       id: string;
       title: string;
       body: string;
@@ -37,7 +37,7 @@ export async function fetchReviewMaterialsByExam(
       topic_name: string;
       subject_name: string;
       subject_slug: string;
-    }>).map((row) => ({
+    }[]).map((row) => ({
       id: row.id,
       title: row.title,
       body: row.body,

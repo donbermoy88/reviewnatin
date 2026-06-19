@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import { SvgUri } from 'react-native-svg';
+import { useAppTheme } from '../hooks/use-app-theme';
 
 type Props = {
   uri: string;
@@ -19,6 +20,7 @@ type Props = {
  * Supports both raster images (PNG/JPEG) and SVG files.
  */
 export function QuestionImage({ uri }: Props) {
+  const { colors } = useAppTheme();
   const [loaded, setLoaded] = useState(false);
   const [open, setOpen] = useState(false);
   const isSvg = uri.toLowerCase().includes('.svg') || uri.toLowerCase().includes('svg');
@@ -26,7 +28,7 @@ export function QuestionImage({ uri }: Props) {
   return (
     <>
       <Pressable
-        style={styles.wrapper}
+        style={[styles.wrapper, { backgroundColor: colors.iconBg }]}
         onPress={() => setOpen(true)}
         accessibilityRole="imagebutton"
         accessibilityLabel="Question diagram — tap to enlarge"
@@ -44,7 +46,7 @@ export function QuestionImage({ uri }: Props) {
           <>
             {!loaded && (
               <View style={styles.placeholder}>
-                <ActivityIndicator size="small" color="#1e4fd9" />
+                <ActivityIndicator size="small" color={colors.primary} />
               </View>
             )}
             <Image
@@ -95,7 +97,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     borderRadius: 12,
     overflow: 'hidden',
-    backgroundColor: '#f0f4ff',
     minHeight: 180,
     alignItems: 'center',
     justifyContent: 'center',

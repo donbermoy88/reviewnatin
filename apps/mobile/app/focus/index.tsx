@@ -67,7 +67,7 @@ export default function FocusTimerScreen() {
   }, [clearTimer]);
 
   const start = useCallback(() => {
-    if (running || remaining <= 0) return;
+    if (running || intervalRef.current || remaining <= 0) return;
     setDone(false);
     setRunning(true);
     if (Platform.OS === 'ios') {

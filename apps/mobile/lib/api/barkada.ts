@@ -40,8 +40,8 @@ export async function fetchMyBarkada(examSlug: string): Promise<BarkadaGroup | n
   if (!data) return null;
 
   const row = data as Record<string, unknown>;
-  const members = (row.members as Array<Record<string, unknown>>) ?? [];
-  const results = (row.challenge_results as Array<Record<string, unknown>>) ?? [];
+  const members = (row.members as Record<string, unknown>[]) ?? [];
+  const results = (row.challenge_results as Record<string, unknown>[]) ?? [];
   const challenge = row.active_challenge as Record<string, unknown> | null;
 
   return {

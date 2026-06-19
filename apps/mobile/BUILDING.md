@@ -31,6 +31,16 @@ Required for `production`:
 | `EXPO_PUBLIC_SENTRY_DSN` | Crash reporting | **prebuild throws if missing** |
 | `EXPO_PUBLIC_ADMOB_IOS_APP_ID` + `_ANDROID_APP_ID` | Ads | **prebuild throws if only one is set** |
 
+Before building the Android production AAB, run:
+
+```bash
+npm run release:check:android
+```
+
+This checks the Android package, AAB profile, Google Play product IDs, AdMob app
+ID format, Sentry DSN, Supabase public env, and the Play service-account secret
+required by `iap-verify`. It prints missing keys only, never secret values.
+
 AdMob, when enabled, also injects `SKAdNetworkItems` and the App Tracking
 Transparency usage string (`userTrackingUsageDescription`) via the
 `react-native-google-mobile-ads` config plugin. Set these in the EAS build

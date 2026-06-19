@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Animated, Easing, Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
+import { ErrorBoundary } from '../../components/error-boundary';
 import { GoalRing } from '../../components/goal-ring';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReadinessBreakdownSheet } from '../../components/readiness-breakdown-sheet';
@@ -212,15 +213,15 @@ function PremiumStudyPackArt({
   );
 }
 
-export default function DashboardScreen() {
+function DashboardScreenContent() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
   const { colors, fonts, gradients, spacing } = theme;
   const styles = useMemo(() => createDashboardStyles(theme), [theme]);
   const { user } = useAuth();
-  const { isPremium, products } = useEntitlements();
-  const { displayName } = useUserProfile('Reviewer');
+  const { isPremium, products, storePrices } = useEntitlements();
+  const { displayName } = useUserProfile('Guest');
   const { prefs, setNotificationsEnabled } = usePreferences();
   const [introAnim] = useState(() => new Animated.Value(0));
   const [floatAnim] = useState(() => new Animated.Value(0));
@@ -433,10 +434,13 @@ export default function DashboardScreen() {
   const completedPasapathTasks = visiblePasapathTasks.filter((task) => task.completed).length;
   const remainingPasapathTasks = Math.max(visiblePasapathTasks.length - completedPasapathTasks, 0);
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
-  const firstName = displayName.split(/\s+/)[0] ?? displayName;
+  const firstName = user ? displayName.split(/\s+/)[0] ?? displayName : 'Guest';
   const remainingQuestions = Math.max(questionsTarget - questionsDone, 0);
   const monthlyPlusPrice =
-    products.find((product) => product.tier === 'plus' && product.sku.toLowerCase().includes('monthly'))?.pricePhp ?? 159;
+    products.find((product) => product.tier === 'plus' && product.sku.toLowerCase().includes('monthly')) ?? null;
+  const monthlyPlusPriceText = monthlyPlusPrice
+    ? storePrices[monthlyPlusPrice.sku]?.displayPrice ?? `₱${Math.round(monthlyPlusPrice.pricePhp).toLocaleString('en-PH')}`
+    : '₱159';
   const displayExamName = formatExamDisplayName(examSlug, examName);
   const dailyGoalText =
     questionsDone >= questionsTarget
@@ -445,7 +449,9 @@ export default function DashboardScreen() {
   const completedQuizText =
     stats.sessionCount > 0
       ? `${stats.sessionCount} quiz${stats.sessionCount === 1 ? '' : 'zes'} completed`
-      : 'Start your first quiz';
+      : user
+        ? 'Start your first quiz'
+        : 'Log in to save progress';
   const planStatusText = pasapathComplete
     ? 'Plan complete. Use Mock or Mistakes for extra reps.'
     : nextTask
@@ -815,7 +821,7 @@ export default function DashboardScreen() {
                   <Text style={styles.plusUpsellBadgeText}>PLUS</Text>
                 </View>
                 <Text style={styles.plusUpsellTitle}>Full mocks & offline packs{'\n'}No ads while you study</Text>
-                <Text style={styles.plusUpsellSub}>From ₱{monthlyPlusPrice}/mo · cancel anytime</Text>
+                <Text style={styles.plusUpsellSub}>From {monthlyPlusPriceText}/mo · cancel anytime</Text>
                 <PremiumStudyPackArt styles={styles} colors={colors} floatAnim={floatAnim} />
               </LinearGradient>
             </Pressable>
@@ -1131,5 +1137,13 @@ export default function DashboardScreen() {
         onClose={() => setMilestoneVisible(false)}
       />
     </View>
+  );
+}
+
+export default function DashboardScreen() {
+  return (
+    <ErrorBoundary>
+      <DashboardScreenContent />
+    </ErrorBoundary>
   );
 }

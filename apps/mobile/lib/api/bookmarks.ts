@@ -126,7 +126,7 @@ export async function fetchBookmarkedMaterials(examSlug?: string): Promise<Mater
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<{
+  return ((data ?? []) as {
     material_id: string;
     title: string;
     body: string;
@@ -134,7 +134,7 @@ export async function fetchBookmarkedMaterials(examSlug?: string): Promise<Mater
     topic_name: string;
     subject_name: string;
     bookmarked_at: string;
-  }>).map((row) => ({
+  }[]).map((row) => ({
     materialId: row.material_id,
     title: row.title,
     preview: row.body,

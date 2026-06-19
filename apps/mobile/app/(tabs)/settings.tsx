@@ -5,6 +5,7 @@ import { useMemo, useState, useEffect, useCallback } from 'react';
 import { AppSheet } from '../../components/app-sheet';
 import { ActivityIndicator, Alert, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ErrorBoundary } from '../../components/error-boundary';
 import { ManagePlusCard } from '../../components/manage-plus-card';
 import { Pill } from '../../components/pill';
 import { useAppTheme } from '../../hooks/use-app-theme';
@@ -41,6 +42,10 @@ function SettingsGroup({ children, styles }: { children: React.ReactNode; styles
   return <View style={styles.group}>{children}</View>;
 }
 
+function formatPeso(amount: number): string {
+  return `₱${Math.round(amount).toLocaleString('en-PH')}`;
+}
+
 function SettingsRow({
   styles,
   colors,
@@ -74,7 +79,7 @@ function SettingsRow({
   );
 }
 
-export default function SettingsScreen() {
+function SettingsScreenContent() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
@@ -82,7 +87,7 @@ export default function SettingsScreen() {
   const styles = useMemo(() => createSettingsStyles(theme), [theme]);
   const { user, signOut } = useAuth();
   const { prefs, setDarkMode, setNotificationsEnabled, setExplanationLocale, setExamRemindersEnabled } = usePreferences();
-  const { isPremium, entitlements, restoreStorePurchases } = useEntitlements();
+  const { isPremium, entitlements, products, storePrices, restoreStorePurchases } = useEntitlements();
   const { refresh: refreshOnboarding } = useOnboardingGate();
   const { displayName, initials } = useUserProfile('Guest');
   const { isOnline, hasProbed } = useNetworkStatus();
@@ -248,6 +253,12 @@ export default function SettingsScreen() {
   };
 
   const switchTrack = { false: colors.border, true: colors.primary };
+  const monthlyProduct = products.find(
+    (product) => product.tier === 'plus' && product.sku.toLowerCase().includes('monthly')
+  );
+  const monthlyPrice = monthlyProduct
+    ? storePrices[monthlyProduct.sku]?.displayPrice ?? formatPeso(monthlyProduct.pricePhp)
+    : '₱159';
 
   return (
     <View style={styles.root}>
@@ -293,7 +304,7 @@ export default function SettingsScreen() {
               <Text style={styles.userEmail}>{user?.email ?? 'Not signed in'}</Text>
             </View>
             <View style={{ alignItems: 'flex-end', gap: 6 }}>
-              <Pill color={colors.primary}>{premiumActive ? 'PREMIUM' : 'FREE'}</Pill>
+              <Pill color={colors.primary}>{user ? (premiumActive ? 'PREMIUM' : 'FREE') : 'GUEST'}</Pill>
               {user ? <Ionicons name="chevron-forward" size={16} color={colors.textLight} /> : null}
             </View>
           </Pressable>
@@ -306,7 +317,7 @@ export default function SettingsScreen() {
               <View style={{ flex: 1 }}>
                 <Text style={styles.premiumTitle}>{premiumActive ? 'ReviewNatin Plus active' : 'Upgrade to Premium'}</Text>
                 <Text style={styles.premiumSub}>
-                  {premiumActive ? 'Manage plan, renewal, and cancellation below' : 'From ₱159/mo · best value 6 months'}
+                  {premiumActive ? 'Manage plan, renewal, and cancellation below' : `From ${monthlyPrice}/mo · best value 6 months`}
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#fff" />
@@ -798,5 +809,13 @@ export default function SettingsScreen() {
         actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}
       />
     </View>
+  );
+}
+
+export default function SettingsScreen() {
+  return (
+    <ErrorBoundary>
+      <SettingsScreenContent />
+    </ErrorBoundary>
   );
 }

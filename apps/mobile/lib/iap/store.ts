@@ -6,6 +6,7 @@ import {
   ANDROID_PRODUCT_SKUS,
   IOS_PRODUCT_SKUS,
   canonicalSkuForStore,
+  storeSkuForCanonical,
   type RestorePurchasesResult,
 } from './product-skus';
 
@@ -152,12 +153,13 @@ export async function requestStorePurchase(productId: string): Promise<{ ok: boo
   }
 
   try {
-    const isSub = isSubscriptionSku(productId);
+    const storeProductId = storeSkuForCanonical(productId);
+    const isSub = isSubscriptionSku(storeProductId);
     await iap.requestPurchase({
       type: isSub ? 'subs' : 'in-app',
       request: {
-        apple: { sku: productId },
-        google: { skus: [productId] },
+        apple: { sku: storeProductId },
+        google: { skus: [storeProductId] },
       },
     });
     return { ok: true };

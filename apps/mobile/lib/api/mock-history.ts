@@ -77,7 +77,7 @@ export async function fetchMockExamHistory(
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<{
+  return ((data ?? []) as {
     session_id: string;
     mock_title: string;
     score_percent: number;
@@ -85,7 +85,7 @@ export async function fetchMockExamHistory(
     duration_seconds: number | null;
     completed_at: string;
     passed: boolean;
-  }>).map((row) => ({
+  }[]).map((row) => ({
     sessionId: row.session_id,
     mockTitle: row.mock_title,
     scorePercent: Number(row.score_percent ?? 0),

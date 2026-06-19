@@ -35,7 +35,7 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
         correct && styles.correct,
         wrong && styles.wrong,
         (disabled && !filled) && styles.disabled,
-        eliminated && eliminatedStyle.option,
+        eliminated && eliminatedOptionStyle,
       ]}
       onPress={onPress}
       disabled={disabled}
@@ -43,8 +43,8 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
       accessibilityLabel={`Option ${letter}. ${label}. ${stateLabel}`}
       accessibilityState={{ selected, disabled: !!disabled }}
     >
-      <View style={[styles.badge, filled && styles.badgeFilled, correct && styles.badgeCorrect, eliminated && eliminatedStyle.badge]}>
-        <Text style={[styles.letter, (filled || correct) && styles.letterLight, eliminated && eliminatedStyle.letter]}>
+      <View style={[styles.badge, filled && styles.badgeFilled, correct && styles.badgeCorrect, eliminated && styles.eliminatedBadge]}>
+        <Text style={[styles.letter, (filled || correct) && styles.letterLight, eliminated && styles.eliminatedLetter]}>
           {eliminated ? '✕' : letter}
         </Text>
       </View>
@@ -52,7 +52,7 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
         styles.text,
         filled && styles.textFilled,
         correct && styles.textCorrect,
-        eliminated && eliminatedStyle.text,
+        eliminated && styles.eliminatedText,
       ]}>
         {label}
       </Text>
@@ -65,20 +65,8 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
   );
 }
 
-// Eliminated style: strike-through text, dim the whole row
-const eliminatedStyle = StyleSheet.create({
-  option: {
-    opacity: 0.38,
-  },
-  badge: {
-    backgroundColor: '#e2e8f0',
-    borderColor: '#cbd5e1',
-  },
-  letter: {
-    color: '#94a3b8',
-  },
-  text: {
-    textDecorationLine: 'line-through',
-    color: '#94a3b8',
-  },
-});
+// Eliminated row: dimmed overall (theme-independent); badge/letter/text color
+// variants live in createChoiceOptionStyles since they must follow the theme.
+const eliminatedOptionStyle = StyleSheet.create({
+  option: { opacity: 0.38 },
+}).option;

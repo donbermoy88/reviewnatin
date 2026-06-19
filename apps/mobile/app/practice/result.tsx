@@ -51,7 +51,7 @@ export default function PracticeResultScreen() {
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
   const { prefs } = usePreferences();
-  const { displayName } = useUserProfile('reviewer');
+  const { displayName } = useUserProfile('Guest');
   const [showInterstitial, setShowInterstitial] = useState(false);
   const [reportFeedback, setReportFeedback] = useState<string | null>(null);
   const [examTypeId, setExamTypeId] = useState<string | null>(null);

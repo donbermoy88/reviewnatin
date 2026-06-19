@@ -16,11 +16,11 @@ const LOCAL_KEY = 'reviewnatin:prefs';
 
 const DEFAULTS: UserPreferences = {
   darkMode: false,
-  notificationsEnabled: true,
+  notificationsEnabled: false,
   reminderHour: 19,
   reminderMinute: 0,
   explanationLocale: 'en',
-  examRemindersEnabled: true,
+  examRemindersEnabled: false,
 };
 
 export async function loadLocalPreferences(): Promise<UserPreferences | null> {
@@ -50,12 +50,12 @@ export async function fetchRemotePreferences(userId: string): Promise<UserPrefer
   if (!data) return null;
 
   return {
-    darkMode: data.dark_mode,
-    notificationsEnabled: data.notifications_enabled,
-    reminderHour: data.reminder_hour,
-    reminderMinute: data.reminder_minute,
+    darkMode: data.dark_mode ?? false,
+    notificationsEnabled: data.notifications_enabled ?? false,
+    reminderHour: data.reminder_hour ?? DEFAULTS.reminderHour,
+    reminderMinute: data.reminder_minute ?? DEFAULTS.reminderMinute,
     explanationLocale: data.explanation_locale === 'fil' ? 'fil' : 'en',
-    examRemindersEnabled: data.exam_reminders_enabled ?? true,
+    examRemindersEnabled: data.exam_reminders_enabled ?? false,
   };
 }
 

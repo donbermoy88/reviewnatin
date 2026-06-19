@@ -21,13 +21,13 @@ export async function fetchContentChangelog(
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<{
+  return ((data ?? []) as {
     id: string;
     title: string;
     body: string;
     exam_slug: string | null;
     published_at: string;
-  }>).map((row) => ({
+  }[]).map((row) => ({
     id: row.id,
     title: row.title,
     body: row.body,

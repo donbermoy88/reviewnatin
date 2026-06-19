@@ -103,7 +103,7 @@ export default function FlashcardsScreen() {
   useEffect(() => {
     flipAnim.setValue(0);
     setFlipped(false);
-  }, [index]);
+  }, [flipAnim, index]);
 
   const frontInterpolate = flipAnim.interpolate({ inputRange: [0, 180], outputRange: ['0deg', '180deg'] });
   const backInterpolate  = flipAnim.interpolate({ inputRange: [0, 180], outputRange: ['180deg', '360deg'] });
@@ -128,10 +128,10 @@ export default function FlashcardsScreen() {
     return subjectFilter === 'all' ? cards : cards.filter(c => c.subjectName === subjectFilter);
   }, [cards, subjectFilter]);
 
-  const card = filteredCards[index < filteredCards.length ? index : 0];
   const totalCards = filteredCards.length;
-  const progressPct = totalCards > 0 ? Math.round(((knowCount + reviewCount) / totalCards) * 100) : 0;
-
+  const displayIndex = totalCards > 0 ? Math.min(index, totalCards - 1) : 0;
+  const card = filteredCards[displayIndex];
+  const progressPct = totalCards > 0 ? Math.min(100, Math.max(0, (displayIndex / totalCards) * 100)) : 0;
   const finishDeck = async () => {
     setFinished(true);
     if (user && params.pasapathTaskId) {
@@ -256,7 +256,7 @@ export default function FlashcardsScreen() {
           <View style={{ alignItems: 'center' }}>
             <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: '#fff' }}>Flashcards</Text>
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 11, color: 'rgba(255,255,255,0.6)', marginTop: 1 }}>
-              {index + 1} / {totalCards}
+              {displayIndex + 1} / {totalCards}
             </Text>
           </View>
 
@@ -274,7 +274,7 @@ export default function FlashcardsScreen() {
           <View
             style={{
               height: '100%',
-              width: `${((index) / totalCards) * 100}%`,
+              width: `${progressPct}%`,
               backgroundColor: colors.accent,
               borderRadius: 999,
             }}
@@ -288,7 +288,7 @@ export default function FlashcardsScreen() {
 
       {/* ── Subject Filter ── */}
       {subjects.length > 2 && (
-        <View style={{ backgroundColor: '#fff', borderBottomWidth: 1, borderBottomColor: colors.border, paddingVertical: 10 }}>
+        <View style={{ backgroundColor: colors.surface, borderBottomWidth: 1, borderBottomColor: colors.border, paddingVertical: 10 }}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: spacing.md, gap: 8 }}>
             {subjects.map(s => (
               <Pressable
@@ -298,7 +298,7 @@ export default function FlashcardsScreen() {
                   paddingHorizontal: 14,
                   paddingVertical: 5,
                   borderRadius: 20,
-                  backgroundColor: subjectFilter === s ? colors.primary : '#fff',
+                  backgroundColor: subjectFilter === s ? colors.primary : colors.surface,
                   borderWidth: 1.5,
                   borderColor: subjectFilter === s ? colors.primary : colors.border,
                 }}
@@ -340,7 +340,7 @@ export default function FlashcardsScreen() {
                 position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
                 backfaceVisibility: 'hidden',
                 transform: [{ perspective: 1200 }, { rotateY: frontInterpolate }],
-                backgroundColor: '#fff',
+                backgroundColor: colors.surface,
                 borderRadius: 20,
                 padding: spacing.lg,
                 shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 16, shadowOffset: { width: 0, height: 4 },
@@ -403,23 +403,23 @@ export default function FlashcardsScreen() {
                 onPress={() => void rateCard(1, false)}
                 disabled={submitting}
                 style={{
-                  flex: 1, backgroundColor: '#FFEEE4', borderWidth: 1.5, borderColor: '#FCA5A5',
+                  flex: 1, backgroundColor: colors.errorBg, borderWidth: 1.5, borderColor: colors.error,
                   borderRadius: 14, paddingVertical: spacing.md, alignItems: 'center', gap: 6,
                 }}
               >
-                <Ionicons name="refresh" size={22} color="#EF4444" />
-                <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: '#EF4444' }}>Review Again</Text>
+                <Ionicons name="refresh" size={22} color={colors.error} />
+                <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.error }}>Review Again</Text>
               </Pressable>
               <Pressable
                 onPress={() => void rateCard(4, true)}
                 disabled={submitting}
                 style={{
-                  flex: 1, backgroundColor: '#DCFCE7', borderWidth: 1.5, borderColor: '#86EFAC',
+                  flex: 1, backgroundColor: colors.successBg, borderWidth: 1.5, borderColor: colors.success,
                   borderRadius: 14, paddingVertical: spacing.md, alignItems: 'center', gap: 6,
                 }}
               >
-                <Ionicons name="checkmark-circle" size={22} color="#22C55E" />
-                <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: '#22C55E' }}>I Know This!</Text>
+                <Ionicons name="checkmark-circle" size={22} color={colors.success} />
+                <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.success }}>I Know This!</Text>
               </Pressable>
             </View>
           ) : (
@@ -427,10 +427,10 @@ export default function FlashcardsScreen() {
             <View style={{ flexDirection: 'row', gap: spacing.sm, alignItems: 'center' }}>
               <Pressable
                 onPress={() => index > 0 && (setIndex(i => i - 1))}
-                disabled={index === 0}
-                style={{ width: 50, height: 50, borderRadius: 14, backgroundColor: index === 0 ? colors.border : colors.primaryMuted, alignItems: 'center', justifyContent: 'center' }}
+                disabled={displayIndex === 0}
+                style={{ width: 50, height: 50, borderRadius: 14, backgroundColor: displayIndex === 0 ? colors.border : colors.primaryMuted, alignItems: 'center', justifyContent: 'center' }}
               >
-                <Ionicons name="chevron-back" size={20} color={index === 0 ? colors.textLight : colors.primary} />
+                <Ionicons name="chevron-back" size={20} color={displayIndex === 0 ? colors.textLight : colors.primary} />
               </Pressable>
               <Pressable
                 onPress={triggerFlip}
@@ -440,10 +440,10 @@ export default function FlashcardsScreen() {
               </Pressable>
               <Pressable
                 onPress={() => index < totalCards - 1 && (setIndex(i => i + 1), setFlipped(false), flipAnim.setValue(0))}
-                disabled={index >= totalCards - 1}
-                style={{ width: 50, height: 50, borderRadius: 14, backgroundColor: index >= totalCards - 1 ? colors.border : colors.primaryMuted, alignItems: 'center', justifyContent: 'center' }}
+                disabled={displayIndex >= totalCards - 1}
+                style={{ width: 50, height: 50, borderRadius: 14, backgroundColor: displayIndex >= totalCards - 1 ? colors.border : colors.primaryMuted, alignItems: 'center', justifyContent: 'center' }}
               >
-                <Ionicons name="chevron-forward" size={20} color={index >= totalCards - 1 ? colors.textLight : colors.primary} />
+                <Ionicons name="chevron-forward" size={20} color={displayIndex >= totalCards - 1 ? colors.textLight : colors.primary} />
               </Pressable>
             </View>
           )}

@@ -3,6 +3,7 @@ import { Tabs } from 'expo-router';
 import { useMemo } from 'react';
 import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ErrorBoundary } from '../../components/error-boundary';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createTabLayoutStyles } from '../../lib/themed-styles';
 

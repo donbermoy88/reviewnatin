@@ -21,13 +21,13 @@ export async function fetchUserBadges(): Promise<UserBadge[]> {
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<{
+  return ((data ?? []) as {
     slug: string;
     title: string;
     description: string;
     emoji: string;
     earned_at: string;
-  }>).map((row) => ({
+  }[]).map((row) => ({
     slug: row.slug,
     title: row.title,
     description: row.description,

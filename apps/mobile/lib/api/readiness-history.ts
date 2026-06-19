@@ -18,7 +18,7 @@ export async function fetchReadinessHistory(
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<{ score: number; computed_at: string }>).map((row) => ({
+  return ((data ?? []) as { score: number; computed_at: string }[]).map((row) => ({
     score: Number(row.score ?? 0),
     computedAt: row.computed_at,
   }));

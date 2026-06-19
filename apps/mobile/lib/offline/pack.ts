@@ -158,18 +158,18 @@ export async function deleteOfflinePack(examSlug: string): Promise<void> {
 }
 
 export async function getOfflineFlashcards(examSlug: string): Promise<
-  Array<{ id: string; front: string; back: string; topic_name: string; subject_name: string; topic_slug?: string }>
+  { id: string; front: string; back: string; topic_name: string; subject_name: string; topic_slug?: string }[]
 > {
   const pack = await readPack(examSlug);
   if (!pack?.flashcards?.length) return [];
-  return shuffleArray(pack.flashcards as Array<{
+  return shuffleArray(pack.flashcards as {
     id: string;
     front: string;
     back: string;
     topic_name: string;
     subject_name: string;
     topic_slug?: string;
-  }>);
+  }[]);
 }
 
 export type OfflineMaterial = {
@@ -184,14 +184,14 @@ export type OfflineMaterial = {
 export async function getOfflineMaterials(examSlug: string): Promise<OfflineMaterial[]> {
   const pack = await readPack(examSlug);
   if (!pack?.review_materials?.length) return [];
-  return (pack.review_materials as Array<{
+  return (pack.review_materials as {
     id: string;
     title: string;
     body: string;
     material_type: string;
     topic_slug?: string;
     subject_name: string;
-  }>).map((m) => ({
+  }[]).map((m) => ({
     id: m.id,
     title: m.title,
     body: m.body,

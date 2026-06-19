@@ -86,8 +86,8 @@ export default function AnalyticsScreen() {
 
   const readinessScore = readiness?.score ?? null;
   const readinessBand = readinessScore != null ? getReadinessBand(readinessScore) : null;
-  const weakTopicNames = subjects
-    .flatMap((s) => s.weakTopics)
+  const weakTopics = subjects.flatMap((s) => s.weakTopics);
+  const weakTopicNames = weakTopics
     .map((t) => t.topicName)
     .slice(0, 6);
 
@@ -230,13 +230,23 @@ export default function AnalyticsScreen() {
             })
           )}
 
-          <PrimaryButton
-            label="Quick 10 · weak areas"
-            icon="flash"
-            size="lg"
-            onPress={startQuick10}
-            style={styles.cta}
-          />
+          {weakTopics.length > 0 ? (
+            <PrimaryButton
+              label="Quick 10 · weak areas"
+              icon="flash"
+              size="lg"
+              onPress={startQuick10}
+              style={styles.cta}
+            />
+          ) : (
+            <PrimaryButton
+              label="Start practice to find weak areas"
+              icon="flash"
+              size="lg"
+              onPress={() => router.push({ pathname: '/practice/quiz', params: { examSlug } })}
+              style={styles.cta}
+            />
+          )}
         </View>
       </ScrollView>
 

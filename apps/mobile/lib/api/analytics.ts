@@ -61,7 +61,7 @@ export async function fetchTopicAnalytics(
 
   if (error) throw error;
 
-  const rows: TopicAnalyticsRow[] = ((data ?? []) as Array<{
+  const rows: TopicAnalyticsRow[] = ((data ?? []) as {
     topic_id: string;
     topic_slug: string;
     topic_name: string;
@@ -69,7 +69,7 @@ export async function fetchTopicAnalytics(
     accuracy: number;
     attempts: number;
     correct_count: number;
-  }>).map((row) => ({
+  }[]).map((row) => ({
     topicId: row.topic_id,
     topicSlug: row.topic_slug,
     topicName: row.topic_name,

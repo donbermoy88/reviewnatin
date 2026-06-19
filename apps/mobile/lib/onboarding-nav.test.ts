@@ -1,5 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { resolveOnboardingGoal } from './api/goals';
+import { hasCompletedDiagnostic } from './api/diagnostic';
+import { getOnboarding, saveOnboarding } from './onboarding-store';
+import { getAppEntryHref, getPostOnboardingHref, isOnboardingComplete } from './onboarding-nav';
+
 vi.mock('./api/goals', () => ({
   resolveOnboardingGoal: vi.fn(),
 }));
@@ -12,11 +17,6 @@ vi.mock('./onboarding-store', () => ({
   getOnboarding: vi.fn(),
   saveOnboarding: vi.fn(),
 }));
-
-import { resolveOnboardingGoal } from './api/goals';
-import { hasCompletedDiagnostic } from './api/diagnostic';
-import { getOnboarding, saveOnboarding } from './onboarding-store';
-import { getAppEntryHref, getPostOnboardingHref, isOnboardingComplete } from './onboarding-nav';
 
 const mockGetOnboarding = vi.mocked(getOnboarding);
 const mockSaveOnboarding = vi.mocked(saveOnboarding);

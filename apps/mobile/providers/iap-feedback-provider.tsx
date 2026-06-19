@@ -4,7 +4,7 @@ import { AppSheet } from '../components/app-sheet';
 type Feedback = {
   title: string;
   subtitle?: string;
-  actions?: Array<{ label: string; onPress: () => void; variant?: 'primary' | 'outline' | 'ghost' }>;
+  actions?: { label: string; onPress: () => void; variant?: 'primary' | 'outline' | 'ghost' }[];
 };
 
 type IapFeedbackContextValue = {

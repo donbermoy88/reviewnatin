@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { ErrorBoundary } from '../../components/error-boundary';
 import { PrimaryButton } from '../../components/primary-button';
 import { SparkleStar } from '../../components/sparkle-star';
 import { StreakWeek } from '../../components/streak-week';
@@ -74,14 +75,18 @@ function scoreColor(
   return palette.error;
 }
 
-export default function ProfileScreen() {
+function formatScore(score: number | null | undefined): string {
+  return score == null ? '—' : `${score}%`;
+}
+
+function ProfileScreenContent() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
   const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createProfileStyles(theme), [theme]);
   const { user } = useAuth();
-  const { displayName, initials } = useUserProfile('Guest reviewer');
+  const { displayName, initials } = useUserProfile('Guest');
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [stats, setStats] = useState({
@@ -263,7 +268,7 @@ export default function ProfileScreen() {
 
         <View style={styles.section}>
           <PrimaryButton
-            label="View analytics"
+            label={user ? 'View analytics' : 'Log in for analytics'}
             variant="outline"
             icon="analytics-outline"
             iconPosition="left"
@@ -461,7 +466,7 @@ export default function ProfileScreen() {
                       { color: scoreColor(s.score_percent, colors) },
                     ]}
                   >
-                    {s.score_percent ?? '—'}%
+                    {formatScore(s.score_percent)}
                   </Text>
                 </View>
               ))}
@@ -496,7 +501,7 @@ export default function ProfileScreen() {
                       { color: scoreColor(s.score_percent, colors) },
                     ]}
                   >
-                    {s.score_percent ?? '—'}%
+                    {formatScore(s.score_percent)}
                   </Text>
                 </View>
               ))}
@@ -504,5 +509,13 @@ export default function ProfileScreen() {
         )}
       </ScrollView>
     </View>
+  );
+}
+
+export default function ProfileScreen() {
+  return (
+    <ErrorBoundary>
+      <ProfileScreenContent />
+    </ErrorBoundary>
   );
 }

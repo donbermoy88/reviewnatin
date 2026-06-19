@@ -64,9 +64,9 @@ export default function OnboardingScreen() {
   const [stepError, setStepError] = useState<string | null>(null);
   const [targetDate, setTargetDate] = useState(new Date('2026-08-01'));
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [reminderOn, setReminderOn] = useState(true);
+  const [reminderOn, setReminderOn] = useState(false);
   const theme = useAppTheme();
-  const { colors, gradients, spacing } = theme;
+  const { colors, spacing } = theme;
   const styles = useMemo(() => createOnboardingStyles(theme), [theme]);
 
   useEffect(() => {
@@ -468,7 +468,9 @@ export default function OnboardingScreen() {
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text style={styles.reminderTitle}>Daily reminder</Text>
-                  <Text style={styles.reminderSub}>Every day at 7:00 PM</Text>
+                  <Text style={styles.reminderSub}>
+                    {reminderOn ? 'Every day at 7:00 PM' : 'Off by default — turn on if helpful'}
+                  </Text>
                 </View>
                 <Pressable
                   style={[styles.reminderToggle, reminderOn && styles.reminderToggleOn]}

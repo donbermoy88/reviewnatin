@@ -33,6 +33,9 @@ jobs:
       - name: Lint mobile
         run: npm run mobile:lint
 
+      - name: Typecheck mobile
+        run: npm run mobile:typecheck
+
       - name: Lint admin
         run: npm run lint --workspace=apps/admin
 

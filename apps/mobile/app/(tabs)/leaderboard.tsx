@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { ErrorBoundary } from '../../components/error-boundary';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardPeriod } from '../../lib/api/leaderboard';
@@ -85,7 +86,7 @@ function PodiumSlot({ entry, position, theme }: { entry: LeaderboardEntry; posit
   );
 }
 
-export default function LeaderboardScreen() {
+function LeaderboardScreenContent() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
@@ -314,5 +315,13 @@ export default function LeaderboardScreen() {
         </View>
       )}
     </View>
+  );
+}
+
+export default function LeaderboardScreen() {
+  return (
+    <ErrorBoundary>
+      <LeaderboardScreenContent />
+    </ErrorBoundary>
   );
 }

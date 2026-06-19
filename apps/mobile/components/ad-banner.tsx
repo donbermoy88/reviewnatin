@@ -9,7 +9,19 @@ type Props = {
   onPress?: () => void;
 };
 
-function GoogleBannerAd({ unitId, onFallback }: { unitId: string; onFallback: () => void }) {
+function formatPeso(amount: number): string {
+  return `₱${Math.round(amount).toLocaleString('en-PH')}`;
+}
+
+function GoogleBannerAd({
+  unitId,
+  onFallback,
+  monthlyPrice,
+}: {
+  unitId: string;
+  onFallback: () => void;
+  monthlyPrice: string;
+}) {
   const theme = useAppTheme();
   const { spacing } = theme;
   const [failed, setFailed] = useState(false);
@@ -25,7 +37,7 @@ function GoogleBannerAd({ unitId, onFallback }: { unitId: string; onFallback: ()
       .catch(() => setFailed(true));
   }, []);
 
-  if (failed) return <UpgradePrompt onPress={onFallback} />;
+  if (failed) return <UpgradePrompt onPress={onFallback} monthlyPrice={monthlyPrice} />;
   if (!BannerAd || !bannerSize) return null;
 
   return (
@@ -39,7 +51,7 @@ function GoogleBannerAd({ unitId, onFallback }: { unitId: string; onFallback: ()
   );
 }
 
-function UpgradePrompt({ onPress }: { onPress: () => void }) {
+function UpgradePrompt({ onPress, monthlyPrice }: { onPress: () => void; monthlyPrice: string }) {
   const theme = useAppTheme();
   const { colors, spacing, fonts } = theme;
   const adConfig = getAdMobConfig();
@@ -77,7 +89,7 @@ function UpgradePrompt({ onPress }: { onPress: () => void }) {
           {adConfig.enabled ? 'Sponsored · Go ad-free with Plus' : 'Go ad-free with Plus'}
         </Text>
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 }}>
-          From ₱159/mo · best value 6 months
+          From {monthlyPrice}/mo · best value 6 months
         </Text>
       </View>
       <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: colors.primary }}>View →</Text>
@@ -89,7 +101,11 @@ function UpgradePrompt({ onPress }: { onPress: () => void }) {
 export function AdBanner({ onPress }: Props) {
   const router = useRouter();
   const adConfig = getAdMobConfig();
-  const { isPremium } = useEntitlements();
+  const { isPremium, products, storePrices } = useEntitlements();
+  const monthly = products.find((product) => product.tier === 'plus' && product.sku.toLowerCase().includes('monthly'));
+  const monthlyPrice = monthly
+    ? storePrices[monthly.sku]?.displayPrice ?? formatPeso(monthly.pricePhp)
+    : '₱159';
 
   // Defense-in-depth: never render a banner (ad or upgrade CTA) for a Plus
   // member, even if a call site forgets to gate on entitlement. Exam-pass
@@ -105,8 +121,8 @@ export function AdBanner({ onPress }: Props) {
   };
 
   if (adConfig.bannerUnitId) {
-    return <GoogleBannerAd unitId={adConfig.bannerUnitId} onFallback={openSubscribe} />;
+    return <GoogleBannerAd unitId={adConfig.bannerUnitId} onFallback={openSubscribe} monthlyPrice={monthlyPrice} />;
   }
 
-  return <UpgradePrompt onPress={openSubscribe} />;
+  return <UpgradePrompt onPress={openSubscribe} monthlyPrice={monthlyPrice} />;
 }

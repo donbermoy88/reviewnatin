@@ -44,6 +44,7 @@
     "mobile:ios:dev": "npm run ios:dev --workspace=apps/mobile",
     "mobile:ios:build-sim": "npm run ios:build-sim --workspace=apps/mobile",
     "mobile:lint": "npm run lint --workspace=apps/mobile",
+    "mobile:typecheck": "npm run typecheck --workspace=apps/mobile",
     "mobile:test": "npm run test --workspace=apps/mobile",
     "admin:build": "npm run build --workspace=apps/admin",
     "admin:e2e": "npm run test:e2e --workspace=apps/admin",
@@ -60,7 +61,7 @@
     "admin:reset-password": "node scripts/reset-admin-password.mjs",
     "vercel:deploy:marketing": "npx vercel link --yes --project reviewnatin-marketing && npx vercel deploy --prod --yes --archive=tgz",
     "vercel:deploy:admin": "npx vercel link --yes --project reviewnatin-admin && npx vercel deploy --prod --yes --archive=tgz",
-    "ci:local": "npm run mobile:lint && npm run lint --workspace=apps/admin && npm run lint --workspace=apps/marketing && npm run test && npm run content:audit:rules && npm run content:import:rules && npm run content:admin-import:ui && npm run admin:proxy:rules && npm run web:build",
+    "ci:local": "npm run mobile:lint && npm run mobile:typecheck && npm run lint --workspace=apps/admin && npm run lint --workspace=apps/marketing && npm run test && npm run content:audit:rules && npm run content:import:rules && npm run content:admin-import:ui && npm run admin:proxy:rules && npm run web:build",
     "prepare": "simple-git-hooks || true"
   },
   "simple-git-hooks": {

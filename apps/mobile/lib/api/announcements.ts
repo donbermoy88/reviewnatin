@@ -20,12 +20,12 @@ export async function fetchAppAnnouncements(
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<{
+  return ((data ?? []) as {
     id: string;
     title: string;
     body: string;
     published_at: string;
-  }>).map((row) => ({
+  }[]).map((row) => ({
     id: row.id,
     title: row.title,
     body: row.body,

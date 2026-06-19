@@ -32,11 +32,11 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
   const systemScheme = useColorScheme(); // Reactive to system appearance changes
   const [prefs, setPrefs] = useState<UserPreferences>({
     darkMode: systemScheme === 'dark', // Follow system before saved prefs load
-    notificationsEnabled: true,
+    notificationsEnabled: false,
     reminderHour: 19,
     reminderMinute: 0,
     explanationLocale: 'en',
-    examRemindersEnabled: true,
+    examRemindersEnabled: false,
   });
   const [loading, setLoading] = useState(true);
 

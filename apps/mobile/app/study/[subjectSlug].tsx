@@ -191,7 +191,7 @@ export default function TopicListScreen() {
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.topicTitle}>Start practice quiz</Text>
-                <Text style={styles.topicMeta}>Practice with any available {subjectName} questions</Text>
+                <Text style={styles.topicMeta}>Practice with available questions from your exam track</Text>
               </View>
               <View style={styles.playCircle}>
                 <Ionicons name="play" size={14} color="#fff" />

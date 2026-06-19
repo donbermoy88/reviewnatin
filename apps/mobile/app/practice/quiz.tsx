@@ -15,6 +15,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
 import { EmptyState } from '../../components/empty-state';
+import { ErrorBoundary } from '../../components/error-boundary';
 import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { QuestionImage } from '../../components/question-image';
@@ -95,7 +96,7 @@ const DIAGNOSTIC_SOFT_SECONDS = 30 * 60;
 const BOARD_ITEM_COUNT = 30;
 const BOARD_DURATION_SECONDS = 45 * 60;
 
-export default function PracticeQuizScreen() {
+function PracticeQuizScreenContent() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
@@ -129,6 +130,11 @@ export default function PracticeQuizScreen() {
     : null;
   const barkadaLimit = Math.max(Number(questionLimit) || 10, 5);
   const timedDuration = Number(durationSeconds) || 600;
+  const requestedPreviewLimit = Number(previewLimit);
+  const previewItemLimit =
+    Number.isFinite(requestedPreviewLimit) && requestedPreviewLimit > 0
+      ? Math.floor(requestedPreviewLimit)
+      : null;
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
   const { prefs } = usePreferences();
@@ -156,6 +162,7 @@ export default function PracticeQuizScreen() {
   const [navigatorOpen, setNavigatorOpen] = useState(false);
   const [resumed, setResumed] = useState(false);
   const [elapsed, setElapsed] = useState(0);
+  const [mockPreviewActive, setMockPreviewActive] = useState(false);
   const [timeLeft, setTimeLeft] = useState(
     isMock ? Number(durationSeconds) || 600 : isBoard ? BOARD_DURATION_SECONDS : isTimed ? timedDuration : 0
   );
@@ -215,17 +222,39 @@ export default function PracticeQuizScreen() {
           }
           setQuestions(randomizeQuestionSet(await fetchDiagnosticQuestions(slug, DIAGNOSTIC_ITEM_COUNT)));
         } else if (isMock && mockExamId) {
+          if (!user) {
+            router.replace('/(auth)/login');
+            return;
+          }
           try {
             const [mock, qs] = await Promise.all([
               fetchMockExamById(mockExamId),
               fetchMockExamQuestions(mockExamId),
             ]);
-            const fullDuration = mock?.durationSeconds ?? Number(durationSeconds) ?? 600;
+            const requestedDuration = Number(durationSeconds);
+            const fullDuration =
+              mock?.durationSeconds ??
+              (Number.isFinite(requestedDuration) && requestedDuration > 0 ? requestedDuration : 600);
+            const serverPreviewLimit = qs.previewLimit ?? (qs.isPreview ? qs.questions.length : null);
+            const effectivePreviewLimit =
+              serverPreviewLimit && previewItemLimit
+                ? Math.min(serverPreviewLimit, previewItemLimit)
+                : serverPreviewLimit ?? previewItemLimit;
+            const effectiveQuestions = effectivePreviewLimit
+              ? qs.questions.slice(0, effectivePreviewLimit)
+              : qs.questions;
+            const effectiveDuration = effectivePreviewLimit
+              ? Math.min(
+                  fullDuration,
+                  Number.isFinite(requestedDuration) && requestedDuration > 0 ? requestedDuration : 900
+                )
+              : fullDuration;
             if (mock) {
               setMockTitle(mock.title);
-              setTimeLeft(fullDuration);
+              setTimeLeft(effectiveDuration);
             }
-            await applyStrict(qs.questions, fullDuration);
+            setMockPreviewActive(Boolean(effectivePreviewLimit));
+            await applyStrict(effectiveQuestions, effectiveDuration);
           } catch (err) {
             if (isMiniMockLimitError(err as { message?: string })) {
               setPaywallBlocked(true);
@@ -238,7 +267,7 @@ export default function PracticeQuizScreen() {
             router.replace('/(auth)/login');
             return;
           }
-          if (!isPremium()) {
+          if (!isPremium(exam?.id ?? null)) {
             setPaywallReason('board');
             setPaywallBlocked(true);
             return;
@@ -332,7 +361,7 @@ export default function PracticeQuizScreen() {
         setLoading(false);
       }
     })();
-  }, [slug, topicSlug, isMock, isBoard, isOffline, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, barkadaLimit, mockExamId, previewLimit, focusQuestionId, user, isPremium, router]);
+  }, [slug, topicSlug, isMock, isBoard, isOffline, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, barkadaLimit, mockExamId, durationSeconds, previewItemLimit, focusQuestionId, resumeKey, user, isPremium, router]);
 
   useEffect(() => {
     setLang(prefs.explanationLocale ?? 'en');
@@ -479,7 +508,29 @@ export default function PracticeQuizScreen() {
 
   const checkAnswer = useCallback(async () => {
     if (!current || !selected || revealed || checking) return;
-    // Guest users (no auth) can still check answers — checkQuestionAnswer uses the anon Supabase key
+    if (!user && !offlineMode) {
+      const continuePreview =
+        index < questions.length - 1
+          ? () => {
+              setIndex(index + 1);
+              setSelected(null);
+              setRevealed(false);
+              setRevealResult(null);
+              setEliminatedChoiceId(null);
+              questionStarted.current = Date.now();
+            }
+          : () => router.replace('/(tabs)/study');
+      Alert.alert(
+        'Log in to check answers',
+        'Create a free account to see explanations, save progress, and build your Mistake Bank. You can still preview the next question.',
+        [
+          { text: 'Not now', style: 'cancel' },
+          { text: index < questions.length - 1 ? 'Next preview' : 'Back to Review', onPress: continuePreview },
+          { text: 'Log in', onPress: () => router.push('/(auth)/login') },
+        ]
+      );
+      return;
+    }
     const effectiveOffline = offlineMode;
     setChecking(true);
     try {
@@ -513,7 +564,7 @@ export default function PracticeQuizScreen() {
     } finally {
       setChecking(false);
     }
-  }, [current, selected, revealed, checking, isStrictExam, user, router, offlineMode]);
+  }, [current, selected, revealed, checking, isStrictExam, user, router, offlineMode, index, questions.length]);
 
   const finishQuiz = useCallback(async () => {
     if (finishing.current) return;
@@ -533,22 +584,8 @@ export default function PracticeQuizScreen() {
         )
       : finalizeAnswers(answers, current, selected, revealed, elapsedQ, revealResult);
 
-    // Strict exams (mock/board) defer grading to the server, but guests have no
-    // server session — without this their answer sheet stays isCorrect:false and
-    // the score is always 0%. Grade it client-side via the anon check RPC.
-    if (isStrictExam && !user && !offlineMode) {
-      await Promise.all(
-        finalAnswers.map(async (a, i) => {
-          if (!a.selectedChoiceId) return;
-          try {
-            const r = await checkQuestionAnswer(a.questionId, a.selectedChoiceId);
-            if (r) finalAnswers[i] = { ...a, isCorrect: r.isCorrect };
-          } catch {
-            /* leave as-is — a failed grade just counts the item wrong */
-          }
-        })
-      );
-    }
+    // Strict exams (mock/board) defer grading to the server. Guest strict exams
+    // are blocked before loading because grading and saved results require auth.
     const totalCorrect = finalAnswers.filter((a) => a.isCorrect).length;
     const score = questions.length ? Math.round((totalCorrect / questions.length) * 100) : 0;
     const duration = Math.round((Date.now() - startedAt.current) / 1000);
@@ -649,7 +686,7 @@ export default function PracticeQuizScreen() {
     }
 
     captureAppMessage('quiz submitted', { area: 'quiz', action: 'submit' }, {
-      score,
+      score: serverScore,
       itemCount: questions.length,
       offline: offlineMode,
       mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
@@ -943,7 +980,9 @@ export default function PracticeQuizScreen() {
 
         {isMock ? (
           <View style={styles.mockBanner}>
-            <Text style={styles.mockBannerText}>{mockTitle} · Mock exam · Strict timer · I-tap ang ▦ para mag-navigate</Text>
+            <Text style={styles.mockBannerText}>
+              {mockTitle} · {mockPreviewActive ? `${questions.length}-item preview` : 'Mock exam'} · Strict timer · I-tap ang ▦ para mag-navigate
+            </Text>
           </View>
         ) : null}
 
@@ -1150,5 +1189,13 @@ export default function PracticeQuizScreen() {
         />
       ) : null}
     </View>
+  );
+}
+
+export default function PracticeQuizScreen() {
+  return (
+    <ErrorBoundary>
+      <PracticeQuizScreenContent />
+    </ErrorBoundary>
   );
 }

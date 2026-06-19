@@ -18,14 +18,14 @@ export async function fetchExamSchedules(examSlug: string): Promise<ExamSchedule
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<{
+  return ((data ?? []) as {
     id: string;
     event_type: string;
     event_date: string;
     source_url: string | null;
     notes: string | null;
     days_until: number;
-  }>).map((row) => ({
+  }[]).map((row) => ({
     id: row.id,
     eventType: row.event_type,
     eventDate: row.event_date,
