@@ -1,0 +1,41 @@
+{
+  "total_numbered_items_found": 170,
+  "total_practice_test_questions": 150,
+  "answers_found_in_key": 149,
+  "answers_derived_from_pdf_graph": 1,
+  "total_ready_for_upload": 147,
+  "total_needing_review": 23,
+  "total_without_answer_key_practice_items": 0,
+  "total_duplicates_detected": 0,
+  "total_questions_with_images": 5,
+  "website_omitted_answer_numbers": [
+    154
+  ],
+  "duplicate_option_review_items": [
+    54,
+    62,
+    65
+  ],
+  "questionnaire_items_not_for_upload": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ]
+}
