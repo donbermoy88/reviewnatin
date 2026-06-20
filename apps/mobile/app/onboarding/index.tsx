@@ -2,19 +2,23 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, BackHandler, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Animated, { FadeIn, FadeInUp, ZoomIn } from 'react-native-reanimated';
 import { Card } from '../../components/card';
+import { FeatureRow } from '../../components/feature-row';
 import { SparkleStar } from '../../components/sparkle-star';
 import { LogoMark } from '../../components/logo-mark';
 import { OnboardingHeader } from '../../components/onboarding-header';
 import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { ScreenScroll } from '../../components/screen-scroll';
+import { SegmentedControl } from '../../components/ui';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { DISCLAIMERS, DEFAULT_EXAM_SLUG, EXAM_CATALOG, LET_SECONDARY_MAJORS, ONBOARDING_LEVELS } from '@reviewnatin/shared';
 import { syncExamGoalSafe } from '../../lib/api/goals';
+import { fetchExamSchedules } from '../../lib/api/exam-calendar';
 import { fetchExamCatalog } from '../../lib/api/exam-catalog';
 import { saveOnboarding, saveOnboardingDraft, hasOnboardingDraft, getOnboarding } from '../../lib/onboarding-store';
 import { getPostOnboardingHref } from '../../lib/onboarding-nav';
@@ -47,6 +51,24 @@ const READY_ITEMS = [
   },
 ];
 
+const ACCOUNT_BENEFITS = [
+  {
+    icon: 'cloud-upload-outline' as const,
+    title: 'Cloud sync',
+    description: 'Quiz scores, streaks, at goals — naka-save sa account mo.',
+  },
+  {
+    icon: 'bookmark-outline' as const,
+    title: 'Mistake Bank',
+    description: 'I-review ang mga maling sagot anytime, kahit saang device.',
+  },
+  {
+    icon: 'shield-checkmark-outline' as const,
+    title: 'Switch devices freely',
+    description: 'Magpalit ng phone — ligtas ang progress mo, walang mawawala.',
+  },
+];
+
 export default function OnboardingScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -63,6 +85,11 @@ export default function OnboardingScreen() {
   const [level, setLevel] = useState<'beginner' | 'average' | 'advanced'>('beginner');
   const [stepError, setStepError] = useState<string | null>(null);
   const [targetDate, setTargetDate] = useState(new Date('2026-08-01'));
+  // True until the user explicitly picks a date or a saved draft/goal is restored —
+  // while true, the placeholder above gets replaced with the real next exam date
+  // for the selected exam (see the fetchExamSchedules effect below), so it matches
+  // the Exam Calendar screen instead of drifting from it.
+  const targetDateAuto = useRef(true);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [reminderOn, setReminderOn] = useState(false);
   const theme = useAppTheme();
@@ -88,6 +115,7 @@ export default function OnboardingScreen() {
       setExamSlug(data!.examSlug);
       setMajorSlug(data!.majorSlug);
       setTargetDate(new Date(data!.targetDate));
+      targetDateAuto.current = false;
       const matchedGoal = GOALS.find((g) => g.minutes === data!.dailyMinutes);
       if (matchedGoal) setGoalId(matchedGoal.id);
       setLevel(data!.level);
@@ -102,6 +130,7 @@ export default function OnboardingScreen() {
         setExamSlug(data.examSlug);
         setMajorSlug(data.majorSlug);
         setTargetDate(new Date(data.targetDate));
+        targetDateAuto.current = false;
         const matchedGoal = GOALS.find((g) => g.minutes === data.dailyMinutes);
         if (matchedGoal) setGoalId(matchedGoal.id);
         setLevel(data.level);
@@ -109,6 +138,20 @@ export default function OnboardingScreen() {
       setStep(1);
     });
   }, [isSwitchMode]);
+
+  // Suggest the real next exam date for the selected exam (same source as the
+  // Exam Calendar screen) instead of leaving the hardcoded placeholder above —
+  // but only while the user hasn't picked a date and no saved draft/goal applies.
+  useEffect(() => {
+    if (!targetDateAuto.current) return;
+    fetchExamSchedules(examSlug)
+      .then((events) => {
+        if (!targetDateAuto.current) return;
+        const next = events.find((e) => e.eventType === 'examination' && e.daysUntil >= 0) ?? events[0];
+        if (next) setTargetDate(new Date(next.eventDate + 'T12:00:00'));
+      })
+      .catch(() => {});
+  }, [examSlug]);
 
   // Android hardware back: step backwards through onboarding instead of
   // exiting the app. At step 0 (intro) we let the default fire so back leaves
@@ -127,6 +170,9 @@ export default function OnboardingScreen() {
 
   const dailyMinutes = GOALS.find((g) => g.id === goalId)?.minutes ?? 30;
   const dateStr = targetDate.toISOString().slice(0, 10);
+  const civilServiceExams = useMemo(() => exams.filter((ex) => ex.category === 'Civil Service'), [exams]);
+  const prcExams = useMemo(() => exams.filter((ex) => ex.category === 'PRC'), [exams]);
+  const selectedLevel = ONBOARDING_LEVELS.find((lv) => lv.id === level);
 
   const advanceStep = async () => {
     setStepError(null);
@@ -181,6 +227,46 @@ export default function OnboardingScreen() {
     router.replace((await getPostOnboardingHref(user?.id)) as '/(tabs)');
   };
 
+  const renderExamCard = (opts: {
+    key: string;
+    abbr: string;
+    abbrBg: string;
+    abbrColor: string;
+    name: string;
+    tag?: string;
+    sub?: string;
+    selected: boolean;
+    onPress: () => void;
+  }) => (
+    <Pressable
+      key={opts.key}
+      style={({ pressed }) => [styles.examCard, opts.selected && styles.examCardOn, pressed && { opacity: 0.85 }]}
+      android_ripple={{ color: colors.primaryMuted, borderless: false }}
+      onPress={opts.onPress}
+    >
+      <View style={[styles.examIcon, { backgroundColor: opts.abbrBg }]}>
+        <Text style={[styles.examAbbr, { color: opts.abbrColor }]}>{opts.abbr}</Text>
+      </View>
+      <View style={styles.examText}>
+        <View style={styles.examTitleRow}>
+          <Text style={styles.examName}>{opts.name}</Text>
+          {opts.tag ? (
+            <Pill
+              color={opts.tag === 'New' ? colors.accentDark : colors.primary}
+              bg={opts.tag === 'New' ? colors.accentLight : colors.primaryMuted}
+            >
+              {opts.tag.toUpperCase()}
+            </Pill>
+          ) : null}
+        </View>
+        {opts.sub ? <Text style={styles.examSub}>{opts.sub}</Text> : null}
+      </View>
+      <View style={[styles.radio, opts.selected && styles.radioOn]}>
+        {opts.selected ? <Ionicons name="checkmark" size={14} color="#fff" /> : null}
+      </View>
+    </Pressable>
+  );
+
   if (step === 0) {
     return (
       <View style={styles.root}>
@@ -191,22 +277,27 @@ export default function OnboardingScreen() {
           style={[styles.welcomeBlob, { paddingTop: insets.top + 40 }]}
         >
           <View style={styles.welcomeGlow} />
-          <View style={styles.sparkleWelcomeTop}>
+          <Animated.View entering={FadeIn.delay(300).duration(500)} style={styles.sparkleWelcomeTop}>
             <SparkleStar size={20} opacity={0.8} />
-          </View>
-          <View style={styles.sparkleWelcomeMid}>
+          </Animated.View>
+          <Animated.View entering={FadeIn.delay(450).duration(500)} style={styles.sparkleWelcomeMid}>
             <SparkleStar size={14} opacity={0.5} />
-          </View>
-          <View style={styles.markWrap}>
+          </Animated.View>
+          <Animated.View entering={ZoomIn.delay(120).springify().damping(12)} style={styles.markWrap}>
             <LogoMark size={120} />
-          </View>
-          <Text style={styles.welcomeBrand}>
+          </Animated.View>
+          <Animated.Text entering={FadeInUp.delay(280).springify().damping(16)} style={styles.welcomeBrand}>
             Review<Text style={{ color: colors.accent }}>Natin</Text>
-          </Text>
-          <Text style={styles.welcomeTag}>Mag-review tayo. Pasa tayo.</Text>
+          </Animated.Text>
+          <Animated.Text entering={FadeInUp.delay(360).springify().damping(16)} style={styles.welcomeTag}>
+            Mag-review tayo. Pasa tayo.
+          </Animated.Text>
         </LinearGradient>
 
-        <View style={[styles.welcomeBody, { paddingBottom: insets.bottom + spacing.lg }]}>
+        <Animated.View
+          entering={FadeInUp.delay(440).springify().damping(16)}
+          style={[styles.welcomeBody, { paddingBottom: insets.bottom + spacing.lg }]}
+        >
           <Text style={styles.welcomeTitle}>
             Your study buddy for{'\n'}every Filipino board exam.
           </Text>
@@ -224,7 +315,7 @@ export default function OnboardingScreen() {
               Already have an account? <Text style={styles.loginBold}>Log in</Text>
             </Text>
           </Pressable>
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -337,70 +428,61 @@ export default function OnboardingScreen() {
         <View style={styles.pagePad}>
           {step === 1 && (
             <View style={styles.list}>
-                {exams.map((ex) => {
-                  const on = examSlug === ex.slug;
-                  return (
-                    <Pressable
-                      key={ex.slug}
-                      style={[styles.examCard, on && styles.examCardOn]}
-                      onPress={() => {
-                        setExamSlug(ex.slug);
-                        if (ex.slug !== 'let-secondary') setMajorSlug(undefined);
-                      }}
-                    >
-                      <View style={[styles.examIcon, { backgroundColor: ex.bg }]}>
-                        <Text style={[styles.examAbbr, { color: ex.color }]}>{ex.abbr}</Text>
-                      </View>
-                      <View style={styles.examText}>
-                        <View style={styles.examTitleRow}>
-                          <Text style={styles.examName}>{ex.name}</Text>
-                          {ex.tag ? (
-                            <Pill
-                              color={ex.tag === 'New' ? colors.accentDark : colors.primary}
-                              bg={ex.tag === 'New' ? colors.accentLight : colors.primaryMuted}
-                            >
-                              {ex.tag.toUpperCase()}
-                            </Pill>
-                          ) : null}
-                        </View>
-                        <Text style={styles.examSub}>{ex.sub}</Text>
-                        {ex.users && ex.users !== 'New' ? (
-                          <View style={styles.examUsersRow}>
-                            <View style={styles.examDot} />
-                            <Text style={styles.examUsers}>{ex.users} reviewers</Text>
-                          </View>
-                        ) : null}
-                      </View>
-                      <View style={[styles.radio, on && styles.radioOn]}>
-                        {on ? <Ionicons name="checkmark" size={14} color="#fff" /> : null}
-                      </View>
-                    </Pressable>
-                  );
-                })}
+              <Text style={styles.fieldLabel}>Civil Service Exams</Text>
+              <View style={styles.list}>
+                {civilServiceExams.map((ex) =>
+                  renderExamCard({
+                    key: ex.slug,
+                    abbr: ex.abbr,
+                    abbrBg: ex.bg,
+                    abbrColor: ex.color,
+                    name: ex.name,
+                    tag: ex.tag,
+                    sub: ex.sub,
+                    selected: examSlug === ex.slug,
+                    onPress: () => {
+                      setExamSlug(ex.slug);
+                      setMajorSlug(undefined);
+                    },
+                  }),
+                )}
+              </View>
+
+              <Text style={[styles.fieldLabel, { marginTop: spacing.lg }]}>PRC Licensure Exams</Text>
+              <View style={styles.list}>
+                {prcExams.map((ex) =>
+                  renderExamCard({
+                    key: ex.slug,
+                    abbr: ex.abbr,
+                    abbrBg: ex.bg,
+                    abbrColor: ex.color,
+                    name: ex.name,
+                    tag: ex.tag,
+                    sub: ex.sub,
+                    selected: examSlug === ex.slug,
+                    onPress: () => {
+                      setExamSlug(ex.slug);
+                      if (ex.slug !== 'let-secondary') setMajorSlug(undefined);
+                    },
+                  }),
+                )}
+              </View>
+
               {examSlug === 'let-secondary' ? (
                 <>
                   <Text style={[styles.fieldLabel, { marginTop: spacing.lg }]}>Major field</Text>
                   <View style={styles.list}>
-                    {LET_SECONDARY_MAJORS.map((major) => {
-                      const on = majorSlug === major.slug;
-                      return (
-                        <Pressable
-                          key={major.slug}
-                          style={[styles.examCard, on && styles.examCardOn]}
-                          onPress={() => setMajorSlug(major.slug)}
-                        >
-                          <View style={[styles.examIcon, { backgroundColor: '#F1E8FA' }]}>
-                            <Text style={[styles.examAbbr, { color: '#7B2CBF' }]}>M</Text>
-                          </View>
-                          <View style={styles.examText}>
-                            <Text style={styles.examName}>{major.name}</Text>
-                          </View>
-                          <View style={[styles.radio, on && styles.radioOn]}>
-                            {on ? <Ionicons name="checkmark" size={14} color="#fff" /> : null}
-                          </View>
-                        </Pressable>
-                      );
-                    })}
+                    {LET_SECONDARY_MAJORS.map((major) =>
+                      renderExamCard({
+                        key: major.slug,
+                        abbr: 'M',
+                        abbrBg: '#F1E8FA',
+                        abbrColor: '#7B2CBF',
+                        name: major.name,
+                        selected: majorSlug === major.slug,
+                        onPress: () => setMajorSlug(major.slug),
+                      }),
+                    )}
                   </View>
                 </>
               ) : null}
@@ -411,52 +493,34 @@ export default function OnboardingScreen() {
           {step === 2 && (
             <>
               <Text style={styles.fieldLabel}>Ano ang level mo ngayon?</Text>
-              <View style={styles.list}>
-                {ONBOARDING_LEVELS.map((lv) => {
-                  const on = level === lv.id;
-                  return (
-                    <Pressable
-                      key={lv.id}
-                      style={[styles.goalCard, on && styles.goalCardOn]}
-                      onPress={() => setLevel(lv.id)}
-                    >
-                      <View style={[styles.goalEmoji, on && styles.goalEmojiOn]}>
-                        <Text style={{ fontSize: 24 }}>{lv.emoji}</Text>
-                      </View>
-                      <View style={{ flex: 1 }}>
-                        <Text style={[styles.goalLabel, on && styles.goalLabelOn]}>{lv.label}</Text>
-                        <Text style={[styles.goalSub, on && styles.goalSubOn]}>{lv.sub}</Text>
-                      </View>
-                      <View style={[styles.radioSm, on && styles.radioSmOn]}>
-                        {on ? <Ionicons name="checkmark" size={12} color={colors.primary} /> : null}
-                      </View>
-                    </Pressable>
-                  );
-                })}
-              </View>
+              <SegmentedControl
+                options={ONBOARDING_LEVELS.map((lv) => ({ value: lv.id, label: lv.label }))}
+                value={level}
+                onChange={setLevel}
+                accessibilityLabel="Choose your current level"
+              />
+              {selectedLevel ? (
+                <Text style={styles.levelHint}>
+                  {selectedLevel.emoji} {selectedLevel.sub}
+                </Text>
+              ) : null}
 
               <Text style={[styles.fieldLabel, { marginTop: spacing.lg }]}>Daily study goal</Text>
-              <View style={styles.list}>
+              <View style={styles.goalGrid}>
                 {GOALS.map((g) => {
                   const on = goalId === g.id;
                   return (
                     <Pressable
                       key={g.id}
-                      style={[styles.goalCard, on && styles.goalCardOn]}
+                      style={({ pressed }) => [styles.goalTile, on && styles.goalTileOn, pressed && { opacity: 0.85 }]}
+                      android_ripple={{ color: colors.primaryMuted, borderless: false }}
                       onPress={() => setGoalId(g.id)}
                     >
-                      <View style={[styles.goalEmoji, on && styles.goalEmojiOn]}>
-                        <Text style={{ fontSize: 24 }}>{g.emoji}</Text>
-                      </View>
-                      <View style={{ flex: 1 }}>
-                        <Text style={[styles.goalLabel, on && styles.goalLabelOn]}>{g.label}</Text>
-                        <Text style={[styles.goalSub, on && styles.goalSubOn]}>
-                          {g.sub} · {g.q}
-                        </Text>
-                      </View>
-                      <View style={[styles.radioSm, on && styles.radioSmOn]}>
-                        {on ? <Ionicons name="checkmark" size={12} color={colors.primary} /> : null}
-                      </View>
+                      <Text style={{ fontSize: 22 }}>{g.emoji}</Text>
+                      <Text style={[styles.goalTileLabel, on && styles.goalLabelOn]}>{g.label}</Text>
+                      <Text style={[styles.goalTileSub, on && styles.goalSubOn]}>
+                        {g.sub} · {g.q}
+                      </Text>
                     </Pressable>
                   );
                 })}
@@ -496,7 +560,10 @@ export default function OnboardingScreen() {
                   minimumDate={new Date()}
                   onChange={(_, date) => {
                     setShowDatePicker(Platform.OS === 'ios');
-                    if (date) setTargetDate(date);
+                    if (date) {
+                      targetDateAuto.current = false;
+                      setTargetDate(date);
+                    }
                   }}
                 />
               )}
@@ -505,10 +572,17 @@ export default function OnboardingScreen() {
 
           {step === 3 && (
             <>
-              <View style={[styles.infoCard, { marginTop: spacing.sm }]}>
-                <Ionicons name="cloud-upload-outline" size={22} color={colors.primary} />
-                <Text style={styles.infoText}>Naka-sync ang progress sa account mo — ligtas kahit magpalit ka ng phone.</Text>
-              </View>
+              <Card variant="default" style={{ marginTop: spacing.sm }}>
+                {ACCOUNT_BENEFITS.map((item, index) => (
+                  <FeatureRow
+                    key={item.title}
+                    icon={item.icon}
+                    title={item.title}
+                    description={item.description}
+                    isLast={index === ACCOUNT_BENEFITS.length - 1}
+                  />
+                ))}
+              </Card>
               {user ? (
                 <>
                   <View style={[styles.signedInCard, { marginTop: spacing.lg }]}>
@@ -654,7 +728,7 @@ function createOnboardingStyles(theme: AppTheme) {
     borderWidth: 2,
     borderColor: 'transparent',
   },
-  examCardOn: { borderColor: colors.primary, ...shadows.soft },
+  examCardOn: { borderColor: colors.primary, backgroundColor: colors.primaryMuted, ...shadows.soft },
   examIcon: {
     width: 52,
     height: 52,
@@ -667,9 +741,6 @@ function createOnboardingStyles(theme: AppTheme) {
   examTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 6, flexWrap: 'wrap' },
   examName: { ...type.label, fontSize: 15 },
   examSub: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 3 },
-  examUsersRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 4 },
-  examDot: { width: 4, height: 4, borderRadius: 2, backgroundColor: colors.success },
-  examUsers: { fontFamily: fonts.bodySemiBold, fontSize: 11, color: colors.textLight },
   radio: {
     width: 24,
     height: 24,
@@ -680,38 +751,25 @@ function createOnboardingStyles(theme: AppTheme) {
     justifyContent: 'center',
   },
   radioOn: { backgroundColor: colors.primary, borderColor: colors.primary },
-  goalCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
+  levelHint: {
+    fontFamily: fonts.bodyMedium,
+    fontSize: 13,
+    color: colors.textMuted,
+    marginTop: spacing.sm,
+  },
+  goalGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  goalTile: {
+    width: '48%',
     backgroundColor: colors.surface,
     borderRadius: radii.xl,
     padding: spacing.md,
+    gap: 4,
   },
-  goalCardOn: { backgroundColor: colors.primary, ...shadows.button },
-  goalEmoji: {
-    width: 48,
-    height: 48,
-    borderRadius: radii.lg,
-    backgroundColor: colors.background,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  goalEmojiOn: { backgroundColor: 'rgba(255,255,255,0.18)' },
-  goalLabel: { ...type.label, fontSize: 16 },
+  goalTileOn: { backgroundColor: colors.primary, ...shadows.button },
+  goalTileLabel: { ...type.label, fontSize: 14, marginTop: 4 },
   goalLabelOn: { color: '#fff' },
-  goalSub: { ...type.caption, color: colors.textMuted, marginTop: 2, textTransform: 'none', letterSpacing: 0 },
+  goalTileSub: { ...type.caption, color: colors.textMuted, textTransform: 'none', letterSpacing: 0, fontSize: 11 },
   goalSubOn: { color: 'rgba(255,255,255,0.75)' },
-  radioSm: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    borderWidth: 2,
-    borderColor: colors.border,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  radioSmOn: { backgroundColor: '#fff', borderColor: '#fff' },
   fieldLabel: { fontFamily: fonts.bodySemiBold, fontSize: 14, color: colors.textMuted, marginBottom: spacing.sm },
   stepError: { ...type.body, color: colors.error, marginTop: spacing.sm, fontSize: 14 },
   reminderCard: {
@@ -750,15 +808,6 @@ function createOnboardingStyles(theme: AppTheme) {
     alignSelf: 'flex-start',
   },
   reminderKnobOn: { alignSelf: 'flex-end' },
-  infoCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
-    backgroundColor: colors.surface,
-    borderRadius: radii.xl,
-    padding: spacing.md,
-  },
-  infoText: { fontFamily: fonts.body, flex: 1, fontSize: 14, lineHeight: 20, color: colors.text },
   signedInCard: {
     flexDirection: 'row',
     alignItems: 'center',

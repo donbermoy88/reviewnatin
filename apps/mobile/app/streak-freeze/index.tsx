@@ -62,9 +62,9 @@ export default function StreakFreezeScreen() {
       <StackShell title="Streak freeze" subtitle="Protektahan ang daily streak mo">
         <EmptyState
           icon={<Ionicons name="snow-outline" size={32} color={colors.primary} />}
-          title="Log in to continue"
+          title="Mag-log in muna"
           description="Kailangan ng naka-sign in na account para sa streak freeze."
-          actionLabel="Log in"
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </StackShell>

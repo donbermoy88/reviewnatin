@@ -59,7 +59,7 @@ export default function ForgotPasswordScreen() {
   return (
     <AuthShell
       title="Nakalimutan ang password?"
-      subtitle="We'll send a reset link to your email."
+      subtitle="Magpapadala kami ng reset link sa email mo."
     >
       <LabeledField label="Email" styles={styles}>
         <TextInput

@@ -1,0 +1,49 @@
+{
+  "total_numbered_items_found": 165,
+  "total_practice_test_questions": 145,
+  "answers_found_in_pasted_key": 145,
+  "total_ready_for_upload": 139,
+  "total_needing_review": 26,
+  "total_without_answer_key_practice_items": 0,
+  "total_no_matching_pdf_option": 2,
+  "total_duplicates_detected": 0,
+  "total_questions_with_images": 0,
+  "pdf_version_mismatch_review_items": [
+    59,
+    104,
+    150
+  ],
+  "pdf_version_mismatch_corrected_items": [
+    118,
+    137,
+    138,
+    145
+  ],
+  "other_review_items": [
+    94,
+    105,
+    129
+  ],
+  "questionnaire_items_not_for_upload": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ]
+}

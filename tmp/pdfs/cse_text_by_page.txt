@@ -1,0 +1,941 @@
+
+===== PDF PAGE 1 =====
+FREE CSE SUB-PRO REVIEWER by CSEREVIEWER.COM
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 2 =====
+Compiled and arranged by Joel Conrado Dancalan
+For any questions or clarifications, follow CSEReviewer @
+https://www.facebook.com/csereviewerph/
+Facebook Group: https://www.facebook.com/groups/freecsereviewers/
+This FREE CSE Reviewer is made for everyone who wants to pass the CSC Eligibility test.
+DISCLAIMER
+All the questions in this reviewer are inspired by various online resources, reviewers, books,
+and previous Civil Service Exam questions (at least the ones remembered and shared by
+those who took the exam). CSEREVIEWER.COM is not affiliated, associated, endorsed by, or
+in any way officially connected to the CIVIL SERVICE COMMISSION. This reviewer can be
+downloaded for free @ https://csereviewer.com and is not for sale.
+Contents:
+ Examinee Descriptive Questionnaire
+ Vocabulary (in English and Filipino)
+ Grammar and Correct Usage
+ Paragraph Organization (in English and Filipino)
+ Reading Comprehension
+ Spelling
+ Clerical Operations
+ Numerical Reasoning
+ General Information
+FREE CSE SUB-PRO REVIEWER by CSEREVIEWER.COM
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 3 =====
+FREE CSE SUB-PRO REVIEWER by CSEREVIEWER.COM
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 4 =====
+Examinee Descriptive Questionnaire
+The 20 questions that follow are information about you. Please supply the information as HONESTLY and
+ACCURATELY as you can. The data that will be obtained from these items shall be held strictly confidential. Each
+item is followed by several possible answers. On your sheet, shade completely the circle that corresponds to the
+number of the answer that specifically pertains to you.
+1. Age bracket you belong to:
+a. 18-24 years old c. 32-28 years old
+b. 25-31 years old d. 39-45 years old e. More than 45 years old
+2. Civil Status
+a. Single c. Widow/widower
+b. Married d. Separated e. Annul/Divorced
+3. What is your highest educational attainment?
+a. High School Graduate c. With Master’s Units
+b. College Graduate d. Master’s Degree e. With Ph. D. Units/Degree
+4. Year of last attendance in school:
+a. Before 1985 c. 1991-1995
+b. 1986-1990 d. 1996-2000 e. 2000 onwards
+5. Honors you received when you graduated from college:
+a. Summa-Cum Laude c. Cum Laude
+b. Magna-Cum Laude d. Other academic award e. None/Not Applicable
+6. Location of school last attended:
+a. NCR c. Visayas
+b. Luzon d. Mindanao e. Abroad
+7. Number of times you have taken the Civil Service Exam
+a. First time c. 3 times
+b. 2 times d. 4 times e. 5 or more times
+8. Present Employment
+a. Private c. Self-Employed
+b. Government d. Company Owner e. Unemployed
+9. Type of Present Job
+a. Professional/Technical/Scientific c. Trades and Crafts
+b. General Clerical d. Others e. Not Applicable
+10. Length of experience in present job
+a. Less than a year c. Three to four years
+b. One to two years d. More than four years e. Not Applicable
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 1 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 5 =====
+11. For what reason are you taking this exam?
+a. Achievement c. Change of appointment status
+b. Entrance to government service d. For Promotion e. Others
+12. Which of the following activities did you undertake in preparing for this examination?
+a. Enrolled in review centers c. Engage in other activities
+b. Self-review d. Combination of both A and B e. No preparation
+13. What branch of the government do you think you can maximize your skills?
+a. National Government c. Government owned/controlled corporation
+b. Local Government d. Constitutional Office e. Not Applicable
+14. Category of Government office where you are employed:
+a. National Government c. Government-owned/controlled corporation
+b. Local Government d. Constitutional Office e. Not Applicable
+15. Status of present appointment in the government service:
+a. Permanent c. Casual
+b. Temporary d. Contractual e. Not Applicable
+16. Years of experience in government service:
+a. Less than 5 years c. 11 – 20 years
+b. 5 – 10 Years d. 20 years and above e. Not Applicable
+17. If offered appointment in the government service, when are you available?
+a. Immediately c. After 1 year
+b. After 6 months d. After 3 years e. After 5 years
+18. If offered appointment in government service, where do you prefer to be assigned?
+a. NCR c. Visayas
+b. Luzon Province d. Mindanao e. I will decide later
+19. If offered appointment, what position do you prefer?
+a. Supervisor c. Department Head
+b. Manager d. Coordinator e. Consultant
+20. In what field of work do you consider yourself best qualified?
+a. Accounting c. Statistical Work
+b. Records Management d. System Analysis e. Others
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 2 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 6 =====
+--- TEST BEGINS HERE ---
+(Are you ready?)
+Vocabulary
+DIRECTIONS: Choose the letter of the correct answer based on what the question requires.
+21. Once you get big in the world of social media, you must be ready to face the scurrilous attacks of your
+bashers. SCURRILOUS means:
+a. obvious c. slanderous
+b. continuous d. occasional e. strong
+22. Michelle is normally calm and level-headed, so her outburst is an aberration. ABERRATION means:
+a. rarity c. routine
+b. usual d. unnecessary e. typical
+23. The statement presented by the sole witness to the crime sounds apocryphal. The synonym of the word
+APOCRYPHAL is:
+a. reliable c. true
+b. fictitious d. awful e. absurd
+24. Safety guidelines exist for a reason, and if we flout them, there could be serious consequences. The antonym
+of the word FLOUT is:
+a. follow c. flaunt
+b. exceeded d. nourish e. disobey
+25. To Mr. Sherlock, the victim’s wife appeared mawkish as though she was putting on an act. The antonym of the
+word MAWKISH is:
+a. rabid c. fake
+b. emotional d. unintended e. calm
+26. There should be a law against treating senior citizens with such irreverence. The meaning of the word
+IRREVERENCE is:
+a. politeness c. attitude
+b. mockery d. disrespect e. tone
+27. If you do not clean the cat’s litter box regularly, a noisome aroma will fill your house. The antonym of the word
+NOISOME is:
+a. bad c. good
+b. dirty d. foul e. mesmerizing
+28. There is a regrettable paucity of training in the rudiments of security protocols or practices at the hospital. The
+synonym of the word PAUCITY is:
+a. enough c. malpractice
+b. adequate d. overloaded e. insufficient
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 3 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 7 =====
+29. The motif of the wall is rife with mystical associations that will be discussed later. The synonym of the word
+RIFE is:
+a. uncommon c. scarce
+b. widespread d. uncertain e. limited
+30. The front-liners were not prepared for the surfeit of patients that came in during the pandemic. The antonym of
+the word SURFEIT is:
+a. excess c. abundant
+b. lack d. number e. mass
+DIRECTIONS: Choose among the given options that best represent the underlined word.
+31. Linette has been on the ball since she was hired as a secretary.
+a. doing a good job c. always taking a break
+b. not paying attention d. lazy e. very active
+32. Buying a new phone these days costs an arm and leg.
+a. hard to achieve c. very expensive
+b. very affordable d. just a dream e. a fantasy
+33. Eliza wants to talk to Jason but he’s giving her the cold shoulder.
+a. scolding someone c. maligning someone
+b. threatening someone d. spanking someone e. ignoring someone
+34. Looking before you leap will help you make fewer mistakes.
+a. look before jumping c. praying before doing something
+b. asking for help before doing a task d. take only calculated risks e. doing your best
+35. You can’t have your cake and eat it too.
+a. you can’t have everything c. you can’t have too many gifts
+b. you can’t eat too many desserts d. you can’t make a good decision e. none of the above
+DIRECTIONS: Piliin ang tamang sagot na kailangan ng mga sumusunod na tanong:
+36. Sinubukang ipaliwanag ni Pedro sitwasyon ngunit alimbuyugin si Juan. Ang kasalungat ng salitang
+ALIMBUYUGIN ay:
+a. makitid ang pag-iisip c. makulit
+b. masunurin d. lapastangan e. malawak ang pag-iisip
+37. Ang pagiging gaso ni Estela ang maghahatid sa kanya sa kapahamakan. Ang kasalungat ng salitang GASO
+ay:
+a. magaslaw c. marupok
+b. mahinhin d. matatag e. mayabang
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 4 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 8 =====
+38. Nais ni Julia na maniwala sa pangako ni Gerald ngunit alam nya na siya’y mapaglubid ng buhangin. Ang ibig
+sabihin ng MAPAGLUBID NG BUHANGIN ay:
+a. sinungaling c. pala-alis
+b. mapanukso d. sugarol e. babaero
+39. Kaya lamang sikat ang batang si Mandy ay sa kadahilanang ang kanyang mga magulang ay isa sa mga may
+sinasabi sa lipunan. Ang ibig sabihin ng MAY SINASABI ay:
+a. ma-impluwensya c. mayaman
+b. pala-katwiran d. madaldal e. aktibista
+40. Nilayuan si Mar ng kanyang mga kaibigan simula noong lumaki ang kanyang ulo. Ang ibig sabihin ng LUMAKI
+ANG ULO ay:
+a. bugnutin c. pala-isip
+b. naghirap d. yumabang e. nagkasakit
+Grammar and Correct Usage
+DIRECTIONS: Choose the letter that corresponds to the word or phrase that will correctly complete each sentence
+that is presented below.
+41. If you don't know the meaning of any word, you should ______ your dictionaries instead of asking me.
+a. buy c. refer to e. look inside
+b. borrow d. try
+42. Your voice is _______ hers and I sometimes can’t realize who I am talking to.
+a. identical to c. same to e. blends to
+b. loud d. different as
+43. I am not surprised that she has joined the Parliament, as she has always been _______ politics.
+a. reliant on c. intimidated by e. defective with
+b. keen on d. awful with
+44. Ariel has no ______ directing, he just decided to be a director when he learned that directors earn a lot of
+money.
+a. intentions in c. motivations to e. plans with
+b. motivations of d. talent in
+45. The annual sales of video games in the United States probably ______ a billion dollars per year.
+a. have exceeded c. exceeding e. exceeds
+b. will exceeded d. has exceeding
+46. Fiberglass, often used as an insulating material in homes, ______ allergic reactions in some people.
+a. have causes c. had cause e. causes
+b. has caused d. cause
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 5 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 9 =====
+47. A teenager who tries to conform to the expectations of adults ______ often ridiculed by his or her peers.
+a. are c. will
+b. is d. have e. was
+48. The color of the curtains in my living room ______ away.
+a. fade c. will faded
+b. has faded d. have fade e. fades
+49. One computer for two or three students ______ inadequate.
+a. seem c. seems
+b. will seem d. had seem e. have seem
+50. Speeding in restricted zones, especially those schools, _____ lives.
+a. endangers c. have endangers
+b. will endangers d. had endanger e. had seem
+DIRECTIONS: Some of the sentences in this section may or may not contain an error in grammar or correct usage.
+On your answer sheet, shade completely the circle that corresponds to the section of the sentence
+that contains the error. If there is no error in the sentence, shade the fifth circle.
+51. Me and my grandfather used to go for a walk every morning. No error
+a b c d e
+52. If Friday is declared a holiday, we shall go to a picnic. No error
+a b c d e
+53. The Philippines is aiming at double its bilateral trade with China by 2025. No error
+a b c d e
+54. The growing cooperation between Canada and US has been manifested in all walks of life be it history,
+a b c
+politics, culture or language. No error
+d e
+55. The Center plans to form an empowerment group under the Sports Commission
+a b
+to grant operational flexibility in enforcing athletes’ contracts. No error
+c d e
+56. Few LGUs are struggling with the issue of finding the correct strategy
+a b c
+to provide enough relief during the pandemic. No error
+d e
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 6 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 10 =====
+57. If he did not know what to do with the puppies, he would have asked us. No error
+a b c d e
+58. I would love to be able to swim if I am not afraid of water. No error
+a b c d e
+59. Only when you have your children you will understand how difficult it is. No error
+a b c d e
+60. I told goodbye to Veronica but she ignored me completely. No error
+a b c d e
+Paragraph Organization
+DIRECTIONS: Read each of the following group of sentences and decide what would be the best order in which to
+put the sentences to form a well-organized paragraph.
+61. A. As an English writer has written, “Providence in her wise disposition has placed these people in the garden
+of Eden, where the means of subsistence are found without much labor, and does not require them to toil and
+slave to satisfy their personal wants.”
+B. Foreign writers have rashly accused Filipinos of “indolence.”
+C. Filipinos take life easy because of the tropical climate and the liberation of nature.
+D. By the yardstick of human action in temperature countries, Filipinos do not work hard.
+E. Such may seem the case, but foreign critics are interpreting it as a manifestation of racial laziness.
+a. DECBA c. EDCBA
+b. ADBCE d. BDEDA e. BACDE
+62. A. The term “nationalism” defies definition.
+B. However, it has come to mean different things to different people.
+C. In fact, it has become a complex phenomenon.
+D. Meanwhile, we say that “nationalism” stands for the desire of people for rational self-determination and
+assertion.
+E. Its meaning has changed through the centuries.
+a. ACDBE c. AECDB
+b. EBCDA d. AEBCD e. EBDAC
+63. A. Advanced warning however can do a great deal to reduce opposition.
+B. How changes introduced affect their acceptance by employees.
+C. To illustrate, sudden change will inevitably be met with great employee resistance.
+D. It also gives a man time to adjust to his new framework and to the personal and domestic changes that go
+along.
+E. Imposed alterations can lead to dissatisfaction, absenteeism, and inefficiency.
+a. BCEDA c. ACBED
+b. ECBDA d. CEDAB e. BCEAD
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 7 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 11 =====
+64. A. First, they picked out some vegetables and fruits.
+B. Her mom also brought some milk, bread, and eggs.
+C. Helena went shopping with her mom at the grocery store.
+D. They checked out and went home to put the groceries away.
+E. After that, they stopped at the frozen dinner’s section.
+a. AECBD c. CAEDB
+b. CAEBD d. ACEDB e. CADEB
+65. A. They spent most days playing in the sand water building sandcastles and swimming in the ocean.
+B. Spending two weeks at the beach is Kaycee's favorite part of the summer.
+C. Afterwards, they often took long walks on the beach.
+D. Every summer, Kaycee's family spends two weeks at the beach.
+E. In addition, they knew several other families that went to the beach at the same time.
+a. DEACB c. DECAB
+b. EACDB d. CABDE e. DEBAC
+66. A. A responsive educational system should be directed towards regional cooperation.
+B. Commonality of educational objectives should be replaced by better ways of achieving goals that fit the
+regional needs.
+C. It is necessary to revolutionize the contemporary methodologies in the teaching-learning processes,
+especially during these trying times.
+D. Ancient forms of teaching should be scrapped and be replaced by modern ways of teaching.
+E. The educational goal is to seek better ways of experimentation in the teaching strategies and technologies
+during this pandemic.
+What should be the 4th sentence?
+a. C c. A
+b. E d. B e. D
+67. A. This often results in meeting locals and experiencing their lives and traditions firsthand.
+B. Furthermore, walking tours are flexible and inexpensive because there are no strict schedules or
+transportation expenses.
+C. Travelers taking walking tours are rewarded with the opportunity to interact with the people who live there.
+D. For starters, walking through a new city allows visitors to see the details of an area without having to hurry.
+E. There are many reasons why I enjoy walking tours when visiting new cities.
+What should be the 2nd sentence?
+a. C c. A
+b. E d. B e. D
+68. A. From it comes the energy which makes life possible.
+B. Yet, the sun is all-important to living things on earth.
+C. Though the earth seems so large to us, it is only a minor member of the system.
+D. Nevertheless, it’s important to realize the earth’s place in that broader scheme of things known as the solar
+system.
+E. The attention of geography is focused on the earth, particularly on the surface.
+What should be the 1st sentence?
+a. C c. A
+b. E d. B e. D
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 8 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 12 =====
+69. A. When my friend and I visited North Carolina last January, we hiked in the Blue Ridge Mountains.
+B. Hiking can be especially exhilarating during snowy winter months.
+C. Frostbit leaves crunched beneath our winter boots on the path through snow-frosted tress.
+D. We also saw deer and rabbits as we trekked up the path.
+E. We first crossed a footbridge over a rapidly moving, ice-cold river.
+What should be the last sentence?
+a. C c. A
+b. E d. B e. D
+70. A. Hotels and transportation on trips can be expensive if you don’t book them plenty of time in advance.
+B. When you go on a trip, you need to think about how much money to allot for things like transportation, food,
+and hotels.
+C. It is important to plan your trips carefully.
+D. Even though you may want to do everything, you have to remember that there are only so many hours in
+the day!
+E. Another thing to plan for is how much time you want to spend sightseeing and doing different sorts of
+activities.
+What should be the 3rd sentence?
+a. C c. A
+b. E d. B e. D
+Reading Comprehension
+DIRECTIONS: Read each passage carefully and then answer the question/s that follow/s. Choose the letter that
+corresponds to the correct answer based on the given selections.
+71. The United States has given the free world the concept of “the American Dream,” and thousands from all over
+the earth immigrate to America to pursue it. If one works hard, educates oneself and one’s children, obeys th e
+laws, and executes the responsibilities of a citizen, one can expect prosperity. One’s children can only do better.
+The main idea of the passage above is that:
+a. Hard work reaps rewards all over the earth.
+b. Only the children profit from their parents’ efforts.
+c. “The American Dream” is only a dream.
+d. “The American Dream” promises earthly rewards for productive behaviors.
+e. Not presented in the passage.
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 9 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 13 =====
+72. Working on a computer can be very frustrating if you don’t follow the rules. Rule Number One for word processing
+is “Save your work frequently.” You can sit and yell at the machine when your stuff disappears. You can bang
+the keyboard. You can even cry. The fact remains, had you saved frequently, a lot more than nothing would still
+be there.
+Which sentence best expresses the main idea of the passage above?
+a. Even modern computers are not truly- user-friendly.
+b. Word processing has lots of bugs, and the industry should be ashamed.
+c. The wise typist saves often.
+d. When the computer wins and you lose, get angry.
+e. Not presented in the passage.
+73. Sam shivered as he passed from the bright sunlight into the gloom of the alley on that brilliant January day. As
+he pulled his jacket collar closer to his neck, feeling miserable about his mission, the eternally childish shouts
+from the end of the alley echoed familiarly. He could make out his parents’ silhouettes, posed like old-fashioned
+boxers, ahead of him in the gloom, and wondered anew at how they could always make him feel like he was the
+forever big brother, the forever responsible party.
+The paragraph could be entitled:
+a. “A cold January Day”
+b. “The Battered Wife”
+c. “The Child as Parent”
+d. “Alleys”
+e. “The Prodigal Son”
+74. The parents frantically gathered in the schoolyard, some panic-stricken at the possibility that their children might
+be among the injured. The construction workers stood in a group to one side, knowing that they had perfectly
+secured their operation the night before, that access to the explosives was limited to a crowbar -wielding thief.
+Sheriff’s deputies approached both groups, knowing they had to soothe as well as question. The man in
+camouflage watched the proceedings through binoculars from the top of a distant tree. A hunter, he’d seen what
+had happened but could not decide whether to tell the tale.
+The point of the paragraph is that:
+a. An explosion has ripped through a school.
+b. Construction workers aren’t necessarily careless
+c. Parents may panic understandably
+d. The hunter faces a dilemma.
+e. Not all students were hurt.
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 10 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 14 =====
+75. The complexities of being an adult who attends school are manifold. Home, work, and school compete. Parenting
+responsibilities remain in full force, no matter what other activities an adult pursues. Job demands are incessant
+and presume one’s constant alertness and availability during working hours. School requires not only attendance
+but also the execution of a multitude of homework assignments. Only those who are strong, disciplined, flexible,
+and committed survive and thrive.
+What idea does the paragraph develop?
+a. To succeed, an adult must be mature in nature.
+b. Employers assume one has no life outside their job.
+c. No matter what other demands may come and go, children are always there.
+d. College studies are not simply a matter of going to class.
+e. Jobs are permanent and must be valued.
+Passage for items 76-80:
+Seagulls live on the beach. They eat small fish, bread, and seaweed. Seagulls run quickly on the sand
+and fly quickly in the sky. Seagulls will run or fly away if you try to catch them. There are many seagulls on the
+beach. Crabs also live on the beach. They eat shrimp, ocean plants, and small fish. Crabs crawl quickly on the
+sand and in the ocean. Crabs will crawl away if you try to catch them. There are many crabs on the beach, but
+it is not always easy to see them. Starfish live on the beach, too. They eat clams, oysters, and small fish. Starfish
+move slowly on the sand and in the ocean. Starfish will not move away if you try to catch them. There are few
+starfish on the beach.
+76. Seagulls, crabs, and starfish all eat:
+a. clams c. bread
+b. shrimps d. fish e. plants
+77. Based on the information in the passage, which sentence is false?
+a. Starfish are hard to catch.
+b. Crabs eat shrimps and ocean plants.
+c. Seagulls move quickly on the sand and in the air.
+d. Starfish move slow.
+e. Crabs crawl quickly on the sand and in the ocean.
+78. The passage does not talk about:
+a. how fast beach animals move
+b. what starfish eat
+c. how crabs catch food
+d. what seagulls do when you try to catch them
+e. where starfish lives.
+79. Based on information in the passage, which animal would you be most likely to see at the beach?
+a. crabs c. starfish
+b. shrimps d. seagulls e. sea-urchins
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 11 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 15 =====
+80. Based on the passage, we can understand that:
+a. many animals live at the beach.
+b. the beach is a good place for a vacation.
+c. the beach is not as nice as the mountains.
+d. many people catch crabs at the beach.
+e. the beach is a breeding ground for the starfish.
+Passage for items 81-85:
+Today, Mike and his mom are going to the library. Mike wants to find a book to read. His mom wants
+to use a computer there.
+When they get to the library, Mike finds a book about detectives. He also finds a book with chapters
+about a friendly ghost. Finally, he finds a book about a man who lives in the woods without food or water. He
+puts the books on the front desk and waits for his mom.
+Mike's mom sits at one of the computers in the library. She checks her email and looks at pictures of
+flowers on the internet. Then she reads a news article on a website.
+Mike's mom leaves the computer and walks over to Mike, holding up something out for him. Mike looks
+at her quizzically. It takes him a moment to recognize what she is holding. “I got that movie for us to watch
+tonight," says Mike's mom. “Are you ready to leave?”
+"Sure," Mike says, now holding the movie out in front of him. He reads the cover while walking back to
+the library entrance. He puts his books and the movie on the front desk to check- out. A librarian stands behind
+the counter holding an electronic scanner. "How long can we keep them?" Mike asks her.
+"Three weeks," says the librarian.
+"Cool," says Mike.
+Suddenly, Mike is surprised. His mother is checking out something else that is too big to put on the
+desk. It’s a picture of the ocean.
+"What is that for?" Mike asks.
+"To put on our wall at home," says Mike's mom.
+"You can do that?" Mike asks.
+Mike's mom smiles at the librarian. "Yes," she says, "but we have to return it in three months.”
+81. Based on the books Mike finds to check out, we can tell that he is interested in:
+a. adventure c. science
+b. nature d. fiction e. mystery
+82. According to the passage, how long can Mike and his mother use the books and the movie before they must
+return them to the library?
+a. six days c. two weeks
+b. one week d. three weeks e. four weeks
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 12 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 16 =====
+83. Based on its use in paragraph 4, it can be understood that quizzically belongs to which of the following word
+groups?
+a. abnormally, strangely, weirdly
+b. inquisitively, questioningly, curiously
+c. passionately, keenly, intensely
+d. casually, carelessly, indifferently
+e. none of the above
+84. What does Mike's mom want to do with the picture of the ocean?
+a. She wants to buy it.
+b. She wants to hang it on her wall.
+c. She wants to give it to her friend as a gift.
+d. She wants to donate it to the library.
+e. She wants to keep it.
+85. Which of the following would be the best title for this passage?
+a. Mike's Mom
+b. A Picture of the Ocean
+c. At the Library
+d. Books, Computers, Movies, and Pictures
+e. Renting a Book
+Passage for items 86-90:
+The living room does not look good. It looks bad without a curtain. Maja and Gerald want to buy a
+curtain. They want to buy a curtain for their living room.
+They go to the store. They look at the curtains. There are many colors. There are many sizes. Some
+have patterns. Some are plain.
+Maja likes a pink and purple curtain. It has dots. It has pink and purple dots. Gerald says no! He does
+not like the colors. He does not like the pattern. He does not like the size. The pink and purple curtain is too big.
+Gerald likes a green and red curtain. It has stripes. It has green and red stripes. Maja says no! She
+does not like the colors. She does not like the pattern. She does not like the size. The green and red curtain are
+too small.
+Maja and Gerald see a tan curtain. It does not have dots. It does not have stripes. It is plain. It is tan
+and plain. Gerald likes the tan curtain. Mary likes the tan curtain. They both like the color. They both like the
+size. They both say yes!
+Maja and Gerald buy the tan curtain. They put the curtain in the living room. The living room looks
+wonderful with the new curtain.
+86. According to the passage, Maja and Gerald want to put the new curtain in their:
+a. dining room
+b. kitchen
+c. living room
+d. attic
+e. bathroom
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 13 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 17 =====
+87. According to the passage, the pink and purple curtain:
+a. has stains
+b. has stripes
+c. has dots
+d. is too plain
+e. is too small
+88. According to the passage, both Maja and Gerald like the:
+a. pink and purple curtain
+b. green and red curtain
+c. white curtain
+d. tan curtain
+e. blue curtain
+89. Maja and Gerald do not see a:
+a. black and blue curtain
+b. pink and purple curtain
+c. tan and pink curtain
+d. green and red curtain
+e. red and tan curtain
+90. Based on information in the passage, it can be understood that both Maja and Gerald would like which of the
+following curtains best?
+a. a grey curtain with no dots or stripes
+b. a black and white curtain with both dots and stripes
+c. a yellow and pink curtain with red stripes
+d. a pink and yellow curtain with dots
+e. a blue and green curtain with stripes
+Spelling 10
+DIRECTIONS: For each set of words, choose the one that is spelled correctly.
+91. a. consequently b. consaquently c. consequantly d. consciquantly e. conciquently
+92. a. embarased b. embarassed c. embarrassed d. embbarassed e. embarrased
+93. a. difinately b. definately c. defenitely d. definitley e. definitely
+94. a. occassionally b. occassionally c. occasionally d. ocassionnaly e. none of these
+95. a. merchandise b. mercandise c. marchandize d. merchandice e. merchendice
+96. a. compitent b. competent c. compettent d. comppetent e. competant
+97. a. insistant b. incistant c. inssistent d. insistent e. incistent
+98. a. referrance b. reference c. referance d. refarrence e. referrence
+99. a. probibility b. probebility c. probability d. prabability e. probablity
+100. a. acknowlegement b. acknowlegment c. acknowledgment d. acknowledegement e. none of these
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 14 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 18 =====
+Clerical Operations
+DIRECTIONS: Read each question carefully, follow the instructions and choose the correct answer that
+corresponds to the questions.
+For items 101-105, arrange the name of the businesses in alphabetical order.
+101.
+1. Thumbs-up Grocery Store
+2. Up-Close Dental Clinic
+3. Buddy-Body Gym
+4. Taste Buds Diner
+5. Think Pink Boutique
+a. 34512 c. 32514
+b. 32541 d. 35143 e. 35241
+102.
+1. Mixed-Colors Paint Inc.
+2. Le FiBuon Hair and Make-Up Salon
+3. Munchy and Crunchy Snack Bar
+4. Many Punches Boxing Gym
+5. Karen Martin Nail Accessories
+a. 52413 c. 54213
+b. 52134 d. 52143 e. 51234
+103.
+1. Vicky Socco Barber Shop
+2. Shop and Ride Convenience Store
+3. Violet Pocket Jeans Co.
+4. Imported Stuff Accessories
+5. Orange and Lemon Health Drinks
+a. 45123 c. 45321
+b. 53214 d. 54321 e. 45213
+104.
+1. 7-Eleven Convenience Store
+2. Seventies Apparel Shop
+3. 7-Evelyn Sari-sari Store
+4. Seventy-Five Stars Hotel
+5. 7-Elevator Services
+a. 35412 c. 53142
+b. 53124 d. 34512 e. 51234
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 15 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 19 =====
+105.
+1. Daffodil General Merchandise
+2. David’s Balloons
+3. Danica Soothes Massage Parlor
+4. Danilo Baryo Fiesta Restaurant
+5. Danny’s Vulcanizing Shop
+a. 13542 c. 15432
+b. 13452 d. 12354 e. 15432
+For items 106-110, the questions require you to follow the specific directions given for each question which
+may involve comparing, checking, and counting given groups of letters and/or numbers.
+106. How many pairs of the following groups of letters are exactly alike?
+BRFQSX BRFQSX
+ACDOBJ ACDBOJ
+RPTQVS RPTQVS
+ZUYRVB ZUYRVB
+SPQRAS SQRPAS
+HVCBWR HVCRWB
+a. 1 pair c. 3 pairs
+b. 2 pairs d. 4 pairs e. 5 pairs
+107. In the following sentence, how many words contain letters that appear more than once in that word?
+“Right around April Fool’s Day, the daffodils and crocuses start to emerge and cheer us up after a long winter.”
+a. 4 words c. 6 words
+b. 5 words d. 7 words e. 8 words
+108. Which one of the following letters is as far after C as T is after O in the alphabet?
+a. G b. H c. I d. J e. None
+109. In the following list of numbers, how many times does 8 come just after 6 when 6 comes just after an odd
+number?
+“6325687253494236844576842396868”
+a. 1 time c. 3 times
+b. 2 times d. 4 times e. 5 times
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 16 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 20 =====
+110. How many pairs of the following groups of letters are not exactly alike?
+BJQSPO BJSQPO
+ADEOBJ ADEOBJ
+RQYVSP RQYVSP
+ZLMNRB ZLNMRB
+SARQPS SARQPS
+HRCWBY HRCWBY
+a. 1 pair c. 3 pairs
+b. 2 pairs d. 4 pairs e. 5 pairs
+For items 111-115, indicate which filing cabinet drawer from the set would be used by selecting the
+appropriate letter from the choices given.
+111. Danny Cervantez, II
+a. Aa -- Ch c. Di -- Fl
+b. Ci -- Dh d. Fm -- Ht e. Hu – Jm
+112. pre-workout meals
+a. Jn -- Mf c. Np -- Sm
+b. Mg -- No d. Sn -- Wd e. We -- Zz
+113. Attorney Fritzy Diosdado
+a. Aa -- Ch c. Di -- Fl
+b. Ci -- Dh d. Fm -- Ht e. Hu – Jm
+114. verified payments
+a. Aa -- Ch c. Np -- Sm
+b. Mg -- No d. Sn -- Wd e. We – Zz
+115. Dra. Vicky Bella
+a. Aa -- Ba c. Da -- Ea
+b. Be -- Ca d. Va -- Wa e. We – Zz
+116. If the following words pace, party, paper, pantry, and pan were arranged in alphabetical order, the underlined
+word would be:
+a. first c. third
+b. second d. fourth e. last
+117. If the following words mediocre, medieval, medicine, medium, and mediagenic were arranged in alphabetical
+order, the underlined word would be:
+a. first c. third
+b. second d. fourth e. last
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 17 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 21 =====
+118. If the following brand names Spalding, Spam, Spade, Sparrow, and Spartacus were arranged in a descending
+alphabetical order, the underlined brand name would be:
+a. first c. third
+b. second d. fourth e. last
+119. If the following names Wenona, Wenda, Wenchee, Wendy, and Wendolyn were arranged in alphabetical
+order, the underlined name would be:
+a. first c. third
+b. second d. fourth e. last
+120. If the numerical sequences 1) 5.68342, 2) 586.362, 3) 568.362, 4) 5.29544, and 5) 56.3892 were arranged in
+descending order, what would be their arrangement?
+a. 23154 c. 45132
+b. 54123 d. 23514 e. 45312
+Numerical Reasoning
+121. The price of 10 tables is equal to that of 4 chairs. The price of 15 tables and 2 chairs together is Php 4,000.
+The total price of 12 tables and 3 chairs is:
+a. Php 3,500.00 c. Php 3,840.00
+b. Php 3,750.00 d. Php 3,900.00 e. Php 4,150.00
+122. 28, 25, 5, 21, 18, 5, 14, ??, ??
+a. 11, 5 c. 11, 8
+b. 10. 7 d. 5, 10 e. 10, 5
+123. Kenny fires 5 shots to Max’s 3 shots but Kenny kills a bird once in 3 shots while Max kills once in 2 shots.
+When Max has missed 27 times, Kenny has killed:
+a. 30 birds c. 72 birds
+b. 60 birds d. 90 birds e. 98 birds
+124. 1.5, 2.3, 3.1, 3.9, ??
+a. 4.2 c. 4.7
+b. 4.4 d. 5.1 e. 5.4
+125. To fill a tank, 25 buckets of water is required. How many buckets of water will be required to fill the same tank
+if the capacity of the bucket is reduced to two-fifth of its present size?
+a. 10 buckets c. 62.5 buckets
+b. 35 buckets d. 68.2 buckets e. 70.1 buckets
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 18 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 22 =====
+126. Narmaya made pancakes for her nieces. She made 3⁄ of a pack of pancakes. Narmaya gave the pancakes
+6
+equally to her 5 nieces. How much of a pack of pancakes will each of her nieces get?
+a. 7 c. 28⁄
+3
+b. 3⁄ d. 1⁄ e. 1⁄
+8 10 4
+127. Stacy and 6 of her friends bought 3⁄ of a kilogram of chicken nuggets. How much of a kilogram of chicken
+4
+nuggets will each of them get?
+a. 8 c. 8⁄
+31
+b. 3⁄ d. 2⁄ e. 1⁄
+28 4 3
+128. Mr. Smith saw a pair of glasses with a tagged price of $3,500. The store clerk told him that it was currently
+being sold at 28% off. How much will Mr. Smith pay for the glasses if he decides to buy them?
+a. $970 c. $2,450
+b. $2,520 d. $1,100 e. $2,350
+129. “Nine thousand seven hundred forty-six and eight ten thousandths” written in standard form is:
+a. 9746.8000 c. 9746.08
+b. 97,468.000 d. 9746.0008 9746.008
+130. COA stated that there are 800 reported cases of overspending in DepEd, 200 of which were failed to be
+prosecuted. What percent of cases of overspending were brought to the Ombudsman?
+a. 75% c. 80%
+b. 35% d. 60% e. 85%
+131. 92 weeks converted to days is:
+a. 634 days c. 654 days
+b. 644 days d. 664 days e. 674 days
+132. A chicken pen has 26 hens and 14 roosters. The average weight of the hens is 40 kg and the average weight
+of the roosters is 35 kg. What is the average weight of the chickens in the pen?
+a. 53.76 kg c. 49.44 kg
+b. 72.15 kg d. 29.98 kg e. 38.25 kg
+133. 10 busses are loaded 50 students each went on an educational field trip. 165 students did not go. How many
+students are there all in all?
+a. 335 students c. 665 students
+b. 500 students d. 425 students e. 485 students
+134. Free pencils were distributed equally among the children of a class. The number of pencils each child got was
+one-eighth of the number of children. Had the number of children been half, each child would have gotten 16
+pencils. How many pencils were distributed to the class?
+a. 512 pencils c. 640 pencils
+b. 432 pencils d. 256 pencils e. 618 pencils
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 19 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 23 =====
+135. Jeremie started his online business during the lockdown. He bought goods worth P5,000.00 to sell online.
+After a week, he earned P6,459.00. Jeremie then bought goods again worth P3,500.00 to replenish his stocks
+the day after and earned P7,300.00 the following week. How much money does Jeremie have all in all?
+a. P10,259.00 c. P11,529.00
+b. P15,349.00 d. P15,459.00 e. P12,259.00
+136. The dough for a salt bread weighs 3⁄ kg. The baker needs to make 24 pieces of salt bread out of that dough.
+2
+What will be the weight of each salt bread?
+a. 1⁄ kg c. 3⁄ kg
+16 18
+b. 2⁄ kg d. 4⁄ kg e. 5⁄ kg
+17 19 20
+137. Zeny ordered a webcam worth P550.75, a ring light for P629.25, and a phone holder worth P240.00 for her
+online class. Together with a P55.00 delivery fee, Zeny, her mother, and her sister will pay for the total cost of
+the items. How much will Zeny’s mother and sister pay?
+a. P491.66 c. P938.66
+b. P1,475.00 d. P419.33 e. P983.33
+138. 678.678 rounded off to the nearest hundredths is _____.
+a. 680.678 c. 670.680
+b. 678.680 d. 670.670 e. 680.670
+139. 376.504 is read as:
+a. three hundred seventy-six and five hundred four
+b. three hundred seventy-six and five hundred four thousand
+c. three hundred seventy-six and five hundred four hundredths
+d. three hundred seventy-six and five hundred four thousandths
+e. None of these
+140. 8 - (6 × 52 + 3) + 7 = ______.
+a. 138 c. -138
+b. -154 d. 154 e. 82
+141. Look at this number series: 8, 6, 9, 23, 87. The next number should be?
+a. 128 c. 324
+b. 336 d. 429 e. 538
+142. In a group of 120 people, 90 have an age of more than 30 years, and the others have an age of less than 20
+years. If a person is selected at random from this group, what is the probability the person's age is less than
+20?
+a. 0.30 c. 0.75
+b. 0.50 d. 0.65 e. 0.25
+143. A six-sided die is rolled once. What is the probability that the number rolled is an even number greater than 2?
+a. 1⁄ c. 1⁄
+2 4
+b. 1⁄ d. 1⁄ e. 1⁄
+3 5 6
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 20 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 24 =====
+144. 24 - (32 + 19) × (36 ÷ 6 ) = _______.
+a. -282 c. 102
+b. 282 d. -102 e. -306
+145. In the number series 8, 22, 8, 28, 8, what number should come next?
+a. 9 c. 34
+b. 32 d. 29 e. 22
+146. What least number must be added to 1056 so that the sum is completely divisible by 23?
+a. 2 c. 21
+b. 18 d. 3 e. 15
+147. How many of the following numbers are divisible by 132?
+264, 396, 462, 792, 968, 2178, 5184, 6336
+a. 8 c. 6
+b. 7 d. 5 e. 4
+148. The difference of two numbers is 1365. On dividing the larger number by the smaller, we get 6 as quotient
+and 15 as remainder. What is the smaller number?
+a. 230 c. 280
+b. 270 d. 320 e. 360
+149. In a certain university, 40% of the senior class students are taking Physics, 30% are taking calculus and 10%
+are taking both. If 40 students are enrolled in the senior class, how many students are taking neither Physics
+nor calculus?
+a. 14 c. 18
+b. 12 d. 16 e. 17
+150. A laptop is being sold at P15,200.00 with a discount rate of 40%. What is the regular price of the laptop?
+a. P22,820.00 c. P21,280.00
+b. P21,208.00 d. P22,082.00 e. P21,802.00
+General Information
+DIRECTIONS: Read the questions carefully and choose the letter of the correct answer.
+151. Which branch of the Philippine government is responsible for investigating and prosecuting government
+officials accused of crimes, especially graft and corruption?
+a. NAPOLCOM c. Ombudsman
+b. PDEA d. Social Security System e. Bureau of Corrections
+152. This is called the introductory part of the Constitution.
+a. Preamble c. Suffrage
+b. Amendments d. Bill of Rights e. Preface
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 21 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 25 =====
+153. When a President vetoes a bill, how many days does he/she have to communicate it, otherwise the bill will
+become a law.
+a. 7 days c. 25 days
+b. 14 days d. 30 days e. 45 days
+154. This is the power of the State to take a private property for public use upon payment of just compensation.
+a. Right of Take-Over c. Right of Limited Resources
+b. Right of Eminent Domain d. Right of Confiscation e. Right of sequestration
+155. Which of the following shall be exempted from taxation from the government?
+a. Shopping Malls c. Churches and chapels
+b. Hotels and Restaurants d. Cinemas e. None of these
+156. A Barangay Captain was caught on a webcam having sex with her secretary while in an online meeting. Both
+of them will be charged with:
+a. Misdemeanor c. Red Tape
+b. Graft d. Grave Misconduct e. Corruption
+157. This is the requirement for a foreigner to be able to acquire Filipino citizenship.
+a. Birth Certification c. Visa Application
+b. Marriage d. Extradition e. Naturalization
+158. For a member of the house of Congress to be expelled by their fellow members, how much of the total
+number of members of the house must concur with the expulsion?
+a. Two-thirds c. three-fourths
+b. Majority d. nine-tenths e. 80 percent
+159. Which of the following is considered a basic and autonomous social institution?
+a. NGOs c. family
+b. school d. peers e. barangay
+160. How many continuous years must a Barangay Health Worker render before he/she can be granted Civil
+Service Eligibility?
+a. 4 years c. 6 years
+b. 5 years d. 7 years e. 8 years
+161. This person is the only one that has the authority to issue a warrant of arrest.
+a. President c. Senator
+b. Vice President d. Judge e. Police Chief
+162. Which of the following bills do not originate from the House of Representatives?
+a. Amnesty c. Appropriation Bills
+b. Public Bills d. Tariff Bills e. None
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 22 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/
+
+===== PDF PAGE 26 =====
+163. Article III Section 15 of the Constitution states that the privilege of writ of habeas corpus shall not be
+suspended only in the cases of:
+a. state of calamity c. war
+b. foreign invasion d. state of emergency e. invasion or rebellion
+164. The members of the Lower House are elected by:
+a. region and by The President c. region and by party list
+b. district and by party list d. district and by Senators e. Congressmen
+165. Which of the following flow shows the right transfer of power should the president be incapable of discharging
+his duties?
+a. President >> Vice-President >> House Speaker >> Senate President
+b. President >> Vice-President >> Chief Justice >> House Speaker
+c. President >> Vice-President >> Senate President >> House Speaker
+d. President >> Vice-President >> Chief Justice >> Senate President
+e. President >> Vice-President >> Senate President >> Chief Justice
+++ END of TEST ++
+https://csereviewer.com/subpro-answer-keys/
+FREE CSE REVIEWER by CSEREVIEWER.COM Page 23 of 23
+facebook.com/csereviewerph/
+facebook.com/groups/freecsereviewers/

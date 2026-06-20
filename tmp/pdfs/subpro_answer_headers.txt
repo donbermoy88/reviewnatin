@@ -1,0 +1,16 @@
+HTTP/2 200 
+date: Sat, 20 Jun 2026 06:31:26 GMT
+content-type: text/html; charset=UTF-8
+server: cloudflare
+cache-control: no-cache
+cache-control: max-age=0
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+wpo-cache-status: cached
+last-modified: Fri, 19 Jun 2026 16:52:48 GMT
+expires: Sat, 20 Jun 2026 06:31:25 GMT
+cf-cache-status: DYNAMIC
+vary: accept-encoding
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=igiJ5VQUj5CG87DJnpY%2FD7LyRH%2BYh9pIhUb1Y5h9ESIfbsRtsgoxKpo3%2BqKXLhNUwu3dLtnNsp7NjkiDJW7%2F5xfFdWCiNf2J8QNI%2BrkxhkvFRuqvV9AQ0UCA8PNn2fTmsx0QewV%2BooyvomsYV40%3D"}]}
+cf-ray: a0e8bb008aa4ef6d-SIN
+alt-svc: h3=":443"; ma=86400
+

@@ -104,9 +104,9 @@ export default function AnalyticsScreen() {
       <StackShell title="Analytics" subtitle="Readiness and weak-topic tracking">
         <EmptyState
           icon={<Ionicons name="analytics-outline" size={32} color={colors.primary} />}
-          title="Log in to continue"
-          description="Analytics and weak-topic tracking require a signed-in account."
-          actionLabel="Log in"
+          title="Mag-log in muna"
+          description="Kailangan ng signed-in account para sa analytics at weak-topic tracking."
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </StackShell>

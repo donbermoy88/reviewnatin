@@ -64,9 +64,9 @@ export default function DiagnosticIntroScreen() {
       <StackShell title="Diagnostic quiz">
         <EmptyState
           icon={<Ionicons name="analytics-outline" size={32} color={colors.primary} />}
-          title="Take your diagnostic"
-          description="Log in to take your baseline diagnostic quiz and get a personalized PasaPath study plan."
-          actionLabel="Log in"
+          title="Kunin ang diagnostic mo"
+          description="Mag-log in para kunin ang baseline diagnostic quiz mo at makakuha ng personalized PasaPath study plan."
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </StackShell>

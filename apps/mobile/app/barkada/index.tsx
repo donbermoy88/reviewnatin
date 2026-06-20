@@ -16,6 +16,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
+import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createLeaderboardStyles } from '../../lib/themed-styles';
@@ -150,15 +151,15 @@ export default function BarkadaScreen() {
 
   if (!user) {
     return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
+      <StackShell title="Barkada Mode" subtitle="Review together · compare scores · stronger as a team!">
         <EmptyState
           icon={<Ionicons name="people-outline" size={32} color={colors.primary} />}
-          title="Log in to continue"
-          description="Barkada mode lets you review with friends and compare scores."
-          actionLabel="Log in"
+          title="Mag-log in muna"
+          description="Sa Barkada mode, maka-review ka kasama ang mga kaibigan mo at makukumpara n'yo ang scores."
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
-      </View>
+      </StackShell>
     );
   }
 

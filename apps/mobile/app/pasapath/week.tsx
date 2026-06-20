@@ -112,7 +112,7 @@ export default function PasaPathWeekScreen() {
         <EmptyState
           icon={<Ionicons name="calendar-outline" size={32} color={colors.primary} />}
           title="Tingnan ang weekly path mo"
-          description="Log in to track your PasaPath week — daily tasks, completion streaks, and personalized study targets."
+          description="Mag-log in para masubaybayan ang weekly path mo — daily tasks, completion streaks, at personalized study targets."
           actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />

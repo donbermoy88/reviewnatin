@@ -102,9 +102,9 @@ export default function NotesScreen() {
       <StackShell title="Study notes" subtitle="Mga personal mong study notes">
         <EmptyState
           icon={<Ionicons name="document-text-outline" size={32} color={colors.primary} />}
-          title="Log in to continue"
+          title="Mag-log in muna"
           description="Kailangan mo ng account para mag-save ng notes."
-          actionLabel="Log in"
+          actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
       </StackShell>

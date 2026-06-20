@@ -5,7 +5,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
-  AppState,
   Platform,
   Pressable,
   ScrollView,
@@ -24,77 +23,23 @@ import { QuestionNavigator } from '../../components/question-navigator';
 import { RichText } from '../../components/rich-text';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createQuizStyles } from '../../lib/themed-styles';
-import { randomizeQuestionSet } from '../../lib/question-randomization';
-import {
-  checkQuestionAnswer,
-  fetchExamBySlug,
-  fetchPracticeQuestions,
-  fetchQuestionHint,
-  fetchQuestionsByIds,
-  type AnswerCheckResult,
-} from '../../lib/api/catalog';
-import {
-  checkOfflineAnswer,
-  pickOfflinePracticeQuestions,
-  hasOfflinePack,
-} from '../../lib/offline/pack';
-import { queuePendingSession } from '../../lib/offline/answer-queue';
-import {
-  clearExamSnapshot,
-  examResumeKey,
-  loadExamSnapshot,
-  reorderToSnapshot,
-  saveExamSnapshot,
-} from '../../lib/exam-resume';
-import { fetchBookmarkedQuestionIds, toggleBookmark } from '../../lib/api/bookmarks';
-import { fetchMistakeQuestionIds, recordQuizOutcome, recordSessionOutcomes } from '../../lib/api/mistakes';
-import { fetchMockExamById, fetchMockExamQuestions } from '../../lib/api/mock-exams';
-import { fetchDiagnosticQuestions, completeDiagnostic } from '../../lib/api/diagnostic';
-import {
-  completePracticeSession,
-  createQuizSession,
-  saveQuizAnswers,
-} from '../../lib/api/quiz';
-import { fetchUsageLimits, isMiniMockLimitError } from '../../lib/api/iap';
-import { fetchWeakAreaQuestions } from '../../lib/api/analytics';
-import { awardUserBadges } from '../../lib/api/achievements';
-import { deductHint, awardSessionXp, fetchXpStats } from '../../lib/api/xp';
+import { checkQuestionAnswer, fetchQuestionHint, type AnswerCheckResult } from '../../lib/api/catalog';
+import { checkOfflineAnswer } from '../../lib/offline/pack';
+import { recordQuizOutcome } from '../../lib/api/mistakes';
+import { toggleBookmark } from '../../lib/api/bookmarks';
+import { deductHint } from '../../lib/api/xp';
 import { FREE_DAILY_QUESTIONS } from '../../lib/paywall';
-import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
-import { saveGuestQuizSession } from '../../lib/guest-quiz-history';
 import { dismissDiagnosticPrompt } from '../../lib/diagnostic-prompt';
-import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
-import type { Question, QuizAnswerRecord } from '../../lib/types';
+import { BOARD_DURATION_SECONDS, LETTERS } from '../../lib/quiz/constants';
+import { deriveQuizMode, type QuizModeParams } from '../../lib/quiz/mode';
+import { useQuizQuestions } from '../../lib/quiz/use-quiz-questions';
+import { useExamAutosave } from '../../lib/quiz/use-exam-autosave';
+import { useQuizTimer } from '../../lib/quiz/use-quiz-timer';
+import { useQuizSubmission } from '../../lib/quiz/use-quiz-submission';
+import type { QuizAnswerRecord } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
-
-function finalizeAnswers(
-  prev: QuizAnswerRecord[],
-  current: Question | undefined,
-  selected: string | null,
-  revealed: boolean,
-  timeSpentSeconds: number,
-  revealResult: AnswerCheckResult | null
-): QuizAnswerRecord[] {
-  if (!current || !selected || !revealed || !revealResult) return prev;
-  if (prev.some((a) => a.questionId === current.id)) return prev;
-  return [
-    ...prev,
-    {
-      questionId: current.id,
-      selectedChoiceId: selected,
-      isCorrect: revealResult.isCorrect,
-      timeSpentSeconds,
-    },
-  ];
-}
-
-const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
-const DIAGNOSTIC_ITEM_COUNT = 40;
-const DIAGNOSTIC_SOFT_SECONDS = 30 * 60;
-const BOARD_ITEM_COUNT = 30;
-const BOARD_DURATION_SECONDS = 45 * 60;
 
 function PracticeQuizScreenContent() {
   const router = useRouter();
@@ -102,290 +47,70 @@ function PracticeQuizScreenContent() {
   const theme = useAppTheme();
   const { colors, spacing } = theme;
   const styles = useMemo(() => createQuizStyles(theme), [theme]);
-  const { examSlug, topicSlug, mode, mockExamId, durationSeconds, previewLimit, pasapathTaskId, barkadaChallengeId, questionLimit, focusQuestionId } = useLocalSearchParams<{
-    examSlug?: string;
-    topicSlug?: string;
-    mode?: string;
-    mockExamId?: string;
-    durationSeconds?: string;
-    previewLimit?: string;
-    pasapathTaskId?: string;
-    barkadaChallengeId?: string;
-    questionLimit?: string;
-    focusQuestionId?: string;
-  }>();
-  const slug = examSlug ?? DEFAULT_EXAM_SLUG;
-  const isMock = mode === 'mock';
-  const isMistakeReview = mode === 'mistake_review';
-  const isBookmarkReview = mode === 'bookmark_review';
-  const isDiagnostic = mode === 'diagnostic';
-  const isTimed = mode === 'timed';
-  const isWeakArea = mode === 'weak_area';
-  const isBarkada = mode === 'barkada';
-  const isBoard = mode === 'board';
-  const isOffline = mode === 'offline';
-  const isStrictExam = isMock || isBoard;
-  const resumeKey = isStrictExam
-    ? examResumeKey({ mode: isMock ? 'mock' : 'board', mockExamId, slug })
-    : null;
-  const barkadaLimit = Math.max(Number(questionLimit) || 10, 5);
-  const timedDuration = Number(durationSeconds) || 600;
-  const requestedPreviewLimit = Number(previewLimit);
-  const previewItemLimit =
-    Number.isFinite(requestedPreviewLimit) && requestedPreviewLimit > 0
-      ? Math.floor(requestedPreviewLimit)
-      : null;
+  const params = useLocalSearchParams<QuizModeParams>();
+  const { topicSlug, mockExamId, durationSeconds, pasapathTaskId, barkadaChallengeId, focusQuestionId } = params;
+  const modeFlags = deriveQuizMode(params);
+  const { slug, isMock, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, isBoard, isStrictExam, timedDuration } = modeFlags;
+
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
   const { prefs } = usePreferences();
-  const [paywallBlocked, setPaywallBlocked] = useState(false);
-  const [paywallReason, setPaywallReason] = useState<'daily' | 'board'>('daily');
-  const [softTimerWarn, setSoftTimerWarn] = useState(false);
-  const [offlineMode, setOfflineMode] = useState(isOffline);
 
-  const [loading, setLoading] = useState(true);
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
-  const [index, setIndex] = useState(0);
-  const [selected, setSelected] = useState<string | null>(null);
+  const quiz = useQuizQuestions(modeFlags, { topicSlug, mockExamId, durationSeconds, focusQuestionId }, user, isPremium, router);
+  const {
+    loading,
+    questions,
+    paywallBlocked,
+    paywallReason,
+    offlineMode,
+    bookmarkedIds,
+    setBookmarkedIds,
+    hintCredits,
+    setHintCredits,
+    mockTitle,
+    mockPreviewActive,
+    resumed,
+    answersByIndex,
+    setAnswersByIndex,
+    flaggedIndices,
+    setFlaggedIndices,
+    index,
+    setIndex,
+    selected,
+    setSelected,
+    timeLeft,
+    setTimeLeft,
+  } = quiz;
+
   const [revealed, setRevealed] = useState(false);
   const [checking, setChecking] = useState(false);
   const [revealResult, setRevealResult] = useState<AnswerCheckResult | null>(null);
   const [lang, setLang] = useState<'en' | 'fil'>(prefs.explanationLocale ?? 'en');
   const [answers, setAnswers] = useState<QuizAnswerRecord[]>([]);
-  // Strict exams (mock/board) use an answer-sheet model: selections are stored
-  // per question index so the user can answer in any order, revisit, and change
-  // answers via the navigator. Grading is deferred to submit.
-  const [answersByIndex, setAnswersByIndex] = useState<Record<number, string>>({});
-  // "Flag for review" markers — persisted with the resume snapshot below.
-  const [flaggedIndices, setFlaggedIndices] = useState<Set<number>>(new Set());
   const [navigatorOpen, setNavigatorOpen] = useState(false);
-  const [resumed, setResumed] = useState(false);
-  const [elapsed, setElapsed] = useState(0);
-  const [mockPreviewActive, setMockPreviewActive] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(
-    isMock ? Number(durationSeconds) || 600 : isBoard ? BOARD_DURATION_SECONDS : isTimed ? timedDuration : 0
-  );
-  const [mockTitle, setMockTitle] = useState('Mock Exam');
-
-  // Hint system: eliminates one wrong answer per question.
-  // hintCredits is fetched from DB; hintUsedOnQuestion tracks which questions got a hint.
-  // eliminatedChoiceId is which wrong choice was dimmed on the current question.
-  const [hintCredits, setHintCredits] = useState(3);
-  const [hintUsedOnQuestion, setHintUsedOnQuestion] = useState<Set<string>>(new Set());
-  const [eliminatedChoiceId, setEliminatedChoiceId] = useState<string | null>(null);
-
-  const startedAt = useRef(Date.now());
-  const questionStarted = useRef(Date.now());
-  const finishing = useRef(false);
-
-  useEffect(() => {
-    (async () => {
-      // Strict exams: restore an interrupted attempt (same question order,
-      // answers, flags, position, remaining time) when a valid snapshot exists;
-      // otherwise shuffle fresh and save the starting order so future saves and
-      // resumes stay index-aligned.
-      const applyStrict = async (raw: Question[], fallbackTimeLeft: number) => {
-        const snap = resumeKey ? await loadExamSnapshot(resumeKey) : null;
-        const ordered = snap ? reorderToSnapshot(raw, snap.questionOrder) : null;
-        if (snap && ordered) {
-          setQuestions(ordered);
-          setAnswersByIndex(snap.answers);
-          setFlaggedIndices(new Set(snap.flagged));
-          setIndex(Math.min(snap.index, ordered.length - 1));
-          setSelected(snap.answers[snap.index] ?? null);
-          setTimeLeft(snap.timeLeft);
-          setResumed(true);
-        } else {
-          const shuffled = randomizeQuestionSet(raw);
-          setQuestions(shuffled);
-          if (resumeKey) {
-            void saveExamSnapshot(resumeKey, {
-              questionOrder: shuffled.map((q) => q.id),
-              answers: {},
-              flagged: [],
-              index: 0,
-              timeLeft: fallbackTimeLeft,
-              savedAt: Date.now(),
-            });
-          }
-        }
-      };
-
-      try {
-        const exam = await fetchExamBySlug(slug);
-
-        if (isDiagnostic) {
-          if (!user) {
-            router.replace('/(auth)/login');
-            return;
-          }
-          setQuestions(randomizeQuestionSet(await fetchDiagnosticQuestions(slug, DIAGNOSTIC_ITEM_COUNT)));
-        } else if (isMock && mockExamId) {
-          if (!user) {
-            router.replace('/(auth)/login');
-            return;
-          }
-          try {
-            const [mock, qs] = await Promise.all([
-              fetchMockExamById(mockExamId),
-              fetchMockExamQuestions(mockExamId),
-            ]);
-            const requestedDuration = Number(durationSeconds);
-            const fullDuration =
-              mock?.durationSeconds ??
-              (Number.isFinite(requestedDuration) && requestedDuration > 0 ? requestedDuration : 600);
-            const serverPreviewLimit = qs.previewLimit ?? (qs.isPreview ? qs.questions.length : null);
-            const effectivePreviewLimit =
-              serverPreviewLimit && previewItemLimit
-                ? Math.min(serverPreviewLimit, previewItemLimit)
-                : serverPreviewLimit ?? previewItemLimit;
-            const effectiveQuestions = effectivePreviewLimit
-              ? qs.questions.slice(0, effectivePreviewLimit)
-              : qs.questions;
-            const effectiveDuration = effectivePreviewLimit
-              ? Math.min(
-                  fullDuration,
-                  Number.isFinite(requestedDuration) && requestedDuration > 0 ? requestedDuration : 900
-                )
-              : fullDuration;
-            if (mock) {
-              setMockTitle(mock.title);
-              setTimeLeft(effectiveDuration);
-            }
-            setMockPreviewActive(Boolean(effectivePreviewLimit));
-            await applyStrict(effectiveQuestions, effectiveDuration);
-          } catch (err) {
-            if (isMiniMockLimitError(err as { message?: string })) {
-              setPaywallBlocked(true);
-              return;
-            }
-            throw err;
-          }
-        } else if (isBoard) {
-          if (!user) {
-            router.replace('/(auth)/login');
-            return;
-          }
-          if (!isPremium(exam?.id ?? null)) {
-            setPaywallReason('board');
-            setPaywallBlocked(true);
-            return;
-          }
-          const result = await fetchPracticeQuestions(slug, BOARD_ITEM_COUNT, topicSlug);
-          setTimeLeft(BOARD_DURATION_SECONDS);
-          await applyStrict(result.questions.slice(0, BOARD_ITEM_COUNT), BOARD_DURATION_SECONDS);
-        } else if (isMistakeReview) {
-          const ids = await fetchMistakeQuestionIds(slug, 12);
-          setQuestions(randomizeQuestionSet(await fetchQuestionsByIds(ids)));
-        } else if (isBookmarkReview) {
-          if (!user) {
-            router.replace('/(auth)/login');
-            return;
-          }
-          // Focus a single bookmarked question, or drill all of them.
-          const ids = focusQuestionId
-            ? [focusQuestionId]
-            : [...(await fetchBookmarkedQuestionIds(user.id))];
-          setQuestions(randomizeQuestionSet(await fetchQuestionsByIds(ids)));
-        } else if (isWeakArea) {
-          if (!user) {
-            router.replace('/(auth)/login');
-            return;
-          }
-          if (user && exam) {
-            const limits = await fetchUsageLimits(slug);
-            if (limits && !limits.isPremium && limits.dailyQuestionsRemaining === 0) {
-              setPaywallBlocked(true);
-              return;
-            }
-          }
-          const result = await fetchWeakAreaQuestions(slug, 10);
-          if (result.error === 'daily_limit') {
-            setPaywallBlocked(true);
-            return;
-          }
-          setQuestions(randomizeQuestionSet(result.questions));
-        } else if (isOffline) {
-          const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
-          if (!offlineQs.length) {
-            Alert.alert('Walang offline pack', 'I-download muna ang offline pack sa Settings.');
-            router.back();
-            return;
-          }
-          setOfflineMode(true);
-          setQuestions(randomizeQuestionSet(offlineQs));
-        } else if (isBarkada) {
-          if (!user) {
-            router.replace('/(auth)/login');
-            return;
-          }
-          const result = await fetchPracticeQuestions(slug, barkadaLimit, topicSlug);
-          if (result.error === 'daily_limit') {
-            setPaywallBlocked(true);
-            return;
-          }
-          setQuestions(randomizeQuestionSet(result.questions.slice(0, barkadaLimit)));
-        } else {
-          if (user && exam) {
-            const limits = await fetchUsageLimits(slug);
-            if (limits && !limits.isPremium && limits.dailyQuestionsRemaining === 0) {
-              setPaywallBlocked(true);
-              return;
-            }
-          }
-          const result = await fetchPracticeQuestions(slug, 12, topicSlug);
-          if (result.error === 'daily_limit') {
-            setPaywallBlocked(true);
-            return;
-          }
-          setQuestions(randomizeQuestionSet(result.questions));
-        }
-        if (user) {
-          const [bookmarks, xpStats] = await Promise.all([
-            fetchBookmarkedQuestionIds(user.id),
-            fetchXpStats(),
-          ]);
-          setBookmarkedIds(bookmarks);
-          setHintCredits(xpStats.hintCredits);
-        }
-      } catch {
-        if (!isMock && !isBoard && !isDiagnostic && !isWeakArea && !isBarkada && !isBookmarkReview && (await hasOfflinePack(slug))) {
-          const offlineQs = await pickOfflinePracticeQuestions(slug, 12, topicSlug);
-          if (offlineQs.length) {
-            setOfflineMode(true);
-            setQuestions(randomizeQuestionSet(offlineQs));
-          }
-        }
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [slug, topicSlug, isMock, isBoard, isOffline, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, barkadaLimit, mockExamId, durationSeconds, previewItemLimit, focusQuestionId, resumeKey, user, isPremium, router]);
 
   useEffect(() => {
     setLang(prefs.explanationLocale ?? 'en');
   }, [prefs.explanationLocale]);
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      const sec = Math.floor((Date.now() - startedAt.current) / 1000);
-      setElapsed(sec);
-      if (isMock || isTimed || isBoard) {
-        setTimeLeft((t) => Math.max(0, t - 1));
-      }
-      if (isDiagnostic && sec >= DIAGNOSTIC_SOFT_SECONDS) {
-        setSoftTimerWarn(true);
-      }
-    }, 1000);
-    return () => clearInterval(id);
-  }, [isMock, isTimed, isBoard, isDiagnostic]);
+  // Hint system: eliminates one wrong answer per question.
+  // hintCredits is fetched from DB; hintUsedOnQuestion tracks which questions got a hint.
+  // eliminatedChoiceId is which wrong choice was dimmed on the current question.
+  const [hintUsedOnQuestion, setHintUsedOnQuestion] = useState<Set<string>>(new Set());
+  const [eliminatedChoiceId, setEliminatedChoiceId] = useState<string | null>(null);
 
-  const formatTime = (sec: number) => {
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-  };
+  const { startedAt, elapsed, softTimerWarn } = useQuizTimer(modeFlags, setTimeLeft);
+  const questionStarted = useRef(Date.now());
+
+  useExamAutosave({
+    resumeKey: modeFlags.resumeKey,
+    questions,
+    answersByIndex,
+    flaggedIndices,
+    index,
+    timeLeft,
+    loading,
+  });
 
   const current = questions[index];
   const answeredIndices = useMemo(
@@ -393,42 +118,6 @@ function PracticeQuizScreenContent() {
     [answersByIndex]
   );
   const answeredCount = answeredIndices.size;
-
-  // Latest exam state in a ref so background/unmount saves capture the current
-  // values without re-subscribing every render.
-  const examStateRef = useRef({ questions, answersByIndex, flaggedIndices, index, timeLeft });
-  useEffect(() => {
-    examStateRef.current = { questions, answersByIndex, flaggedIndices, index, timeLeft };
-  });
-
-  const saveExamProgress = useCallback(() => {
-    if (!resumeKey) return;
-    const s = examStateRef.current;
-    if (!s.questions.length) return;
-    void saveExamSnapshot(resumeKey, {
-      questionOrder: s.questions.map((q) => q.id),
-      answers: s.answersByIndex,
-      flagged: [...s.flaggedIndices],
-      index: s.index,
-      timeLeft: s.timeLeft,
-      savedAt: Date.now(),
-    });
-  }, [resumeKey]);
-
-  // Persist progress on every answer/flag/navigation change.
-  useEffect(() => {
-    if (!resumeKey || loading || !questions.length) return;
-    saveExamProgress();
-  }, [answersByIndex, flaggedIndices, index, resumeKey, loading, questions.length, saveExamProgress]);
-
-  // Capture the latest state (incl. remaining time) when the app is backgrounded.
-  useEffect(() => {
-    if (!resumeKey) return;
-    const sub = AppState.addEventListener('change', (state) => {
-      if (state === 'inactive' || state === 'background') saveExamProgress();
-    });
-    return () => sub.remove();
-  }, [resumeKey, saveExamProgress]);
 
   const pickChoice = useCallback(
     (choiceId: string) => {
@@ -443,7 +132,7 @@ function PracticeQuizScreenContent() {
         setAnswersByIndex((prev) => ({ ...prev, [index]: choiceId }));
       }
     },
-    [current, revealed, isStrictExam, index]
+    [current, revealed, isStrictExam, index, setSelected, setAnswersByIndex]
   );
 
   /** Toggle the current question's "flag for review" marker (strict exams). */
@@ -457,7 +146,7 @@ function PracticeQuizScreenContent() {
     if (Platform.OS === 'ios') {
       Haptics.selectionAsync();
     }
-  }, [index]);
+  }, [index, setFlaggedIndices]);
 
   /** Jump to any question (strict-exam navigator). Restores its saved answer. */
   const jumpTo = useCallback(
@@ -471,7 +160,7 @@ function PracticeQuizScreenContent() {
       setEliminatedChoiceId(null);
       questionStarted.current = Date.now();
     },
-    [questions.length, answersByIndex]
+    [questions.length, answersByIndex, setIndex, setSelected, questionStarted]
   );
 
   /**
@@ -504,7 +193,7 @@ function PracticeQuizScreenContent() {
     deductHint()
       .then((remaining) => setHintCredits(remaining))
       .catch(() => setHintCredits((c) => Math.max(c - 1, 0)));
-  }, [current, revealed, user, selected, hintUsedOnQuestion, hintCredits]);
+  }, [current, revealed, user, selected, hintUsedOnQuestion, hintCredits, setHintCredits]);
 
   const checkAnswer = useCallback(async () => {
     if (!current || !selected || revealed || checking) return;
@@ -564,173 +253,27 @@ function PracticeQuizScreenContent() {
     } finally {
       setChecking(false);
     }
-  }, [current, selected, revealed, checking, isStrictExam, user, router, offlineMode, index, questions.length]);
+  }, [current, selected, revealed, checking, isStrictExam, user, router, offlineMode, index, questions.length, setIndex, setSelected, questionStarted]);
 
-  const finishQuiz = useCallback(async () => {
-    if (finishing.current) return;
-    finishing.current = true;
-
-    // The attempt is being submitted — discard any resume snapshot.
-    if (resumeKey) void clearExamSnapshot(resumeKey);
-
-    const elapsedQ = Math.round((Date.now() - questionStarted.current) / 1000);
-    // Strict exams build the answer set from the answer-sheet (any-order, deferred
-    // grading — server computes correctness). Other modes use the live record.
-    const finalAnswers: QuizAnswerRecord[] = isStrictExam
-      ? questions.flatMap((q, i) =>
-          answersByIndex[i]
-            ? [{ questionId: q.id, selectedChoiceId: answersByIndex[i], isCorrect: false, timeSpentSeconds: 0 }]
-            : []
-        )
-      : finalizeAnswers(answers, current, selected, revealed, elapsedQ, revealResult);
-
-    // Strict exams (mock/board) defer grading to the server. Guest strict exams
-    // are blocked before loading because grading and saved results require auth.
-    const totalCorrect = finalAnswers.filter((a) => a.isCorrect).length;
-    const score = questions.length ? Math.round((totalCorrect / questions.length) * 100) : 0;
-    const duration = Math.round((Date.now() - startedAt.current) / 1000);
-
-    let sessionId: string | null = null;
-    let serverScore = score;
-    let diagnosticReadiness: number | null = null;
-
-    // OFFLINE QUEUE — if user is signed in but quiz ran offline, persist
-    // the session locally so we can sync it the next time we're online.
-    // This guarantees offline practice never loses progress, XP, or
-    // mistake-bank entries.
-    if (user && offlineMode) {
-      try {
-        const localId = `${user.id}-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-        await queuePendingSession({
-          localId,
-          userId: user.id,
-          examSlug: slug,
-          itemCount: questions.length,
-          durationSeconds: duration,
-          mode: 'practice',
-          answers: finalAnswers.map((a) => ({
-            questionId: a.questionId,
-            selectedChoiceId: a.selectedChoiceId,
-            isCorrect: a.isCorrect,
-            timeSpentSeconds: a.timeSpentSeconds,
-          })),
-          completedAt: new Date().toISOString(),
-        });
-      } catch (error) {
-        captureAppException(error, { area: 'quiz', action: 'queue_offline_session' }, { mode: 'practice', itemCount: questions.length });
-        /* queue write failed — non-fatal; the user still gets their score */
-      }
-    }
-
-    if (user && !offlineMode) {
-      try {
-        addAppBreadcrumb('quiz', 'server quiz save started', { itemCount: questions.length });
-        const exam = await fetchExamBySlug(slug);
-        if (exam) {
-          sessionId = await createQuizSession(
-            user.id,
-            exam.id,
-            questions.length,
-            isDiagnostic
-              ? 'diagnostic'
-              : isMock
-                ? 'mock'
-                : isBoard
-                  ? 'board'
-                  : isTimed
-                  ? 'timed'
-                  : isMistakeReview
-                    ? 'mistake_review'
-                    : isBarkada
-                      ? 'barkada'
-                      : 'practice',
-            mockExamId
-          );
-          if (sessionId) {
-            await saveQuizAnswers(sessionId, finalAnswers);
-            if (isDiagnostic) {
-              const diag = await completeDiagnostic(sessionId, duration);
-              if (diag) {
-                serverScore = Math.round(diag.score);
-                diagnosticReadiness = diag.readiness;
-              }
-            } else {
-              const graded = await completePracticeSession(sessionId, duration);
-              if (graded != null) serverScore = Math.round(graded);
-              // Award XP for this session (fire-and-forget, non-blocking)
-              awardSessionXp(sessionId).catch(() => {});
-              // Strict exams defer grading, so apply topic-mastery + mistake-bank
-              // outcomes server-side once here (practice mode does this per-answer).
-              if (isStrictExam) {
-                recordSessionOutcomes(sessionId).catch(() => {});
-              }
-              if (!isDiagnostic) {
-                const newBadges = await awardUserBadges();
-                if (newBadges.length > 0) {
-                  Alert.alert(
-                    'Achievement unlocked!',
-                    newBadges.map((b) => `${b.emoji} ${b.title}`).join('\n')
-                  );
-                }
-              }
-            }
-          }
-        }
-      } catch (error) {
-        captureAppException(error, { area: 'quiz', action: 'save_server_session' }, {
-          mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
-          itemCount: questions.length,
-        });
-        /* session save failed */
-      }
-    }
-
-    captureAppMessage('quiz submitted', { area: 'quiz', action: 'submit' }, {
-      score: serverScore,
-      itemCount: questions.length,
-      offline: offlineMode,
-      mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
-    });
-
-    const totalCorrectFinal = Math.round((serverScore / 100) * questions.length);
-
-    if (!user && !isDiagnostic) {
-      try {
-        await saveGuestQuizSession({
-          examSlug: slug,
-          mode: isMock ? 'mock' : isBoard ? 'board' : isMistakeReview ? 'mistake_review' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isDiagnostic ? 'diagnostic' : offlineMode ? 'offline' : 'practice',
-          itemCount: questions.length,
-          scorePercent: serverScore,
-          correct: totalCorrectFinal,
-          durationSeconds: duration,
-        });
-      } catch {
-        /* local save failed */
-      }
-    }
-
-    router.replace({
-      pathname: '/practice/result',
-      params: {
-        score: String(serverScore),
-        total: String(questions.length),
-        correct: String(totalCorrectFinal),
-        duration: String(duration),
-        sessionId: sessionId ?? '',
-        examSlug: slug,
-        mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : isWeakArea ? 'weak_area' : isBarkada ? 'barkada' : isBookmarkReview ? 'bookmark_review' : offlineMode ? 'offline' : 'practice',
-        diagnosticReadiness: diagnosticReadiness != null ? String(diagnosticReadiness) : '',
-        pasapathTaskId: pasapathTaskId ?? '',
-        barkadaChallengeId: barkadaChallengeId ?? '',
-        flaggedQuestionIds: isStrictExam
-          ? [...flaggedIndices]
-              .map((i) => questions[i]?.id)
-              .filter(Boolean)
-              .join(',')
-          : '',
-      },
-    });
-  }, [answers, answersByIndex, current, selected, revealed, revealResult, questions, flaggedIndices, user, slug, isMock, isBoard, isStrictExam, isMistakeReview, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, mockExamId, pasapathTaskId, barkadaChallengeId, offlineMode, resumeKey, router]);
+  const finishQuiz = useQuizSubmission({
+    modeFlags,
+    questions,
+    answersByIndex,
+    flaggedIndices,
+    answers,
+    current,
+    selected,
+    revealed,
+    revealResult,
+    user,
+    offlineMode,
+    mockExamId,
+    pasapathTaskId,
+    barkadaChallengeId,
+    router,
+    startedAt,
+    questionStarted,
+  });
 
   useEffect(() => {
     if ((isStrictExam || isTimed) && timeLeft === 0 && questions.length > 0) {
@@ -847,6 +390,12 @@ function PracticeQuizScreenContent() {
       ? revealResult.explanationFil
       : revealResult.explanationEn
     : null;
+
+  const formatTime = (sec: number) => {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  };
 
   return (
     <View style={styles.root}>
