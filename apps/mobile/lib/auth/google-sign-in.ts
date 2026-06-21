@@ -133,7 +133,10 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
   } catch {
     return {
       idToken: null,
-      error: 'Unable to get token from Google. Check the iOS OAuth client (bundle: ph.reviewnatin.app).',
+      error:
+        Platform.OS === 'android'
+          ? 'Unable to get token from Google. Check the Android OAuth client in Google Cloud Console (package: ph.reviewnatin.app) and that its SHA-1 fingerprint matches this build.'
+          : 'Unable to get token from Google. Check the iOS OAuth client (bundle: ph.reviewnatin.app).',
     };
   }
 }

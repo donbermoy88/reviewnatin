@@ -62,8 +62,10 @@ if (existsSync(DEBUG_KEYSTORE)) {
 const mobileEnv = join(ROOT, 'apps/mobile/.env');
 if (existsSync(mobileEnv)) {
   const env = readFileSync(mobileEnv, 'utf8');
-  const hasAndroid = env.includes('EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID=');
-  console.log(hasAndroid ? '✓ EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID in apps/mobile/.env' : '○ Add EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID to apps/mobile/.env');
+  // Match a non-empty value, not just the bare "KEY=" — an empty assignment
+  // left over from .env.example still makes Google Sign-In fail on Android.
+  const hasAndroid = /^EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID=\S+/m.test(env);
+  console.log(hasAndroid ? '✓ EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID in apps/mobile/.env' : '○ Add EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID to apps/mobile/.env (must be non-empty)');
 } else {
   console.log('○ Create apps/mobile/.env with Google client IDs');
 }

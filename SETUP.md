@@ -84,6 +84,7 @@ After any change: force-close Expo Go, reopen, scan a fresh QR code.
 - [x] Quiz scores saved when logged in
 - [x] Study tab — subject list from Supabase
 - [x] Progress tab — recent sessions
-- [ ] Google / Apple sign-in
+- [x] Apple sign-in (iOS)
+- [x] Google sign-in (code complete — needs OAuth client IDs: `npm run supabase:google`, `npm run supabase:android`)
 - [ ] Admin CSV import UI
 - [ ] PasaPath engine + readiness score

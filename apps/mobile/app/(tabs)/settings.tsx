@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import { AppSheet } from '../../components/app-sheet';
-import { ActivityIndicator, Alert, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Linking, Platform, Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { ManagePlusCard } from '../../components/manage-plus-card';
@@ -13,6 +13,8 @@ import { createSettingsStyles } from '../../lib/themed-styles';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
 import { DEFAULT_EXAM_SLUG, DISCLAIMERS, LEGAL, SITE_URL } from '@reviewnatin/shared';
 import { deleteUserAccount } from '../../lib/auth/delete-account';
+import { getGoogleClientIds, isGoogleSignInConfigured } from '../../lib/auth/google-config';
+import { getOAuthRedirectUrl } from '../../lib/auth/oauth';
 import { clearOnboarding } from '../../lib/onboarding-store';
 import { signOutAndRedirect } from '../../lib/auth/sign-out';
 import { isSupabaseConfigured } from '../../lib/supabase';
@@ -223,6 +225,23 @@ function SettingsScreenContent() {
     await clearOnboarding();
     await refreshOnboarding();
     router.replace('/onboarding');
+  };
+
+  const showGoogleDiagnostics = () => {
+    const ids = getGoogleClientIds();
+    const mask = (id?: string) => (id ? `…${id.slice(-16)}` : 'not set');
+    Alert.alert(
+      'Google Sign-In diagnostics',
+      [
+        `Platform: ${Platform.OS}`,
+        `Configured for this platform: ${isGoogleSignInConfigured() ? 'yes' : 'NO'}`,
+        `Web client ID: ${mask(ids.web)}`,
+        `iOS client ID: ${mask(ids.ios)}`,
+        `Android client ID: ${mask(ids.android)}`,
+        `Redirect URI: ${getOAuthRedirectUrl() ?? 'n/a'}`,
+        `Android package: ph.reviewnatin.app`,
+      ].join('\n')
+    );
   };
 
   const handleSignOut = () => {
@@ -645,15 +664,25 @@ function SettingsScreenContent() {
               </>
             )}
             {__DEV__ && (
-              <SettingsRow
-                styles={styles}
-                colors={colors}
-                icon={<Ionicons name="refresh-outline" size={18} color={colors.primary} />}
-                label="Reset onboarding"
-                sub="Developer"
-                onPress={resetOnboarding}
-                last={!user}
-              />
+              <>
+                <SettingsRow
+                  styles={styles}
+                  colors={colors}
+                  icon={<Ionicons name="refresh-outline" size={18} color={colors.primary} />}
+                  label="Reset onboarding"
+                  sub="Developer"
+                  onPress={resetOnboarding}
+                />
+                <SettingsRow
+                  styles={styles}
+                  colors={colors}
+                  icon={<Ionicons name="logo-google" size={18} color={colors.primary} />}
+                  label="Google Sign-In diagnostics"
+                  sub="Developer"
+                  onPress={showGoogleDiagnostics}
+                  last={!user}
+                />
+              </>
             )}
           </SettingsGroup>
 
