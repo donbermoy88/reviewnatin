@@ -66,7 +66,7 @@ function ask(question) {
   });
 }
 
-async function configureSupabase(token, webClientId, webClientSecret, iosClientId) {
+async function configureSupabase(token, webClientId, webClientSecret, iosClientId, androidClientId) {
   const API = 'https://api.supabase.com/v1';
   const before = await fetch(`${API}/projects/${REF}/config/auth`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -78,8 +78,10 @@ async function configureSupabase(token, webClientId, webClientSecret, iosClientI
   const patch = {
     uri_allow_list,
     external_google_enabled: true,
-    external_google_client_id:
-      iosClientId && iosClientId !== webClientId ? `${webClientId},${iosClientId}` : webClientId,
+    external_google_client_id: [webClientId, iosClientId, androidClientId]
+      .filter(Boolean)
+      .filter((id, index, ids) => ids.indexOf(id) === index)
+      .join(','),
     external_google_secret: webClientSecret,
     external_google_skip_nonce_check: true,
   };
@@ -109,11 +111,13 @@ async function main() {
   for (const u of REDIRECTS) console.log(`   • ${u}`);
   console.log('3. Create iOS client → bundle ID: ph.reviewnatin.app (dev/App Store build — NOT Expo Go)');
   console.log('   Old host.exp.Exponent client will cause Google Error 400 on iOS.');
-  console.log('4. Copy the Web Client ID + Client Secret\n');
+  console.log('4. Create Android client → package: ph.reviewnatin.app + SHA-1 from npm run supabase:android');
+  console.log('5. Copy the Web Client ID + Client Secret\n');
 
   const webClientId = await ask('Paste Web Client ID (.apps.googleusercontent.com): ');
   const webClientSecret = await ask('Paste Web Client Secret (GOCSPX-...): ');
   const iosClientId = await ask('Paste iOS Client ID (Enter to reuse Web Client ID): ');
+  const androidClientId = await ask('Paste Android Client ID (.apps.googleusercontent.com): ');
 
   if (!webClientId.includes('.apps.googleusercontent.com') || !webClientSecret.startsWith('GOCSPX-')) {
     console.error('\nInvalid Client ID or Secret format. Try again.');
@@ -128,23 +132,25 @@ async function main() {
   }
 
   console.log('\nConfiguring Supabase…');
-  await configureSupabase(token, webClientId, webClientSecret, iosClientId || webClientId);
+  await configureSupabase(token, webClientId, webClientSecret, iosClientId || webClientId, androidClientId);
 
   upsertEnvLines(ENV_FILE, {
     GOOGLE_OAUTH_CLIENT_ID: webClientId,
     GOOGLE_OAUTH_CLIENT_SECRET: webClientSecret,
     GOOGLE_OAUTH_IOS_CLIENT_ID: iosClientId || webClientId,
+    ...(androidClientId ? { GOOGLE_OAUTH_ANDROID_CLIENT_ID: androidClientId } : {}),
   });
   upsertEnvLines(MOBILE_ENV, {
     EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID: webClientId,
     EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID: iosClientId || webClientId,
+    ...(androidClientId ? { EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID: androidClientId } : {}),
   });
 
   console.log('\n✅ Done!');
   console.log('   • Google enabled on Supabase');
   console.log('   • apps/mobile/.env updated');
   console.log('   • Build iOS dev client: cd apps/mobile && npx expo run:ios');
-  console.log('   • Then: npm run mobile:ios:dev');
+  console.log('   • Build Android dev client: cd apps/mobile && npm run android');
 }
 
 main().catch((e) => {

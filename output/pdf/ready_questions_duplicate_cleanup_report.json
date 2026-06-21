@@ -1,0 +1,149 @@
+{
+  "deleted": 810,
+  "duplicate_groups": 796,
+  "sample": [
+    {
+      "keep": "53fd5de9-f313-4cbb-85ab-540070598029",
+      "delete": [
+        "20f815c6-ffd7-4b9e-a931-3fc4023a04df"
+      ],
+      "stem": "________ ba nagkaroon ng isang bulkan?"
+    },
+    {
+      "keep": "ea4e10de-966e-4fca-babd-60a6301a36a0",
+      "delete": [
+        "a3e4fc08-7dab-4cdb-af92-a26eb4f3902d"
+      ],
+      "stem": "4 9 5 11 6 13 7 15"
+    },
+    {
+      "keep": "3e7afc09-e33b-48f1-b6dc-85bea80b907f",
+      "delete": [
+        "e90ba7a7-df24-4c21-9207-6df04dfce4e7"
+      ],
+      "stem": "6 12 36 72 216"
+    },
+    {
+      "keep": "8a7201a8-6df7-4385-b554-7188a86b7426",
+      "delete": [
+        "98dd7b89-5ed4-46b4-a336-9c06e5c71db5"
+      ],
+      "stem": "A C C F F F"
+    },
+    {
+      "keep": "2ecd41a7-0dd4-4c66-ac24-19edc740120b",
+      "delete": [
+        "dfb5f5bd-43a1-4f26-b7e0-9eb2bb29bb27"
+      ],
+      "stem": "1 2 6 12 36"
+    },
+    {
+      "keep": "4dd00d76-644a-4db5-9ad8-b5a2a585389c",
+      "delete": [
+        "8f42fd6a-a303-4c2d-8270-6c7ab447aa18"
+      ],
+      "stem": "H H L L P P T T"
+    },
+    {
+      "keep": "6d29b958-6b62-4889-964c-5f87ec4c2506",
+      "delete": [
+        "e0ee40a9-ca68-437c-9a95-98c663c85826"
+      ],
+      "stem": "E F H G I J"
+    },
+    {
+      "keep": "411003dc-a028-437a-8c05-9aee2f82f0cc",
+      "delete": [
+        "b7e5efc1-a714-4140-88c9-c09dc75bee10"
+      ],
+      "stem": "6 12 7 11 8 10"
+    },
+    {
+      "keep": "0f7e95c8-b0dc-48cb-9bfc-c32ab8d4fd2b",
+      "delete": [
+        "d4bf41c9-0708-4c2d-92a7-2fe90ed8b96e"
+      ],
+      "stem": "A B C D E F"
+    },
+    {
+      "keep": "a9161a66-9116-4a4b-a19a-d902607cb152",
+      "delete": [
+        "eea0693d-74b4-4810-88f1-977d613f12d3"
+      ],
+      "stem": "N O P Q R S"
+    },
+    {
+      "keep": "7458fa66-19de-4464-8b63-8f545c1b2cee",
+      "delete": [
+        "527900db-f989-446f-be89-626a9ad5d020"
+      ],
+      "stem": "3 8 48 55 440"
+    },
+    {
+      "keep": "5197b87f-cc1f-4d2e-a383-cd263987bd85",
+      "delete": [
+        "c965c1ea-6bdd-4df8-9ebf-b81ee3d0f973"
+      ],
+      "stem": "16 12 17 11 18"
+    },
+    {
+      "keep": "cfb8682e-5a5e-4fc9-9a3a-30c8ed02ab3a",
+      "delete": [
+        "f892b1f9-b482-4107-8062-42c9d1c0f6e8"
+      ],
+      "stem": "29 58 29 145 29"
+    },
+    {
+      "keep": "cda27b63-ed41-430f-80c0-ad37b15cde09",
+      "delete": [
+        "aadee9f5-9888-4dcf-9707-74e9bd4b096e"
+      ],
+      "stem": "MZ KX IV GT"
+    },
+    {
+      "keep": "96db0723-1285-42c8-a56a-d4562ccd44e3",
+      "delete": [
+        "12921a07-fd44-4dbe-aab9-cd6e88684e28"
+      ],
+      "stem": "LO KP JQ IR HS"
+    },
+    {
+      "keep": "fd06674c-d35c-42ff-b7f7-d37397f50fa3",
+      "delete": [
+        "07785814-a017-457c-9fa5-c543e9fdefee"
+      ],
+      "stem": "AZ BY CX DW EV"
+    },
+    {
+      "keep": "22965e23-37e9-48c5-8aeb-98a7b400ecc0",
+      "delete": [
+        "381f45b7-b1c5-4f82-a5ba-5e7187d3f6ae",
+        "e67b1410-c5f7-48f5-aa35-573ae5ce8e57"
+      ],
+      "stem": "book : leaves"
+    },
+    {
+      "keep": "e94d77ba-84c4-4d20-80cb-b6e23f88a422",
+      "delete": [
+        "05a4fbba-7130-4eac-bd3c-3f9570904b75",
+        "00aec860-0681-4e10-81f1-6fb3d4e2b418"
+      ],
+      "stem": "adjacent : near"
+    },
+    {
+      "keep": "b5365af6-4418-4928-b733-95de87b218fd",
+      "delete": [
+        "bf526140-8867-43ee-88c6-3d1f62251bb5",
+        "47020990-1da7-424f-8df4-417f9f3cbc70"
+      ],
+      "stem": "firmament : sky"
+    },
+    {
+      "keep": "0ee2c47e-e9b3-4a60-ae8b-5b6ec0fceba7",
+      "delete": [
+        "01c31339-c860-4693-808a-19a238fb3d54"
+      ],
+      "stem": "396 384 370 354 336"
+    }
+  ]
+}

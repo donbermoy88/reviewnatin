@@ -20,6 +20,13 @@ module.exports = () => {
   const iosClientId = process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID ?? '';
   const googleScheme = googleIosUrlScheme(iosClientId);
   const urlSchemes = ['reviewnatin', googleScheme].filter(Boolean);
+  const publicAuthExtra = {
+    supabaseUrl: process.env.EXPO_PUBLIC_SUPABASE_URL ?? '',
+    supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '',
+    googleWebClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID ?? '',
+    googleIosClientId: iosClientId,
+    googleAndroidClientId: process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID ?? '',
+  };
   const easProjectId =
     process.env.EAS_PROJECT_ID ?? base.extra?.eas?.projectId ?? undefined;
 
@@ -123,6 +130,7 @@ module.exports = () => {
       },
       extra: {
         ...(base.extra ?? {}),
+        ...publicAuthExtra,
         eas: {
           ...(base.extra?.eas ?? {}),
           ...(easProjectId ? { projectId: easProjectId } : {}),

@@ -44,20 +44,25 @@ export function getGoogleOAuthRedirectUri(clientId: string): string {
   });
 }
 
-function resolveGoogleClientId(): string {
+/**
+ * Android OAuth clients are validated by Google via package name + SHA-1
+ * cert fingerprint, not a redirect URI allow-list. The Web client ID does
+ * not carry that validation, so falling back to it on Android produces a
+ * Google "Error 400: invalid_request" in the browser instead of a token.
+ * There is no safe fallback — require the Android client explicitly.
+ */
+function resolveGoogleClientId(): string | null {
   const ids = getGoogleClientIds();
-  const web = ids.web!;
 
   if (Platform.OS === 'ios') {
-    return ids.ios ?? web;
+    return ids.ios ?? ids.web ?? null;
   }
 
   if (Platform.OS === 'android') {
-    if (ids.android) return ids.android;
-    return web;
+    return ids.android ?? null;
   }
 
-  return web;
+  return ids.web ?? null;
 }
 
 /**
@@ -69,7 +74,9 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
     return {
       idToken: null,
       error:
-        'Google Sign-In is not set up. In the project root, run: npm run supabase:google — then restart Expo.',
+        Platform.OS === 'android'
+          ? 'Google Sign-In is not set up for Android. Run: node scripts/configure-android-oauth.mjs for the SHA-1 + checklist, register an Android OAuth client in Google Cloud Console, then set EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID and restart Expo.'
+          : 'Google Sign-In is not set up. In the project root, run: npm run supabase:google — then restart Expo.',
     };
   }
 
@@ -81,7 +88,8 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
     };
   }
 
-  const clientId = resolveGoogleClientId();
+  // isGoogleSignInConfigured() above already guarantees this is non-null for the current platform.
+  const clientId = resolveGoogleClientId()!;
   const redirectUri = getGoogleOAuthRedirectUri(clientId);
 
   const request = new AuthRequest({

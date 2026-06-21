@@ -8,12 +8,13 @@
  * 3. Create OAuth client IDs:
  *    - Web application (for Supabase + token exchange)
  *    - iOS (bundle: ph.reviewnatin.app for dev/production builds — NOT Expo Go)
- *    - Android (optional for Expo Go)
+ *    - Android (package: ph.reviewnatin.app, SHA-1 from npm run supabase:android)
  *
  * Add to .env.supabase:
  *   GOOGLE_OAUTH_CLIENT_ID=....apps.googleusercontent.com
  *   GOOGLE_OAUTH_CLIENT_SECRET=GOCSPX-...
  *   GOOGLE_OAUTH_IOS_CLIENT_ID=....apps.googleusercontent.com   (optional)
+ *   GOOGLE_OAUTH_ANDROID_CLIENT_ID=....apps.googleusercontent.com   (required for Android)
  *
  * Authorized redirect URIs (Web client):
  *   reviewnatin://auth/callback
@@ -83,6 +84,7 @@ const REF = env.SUPABASE_PROJECT_ID || 'yohewfdafdmwntsbzgxx';
 const WEB_CLIENT_ID = env.GOOGLE_OAUTH_CLIENT_ID;
 const WEB_CLIENT_SECRET = env.GOOGLE_OAUTH_CLIENT_SECRET;
 const IOS_CLIENT_ID = env.GOOGLE_OAUTH_IOS_CLIENT_ID || WEB_CLIENT_ID;
+const ANDROID_CLIENT_ID = env.GOOGLE_OAUTH_ANDROID_CLIENT_ID;
 
 if (!TOKEN) {
   console.error('Missing SUPABASE_ACCESS_TOKEN in .env.supabase');
@@ -135,11 +137,16 @@ async function main() {
 
   if (WEB_CLIENT_ID && WEB_CLIENT_SECRET) {
     patch.external_google_enabled = true;
-    // Comma-separated = allowed ID-token audiences (iOS + Web). Do NOT use signInWithOAuth on mobile.
-    patch.external_google_client_id =
-      IOS_CLIENT_ID && IOS_CLIENT_ID !== WEB_CLIENT_ID
-        ? `${WEB_CLIENT_ID},${IOS_CLIENT_ID}`
-        : WEB_CLIENT_ID;
+    // Comma-separated = allowed ID-token audiences (Web first, then native app client IDs).
+    // Do NOT use signInWithOAuth on mobile.
+    patch.external_google_client_id = [
+      WEB_CLIENT_ID,
+      IOS_CLIENT_ID,
+      ANDROID_CLIENT_ID,
+    ]
+      .filter(Boolean)
+      .filter((id, index, ids) => ids.indexOf(id) === index)
+      .join(',');
     patch.external_google_secret = WEB_CLIENT_SECRET;
     patch.external_google_skip_nonce_check = true;
   }
@@ -158,16 +165,22 @@ async function main() {
     upsertEnvLines(MOBILE_ENV, {
       EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID: WEB_CLIENT_ID,
       EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID: IOS_CLIENT_ID,
+      ...(ANDROID_CLIENT_ID
+        ? { EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID: ANDROID_CLIENT_ID }
+        : {}),
     });
     console.log(`  Mobile .env:      EXPO_PUBLIC_GOOGLE_* written`);
     console.log('\nGoogle Sign-In ready.');
     console.log('  iOS: create OAuth client with bundle ph.reviewnatin.app in Google Cloud, then:');
     console.log('       npm run supabase:google && cd apps/mobile && npx expo prebuild --platform ios --clean && npm run ios:run');
+    console.log('  Android: create OAuth client with package ph.reviewnatin.app + SHA-1, then:');
+    console.log('       npm run supabase:android && npm run supabase:google && cd apps/mobile && npm run android');
   } else {
     console.log('\nNext steps — add to .env.supabase:');
     console.log('  GOOGLE_OAUTH_CLIENT_ID=your-web-client-id.apps.googleusercontent.com');
     console.log('  GOOGLE_OAUTH_CLIENT_SECRET=GOCSPX-...');
     console.log('  GOOGLE_OAUTH_IOS_CLIENT_ID=your-ios-client-id.apps.googleusercontent.com  # optional');
+    console.log('  GOOGLE_OAUTH_ANDROID_CLIENT_ID=your-android-client-id.apps.googleusercontent.com');
     console.log('\nGoogle Cloud → Credentials → Web client → Authorized redirect URIs:');
     for (const uri of [...MOBILE_REDIRECTS, `https://${REF}.supabase.co/auth/v1/callback`]) {
       console.log(`  • ${uri}`);

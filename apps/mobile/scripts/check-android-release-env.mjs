@@ -81,6 +81,10 @@ requirePattern(
   /^ca-app-pub-\d+~\d+$/,
   'expected AdMob Android app ID format ca-app-pub-...~...'
 );
+requirePresent(
+  'EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID',
+  'Google Sign-In has no safe fallback on Android (Web client ID redirect is rejected by Google) — register an Android OAuth client and set this'
+);
 requirePresent('GOOGLE_PLAY_SERVICE_ACCOUNT_JSON', 'iap-verify needs Play Developer API credentials');
 requirePresent('ANDROID_PACKAGE', `iap-verify should verify package ${ANDROID_PACKAGE}`);
 if (value('ANDROID_PACKAGE') && value('ANDROID_PACKAGE') !== ANDROID_PACKAGE) {
@@ -91,7 +95,6 @@ warnMissing('SENTRY_ORG', 'recommended for Sentry source map upload and release 
 warnMissing('SENTRY_PROJECT', 'recommended for Sentry source map upload and release association');
 warnMissing('EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID', 'ads will fall back to the Plus upsell instead of real banners');
 warnMissing('EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID', 'session interstitial ads will be disabled');
-warnMissing('EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID', 'Google Sign-In may fail on Android release builds');
 
 const appJson = JSON.parse(readFileSync(resolve(ROOT, 'app.json'), 'utf8')).expo;
 if (appJson.android?.package !== ANDROID_PACKAGE) {

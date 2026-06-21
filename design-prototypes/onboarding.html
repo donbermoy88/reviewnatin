@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ReviewNatin — Onboarding Redesign Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0B5FFF;
+    --primary-dark: #08245C;
+    --accent: #FFC928;
+    --accent-dark: #F5A623;
+    --accent-light: #FFF4DC;
+    --bg: #F4F7FC;
+    --surface: #FFFFFF;
+    --text: #0E1B3D;
+    --text-muted: #5B6B8C;
+    --text-light: #9AA7BF;
+    --border: #E7ECF5;
+    --success: #22C55E;
+    --success-bg: #E4F8EC;
+    --primary-muted: #E8F0FF;
+    --error: #DC2626;
+    --error-bg: #FDE8E8;
+    --font: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    background:
+      radial-gradient(circle at 20% 10%, rgba(11,95,255,0.18), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(255,201,40,0.10), transparent 40%),
+      #0a1330;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 48px 20px;
+    color: #fff;
+  }
+
+  .lab-title {
+    text-align: center;
+  }
+  .lab-title h1 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.92);
+  }
+  .lab-title p {
+    margin-top: 4px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.3px;
+  }
+
+  /* ---------- Phone frame ---------- */
+  .phone {
+    position: relative;
+    width: 390px;
+    height: 844px;
+    background: #000;
+    border-radius: 54px;
+    padding: 14px;
+    box-shadow:
+      0 50px 100px -20px rgba(0,0,0,0.7),
+      0 0 0 1px rgba(255,255,255,0.06) inset,
+      0 0 60px rgba(11,95,255,0.15);
+  }
+  .phone__notch {
+    position: absolute;
+    top: 14px; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 28px;
+    background: #000;
+    border-radius: 0 0 18px 18px;
+    z-index: 50;
+  }
+  .phone__screen {
+    position: relative;
+    width: 100%; height: 100%;
+    background: var(--bg);
+    border-radius: 40px;
+    overflow: hidden;
+  }
+  .phone__home-indicator {
+    position: absolute;
+    bottom: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 134px; height: 5px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 3px;
+    z-index: 50;
+  }
+  .statusbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px 0 32px;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 40;
+    pointer-events: none;
+  }
+  .statusbar.on-light { color: var(--text); }
+  .statusbar.on-dark { color: #fff; }
+
+  /* ---------- Step container ---------- */
+  .step {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(24px);
+    pointer-events: none;
+    transition: opacity 0.38s cubic-bezier(.2,.7,.2,1), transform 0.38s cubic-bezier(.2,.7,.2,1);
+  }
+  .step.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  .step.leaving {
+    transform: translateX(-24px);
+  }
+
+  .step__scroll {
+    flex: 1;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .step__scroll::-webkit-scrollbar { display: none; }
+
+  .pad { padding-left: 24px; padding-right: 24px; }
+
+  /* ---------- Gradient hero ---------- */
+  .hero-gradient {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.14);
+    filter: blur(2px);
+  }
+  .hero-glow--a { width: 280px; height: 280px; top: -90px; left: 50%; transform: translateX(-50%); }
+  .hero-glow--b { width: 160px; height: 160px; top: 60px; right: -60px; background: rgba(255,201,40,0.16); }
+  .hero-grain {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 14px 14px;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+  }
+
+  /* ---------- Stage tracker ---------- */
+  .stage-tracker {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .stage-node {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800;
+    flex-shrink: 0;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  }
+  .stage-bar {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    margin: 0 4px;
+    transition: background 0.4s;
+  }
+  /* light variant (white bg screens) */
+  .stage-tracker.light .stage-node { background: var(--border); color: var(--text-light); }
+  .stage-tracker.light .stage-node.active { background: var(--primary); color: #fff; box-shadow: 0 0 0 4px var(--primary-muted); }
+  .stage-tracker.light .stage-node.done { background: var(--accent); color: var(--primary-dark); }
+  .stage-tracker.light .stage-bar { background: var(--border); }
+  .stage-tracker.light .stage-bar.done { background: var(--accent); }
+  /* dark variant (gradient bg screens) */
+  .stage-tracker.dark .stage-node { background: rgba(255,255,255,0.22); color: rgba(255,255,255,0.6); }
+  .stage-tracker.dark .stage-node.active { background: rgba(255,255,255,0.92); color: var(--primary-dark); box-shadow: 0 0 0 4px rgba(255,255,255,0.18); }
+  .stage-tracker.dark .stage-node.done { background: var(--accent); color: var(--primary-dark); }
+  .stage-tracker.dark .stage-bar { background: rgba(255,255,255,0.22); }
+  .stage-tracker.dark .stage-bar.done { background: var(--accent); }
+
+  .step-header {
+    padding: 58px 24px 16px;
+  }
+  .step-header__top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .back-btn {
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+  .back-btn.on-dark { color: #fff; }
+  .step-header.on-light { background: var(--surface); border-bottom: 1px solid var(--border); }
+
+  .page-title {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.22;
+  }
+  .page-sub {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 5px;
+    line-height: 1.4;
+  }
+
+  /* ---------- Floating illustration ---------- */
+  .float-art {
+    position: relative;
+    width: 150px; height: 150px;
+    margin: 8px auto 0;
+  }
+  .float-art__glow {
+    position: absolute;
+    width: 130px; height: 130px;
+    left: 10px; top: 14px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    animation: float-pulse 3.2s ease-in-out infinite;
+  }
+  .float-art__card {
+    position: absolute;
+    width: 92px; height: 92px;
+    left: 29px; top: 22px;
+    border-radius: 26px;
+    background: linear-gradient(145deg, #2E7BFF, var(--primary-dark));
+    box-shadow: 0 18px 30px -8px rgba(3,15,45,0.55);
+    display: flex; align-items: center; justify-content: center;
+    animation: float-bob 3.6s ease-in-out infinite;
+  }
+  .float-art__card svg { width: 46px; height: 46px; }
+  .float-art__crown {
+    position: absolute;
+    top: 4px; left: 96px;
+    width: 38px; height: 30px;
+    background: var(--accent);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(8deg);
+    animation: float-bob 3.6s ease-in-out infinite;
+    animation-delay: 0.15s;
+  }
+  .float-art__crown svg { width: 16px; height: 16px; color: var(--primary-dark); }
+  .float-art__sparkle {
+    position: absolute;
+    color: var(--accent);
+    animation: sparkle-twinkle 2.4s ease-in-out infinite;
+  }
+  .float-art__sparkle.a { top: 0; left: 4px; width: 18px; height: 18px; animation-delay: 0.3s; }
+  .float-art__sparkle.b { top: 36px; right: 0; width: 13px; height: 13px; color: rgba(255,255,255,0.85); animation-delay: 1s; }
+  .float-art__sparkle.c { bottom: 10px; left: 0; width: 11px; height: 11px; animation-delay: 1.6s; }
+
+  @keyframes float-bob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-9px) rotate(-3deg); }
+  }
+  @keyframes float-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+  @keyframes sparkle-twinkle {
+    0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.15) rotate(15deg); }
+  }
+
+  /* ---------- Celebration burst (Ready screen) ---------- */
+  .burst { position: absolute; inset: 0; pointer-events: none; }
+  .burst span {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0;
+  }
+  .step.active .burst span { animation: burst-out 1.1s cubic-bezier(.2,.8,.3,1) forwards; }
+  .burst span:nth-child(1) { --tx: -70px; --ty: -90px; animation-delay: 0.05s; }
+  .burst span:nth-child(2) { --tx: 60px; --ty: -100px; animation-delay: 0.12s; background:#fff; }
+  .burst span:nth-child(3) { --tx: 95px; --ty: -30px; animation-delay: 0.02s; }
+  .burst span:nth-child(4) { --tx: -95px; --ty: -10px; animation-delay: 0.2s; background:#fff; }
+  .burst span:nth-child(5) { --tx: -30px; --ty: -120px; animation-delay: 0.16s; }
+  .burst span:nth-child(6) { --tx: 30px; --ty: -130px; animation-delay: 0.08s; background:#fff; }
+  @keyframes burst-out {
+    0% { opacity: 0; transform: translate(-50%,-50%) scale(0.3); }
+    25% { opacity: 1; }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.3); }
+  }
+
+  /* ---------- Welcome screen ---------- */
+  #step-0 .hero-gradient {
+    height: 470px;
+    border-radius: 0 0 56px 56px;
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: 78px;
+  }
+  .brand-mark { position: relative; z-index: 2; }
+  .brand-word {
+    margin-top: 18px;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    color: #fff;
+    position: relative; z-index: 2;
+  }
+  .brand-word span { color: var(--accent); }
+  .brand-tag {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    position: relative; z-index: 2;
+  }
+  .welcome-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 26px 24px 36px;
+    gap: 0;
+  }
+  .welcome-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.28;
+    color: var(--text);
+    text-align: center;
+  }
+  .welcome-sub {
+    margin-top: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .welcome-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .welcome-stats .stat { text-align: center; }
+  .welcome-stats .stat b { display: block; font-size: 17px; font-weight: 800; color: var(--primary); letter-spacing: -0.3px; }
+  .welcome-stats .stat span { font-size: 9.5px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.4px; }
+  .welcome-stats .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    height: 56px;
+    border-radius: 18px;
+    font-family: var(--font);
+    font-size: 15.5px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: linear-gradient(135deg, #2E7BFF, var(--primary));
+    color: #fff;
+    box-shadow: 0 14px 28px -8px rgba(11,95,255,0.5);
+  }
+  .btn-outline {
+    background: var(--surface);
+    color: var(--primary);
+    border: 1.5px solid var(--primary-muted);
+  }
+  .btn-ghost-link {
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 13.5px;
+    height: auto;
+    padding: 10px;
+  }
+  .btn-ghost-link b { color: var(--primary); font-weight: 700; }
+  .btn svg { width: 18px; height: 18px; }
+
+  .sticky-footer {
+    padding: 14px 24px calc(20px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(to top, var(--bg) 70%, rgba(244,247,252,0));
+  }
+
+  /* ---------- Section label ---------- */
+  .section-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    margin-top: 22px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* ---------- Exam cards ---------- */
+  .card-list { display: flex; flex-direction: column; gap: 10px; }
+  .exam-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 14px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+  .exam-card:active { transform: scale(0.98); }
+  .exam-card.selected {
+    border-color: var(--primary);
+    background: var(--primary-muted);
+    box-shadow: 0 8px 18px -10px rgba(11,95,255,0.35);
+  }
+  .exam-icon {
+    width: 50px; height: 50px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .exam-text { flex: 1; min-width: 0; }
+  .exam-name-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .exam-name { font-size: 14.5px; font-weight: 700; color: var(--text); letter-spacing: -0.1px; }
+  .exam-sub { font-size: 11.5px; font-weight: 500; color: var(--text-muted); margin-top: 2px; }
+  .tag-pill {
+    font-size: 9px; font-weight: 800; letter-spacing: 0.3px;
+    padding: 3px 7px; border-radius: 6px;
+    background: var(--accent-light); color: var(--accent-dark);
+  }
+  .radio {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .exam-card.selected .radio { background: var(--primary); border-color: var(--primary); }
+  .radio svg { width: 12px; height: 12px; color: #fff; opacity: 0; transition: opacity 0.15s; }
+  .exam-card.selected .radio svg { opacity: 1; }
+
+  /* ---------- Segmented control ---------- */
+  .segmented {
+    position: relative;
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px;
+    gap: 4px;
+  }
+  .segmented__thumb {
+    position: absolute;
+    top: 4px; left: 4px;
+    height: calc(100% - 8px);
+    width: calc(33.333% - 2.66px);
+    background: var(--primary);
+    border-radius: 999px;
+    transition: transform 0.32s cubic-bezier(.3,.9,.4,1.2);
+    box-shadow: 0 6px 14px -4px rgba(11,95,255,0.5);
+  }
+  .segmented__opt {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    text-align: center;
+    padding: 11px 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.25s;
+  }
+  .segmented__opt.selected { color: #fff; }
+  .level-hint {
+    margin-top: 10px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  /* ---------- Goal ring ---------- */
+  .goal-ring-wrap {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 16px;
+    margin-top: 10px;
+  }
+  .goal-ring { position: relative; width: 64px; height: 64px; flex-shrink: 0; }
+  .goal-ring svg { transform: rotate(-90deg); }
+  .goal-ring__track { stroke: var(--border); }
+  .goal-ring__fill {
+    stroke: var(--accent);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s cubic-bezier(.3,.8,.3,1), stroke 0.4s;
+  }
+  .goal-ring__icon {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    transition: transform 0.3s;
+  }
+  .goal-ring-info b { font-size: 15px; font-weight: 800; color: var(--text); display: block; }
+  .goal-ring-info span { font-size: 12px; font-weight: 500; color: var(--text-muted); }
+
+  /* ---------- Goal grid ---------- */
+  .goal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .goal-tile {
+    background: var(--surface);
+    border-radius: 18px;
+    padding: 14px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 0.25s, transform 0.15s, box-shadow 0.25s;
+  }
+  .goal-tile:active { transform: scale(0.97); }
+  .goal-tile .emoji { font-size: 21px; }
+  .goal-tile .lbl { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 7px; }
+  .goal-tile .sub { font-size: 10.5px; font-weight: 500; color: var(--text-muted); margin-top: 2px; }
+  .goal-tile.selected {
+    background: linear-gradient(135deg, #2E7BFF, var(--primary));
+    box-shadow: 0 10px 22px -8px rgba(11,95,255,0.5);
+  }
+  .goal-tile.selected .lbl { color: #fff; }
+  .goal-tile.selected .sub { color: rgba(255,255,255,0.78); }
+
+  /* ---------- Reminder + date ---------- */
+  .reminder-row {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 14px;
+    margin-top: 20px;
+  }
+  .reminder-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .reminder-icon svg { width: 19px; height: 19px; color: var(--accent-dark); }
+  .reminder-row .rtext { flex: 1; }
+  .reminder-row .rtext b { font-size: 13px; font-weight: 700; color: var(--text); display: block; }
+  .reminder-row .rtext span { font-size: 11px; font-weight: 500; color: var(--text-muted); }
+  .switch {
+    width: 42px; height: 25px;
+    background: var(--border);
+    border-radius: 999px;
+    padding: 2px;
+    cursor: pointer;
+    transition: background 0.25s;
+    flex-shrink: 0;
+  }
+  .switch.on { background: var(--primary); }
+  .switch__knob {
+    width: 21px; height: 21px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    transition: transform 0.25s cubic-bezier(.3,.9,.4,1.2);
+  }
+  .switch.on .switch__knob { transform: translateX(17px); }
+  .date-field {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface);
+    border: 1.5px solid var(--primary-muted);
+    border-radius: 16px;
+    padding: 13px 16px;
+    margin-top: 10px;
+    font-size: 13.5px; font-weight: 700; color: var(--primary);
+  }
+  .date-field svg { width: 17px; height: 17px; }
+
+  /* ---------- Benefit list (account screen) ---------- */
+  .benefit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 18px;
+    margin-top: 14px;
+  }
+  .benefit-row { display: flex; gap: 14px; align-items: flex-start; }
+  .benefit-row + .benefit-row { margin-top: 18px; }
+  .benefit-icon {
+    width: 40px; height: 40px; border-radius: 13px;
+    background: var(--primary-muted);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .benefit-icon svg { width: 19px; height: 19px; color: var(--primary); }
+  .benefit-row b { font-size: 14px; font-weight: 700; color: var(--text); display: block; }
+  .benefit-row p { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-top: 3px; line-height: 1.45; }
+  .anim-stagger > * { opacity: 0; transform: translateY(10px); }
+  .step.active .anim-stagger > *:nth-child(1) { animation: rise-in 0.5s 0.05s cubic-bezier(.2,.8,.3,1) forwards; }
+  .step.active .anim-stagger > *:nth-child(2) { animation: rise-in 0.5s 0.15s cubic-bezier(.2,.8,.3,1) forwards; }
+  .step.active .anim-stagger > *:nth-child(3) { animation: rise-in 0.5s 0.25s cubic-bezier(.2,.8,.3,1) forwards; }
+  @keyframes rise-in { to { opacity: 1; transform: translateY(0); } }
+
+  /* ---------- Ready screen ---------- */
+  #step-4 .hero-gradient {
+    border-radius: 0 0 36px 36px;
+    padding: 58px 24px 26px;
+  }
+  .ready-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    font-size: 10px; font-weight: 800; letter-spacing: 0.5px;
+    padding: 5px 11px; border-radius: 999px;
+    margin-top: 16px;
+  }
+  .ready-title {
+    font-size: 25px; font-weight: 800; letter-spacing: -0.5px;
+    color: var(--text); text-align: center; margin-top: 16px; line-height: 1.3;
+  }
+  .ready-sub {
+    font-size: 13px; font-weight: 500; color: var(--text-muted);
+    text-align: center; margin-top: 8px; line-height: 1.5; max-width: 280px;
+    margin-left: auto; margin-right: auto;
+  }
+  .checklist-card {
+    background: var(--surface);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px -16px rgba(8,36,92,0.25);
+    margin: -28px 24px 0;
+    padding: 6px 16px;
+    position: relative;
+    z-index: 5;
+  }
+  .check-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 0;
+  }
+  .check-row + .check-row { border-top: 1px solid var(--border); }
+  .check-icon-wrap {
+    width: 38px; height: 38px; border-radius: 12px;
+    background: var(--success-bg);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .check-icon-wrap svg { width: 18px; height: 18px; color: var(--success); }
+  .check-row .ctext { flex: 1; }
+  .check-row .ctext b { font-size: 13.5px; font-weight: 700; color: var(--text); display: block; }
+  .check-row .ctext span { font-size: 11.5px; font-weight: 500; color: var(--text-muted); margin-top: 1px; }
+  .check-done {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--success);
+    display: flex; align-items: center; justify-content: center;
+    transform: scale(0);
+    flex-shrink: 0;
+  }
+  .check-done svg { width: 12px; height: 12px; color: #fff; }
+  .step.active .check-done { animation: pop-in 0.4s cubic-bezier(.3,1.6,.5,1) forwards; }
+  .check-row:nth-child(1) .check-done { animation-delay: 0.5s; }
+  .check-row:nth-child(2) .check-done { animation-delay: 0.65s; }
+  .check-row:nth-child(3) .check-done { animation-delay: 0.8s; }
+  @keyframes pop-in { to { transform: scale(1); } }
+
+  .disclaimer-box {
+    display: flex; gap: 10px;
+    background: var(--accent-light);
+    border: 1px solid #FFEABB;
+    border-radius: 16px;
+    padding: 13px;
+    margin: 16px 24px 0;
+  }
+  .disclaimer-box svg { width: 16px; height: 16px; color: var(--accent-dark); flex-shrink: 0; margin-top: 1px; }
+  .disclaimer-box p { font-size: 10.5px; font-weight: 500; color: #8a6314; line-height: 1.5; }
+
+  .ready-ring-wrap { display: flex; justify-content: center; margin-top: 14px; }
+
+  /* ---------- Prototype nav chrome ---------- */
+  .lab-nav {
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .lab-dots { display: flex; gap: 8px; }
+  .lab-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .lab-dot.active { background: var(--accent); transform: scale(1.3); }
+  .lab-buttons { display: flex; gap: 10px; }
+  .lab-btn {
+    font-family: var(--font);
+    font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .lab-btn:hover { background: rgba(255,255,255,0.16); }
+  .lab-btn:disabled { opacity: 0.3; cursor: default; }
+  .lab-step-name { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.3px; }
+</style>
+</head>
+<body>
+
+  <div class="lab-title">
+    <h1>ReviewNatin — Onboarding Redesign Concept</h1>
+    <p>Click through the phone below. Cards, segments, and toggles are live.</p>
+  </div>
+
+  <div class="phone">
+    <div class="phone__notch"></div>
+    <div class="phone__screen" id="screen">
+
+      <!-- ================= STEP 0 — WELCOME ================= -->
+      <div class="step active" id="step-0">
+        <div class="statusbar on-dark"><span>9:41</span><span>●●●●</span></div>
+        <div class="step__scroll" style="overflow:visible;">
+          <div class="hero-gradient" style="height:470px;border-radius:0 0 56px 56px;display:flex;flex-direction:column;align-items:center;padding-top:78px;">
+            <div class="hero-grain"></div>
+            <div class="hero-glow hero-glow--a"></div>
+            <div class="hero-glow hero-glow--b"></div>
+
+            <div class="float-art brand-mark">
+              <div class="float-art__glow"></div>
+              <div class="float-art__card">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 18.5C5 18.5 9 14 12 11C15 8 19 5.5 19 5.5" stroke="white" stroke-width="2.4" stroke-linecap="round"/></svg>
+              </div>
+              <div class="float-art__crown">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5 5.6.6-4.2 3.8 1.2 5.6L12 14l-5 3 1.2-5.6L4 7.6l5.6-.6L12 2z"/></svg>
+              </div>
+              <svg class="float-art__sparkle a" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 7.5L21 11l-7.5 1.5L12 20l-1.5-7.5L3 11l7.5-1.5L12 2z"/></svg>
+              <svg class="float-art__sparkle b" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 7.5L21 11l-7.5 1.5L12 20l-1.5-7.5L3 11l7.5-1.5L12 2z"/></svg>
+              <svg class="float-art__sparkle c" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 7.5L21 11l-7.5 1.5L12 20l-1.5-7.5L3 11l7.5-1.5L12 2z"/></svg>
+            </div>
+
+            <div class="brand-word">Review<span>Natin</span></div>
+            <div class="brand-tag">Mag-review tayo. Pasa tayo.</div>
+          </div>
+
+          <div class="welcome-body">
+            <div class="welcome-title">Your study buddy for<br/>every Filipino board exam.</div>
+            <div class="welcome-sub">CSE Full, CSE Sub, PNLE, LET Elementary &amp; Secondary — one app, one streak, one goal.</div>
+            <div class="welcome-stats">
+              <div class="stat"><b>5</b><span>Board Exams</span></div>
+              <div class="dot"></div>
+              <div class="stat"><b>1.6K+</b><span>Practice Qs</span></div>
+              <div class="dot"></div>
+              <div class="stat"><b>Free</b><span>To Start</span></div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:20px;" onclick="goTo(1)">Get started — it's free</button>
+            <button class="btn btn-ghost-link" onclick="goTo(0)">Already have an account? <b>Log in</b></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= STEP 1 — EXAM PICKER ================= -->
+      <div class="step" id="step-1">
+        <div class="statusbar on-light"><span>9:41</span><span>●●●●</span></div>
+        <div class="step-header on-light">
+          <div class="step-header__top">
+            <div class="back-btn" onclick="goTo(0)">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#0E1B3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="stage-tracker light" style="flex:1;">
+              <div class="stage-node active">1</div><div class="stage-bar"></div>
+              <div class="stage-node">2</div><div class="stage-bar"></div>
+              <div class="stage-node">3</div><div class="stage-bar"></div>
+              <div class="stage-node">4</div><div class="stage-bar"></div>
+              <div class="stage-node">5</div>
+            </div>
+          </div>
+          <div class="page-title">Anong exam ang nire-review mo?</div>
+          <div class="page-sub">Pumili muna — pwede mong baguhin mamaya.</div>
+        </div>
+        <div class="step__scroll pad" style="padding-top:18px;padding-bottom:24px;">
+          <div class="section-label">Civil Service Exams</div>
+          <div class="card-list">
+            <div class="exam-card selected" data-exam="cse-pro" onclick="selectExam(this)">
+              <div class="exam-icon" style="background:#E5EAF5;color:#08245C;">CSE</div>
+              <div class="exam-text">
+                <div class="exam-name-row"><span class="exam-name">CSE Professional</span><span class="tag-pill">POPULAR</span></div>
+                <div class="exam-sub">Career Service Examination — Professional Level</div>
+              </div>
+              <div class="radio"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="exam-card" data-exam="cse-sub" onclick="selectExam(this)">
+              <div class="exam-icon" style="background:#E8F0FF;color:#0B5FFF;">CSE</div>
+              <div class="exam-text">
+                <div class="exam-name-row"><span class="exam-name">CSE Subprofessional</span></div>
+                <div class="exam-sub">Career Service Examination — Sub-Professional Level</div>
+              </div>
+              <div class="radio"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+          </div>
+
+          <div class="section-label">PRC Licensure Exams</div>
+          <div class="card-list">
+            <div class="exam-card" data-exam="pnle" onclick="selectExam(this)">
+              <div class="exam-icon" style="background:#E4F8EC;color:#22C55E;">PNLE</div>
+              <div class="exam-text">
+                <div class="exam-name-row"><span class="exam-name">PNLE (Nursing)</span></div>
+                <div class="exam-sub">Philippine Nurse Licensure Examination</div>
+              </div>
+              <div class="radio"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="exam-card" data-exam="let-elem" onclick="selectExam(this)">
+              <div class="exam-icon" style="background:#E8F0FF;color:#0B5FFF;">LET</div>
+              <div class="exam-text">
+                <div class="exam-name-row"><span class="exam-name">LET Elementary</span></div>
+                <div class="exam-sub">Licensure Examination for Teachers — Elementary</div>
+              </div>
+              <div class="radio"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="exam-card" data-exam="let-sec" onclick="selectExam(this)">
+              <div class="exam-icon" style="background:#F1E8FA;color:#7B2CBF;">LET</div>
+              <div class="exam-text">
+                <div class="exam-name-row"><span class="exam-name">LET Secondary</span></div>
+                <div class="exam-sub">Licensure Examination for Teachers — Secondary</div>
+              </div>
+              <div class="radio"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div class="sticky-footer"><button class="btn btn-primary" onclick="goTo(2)">Continue →</button></div>
+      </div>
+
+      <!-- ================= STEP 2 — GOALS & LEVEL ================= -->
+      <div class="step" id="step-2">
+        <div class="statusbar on-light"><span>9:41</span><span>●●●●</span></div>
+        <div class="step-header on-light">
+          <div class="step-header__top">
+            <div class="back-btn" onclick="goTo(1)">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#0E1B3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="stage-tracker light" style="flex:1;">
+              <div class="stage-node done"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;"><path d="M5 13l4 4L19 7" stroke="#08245C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="stage-bar done"></div>
+              <div class="stage-node active">2</div><div class="stage-bar"></div>
+              <div class="stage-node">3</div><div class="stage-bar"></div>
+              <div class="stage-node">4</div><div class="stage-bar"></div>
+              <div class="stage-node">5</div>
+            </div>
+          </div>
+          <div class="page-title">Itakda ang daily goal mo</div>
+          <div class="page-sub">Even a little each day adds up. Let's build that streak!</div>
+        </div>
+        <div class="step__scroll pad" style="padding-top:18px;padding-bottom:24px;">
+          <div class="section-label" style="margin-top:0;">Ano ang level mo ngayon?</div>
+          <div class="segmented" id="level-seg">
+            <div class="segmented__thumb" id="level-thumb"></div>
+            <div class="segmented__opt selected" data-level="beginner" data-hint="🌱 Just starting exam prep" onclick="selectLevel(this,0)">Beginner</div>
+            <div class="segmented__opt" data-level="average" data-hint="📖 Have some review done" onclick="selectLevel(this,1)">Average</div>
+            <div class="segmented__opt" data-level="advanced" data-hint="🎯 Retaker or have a solid base" onclick="selectLevel(this,2)">Advanced</div>
+          </div>
+          <div class="level-hint" id="level-hint">🌱 Just starting exam prep</div>
+
+          <div class="section-label">Daily study goal</div>
+          <div class="goal-ring-wrap">
+            <div class="goal-ring">
+              <svg width="64" height="64">
+                <circle class="goal-ring__track" cx="32" cy="32" r="27" stroke-width="7" fill="none"/>
+                <circle class="goal-ring__fill" id="goal-ring-fill" cx="32" cy="32" r="27" stroke-width="7" fill="none"
+                  stroke-dasharray="169.6" stroke-dashoffset="127.2"/>
+              </svg>
+              <div class="goal-ring__icon" id="goal-ring-icon">⚡</div>
+            </div>
+            <div class="goal-ring-info">
+              <b id="goal-ring-label">Regular</b>
+              <span id="goal-ring-sub">10 mins / day · 15 questions</span>
+            </div>
+          </div>
+          <div class="goal-grid">
+            <div class="goal-tile" data-goal="0.25" data-emoji="🌱" data-label="Casual" data-sub="5 mins / day · 5 questions" onclick="selectGoal(this)">
+              <div class="emoji">🌱</div><div class="lbl">Casual</div><div class="sub">5 mins / day · 5 questions</div>
+            </div>
+            <div class="goal-tile selected" data-goal="0.5" data-emoji="⚡" data-label="Regular" data-sub="10 mins / day · 15 questions" onclick="selectGoal(this)">
+              <div class="emoji">⚡</div><div class="lbl">Regular</div><div class="sub">10 mins / day · 15 questions</div>
+            </div>
+            <div class="goal-tile" data-goal="0.75" data-emoji="🔥" data-label="Serious" data-sub="20 mins / day · 30 questions" onclick="selectGoal(this)">
+              <div class="emoji">🔥</div><div class="lbl">Serious</div><div class="sub">20 mins / day · 30 questions</div>
+            </div>
+            <div class="goal-tile" data-goal="1" data-emoji="🚀" data-label="Intense" data-sub="40 mins / day · 60 questions" onclick="selectGoal(this)">
+              <div class="emoji">🚀</div><div class="lbl">Intense</div><div class="sub">40 mins / day · 60 questions</div>
+            </div>
+          </div>
+
+          <div class="reminder-row">
+            <div class="reminder-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="#F5A623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="rtext"><b>Daily reminder</b><span id="reminder-sub">Off by default — turn on if helpful</span></div>
+            <div class="switch" id="reminder-switch" onclick="toggleReminder()"><div class="switch__knob"></div></div>
+          </div>
+
+          <div class="section-label">Target exam date</div>
+          <div class="date-field">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="#0B5FFF" stroke-width="2"/><path d="M3 9h18M8 3v4M16 3v4" stroke="#0B5FFF" stroke-width="2" stroke-linecap="round"/></svg>
+            2026-08-01
+          </div>
+        </div>
+        <div class="sticky-footer"><button class="btn btn-primary" onclick="goTo(3)">I'm committed →</button></div>
+      </div>
+
+      <!-- ================= STEP 3 — ACCOUNT SYNC ================= -->
+      <div class="step" id="step-3">
+        <div class="statusbar on-light"><span>9:41</span><span>●●●●</span></div>
+        <div class="step-header on-light">
+          <div class="step-header__top">
+            <div class="back-btn" onclick="goTo(2)">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#0E1B3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="stage-tracker light" style="flex:1;">
+              <div class="stage-node done"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;"><path d="M5 13l4 4L19 7" stroke="#08245C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="stage-bar done"></div>
+              <div class="stage-node done"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;"><path d="M5 13l4 4L19 7" stroke="#08245C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="stage-bar done"></div>
+              <div class="stage-node active">3</div><div class="stage-bar"></div>
+              <div class="stage-node">4</div><div class="stage-bar"></div>
+              <div class="stage-node">5</div>
+            </div>
+          </div>
+          <div class="page-title">I-save ang progress mo</div>
+          <div class="page-sub">I-sync ang quiz scores, Mistake Bank, at PasaPath sa cloud.</div>
+        </div>
+        <div class="step__scroll pad" style="padding-top:14px;padding-bottom:24px;">
+          <div class="benefit-card anim-stagger">
+            <div class="benefit-row">
+              <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M7 18a4 4 0 01-1-7.9A5 5 0 0115 7a4.5 4.5 0 01.5 9H7z" stroke="#0B5FFF" stroke-width="1.8"/><path d="M12 11v6m0-6l2.5 2.3M12 11L9.5 13.3" stroke="#0B5FFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div><b>Cloud sync</b><p>Quiz scores, streaks, at goals — naka-save sa account mo.</p></div>
+            </div>
+            <div class="benefit-row">
+              <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4h12v17l-6-3.5L6 21V4z" stroke="#0B5FFF" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <div><b>Mistake Bank</b><p>I-review ang mga maling sagot anytime, kahit saang device.</p></div>
+            </div>
+            <div class="benefit-row">
+              <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z" stroke="#0B5FFF" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#0B5FFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div><b>Switch devices freely</b><p>Magpalit ng phone — ligtas ang progress mo, walang mawawala.</p></div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" style="margin-top:20px;" onclick="goTo(4)">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Mag-sign up / Mag-log in
+          </button>
+          <button class="btn btn-outline" style="margin-top:10px;" onclick="goTo(4)">Skip muna (guest)</button>
+        </div>
+      </div>
+
+      <!-- ================= STEP 4 — READY ================= -->
+      <div class="step" id="step-4">
+        <div class="statusbar on-dark"><span>9:41</span><span>●●●●</span></div>
+        <div class="step__scroll" style="padding-bottom:28px;">
+          <div class="hero-gradient">
+            <div class="hero-grain"></div>
+            <div class="hero-glow hero-glow--a" style="width:200px;height:200px;top:-70px;right:-50px;left:auto;transform:none;"></div>
+            <div class="burst">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="step-header__top" style="padding:0 0 14px;">
+              <div class="back-btn on-dark" onclick="goTo(3)">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="stage-tracker dark" style="flex:1;">
+                <div class="stage-node done"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;"><path d="M5 13l4 4L19 7" stroke="#08245C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="stage-bar done"></div>
+                <div class="stage-node done"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;"><path d="M5 13l4 4L19 7" stroke="#08245C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="stage-bar done"></div>
+                <div class="stage-node done"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;"><path d="M5 13l4 4L19 7" stroke="#08245C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="stage-bar done"></div>
+                <div class="stage-node done"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;"><path d="M5 13l4 4L19 7" stroke="#08245C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="stage-bar done"></div>
+                <div class="stage-node done"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;"><path d="M5 13l4 4L19 7" stroke="#08245C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              </div>
+            </div>
+
+            <div class="ready-ring-wrap">
+              <div class="goal-ring" style="width:84px;height:84px;">
+                <svg width="84" height="84">
+                  <circle class="goal-ring__track" cx="42" cy="42" r="35" stroke-width="8" fill="none" stroke="rgba(255,255,255,0.2)"/>
+                  <circle cx="42" cy="42" r="35" stroke-width="8" fill="none" stroke="#FFC928" stroke-linecap="round"
+                    stroke-dasharray="219.9" stroke-dashoffset="219.9" id="ready-ring" transform="rotate(-90 42 42)"/>
+                </svg>
+                <div class="goal-ring__icon" style="font-size:26px;">🏁</div>
+              </div>
+            </div>
+            <div style="text-align:center;"><span class="ready-badge">PASAPATH READY</span></div>
+            <div class="ready-title">Handa ka na para sa PasaPath</div>
+            <div class="ready-sub">Your daily study path starts now — weak topics, mistake review, and new lessons every day.</div>
+          </div>
+
+          <div class="checklist-card">
+            <div class="check-row">
+              <div class="check-icon-wrap"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z" stroke="#22C55E" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <div class="ctext"><b>Handa na ang practice quiz</b><span>Base sa level na pinili mo</span></div>
+              <div class="check-done"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="check-row">
+              <div class="check-icon-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="#22C55E" stroke-width="1.8"/><path d="M3 9h18M8 3v4M16 3v4" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <div class="ctext"><b>Naka-schedule na ang daily tasks</b><span>Base sa target exam date mo</span></div>
+              <div class="check-done"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="check-row">
+              <div class="check-icon-wrap"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4h12v17l-6-3.5L6 21V4z" stroke="#22C55E" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <div class="ctext"><b>Active na ang Mistake Bank</b><span>Awtomatikong tina-track ang maling sagot</span></div>
+              <div class="check-done"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+          </div>
+
+          <div class="disclaimer-box">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#F5A623" stroke-width="1.8"/><path d="M12 8v5M12 16h.01" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <p>ReviewNatin is not affiliated with CSC, PRC, or any government agency. No pass guarantee.</p>
+          </div>
+        </div>
+        <div class="sticky-footer"><button class="btn btn-primary" onclick="goTo(0)">Pumunta sa Dashboard →</button></div>
+      </div>
+
+    </div>
+    <div class="phone__home-indicator"></div>
+  </div>
+
+  <div class="lab-nav">
+    <div class="lab-step-name" id="lab-step-name">1 / 5 — Welcome</div>
+    <div class="lab-dots" id="lab-dots"></div>
+    <div class="lab-buttons">
+      <button class="lab-btn" id="lab-prev" onclick="navStep(-1)">← Prev</button>
+      <button class="lab-btn" id="lab-next" onclick="navStep(1)">Next →</button>
+    </div>
+  </div>
+
+<script>
+  const STEP_NAMES = ['Welcome', 'Exam Picker', 'Goals & Level', 'Account Sync', 'Ready'];
+  let current = 0;
+
+  const dotsEl = document.getElementById('lab-dots');
+  STEP_NAMES.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'lab-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    if (n === current) { replay(n); return; }
+    const steps = document.querySelectorAll('.step');
+    steps[current].classList.remove('active');
+    steps[n].classList.add('active');
+    current = n;
+    document.querySelectorAll('.lab-dot').forEach((d, i) => d.classList.toggle('active', i === n));
+    document.getElementById('lab-step-name').textContent = (n + 1) + ' / 5 — ' + STEP_NAMES[n];
+    document.getElementById('lab-prev').disabled = n === 0;
+    document.getElementById('lab-next').disabled = n === STEP_NAMES.length - 1;
+    if (n === 2) requestAnimationFrame(() => requestAnimationFrame(positionThumb));
+    if (n === 4) requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.getElementById('ready-ring').style.transition = 'stroke-dashoffset 1.1s cubic-bezier(.2,.8,.3,1) 0.3s';
+      document.getElementById('ready-ring').setAttribute('stroke-dashoffset', '0');
+    }));
+  }
+
+  function replay(n) {
+    const el = document.querySelectorAll('.step')[n];
+    el.classList.remove('active');
+    void el.offsetWidth;
+    el.classList.add('active');
+    if (n === 4) {
+      const ring = document.getElementById('ready-ring');
+      ring.style.transition = 'none';
+      ring.setAttribute('stroke-dashoffset', '219.9');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        ring.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(.2,.8,.3,1) 0.3s';
+        ring.setAttribute('stroke-dashoffset', '0');
+      }));
+    }
+  }
+
+  function navStep(dir) {
+    const n = current + dir;
+    if (n < 0 || n >= STEP_NAMES.length) return;
+    goTo(n);
+  }
+
+  function selectExam(el) {
+    el.parentElement.querySelectorAll('.exam-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function positionThumb() {
+    const opts = document.querySelectorAll('#level-seg .segmented__opt');
+    const idx = [...opts].findIndex(o => o.classList.contains('selected'));
+    const thumb = document.getElementById('level-thumb');
+    const w = opts[0].getBoundingClientRect().width;
+    thumb.style.transform = 'translateX(' + (idx * (w + 4)) + 'px)';
+  }
+
+  function selectLevel(el, idx) {
+    document.querySelectorAll('#level-seg .segmented__opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('level-hint').textContent = el.dataset.hint;
+    positionThumb();
+  }
+  window.addEventListener('load', positionThumb);
+  window.addEventListener('resize', positionThumb);
+
+  const RING_CIRC = 169.6;
+  function selectGoal(el) {
+    document.querySelectorAll('.goal-tile').forEach(t => t.classList.remove('selected'));
+    el.classList.add('selected');
+    const pct = parseFloat(el.dataset.goal);
+    document.getElementById('goal-ring-fill').setAttribute('stroke-dashoffset', RING_CIRC * (1 - pct));
+    document.getElementById('goal-ring-icon').textContent = el.dataset.emoji;
+    document.getElementById('goal-ring-label').textContent = el.dataset.label;
+    document.getElementById('goal-ring-sub').textContent = el.dataset.sub;
+  }
+
+  function toggleReminder() {
+    const sw = document.getElementById('reminder-switch');
+    const on = sw.classList.toggle('on');
+    document.getElementById('reminder-sub').textContent = on ? 'Every day at 7:00 PM' : 'Off by default — turn on if helpful';
+  }
+
+  document.getElementById('lab-prev').disabled = true;
+</script>
+
+</body>
+</html>

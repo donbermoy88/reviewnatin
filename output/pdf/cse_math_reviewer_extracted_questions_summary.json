@@ -1,0 +1,29 @@
+{
+  "source_pdf": "/Users/lyndon/reviewnatin/tmp/pdfs/cse_math_reviewer.pdf",
+  "total_questions_found": 75,
+  "total_ready_for_upload": 69,
+  "total_needing_review": 5,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 1,
+  "total_questions_with_images": 5,
+  "suggested_supabase_table_mapping": {
+    "No.": "source_sequence",
+    "Page": "source_page",
+    "Question": "question_text",
+    "Choice A": "choice_a",
+    "Choice B": "choice_b",
+    "Choice C": "choice_c",
+    "Choice D": "choice_d",
+    "Choice E if there is": "choice_e",
+    "Correct Answer": "correct_answer",
+    "Explanation": "explanation",
+    "Exam Type": "exam_type",
+    "Subject Category": "subject_category",
+    "Difficulty": "difficulty",
+    "Has Image": "has_image",
+    "Image Reference": "image_reference",
+    "Status": "status",
+    "Notes": "notes"
+  },
+  "recommended_next_action": "Review rows marked Needs Review because their PDF blocks include embedded formula images before uploading to ReviewNatin."
+}

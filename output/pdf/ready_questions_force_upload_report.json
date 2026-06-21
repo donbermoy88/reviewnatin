@@ -1,0 +1,433 @@
+{
+  "batch_id": "bf4cbfc7-e8c0-436f-bce5-9cdb5c6da09d",
+  "force": true,
+  "inserted": 20,
+  "candidate_targets": 1422,
+  "skipped": 0,
+  "duplicates": 1402,
+  "source_stats": {
+    "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv": {
+      "readyRows": 139,
+      "candidateTargets": 139,
+      "skipped": 0
+    },
+    "output/pdf/cse_reviewer_professional_v1_extracted_questions_answered.csv": {
+      "readyRows": 147,
+      "candidateTargets": 147,
+      "skipped": 0
+    },
+    "output/pdf/cse_prof_subpro_practice_test_extracted_questions.csv": {
+      "readyRows": 499,
+      "candidateTargets": 998,
+      "skipped": 0
+    },
+    "output/pdf/cse_math_reviewer_extracted_questions.csv": {
+      "readyRows": 69,
+      "candidateTargets": 138,
+      "skipped": 0
+    }
+  },
+  "skipped_samples": [],
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "21",
+      "page": "6",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "22",
+      "page": "6",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "23",
+      "page": "6",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "24",
+      "page": "6",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "25",
+      "page": "6",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "26",
+      "page": "6",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "27",
+      "page": "6",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "28",
+      "page": "6",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "29",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "30",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "31",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "32",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "33",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "34",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "35",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "36",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "37",
+      "page": "7",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "38",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "39",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "40",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/vocabulary",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "41",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "42",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "43",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "44",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "45",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "46",
+      "page": "8",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "47",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "48",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "49",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "50",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "51",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "52",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "53",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "54",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "55",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "56",
+      "page": "9",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "57",
+      "page": "10",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "58",
+      "page": "10",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "60",
+      "page": "10",
+      "exam": "subprofessional",
+      "topic": "verbal/grammar",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "61",
+      "page": "10",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "62",
+      "page": "10",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "63",
+      "page": "10",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "64",
+      "page": "11",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "65",
+      "page": "11",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "66",
+      "page": "11",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "67",
+      "page": "11",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "68",
+      "page": "11",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "69",
+      "page": "12",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "70",
+      "page": "12",
+      "exam": "subprofessional",
+      "topic": "verbal/paragraph-org",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/cse_reviewer_subpro_v1_extracted_questions_answered.csv",
+      "row": "71",
+      "page": "12",
+      "exam": "subprofessional",
+      "topic": "verbal/reading-comp",
+      "reason": "duplicate_existing_stem"
+    }
+  ]
+}
