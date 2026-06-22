@@ -5,13 +5,12 @@ import { useRouter } from 'expo-router';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createSessionFromUrl, isRecoveryUrl } from '../../lib/auth/deep-link-auth';
 import { getAppEntryHref } from '../../lib/onboarding-nav';
-import { useAuth } from '../../providers/auth-provider';
+import { supabase } from '../../lib/supabase';
 
 /** Handles reviewnatin:// deep links (OAuth callback, password recovery, etc.) */
 export default function AuthCallbackScreen() {
   const router = useRouter();
   const { colors } = useAppTheme();
-  const { user } = useAuth();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -29,7 +28,8 @@ export default function AuthCallbackScreen() {
           }
         }
 
-        const href = await getAppEntryHref(user?.id);
+        const { data } = await supabase.auth.getSession();
+        const href = await getAppEntryHref(data.session?.user.id);
         if (mounted) router.replace(href);
       } catch (err) {
         if (mounted) {
@@ -46,7 +46,8 @@ export default function AuthCallbackScreen() {
           router.replace('/(auth)/reset-password');
           return;
         }
-        router.replace(await getAppEntryHref(user?.id));
+        const { data } = await supabase.auth.getSession();
+        router.replace(await getAppEntryHref(data.session?.user.id));
       } catch {
         router.replace('/(auth)/login');
       }
@@ -56,7 +57,7 @@ export default function AuthCallbackScreen() {
       mounted = false;
       sub.remove();
     };
-  }, [router, user?.id]);
+  }, [router]);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>

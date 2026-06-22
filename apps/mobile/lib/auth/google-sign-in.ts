@@ -12,6 +12,8 @@ import { getGoogleClientIds, getGoogleIosUrlScheme, isGoogleSignInConfigured } f
 
 WebBrowser.maybeCompleteAuthSession();
 
+const ANDROID_PACKAGE = 'ph.reviewnatin.app';
+
 const GOOGLE_SCOPES = [
   'openid',
   'https://www.googleapis.com/auth/userinfo.profile',
@@ -35,6 +37,10 @@ export function getGoogleOAuthRedirectUri(clientId: string): string {
   if (Platform.OS === 'ios' && clientId.includes('.apps.googleusercontent.com')) {
     const scheme = getGoogleIosUrlScheme(clientId);
     if (scheme) return `${scheme}:/oauthredirect`;
+  }
+
+  if (Platform.OS === 'android') {
+    return `${ANDROID_PACKAGE}:/oauthredirect`;
   }
 
   return makeRedirectUri({
@@ -98,7 +104,10 @@ export async function requestGoogleIdToken(): Promise<{ idToken: string | null; 
     redirectUri,
     responseType: ResponseType.Code,
     usePKCE: true,
-    extraParams: { access_type: 'offline', prompt: 'select_account' },
+    extraParams: {
+      access_type: 'offline',
+      ...(Platform.OS === 'android' ? {} : { prompt: 'select_account' }),
+    },
   });
 
   await request.makeAuthUrlAsync(Google.discovery);

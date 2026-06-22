@@ -96,6 +96,7 @@ module.exports = () => {
   return {
     expo: {
       ...base,
+      scheme: ['reviewnatin', ANDROID_PACKAGE],
       ios: {
         ...base.ios,
         bundleIdentifier: BUNDLE_ID,

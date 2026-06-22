@@ -75,6 +75,16 @@ export default function LoginScreen() {
     setConfirmPassword('');
   };
 
+  const replaceAfterAuth = async (userId: string) => {
+    const href = await getAppEntryHref(userId);
+    if (href === '/onboarding' && returnTo === 'onboarding') {
+      router.replace({ pathname: '/onboarding', params: { step: '4' } });
+      return;
+    }
+
+    router.replace(href);
+  };
+
   const submit = async () => {
     setError(null);
     setInfo(null);
@@ -136,11 +146,7 @@ export default function LoginScreen() {
     }
     setLoading(false);
 
-    if (returnTo === 'onboarding') {
-      router.replace({ pathname: '/onboarding', params: { step: '4' } });
-    } else {
-      router.replace(await getAppEntryHref(userId));
-    }
+    await replaceAfterAuth(userId);
   };
 
   const finishAuth = async (sessionUserId?: string) => {
@@ -153,11 +159,7 @@ export default function LoginScreen() {
       setInfo(`Logged in, but goal sync failed: ${syncError}`);
     }
     setLoading(false);
-    if (returnTo === 'onboarding') {
-      router.replace({ pathname: '/onboarding', params: { step: '4' } });
-    } else {
-      router.replace(await getAppEntryHref(sessionUserId));
-    }
+    await replaceAfterAuth(sessionUserId);
   };
 
   const oauth = async (provider: 'google' | 'apple') => {

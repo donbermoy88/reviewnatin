@@ -1,7 +1,9 @@
 import * as AuthSession from 'expo-auth-session';
 import type { Session } from '@supabase/supabase-js';
+import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 import { supabase, isSupabaseConfigured } from '../supabase';
+import { createSessionFromUrl } from './deep-link-auth';
 import { getGoogleClientId, isGoogleSignInConfigured } from './google-config';
 import { getGoogleOAuthRedirectUri, requestGoogleIdToken } from './google-sign-in';
 
@@ -21,7 +23,43 @@ function mapGoogleProviderError(message: string): string {
   return message;
 }
 
-/** Google → ID token (native) → Supabase session. Works on iOS/Android Expo Go without Safari redirects. */
+async function signInWithGoogleViaSupabaseOAuth(): Promise<{
+  error: string | null;
+  cancelled?: boolean;
+  session?: Session | null;
+}> {
+  const redirectTo = AuthSession.makeRedirectUri({
+    scheme: 'reviewnatin',
+    path: 'auth/callback',
+  });
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo,
+      skipBrowserRedirect: true,
+    },
+  });
+
+  if (error) return { error: mapGoogleProviderError(error.message) };
+  if (!data.url) return { error: 'Google sign-in did not start. Please try again.' };
+
+  const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo);
+  if (result.type === 'cancel' || result.type === 'dismiss') {
+    return { error: null, cancelled: true };
+  }
+
+  if (result.type !== 'success') {
+    return { error: 'Google sign-in did not complete.' };
+  }
+
+  await createSessionFromUrl(result.url);
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError) return { error: mapGoogleProviderError(sessionError.message) };
+  return { error: null, session: sessionData.session };
+}
+
+/** Google sign-in. Android uses Supabase's HTTPS callback; iOS keeps the native ID-token flow. */
 export async function signInWithGoogle(): Promise<{
   error: string | null;
   cancelled?: boolean;
@@ -29,6 +67,10 @@ export async function signInWithGoogle(): Promise<{
 }> {
   if (!isSupabaseConfigured) {
     return { error: 'Supabase is not connected.' };
+  }
+
+  if (Platform.OS === 'android') {
+    return signInWithGoogleViaSupabaseOAuth();
   }
 
   if (!isGoogleSignInConfigured()) {
