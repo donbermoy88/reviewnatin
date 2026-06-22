@@ -240,11 +240,15 @@ export default function PracticeResultScreen() {
       await stopSpeaking();
     }
     setSpeakingId(questionId);
-    const started = await speakText(text, locale, {
-      onDone: () => setSpeakingId(null),
-      onError: () => setSpeakingId(null),
-    });
-    if (!started) setSpeakingId(null);
+    try {
+      const started = await speakText(text, locale, {
+        onDone: () => setSpeakingId(null),
+        onError: () => setSpeakingId(null),
+      });
+      if (!started) setSpeakingId(null);
+    } catch {
+      setSpeakingId(null);
+    }
   };
 
   const handleCaptureReady = useCallback((capture: () => Promise<string | undefined>) => {

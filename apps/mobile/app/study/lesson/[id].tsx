@@ -110,18 +110,24 @@ export default function LessonReaderScreen() {
       return;
     }
 
-    setTtsStarting(true);
-    const started = await speakText(body, 'en', {
-      onDone: () => setSpeaking(false),
-      onError: () => {
-        setSpeaking(false);
+    try {
+      setTtsStarting(true);
+      const started = await speakText(body, 'en', {
+        onDone: () => setSpeaking(false),
+        onError: () => {
+          setSpeaking(false);
+          Alert.alert('Audio unavailable', 'Text-to-speech could not start on this device. Please try again.');
+        },
+      });
+      setSpeaking(started);
+      if (!started) {
         Alert.alert('Audio unavailable', 'Text-to-speech could not start on this device. Please try again.');
-      },
-    });
-    setTtsStarting(false);
-    setSpeaking(started);
-    if (!started) {
+      }
+    } catch {
+      setSpeaking(false);
       Alert.alert('Audio unavailable', 'Text-to-speech could not start on this device. Please try again.');
+    } finally {
+      setTtsStarting(false);
     }
   }, [body, speaking, ttsStarting]);
 

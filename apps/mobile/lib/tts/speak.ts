@@ -7,13 +7,18 @@ type SpeechVoice = Awaited<ReturnType<SpeechModule['getAvailableVoicesAsync']>>[
 
 let speechModule: SpeechModule | null = null;
 let voicesCache: SpeechVoice[] | null = null;
+const VOICE_LOOKUP_TIMEOUT_MS = 500;
 
 async function getSpeech() {
   if (Platform.OS === 'web') return null;
-  if (!speechModule) {
-    speechModule = await import('expo-speech');
+  try {
+    if (!speechModule) {
+      speechModule = await import('expo-speech');
+    }
+    return speechModule;
+  } catch {
+    return null;
   }
-  return speechModule;
 }
 
 async function getAvailableVoices(Speech: SpeechModule): Promise<SpeechVoice[]> {
@@ -57,9 +62,36 @@ async function resolveVoiceConfig(
   Speech: SpeechModule,
   locale: 'en' | 'fil'
 ): Promise<{ language: string; voice?: string }> {
-  const voice = chooseVoice(await getAvailableVoices(Speech), locale);
+  const fallback = { language: locale === 'fil' ? 'fil-PH' : 'en-US' };
+  const voices = await withTimeout(getAvailableVoices(Speech), VOICE_LOOKUP_TIMEOUT_MS, []);
+  const voice = chooseVoice(voices, locale);
   if (voice) return { language: voice.language, voice: voice.identifier };
-  return { language: locale === 'fil' ? 'fil-PH' : 'en-US' };
+  return fallback;
+}
+
+function withTimeout<T>(promise: Promise<T>, timeoutMs: number, fallback: T): Promise<T> {
+  return new Promise((resolve) => {
+    let settled = false;
+    const timeout = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      resolve(fallback);
+    }, timeoutMs);
+
+    promise
+      .then((value) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+        resolve(value);
+      })
+      .catch(() => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+        resolve(fallback);
+      });
+  });
 }
 
 export async function speakText(
@@ -77,7 +109,7 @@ export async function speakText(
   if (!Speech) return false;
 
   try {
-    await Speech.stop();
+    await withTimeout(Speech.stop(), VOICE_LOOKUP_TIMEOUT_MS, undefined);
     const voiceConfig = await resolveVoiceConfig(Speech, locale);
     const chunks = splitSpeechText(trimmed, resolveSpeechChunkLimit(Speech.maxSpeechInputLength));
     let settled = false;
@@ -113,7 +145,12 @@ export async function speakText(
 
 export async function stopSpeaking(): Promise<void> {
   const Speech = await getSpeech();
-  if (Speech) await Speech.stop();
+  if (!Speech) return;
+  try {
+    await Speech.stop();
+  } catch {
+    // Stopping speech should never block navigation or leave controls disabled.
+  }
 }
 
 export function canUseTts(): boolean {
