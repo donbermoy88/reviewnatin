@@ -1,3 +1,4 @@
+import * as Haptics from 'expo-haptics';
 import { useMemo } from 'react';
 import { Pressable, Text, View, type PressableProps, type StyleProp, type ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -41,6 +42,11 @@ export function PrimaryButton({
 
   return (
     <Pressable
+      onPressIn={() => {
+        if (!disabled) {
+          void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }
+      }}
       style={(state) => {
         const base: StyleProp<ViewStyle>[] = [
           styles.base,

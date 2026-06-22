@@ -4,9 +4,15 @@ import { Linking, Platform } from 'react-native';
 
 const BETA_FEEDBACK_EMAIL = 'beta@reviewnatinph.com';
 
+import type { BetaCohort } from './beta-cohort';
+import { resolveBetaCohort } from './beta-cohort';
+
+export type { BetaCohort };
+
 export type BetaFeedbackContext = {
   userId?: string | null;
-  cohortHint?: 'guest' | 'free' | 'premium';
+  cohortHint?: BetaCohort;
+  isPremiumActive?: boolean;
   currentRoute?: string;
 };
 
@@ -21,7 +27,7 @@ export function buildBetaFeedbackMailto(ctx: BetaFeedbackContext = {}): string {
 
   const cohort =
     ctx.cohortHint ??
-    (ctx.userId ? 'free_or_premium' : 'guest');
+    resolveBetaCohort(ctx.userId, ctx.isPremiumActive ?? false);
 
   const subject = encodeURIComponent(`[ReviewNatin Beta] Issue report (${cohort})`);
   const body = encodeURIComponent(

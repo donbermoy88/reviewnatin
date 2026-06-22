@@ -8,6 +8,7 @@ import { EmptyState } from '../../components/empty-state';
 import { ErrorState } from '../../components/error-state';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { PrimaryButton } from '../../components/primary-button';
+import { Skeleton } from '../../components/skeleton';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardPeriod } from '../../lib/api/leaderboard';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
@@ -210,12 +211,24 @@ function LeaderboardScreenContent() {
                 {rank3 ? <PodiumSlot entry={rank3} position={3} theme={theme} /> : <View style={{ width: 80 }} />}
               </View>
             )}
-            {loading && <ActivityIndicator color={colors.accent} style={{ marginVertical: spacing.xl }} />}
+            {loading && (
+              <View style={{ gap: spacing.sm, paddingVertical: spacing.md }}>
+                {[0, 1, 2].map((i) => (
+                  <Skeleton key={i} height={72} radius={14} />
+                ))}
+              </View>
+            )}
           </LinearGradient>
         }
         ListEmptyComponent={
           loadError ? (
             <ErrorState description={loadError} onRetry={() => { setLoading(true); void load(); }} />
+          ) : loading ? (
+            <View style={{ paddingHorizontal: spacing.md, paddingTop: spacing.md, gap: spacing.sm }}>
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Skeleton key={i} height={64} radius={14} />
+              ))}
+            </View>
           ) : !loading && entries.length === 0 ? (
             <View style={{ paddingHorizontal: spacing.md, paddingTop: spacing.md }}>
               <EmptyState

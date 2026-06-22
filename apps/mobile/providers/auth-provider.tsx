@@ -4,6 +4,7 @@ import { AppState } from 'react-native';
 import { updateUserDisplayName } from '../lib/api/profile';
 import { mapAuthError } from '../lib/auth/errors';
 import { validateEmailNotDisposable } from '../lib/auth/disposable-email';
+import { isEmailBlockedForSignup } from '../lib/auth/disposable-email-server';
 import {
   clearLoginLockout,
   getLoginLockoutMessage,
@@ -161,6 +162,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const normalized = normalizeEmail(email);
         const disposableError = validateEmailNotDisposable(normalized);
         if (disposableError) return { error: disposableError };
+
+        if (await isEmailBlockedForSignup(normalized)) {
+          return {
+            error: 'Temporary email addresses are not allowed. Use a real email address.',
+          };
+        }
 
         if (isTurnstileRequired() && !captchaToken?.trim()) {
           return { error: 'Please complete the security verification.' };

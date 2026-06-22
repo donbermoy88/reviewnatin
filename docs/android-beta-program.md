@@ -145,6 +145,66 @@ See also [release-readiness-checklist.md](./release-readiness-checklist.md).
 - [ ] [beta-audit-matrix.md](./beta-audit-matrix.md) updated for changed flows
 - [ ] Release notes posted to testers
 
+## Ops runbook (cloud + local)
+
+Run after each beta release cycle or when onboarding new testers.
+
+### Local verification
+
+```bash
+npm run mobile:test
+cd apps/mobile && npm run typecheck
+```
+
+### Supabase (hosted project)
+
+Requires `.env.supabase` with `SUPABASE_ACCESS_TOKEN` and `SUPABASE_PROJECT_ID`.
+
+```bash
+# Enable email OTP (disable auto-confirm)
+npm run supabase:auth:prod
+
+# Apply auth migrations (rate limits, login events, disposable email RPC)
+supabase link --project-ref $SUPABASE_PROJECT_ID
+supabase db push
+```
+
+If `supabase db push` fails (no CLI link), apply migrations manually in Supabase SQL editor:
+- `20260622120000_auth_rate_limits.sql`
+- `20260622120001_auth_login_events.sql`
+- `20260622120002_auth_login_rpc.sql`
+- `20260622130000_grant_disposable_email_check.sql`
+
+Configure SMTP in Supabase Dashboard → Authentication → Email for reliable OTP delivery.
+
+### EAS preview APK (12 testers)
+
+Requires `eas login` and env vars in EAS `preview` profile.
+
+```bash
+cd apps/mobile
+# Bump android.versionCode in app.json first
+npm run eas:build:android:preview
+```
+
+Download APK from EAS dashboard → distribute with SHA-256 in release notes.
+
+### Emulator audit (optional)
+
+```bash
+adb devices
+adb shell am start -a android.intent.action.VIEW -d "reviewnatin://subscribe" ph.reviewnatin.app
+```
+
+See [audit/android-emulator-beta-audit-2026-06-22.md](../audit/android-emulator-beta-audit-2026-06-22.md).
+
+### Maestro cohort smokes (when CLI installed)
+
+```bash
+curl -Ls https://get.maestro.mobile.dev | bash
+maestro test apps/mobile/.maestro/flows/
+```
+
 ## Transition to Play Console
 
 When Play internal testing is ready, see [play-console-migration.md](./play-console-migration.md).

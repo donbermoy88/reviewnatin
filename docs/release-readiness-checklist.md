@@ -69,3 +69,5 @@ Run on latest APK — see [beta-audit-matrix.md](./beta-audit-matrix.md).
 | Store config | 20% | N/A for APK beta; required for Play |
 
 **Minimum to ship beta APK:** all cohort smokes + automated tests + no P0.
+
+**Current estimate (2026-06-22):** 72/100 — see [audit/android-emulator-beta-audit-2026-06-22.md](../audit/android-emulator-beta-audit-2026-06-22.md).

@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Alert, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Alert, RefreshControl, ScrollView, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Badge } from '../../components/badge';
 import { PrimaryButton } from '../../components/primary-button';
@@ -90,12 +90,19 @@ function StudyScreenContent() {
   const [materials, setMaterials] = useState<ReviewMaterial[]>([]);
   const [notesFilter, setNotesFilter] = useState<NotesFilter>('all');
   const [activeTab, setActiveTab] = useState<StudyTab>('subjects');
+  const [subjectQuery, setSubjectQuery] = useState('');
   const [contentGate, setContentGate] = useState<ContentGateStatus | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const displayExamName = useMemo(
     () => cleanExamName(examName || examSlug || 'Your exam'),
     [examName, examSlug]
   );
+
+  const filteredSubjects = useMemo(() => {
+    const q = subjectQuery.trim().toLowerCase();
+    if (!q) return subjects;
+    return subjects.filter((s) => s.name.toLowerCase().includes(q));
+  }, [subjects, subjectQuery]);
 
   const load = useCallback(async () => {
     try {
@@ -386,7 +393,37 @@ function StudyScreenContent() {
         title="Subjects"
         subtitle="Choose a subject to review topics, practice questions, and improve weak areas."
       >
-        {subjects.map((s, i) => {
+        <TextInput
+          style={{
+            borderWidth: 1.5,
+            borderColor: colors.border,
+            borderRadius: 14,
+            paddingHorizontal: spacing.md,
+            paddingVertical: spacing.sm,
+            minHeight: 48,
+            fontFamily: theme.fonts.body,
+            fontSize: 16,
+            color: colors.text,
+            backgroundColor: colors.surface,
+            marginBottom: spacing.md,
+          }}
+          placeholder="Search subjects…"
+          placeholderTextColor={colors.textLight}
+          value={subjectQuery}
+          onChangeText={setSubjectQuery}
+          accessibilityLabel="Search subjects"
+          accessibilityRole="search"
+          clearButtonMode="while-editing"
+        />
+        {filteredSubjects.length === 0 ? (
+          <ScreenState
+            icon="search-outline"
+            tone="neutral"
+            title="Walang match"
+            description={`Walang subject na tumutugma sa "${subjectQuery.trim()}".`}
+          />
+        ) : null}
+        {filteredSubjects.map((s, i) => {
           const meta = subjectMeta[i % subjectMeta.length];
           const analytics = analyticsBySubject.get(s.name.toLowerCase());
           const avg = analytics?.averageAccuracy ?? 0;

@@ -12,6 +12,8 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
+import * as Haptics from 'expo-haptics';
 import { LogoMark } from '../../components/logo-mark';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
@@ -47,6 +49,7 @@ export default function VerifyEmailScreen() {
   const [loading, setLoading] = useState(false);
   const [cooldown, setCooldown] = useState(RESEND_COOLDOWN_SEC);
   const [resendCount, setResendCount] = useState(0);
+  const [verified, setVerified] = useState(false);
   const inputRefs = useRef<(TextInput | null)[]>([]);
 
   useEffect(() => {
@@ -126,6 +129,9 @@ export default function VerifyEmailScreen() {
 
     setInfo('Na-verify na ang email mo!');
     trackEvent('otp_verified');
+    setVerified(true);
+    void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    await new Promise((r) => setTimeout(r, 700));
     await finishVerified(userId);
     setLoading(false);
   };
@@ -174,6 +180,16 @@ export default function VerifyEmailScreen() {
       </LinearGradient>
 
       <View style={[styles.body, { paddingBottom: insets.bottom + spacing.xl }]}>
+        {verified ? (
+          <Animated.View entering={ZoomIn.duration(400)} style={styles.successBox}>
+            <Animated.View entering={FadeIn.delay(200)}>
+              <Text style={styles.successEmoji}>✓</Text>
+              <Text style={styles.successTitle}>Verified!</Text>
+              <Text style={styles.successSub}>Dadalhin ka na sa onboarding…</Text>
+            </Animated.View>
+          </Animated.View>
+        ) : (
+          <>
         <Text style={styles.label}>Verification code</Text>
         <View style={styles.otpRow} accessibilityLabel="Enter 6-digit verification code">
           {digits.map((digit, index) => (
@@ -237,6 +253,8 @@ export default function VerifyEmailScreen() {
         >
           <Text style={styles.backLinkText}>Bumalik sa login</Text>
         </Pressable>
+          </>
+        )}
       </View>
     </KeyboardAvoidingView>
   );
@@ -332,6 +350,28 @@ function createStyles(theme: AppTheme) {
     },
     backLinkText: {
       ...type.subtitle,
+      color: colors.textMuted,
+    },
+    successBox: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: spacing.xxl,
+    },
+    successEmoji: {
+      fontSize: 48,
+      textAlign: 'center',
+      color: colors.success,
+      marginBottom: spacing.md,
+    },
+    successTitle: {
+      ...type.headline,
+      fontSize: 22,
+      textAlign: 'center',
+      marginBottom: spacing.sm,
+    },
+    successSub: {
+      ...type.subtitle,
+      textAlign: 'center',
       color: colors.textMuted,
     },
   });

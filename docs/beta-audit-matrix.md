@@ -6,17 +6,17 @@ Screen × cohort expected behavior. Update **Status** after each beta build (`�
 
 | Flow / Screen | G (Guest) | F (Free) | P (Premium) | Status |
 |---------------|-----------|----------|-------------|--------|
-| **Auth — skip login** | Can tap "Magpatuloy bilang guest" on login | N/A (signed in) | N/A | — |
-| **Auth — email signup + OTP** | N/A | OTP required before app access | Same as Free | — |
+| **Auth — skip login** | Can tap "Magpatuloy bilang guest" on login | N/A (signed in) | N/A | ✓ emulator |
+| **Auth — email signup + OTP** | N/A | OTP required before app access | Same as Free | ✓ code |
 | **Auth — OAuth** | N/A | Google/Apple → skip OTP | Same | — |
-| **Onboarding** | Required once (local); cloud sync on signup later | Required; syncs to account | Same | — |
+| **Onboarding** | Required once (local); cloud sync on signup later | Required; syncs to account | Same | ✓ deep link |
 | **Dashboard** | Guest stats fallback; signup CTAs | Full dashboard; ads may show | Full; no ads | — |
 | **Daily practice (20 Q limit)** | 20 Q/day then paywall | 20 Q/day then paywall | Unlimited | — |
 | **Mock exam preview** | Preview / limited questions | Preview / limited | Full mock access | — |
 | **AI tutor** | Signup prompt or limited | Daily limit (free tier) | Unlimited | — |
 | **Ads (banner/interstitial)** | Shown on Home/Study/Result | Shown | Hidden | — |
 | **Offline pack download** | Premium gate / signup prompt | Premium gate → subscribe | Download works | — |
-| **Subscribe / paywall** | Prompt to create account | Web checkout (APK beta) | Manage subscription | — |
+| **Subscribe / paywall** | Prompt to create account | Web checkout (APK beta) | Manage subscription | ✓ emulator (guest) |
 | **Restore purchases** | Hidden (no account) | Visible (Play N/A on APK) | Visible | — |
 | **Leaderboard** | May show; scores local only | Full with account | Full | — |
 | **Stats / Profile** | Guest progress local | Cloud sync | Cloud sync | — |
@@ -24,7 +24,7 @@ Screen × cohort expected behavior. Update **Status** after each beta build (`�
 | **Flashcards** | Available if content exists | Full (within limits) | Full | — |
 | **Mistake Bank** | Local / limited without account | Cloud sync | Cloud sync | — |
 | **Bookmarks** | Signup prompt for sync | Cloud sync | Cloud sync | — |
-| **Settings — beta feedback** | Works (no user id in email) | Works with user id | Works | — |
+| **Settings — beta feedback** | Works (no user id in email) | Works with user id | Works | ✓ code |
 | **Settings — delete account** | Hidden / N/A | Available | Available | — |
 
 ## Release gates
