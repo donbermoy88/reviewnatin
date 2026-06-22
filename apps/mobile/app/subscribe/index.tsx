@@ -17,6 +17,7 @@ import { useIap } from '../../providers/iap-provider';
 import { createWebCheckoutSession, fetchWebCheckoutStatus, checkoutAttributionOptions } from '../../lib/api/web-checkout';
 import { captureAttributionFromQuery, loadCheckoutAttribution } from '../../lib/checkout-attribution';
 import { toUserFacingError } from '../../lib/errors/user-facing';
+import { PREMIUM_HEADLINE } from '../../lib/product-copy';
 import { trackEvent } from '../../lib/analytics/events';
 import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
 import { preferWebCheckout } from '../../lib/iap/availability';
@@ -446,9 +447,9 @@ export default function SubscribeScreen() {
           </Pressable>
         </View>
 
-        <Text style={styles.headlineDark}>
-          Everything you need{'\n'}to pass, in one plan
-        </Text>
+        <Text style={styles.headlineDark}>{PREMIUM_HEADLINE.title}</Text>
+        <Text style={[styles.headlineSubDark, { marginTop: spacing.sm }]}>{PREMIUM_HEADLINE.subtitle}</Text>
+        <Text style={[styles.trustLineDark, { marginTop: spacing.xs }]}>{PREMIUM_HEADLINE.trust}</Text>
 
         <View style={styles.featuresList}>
           {PLUS_FEATURES.map((f) => (
@@ -1002,6 +1003,20 @@ function createStyles(theme: AppTheme) {
       color: '#fff',
       letterSpacing: -0.6,
       lineHeight: 34,
+      marginBottom: spacing.xs,
+    },
+    headlineSubDark: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 15,
+      color: 'rgba(255,255,255,0.88)',
+      lineHeight: 22,
+      marginBottom: spacing.sm,
+    },
+    trustLineDark: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 11,
+      color: 'rgba(255,255,255,0.55)',
+      lineHeight: 16,
       marginBottom: spacing.lg,
     },
     featuresList: { gap: spacing.sm },

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { ProfileSettingsHint } from '../../components/profile-settings-hint';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { PrimaryButton } from '../../components/primary-button';
 import { SparkleStar } from '../../components/sparkle-star';
@@ -239,6 +240,10 @@ function ProfileScreenContent() {
               <Text style={styles.statLbl}>{s.l}</Text>
             </View>
           ))}
+        </View>
+
+        <View style={{ paddingHorizontal: spacing.lg }}>
+          <ProfileSettingsHint />
         </View>
 
         {user && weeklySummary ? (

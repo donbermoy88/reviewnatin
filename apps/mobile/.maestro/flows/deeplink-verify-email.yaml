@@ -1,0 +1,9 @@
+# Cold-start verify-email via openLink (matches F1 Maestro path)
+appId: ph.reviewnatin.app
+---
+- launchApp:
+    clearState: true
+- openLink: reviewnatin://verify-email?email=f1.agent@reviewnatinph.com
+- extendedWaitUntil:
+    visible: "I-verify ang email"
+    timeout: 20000

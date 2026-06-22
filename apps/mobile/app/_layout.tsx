@@ -15,6 +15,8 @@ import { AnalyticsProvider } from '../providers/analytics-provider';
 import { PreferencesProvider, usePreferences } from '../providers/preferences-provider';
 import { useAppTheme, fonts } from '../hooks/use-app-theme';
 import { DeepLinkHandler } from '../components/deep-link-handler';
+import { PostHogIdentity } from '../components/analytics/posthog-identity';
+import { PostHogScreenTracker } from '../components/analytics/posthog-screen-tracker';
 import { NotificationTapHandler } from '../components/notification-tap-handler';
 import { OfflineBanner } from '../components/offline-banner';
 import { OfflineQueueFlusher } from '../components/offline-queue-flusher';
@@ -80,14 +82,16 @@ export default function RootLayout() {
     <ErrorBoundary>
     <FontProvider>
       <AuthProvider>
-        <AnalyticsProvider>
         <PreferencesProvider>
+        <AnalyticsProvider>
+          <DeepLinkHandler />
+          <PostHogScreenTracker />
           <EntitlementsProvider>
             <IapFeedbackProvider>
               <IapProvider>
+                <PostHogIdentity />
                 <OnboardingGate>
                   <EmailVerificationGate>
-                  <DeepLinkHandler />
                   <NotificationTapHandler />
                   <OfflineQueueFlusher />
                   <ThemedStack />
@@ -97,8 +101,8 @@ export default function RootLayout() {
               </IapProvider>
             </IapFeedbackProvider>
           </EntitlementsProvider>
-        </PreferencesProvider>
         </AnalyticsProvider>
+        </PreferencesProvider>
       </AuthProvider>
     </FontProvider>
     </ErrorBoundary>

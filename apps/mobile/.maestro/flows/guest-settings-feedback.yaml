@@ -1,28 +1,39 @@
-# G4 smoke: Settings beta feedback entry (guest)
+# G4 smoke: Profile → Settings → Report a problem (guest)
 appId: ph.reviewnatin.app
 ---
 - launchApp:
     clearState: true
-- runFlow:
-    when:
-      visible: "Get started"
-    commands:
-      - tapOn: "Get started"
+- extendedWaitUntil:
+    visible: "ReviewNatin"
+    timeout: 30000
+- extendedWaitUntil:
+    visible: "Get started — it's free"
+    timeout: 15000
+- tapOn: "Get started — it's free"
 - extendedWaitUntil:
     visible: "Continue →"
-    timeout: 15000
-    optional: true
-- runFlow:
-    when:
-      visible: "Continue →"
-    commands:
-      - tapOn: "Continue →"
-      - tapOn: "Continue →"
-      - tapOn: "I'm committed →"
-      - tapOn: "Skip muna (guest)"
-      - tapOn: "Pumunta sa Dashboard"
-- tapOn: "Settings"
+    timeout: 10000
+- tapOn: "Continue →"
+- tapOn: "Continue →"
+- tapOn: "I'm committed →"
+- tapOn: "Skip muna (guest)"
 - extendedWaitUntil:
-    visible: "Report a problem"
+    visible: "Pumunta sa Dashboard"
+    timeout: 10000
+- tapOn: "Pumunta sa Dashboard"
+- extendedWaitUntil:
+    visible: "Home"
     timeout: 15000
+- tapOn: "Profile"
+- extendedWaitUntil:
+    visible: "Open settings"
+    timeout: 10000
+- tapOn: "Open settings"
+- extendedWaitUntil:
+    visible: "Settings"
+    timeout: 10000
+- scrollUntilVisible:
+    element: "Report a problem"
+    direction: DOWN
+    timeout: 20000
 - tapOn: "Report a problem"

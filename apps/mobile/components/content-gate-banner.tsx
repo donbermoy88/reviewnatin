@@ -51,13 +51,13 @@ export function ContentGateBanner({ theme, status, compact = false }: Props) {
       <Ionicons name="construct-outline" size={20} color={colors.accentDark} />
       <View style={{ flex: 1 }}>
         <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text }}>
-          More questions coming soon
+          Dagdag na tanong — paparating na
         </Text>
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 4 }}>
-          {status.counts.questions} questions available now · {status.questionPct}% of target bank
+          {status.counts.questions} tanong available · {status.questionPct}% ng target bank
         </Text>
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 4 }}>
-          Practice what&apos;s here — new content drops regularly.
+          Mag-practice muna sa available content — regular ang bagong tanong.
         </Text>
       </View>
     </View>

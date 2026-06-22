@@ -51,7 +51,8 @@ Dark mode: `constants/dark-theme.ts` via `useAppTheme()`.
 
 - **Hero:** `LinearGradient` + rounded bottom corners (28px)
 - **Errors:** `toUserFacingError()` from `lib/errors/user-facing.ts` — never raw Supabase messages
-- **Analytics:** `trackEvent()` from `lib/analytics/events.ts`
+- **Analytics:** PostHog via `trackEvent()` / `trackMicrointeraction()` in `lib/analytics/events.ts` (see `docs/analytics-posthog.md`)
+- **Product copy:** PH conversion strings in `lib/product-copy.ts` (see `docs/product-experience-audit-2026-06-22.md`)
 - **Beta feedback:** `openBetaFeedback()` with cohort via `resolveBetaCohort()`
 
 ## Cohort UX

@@ -4,6 +4,7 @@ import { Pressable, Text, View, type PressableProps, type StyleProp, type ViewSt
 import { Ionicons } from '@expo/vector-icons';
 import type { ComponentProps } from 'react';
 import { useAppTheme } from '../hooks/use-app-theme';
+import { trackMicrointeraction } from '../lib/analytics/events';
 import { createPrimaryButtonStyles } from '../lib/themed-styles';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
@@ -45,6 +46,7 @@ export function PrimaryButton({
       onPressIn={() => {
         if (!disabled) {
           void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          trackMicrointeraction(accessibilityLabel ?? label, { variant, size });
         }
       }}
       style={(state) => {

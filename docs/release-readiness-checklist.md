@@ -4,7 +4,8 @@ Use before every beta APK or store release. **Block release if any P0 is open.**
 
 ## Automated gates
 
-- [ ] `npm run mobile:test` passes (Vitest) — **116/116 pass (2026-06-22)**
+- [ ] `npm run mobile:test` passes (Vitest) — **124/124 pass (2026-06-22)**
+- [ ] Product UX audit P0 items shipped — see [product-experience-audit-2026-06-22.md](./product-experience-audit-2026-06-22.md)
 - [ ] `npm run ci:local` passes (if touching shared packages)
 - [ ] `npm run release:check:android` passes (production AAB only)
 

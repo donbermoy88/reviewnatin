@@ -1,17 +1,24 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 import { AppState } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { PostHogProvider } from 'posthog-react-native';
+import {
+  initPostHog,
+  isPostHogEnabled,
+  shutdownPostHog,
+} from '../lib/analytics/posthog';
 import { trackEvent, type AnalyticsEventName, type AnalyticsProperties } from '../lib/analytics/events';
 
 const DAILY_ACTIVE_KEY = 'reviewnatin:analytics:daily_active';
 
 type AnalyticsContextValue = {
   track: (name: AnalyticsEventName, properties?: AnalyticsProperties) => void;
+  enabled: boolean;
 };
 
 const AnalyticsContext = createContext<AnalyticsContextValue | null>(null);
 
-export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
+function AnalyticsRuntime({ children }: { children: React.ReactNode }) {
   const firedDaily = useRef(false);
 
   const track = useCallback((name: AnalyticsEventName, properties?: AnalyticsProperties) => {
@@ -43,9 +50,34 @@ export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
     return () => sub.remove();
   }, [track]);
 
-  const value = useMemo(() => ({ track }), [track]);
+  const value = useMemo(
+    () => ({ track, enabled: isPostHogEnabled() }),
+    [track]
+  );
 
   return <AnalyticsContext.Provider value={value}>{children}</AnalyticsContext.Provider>;
+}
+
+export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
+  const posthogClient = useMemo(() => initPostHog(), []);
+
+  useEffect(() => () => shutdownPostHog(), []);
+
+  if (!posthogClient) {
+    return <AnalyticsRuntime>{children}</AnalyticsRuntime>;
+  }
+
+  return (
+    <PostHogProvider
+      client={posthogClient}
+      autocapture={{
+        captureScreens: false,
+        captureTouches: false,
+      }}
+    >
+      <AnalyticsRuntime>{children}</AnalyticsRuntime>
+    </PostHogProvider>
+  );
 }
 
 export function useAnalytics() {

@@ -1,6 +1,7 @@
-/** Typed product analytics events (console + Sentry breadcrumb in dev/beta). */
+/** Typed product analytics events — PostHog + Sentry breadcrumbs. */
 
 import { addAppBreadcrumb } from '../monitoring/events';
+import { capturePostHog } from './posthog';
 
 export type AnalyticsEventName =
   | 'registration_started'
@@ -16,7 +17,10 @@ export type AnalyticsEventName =
   | 'subscription_viewed'
   | 'checkout_started'
   | 'subscription_active'
-  | 'daily_active';
+  | 'daily_active'
+  | 'dashboard_charts_viewed'
+  | 'analytics_screen_opened'
+  | 'ui_tap';
 
 export type AnalyticsProperties = Record<string, string | number | boolean | null | undefined>;
 
@@ -25,5 +29,13 @@ export function trackEvent(name: AnalyticsEventName, properties?: AnalyticsPrope
     console.info('[analytics]', name, properties ?? {});
   }
   addAppBreadcrumb('analytics', name, properties);
-  // Firebase/PostHog SDK can be wired here when added to package.json.
+  capturePostHog(name, properties);
+}
+
+/** Haptic / CTA microinteractions for funnel diagnostics in PostHog. */
+export function trackMicrointeraction(
+  target: string,
+  properties?: AnalyticsProperties
+): void {
+  trackEvent('ui_tap', { target, ...properties });
 }

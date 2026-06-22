@@ -6,6 +6,7 @@ import { Animated, Easing, Image, Pressable, RefreshControl, ScrollView, Text, V
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
 import { ErrorBoundary } from '../../components/error-boundary';
+import { GuestNextStepCard } from '../../components/guest-next-step-card';
 import { GoalRing } from '../../components/goal-ring';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReadinessBreakdownSheet } from '../../components/readiness-breakdown-sheet';
@@ -28,10 +29,12 @@ import { fetchAppAnnouncements, type AppAnnouncement } from '../../lib/api/annou
 import { fetchExamSchedules } from '../../lib/api/exam-calendar';
 import { formatExamCountdown } from '../../lib/exam-countdown';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
+import { GUEST_SAVE_PROGRESS } from '../../lib/product-copy';
 import { canStartPractice } from '../../lib/paywall';
 import { scheduleDailyReminder, scheduleExamReminders } from '../../lib/notifications';
 import { fetchDueFlashcardCount } from '../../lib/api/flashcards';
 import { fetchTopicAnalytics, type SubjectAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
+import { trackEvent } from '../../lib/analytics/events';
 import { fetchDailyStudyTrend, type DailyStudyPoint } from '../../lib/api/study-trend';
 import { buildAnalyticsInsights } from '../../lib/analytics/insights';
 import { StudyTrendChart } from '../../components/analytics/study-trend-chart';
@@ -426,6 +429,15 @@ function DashboardScreenContent() {
     [subjectAnalytics, stats.accuracyPercent]
   );
 
+  useEffect(() => {
+    if (subjectAnalytics.length === 0) return;
+    trackEvent('dashboard_charts_viewed', {
+      subject_count: subjectAnalytics.length,
+      has_study_trend: studyTrend.length > 0,
+      screen: 'home',
+    });
+  }, [subjectAnalytics.length, studyTrend.length]);
+
   const premium = isPremium(examTypeId);
   const readinessScore = readiness?.score ?? pasapath?.readiness_hint ?? null;
   const questionsTarget = stats.questionsTarget;
@@ -720,6 +732,15 @@ function DashboardScreenContent() {
         </Animated.View>
 
         <Animated.View style={[styles.sectionPad, entranceStyle]}>
+          {!user ? (
+            <GuestNextStepCard
+              questionsToday={stats.questionsToday}
+              onPractice={() => void startPractice()}
+              onBrowseSubjects={() => router.push('/(tabs)/study')}
+              onSignup={() => router.push('/(auth)/signup')}
+            />
+          ) : null}
+
           <View style={styles.planRow}>
             <View style={styles.planGoalCard}>
               <GoalRing
@@ -1060,14 +1081,12 @@ function DashboardScreenContent() {
             {!user ? (
               <Pressable
                 style={styles.guestBanner}
-                onPress={() => router.push('/(auth)/login')}
+                onPress={() => router.push('/(auth)/signup')}
                 accessibilityRole="button"
-                accessibilityLabel="Log in to save progress"
+                accessibilityLabel={GUEST_SAVE_PROGRESS.ctaSignup}
               >
-                <Text style={styles.guestBannerTitle}>Log in to save your progress</Text>
-                <Text style={styles.guestBannerSub}>
-                  Sync PasaPath, streaks, Mistake Bank, and readiness across devices.
-                </Text>
+                <Text style={styles.guestBannerTitle}>{GUEST_SAVE_PROGRESS.title}</Text>
+                <Text style={styles.guestBannerSub}>{GUEST_SAVE_PROGRESS.subtitle}</Text>
               </Pressable>
             ) : null}
 

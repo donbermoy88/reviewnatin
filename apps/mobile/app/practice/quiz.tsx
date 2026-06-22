@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
+import { PremiumLimitPanel } from '../../components/premium-limit-panel';
 import { EmptyState } from '../../components/empty-state';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { Pill } from '../../components/pill';
@@ -28,7 +29,6 @@ import { checkOfflineAnswer } from '../../lib/offline/pack';
 import { recordQuizOutcome } from '../../lib/api/mistakes';
 import { toggleBookmark } from '../../lib/api/bookmarks';
 import { deductHint } from '../../lib/api/xp';
-import { FREE_DAILY_QUESTIONS } from '../../lib/paywall';
 import { dismissDiagnosticPrompt } from '../../lib/diagnostic-prompt';
 import { BOARD_DURATION_SECONDS, LETTERS } from '../../lib/quiz/constants';
 import { deriveQuizMode, type QuizModeParams } from '../../lib/quiz/mode';
@@ -377,16 +377,10 @@ function PracticeQuizScreenContent() {
   if (paywallBlocked) {
     return (
       <View style={[styles.root, { paddingTop: insets.top }]}>
-        <EmptyState
-          icon={<Ionicons name="lock-closed-outline" size={32} color={colors.primary} />}
-          title={paywallReason === 'board' ? 'Board Exam Mode' : 'Abot na ang daily limit'}
-          description={
-            paywallReason === 'board'
-              ? 'Maranasan ang totoong exam pressure gamit ang ReviewNatin Plus — strict timer, walang hint.'
-              : `Nagamit mo na ang ${FREE_DAILY_QUESTIONS}/${FREE_DAILY_QUESTIONS} libreng tanong ngayong araw. I-unlock ang unlimited practice.`
-          }
-          actionLabel="View plans"
-          onAction={() => router.replace('/subscribe')}
+        <PremiumLimitPanel
+          variant={paywallReason === 'board' ? 'board' : 'daily'}
+          onUpgrade={() => router.replace('/subscribe')}
+          onDismiss={() => router.replace('/(tabs)')}
         />
       </View>
     );

@@ -20,11 +20,18 @@ import {
 } from 'node:fs';
 import { join } from 'node:path';
 import { REPO_ROOT } from './lib/supabase-env.mjs';
+import {
+  assertColdVerifyEmailDeeplink,
+  ensureMaestroCli,
+  ensureMaestroDriver,
+  resetMaestroDriver,
+} from './lib/maestro-driver.mjs';
 
 const args = process.argv.slice(2);
 const skipBuild = args.includes('--skip-build');
 const skipEmulator = args.includes('--skip-emulator');
 const skipPush = args.includes('--skip-push');
+const localBuild = args.includes('--local-build');
 
 const DIST = join(REPO_ROOT, 'dist/beta');
 const APP_JSON = join(REPO_ROOT, 'apps/mobile/app.json');
@@ -63,12 +70,7 @@ function sha256File(path) {
 }
 
 function ensureMaestro() {
-  const which = spawnSync('bash', ['-lc', 'command -v maestro'], { encoding: 'utf8' });
-  if (which.status === 0 && which.stdout.trim()) return which.stdout.trim();
-  console.log('Installing Maestro CLI…');
-  run('curl -Ls https://get.maestro.mobile.dev | bash');
-  const path = `${process.env.HOME}/.maestro/bin/maestro`;
-  return existsSync(path) ? path : 'maestro';
+  return ensureMaestroCli();
 }
 
 function waitForEmulator(timeoutSec = 120) {
@@ -174,9 +176,18 @@ async function main() {
           logStep('git-push-version', 'skip');
         }
       }
-      const out = runCapture(
-        'cd apps/mobile && npx eas-cli build --profile preview --platform android --non-interactive --json --wait',
-      );
+      const buildEnv = {
+        ...process.env,
+        ...(localBuild && process.env.ANDROID_HOME
+          ? {}
+          : localBuild
+            ? { ANDROID_HOME: `${process.env.HOME}/Library/Android/sdk` }
+            : {}),
+      };
+      const buildCmd = localBuild
+        ? 'cd apps/mobile && npx eas-cli build --profile preview --platform android --local --non-interactive --json'
+        : 'cd apps/mobile && npx eas-cli build --profile preview --platform android --non-interactive --json --wait';
+      const out = runCapture(buildCmd, { env: buildEnv });
       const buildLine = out.split('\n').filter((l) => l.trim().startsWith('{')).pop() ?? '{}';
       const last = JSON.parse(buildLine);
       const buildId = last.id ?? last.buildDetails?.id;
@@ -239,24 +250,46 @@ async function main() {
         logStep('emulator-install', 'skip', 'no emulator');
       }
 
-      step('7/9 — Maestro cohort smokes');
+      step('7/9 — Maestro cohort smokes + cold deeplink');
       const maestro = ensureMaestro();
+      ensureMaestroDriver();
+      const deeplink = assertColdVerifyEmailDeeplink(PACKAGE);
+      if (deeplink.ok) {
+        logStep('deeplink-verify-email', 'ok');
+      } else {
+        logStep('deeplink-verify-email', 'warn', deeplink.detail ?? deeplink.screen);
+      }
+
       const flows = [
         'guest-onboarding-quiz.yaml',
         'guest-settings-feedback.yaml',
-        'free-signup-path.yaml',
         'premium-subscribe-hint.yaml',
         'auth-keyboard-smoke.yaml',
+        'free-signup-path.yaml',
       ];
       let maestroOk = true;
       for (const flow of flows) {
+        resetMaestroDriver();
+        run(`adb shell am force-stop ${PACKAGE} 2>/dev/null || true`);
+        run('sleep 1');
+        run(`adb shell pm clear ${PACKAGE} || true`);
+        run('sleep 2');
         try {
-          run(`adb shell am force-stop dev.mobile.maestro dev.mobile.maestro.test ${PACKAGE} 2>/dev/null || true`);
-          run(`adb shell pm clear ${PACKAGE} || true`);
-          run('sleep 2');
           run(`${maestro} test apps/mobile/.maestro/flows/${flow}`);
+          report.maestroFlows = report.maestroFlows ?? [];
+          report.maestroFlows.push({ flow, status: 'pass' });
         } catch {
-          maestroOk = false;
+          console.warn(`Maestro flow failed: ${flow} — retrying once after driver reset…`);
+          try {
+            ensureMaestroDriver();
+            run(`${maestro} test apps/mobile/.maestro/flows/${flow}`);
+            report.maestroFlows = report.maestroFlows ?? [];
+            report.maestroFlows.push({ flow, status: 'pass-retry' });
+          } catch {
+            maestroOk = false;
+            report.maestroFlows = report.maestroFlows ?? [];
+            report.maestroFlows.push({ flow, status: 'fail' });
+          }
         }
       }
       if (maestroOk) {

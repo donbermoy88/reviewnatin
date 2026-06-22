@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
-import { isAuthDeepLink, routeTargetFromUrl } from '../lib/deep-link-routes';
+import { isAuthDeepLink, routeTargetFromUrl, verifyEmailParamsFromUrl } from '../lib/deep-link-routes';
 
 /** Handles reviewnatin:// navigation deep links (Barkada invites, checkout ref, etc.). */
 export function DeepLinkHandler() {
@@ -11,8 +11,18 @@ export function DeepLinkHandler() {
   useEffect(() => {
     const handle = (url: string | null) => {
       if (!url || url === lastHandled.current) return;
-      if (isAuthDeepLink(url)) return;
       lastHandled.current = url;
+
+      const verifyParams = verifyEmailParamsFromUrl(url);
+      if (verifyParams) {
+        router.replace({
+          pathname: '/(auth)/verify-email',
+          params: verifyParams,
+        } as never);
+        return;
+      }
+
+      if (isAuthDeepLink(url)) return;
       const target = routeTargetFromUrl(url);
       if (!target) return;
       if (target.params) {

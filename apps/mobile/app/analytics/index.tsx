@@ -17,6 +17,7 @@ import { useAppTheme } from '../../hooks/use-app-theme';
 import { fetchTopicAnalytics, type SubjectAnalytics } from '../../lib/api/analytics';
 import { fetchDailyStudyTrend, type DailyStudyPoint } from '../../lib/api/study-trend';
 import { buildAnalyticsInsights } from '../../lib/analytics/insights';
+import { trackEvent } from '../../lib/analytics/events';
 import { fetchPracticeStats } from '../../lib/api/stats';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import {
@@ -89,6 +90,14 @@ export default function AnalyticsScreen() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  useEffect(() => {
+    if (loading || subjects.length === 0) return;
+    trackEvent('analytics_screen_opened', {
+      subject_count: subjects.length,
+      has_study_trend: studyTrend.length > 0,
+    });
+  }, [loading, subjects.length, studyTrend.length]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

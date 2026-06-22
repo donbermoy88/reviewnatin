@@ -1,5 +1,6 @@
 import type { MockExam } from './api/mock-exams';
 import { fetchUsageLimits } from './api/iap';
+import { DAILY_LIMIT } from './product-copy';
 
 export const FREE_DAILY_QUESTIONS = 20;
 export const FREE_MISTAKE_DAYS = 7;
@@ -48,7 +49,7 @@ export function canStartPractice(
     return {
       allowed: false,
       remaining: 0,
-      message: `You've used ${FREE_DAILY_QUESTIONS}/${FREE_DAILY_QUESTIONS} free questions today. Unlock unlimited practice.`,
+      message: DAILY_LIMIT.body(questionsAnsweredToday),
     };
   }
 
@@ -56,7 +57,7 @@ export function canStartPractice(
     return {
       allowed: true,
       remaining,
-      message: `Free tier: ${remaining} question${remaining === 1 ? '' : 's'} left today.`,
+      message: `${remaining} libreng tanong na lang ngayong araw.`,
     };
   }
 
