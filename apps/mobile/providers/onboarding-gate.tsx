@@ -37,11 +37,11 @@ export function OnboardingGate({ children }: { children: React.ReactNode }) {
   // false on re-resolves (e.g. when the user id changes), otherwise the whole
   // app tree unmounts behind a full-screen spinner on every auth transition.
   const refresh = useCallback(async () => {
-    const done = await isOnboardingComplete(user?.id);
+    const done = user ? true : await isOnboardingComplete();
     setComplete(done);
     setReady(true);
     return done;
-  }, [user?.id]);
+  }, [user]);
 
   useEffect(() => {
     refresh();

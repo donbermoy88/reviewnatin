@@ -1,7 +1,5 @@
 import { resolveOnboardingGoal } from './api/goals';
-import { hasCompletedDiagnostic } from './api/diagnostic';
 import { getOnboarding, saveOnboarding } from './onboarding-store';
-import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 
 /**
  * True when onboarding is finished — checks local storage, then Supabase goal for signed-in users.
@@ -31,18 +29,8 @@ export async function getAppEntryHref(userId?: string): Promise<'/onboarding' | 
   return (await isOnboardingComplete(userId)) ? '/(tabs)' : '/onboarding';
 }
 
-/** After onboarding finish — diagnostic for signed-in users who haven't taken it */
+/** After onboarding finish, land in the main app. Diagnostic remains optional. */
 export async function getPostOnboardingHref(userId?: string): Promise<string> {
-  if (!userId) return '/(tabs)';
-
-  try {
-    const goal = await resolveOnboardingGoal(userId);
-    const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
-    const done = await hasCompletedDiagnostic(slug);
-    if (!done) return '/diagnostic/intro';
-  } catch {
-    /* fall through to dashboard */
-  }
-
+  void userId;
   return '/(tabs)';
 }

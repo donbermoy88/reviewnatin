@@ -16,7 +16,6 @@ import { fetchTopicQuestionCounts, fetchTopicsBySubjectSlug, type TopicRow } fro
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
-import { hasCompletedDiagnostic } from '../../lib/api/diagnostic';
 import { fetchPracticeStats } from '../../lib/api/stats';
 import { fetchGuestPracticeStats } from '../../lib/guest-quiz-history';
 import { ExamCountdownCard } from '../../components/exam-countdown-card';
@@ -42,7 +41,6 @@ import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StreakMilestoneModal, isStreakMilestone } from '../../components/streak-milestone-modal';
-import { isDiagnosticPromptDismissed } from '../../lib/diagnostic-prompt';
 
 const APP_ICON = require('../../assets/icon.png');
 
@@ -291,7 +289,7 @@ function DashboardScreenContent() {
           // These dashboard sections are independent — fetch them concurrently
           // instead of in a waterfall. Non-critical fetches fall back to a safe
           // value so one slow/failed call doesn't blank the rest of the screen.
-          const [practiceStats, gate, todayPasa, latestReadiness, weakest, diagnosticDone] =
+          const [practiceStats, gate, todayPasa, latestReadiness, weakest] =
             await Promise.all([
               fetchPracticeStats(user.id, target, slug).then(async (s) => {
                 // Show streak milestone modal if a milestone was just reached
@@ -314,22 +312,12 @@ function DashboardScreenContent() {
                   return pickWeakTopic(a.subjects);
                 })
                 .catch(() => null),
-              // Treat a lookup failure as "done" so we never force the diagnostic
-              // redirect on a transient error.
-              hasCompletedDiagnostic(slug).catch(() => true),
             ]);
           setStats(practiceStats);
           setContentGate(gate);
           setPasapath(todayPasa);
           setReadiness(latestReadiness);
           setWeakTopic(weakest);
-          if (gate?.meetsMinimum && !diagnosticDone) {
-            const dismissed = await isDiagnosticPromptDismissed(user.id, slug).catch(() => false);
-            if (!dismissed) {
-              router.replace('/diagnostic/intro');
-              return;
-            }
-          }
         } catch {
           setStats((s) => ({ ...s, questionsTarget: target }));
         }

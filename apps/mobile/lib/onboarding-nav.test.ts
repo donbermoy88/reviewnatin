@@ -1,16 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { resolveOnboardingGoal } from './api/goals';
-import { hasCompletedDiagnostic } from './api/diagnostic';
 import { getOnboarding, saveOnboarding } from './onboarding-store';
 import { getAppEntryHref, getPostOnboardingHref, isOnboardingComplete } from './onboarding-nav';
 
 vi.mock('./api/goals', () => ({
   resolveOnboardingGoal: vi.fn(),
-}));
-
-vi.mock('./api/diagnostic', () => ({
-  hasCompletedDiagnostic: vi.fn(),
 }));
 
 vi.mock('./onboarding-store', () => ({
@@ -21,7 +16,6 @@ vi.mock('./onboarding-store', () => ({
 const mockGetOnboarding = vi.mocked(getOnboarding);
 const mockSaveOnboarding = vi.mocked(saveOnboarding);
 const mockResolveGoal = vi.mocked(resolveOnboardingGoal);
-const mockHasDiagnostic = vi.mocked(hasCompletedDiagnostic);
 
 describe('isOnboardingComplete', () => {
   beforeEach(() => {
@@ -72,15 +66,7 @@ describe('getPostOnboardingHref', () => {
     await expect(getPostOnboardingHref()).resolves.toBe('/(tabs)');
   });
 
-  it('prompts diagnostic when not taken', async () => {
-    mockResolveGoal.mockResolvedValue({ ...sampleGoal(), examSlug: 'cse-professional' });
-    mockHasDiagnostic.mockResolvedValue(false);
-    await expect(getPostOnboardingHref('user-1')).resolves.toBe('/diagnostic/intro');
-  });
-
-  it('skips diagnostic when already completed', async () => {
-    mockResolveGoal.mockResolvedValue({ ...sampleGoal(), examSlug: 'cse-professional' });
-    mockHasDiagnostic.mockResolvedValue(true);
+  it('sends signed-in users to dashboard', async () => {
     await expect(getPostOnboardingHref('user-1')).resolves.toBe('/(tabs)');
   });
 });

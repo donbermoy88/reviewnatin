@@ -230,7 +230,7 @@ export default function PracticeResultScreen() {
                   ? 'Bookmarks review'
                   : 'Practice quiz';
 
-  const toggleSpeak = async (questionId: string, text: string) => {
+  const toggleSpeak = async (questionId: string, text: string, locale: 'en' | 'fil' = 'en') => {
     if (speakingId === questionId) {
       await stopSpeaking();
       setSpeakingId(null);
@@ -240,7 +240,7 @@ export default function PracticeResultScreen() {
       await stopSpeaking();
     }
     setSpeakingId(questionId);
-    const started = await speakText(text, 'en', {
+    const started = await speakText(text, locale, {
       onDone: () => setSpeakingId(null),
       onError: () => setSpeakingId(null),
     });
@@ -438,6 +438,8 @@ export default function PracticeResultScreen() {
                   (prefs.explanationLocale === 'fil'
                     ? item.explanationFil ?? item.explanationEn
                     : item.explanationEn ?? item.explanationFil);
+                const explanationLocale =
+                  prefs.explanationLocale === 'fil' && explanation === item.explanationFil ? 'fil' : 'en';
                 const open = expandedId === item.questionId;
                 const showAiCta = user && !explanation && item.isCorrect === false;
                 return (
@@ -485,7 +487,7 @@ export default function PracticeResultScreen() {
                             {canUseTts() ? (
                               <Pressable
                                 style={styles.reportBtn}
-                                onPress={() => void toggleSpeak(item.questionId, explanation)}
+                                onPress={() => void toggleSpeak(item.questionId, explanation, explanationLocale)}
                               >
                                 <Ionicons
                                   name={speakingId === item.questionId ? 'stop-circle-outline' : 'volume-high-outline'}

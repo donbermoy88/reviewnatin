@@ -4,7 +4,6 @@ import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createSessionFromUrl, isRecoveryUrl } from '../../lib/auth/deep-link-auth';
-import { getAppEntryHref } from '../../lib/onboarding-nav';
 import { supabase } from '../../lib/supabase';
 
 /** Handles reviewnatin:// deep links (OAuth callback, password recovery, etc.) */
@@ -29,8 +28,7 @@ export default function AuthCallbackScreen() {
         }
 
         const { data } = await supabase.auth.getSession();
-        const href = await getAppEntryHref(data.session?.user.id);
-        if (mounted) router.replace(href);
+        if (mounted) router.replace(data.session ? '/(tabs)' : '/onboarding');
       } catch (err) {
         if (mounted) {
           setError(err instanceof Error ? err.message : 'Auth link failed');
@@ -47,7 +45,7 @@ export default function AuthCallbackScreen() {
           return;
         }
         const { data } = await supabase.auth.getSession();
-        router.replace(await getAppEntryHref(data.session?.user.id));
+        router.replace(data.session ? '/(tabs)' : '/onboarding');
       } catch {
         router.replace('/(auth)/login');
       }

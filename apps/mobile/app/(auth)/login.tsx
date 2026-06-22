@@ -1,6 +1,6 @@
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { TextInput as RNTextInput } from 'react-native';
 import {
@@ -19,7 +19,6 @@ import { LogoMark } from '../../components/logo-mark';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { syncOnboardingAfterAuth } from '../../lib/auth/post-auth';
-import { getAppEntryHref } from '../../lib/onboarding-nav';
 import {
   validateEmail,
   validatePassword,
@@ -50,7 +49,6 @@ export default function LoginScreen() {
   const theme = useAppTheme();
   const { colors, radii, spacing } = theme;
   const styles = useMemo(() => createLoginStyles(theme), [theme]);
-  const { returnTo } = useLocalSearchParams<{ returnTo?: string }>();
   const { signIn, signUp, signInGoogle, signInApple, isConfigured } = useAuth();
   const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const [email, setEmail] = useState('');
@@ -75,14 +73,8 @@ export default function LoginScreen() {
     setConfirmPassword('');
   };
 
-  const replaceAfterAuth = async (userId: string) => {
-    const href = await getAppEntryHref(userId);
-    if (href === '/onboarding' && returnTo === 'onboarding') {
-      router.replace({ pathname: '/onboarding', params: { step: '4' } });
-      return;
-    }
-
-    router.replace(href);
+  const replaceAfterAuth = async (_userId: string) => {
+    router.replace('/(tabs)');
   };
 
   const submit = async () => {
