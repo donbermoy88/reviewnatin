@@ -46,7 +46,7 @@ See [beta-distribution-build-10.md](./beta-distribution-build-10.md) for APK URL
 - [x] APK v10 distributed (EAS preview + local `dist/beta/reviewnatin-beta-v10.apk`)
 - [x] Auth keyboard fix shipped in build 10
 - [x] Maestro cohort smokes: Guest ✓ · Premium ✓ · Keyboard ✓ (Free verify deeplink pending)
-- [ ] SMTP configured for end-to-end OTP email (`npm run supabase:resend:setup`)
+- [x] SMTP configured for end-to-end OTP email (`npm run supabase:resend:setup` — verified 2026-06-22)
 - [ ] Premium web checkout live test on physical device
 
 ## Feedback channels
