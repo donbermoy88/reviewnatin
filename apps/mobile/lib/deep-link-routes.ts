@@ -46,6 +46,9 @@ export function routeFromUrl(url: string): string | null {
     }
 
     if (path === 'subscribe') return '/subscribe';
+    if (path === 'login') return '/(auth)/login';
+    if (path === 'signup') return '/(auth)/signup';
+    if (path === 'verify-email') return '/(auth)/verify-email';
     if (path === 'checkout') {
       const ref = parsed.queryParams?.ref;
       if (typeof ref === 'string' && ref.trim()) {

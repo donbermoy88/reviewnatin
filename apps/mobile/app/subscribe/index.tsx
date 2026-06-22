@@ -570,7 +570,10 @@ export default function SubscribeScreen() {
           <View style={styles.devBannerDark}>
             <Ionicons name="code-slash" size={14} color={colors.accent} />
             <Text style={styles.devBannerDarkText}>
-              Dev build — purchases are simulated. {Platform.OS === 'android' ? 'Play Billing' : 'StoreKit'} applies on production.
+              Dev build — purchases are simulated.{' '}
+              {Platform.OS === 'android'
+                ? 'APK beta uses GCash/Maya web checkout; Play Billing on store release.'
+                : 'StoreKit applies on production.'}
             </Text>
           </View>
         ) : null}
