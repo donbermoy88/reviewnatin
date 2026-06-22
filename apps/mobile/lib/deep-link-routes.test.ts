@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { isAuthDeepLink, routeFromUrl } from './deep-link-routes';
+import { isAuthDeepLink, routeFromUrl, routeTargetFromUrl, verifyEmailParamsFromUrl } from './deep-link-routes';
 
 vi.mock('expo-linking', () => ({
   parse: (url: string) => {
@@ -36,6 +36,23 @@ describe('routeFromUrl', () => {
 
   it('routes practice quiz deep links', () => {
     expect(routeFromUrl('reviewnatin://practice')).toBe('/practice/quiz');
+  });
+});
+
+describe('routeTargetFromUrl', () => {
+  it('returns pathname and params for verify-email', () => {
+    expect(routeTargetFromUrl('reviewnatin://verify-email?email=f1@reviewnatinph.com')).toEqual({
+      pathname: '/(auth)/verify-email',
+      params: { email: 'f1@reviewnatinph.com' },
+    });
+  });
+});
+
+describe('verifyEmailParamsFromUrl', () => {
+  it('extracts email from verify-email URLs', () => {
+    expect(verifyEmailParamsFromUrl('reviewnatin://verify-email?email=Test@Mail.com')).toEqual({
+      email: 'test@mail.com',
+    });
   });
 });
 

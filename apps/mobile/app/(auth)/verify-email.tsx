@@ -46,9 +46,6 @@ export default function VerifyEmailScreen() {
     return value ?? '';
   };
 
-  const email = (normalizeParam(emailParam) || linkedEmail || user?.email || '').trim().toLowerCase();
-  const displayName = normalizeParam(displayNameParam).trim();
-
   const [digits, setDigits] = useState<string[]>(Array(OTP_LENGTH).fill(''));
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
@@ -56,32 +53,57 @@ export default function VerifyEmailScreen() {
   const [cooldown, setCooldown] = useState(RESEND_COOLDOWN_SEC);
   const [resendCount, setResendCount] = useState(0);
   const [verified, setVerified] = useState(false);
-  const [linkedEmail, setLinkedEmail] = useState('');
-  const [paramsSettled, setParamsSettled] = useState(false);
+  const [bootReady, setBootReady] = useState(false);
+  const [fallbackEmail, setFallbackEmail] = useState('');
+  const [fallbackDisplayName, setFallbackDisplayName] = useState('');
   const inputRefs = useRef<(TextInput | null)[]>([]);
 
   useEffect(() => {
+    let cancelled = false;
     (async () => {
-      const initial = await Linking.getInitialURL();
-      if (!initial) return;
-      const parsed = Linking.parse(initial);
-      const raw = parsed.queryParams?.email;
-      const value = Array.isArray(raw) ? raw[0] : raw;
-      if (typeof value === 'string' && value.trim()) {
-        setLinkedEmail(value.trim().toLowerCase());
+      let emailFromLink = '';
+      let nameFromLink = '';
+      try {
+        const parsed = await Linking.parseInitialURLAsync();
+        const path = parsed.path?.replace(/^\//, '') || parsed.hostname || '';
+        if (path === 'verify-email' || path.endsWith('verify-email')) {
+          const rawEmail = parsed.queryParams?.email;
+          const rawName = parsed.queryParams?.displayName;
+          const emailVal = Array.isArray(rawEmail) ? rawEmail[0] : rawEmail;
+          const nameVal = Array.isArray(rawName) ? rawName[0] : rawName;
+          if (typeof emailVal === 'string' && emailVal.trim()) {
+            emailFromLink = emailVal.trim().toLowerCase();
+          }
+          if (typeof nameVal === 'string' && nameVal.trim()) {
+            nameFromLink = nameVal.trim();
+          }
+        }
+      } catch {
+        // Non-fatal — router params may still carry email.
+      }
+      if (!cancelled) {
+        setFallbackEmail(emailFromLink);
+        setFallbackDisplayName(nameFromLink);
+        setBootReady(true);
       }
     })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setParamsSettled(true), 400);
-    return () => clearTimeout(timer);
-  }, []);
+  const email = (
+    normalizeParam(emailParam) ||
+    fallbackEmail ||
+    user?.email ||
+    ''
+  ).trim().toLowerCase();
+  const displayName = normalizeParam(displayNameParam).trim() || fallbackDisplayName.trim();
 
   useEffect(() => {
-    if (!paramsSettled || email) return;
+    if (!bootReady || email) return;
     router.replace('/(auth)/signup');
-  }, [paramsSettled, email, router]);
+  }, [bootReady, email, router]);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -187,7 +209,7 @@ export default function VerifyEmailScreen() {
     inputRefs.current[0]?.focus();
   };
 
-  if (!paramsSettled) {
+  if (!bootReady) {
     return (
       <View style={[styles.flex, styles.centered, { backgroundColor: colors.background }]}>
         <ActivityIndicator color={colors.primary} />

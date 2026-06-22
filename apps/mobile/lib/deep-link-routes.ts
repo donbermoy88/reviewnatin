@@ -28,6 +28,63 @@ function hrefWithQueryParams(
   return qs ? `${href}?${qs}` : href;
 }
 
+function queryParam(parsed: Linking.ParsedURL, key: string): string | undefined {
+  const raw = parsed.queryParams?.[key];
+  const value = Array.isArray(raw) ? raw[0] : raw;
+  return typeof value === 'string' && value.trim() ? value.trim() : undefined;
+}
+
+/** Parsed router target for imperative navigation (preserves query params on Android). */
+export function routeTargetFromUrl(
+  url: string
+): { pathname: string; params?: Record<string, string> } | null {
+  try {
+    const parsed = Linking.parse(url);
+    const path = pathFromParsed(parsed);
+
+    if (path === 'verify-email') {
+      const email = queryParam(parsed, 'email');
+      const displayName = queryParam(parsed, 'displayName');
+      if (!email) return { pathname: '/(auth)/verify-email' };
+      return {
+        pathname: '/(auth)/verify-email',
+        params: {
+          email: email.toLowerCase(),
+          ...(displayName ? { displayName } : {}),
+        },
+      };
+    }
+
+    const href = routeFromUrl(url);
+    if (!href) return null;
+    const qIndex = href.indexOf('?');
+    if (qIndex === -1) return { pathname: href };
+    const pathname = href.slice(0, qIndex);
+    const params = Object.fromEntries(new URLSearchParams(href.slice(qIndex + 1)).entries());
+    return { pathname, params };
+  } catch {
+    return null;
+  }
+}
+
+/** Extract verify-email params from a deep link URL (cold-start fallback). */
+export function verifyEmailParamsFromUrl(url: string): { email: string; displayName?: string } | null {
+  try {
+    const parsed = Linking.parse(url);
+    const path = pathFromParsed(parsed);
+    if (path !== 'verify-email') return null;
+    const email = queryParam(parsed, 'email');
+    if (!email) return null;
+    const displayName = queryParam(parsed, 'displayName');
+    return {
+      email: email.toLowerCase(),
+      ...(displayName ? { displayName } : {}),
+    };
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Auth links (OAuth callback, password recovery, magic links) carry Supabase
  * tokens and are owned by the auth screens — `app/auth/callback.tsx` and

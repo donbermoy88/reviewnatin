@@ -27,7 +27,7 @@ Screen × cohort expected behavior. Update **Status** after each beta build (`�
 | **Settings — beta feedback** | Works (no user id in email) | Works with user id | Works | ✓ v10 code |
 | **Settings — delete account** | Hidden / N/A | Available | Available | — |
 
-**Current build:** v10 (2026-06-22) — see [beta-distribution-build-10.md](./beta-distribution-build-10.md) and [android-beta-emulator-audit-v10-2026-06-22.md](../audit/android-beta-emulator-audit-v10-2026-06-22.md).
+**Current build:** v12 (2026-06-22) — see [beta-distribution-build-12.md](./beta-distribution-build-12.md) and [android-beta-emulator-audit-v10-2026-06-22.md](../audit/android-beta-emulator-audit-v10-2026-06-22.md).
 
 ## Release gates
 

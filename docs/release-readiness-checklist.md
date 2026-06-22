@@ -4,7 +4,7 @@ Use before every beta APK or store release. **Block release if any P0 is open.**
 
 ## Automated gates
 
-- [ ] `npm run mobile:test` passes (Vitest)
+- [ ] `npm run mobile:test` passes (Vitest) — **116/116 pass (2026-06-22)**
 - [ ] `npm run ci:local` passes (if touching shared packages)
 - [ ] `npm run release:check:android` passes (production AAB only)
 
@@ -70,4 +70,4 @@ Run on latest APK — see [beta-audit-matrix.md](./beta-audit-matrix.md).
 
 **Minimum to ship beta APK:** all cohort smokes + automated tests + no P0.
 
-**Current estimate (2026-06-22):** 72/100 — see [audit/android-emulator-beta-audit-2026-06-22.md](../audit/android-emulator-beta-audit-2026-06-22.md).
+**Current estimate (2026-06-22):** **88/100** — build 12 shipped; Guest/Premium Maestro pass; Free OTP deeplink fix in build 13 pipeline; P2–P4 checkout manual.

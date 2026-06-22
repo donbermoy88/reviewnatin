@@ -4,7 +4,7 @@
 
 These are **automated QA personas** (emulator + Maestro + adb audit agents) representing the 12 daily beta testers. Each persona maps to a cohort smoke, exam focus, and audit owner for release gates.
 
-| # | Cohort | Persona | Device profile | Android | Exam focus | Build v10 | Last audit | Notes |
+| # | Cohort | Persona | Device profile | Android | Exam focus | Build v12 | Last audit | Notes |
 |---|--------|---------|----------------|---------|------------|-----------|------------|-------|
 | 1 | **Guest** | **Mara Santos** (G1) | Pixel 8 emulator | API 35 | CSE Professional | ✓ | 2026-06-22 | Guest onboarding → Review tab smoke PASS |
 | 2 | **Guest** | **Diego Reyes** (G2) | Samsung A54 profile | API 35 | LET Elementary | ✓ | 2026-06-22 | Deep links + subscribe guest CTA |
@@ -19,11 +19,11 @@ These are **automated QA personas** (emulator + Maestro + adb audit agents) repr
 | 11 | **Premium** | **Nico Almario** (P3) | OnePlus Nord profile | API 35 | Mixed exams | ✓ | 2026-06-22 | No-ads entitlement — needs Plus activation |
 | 12 | **Premium** | **Patricia Gomez** (P4) | Realme 11 profile | API 35 | LET Elementary | ✓ | 2026-06-22 | Offline pack + AI tutor — needs Plus |
 
-## Distribution — build 10 (current)
+## Distribution — build 12 (current)
 
-See [beta-distribution-build-10.md](./beta-distribution-build-10.md) for APK URL, SHA-256, and per-cohort install instructions.
+See [beta-distribution-build-12.md](./beta-distribution-build-12.md) for APK URL, SHA-256, and per-cohort install instructions.
 
-**Prior build:** [beta-distribution-build-7.md](./beta-distribution-build-7.md)
+**Prior builds:** [build 10](./beta-distribution-build-10.md) · [build 7](./beta-distribution-build-7.md)
 
 ## Cohort setup instructions
 
@@ -43,9 +43,9 @@ See [beta-distribution-build-10.md](./beta-distribution-build-10.md) for APK URL
 
 ## Onboarding checklist (all 12 personas)
 
-- [x] APK v10 distributed (EAS preview + local `dist/beta/reviewnatin-beta-v10.apk`)
-- [x] Auth keyboard fix shipped in build 10
-- [x] Maestro cohort smokes: Guest ✓ · Premium ✓ · Keyboard ✓ (Free verify deeplink pending)
+- [x] APK v12 distributed (EAS preview + local `dist/beta/reviewnatin-beta-v12.apk`)
+- [x] Verify-email deeplink fix in build 12
+- [x] Maestro: 5 cohort smokes (guest, settings, premium, keyboard, free signup)
 - [x] SMTP configured for end-to-end OTP email (`npm run supabase:resend:setup` — verified 2026-06-22)
 - [ ] Premium web checkout live test on physical device
 
