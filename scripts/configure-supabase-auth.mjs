@@ -7,30 +7,20 @@
  *
  * Run:
  *   npm run supabase:auth          # dev-friendly
- *   npm run supabase:auth -- --prod # production / beta with OTP
+ *   npm run supabase:auth -- --prod # production / beta with OTP (+ SMTP if configured)
  */
 
-import { readFileSync, existsSync } from 'node:fs';
+import { getSupabaseEnv } from './lib/supabase-env.mjs';
+import { getAuthConfig, patchAuthConfig } from './lib/supabase-management-api.mjs';
+import { execSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const ENV_FILE = join(ROOT, '.env.supabase');
 const isProd = process.argv.includes('--prod');
+const skipSmtp = process.argv.includes('--skip-smtp');
 
-function loadEnv() {
-  if (!existsSync(ENV_FILE)) return {};
-  const out = {};
-  for (const line of readFileSync(ENV_FILE, 'utf8').split('\n')) {
-    const t = line.trim();
-    if (!t || t.startsWith('#')) continue;
-    const i = t.indexOf('=');
-    if (i > 0) out[t.slice(0, i).trim()] = t.slice(i + 1).trim();
-  }
-  return out;
-}
-
-const env = { ...loadEnv(), ...process.env };
+const env = getSupabaseEnv();
 const TOKEN = env.SUPABASE_ACCESS_TOKEN;
 const REF = env.SUPABASE_PROJECT_ID;
 
@@ -39,32 +29,8 @@ if (!TOKEN || !REF) {
   process.exit(1);
 }
 
-const API = 'https://api.supabase.com/v1';
-
-async function api(path, options = {}) {
-  const res = await fetch(`${API}${path}`, {
-    ...options,
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
-  const text = await res.text();
-  let data;
-  try {
-    data = text ? JSON.parse(text) : null;
-  } catch {
-    data = text;
-  }
-  if (!res.ok) {
-    throw new Error(`API ${path} (${res.status}): ${JSON.stringify(data)}`);
-  }
-  return data;
-}
-
 async function main() {
-  const before = await api(`/projects/${REF}/config/auth`);
+  const before = await getAuthConfig(REF, TOKEN);
 
   const patch = isProd
     ? {
@@ -79,10 +45,7 @@ async function main() {
         mailer_autoconfirm: true,
       };
 
-  const after = await api(`/projects/${REF}/config/auth`, {
-    method: 'PATCH',
-    body: JSON.stringify(patch),
-  });
+  const after = await patchAuthConfig(REF, TOKEN, patch);
 
   console.log(`Supabase auth configured for ReviewNatin (${isProd ? 'PRODUCTION' : 'DEV'}):\n`);
   console.log(`  Project:      ${REF}`);
@@ -92,7 +55,26 @@ async function main() {
 
   if (isProd) {
     console.log('\nProduction mode: users must verify email via 6-digit OTP before access.');
-    console.log('Also configure SMTP in Supabase dashboard for reliable delivery.');
+    if (!skipSmtp) {
+      try {
+        execSync('node scripts/configure-supabase-smtp.mjs', {
+          cwd: ROOT,
+          stdio: 'inherit',
+          env: process.env,
+        });
+      } catch {
+        try {
+          execSync('node scripts/configure-supabase-smtp.mjs --otp-only', {
+            cwd: ROOT,
+            stdio: 'inherit',
+            env: process.env,
+          });
+          console.warn('\nSMTP not configured — run: npm run supabase:resend:setup');
+        } catch (e) {
+          console.warn('\nSMTP/OTP patch failed:', e.message ?? e);
+        }
+      }
+    }
   } else if (before.external_email_enabled && before.mailer_autoconfirm) {
     console.log('\nNo changes needed — already configured for dev.');
   } else {

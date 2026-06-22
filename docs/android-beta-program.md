@@ -180,21 +180,26 @@ cd apps/mobile && npm run typecheck
 Requires `.env.supabase` with `SUPABASE_ACCESS_TOKEN` and `SUPABASE_PROJECT_ID`.
 
 ```bash
-# Enable email OTP (disable auto-confirm)
+# Enable email OTP (disable auto-confirm) + OTP templates
 npm run supabase:auth:prod
 
-# Apply auth migrations (rate limits, login events, disposable email RPC)
-supabase link --project-ref $SUPABASE_PROJECT_ID
-supabase db push
+# SMTP for OTP delivery (automated — no dashboard clicks)
+npm run supabase:resend:setup   # one-time: Resend API key + reviewnatinph.com DNS
+npm run supabase:smtp           # re-apply after key is in .env.supabase
 ```
 
-If `supabase db push` fails (no CLI link), apply migrations manually in Supabase SQL editor:
+```bash
+# Apply auth migrations (rate limits, login events, disposable email RPC)
+npm run beta:migrations
+```
+
+If migrations fail, apply manually in Supabase SQL editor:
 - `20260622120000_auth_rate_limits.sql`
 - `20260622120001_auth_login_events.sql`
 - `20260622120002_auth_login_rpc.sql`
 - `20260622130000_grant_disposable_email_check.sql`
 
-Configure SMTP in Supabase Dashboard → Authentication → Email for reliable OTP delivery.
+Add `RESEND_API_KEY` to `.env.supabase` (see `.env.supabase.example`). Domain `reviewnatinph.com` must be verified in Resend for beta testers to receive OTP.
 
 ### EAS preview APK (12 testers)
 

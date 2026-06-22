@@ -131,20 +131,31 @@ async function main() {
   };
 
   try {
-    step('1/8 — Vitest + TypeScript');
+    step('1/9 — Vitest + TypeScript');
     run('npm run mobile:test');
     run('npm run mobile:typecheck');
     logStep('tests', 'ok');
 
-    step('2/8 — Supabase prod auth (OTP on)');
+    step('2/9 — Supabase prod auth + SMTP (OTP on)');
     try {
       run('npm run supabase:auth:prod');
       logStep('supabase:auth:prod', 'ok');
     } catch {
       logStep('supabase:auth:prod', 'warn', 'already configured or creds missing');
     }
+    try {
+      run('npm run supabase:smtp');
+      logStep('supabase:smtp', 'ok');
+    } catch {
+      try {
+        run('npm run supabase:smtp -- --otp-only');
+        logStep('supabase:smtp', 'warn', 'OTP templates only — add RESEND_API_KEY for delivery');
+      } catch {
+        logStep('supabase:smtp', 'warn', 'skipped');
+      }
+    }
 
-    step('3/8 — Auth migrations (Management API)');
+    step('3/9 — Auth migrations (Management API)');
     run('node scripts/beta-apply-auth-migrations.mjs');
     logStep('auth-migrations', 'ok');
 
@@ -152,7 +163,7 @@ async function main() {
     let versionCode = JSON.parse(readFileSync(APP_JSON, 'utf8')).expo.android.versionCode;
 
     if (!skipBuild) {
-      step('4/8 — Bump versionCode + EAS preview build');
+      step('4/9 — Bump versionCode + EAS preview build');
       versionCode = bumpVersionCode();
       if (!skipPush) {
         try {
@@ -174,7 +185,7 @@ async function main() {
       report.easBuildUrl = `https://expo.dev/accounts/donbermoy88/projects/reviewnatin/builds/${buildId}`;
       logStep('eas-build', 'ok', buildId);
 
-      step('5/8 — Download APK');
+      step('5/9 — Download APK');
       const apkUrl = await pollEasBuild(buildId);
       if (!apkUrl) throw new Error('No APK URL on finished build');
       apkPath = join(DIST, `reviewnatin-beta-v${versionCode}.apk`);
@@ -191,7 +202,7 @@ async function main() {
         report.sha256 = sha256File(apkPath);
         logStep('apk-download', 'skip', existing);
       } else {
-        step('5/8 — Download latest finished EAS APK');
+        step('5/9 — Download latest finished EAS APK');
         const listJson = runCapture(
           'cd apps/mobile && npx eas-cli build:list --platform android --limit 1 --json --non-interactive',
         );
@@ -213,7 +224,7 @@ async function main() {
     }
 
     if (!skipEmulator && apkPath && existsSync(apkPath)) {
-      step('6/8 — Emulator install APK');
+      step('6/9 — Emulator install APK');
       if (startEmulatorIfNeeded()) {
         try {
           run(`adb uninstall ${PACKAGE}`);
@@ -228,7 +239,7 @@ async function main() {
         logStep('emulator-install', 'skip', 'no emulator');
       }
 
-      step('7/8 — Maestro cohort smokes');
+      step('7/9 — Maestro cohort smokes');
       const maestro = ensureMaestro();
       try {
         run(`${maestro} test apps/mobile/.maestro/flows`);
@@ -238,7 +249,7 @@ async function main() {
       }
     }
 
-    step('8/8 — Release notes');
+    step('8/9 — Release notes');
     const notes = [
       `# ReviewNatin Beta APK — build ${versionCode}`,
       ``,
