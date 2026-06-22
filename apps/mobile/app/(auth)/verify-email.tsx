@@ -1,4 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Linking from 'expo-linking';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -45,7 +46,7 @@ export default function VerifyEmailScreen() {
     return value ?? '';
   };
 
-  const email = (normalizeParam(emailParam) || user?.email || '').trim().toLowerCase();
+  const email = (normalizeParam(emailParam) || linkedEmail || user?.email || '').trim().toLowerCase();
   const displayName = normalizeParam(displayNameParam).trim();
 
   const [digits, setDigits] = useState<string[]>(Array(OTP_LENGTH).fill(''));
@@ -55,11 +56,25 @@ export default function VerifyEmailScreen() {
   const [cooldown, setCooldown] = useState(RESEND_COOLDOWN_SEC);
   const [resendCount, setResendCount] = useState(0);
   const [verified, setVerified] = useState(false);
+  const [linkedEmail, setLinkedEmail] = useState('');
   const [paramsSettled, setParamsSettled] = useState(false);
   const inputRefs = useRef<(TextInput | null)[]>([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setParamsSettled(true), 120);
+    (async () => {
+      const initial = await Linking.getInitialURL();
+      if (!initial) return;
+      const parsed = Linking.parse(initial);
+      const raw = parsed.queryParams?.email;
+      const value = Array.isArray(raw) ? raw[0] : raw;
+      if (typeof value === 'string' && value.trim()) {
+        setLinkedEmail(value.trim().toLowerCase());
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setParamsSettled(true), 400);
     return () => clearTimeout(timer);
   }, []);
 

@@ -487,10 +487,10 @@ export default function SubscribeScreen() {
               </Text>
             </View>
             <Pressable
-              onPress={requireLogin}
+              onPress={() => router.push('/(auth)/signup')}
               style={({ pressed }) => [styles.guestBannerBtn, pressed && { opacity: 0.9 }]}
               accessibilityRole="button"
-              accessibilityLabel="Mag-sign up o mag-log in"
+              accessibilityLabel="Mag-sign up"
             >
               <Text style={styles.guestBannerBtnText}>Sign up</Text>
             </Pressable>
