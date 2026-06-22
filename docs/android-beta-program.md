@@ -147,6 +147,25 @@ See also [release-readiness-checklist.md](./release-readiness-checklist.md).
 
 ## Ops runbook (cloud + local)
 
+### One-command automation (recommended)
+
+Runs tests → Supabase OTP prod → auth migrations → EAS preview APK → emulator install → Maestro smokes → release notes.
+
+```bash
+npm run beta:automate
+```
+
+Options:
+- `--skip-build` — reuse latest APK in `dist/beta/`
+- `--skip-emulator` — skip adb install + Maestro
+- `--skip-push` — do not auto-commit versionCode bump
+
+CI: GitHub Actions workflow **Android Beta Release** (`workflow_dispatch`) with secrets `EXPO_TOKEN`, `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_ID`.
+
+Output: `dist/beta/last-automation-report.json`, `dist/beta/release-notes-build-*.md`, APK artifact.
+
+### Manual steps (if automation blocked)
+
 Run after each beta release cycle or when onboarding new testers.
 
 ### Local verification

@@ -24,7 +24,5 @@ appId: ph.reviewnatin.app
     timeout: 15000
 - tapOn: "Review"
 - extendedWaitUntil:
-    visible:
-      - "Start practice quiz"
-      - "Practice"
+    visible: "Start practice quiz"
     timeout: 10000

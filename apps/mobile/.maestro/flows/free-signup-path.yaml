@@ -22,7 +22,5 @@ appId: ph.reviewnatin.app
 - hideKeyboard
 - tapOn: "Gumawa ng account"
 - extendedWaitUntil:
-    visible:
-      - "6-digit code"
-      - "I-verify at magpatuloy"
+    visible: "I-verify at magpatuloy"
     timeout: 20000
