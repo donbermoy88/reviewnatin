@@ -1,0 +1,28 @@
+# G4 smoke: Settings beta feedback entry (guest)
+appId: ph.reviewnatin.app
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    when:
+      visible: "Get started"
+    commands:
+      - tapOn: "Get started"
+- extendedWaitUntil:
+    visible: "Continue →"
+    timeout: 15000
+    optional: true
+- runFlow:
+    when:
+      visible: "Continue →"
+    commands:
+      - tapOn: "Continue →"
+      - tapOn: "Continue →"
+      - tapOn: "I'm committed →"
+      - tapOn: "Skip muna (guest)"
+      - tapOn: "Pumunta sa Dashboard"
+- tapOn: "Settings"
+- extendedWaitUntil:
+    visible: "Report a problem"
+    timeout: 15000
+- tapOn: "Report a problem"

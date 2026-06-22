@@ -79,6 +79,7 @@ export function routeFromUrl(url: string): string | null {
     if (path === 'tutor' || path === 'ai-tutor') return '/tutor';
     if (path === 'changelog' || path === 'updates') return '/changelog';
     if (path === 'study' || path === 'aral') return '/(tabs)/study';
+    if (path === 'practice' || path === 'quiz') return '/practice/quiz';
     if (path === 'pasapath' || path === 'pasapath/week') return '/pasapath/week';
     if (path === 'mistakes') return '/mistakes';
     if (path === 'flashcards') return '/flashcards';

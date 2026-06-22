@@ -243,6 +243,7 @@ async function main() {
       const maestro = ensureMaestro();
       const flows = [
         'guest-onboarding-quiz.yaml',
+        'guest-settings-feedback.yaml',
         'free-signup-path.yaml',
         'premium-subscribe-hint.yaml',
         'auth-keyboard-smoke.yaml',

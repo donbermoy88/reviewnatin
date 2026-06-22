@@ -33,6 +33,10 @@ describe('routeFromUrl', () => {
       routeFromUrl('reviewnatin://verify-email?email=a@b.com&displayName=Mara%20Santos')
     ).toBe('/(auth)/verify-email?email=a%40b.com&displayName=Mara+Santos');
   });
+
+  it('routes practice quiz deep links', () => {
+    expect(routeFromUrl('reviewnatin://practice')).toBe('/practice/quiz');
+  });
 });
 
 describe('isAuthDeepLink', () => {
