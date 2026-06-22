@@ -11,6 +11,23 @@ function pathFromParsed(parsed: Linking.ParsedURL): string {
   return path || hostname || '';
 }
 
+function hrefWithQueryParams(
+  href: string,
+  parsed: Linking.ParsedURL,
+  keys: string[]
+): string {
+  const params = new URLSearchParams();
+  for (const key of keys) {
+    const raw = parsed.queryParams?.[key];
+    const value = Array.isArray(raw) ? raw[0] : raw;
+    if (typeof value === 'string' && value.trim()) {
+      params.set(key, value.trim());
+    }
+  }
+  const qs = params.toString();
+  return qs ? `${href}?${qs}` : href;
+}
+
 /**
  * Auth links (OAuth callback, password recovery, magic links) carry Supabase
  * tokens and are owned by the auth screens — `app/auth/callback.tsx` and
@@ -48,7 +65,9 @@ export function routeFromUrl(url: string): string | null {
     if (path === 'subscribe') return '/subscribe';
     if (path === 'login') return '/(auth)/login';
     if (path === 'signup') return '/(auth)/signup';
-    if (path === 'verify-email') return '/(auth)/verify-email';
+    if (path === 'verify-email') {
+      return hrefWithQueryParams('/(auth)/verify-email', parsed, ['email', 'displayName']);
+    }
     if (path === 'checkout') {
       const ref = parsed.queryParams?.ref;
       if (typeof ref === 'string' && ref.trim()) {

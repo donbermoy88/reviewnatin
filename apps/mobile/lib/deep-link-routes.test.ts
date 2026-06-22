@@ -21,6 +21,18 @@ describe('routeFromUrl', () => {
   it('routes custom scheme checkout links with refs', () => {
     expect(routeFromUrl('reviewnatin://checkout?ref=RN-123')).toBe('/subscribe?ref=RN-123');
   });
+
+  it('routes verify-email links with email query params', () => {
+    expect(routeFromUrl('reviewnatin://verify-email?email=f1.agent@reviewnatinph.com')).toBe(
+      '/(auth)/verify-email?email=f1.agent%40reviewnatinph.com'
+    );
+  });
+
+  it('routes verify-email links with displayName', () => {
+    expect(
+      routeFromUrl('reviewnatin://verify-email?email=a@b.com&displayName=Mara%20Santos')
+    ).toBe('/(auth)/verify-email?email=a%40b.com&displayName=Mara+Santos');
+  });
 });
 
 describe('isAuthDeepLink', () => {

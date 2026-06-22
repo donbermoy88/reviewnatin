@@ -35,13 +35,18 @@ export default function VerifyEmailScreen() {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const { colors, spacing } = theme;
   const { email: emailParam, displayName: displayNameParam } = useLocalSearchParams<{
-    email?: string;
-    displayName?: string;
+    email?: string | string[];
+    displayName?: string | string[];
   }>();
   const { verifyEmailOtp, resendEmailOtp, user, isConfigured } = useAuth();
 
-  const email = (emailParam ?? user?.email ?? '').trim().toLowerCase();
-  const displayName = displayNameParam?.trim() ?? '';
+  const normalizeParam = (value?: string | string[]) => {
+    if (Array.isArray(value)) return value[0] ?? '';
+    return value ?? '';
+  };
+
+  const email = (normalizeParam(emailParam) || user?.email || '').trim().toLowerCase();
+  const displayName = normalizeParam(displayNameParam).trim();
 
   const [digits, setDigits] = useState<string[]>(Array(OTP_LENGTH).fill(''));
   const [error, setError] = useState<string | null>(null);
@@ -50,13 +55,18 @@ export default function VerifyEmailScreen() {
   const [cooldown, setCooldown] = useState(RESEND_COOLDOWN_SEC);
   const [resendCount, setResendCount] = useState(0);
   const [verified, setVerified] = useState(false);
+  const [paramsSettled, setParamsSettled] = useState(false);
   const inputRefs = useRef<(TextInput | null)[]>([]);
 
   useEffect(() => {
-    if (!email) {
-      router.replace('/(auth)/signup');
-    }
-  }, [email, router]);
+    const timer = setTimeout(() => setParamsSettled(true), 120);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!paramsSettled || email) return;
+    router.replace('/(auth)/signup');
+  }, [paramsSettled, email, router]);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -162,6 +172,18 @@ export default function VerifyEmailScreen() {
     inputRefs.current[0]?.focus();
   };
 
+  if (!paramsSettled) {
+    return (
+      <View style={[styles.flex, styles.centered, { backgroundColor: colors.background }]}>
+        <ActivityIndicator color={colors.primary} />
+      </View>
+    );
+  }
+
+  if (!email) {
+    return null;
+  }
+
   return (
     <KeyboardAvoidingView
       style={[styles.flex, { backgroundColor: colors.background }]}
@@ -205,6 +227,8 @@ export default function VerifyEmailScreen() {
               keyboardType="number-pad"
               maxLength={1}
               selectTextOnFocus
+              showSoftInputOnFocus
+              autoFocus={index === 0}
               editable={!loading}
               accessibilityLabel={`Digit ${index + 1} of ${OTP_LENGTH}`}
             />
@@ -264,6 +288,7 @@ function createStyles(theme: AppTheme) {
   const { colors, fonts, radii, spacing, type } = theme;
   return StyleSheet.create({
     flex: { flex: 1 },
+    centered: { justifyContent: 'center', alignItems: 'center' },
     hero: {
       alignItems: 'center',
       paddingBottom: spacing.xl,

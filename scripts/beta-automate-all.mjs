@@ -250,7 +250,9 @@ async function main() {
       let maestroOk = true;
       for (const flow of flows) {
         try {
+          run(`adb shell am force-stop dev.mobile.maestro dev.mobile.maestro.test ${PACKAGE} 2>/dev/null || true`);
           run(`adb shell pm clear ${PACKAGE} || true`);
+          run('sleep 2');
           run(`${maestro} test apps/mobile/.maestro/flows/${flow}`);
         } catch {
           maestroOk = false;

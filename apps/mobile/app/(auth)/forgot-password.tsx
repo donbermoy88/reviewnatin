@@ -1,6 +1,8 @@
 import { useRouter } from 'expo-router';
-import { useState, type ReactNode } from 'react';
+import { useRef, useState } from 'react';
+import type { TextInput as RNTextInput } from 'react-native';
 import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native';
+import { AuthLabeledField } from '../../components/auth-labeled-field';
 import { AuthShell, authFieldStyles } from '../../components/auth-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
@@ -8,28 +10,12 @@ import { validateEmail } from '../../lib/auth/validation';
 import { toUserFacingError } from '../../lib/errors/user-facing';
 import { useAuth } from '../../providers/auth-provider';
 
-function LabeledField({
-  label,
-  children,
-  styles,
-}: {
-  label: string;
-  children: ReactNode;
-  styles: ReturnType<typeof authFieldStyles>;
-}) {
-  return (
-    <View style={styles.field}>
-      <Text style={styles.fieldLabel}>{label}</Text>
-      {children}
-    </View>
-  );
-}
-
 export default function ForgotPasswordScreen() {
   const router = useRouter();
   const theme = useAppTheme();
   const styles = authFieldStyles(theme);
   const { resetPassword, isConfigured } = useAuth();
+  const emailRef = useRef<RNTextInput>(null);
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
@@ -62,20 +48,26 @@ export default function ForgotPasswordScreen() {
       title="Nakalimutan ang password?"
       subtitle="Magpapadala kami ng reset link sa email mo."
     >
-      <LabeledField label="Email" styles={styles}>
+      <AuthLabeledField
+        label="Email"
+        onFocusField={() => emailRef.current?.focus()}
+        disabled={loading}
+      >
         <TextInput
+          ref={emailRef}
           style={styles.input}
           placeholder="e.g. reviewer@email.com"
           placeholderTextColor={theme.colors.textLight}
           autoCapitalize="none"
           keyboardType="email-address"
           autoComplete="email"
+          showSoftInputOnFocus
           value={email}
           onChangeText={setEmail}
           editable={!loading}
           accessibilityLabel="Email address for password reset"
         />
-      </LabeledField>
+      </AuthLabeledField>
       {error ? <Text style={styles.error}>{error}</Text> : null}
       {info ? <Text style={styles.info}>{info}</Text> : null}
       {loading ? (
