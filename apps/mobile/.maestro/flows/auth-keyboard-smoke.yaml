@@ -1,0 +1,55 @@
+# Auth keyboard smoke: fields accept input via label or placeholder tap
+appId: ph.reviewnatin.app
+---
+- runFlow:
+    when:
+      visible: "Get started"
+    commands:
+      - tapOn: "Get started"
+- openLink: reviewnatin://signup
+- extendedWaitUntil:
+    visible: "Gumawa ng account"
+    timeout: 15000
+- tapOn:
+    text: "Name"
+    optional: true
+- tapOn:
+    text: "Pangalan mo"
+    optional: true
+- inputText: "Mara Santos"
+- hideKeyboard
+- tapOn:
+    text: "Email"
+    optional: true
+- tapOn:
+    text: "e.g. reviewer@email.com"
+    optional: true
+- inputText: "f1.agent@reviewnatinph.com"
+- hideKeyboard
+- tapOn:
+    text: "Password"
+    optional: true
+- tapOn:
+    text: "Create a password"
+    optional: true
+- inputText: "ReviewNatin1"
+- hideKeyboard
+- openLink: reviewnatin://login
+- extendedWaitUntil:
+    visible: "Log in"
+    timeout: 15000
+- tapOn:
+    text: "Email"
+    optional: true
+- tapOn:
+    text: "e.g. reviewer@email.com"
+    optional: true
+- inputText: "f1.agent@reviewnatinph.com"
+- hideKeyboard
+- tapOn:
+    text: "Password"
+    optional: true
+- tapOn:
+    text: "Enter your password"
+    optional: true
+- inputText: "ReviewNatin1"

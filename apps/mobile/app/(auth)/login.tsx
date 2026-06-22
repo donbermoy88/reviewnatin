@@ -1,7 +1,7 @@
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { LayoutChangeEvent, TextInput as RNTextInput } from 'react-native';
 import {
   ActivityIndicator,
@@ -26,6 +26,7 @@ import {
   validatePasswordMatch,
 } from '../../lib/auth/validation';
 import { validateEmailNotDisposable } from '../../lib/auth/disposable-email';
+import { AuthLabeledField } from '../../components/auth-labeled-field';
 import { PasswordStrengthMeter } from '../../components/password-strength-meter';
 import { TurnstileCaptcha } from '../../components/turnstile-captcha';
 import { isTurnstileRequired } from '../../lib/auth/turnstile-config';
@@ -33,25 +34,6 @@ import { toUserFacingError } from '../../lib/errors/user-facing';
 import { useAuth } from '../../providers/auth-provider';
 
 type LoginField = 'email' | 'password' | 'confirm';
-
-function LabeledField({
-  label,
-  children,
-  onLayout,
-  styles,
-}: {
-  label: string;
-  children: ReactNode;
-  onLayout?: (event: LayoutChangeEvent) => void;
-  styles: ReturnType<typeof createLoginStyles>;
-}) {
-  return (
-    <View style={styles.field} onLayout={onLayout}>
-      <Text style={styles.fieldLabel}>{label}</Text>
-      {children}
-    </View>
-  );
-}
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -79,6 +61,7 @@ export default function LoginScreen() {
     confirm: 0,
   });
   const scrollRef = useRef<ScrollView>(null);
+  const emailRef = useRef<RNTextInput>(null);
   const passwordRef = useRef<RNTextInput>(null);
   const confirmRef = useRef<RNTextInput>(null);
 
@@ -250,15 +233,17 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView
       style={[styles.flex, { backgroundColor: colors.background }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? insets.top : 0}
     >
       <ScrollView
         ref={scrollRef}
         style={styles.flex}
         contentContainerStyle={styles.scrollContent}
-        keyboardDismissMode="interactive"
-        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        keyboardShouldPersistTaps="always"
         bounces={false}
+        automaticallyAdjustKeyboardInsets
       >
         <LinearGradient
           colors={[colors.primary, colors.primaryDark]}
@@ -332,8 +317,14 @@ export default function LoginScreen() {
             <View style={styles.dividerLine} />
           </View>
 
-          <LabeledField label="Email" styles={styles} onLayout={recordFieldTop('email')}>
+          <AuthLabeledField
+            label="Email"
+            onLayout={recordFieldTop('email')}
+            onFocusField={() => emailRef.current?.focus()}
+            disabled={loading}
+          >
             <TextInput
+              ref={emailRef}
               style={styles.input}
               placeholder="e.g. reviewer@email.com"
               placeholderTextColor={colors.textLight}
@@ -343,6 +334,7 @@ export default function LoginScreen() {
               textContentType="emailAddress"
               autoComplete="email"
               returnKeyType="next"
+              showSoftInputOnFocus
               onFocus={() => scrollToField('email')}
               onSubmitEditing={() => passwordRef.current?.focus()}
               value={email}
@@ -350,9 +342,14 @@ export default function LoginScreen() {
               editable={!loading}
               accessibilityLabel="Email address"
             />
-          </LabeledField>
+          </AuthLabeledField>
 
-          <LabeledField label="Password" styles={styles} onLayout={recordFieldTop('password')}>
+          <AuthLabeledField
+            label="Password"
+            onLayout={recordFieldTop('password')}
+            onFocusField={() => passwordRef.current?.focus()}
+            disabled={loading}
+          >
             <TextInput
               ref={passwordRef}
               style={styles.input}
@@ -362,6 +359,7 @@ export default function LoginScreen() {
               textContentType={mode === 'signup' ? 'newPassword' : 'password'}
               autoComplete={mode === 'signup' ? 'password-new' : 'password'}
               returnKeyType={mode === 'signup' ? 'next' : 'done'}
+              showSoftInputOnFocus
               onFocus={() => scrollToField('password')}
               onSubmitEditing={mode === 'signup' ? () => confirmRef.current?.focus() : submit}
               value={password}
@@ -370,13 +368,14 @@ export default function LoginScreen() {
               accessibilityLabel={mode === 'signup' ? 'Password' : 'Password for login'}
             />
             {mode === 'signup' ? <PasswordStrengthMeter password={password} /> : null}
-          </LabeledField>
+          </AuthLabeledField>
 
           {mode === 'signup' ? (
-            <LabeledField
+            <AuthLabeledField
               label="Confirm password"
-              styles={styles}
               onLayout={recordFieldTop('confirm')}
+              onFocusField={() => confirmRef.current?.focus()}
+              disabled={loading}
             >
               <TextInput
                 ref={confirmRef}
@@ -387,6 +386,7 @@ export default function LoginScreen() {
                 textContentType="newPassword"
                 autoComplete="password-new"
                 returnKeyType="done"
+                showSoftInputOnFocus
                 onFocus={() => scrollToField('confirm')}
                 onSubmitEditing={submit}
                 value={confirmPassword}
@@ -394,7 +394,7 @@ export default function LoginScreen() {
                 editable={!loading}
                 accessibilityLabel="Confirm password"
               />
-            </LabeledField>
+            </AuthLabeledField>
           ) : null}
 
           {mode === 'signup' && turnstileRequired ? (

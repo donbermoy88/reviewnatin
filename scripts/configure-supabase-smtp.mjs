@@ -30,7 +30,7 @@ function resolveSmtpConfig(env) {
   if (env.SMTP_HOST && env.SMTP_PASS) {
     return {
       smtp_host: env.SMTP_HOST,
-      smtp_port: Number(env.SMTP_PORT || 587),
+      smtp_port: String(env.SMTP_PORT || 587),
       smtp_user: env.SMTP_USER || '',
       smtp_pass: env.SMTP_PASS,
       smtp_admin_email: env.SMTP_ADMIN_EMAIL || env.SMTP_FROM || 'no-reply@reviewnatinph.com',
@@ -41,7 +41,7 @@ function resolveSmtpConfig(env) {
   if (env.GMAIL_USER && env.GMAIL_APP_PASSWORD) {
     return {
       smtp_host: 'smtp.gmail.com',
-      smtp_port: Number(env.SMTP_PORT || 587),
+      smtp_port: String(env.SMTP_PORT || 587),
       smtp_user: env.GMAIL_USER,
       smtp_pass: env.GMAIL_APP_PASSWORD,
       smtp_admin_email: env.SMTP_ADMIN_EMAIL || env.GMAIL_USER,
@@ -53,7 +53,7 @@ function resolveSmtpConfig(env) {
   if (resendKey) {
     return {
       smtp_host: 'smtp.resend.com',
-      smtp_port: Number(env.SMTP_PORT || 465),
+      smtp_port: String(env.SMTP_PORT || 465),
       smtp_user: 'resend',
       smtp_pass: resendKey,
       smtp_admin_email:

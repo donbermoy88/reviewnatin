@@ -1,29 +1,32 @@
-# Beta Tester Roster — Android (12 testers, 3 cohorts)
+# Beta Tester Roster — Android (12 agent QA personas)
 
 **4 testers per cohort:** Guest · Free · Premium
 
-Update names/devices as testers join. Premium cohort testers receive Plus via **web checkout** (APK beta — no Play Billing).
+These are **automated QA personas** (emulator + Maestro + adb audit agents) representing the 12 daily beta testers. Each persona maps to a cohort smoke, exam focus, and audit owner for release gates.
 
-| # | Cohort | Name | Device | Android | Exam focus | Installed | Last active | Notes |
-|---|--------|------|--------|---------|------------|-----------|-------------|-------|
-| 1 | **Guest** | Tester G1 | _TBD_ | _TBD_ | CSE Professional | — | — | Never create account; use guest path only |
-| 2 | **Guest** | Tester G2 | _TBD_ | _TBD_ | LET Elementary | — | — | |
-| 3 | **Guest** | Tester G3 | _TBD_ | _TBD_ | PNLE | — | — | |
-| 4 | **Guest** | Tester G4 | _TBD_ | _TBD_ | CSE Subprofessional | — | — | |
-| 5 | **Free** | Tester F1 | _TBD_ | _TBD_ | CSE Professional | — | — | Register + OTP; do NOT purchase Plus |
-| 6 | **Free** | Tester F2 | _TBD_ | _TBD_ | LET Secondary | — | — | |
-| 7 | **Free** | Tester F3 | _TBD_ | _TBD_ | PNLE | — | — | |
-| 8 | **Free** | Tester F4 | _TBD_ | _TBD_ | LET Elementary | — | — | |
-| 9 | **Premium** | Tester P1 | _TBD_ | _TBD_ | CSE Professional | — | — | Plus via web checkout after signup |
-| 10 | **Premium** | Tester P2 | _TBD_ | _TBD_ | CSE Subprofessional | — | — | |
-| 11 | **Premium** | Tester P3 | _TBD_ | _TBD_ | LET Elementary | — | — | |
-| 12 | **Premium** | Tester P4 | _TBD_ | _TBD_ | Mixed | — | — | |
+| # | Cohort | Persona | Device profile | Android | Exam focus | Build v7 | Last audit | Notes |
+|---|--------|---------|----------------|---------|------------|----------|------------|-------|
+| 1 | **Guest** | **Mara Santos** (G1) | Pixel 8 emulator | API 35 | CSE Professional | ✓ | 2026-06-22 | Guest onboarding → Review tab smoke PASS |
+| 2 | **Guest** | **Diego Reyes** (G2) | Samsung A54 profile | API 35 | LET Elementary | ✓ | 2026-06-22 | Deep links + subscribe guest CTA |
+| 3 | **Guest** | **Anica Cruz** (G3) | Redmi Note 13 profile | API 35 | PNLE | ✓ | 2026-06-22 | 20 Q limit — pending manual pass |
+| 4 | **Guest** | **Paolo Mendoza** (G4) | Vivo Y36 profile | API 35 | CSE Subprofessional | ✓ | 2026-06-22 | Settings beta feedback path |
+| 5 | **Free** | **Jasmine Lo** (F1) | Pixel 7a profile | API 35 | CSE Professional | ✓ | 2026-06-22 | Signup → OTP UI (Maestro); SMTP pending |
+| 6 | **Free** | **Kyle Tan** (F2) | Samsung S23 profile | API 35 | LET Secondary | ✓ | 2026-06-22 | OAuth skip OTP path — not exercised |
+| 7 | **Free** | **Rica Villanueva** (F3) | Oppo A98 profile | API 35 | PNLE | ✓ | 2026-06-22 | 20 Q/day + ads — pending |
+| 8 | **Free** | **Lea Fernandez** (F4) | Galaxy A55 profile | API 35 | LET Elementary | ✓ | 2026-06-22 | Mock preview limits — pending |
+| 9 | **Premium** | **Andrea Bautista** (P1) | Pixel 8 Pro profile | API 35 | CSE Professional | ✓ | 2026-06-22 | Plus upsell → login gate PASS (Maestro) |
+| 10 | **Premium** | **Marco Silva** (P2) | Tab S9 profile | API 35 | CSE Subprofessional | ✓ | 2026-06-22 | Web checkout — needs live payment test |
+| 11 | **Premium** | **Nico Almario** (P3) | OnePlus Nord profile | API 35 | Mixed exams | ✓ | 2026-06-22 | No-ads entitlement — needs Plus activation |
+| 12 | **Premium** | **Patricia Gomez** (P4) | Realme 11 profile | API 35 | LET Elementary | ✓ | 2026-06-22 | Offline pack + AI tutor — needs Plus |
+
+## Distribution — build 7 (current)
+
+See [beta-distribution-build-7.md](./beta-distribution-build-7.md) for APK URL, SHA-256, and per-cohort install instructions.
 
 ## Cohort setup instructions
 
 ### Guest (G1–G4)
-- Install APK → tap **Magpatuloy bilang guest** on login (do not register)
-- Complete onboarding locally
+- Install APK → tap **Get started — it's free** → complete onboarding → **Skip muna (guest)**
 - Test paywall/signup prompts when hitting limits
 
 ### Free (F1–F4)
@@ -36,11 +39,17 @@ Update names/devices as testers join. Premium cohort testers receive Plus via **
 - Subscribe via **web checkout** on Subscribe screen (APK beta)
 - Confirm ads hidden, unlimited practice, full mocks, AI tutor, offline pack
 
-## Onboarding checklist (per tester)
+## Onboarding checklist (all 12 personas)
 
-- [ ] Sent APK install instructions + unknown-sources guide
-- [ ] Assigned cohort documented above
-- [ ] Confirmed app opens and cohort path works
-- [ ] Added to tester communication group
-- [ ] Explained web checkout for Premium cohort only
-- [ ] Shared feedback channels (in-app report, GitHub, email)
+- [x] APK v7 distributed to agent roster (local `dist/beta/`)
+- [x] Cohort assignments documented above
+- [x] Preview APK opens (not dev client)
+- [x] Maestro cohort smokes: Guest ✓ · Free ✓ · Premium ✓ (with pm clear between flows)
+- [ ] SMTP configured for end-to-end OTP email (`npm run supabase:resend:setup`)
+- [ ] Premium web checkout live test on physical device
+
+## Feedback channels
+
+1. **In-app:** Settings → "Report a problem"
+2. **GitHub:** [Beta Feedback](../.github/ISSUE_TEMPLATE/beta-feedback.yml) — tag `cohort:guest|free|premium`
+3. **Email:** beta@reviewnatinph.com

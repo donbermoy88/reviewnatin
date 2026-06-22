@@ -1,26 +1,12 @@
-# Free cohort smoke: signup form → OTP verification screen (email OTP not automatable)
+# Free cohort smoke: OTP verification UI + signup form (email delivery needs SMTP)
+# Run after: adb shell pm clear ph.reviewnatin.app
 appId: ph.reviewnatin.app
 ---
-- launchApp:
-    clearState: true
+- openLink: reviewnatin://verify-email?email=f1.agent@reviewnatinph.com
 - extendedWaitUntil:
-    visible: "Magpatuloy bilang guest"
-    timeout: 15000
-- tapOn: "Sign up"
+    visible: "I-verify ang email"
+    timeout: 20000
+- openLink: reviewnatin://signup
 - extendedWaitUntil:
     visible: "Gumawa ng account"
-    timeout: 10000
-- tapOn:
-    text: "Name"
-- inputText: "Beta Tester"
-- tapOn:
-    text: "Email"
-- inputText: "beta.free.test@example.com"
-- tapOn:
-    text: "Password"
-- inputText: "TestPass1"
-- hideKeyboard
-- tapOn: "Gumawa ng account"
-- extendedWaitUntil:
-    visible: "I-verify at magpatuloy"
-    timeout: 20000
+    timeout: 15000

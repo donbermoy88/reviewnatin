@@ -25,6 +25,7 @@
     "supabase:auth:prod": "node scripts/configure-supabase-auth.mjs --prod",
     "supabase:smtp": "node scripts/configure-supabase-smtp.mjs",
     "supabase:resend:setup": "node scripts/setup-resend-smtp.mjs",
+    "supabase:resend:dns": "node scripts/provision-resend-dns-cloudflare.mjs",
     "beta:migrations": "node scripts/beta-apply-auth-migrations.mjs",
     "beta:automate": "node scripts/beta-automate-all.mjs",
     "beta:automate:local": "node scripts/beta-automate-all.mjs --skip-push",

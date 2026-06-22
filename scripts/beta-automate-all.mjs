@@ -241,10 +241,24 @@ async function main() {
 
       step('7/9 — Maestro cohort smokes');
       const maestro = ensureMaestro();
-      try {
-        run(`${maestro} test apps/mobile/.maestro/flows`);
+      const flows = [
+        'guest-onboarding-quiz.yaml',
+        'free-signup-path.yaml',
+        'premium-subscribe-hint.yaml',
+        'auth-keyboard-smoke.yaml',
+      ];
+      let maestroOk = true;
+      for (const flow of flows) {
+        try {
+          run(`adb shell pm clear ${PACKAGE} || true`);
+          run(`${maestro} test apps/mobile/.maestro/flows/${flow}`);
+        } catch {
+          maestroOk = false;
+        }
+      }
+      if (maestroOk) {
         logStep('maestro', 'ok');
-      } catch {
+      } else {
         logStep('maestro', 'warn');
       }
     }

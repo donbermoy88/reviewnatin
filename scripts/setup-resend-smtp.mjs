@@ -141,7 +141,7 @@ async function pushDnsToCloudflare(apiKey, cfToken) {
     console.log('No DNS records from Resend yet — check Resend dashboard.');
     return;
   }
-  const zoneId = await getCloudflareZoneId(cfToken);
+  const zoneId = env.CLOUDFLARE_ZONE_ID?.trim() || (await getCloudflareZoneId(cfToken));
   console.log(`Pushing ${records.length} DNS record(s) to Cloudflare…`);
   for (const rec of records) {
     const name = rec.name === DOMAIN ? DOMAIN : rec.name.replace(`.${DOMAIN}`, '');
