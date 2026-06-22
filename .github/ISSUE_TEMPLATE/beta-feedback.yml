@@ -1,0 +1,84 @@
+name: Beta Feedback
+description: Report an issue found during Android beta testing
+title: "[Beta] "
+labels: ["beta", "triage"]
+body:
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How badly does this affect your ability to use the app?
+      options:
+        - P0 — Crash, data loss, or cannot use core feature
+        - P1 — Major blocker (auth, quiz, payment, sync)
+        - P2 — UX friction, UI bug, performance issue
+        - P3 — Polish / nice-to-have
+    validations:
+      required: true
+
+  - type: input
+    id: screen
+    attributes:
+      label: Screen / feature
+      description: Where did this happen? (e.g. Login, Practice Quiz, Subscribe)
+      placeholder: e.g. Practice Quiz → CSE Professional
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: What did you do before the issue occurred?
+      placeholder: |
+        1. Open app
+        2. Tap ...
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device model
+      placeholder: e.g. Samsung Galaxy A54
+    validations:
+      required: false
+
+  - type: input
+    id: android_version
+    attributes:
+      label: Android version
+      placeholder: e.g. 14
+    validations:
+      required: false
+
+  - type: input
+    id: app_version
+    attributes:
+      label: App version / build
+      placeholder: e.g. 1.0.0 (build 4)
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot / screen recording
+      description: Paste image links or attach files in a follow-up comment
+    validations:
+      required: false

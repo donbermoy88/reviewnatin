@@ -7,6 +7,7 @@ import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createSessionFromUrl } from '../../lib/auth/deep-link-auth';
 import { validatePassword } from '../../lib/auth/validation';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { getAppEntryHref } from '../../lib/onboarding-nav';
 import { useAuth } from '../../providers/auth-provider';
 
@@ -45,7 +46,7 @@ export default function ResetPasswordScreen() {
         try {
           await createSessionFromUrl(url);
         } catch (err) {
-          setError(err instanceof Error ? err.message : 'Invalid recovery link');
+          setError(toUserFacingError(err, 'auth'));
         }
       }
       setSessionReady(true);
@@ -58,7 +59,7 @@ export default function ResetPasswordScreen() {
         setSessionReady(true);
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Invalid recovery link');
+        setError(toUserFacingError(err, 'auth'));
       }
     });
 
@@ -84,7 +85,7 @@ export default function ResetPasswordScreen() {
     const result = await setNewPassword(password);
     setLoading(false);
     if (result.error) {
-      setError(result.error);
+      setError(toUserFacingError(result.error, 'auth'));
       return;
     }
     router.replace(await getAppEntryHref(session.user.id));
@@ -114,6 +115,7 @@ export default function ResetPasswordScreen() {
           value={password}
           onChangeText={setPassword}
           editable={!loading && !!session}
+          accessibilityLabel="New password"
         />
       </LabeledField>
       <LabeledField label="Confirm password" styles={styles}>
@@ -125,6 +127,7 @@ export default function ResetPasswordScreen() {
           value={confirm}
           onChangeText={setConfirm}
           editable={!loading && !!session}
+          accessibilityLabel="Confirm new password"
         />
       </LabeledField>
       {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -133,7 +136,13 @@ export default function ResetPasswordScreen() {
       ) : (
         <PrimaryButton label="Save password" size="lg" onPress={submit} disabled={!session} />
       )}
-      <Pressable onPress={() => router.replace('/(auth)/login')} style={{ marginTop: theme.spacing.lg }} hitSlop={8}>
+      <Pressable
+        onPress={() => router.replace('/(auth)/login')}
+        style={{ marginTop: theme.spacing.lg }}
+        hitSlop={8}
+        accessibilityRole="button"
+        accessibilityLabel="Back to login"
+      >
         <Text style={styles.backLink}>← Back to login</Text>
       </Pressable>
     </AuthShell>

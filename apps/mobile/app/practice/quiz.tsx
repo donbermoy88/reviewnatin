@@ -40,6 +40,7 @@ import type { QuizAnswerRecord } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
+import { trackEvent } from '../../lib/analytics/events';
 
 function PracticeQuizScreenContent() {
   const router = useRouter();
@@ -50,7 +51,7 @@ function PracticeQuizScreenContent() {
   const params = useLocalSearchParams<QuizModeParams>();
   const { topicSlug, mockExamId, durationSeconds, pasapathTaskId, barkadaChallengeId, focusQuestionId } = params;
   const modeFlags = deriveQuizMode(params);
-  const { slug, isMock, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, isBoard, isStrictExam, timedDuration } = modeFlags;
+  const { slug, isMock, isBookmarkReview, isDiagnostic, isTimed, isWeakArea, isBarkada, isBoard, isStrictExam, isMistakeReview, timedDuration } = modeFlags;
 
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
@@ -88,10 +89,30 @@ function PracticeQuizScreenContent() {
   const [lang, setLang] = useState<'en' | 'fil'>(prefs.explanationLocale ?? 'en');
   const [answers, setAnswers] = useState<QuizAnswerRecord[]>([]);
   const [navigatorOpen, setNavigatorOpen] = useState(false);
+  const startedTracked = useRef(false);
 
   useEffect(() => {
     setLang(prefs.explanationLocale ?? 'en');
   }, [prefs.explanationLocale]);
+
+  useEffect(() => {
+    if (loading || questions.length === 0 || startedTracked.current) return;
+    startedTracked.current = true;
+    if (isMock || isBoard) {
+      trackEvent('mock_exam_started', {
+        examSlug: slug,
+        itemCount: questions.length,
+        mockExamId: mockExamId ?? null,
+        preview: mockPreviewActive,
+      });
+    } else if (!isDiagnostic) {
+      trackEvent('practice_started', {
+        examSlug: slug,
+        itemCount: questions.length,
+        mode: isTimed ? 'timed' : isMistakeReview ? 'mistake_review' : isWeakArea ? 'weak_area' : offlineMode ? 'offline' : 'practice',
+      });
+    }
+  }, [loading, questions.length, isMock, isBoard, isDiagnostic, isTimed, isMistakeReview, isWeakArea, slug, mockExamId, mockPreviewActive, offlineMode]);
 
   // Hint system: eliminates one wrong answer per question.
   // hintCredits is fetched from DB; hintUsedOnQuestion tracks which questions got a hint.

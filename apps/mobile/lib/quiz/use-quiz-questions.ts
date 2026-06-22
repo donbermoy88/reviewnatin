@@ -9,6 +9,7 @@ import {
 } from './load-questions';
 import type { QuizMode } from './mode';
 import type { Question } from '../types';
+import { trackEvent } from '../analytics/events';
 
 export type UseQuizQuestionsParams = {
   topicSlug?: string;
@@ -70,6 +71,8 @@ export function useQuizQuestions(
             return;
           case 'ready':
             setQuestions(result.questions);
+            if (isMock) trackEvent('mock_exam_started', { slug });
+            else trackEvent('practice_started', { slug, mode: resumeKey });
             setOfflineMode(result.offlineMode);
             if (result.mockTitle !== undefined) setMockTitle(result.mockTitle);
             setMockPreviewActive(result.mockPreviewActive);

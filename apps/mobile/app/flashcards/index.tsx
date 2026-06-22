@@ -28,6 +28,7 @@ import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { shuffleArray } from '../../lib/shuffle';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
+import { trackEvent } from '../../lib/analytics/events';
 
 export default function FlashcardsScreen() {
   const router = useRouter();
@@ -132,8 +133,15 @@ export default function FlashcardsScreen() {
   const displayIndex = totalCards > 0 ? Math.min(index, totalCards - 1) : 0;
   const card = filteredCards[displayIndex];
   const progressPct = totalCards > 0 ? Math.min(100, Math.max(0, (displayIndex / totalCards) * 100)) : 0;
-  const finishDeck = async () => {
+  const finishDeck = async (counts?: { know: number; review: number }) => {
     setFinished(true);
+    trackEvent('flashcard_session', {
+      examSlug,
+      cardCount: totalCards,
+      knowCount: counts?.know ?? knowCount,
+      reviewCount: counts?.review ?? reviewCount,
+      offline: offlineMode,
+    });
     if (user && params.pasapathTaskId) {
       try { await completePasaPathTask(examSlug, params.pasapathTaskId); } catch { /* non-blocking */ }
     }
@@ -146,8 +154,10 @@ export default function FlashcardsScreen() {
       if (user && !offlineMode) await reviewFlashcard(card.id, rating);
       if (isKnown) setKnowCount(n => n + 1);
       else setReviewCount(n => n + 1);
+      const nextKnow = isKnown ? knowCount + 1 : knowCount;
+      const nextReview = isKnown ? reviewCount : reviewCount + 1;
       if (index < totalCards - 1) setIndex(i => i + 1);
-      else await finishDeck();
+      else await finishDeck({ know: nextKnow, review: nextReview });
     } catch {
       Alert.alert('Could not save', 'Please try rating again.');
     } finally {

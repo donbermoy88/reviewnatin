@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { ErrorState } from '../../components/error-state';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
@@ -12,6 +13,7 @@ import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardPeriod } from 
 import { tabScrollPadding } from '../../lib/layout/content-padding';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { DEFAULT_EXAM_SLUG, getExamCatalogItem } from '@reviewnatin/shared';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { useAuth } from '../../providers/auth-provider';
 
 /** Avatar background colors cycling for rank rows */
@@ -97,13 +99,18 @@ function LeaderboardScreenContent() {
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [period, setPeriod] = useState<LeaderboardPeriod>('week');
   const [refreshing, setRefreshing] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     const goal = await resolveOnboardingGoal(user?.id);
     const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
     setExamSlug(slug);
     try {
+      setLoadError(null);
       setEntries(await fetchLeaderboard(slug, 50, period));
+    } catch (err) {
+      setLoadError(toUserFacingError(err));
+      setEntries([]);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -207,7 +214,9 @@ function LeaderboardScreenContent() {
           </LinearGradient>
         }
         ListEmptyComponent={
-          !loading && entries.length === 0 ? (
+          loadError ? (
+            <ErrorState description={loadError} onRetry={() => { setLoading(true); void load(); }} />
+          ) : !loading && entries.length === 0 ? (
             <View style={{ paddingHorizontal: spacing.md, paddingTop: spacing.md }}>
               <EmptyState
                 icon={<Ionicons name="trophy-outline" size={32} color={colors.primary} />}

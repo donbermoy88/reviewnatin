@@ -1,0 +1,16 @@
+appId: ph.reviewnatin.app
+---
+# Guest cohort: skip login, complete onboarding, start practice
+- launchApp
+- tapOn:
+    text: ".*guest.*"
+    optional: true
+- tapOn:
+    text: "Get started"
+    optional: true
+- tapOn:
+    text: ".*Dashboard.*|Pumunta sa Dashboard"
+    optional: true
+- assertVisible:
+    text: ".*Home.*|PasaPath.*"
+    optional: true

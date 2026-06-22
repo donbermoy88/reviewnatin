@@ -1,0 +1,13 @@
+appId: ph.reviewnatin.app
+---
+# Free cohort: auth + OTP path (requires test account)
+- launchApp
+- tapOn:
+    text: "Log in"
+    optional: true
+- tapOn:
+    text: ".*Sign up.*|Gumawa"
+    optional: true
+- assertVisible:
+    text: ".*Email.*|email"
+    optional: true

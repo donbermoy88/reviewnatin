@@ -35,6 +35,7 @@ import {
   type OfflineSyncCounts,
 } from '../../lib/offline/sync-status';
 import { formatEntitlementSummary } from '../../lib/entitlements/format';
+import { openBetaFeedback } from '../../lib/beta-feedback';
 
 type SettingsStyles = ReturnType<typeof createSettingsStyles>;
 
@@ -689,6 +690,21 @@ function SettingsScreenContent() {
 
           <Text style={styles.sectionLbl}>Support</Text>
           <SettingsGroup styles={styles}>
+            <SettingsRow
+              styles={styles}
+              colors={colors}
+              icon={<Ionicons name="bug-outline" size={18} color={colors.primary} />}
+              label="Report a problem"
+              sub="Beta feedback — pre-fills device & version info"
+              onPress={() =>
+                void openBetaFeedback({
+                  userId: user?.id,
+                  cohortHint: !user ? 'guest' : premiumActive ? 'premium' : 'free',
+                  currentRoute: '/settings',
+                })
+              }
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
             <SettingsRow
               styles={styles}
               colors={colors}

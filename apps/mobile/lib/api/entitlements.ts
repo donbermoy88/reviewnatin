@@ -29,22 +29,6 @@ export type UserEntitlement = {
   storeProductId?: string | null;
 };
 
-// Last-resort offline fallback ONLY. Source-of-truth precedence for the
-// displayed price is: store-reported localized price (resolved at display time
-// via fetchStoreProductPricing) > DB `price_php` > this map. It exists so a
-// build with no store connection and an incomplete `subscription_products` row
-// still renders *something*; it must never silently shadow the DB or the store.
-const CANONICAL_PRODUCT_PRICING: Record<string, { pricePhp: number; durationDays: number | null }> = {
-  'com.reviewnatin.plus.monthly': { pricePhp: 159, durationDays: 30 },
-  'com.reviewnatin.plus.six_months': { pricePhp: 699, durationDays: 180 },
-  'com.reviewnatin.plus.yearly': { pricePhp: 1499, durationDays: 365 },
-  'com.reviewnatin.exampass.cse_pro': { pricePhp: 599, durationDays: 180 },
-  'com.reviewnatin.exampass.cse_sub': { pricePhp: 599, durationDays: 180 },
-  'com.reviewnatin.exampass.let_elem': { pricePhp: 699, durationDays: 180 },
-  'com.reviewnatin.exampass.let_sec': { pricePhp: 699, durationDays: 180 },
-  'com.reviewnatin.exampass.pnle': { pricePhp: 799, durationDays: 180 },
-};
-
 function entitlementAccessEnd(e: Pick<UserEntitlement, 'expiresAt' | 'currentPeriodEnd' | 'gracePeriodExpiresAt'>): string | null {
   return e.gracePeriodExpiresAt ?? e.currentPeriodEnd ?? e.expiresAt ?? null;
 }
@@ -66,19 +50,15 @@ export async function fetchSubscriptionProducts(): Promise<SubscriptionProduct[]
 
   if (error) throw error;
 
-  return (data ?? []).map((row) => {
-    const canonical = CANONICAL_PRODUCT_PRICING[row.sku];
-    return {
-      id: row.id,
-      sku: row.sku,
-      tier: row.tier,
-      examTypeId: row.exam_type_id,
-      // DB is authoritative over the offline fallback map; the store-localized
-      // price (resolved in the UI) overrides both.
-      pricePhp: row.price_php ?? canonical?.pricePhp ?? 0,
-      durationDays: row.duration_days ?? canonical?.durationDays ?? null,
-    };
-  });
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    sku: row.sku,
+    tier: row.tier,
+    examTypeId: row.exam_type_id,
+    // DB `price_php` is authoritative; store-localized price overrides at display time.
+    pricePhp: row.price_php ?? 0,
+    durationDays: row.duration_days ?? null,
+  }));
 }
 
 export async function fetchUserEntitlements(userId: string): Promise<UserEntitlement[]> {

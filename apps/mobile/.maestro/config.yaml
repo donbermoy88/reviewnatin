@@ -1,0 +1,11 @@
+# Maestro E2E smoke flows for ReviewNatin Android beta.
+# Requires preview/dev build installed (ph.reviewnatin.app).
+#
+# Run all:
+#   maestro test apps/mobile/.maestro/flows/
+#
+# Run one cohort:
+#   maestro test apps/mobile/.maestro/flows/guest-onboarding-quiz.yaml
+
+flows:
+  - flows/*.yaml

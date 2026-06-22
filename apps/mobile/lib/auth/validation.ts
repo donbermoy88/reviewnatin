@@ -11,14 +11,7 @@ export function validateEmail(email: string): string | null {
   return null;
 }
 
-export function validatePassword(password: string, isSignUp = false): string | null {
-  if (!password) return 'Please enter your password.';
-  if (password.length < 6) return 'Password must be at least 6 characters.';
-  if (isSignUp && password.length < 8) {
-    return 'For sign-up, use at least 8 characters.';
-  }
-  return null;
-}
+export { validatePasswordStrength as validatePassword } from './password-strength';
 
 export function validatePasswordMatch(password: string, confirm: string): string | null {
   if (password !== confirm) return 'Passwords do not match.';

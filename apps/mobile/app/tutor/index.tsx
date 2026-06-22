@@ -25,6 +25,7 @@ import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
+import { trackEvent } from '../../lib/analytics/events';
 
 const STARTER: AiTutorMessage = {
   role: 'assistant',
@@ -110,6 +111,7 @@ export default function AiTutorScreen() {
       }
       setMessages((prev) => [...prev, { role: 'assistant', content: result.reply }]);
       if (typeof result.remaining === 'number') setRemaining(result.remaining);
+      trackEvent('ai_tutor_message', { examSlug, locale, remaining: result.remaining ?? null });
     } finally {
       setSending(false);
       setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 100);

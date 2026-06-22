@@ -5,8 +5,9 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, BackHandler, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Animated, { FadeIn, FadeInUp, ZoomIn } from 'react-native-reanimated';
+import Animated, { FadeIn, FadeInUp, ZoomIn, FadeInDown } from 'react-native-reanimated';
 import { Card } from '../../components/card';
+import { GoalRing } from '../../components/goal-ring';
 import { FeatureRow } from '../../components/feature-row';
 import { SparkleStar } from '../../components/sparkle-star';
 import { LogoMark } from '../../components/logo-mark';
@@ -16,6 +17,7 @@ import { PrimaryButton } from '../../components/primary-button';
 import { ScreenScroll } from '../../components/screen-scroll';
 import { SegmentedControl } from '../../components/ui';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
+import { trackEvent } from '../../lib/analytics/events';
 import { DISCLAIMERS, DEFAULT_EXAM_SLUG, EXAM_CATALOG, LET_SECONDARY_MAJORS, ONBOARDING_LEVELS } from '@reviewnatin/shared';
 import { syncExamGoalSafe } from '../../lib/api/goals';
 import { fetchExamSchedules } from '../../lib/api/exam-calendar';
@@ -49,6 +51,14 @@ const READY_ITEMS = [
     label: 'Active na ang Mistake Bank',
     sub: 'Awtomatikong tina-track ang mga maling sagot',
   },
+];
+
+const ONBOARDING_TOTAL = 6;
+
+const WELCOME_EXAM_CHIPS = [
+  { abbr: 'CSE', bg: '#E8F0FF', color: '#0B5FFF' },
+  { abbr: 'LET', bg: '#F1E8FA', color: '#7B2CBF' },
+  { abbr: 'PNLE', bg: '#E8FAF0', color: '#059669' },
 ];
 
 const ACCOUNT_BENEFITS = [
@@ -106,7 +116,7 @@ export default function OnboardingScreen() {
   }, []);
 
   useEffect(() => {
-    if (stepParam !== '4') return;
+    if (stepParam !== '5') return;
     getOnboarding().then((data) => {
       if (!hasOnboardingDraft(data)) {
         setStep(1);
@@ -119,7 +129,7 @@ export default function OnboardingScreen() {
       const matchedGoal = GOALS.find((g) => g.minutes === data!.dailyMinutes);
       if (matchedGoal) setGoalId(matchedGoal.id);
       setLevel(data!.level);
-      setStep(4);
+      setStep(5);
     });
   }, [stepParam]);
 
@@ -173,6 +183,12 @@ export default function OnboardingScreen() {
   const civilServiceExams = useMemo(() => exams.filter((ex) => ex.category === 'Civil Service'), [exams]);
   const prcExams = useMemo(() => exams.filter((ex) => ex.category === 'PRC'), [exams]);
   const selectedLevel = ONBOARDING_LEVELS.find((lv) => lv.id === level);
+  const selectedExam = exams.find((ex) => ex.slug === examSlug);
+  const selectedGoal = GOALS.find((g) => g.id === goalId);
+  const daysUntilExam = Math.max(
+    0,
+    Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+  );
 
   const advanceStep = async () => {
     setStepError(null);
@@ -187,6 +203,8 @@ export default function OnboardingScreen() {
         majorSlug: examSlug === 'let-secondary' ? majorSlug : undefined,
       });
     } else if (step === 2) {
+      await saveOnboardingDraft({ level });
+    } else if (step === 3) {
       await saveOnboardingDraft({
         examSlug,
         targetDate: dateStr,
@@ -224,6 +242,7 @@ export default function OnboardingScreen() {
       }
     }
     await refreshOnboarding();
+    trackEvent('onboarding_completed', { examSlug, level, dailyMinutes });
     router.replace((await getPostOnboardingHref(user?.id)) as '/(tabs)');
   };
 
@@ -286,6 +305,17 @@ export default function OnboardingScreen() {
           <Animated.View entering={ZoomIn.delay(120).springify().damping(12)} style={styles.markWrap}>
             <LogoMark size={120} />
           </Animated.View>
+          <View style={styles.welcomeIllustrationRow}>
+            {WELCOME_EXAM_CHIPS.map((chip, index) => (
+              <Animated.View
+                key={chip.abbr}
+                entering={FadeInDown.delay(200 + index * 90).springify().damping(14)}
+                style={[styles.welcomeChip, { backgroundColor: chip.bg }]}
+              >
+                <Text style={[styles.welcomeChipText, { color: chip.color }]}>{chip.abbr}</Text>
+              </Animated.View>
+            ))}
+          </View>
           <Animated.Text entering={FadeInUp.delay(280).springify().damping(16)} style={styles.welcomeBrand}>
             Review<Text style={{ color: colors.accent }}>Natin</Text>
           </Animated.Text>
@@ -320,7 +350,7 @@ export default function OnboardingScreen() {
     );
   }
 
-  if (step === 4) {
+  if (step === 5) {
     return (
       <View style={styles.root}>
         <LinearGradient
@@ -331,7 +361,7 @@ export default function OnboardingScreen() {
         >
           <View style={styles.readyGlow} />
           <View style={styles.pagePad}>
-            <OnboardingHeader step={step} total={5} onBack={() => setStep(3)} variant="dark" />
+            <OnboardingHeader step={step} total={ONBOARDING_TOTAL} onBack={() => setStep(4)} variant="dark" />
           </View>
         </LinearGradient>
 
@@ -344,11 +374,48 @@ export default function OnboardingScreen() {
               <Pill color={colors.accentDark} bg={colors.accentLight}>
                 PASAPATH READY
               </Pill>
-              <Text style={styles.readyTitle}>Handa ka na para sa PasaPath</Text>
+              <Text style={styles.readyTitle}>
+                Handa ka na bang pumasa sa{'\n'}
+                {selectedExam?.name ?? 'exam mo'}?
+              </Text>
               <Text style={styles.readySub}>
                 Your daily study path starts now — weak topics, mistake review, and new lessons every day.
               </Text>
             </View>
+
+            <Card variant="elevated" padding={spacing.md} style={styles.dashboardPreview}>
+              <Text style={styles.dashboardPreviewLbl}>Dashboard preview</Text>
+              <View style={styles.dashboardPreviewRow}>
+                <GoalRing
+                  percent={42}
+                  size={72}
+                  strokeWidth={8}
+                  trackColor={colors.primaryMuted}
+                  fillColor={colors.primary}
+                />
+                <View style={styles.dashboardPreviewCopy}>
+                  <Text style={styles.dashboardPreviewExam} numberOfLines={2}>
+                    {selectedExam?.name ?? examSlug}
+                  </Text>
+                  <Text style={styles.dashboardPreviewMeta}>
+                    {selectedLevel?.emoji} {selectedLevel?.label} · {selectedGoal?.sub ?? `${dailyMinutes} min/day`}
+                  </Text>
+                  <Text style={styles.dashboardPreviewMeta}>
+                    Exam in {daysUntilExam} days · {dateStr}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.dashboardPreviewPills}>
+                <View style={styles.dashboardPreviewPill}>
+                  <Ionicons name="flash-outline" size={14} color={colors.primary} />
+                  <Text style={styles.dashboardPreviewPillText}>Daily PasaPath</Text>
+                </View>
+                <View style={styles.dashboardPreviewPill}>
+                  <Ionicons name="bookmark-outline" size={14} color={colors.primary} />
+                  <Text style={styles.dashboardPreviewPillText}>Mistake Bank</Text>
+                </View>
+              </View>
+            </Card>
 
             <Card variant="elevated" padding={spacing.md} style={styles.readyCard}>
               {READY_ITEMS.map((item, index) => (
@@ -396,26 +463,36 @@ export default function OnboardingScreen() {
     <View style={styles.root}>
       <View style={[styles.stepHeader, { paddingTop: insets.top + spacing.sm }]}>
         <View style={styles.pagePad}>
-          <OnboardingHeader step={step} total={5} onBack={() => setStep(step - 1)} />
+          <OnboardingHeader step={step} total={ONBOARDING_TOTAL} onBack={() => setStep(step - 1)} />
           {step === 1 && (
             <>
               <Text style={styles.pageTitle}>
                 {isSwitchMode ? 'Switch exam track' : 'Anong exam ang nire-review mo?'}
               </Text>
               <Text style={styles.pageSub}>
-                {isSwitchMode
-                  ? 'Choose your new exam — we\'ll sync your goal and PasaPath.'
-                  : 'Pumili muna — pwede mong baguhin mamaya.'}
+                {selectedExam && !isSwitchMode
+                  ? `Handa ka na bang pumasa sa ${selectedExam.name}?`
+                  : isSwitchMode
+                    ? 'Choose your new exam — we\'ll sync your goal and PasaPath.'
+                    : 'Pumili muna — pwede mong baguhin mamaya.'}
               </Text>
             </>
           )}
           {step === 2 && (
             <>
+              <Text style={styles.pageTitle}>Ano ang level mo ngayon?</Text>
+              <Text style={styles.pageSub}>
+                We&apos;ll tune quiz difficulty and PasaPath pacing to match your starting point.
+              </Text>
+            </>
+          )}
+          {step === 3 && (
+            <>
               <Text style={styles.pageTitle}>Itakda ang daily goal mo</Text>
               <Text style={styles.pageSub}>{'Even a little each day adds up. Let\'s build that streak!'}</Text>
             </>
           )}
-          {step === 3 && (
+          {step === 4 && (
             <>
               <Text style={styles.pageTitle}>I-save ang progress mo</Text>
               <Text style={styles.pageSub}>I-sync ang quiz scores, Mistake Bank, at PasaPath sa cloud.</Text>
@@ -492,7 +569,6 @@ export default function OnboardingScreen() {
 
           {step === 2 && (
             <>
-              <Text style={styles.fieldLabel}>Ano ang level mo ngayon?</Text>
               <SegmentedControl
                 options={ONBOARDING_LEVELS.map((lv) => ({ value: lv.id, label: lv.label }))}
                 value={level}
@@ -500,12 +576,22 @@ export default function OnboardingScreen() {
                 accessibilityLabel="Choose your current level"
               />
               {selectedLevel ? (
-                <Text style={styles.levelHint}>
-                  {selectedLevel.emoji} {selectedLevel.sub}
-                </Text>
+                <Card variant="default" style={{ marginTop: spacing.md }}>
+                  <View style={styles.proficiencyCard}>
+                    <Text style={styles.proficiencyEmoji}>{selectedLevel.emoji}</Text>
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.proficiencyTitle}>{selectedLevel.label}</Text>
+                      <Text style={styles.proficiencySub}>{selectedLevel.sub}</Text>
+                    </View>
+                  </View>
+                </Card>
               ) : null}
+            </>
+          )}
 
-              <Text style={[styles.fieldLabel, { marginTop: spacing.lg }]}>Daily study goal</Text>
+          {step === 3 && (
+            <>
+              <Text style={styles.fieldLabel}>Daily study goal</Text>
               <View style={styles.goalGrid}>
                 {GOALS.map((g) => {
                   const on = goalId === g.id;
@@ -570,7 +656,7 @@ export default function OnboardingScreen() {
             </>
           )}
 
-          {step === 3 && (
+          {step === 4 && (
             <>
               <Card variant="default" style={{ marginTop: spacing.sm }}>
                 {ACCOUNT_BENEFITS.map((item, index) => (
@@ -598,7 +684,7 @@ export default function OnboardingScreen() {
                     label="Next →"
                     icon="arrow-forward"
                     iconPosition="right"
-                    onPress={() => setStep(4)}
+                    onPress={() => setStep(5)}
                     style={{ marginTop: spacing.md }}
                   />
                 </>
@@ -611,7 +697,7 @@ export default function OnboardingScreen() {
                     onPress={() => router.push({ pathname: '/(auth)/login', params: { returnTo: 'onboarding' } })}
                     style={{ marginTop: spacing.lg }}
                   />
-                  <PrimaryButton label="Skip muna (guest)" variant="outline" onPress={() => setStep(4)} style={{ marginTop: spacing.sm }} />
+                  <PrimaryButton label="Skip muna (guest)" variant="outline" onPress={() => setStep(5)} style={{ marginTop: spacing.sm }} />
                 </>
               )}
             </>
@@ -619,14 +705,20 @@ export default function OnboardingScreen() {
         </View>
       </ScreenScroll>
 
-      {step >= 1 && step < 3 && (
+      {step >= 1 && step < 4 && (
         <LinearGradient
           colors={[colors.footerFade, colors.background]}
           style={[styles.stickyFooterFade, { paddingBottom: insets.bottom + spacing.md }]}
         >
           <View style={styles.stickyFooterInner}>
             <PrimaryButton
-              label={step === 2 ? (isSwitchMode ? 'I-save ang bagong track →' : "I'm committed →") : 'Continue →'}
+              label={
+                step === 3
+                  ? isSwitchMode
+                    ? 'I-save ang bagong track →'
+                    : "I'm committed →"
+                  : 'Continue →'
+              }
               size="lg"
               onPress={advanceStep}
             />
@@ -659,6 +751,22 @@ function createOnboardingStyles(theme: AppTheme) {
   sparkleWelcomeTop: { position: 'absolute', top: 60, right: 40, zIndex: 2 },
   sparkleWelcomeMid: { position: 'absolute', top: 130, left: 50, zIndex: 2 },
   markWrap: { marginTop: 40, ...shadows.soft },
+  welcomeIllustrationRow: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+    marginTop: spacing.lg,
+  },
+  welcomeChip: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: radii.full,
+    ...shadows.soft,
+  },
+  welcomeChipText: {
+    fontFamily: type.label.fontFamily,
+    fontSize: 13,
+    letterSpacing: 0.5,
+  },
   welcomeBrand: {
     fontFamily: type.brand.fontFamily,
     fontSize: 34,
@@ -756,6 +864,73 @@ function createOnboardingStyles(theme: AppTheme) {
     fontSize: 13,
     color: colors.textMuted,
     marginTop: spacing.sm,
+  },
+  proficiencyCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+  },
+  proficiencyEmoji: { fontSize: 28 },
+  proficiencyTitle: {
+    fontFamily: fonts.bodyBold,
+    fontSize: 16,
+    color: colors.text,
+  },
+  proficiencySub: {
+    fontFamily: fonts.bodyMedium,
+    fontSize: 13,
+    color: colors.textMuted,
+    marginTop: 2,
+    lineHeight: 18,
+  },
+  dashboardPreview: {
+    marginBottom: spacing.md,
+  },
+  dashboardPreviewLbl: {
+    fontFamily: fonts.bodySemiBold,
+    fontSize: 12,
+    color: colors.textMuted,
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
+    marginBottom: spacing.sm,
+  },
+  dashboardPreviewRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+  },
+  dashboardPreviewCopy: { flex: 1, gap: 4 },
+  dashboardPreviewExam: {
+    fontFamily: fonts.bodyBold,
+    fontSize: 16,
+    color: colors.text,
+    lineHeight: 21,
+  },
+  dashboardPreviewMeta: {
+    fontFamily: fonts.bodyMedium,
+    fontSize: 13,
+    color: colors.textMuted,
+    lineHeight: 18,
+  },
+  dashboardPreviewPills: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+    marginTop: spacing.md,
+  },
+  dashboardPreviewPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: colors.primaryMuted,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 6,
+    borderRadius: radii.full,
+  },
+  dashboardPreviewPillText: {
+    fontFamily: fonts.bodySemiBold,
+    fontSize: 12,
+    color: colors.primary,
   },
   goalGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   goalTile: {

@@ -1,7 +1,13 @@
 #!/usr/bin/env node
 /**
- * Enable Email auth + auto-confirm (dev-friendly) via Supabase Management API.
- * Run: npm run supabase:auth
+ * Configure Supabase Auth for ReviewNatin.
+ *
+ * Dev (default): email auth + auto-confirm (no inbox needed).
+ * Production:    email confirmations ON, auto-confirm OFF (OTP required).
+ *
+ * Run:
+ *   npm run supabase:auth          # dev-friendly
+ *   npm run supabase:auth -- --prod # production / beta with OTP
  */
 
 import { readFileSync, existsSync } from 'node:fs';
@@ -10,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ENV_FILE = join(ROOT, '.env.supabase');
+const isProd = process.argv.includes('--prod');
 
 function loadEnv() {
   if (!existsSync(ENV_FILE)) return {};
@@ -59,27 +66,37 @@ async function api(path, options = {}) {
 async function main() {
   const before = await api(`/projects/${REF}/config/auth`);
 
-  const patch = {
-    disable_signup: false,
-    external_email_enabled: true,
-    mailer_autoconfirm: true,
-  };
+  const patch = isProd
+    ? {
+        disable_signup: false,
+        external_email_enabled: true,
+        mailer_autoconfirm: false,
+        mailer_secure_email_change_enabled: true,
+      }
+    : {
+        disable_signup: false,
+        external_email_enabled: true,
+        mailer_autoconfirm: true,
+      };
 
   const after = await api(`/projects/${REF}/config/auth`, {
     method: 'PATCH',
     body: JSON.stringify(patch),
   });
 
-  console.log('Supabase auth configured for ReviewNatin:\n');
-  console.log(`  Project:     ${REF}`);
-  console.log(`  Email auth:  ${after.external_email_enabled ? 'ON' : 'OFF'}`);
-  console.log(`  Auto-confirm: ${after.mailer_autoconfirm ? 'ON (no inbox needed for dev)' : 'OFF'}`);
-  console.log(`  Sign-ups:    ${after.disable_signup ? 'disabled' : 'enabled'}`);
+  console.log(`Supabase auth configured for ReviewNatin (${isProd ? 'PRODUCTION' : 'DEV'}):\n`);
+  console.log(`  Project:      ${REF}`);
+  console.log(`  Email auth:   ${after.external_email_enabled ? 'ON' : 'OFF'}`);
+  console.log(`  Auto-confirm: ${after.mailer_autoconfirm ? 'ON (no inbox needed)' : 'OFF (OTP required)'}`);
+  console.log(`  Sign-ups:     ${after.disable_signup ? 'disabled' : 'enabled'}`);
 
-  if (before.external_email_enabled && before.mailer_autoconfirm) {
-    console.log('\nNo changes needed — already configured.');
+  if (isProd) {
+    console.log('\nProduction mode: users must verify email via 6-digit OTP before access.');
+    console.log('Also configure SMTP in Supabase dashboard for reliable delivery.');
+  } else if (before.external_email_enabled && before.mailer_autoconfirm) {
+    console.log('\nNo changes needed — already configured for dev.');
   } else {
-    console.log('\nUpdated successfully. Users can sign up in the app immediately.');
+    console.log('\nUpdated successfully. Users can sign up without inbox verification.');
   }
 }
 

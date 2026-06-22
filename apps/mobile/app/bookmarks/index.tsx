@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { ErrorState } from '../../components/error-state';
 import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReportContentButton } from '../../components/report-content-button';
@@ -18,6 +19,7 @@ import {
   type MaterialBookmarkItem,
 } from '../../lib/api/bookmarks';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 
@@ -36,9 +38,11 @@ export default function BookmarksScreen() {
   const [questions, setQuestions] = useState<BookmarkItem[]>([]);
   const [materials, setMaterials] = useState<MaterialBookmarkItem[]>([]);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     try {
+      setLoadError(null);
       const goal = await resolveOnboardingGoal(user?.id);
       const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
       setExamSlug(slug);
@@ -53,6 +57,10 @@ export default function BookmarksScreen() {
       ]);
       setQuestions(q);
       setMaterials(m);
+    } catch (err) {
+      setLoadError(toUserFacingError(err));
+      setQuestions([]);
+      setMaterials([]);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -157,6 +165,8 @@ export default function BookmarksScreen() {
 
   const ListEmpty = loading ? (
     <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
+  ) : loadError ? (
+    <ErrorState description={loadError} onRetry={() => { setLoading(true); void load(); }} />
   ) : tab === 'questions' ? (
     <EmptyState
       icon={<Ionicons name="bookmark-outline" size={32} color={colors.primary} />}

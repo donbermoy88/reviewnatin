@@ -26,6 +26,7 @@ import type { SubjectArea } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { DEFAULT_EXAM_SLUG, getExamCategoryLabel } from '@reviewnatin/shared';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { AdBanner } from '../../components/ad-banner';
 import { ContentGateBanner } from '../../components/content-gate-banner';
 import { fetchContentGateStatus, type ContentGateStatus } from '../../lib/content-gate';
@@ -122,8 +123,8 @@ function StudyScreenContent() {
       setSubjectAnalytics(analytics);
       setMaterials(notes);
       setContentGate(await fetchContentGateStatus(slug).catch(() => null));
-    } catch {
-      setLoadError('Hindi ma-load ang reviewer right now. Check your connection and try again.');
+    } catch (err) {
+      setLoadError(toUserFacingError(err));
     } finally {
       setLoading(false);
       setRefreshing(false);

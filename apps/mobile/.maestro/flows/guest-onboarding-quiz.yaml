@@ -1,0 +1,30 @@
+# Guest cohort smoke: skip login → onboarding → dashboard → Review tab
+appId: ph.reviewnatin.app
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "Magpatuloy bilang guest"
+    timeout: 15000
+- tapOn: "Magpatuloy bilang guest"
+- extendedWaitUntil:
+    visible: "Get started — it's free"
+    timeout: 10000
+- tapOn: "Get started — it's free"
+- tapOn: "Continue →"
+- tapOn: "Continue →"
+- tapOn: "I'm committed →"
+- tapOn: "Skip muna (guest)"
+- extendedWaitUntil:
+    visible: "Pumunta sa Dashboard"
+    timeout: 10000
+- tapOn: "Pumunta sa Dashboard"
+- extendedWaitUntil:
+    visible: "Home"
+    timeout: 15000
+- tapOn: "Review"
+- extendedWaitUntil:
+    visible:
+      - "Start practice quiz"
+      - "Practice"
+    timeout: 10000

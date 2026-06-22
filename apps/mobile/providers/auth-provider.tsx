@@ -3,7 +3,15 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { AppState } from 'react-native';
 import { updateUserDisplayName } from '../lib/api/profile';
 import { mapAuthError } from '../lib/auth/errors';
+import { validateEmailNotDisposable } from '../lib/auth/disposable-email';
+import {
+  clearLoginLockout,
+  getLoginLockoutMessage,
+  recordFailedLoginAttempt,
+} from '../lib/auth/login-lockout';
+import { logAuthLoginAttempt } from '../lib/auth/login-events';
 import { sendPasswordResetEmail, signInWithApple, signInWithGoogle, updatePassword } from '../lib/auth/oauth';
+import { isTurnstileRequired } from '../lib/auth/turnstile-config';
 import { normalizeDisplayName, normalizeEmail, validateDisplayName } from '../lib/auth/validation';
 import { addAppBreadcrumb, captureAppMessage } from '../lib/monitoring/events';
 import { Sentry } from '../lib/monitoring/sentry';
@@ -22,13 +30,15 @@ type AuthContextValue = {
   loading: boolean;
   isConfigured: boolean;
   signIn: (email: string, password: string) => Promise<AuthResult>;
-  signUp: (email: string, password: string) => Promise<AuthResult>;
+  signUp: (email: string, password: string, captchaToken?: string) => Promise<AuthResult>;
   signInGoogle: () => Promise<AuthResult>;
   signInApple: () => Promise<AuthResult>;
   resetPassword: (email: string) => Promise<AuthResult>;
   setNewPassword: (password: string) => Promise<AuthResult>;
   updateDisplayName: (displayName: string) => Promise<AuthResult>;
   signOut: () => Promise<void>;
+  verifyEmailOtp: (email: string, token: string) => Promise<AuthResult>;
+  resendEmailOtp: (email: string) => Promise<AuthResult>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -115,18 +125,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       async signIn(email, password) {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
 
+        const lockout = await getLoginLockoutMessage();
+        if (lockout) return { error: lockout };
+
         const normalized = normalizeEmail(email);
+        const disposableError = validateEmailNotDisposable(normalized);
+        if (disposableError) return { error: disposableError };
+
         const { data, error } = await supabase.auth.signInWithPassword({
           email: normalized,
           password,
         });
 
         if (error) {
-          captureAppMessage('email sign-in failed', { area: 'auth', action: 'sign_in' }, { reason: mapAuthError(error.message) }, 'warning');
-          return { error: mapAuthError(error.message) };
+          const mapped = mapAuthError(error.message);
+          const lockoutMsg = await recordFailedLoginAttempt();
+          void logAuthLoginAttempt(normalized, false, null, mapped);
+          captureAppMessage('email sign-in failed', { area: 'auth', action: 'sign_in' }, { reason: mapped }, 'warning');
+          return { error: lockoutMsg ?? mapped };
         }
 
         if (data.session) {
+          await clearLoginLockout();
+          void logAuthLoginAttempt(normalized, true, data.session.user.id);
           addAppBreadcrumb('auth', 'email sign-in completed');
           setSession(data.session);
           return { error: null, session: data.session };
@@ -134,18 +155,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         return { error: 'Login failed. Please try again.' };
       },
-      async signUp(email, password) {
+      async signUp(email, password, captchaToken) {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
 
         const normalized = normalizeEmail(email);
+        const disposableError = validateEmailNotDisposable(normalized);
+        if (disposableError) return { error: disposableError };
+
+        if (isTurnstileRequired() && !captchaToken?.trim()) {
+          return { error: 'Please complete the security verification.' };
+        }
+
         const displayName = normalized.split('@')[0];
+        const signUpOptions: {
+          data: { display_name: string; full_name: string };
+          captchaToken?: string;
+        } = {
+          data: { display_name: displayName, full_name: displayName },
+        };
+        if (captchaToken?.trim()) {
+          signUpOptions.captchaToken = captchaToken.trim();
+        }
 
         const { data, error } = await supabase.auth.signUp({
           email: normalized,
           password,
-          options: {
-            data: { display_name: displayName, full_name: displayName },
-          },
+          options: signUpOptions,
         });
 
         if (error) {
@@ -172,12 +207,63 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         if (data.user && !data.session) {
+          addAppBreadcrumb('auth', 'email sign-up pending verification');
           return { error: null, needsEmailConfirmation: true };
         }
 
         return {
           error: mapAuthError(signInError?.message ?? 'Sign up failed. Please try again.'),
         };
+      },
+      async verifyEmailOtp(email, token) {
+        if (!isSupabaseConfigured) return NOT_CONFIGURED;
+
+        const normalized = normalizeEmail(email);
+        const { data, error } = await supabase.auth.verifyOtp({
+          email: normalized,
+          token: token.trim(),
+          type: 'signup',
+        });
+
+        if (error) {
+          captureAppMessage(
+            'email OTP verify failed',
+            { area: 'auth', action: 'verify_otp' },
+            { reason: mapAuthError(error.message) },
+            'warning'
+          );
+          return { error: mapAuthError(error.message) };
+        }
+
+        if (data.session) {
+          addAppBreadcrumb('auth', 'email OTP verified');
+          setSession(data.session);
+          return { error: null, session: data.session };
+        }
+
+        return { error: 'Verification failed. Please try again.' };
+      },
+      async resendEmailOtp(email) {
+        if (!isSupabaseConfigured) return NOT_CONFIGURED;
+
+        const normalized = normalizeEmail(email);
+        const { error } = await supabase.auth.resend({
+          type: 'signup',
+          email: normalized,
+        });
+
+        if (error) {
+          captureAppMessage(
+            'email OTP resend failed',
+            { area: 'auth', action: 'resend_otp' },
+            { reason: mapAuthError(error.message) },
+            'warning'
+          );
+          return { error: mapAuthError(error.message) };
+        }
+
+        addAppBreadcrumb('auth', 'email OTP resent');
+        return { error: null };
       },
       async signInGoogle() {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;

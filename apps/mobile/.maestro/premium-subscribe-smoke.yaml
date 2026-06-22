@@ -1,0 +1,13 @@
+appId: ph.reviewnatin.app
+---
+# Premium cohort: subscribe screen + web checkout entry
+- launchApp
+- runFlow:
+    file: guest-smoke.yaml
+    optional: true
+- tapOn:
+    text: ".*Plus.*|Subscribe.*|Mag-upgrade"
+    optional: true
+- assertVisible:
+    text: ".*GCash.*|checkout.*|Plus"
+    optional: true

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { ErrorState } from '../../components/error-state';
 import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReportContentButton } from '../../components/report-content-button';
@@ -14,6 +15,7 @@ import { fetchMistakes, type MistakeItem } from '../../lib/api/mistakes';
 import { fetchUsageLimits } from '../../lib/api/iap';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { FREE_MISTAKE_DAYS } from '../../lib/paywall';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
@@ -32,9 +34,11 @@ export default function MistakesScreen() {
   const [showFreeLimitBanner, setShowFreeLimitBanner] = useState(false);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     try {
+      setLoadError(null);
       const goal = await resolveOnboardingGoal(user?.id);
       const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
       setExamSlug(slug);
@@ -56,6 +60,9 @@ export default function MistakesScreen() {
       } else {
         setShowFreeLimitBanner(false);
       }
+    } catch (err) {
+      setLoadError(toUserFacingError(err));
+      setMistakes([]);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -133,6 +140,8 @@ export default function MistakesScreen() {
 
   const ListEmpty = loading ? (
     <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
+  ) : loadError ? (
+    <ErrorState description={loadError} onRetry={() => { setLoading(true); void load(); }} />
   ) : (
     <EmptyState
       icon={<Ionicons name="checkmark-circle-outline" size={32} color={colors.success} />}

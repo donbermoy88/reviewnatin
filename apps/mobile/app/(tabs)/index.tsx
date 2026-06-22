@@ -32,6 +32,11 @@ import { canStartPractice } from '../../lib/paywall';
 import { scheduleDailyReminder, scheduleExamReminders } from '../../lib/notifications';
 import { fetchDueFlashcardCount } from '../../lib/api/flashcards';
 import { fetchTopicAnalytics, type SubjectAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
+import { fetchDailyStudyTrend, type DailyStudyPoint } from '../../lib/api/study-trend';
+import { buildAnalyticsInsights } from '../../lib/analytics/insights';
+import { StudyTrendChart } from '../../components/analytics/study-trend-chart';
+import { AnalyticsInsightCards, SubjectStrengthChart } from '../../components/analytics/subject-strength-chart';
+import { PASAPATH_COACH_MARK_KEY, PasaPathCoachMark } from '../../components/pasapath-coach-mark';
 import { DEFAULT_EXAM_SLUG, EXAM_TYPES } from '@reviewnatin/shared';
 import type { OnboardingData } from '../../lib/onboarding-store';
 import type { SubjectArea } from '../../lib/types';
@@ -242,6 +247,8 @@ function DashboardScreenContent() {
   const [announcements, setAnnouncements] = useState<AppAnnouncement[]>([]);
   const [weakTopic, setWeakTopic] = useState<TopicAnalyticsRow | null>(null);
   const [subjectAnalytics, setSubjectAnalytics] = useState<SubjectAnalytics[]>([]);
+  const [studyTrend, setStudyTrend] = useState<DailyStudyPoint[]>([]);
+  const [coachMarkVisible, setCoachMarkVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [readinessSheetOpen, setReadinessSheetOpen] = useState(false);
@@ -289,7 +296,7 @@ function DashboardScreenContent() {
           // These dashboard sections are independent — fetch them concurrently
           // instead of in a waterfall. Non-critical fetches fall back to a safe
           // value so one slow/failed call doesn't blank the rest of the screen.
-          const [practiceStats, gate, todayPasa, latestReadiness, weakest] =
+          const [practiceStats, gate, todayPasa, latestReadiness, analytics, trend] =
             await Promise.all([
               fetchPracticeStats(user.id, target, slug).then(async (s) => {
                 // Show streak milestone modal if a milestone was just reached
@@ -306,18 +313,16 @@ function DashboardScreenContent() {
               fetchContentGateStatus(slug).catch(() => null),
               fetchTodayPasaPath(slug).catch(() => null),
               fetchLatestReadiness(slug).catch(() => null),
-              fetchTopicAnalytics(slug)
-                .then((a) => {
-                  setSubjectAnalytics(a.subjects);
-                  return pickWeakTopic(a.subjects);
-                })
-                .catch(() => null),
+              fetchTopicAnalytics(slug).catch(() => ({ subjects: [], allTopics: [] })),
+              fetchDailyStudyTrend(user.id, slug).catch(() => []),
             ]);
           setStats(practiceStats);
           setContentGate(gate);
           setPasapath(todayPasa);
           setReadiness(latestReadiness);
-          setWeakTopic(weakest);
+          setSubjectAnalytics(analytics.subjects);
+          setWeakTopic(pickWeakTopic(analytics.subjects));
+          setStudyTrend(trend);
         } catch {
           setStats((s) => ({ ...s, questionsTarget: target }));
         }
@@ -325,6 +330,8 @@ function DashboardScreenContent() {
         setPasapath(null);
         setReadiness(null);
         setWeakTopic(null);
+        setSubjectAnalytics([]);
+        setStudyTrend([]);
         try {
           setStats(await fetchGuestPracticeStats(slug, target));
         } catch {
@@ -409,6 +416,16 @@ function DashboardScreenContent() {
       .catch(() => {});
   }, [prefs.examRemindersEnabled, user, examSlug]);
 
+  const dismissCoachMark = useCallback(async () => {
+    setCoachMarkVisible(false);
+    await AsyncStorage.setItem(PASAPATH_COACH_MARK_KEY, 'seen').catch(() => {});
+  }, []);
+
+  const analyticsInsights = useMemo(
+    () => buildAnalyticsInsights(subjectAnalytics, stats.accuracyPercent),
+    [subjectAnalytics, stats.accuracyPercent]
+  );
+
   const premium = isPremium(examTypeId);
   const readinessScore = readiness?.score ?? pasapath?.readiness_hint ?? null;
   const questionsTarget = stats.questionsTarget;
@@ -417,6 +434,14 @@ function DashboardScreenContent() {
   const hasActivity = stats.sessionCount > 0;
   const visiblePasapathTasks = pasapath ? filterVisiblePasapathTasks(pasapath.tasks) : [];
   const nextTask = pasapath ? primaryPasapathTask(pasapath.tasks) : null;
+
+  useEffect(() => {
+    if (!user || loading || !pasapath || !nextTask) return;
+    void AsyncStorage.getItem(PASAPATH_COACH_MARK_KEY).then((seen) => {
+      if (!seen) setCoachMarkVisible(true);
+    });
+  }, [user, loading, pasapath, nextTask]);
+
   const pasapathComplete =
     visiblePasapathTasks.length > 0 && visiblePasapathTasks.every((task) => task.completed);
   const completedPasapathTasks = visiblePasapathTasks.filter((task) => task.completed).length;
@@ -791,6 +816,36 @@ function DashboardScreenContent() {
             })}
           </View>
 
+          {user ? (
+            <View style={{ gap: spacing.md, marginBottom: spacing.md }}>
+              <View style={styles.sectionHead}>
+                <View style={styles.sectionHeadCopy}>
+                  <Text style={styles.sectionTitle}>Study insights</Text>
+                  <Text style={styles.sectionSub}>7-day trend, accuracy, and weak areas.</Text>
+                </View>
+                <Pressable
+                  onPress={() => router.push('/analytics')}
+                  hitSlop={8}
+                  accessibilityRole="button"
+                  accessibilityLabel="Open full analytics"
+                >
+                  <View style={styles.weekLink}>
+                    <Text style={styles.weekLinkText}>Details</Text>
+                    <Ionicons name="chevron-forward" size={15} color={colors.primary} />
+                  </View>
+                </Pressable>
+              </View>
+              <StudyTrendChart points={studyTrend.length > 0 ? studyTrend : Array.from({ length: 7 }, (_, i) => ({
+                date: '',
+                dayLabel: ['M', 'T', 'W', 'T', 'F', 'S', 'S'][i],
+                questions: 0,
+                sessions: 0,
+              }))} />
+              <SubjectStrengthChart subjects={subjectAnalytics} mode="both" limit={4} />
+              <AnalyticsInsightCards insights={analyticsInsights} />
+            </View>
+          ) : null}
+
           {!premium ? (
             <Pressable
               onPress={() => router.push('/subscribe')}
@@ -1123,6 +1178,16 @@ function DashboardScreenContent() {
         visible={milestoneVisible}
         streakDays={stats.streakDays}
         onClose={() => setMilestoneVisible(false)}
+      />
+
+      <PasaPathCoachMark
+        visible={coachMarkVisible && Boolean(nextTask)}
+        taskTitle={nextTask?.title}
+        onDismiss={() => void dismissCoachMark()}
+        onStart={() => {
+          void dismissCoachMark();
+          if (nextTask) runPasapathTask(nextTask);
+        }}
       />
     </View>
   );

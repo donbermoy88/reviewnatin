@@ -10,6 +10,8 @@ import { IapFeedbackProvider } from '../providers/iap-feedback-provider';
 import { IapProvider } from '../providers/iap-provider';
 import { FontProvider } from '../providers/font-provider';
 import { OnboardingGate } from '../providers/onboarding-gate';
+import { EmailVerificationGate } from '../providers/email-verification-gate';
+import { AnalyticsProvider } from '../providers/analytics-provider';
 import { PreferencesProvider, usePreferences } from '../providers/preferences-provider';
 import { useAppTheme, fonts } from '../hooks/use-app-theme';
 import { DeepLinkHandler } from '../components/deep-link-handler';
@@ -44,6 +46,7 @@ function ThemedStack() {
         <Stack.Screen name="bookmarks/index" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)/signup" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/verify-email" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)/forgot-password" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)/reset-password" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -77,21 +80,25 @@ export default function RootLayout() {
     <ErrorBoundary>
     <FontProvider>
       <AuthProvider>
+        <AnalyticsProvider>
         <PreferencesProvider>
           <EntitlementsProvider>
             <IapFeedbackProvider>
               <IapProvider>
                 <OnboardingGate>
+                  <EmailVerificationGate>
                   <DeepLinkHandler />
                   <NotificationTapHandler />
                   <OfflineQueueFlusher />
                   <ThemedStack />
                   <OfflineBanner />
+                  </EmailVerificationGate>
                 </OnboardingGate>
               </IapProvider>
             </IapFeedbackProvider>
           </EntitlementsProvider>
         </PreferencesProvider>
+        </AnalyticsProvider>
       </AuthProvider>
     </FontProvider>
     </ErrorBoundary>

@@ -5,12 +5,14 @@ import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } fr
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
 import { EmptyState } from '../../components/empty-state';
+import { ErrorState } from '../../components/error-state';
 import { Pill } from '../../components/pill';
 import { ReportContentButton } from '../../components/report-content-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createListScreenStyles } from '../../lib/themed-styles';
 import { fetchSessionReview, type SessionReviewItem } from '../../lib/api/quiz';
 import { MOCK_PASS_THRESHOLD } from '../../lib/api/mock-history';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { useAuth } from '../../providers/auth-provider';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -32,6 +34,7 @@ export default function MockReviewScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [review, setReview] = useState<SessionReviewItem[]>([]);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     if (!sessionId) {
@@ -39,7 +42,11 @@ export default function MockReviewScreen() {
       return;
     }
     try {
+      setLoadError(null);
       setReview(await fetchSessionReview(sessionId));
+    } catch (err) {
+      setLoadError(toUserFacingError(err));
+      setReview([]);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -145,7 +152,7 @@ export default function MockReviewScreen() {
 
   const ListHeader = (
     <View style={[styles.header, { paddingTop: insets.top + spacing.sm }]}>
-      <Pressable onPress={() => router.back()} hitSlop={8}>
+      <Pressable onPress={() => router.back()} hitSlop={8} accessibilityRole="button" accessibilityLabel="Go back">
         <Ionicons name="chevron-back" size={22} color={colors.text} />
       </Pressable>
       <Text style={styles.title} numberOfLines={2}>{title ?? 'Mock review'}</Text>
@@ -171,6 +178,8 @@ export default function MockReviewScreen() {
 
   const ListEmpty = loading ? (
     <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
+  ) : loadError ? (
+    <ErrorState description={loadError} onRetry={() => { setLoading(true); void load(); }} />
   ) : (
     <View style={{ paddingHorizontal: spacing.lg }}>
       <EmptyState

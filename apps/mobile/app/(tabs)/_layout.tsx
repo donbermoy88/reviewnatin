@@ -91,6 +91,7 @@ export default function TabsLayout() {
           name={tab.name}
           options={{
             title: tab.label,
+            tabBarAccessibilityLabel: `${tab.label} tab`,
             headerShown: false,
             tabBarIcon: ({ focused }) => (
               <TabIcon

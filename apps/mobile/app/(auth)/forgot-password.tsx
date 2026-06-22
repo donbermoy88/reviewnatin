@@ -5,6 +5,7 @@ import { AuthShell, authFieldStyles } from '../../components/auth-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { validateEmail } from '../../lib/auth/validation';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { useAuth } from '../../providers/auth-provider';
 
 function LabeledField({
@@ -50,7 +51,7 @@ export default function ForgotPasswordScreen() {
     const result = await resetPassword(email);
     setLoading(false);
     if (result.error) {
-      setError(result.error);
+      setError(toUserFacingError(result.error, 'auth'));
       return;
     }
     setInfo('Naipadala ang reset link sa email mo. Buksan para mag-set ng bagong password.');
@@ -72,6 +73,7 @@ export default function ForgotPasswordScreen() {
           value={email}
           onChangeText={setEmail}
           editable={!loading}
+          accessibilityLabel="Email address for password reset"
         />
       </LabeledField>
       {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -81,7 +83,13 @@ export default function ForgotPasswordScreen() {
       ) : (
         <PrimaryButton label="Ipadala ang reset link" size="lg" onPress={submit} />
       )}
-      <Pressable onPress={() => router.back()} style={{ marginTop: theme.spacing.lg }} hitSlop={8}>
+      <Pressable
+        onPress={() => router.back()}
+        style={{ marginTop: theme.spacing.lg }}
+        hitSlop={8}
+        accessibilityRole="button"
+        accessibilityLabel="Balik sa login"
+      >
         <Text style={styles.backLink}>← Balik sa login</Text>
       </Pressable>
     </AuthShell>

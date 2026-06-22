@@ -3,9 +3,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import type { TextInput as RNTextInput } from 'react-native';
+import type { LayoutChangeEvent, TextInput as RNTextInput } from 'react-native';
 import {
   ActivityIndicator,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -23,19 +24,29 @@ import { syncOnboardingAfterAuth } from '../../lib/auth/post-auth';
 import { getAppEntryHref } from '../../lib/onboarding-nav';
 import { updateUserDisplayName } from '../../lib/api/profile';
 import { validateEmail, validatePassword } from '../../lib/auth/validation';
+import { validateEmailNotDisposable } from '../../lib/auth/disposable-email';
+import { PasswordStrengthMeter } from '../../components/password-strength-meter';
+import { TurnstileCaptcha } from '../../components/turnstile-captcha';
+import { trackEvent } from '../../lib/analytics/events';
+import { isTurnstileRequired } from '../../lib/auth/turnstile-config';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { useAuth } from '../../providers/auth-provider';
+
+type SignupField = 'name' | 'email' | 'password';
 
 function LabeledField({
   label,
   children,
+  onLayout,
   styles,
 }: {
   label: string;
   children: ReactNode;
+  onLayout?: (event: LayoutChangeEvent) => void;
   styles: ReturnType<typeof createSignupStyles>;
 }) {
   return (
-    <View style={styles.field}>
+    <View style={styles.field} onLayout={onLayout}>
       <Text style={styles.fieldLabel}>{label}</Text>
       {children}
     </View>
@@ -56,7 +67,18 @@ export default function SignUpScreen() {
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaResetKey, setCaptchaResetKey] = useState(0);
+  const turnstileRequired = isTurnstileRequired();
   const [appleAvailable, setAppleAvailable] = useState(false);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const [formTop, setFormTop] = useState(0);
+  const [fieldTop, setFieldTop] = useState<Record<SignupField, number>>({
+    name: 0,
+    email: 0,
+    password: 0,
+  });
+  const scrollRef = useRef<ScrollView>(null);
   const emailRef = useRef<RNTextInput>(null);
   const passwordRef = useRef<RNTextInput>(null);
 
@@ -64,6 +86,29 @@ export default function SignUpScreen() {
     if (Platform.OS !== 'ios') return;
     void AppleAuthentication.isAvailableAsync().then(setAppleAvailable);
   }, []);
+
+  useEffect(() => {
+    const showSub = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
+    const hideSub = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false));
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
+  }, []);
+
+  const recordFieldTop =
+    (field: SignupField) => (event: LayoutChangeEvent) => {
+      const y = event.nativeEvent.layout.y;
+      setFieldTop((current) => (current[field] === y ? current : { ...current, [field]: y }));
+    };
+
+  const scrollToField = (field: SignupField) => {
+    const y = Math.max(formTop + fieldTop[field] - 120, 0);
+    const scroll = () => scrollRef.current?.scrollTo({ y, animated: true });
+
+    requestAnimationFrame(scroll);
+    setTimeout(scroll, Platform.OS === 'android' ? 260 : 120);
+  };
 
   const submit = async () => {
     setError(null);
@@ -80,6 +125,12 @@ export default function SignUpScreen() {
       return;
     }
 
+    const disposableError = validateEmailNotDisposable(email);
+    if (disposableError) {
+      setError(disposableError);
+      return;
+    }
+
     const passwordError = validatePassword(password, true);
     if (passwordError) {
       setError(passwordError);
@@ -91,18 +142,33 @@ export default function SignUpScreen() {
       return;
     }
 
+    if (turnstileRequired && !captchaToken) {
+      setError('Please complete the security verification.');
+      return;
+    }
+
     setLoading(true);
-    const result = await signUp(email, password);
+    trackEvent('registration_started', { method: 'email' });
+    const result = await signUp(email, password, captchaToken ?? undefined);
 
     if (result.error) {
-      setError(result.error);
+      setError(toUserFacingError(result.error, 'auth'));
+      setCaptchaToken(null);
+      setCaptchaResetKey((k) => k + 1);
       setLoading(false);
       return;
     }
 
     if (result.needsEmailConfirmation) {
-      setInfo('Nagawa na ang account. I-check ang email mo para i-confirm bago mag-log in.');
+      trackEvent('otp_sent', { trigger: 'signup' });
       setLoading(false);
+      router.replace({
+        pathname: '/(auth)/verify-email',
+        params: {
+          email: email.trim().toLowerCase(),
+          displayName: displayName.trim(),
+        },
+      });
       return;
     }
 
@@ -149,7 +215,7 @@ export default function SignUpScreen() {
     setLoading(true);
     const result = provider === 'google' ? await signInGoogle() : await signInApple();
     if (result.error) {
-      setError(result.error);
+      setError(toUserFacingError(result.error, 'auth'));
       setLoading(false);
       return;
     }
@@ -166,8 +232,10 @@ export default function SignUpScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView
+        ref={scrollRef}
         style={styles.flex}
         contentContainerStyle={styles.scrollContent}
+        keyboardDismissMode="interactive"
         keyboardShouldPersistTaps="handled"
         bounces={false}
       >
@@ -182,7 +250,16 @@ export default function SignUpScreen() {
           <Text style={styles.heroSub}>Mag-review tayo. Pasa tayo.</Text>
         </LinearGradient>
 
-        <View style={[styles.form, { paddingBottom: insets.bottom + spacing.xl }]}>
+        <View
+          onLayout={(event) => {
+            const y = event.nativeEvent.layout.y;
+            setFormTop((current) => (current === y ? current : y));
+          }}
+          style={[
+            styles.form,
+            { paddingBottom: insets.bottom + spacing.xl + (keyboardVisible ? 160 : 0) },
+          ]}
+        >
           <Text style={styles.title}>Gumawa ng account</Text>
           <Text style={styles.subtitle}>Simulan ang review mo.</Text>
 
@@ -219,7 +296,7 @@ export default function SignUpScreen() {
             <View style={styles.dividerLine} />
           </View>
 
-          <LabeledField label="Name" styles={styles}>
+          <LabeledField label="Name" styles={styles} onLayout={recordFieldTop('name')}>
             <TextInput
               style={styles.input}
               placeholder="Pangalan mo"
@@ -229,13 +306,15 @@ export default function SignUpScreen() {
               textContentType="name"
               returnKeyType="next"
               onSubmitEditing={() => emailRef.current?.focus()}
+              onFocus={() => scrollToField('name')}
               value={displayName}
               onChangeText={setDisplayName}
               editable={!loading}
+              accessibilityLabel="Display name"
             />
           </LabeledField>
 
-          <LabeledField label="Email" styles={styles}>
+          <LabeledField label="Email" styles={styles} onLayout={recordFieldTop('email')}>
             <TextInput
               ref={emailRef}
               style={styles.input}
@@ -248,13 +327,15 @@ export default function SignUpScreen() {
               autoComplete="email"
               returnKeyType="next"
               onSubmitEditing={() => passwordRef.current?.focus()}
+              onFocus={() => scrollToField('email')}
               value={email}
               onChangeText={setEmail}
               editable={!loading}
+              accessibilityLabel="Email address"
             />
           </LabeledField>
 
-          <LabeledField label="Password" styles={styles}>
+          <LabeledField label="Password" styles={styles} onLayout={recordFieldTop('password')}>
             <View style={styles.passwordRow}>
               <TextInput
                 ref={passwordRef}
@@ -265,15 +346,19 @@ export default function SignUpScreen() {
                 textContentType="newPassword"
                 autoComplete="password-new"
                 returnKeyType="done"
+                onFocus={() => scrollToField('password')}
                 onSubmitEditing={submit}
                 value={password}
                 onChangeText={setPassword}
                 editable={!loading}
+                accessibilityLabel="Password"
               />
               <Pressable
                 onPress={() => setShowPassword((v) => !v)}
                 style={styles.passwordToggle}
                 hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel={showPassword ? 'Hide password' : 'Show password'}
               >
                 <Ionicons
                   name={showPassword ? 'eye-off-outline' : 'eye-outline'}
@@ -282,8 +367,16 @@ export default function SignUpScreen() {
                 />
               </Pressable>
             </View>
-            <Text style={styles.helperText}>At least 8 characters</Text>
+            <Text style={styles.helperText}>At least 8 characters, upper, lower, and number</Text>
+            <PasswordStrengthMeter password={password} />
           </LabeledField>
+
+          {turnstileRequired ? (
+            <TurnstileCaptcha
+              resetKey={captchaResetKey}
+              onToken={setCaptchaToken}
+            />
+          ) : null}
 
           {error ? <Text style={styles.error}>{error}</Text> : null}
           {info ? <Text style={styles.info}>{info}</Text> : null}
@@ -304,6 +397,8 @@ export default function SignUpScreen() {
             onPress={() => router.replace('/(auth)/login')}
             style={styles.modeSwitch}
             disabled={loading}
+            accessibilityRole="button"
+            accessibilityLabel="Switch to log in"
           >
             <Text style={styles.modeSwitchText}>
               Already have an account?{' '}

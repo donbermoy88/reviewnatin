@@ -39,6 +39,19 @@ describe('isOnboardingComplete', () => {
     mockGetOnboarding.mockResolvedValue(null);
     await expect(isOnboardingComplete()).resolves.toBe(false);
   });
+
+  it('returns false when remote goal exists but is incomplete', async () => {
+    mockGetOnboarding.mockResolvedValue(null);
+    mockResolveGoal.mockResolvedValue({ ...sampleGoal(), completed: false });
+    await expect(isOnboardingComplete('user-1')).resolves.toBe(false);
+    expect(mockSaveOnboarding).not.toHaveBeenCalled();
+  });
+
+  it('falls back to local when remote goal fetch fails', async () => {
+    mockGetOnboarding.mockResolvedValue({ ...sampleGoal(), completed: false });
+    mockResolveGoal.mockRejectedValue(new Error('network'));
+    await expect(isOnboardingComplete('user-1')).resolves.toBe(false);
+  });
 });
 
 describe('getAppEntryHref', () => {
@@ -54,6 +67,12 @@ describe('getAppEntryHref', () => {
   it('routes to onboarding when incomplete', async () => {
     mockGetOnboarding.mockResolvedValue({ ...sampleGoal(), completed: false });
     await expect(getAppEntryHref()).resolves.toBe('/onboarding');
+  });
+
+  it('checks remote goal for signed-in users before routing', async () => {
+    mockGetOnboarding.mockResolvedValue(null);
+    mockResolveGoal.mockResolvedValue({ ...sampleGoal(), completed: true });
+    await expect(getAppEntryHref('user-1')).resolves.toBe('/(tabs)');
   });
 });
 

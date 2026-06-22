@@ -38,6 +38,11 @@ describe('validatePassword', () => {
       'For sign-up, use at least 8 characters.'
     );
   });
+
+  it('requires complexity for sign-up', () => {
+    expect(validatePassword('abcdefgh', true)).toMatch(/uppercase/i);
+    expect(validatePassword('Abcdefg1', true)).toBeNull();
+  });
 });
 
 describe('validatePasswordMatch', () => {

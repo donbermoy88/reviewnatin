@@ -11,6 +11,12 @@ export function mapAuthError(message: string): string {
   if (m.includes('email not confirmed')) {
     return 'Please confirm your email before logging in. Check your inbox.';
   }
+  if (m.includes('token has expired') || m.includes('otp_expired')) {
+    return 'Verification code expired. Request a new code.';
+  }
+  if (m.includes('invalid otp') || m.includes('invalid token')) {
+    return 'Invalid verification code. Please check and try again.';
+  }
   if (m.includes('password') && m.includes('weak')) {
     return 'Password is too weak. Use a longer, more unique password.';
   }

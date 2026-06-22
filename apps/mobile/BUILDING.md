@@ -99,3 +99,33 @@ EAS manages the signing certificate and provisioning profile automatically
 
 Prefer EAS to hold the key instead of a local file? Store it as an EAS secret
 and drop `ascApiKeyPath` — `eas submit` will use the secret.
+
+## Android beta builds (direct APK distribution)
+
+For the 12-tester APK beta program (no Play Console yet), use the **`preview`**
+profile. It produces an installable APK for internal distribution.
+
+```bash
+cd apps/mobile
+npm run eas:build:android:preview
+# or: eas build --profile preview --platform android
+```
+
+Before each beta release:
+
+1. Bump `android.versionCode` in `app.json`.
+2. Tag: `git tag beta-v1.0.X`.
+3. Record SHA-256 from the EAS artifact in release notes.
+
+**Preview profile env** (EAS dashboard `preview` env block):
+
+| Variable | Required |
+|----------|----------|
+| `EXPO_PUBLIC_SUPABASE_URL` | Yes |
+| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Yes |
+| `EXPO_PUBLIC_SENTRY_DSN` | Recommended |
+| `EXPO_PUBLIC_ADMOB_ANDROID_APP_ID` | Optional (test IDs OK) |
+
+**Beta limitations:** Play Billing IAP and FCM remote push do not work on
+sideloaded APKs. Testers subscribe via **web checkout**; local notification
+scheduling still works. See `docs/android-beta-program.md` for the daily SOP.

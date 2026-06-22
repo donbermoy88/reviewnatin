@@ -2,9 +2,10 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import type { TextInput as RNTextInput } from 'react-native';
+import type { LayoutChangeEvent, TextInput as RNTextInput } from 'react-native';
 import {
   ActivityIndicator,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -24,19 +25,28 @@ import {
   validatePassword,
   validatePasswordMatch,
 } from '../../lib/auth/validation';
+import { validateEmailNotDisposable } from '../../lib/auth/disposable-email';
+import { PasswordStrengthMeter } from '../../components/password-strength-meter';
+import { TurnstileCaptcha } from '../../components/turnstile-captcha';
+import { isTurnstileRequired } from '../../lib/auth/turnstile-config';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { useAuth } from '../../providers/auth-provider';
+
+type LoginField = 'email' | 'password' | 'confirm';
 
 function LabeledField({
   label,
   children,
+  onLayout,
   styles,
 }: {
   label: string;
   children: ReactNode;
+  onLayout?: (event: LayoutChangeEvent) => void;
   styles: ReturnType<typeof createLoginStyles>;
 }) {
   return (
-    <View style={styles.field}>
+    <View style={styles.field} onLayout={onLayout}>
       <Text style={styles.fieldLabel}>{label}</Text>
       {children}
     </View>
@@ -57,7 +67,18 @@ export default function LoginScreen() {
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaResetKey, setCaptchaResetKey] = useState(0);
+  const turnstileRequired = isTurnstileRequired();
   const [appleAvailable, setAppleAvailable] = useState(false);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const [formTop, setFormTop] = useState(0);
+  const [fieldTop, setFieldTop] = useState<Record<LoginField, number>>({
+    email: 0,
+    password: 0,
+    confirm: 0,
+  });
+  const scrollRef = useRef<ScrollView>(null);
   const passwordRef = useRef<RNTextInput>(null);
   const confirmRef = useRef<RNTextInput>(null);
 
@@ -66,11 +87,36 @@ export default function LoginScreen() {
     void AppleAuthentication.isAvailableAsync().then(setAppleAvailable);
   }, []);
 
+  useEffect(() => {
+    const showSub = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
+    const hideSub = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false));
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
+  }, []);
+
+  const recordFieldTop =
+    (field: LoginField) => (event: LayoutChangeEvent) => {
+      const y = event.nativeEvent.layout.y;
+      setFieldTop((current) => (current[field] === y ? current : { ...current, [field]: y }));
+    };
+
+  const scrollToField = (field: LoginField) => {
+    const y = Math.max(formTop + fieldTop[field] - 120, 0);
+    const scroll = () => scrollRef.current?.scrollTo({ y, animated: true });
+
+    requestAnimationFrame(scroll);
+    setTimeout(scroll, Platform.OS === 'android' ? 260 : 120);
+  };
+
   const switchMode = (next: 'signin' | 'signup') => {
     setMode(next);
     setError(null);
     setInfo(null);
     setConfirmPassword('');
+    setCaptchaToken(null);
+    setCaptchaResetKey((k) => k + 1);
   };
 
   const replaceAfterAuth = async (_userId: string) => {
@@ -85,6 +131,14 @@ export default function LoginScreen() {
     if (emailError) {
       setError(emailError);
       return;
+    }
+
+    if (mode === 'signup') {
+      const disposableError = validateEmailNotDisposable(email);
+      if (disposableError) {
+        setError(disposableError);
+        return;
+      }
     }
 
     const passwordError = validatePassword(password, mode === 'signup');
@@ -106,21 +160,44 @@ export default function LoginScreen() {
       return;
     }
 
+    if (mode === 'signup' && turnstileRequired && !captchaToken) {
+      setError('Please complete the security verification.');
+      return;
+    }
+
     setLoading(true);
-    const result = mode === 'signin' ? await signIn(email, password) : await signUp(email, password);
+    const result =
+      mode === 'signin'
+        ? await signIn(email, password)
+        : await signUp(email, password, captchaToken ?? undefined);
 
     if (result.error) {
-      setError(result.error);
+      if (
+        mode === 'signin' &&
+        result.error.toLowerCase().includes('confirm your email')
+      ) {
+        setLoading(false);
+        router.replace({
+          pathname: '/(auth)/verify-email',
+          params: { email: email.trim().toLowerCase() },
+        });
+        return;
+      }
+      setError(toUserFacingError(result.error, 'auth'));
+      if (mode === 'signup') {
+        setCaptchaToken(null);
+        setCaptchaResetKey((k) => k + 1);
+      }
       setLoading(false);
       return;
     }
 
     if (result.needsEmailConfirmation) {
-      setInfo('Nagawa na ang account! I-check ang email mo para i-confirm bago mag-log in.');
-      setMode('signin');
-      setPassword('');
-      setConfirmPassword('');
       setLoading(false);
+      router.replace({
+        pathname: '/(auth)/verify-email',
+        params: { email: email.trim().toLowerCase() },
+      });
       return;
     }
 
@@ -159,7 +236,7 @@ export default function LoginScreen() {
     setLoading(true);
     const result = provider === 'google' ? await signInGoogle() : await signInApple();
     if (result.error) {
-      setError(result.error);
+      setError(toUserFacingError(result.error, 'auth'));
       setLoading(false);
       return;
     }
@@ -171,10 +248,15 @@ export default function LoginScreen() {
   };
 
   return (
-    <KeyboardAvoidingView style={[styles.flex, { backgroundColor: colors.background }]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView
+      style={[styles.flex, { backgroundColor: colors.background }]}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
       <ScrollView
+        ref={scrollRef}
         style={styles.flex}
         contentContainerStyle={styles.scrollContent}
+        keyboardDismissMode="interactive"
         keyboardShouldPersistTaps="handled"
         bounces={false}
       >
@@ -189,7 +271,16 @@ export default function LoginScreen() {
           <Text style={styles.heroSub}>Mag-review tayo. Pasa tayo.</Text>
         </LinearGradient>
 
-        <View style={[styles.form, { paddingBottom: insets.bottom + spacing.xl }]}>
+        <View
+          onLayout={(event) => {
+            const y = event.nativeEvent.layout.y;
+            setFormTop((current) => (current === y ? current : y));
+          }}
+          style={[
+            styles.form,
+            { paddingBottom: insets.bottom + spacing.xl + (keyboardVisible ? 160 : 0) },
+          ]}
+        >
           <Text style={styles.title}>{mode === 'signin' ? 'Log in' : 'Create account'}</Text>
           <Text style={styles.subtitle}>I-save ang progress mo sa cloud.</Text>
 
@@ -229,6 +320,8 @@ export default function LoginScreen() {
             style={[styles.guestLink, { marginTop: 0, marginBottom: 4 }]}
             disabled={loading}
             hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="Magpatuloy bilang guest"
           >
             <Text style={styles.guestLinkText}>Magpatuloy bilang guest</Text>
           </Pressable>
@@ -239,7 +332,7 @@ export default function LoginScreen() {
             <View style={styles.dividerLine} />
           </View>
 
-          <LabeledField label="Email" styles={styles}>
+          <LabeledField label="Email" styles={styles} onLayout={recordFieldTop('email')}>
             <TextInput
               style={styles.input}
               placeholder="e.g. reviewer@email.com"
@@ -250,14 +343,16 @@ export default function LoginScreen() {
               textContentType="emailAddress"
               autoComplete="email"
               returnKeyType="next"
+              onFocus={() => scrollToField('email')}
               onSubmitEditing={() => passwordRef.current?.focus()}
               value={email}
               onChangeText={setEmail}
               editable={!loading}
+              accessibilityLabel="Email address"
             />
           </LabeledField>
 
-          <LabeledField label="Password" styles={styles}>
+          <LabeledField label="Password" styles={styles} onLayout={recordFieldTop('password')}>
             <TextInput
               ref={passwordRef}
               style={styles.input}
@@ -267,15 +362,22 @@ export default function LoginScreen() {
               textContentType={mode === 'signup' ? 'newPassword' : 'password'}
               autoComplete={mode === 'signup' ? 'password-new' : 'password'}
               returnKeyType={mode === 'signup' ? 'next' : 'done'}
+              onFocus={() => scrollToField('password')}
               onSubmitEditing={mode === 'signup' ? () => confirmRef.current?.focus() : submit}
               value={password}
               onChangeText={setPassword}
               editable={!loading}
+              accessibilityLabel={mode === 'signup' ? 'Password' : 'Password for login'}
             />
+            {mode === 'signup' ? <PasswordStrengthMeter password={password} /> : null}
           </LabeledField>
 
           {mode === 'signup' ? (
-            <LabeledField label="Confirm password" styles={styles}>
+            <LabeledField
+              label="Confirm password"
+              styles={styles}
+              onLayout={recordFieldTop('confirm')}
+            >
               <TextInput
                 ref={confirmRef}
                 style={styles.input}
@@ -285,12 +387,21 @@ export default function LoginScreen() {
                 textContentType="newPassword"
                 autoComplete="password-new"
                 returnKeyType="done"
+                onFocus={() => scrollToField('confirm')}
                 onSubmitEditing={submit}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 editable={!loading}
+                accessibilityLabel="Confirm password"
               />
             </LabeledField>
+          ) : null}
+
+          {mode === 'signup' && turnstileRequired ? (
+            <TurnstileCaptcha
+              resetKey={captchaResetKey}
+              onToken={setCaptchaToken}
+            />
           ) : null}
 
           {mode === 'signin' ? (
@@ -298,6 +409,8 @@ export default function LoginScreen() {
               onPress={() => router.push('/(auth)/forgot-password')}
               style={styles.forgotRow}
               hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel="Nakalimutan ang password"
             >
               <Text style={styles.forgotLink}>Nakalimutan ang password?</Text>
             </Pressable>
@@ -328,6 +441,8 @@ export default function LoginScreen() {
             }}
             style={styles.modeSwitch}
             disabled={loading}
+            accessibilityRole="button"
+            accessibilityLabel={mode === 'signin' ? 'Switch to sign up' : 'Switch to log in'}
           >
             <Text style={styles.modeSwitchText}>
               {mode === 'signin' ? 'No account? ' : 'May account ka na? '}

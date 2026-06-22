@@ -1,0 +1,28 @@
+# Free cohort smoke: signup form → OTP verification screen (email OTP not automatable)
+appId: ph.reviewnatin.app
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "Magpatuloy bilang guest"
+    timeout: 15000
+- tapOn: "Sign up"
+- extendedWaitUntil:
+    visible: "Gumawa ng account"
+    timeout: 10000
+- tapOn:
+    text: "Name"
+- inputText: "Beta Tester"
+- tapOn:
+    text: "Email"
+- inputText: "beta.free.test@example.com"
+- tapOn:
+    text: "Password"
+- inputText: "TestPass1"
+- hideKeyboard
+- tapOn: "Gumawa ng account"
+- extendedWaitUntil:
+    visible:
+      - "6-digit code"
+      - "I-verify at magpatuloy"
+    timeout: 20000

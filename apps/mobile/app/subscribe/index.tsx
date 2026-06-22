@@ -16,7 +16,10 @@ import { useEntitlements } from '../../providers/entitlements-provider';
 import { useIap } from '../../providers/iap-provider';
 import { createWebCheckoutSession, fetchWebCheckoutStatus, checkoutAttributionOptions } from '../../lib/api/web-checkout';
 import { captureAttributionFromQuery, loadCheckoutAttribution } from '../../lib/checkout-attribution';
+import { toUserFacingError } from '../../lib/errors/user-facing';
+import { trackEvent } from '../../lib/analytics/events';
 import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
+import { preferWebCheckout } from '../../lib/iap/availability';
 import {
   clearPendingCheckoutRef,
   getPendingCheckoutRef,
@@ -24,7 +27,7 @@ import {
 } from '../../lib/web-checkout-pending';
 
 const isDevBuild = __DEV__;
-const MONTHLY_BASE_PRICE_PHP = 159;
+const webCheckoutPrimary = preferWebCheckout();
 
 const PLUS_FEATURES = [
   'All exams unlocked (CSE, LET, PNLE)',
@@ -166,6 +169,14 @@ export default function SubscribeScreen() {
   >(null);
 
   useEffect(() => {
+    trackEvent('subscription_viewed', {
+      source: sourceParam ?? utm_source ?? 'direct',
+      signedIn: Boolean(user),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- fire once on mount
+  }, []);
+
+  useEffect(() => {
     void refreshEntitlements();
   }, [refreshEntitlements]);
 
@@ -252,7 +263,7 @@ export default function SubscribeScreen() {
   // Per-month savings are benchmarked against the actual monthly plan's resolved
   // price, not a hardcoded constant, so the "save X%" label stays truthful.
   const monthlyPlan = sortedPlus.find((p) => p.sku.toLowerCase().includes('monthly'));
-  const monthlyBaseAmount = monthlyPlan ? resolvePrice(monthlyPlan).amount : MONTHLY_BASE_PRICE_PHP;
+  const monthlyBaseAmount = monthlyPlan ? resolvePrice(monthlyPlan).amount : 0;
 
   function planMonthlyEquiv(product: ProductRow): number {
     const { amount } = resolvePrice(product);
@@ -320,10 +331,11 @@ export default function SubscribeScreen() {
       return;
     }
     addAppBreadcrumb('paywall', 'store purchase button pressed', { sku });
+    trackEvent('checkout_started', { method: 'store', sku });
     const result = await purchaseProduct(sku);
     if (!result.ok && result.error && !result.error.includes('cancel')) {
       captureAppMessage('store purchase request failed', { area: 'paywall', action: 'store_purchase_request' }, { sku, error: result.error }, 'warning');
-      setSheet({ kind: 'purchase_error', message: result.error });
+      setSheet({ kind: 'purchase_error', message: toUserFacingError(result.error, 'checkout') });
     }
   };
 
@@ -354,6 +366,7 @@ export default function SubscribeScreen() {
     }
     try {
       addAppBreadcrumb('checkout', 'e-wallet checkout requested', { sku, provider });
+      trackEvent('checkout_started', { method: provider, sku });
       const attribution = await loadCheckoutAttribution();
       const attrOpts = checkoutAttributionOptions(attribution);
       const session = await createWebCheckoutSession(sku, provider, attrOpts);
@@ -368,22 +381,37 @@ export default function SubscribeScreen() {
       });
     } catch (e) {
       captureAppException(e, { area: 'checkout', action: 'create_ewallet_checkout' }, { sku, provider });
-      setSheet({ kind: 'checkout_error', message: (e as Error).message });
+      setSheet({ kind: 'checkout_error', message: toUserFacingError(e, 'checkout') });
     }
   };
 
   const ctaLabel = hasAccess
     ? 'Plus active'
-    : busy || purchasingSku
-      ? 'Processing…'
-      : selectedProduct
-        ? `Start ${planShortName(selectedProduct)} · ${resolvePrice(selectedProduct).display}`
-        : 'Choose a plan';
+    : !user
+      ? 'Mag-log in para mag-subscribe'
+      : busy || purchasingSku
+        ? 'Processing…'
+        : selectedProduct
+          ? webCheckoutPrimary && !isDevBuild
+            ? `Magbayad via GCash/Maya · ${resolvePrice(selectedProduct).display}`
+            : `Start ${planShortName(selectedProduct)} · ${resolvePrice(selectedProduct).display}`
+          : 'Choose a plan';
 
   const onCtaPress = () => {
     if (hasAccess || !selectedProduct) return;
-    if (isDevBuild) void buyDemo(selectedProduct.id, selectedProduct.tier);
-    else void buyStore(selectedProduct.sku);
+    if (!user) {
+      requireLogin();
+      return;
+    }
+    if (isDevBuild) {
+      void buyDemo(selectedProduct.id, selectedProduct.tier);
+      return;
+    }
+    if (webCheckoutPrimary) {
+      setEwalletPickerOpen(true);
+      return;
+    }
+    void buyStore(selectedProduct.sku);
   };
 
   return (
@@ -449,6 +477,24 @@ export default function SubscribeScreen() {
               compact
             />
           </View>
+        ) : !user ? (
+          <View style={styles.guestBannerDark}>
+            <Ionicons name="person-circle-outline" size={20} color={colors.accent} />
+            <View style={{ flex: 1 }}>
+              <Text style={styles.guestBannerTitleDark}>Mag-log in muna</Text>
+              <Text style={styles.guestBannerSubDark}>
+                Kailangan ng account para mag-subscribe sa Plus. Libre ang sign-up — i-save ang progress mo sa cloud.
+              </Text>
+            </View>
+            <Pressable
+              onPress={requireLogin}
+              style={({ pressed }) => [styles.guestBannerBtn, pressed && { opacity: 0.9 }]}
+              accessibilityRole="button"
+              accessibilityLabel="Mag-sign up o mag-log in"
+            >
+              <Text style={styles.guestBannerBtnText}>Sign up</Text>
+            </Pressable>
+          </View>
         ) : loading ? (
           <ActivityIndicator color={colors.accent} style={{ marginTop: spacing.lg }} />
         ) : (
@@ -511,6 +557,15 @@ export default function SubscribeScreen() {
           </Pressable>
         ) : null}
 
+        {webCheckoutPrimary && !hasAccess && user ? (
+          <View style={styles.betaBannerDark}>
+            <Ionicons name="phone-portrait-outline" size={14} color={colors.accent} />
+            <Text style={styles.betaBannerDarkText}>
+              Beta APK — magbayad via GCash o Maya web checkout. Google Play billing darating kapag live na sa Play Store.
+            </Text>
+          </View>
+        ) : null}
+
         {isDevBuild ? (
           <View style={styles.devBannerDark}>
             <Ionicons name="code-slash" size={14} color={colors.accent} />
@@ -537,20 +592,43 @@ export default function SubscribeScreen() {
             <Text style={styles.bigCtaText}>{ctaLabel}</Text>
           </Pressable>
           <View style={styles.ctaLinksRow}>
+            {!webCheckoutPrimary ? (
+              <Pressable
+                onPress={() => (user ? void handleRestore() : requireLogin())}
+                hitSlop={8}
+                disabled={restoring}
+                accessibilityRole="button"
+                accessibilityLabel="Restore purchase"
+              >
+                <Text style={styles.ctaLinkText}>
+                  {restoring ? 'Restoring…' : 'Restore purchase'}
+                </Text>
+              </Pressable>
+            ) : null}
             <Pressable
-              onPress={() => (user ? void handleRestore() : requireLogin())}
+              onPress={() => setComparePlansOpen(true)}
               hitSlop={8}
-              disabled={restoring}
+              accessibilityRole="button"
+              accessibilityLabel="Compare subscription plans"
             >
-              <Text style={styles.ctaLinkText}>
-                {restoring ? 'Restoring…' : 'Restore purchase'}
-              </Text>
-            </Pressable>
-            <Pressable onPress={() => setComparePlansOpen(true)} hitSlop={8}>
               <Text style={styles.ctaLinkText}>Compare plans</Text>
             </Pressable>
-            {!isDevBuild ? (
-              <Pressable onPress={() => setEwalletPickerOpen(true)} hitSlop={8}>
+            {webCheckoutPrimary && user && !isDevBuild ? (
+              <Pressable
+                onPress={() => setEwalletPickerOpen(true)}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel="Pay with GCash or Maya"
+              >
+                <Text style={styles.ctaLinkText}>GCash/Maya</Text>
+              </Pressable>
+            ) : !webCheckoutPrimary && !isDevBuild ? (
+              <Pressable
+                onPress={() => setEwalletPickerOpen(true)}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel="Pay with GCash or Maya"
+              >
                 <Text style={styles.ctaLinkText}>GCash/Maya</Text>
               </Pressable>
             ) : null}
@@ -1038,6 +1116,58 @@ function createStyles(theme: AppTheme) {
       fontSize: 12,
       color: 'rgba(255,255,255,0.78)',
       lineHeight: 17,
+    },
+    betaBannerDark: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: spacing.sm,
+      backgroundColor: 'rgba(11,95,255,0.18)',
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      marginTop: spacing.md,
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.14)',
+    },
+    betaBannerDarkText: {
+      flex: 1,
+      fontFamily: fonts.bodyMedium,
+      fontSize: 12,
+      color: 'rgba(255,255,255,0.85)',
+      lineHeight: 17,
+    },
+    guestBannerDark: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      backgroundColor: 'rgba(255,255,255,0.08)',
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      marginTop: spacing.lg,
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.12)',
+    },
+    guestBannerTitleDark: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 14,
+      color: '#fff',
+    },
+    guestBannerSubDark: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 12,
+      color: 'rgba(255,255,255,0.65)',
+      marginTop: 2,
+      lineHeight: 17,
+    },
+    guestBannerBtn: {
+      backgroundColor: colors.accent,
+      borderRadius: radii.md,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+    },
+    guestBannerBtnText: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 13,
+      color: colors.primaryDark,
     },
     successBannerDark: {
       flexDirection: 'row',

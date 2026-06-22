@@ -3,6 +3,8 @@ import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AnalyticsInsightCards, SubjectStrengthChart } from '../../components/analytics/subject-strength-chart';
+import { StudyTrendChart } from '../../components/analytics/study-trend-chart';
 import { EmptyState } from '../../components/empty-state';
 import { MasteryBar } from '../../components/mastery-bar';
 import { PrimaryButton } from '../../components/primary-button';
@@ -10,8 +12,12 @@ import { ReadinessBreakdownSheet } from '../../components/readiness-breakdown-sh
 import { ScreenBackground } from '../../components/screen-background';
 import { StackShell } from '../../components/stack-shell';
 import { SegmentedReadinessBar } from '../../components/segmented-readiness-bar';
+import { SimpleBarChart } from '../../components/simple-bar-chart';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { fetchTopicAnalytics, type SubjectAnalytics } from '../../lib/api/analytics';
+import { fetchDailyStudyTrend, type DailyStudyPoint } from '../../lib/api/study-trend';
+import { buildAnalyticsInsights } from '../../lib/analytics/insights';
+import { fetchPracticeStats } from '../../lib/api/stats';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import {
   fetchLatestReadiness,
@@ -33,6 +39,8 @@ export default function AnalyticsScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
   const [subjects, setSubjects] = useState<SubjectAnalytics[]>([]);
+  const [studyTrend, setStudyTrend] = useState<DailyStudyPoint[]>([]);
+  const [accuracyPercent, setAccuracyPercent] = useState<number | null>(null);
   const [readiness, setReadiness] = useState<ReadinessSnapshot | null>(null);
   const [breakdownOpen, setBreakdownOpen] = useState(false);
 
@@ -44,19 +52,29 @@ export default function AnalyticsScreen() {
 
       if (!user) {
         setSubjects([]);
+        setStudyTrend([]);
+        setAccuracyPercent(null);
         setReadiness(null);
         return;
       }
 
       try {
-        const [analytics, latestReadiness] = await Promise.all([
+        const goalMinutes = goal?.dailyMinutes ?? 30;
+        const dailyTarget = { 15: 5, 30: 15, 45: 30, 60: 60 }[goalMinutes] ?? 15;
+        const [analytics, latestReadiness, trend, practiceStats] = await Promise.all([
           fetchTopicAnalytics(slug),
           fetchLatestReadiness(slug),
+          fetchDailyStudyTrend(user.id, slug),
+          fetchPracticeStats(user.id, dailyTarget, slug),
         ]);
         setSubjects(analytics.subjects);
         setReadiness(latestReadiness);
+        setStudyTrend(trend);
+        setAccuracyPercent(practiceStats.accuracyPercent);
       } catch {
         setSubjects([]);
+        setStudyTrend([]);
+        setAccuracyPercent(null);
         setReadiness(null);
       }
     } catch {
@@ -90,6 +108,20 @@ export default function AnalyticsScreen() {
   const weakTopicNames = weakTopics
     .map((t) => t.topicName)
     .slice(0, 6);
+  const insights = useMemo(
+    () => buildAnalyticsInsights(subjects, accuracyPercent),
+    [subjects, accuracyPercent]
+  );
+  const emptyTrend = useMemo(
+    () =>
+      Array.from({ length: 7 }, (_, i) => ({
+        date: '',
+        dayLabel: ['M', 'T', 'W', 'T', 'F', 'S', 'S'][i],
+        questions: 0,
+        sessions: 0,
+      })),
+    []
+  );
 
   if (loading) {
     return (
@@ -163,13 +195,26 @@ export default function AnalyticsScreen() {
               <SegmentedReadinessBar score={readinessScore} style={styles.summarySegments} />
             ) : null}
 
-            {weakTopicNames.length > 0 ? (
-              <View style={styles.weakBox}>
-                <Text style={styles.weakBoxText}>
-                  Weak areas: {weakTopicNames.join(', ')}
-                </Text>
+            {weakTopics.length > 0 ? (
+              <View style={{ marginTop: 16 }}>
+                <Text style={[styles.weakBoxText, { marginBottom: 8 }]}>Accuracy by weak topic</Text>
+                <SimpleBarChart
+                  data={weakTopics.slice(0, 5).map((t) => ({
+                    label: t.topicName.slice(0, 8),
+                    value: Math.round(t.accuracy),
+                  }))}
+                  maxValue={100}
+                  accessibilityLabel="Weak topic accuracy chart"
+                />
               </View>
             ) : null}
+          </View>
+
+          <View style={{ gap: 12, marginBottom: 16 }}>
+            <StudyTrendChart points={studyTrend.length > 0 ? studyTrend : emptyTrend} />
+            <SubjectStrengthChart subjects={subjects} mode="weak" limit={4} />
+            <SubjectStrengthChart subjects={subjects} mode="strong" limit={4} />
+            <AnalyticsInsightCards insights={insights} />
           </View>
 
           {subjects.length === 0 ? (

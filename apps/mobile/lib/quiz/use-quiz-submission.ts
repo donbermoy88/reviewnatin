@@ -11,6 +11,7 @@ import { completeDiagnostic } from '../api/diagnostic';
 import { completePracticeSession, createQuizSession, saveQuizAnswers } from '../api/quiz';
 import { awardSessionXp } from '../api/xp';
 import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../monitoring/events';
+import { trackEvent } from '../analytics/events';
 import type { Question, QuizAnswerRecord } from '../types';
 import type { QuizMode } from './mode';
 
@@ -203,6 +204,24 @@ export function useQuizSubmission({
       offline: offlineMode,
       mode: isDiagnostic ? 'diagnostic' : isMock ? 'mock' : isBoard ? 'board' : isTimed ? 'timed' : 'practice',
     });
+
+    if (isMock || isBoard) {
+      trackEvent('mock_exam_completed', {
+        examSlug: slug,
+        score: serverScore,
+        itemCount: questions.length,
+        durationSeconds: duration,
+        offline: offlineMode,
+      });
+    } else if (!isDiagnostic) {
+      trackEvent('practice_completed', {
+        examSlug: slug,
+        score: serverScore,
+        itemCount: questions.length,
+        durationSeconds: duration,
+        mode: isTimed ? 'timed' : isMistakeReview ? 'mistake_review' : isWeakArea ? 'weak_area' : offlineMode ? 'offline' : 'practice',
+      });
+    }
 
     const totalCorrectFinal = Math.round((serverScore / 100) * questions.length);
 

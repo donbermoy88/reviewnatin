@@ -22,6 +22,7 @@
     "supabase:setup": "node scripts/wait-and-setup-supabase.mjs",
     "supabase:login": "supabase login",
     "supabase:auth": "node scripts/configure-supabase-auth.mjs",
+    "supabase:auth:prod": "node scripts/configure-supabase-auth.mjs --prod",
     "supabase:google": "node scripts/configure-google-auth.mjs",
     "supabase:android": "node scripts/configure-android-oauth.mjs",
     "supabase:google:setup": "node scripts/setup-google-oauth-interactive.mjs",
