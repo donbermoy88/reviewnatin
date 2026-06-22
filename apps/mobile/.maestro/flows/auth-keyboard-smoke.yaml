@@ -1,4 +1,5 @@
 # Auth keyboard smoke: fields accept input via label or placeholder tap
+# Avoid hideKeyboard — Maestro often cannot dismiss Android soft keyboard on API 35.
 appId: ph.reviewnatin.app
 ---
 - runFlow:
@@ -17,7 +18,6 @@ appId: ph.reviewnatin.app
     text: "Pangalan mo"
     optional: true
 - inputText: "Mara Santos"
-- hideKeyboard
 - tapOn:
     text: "Email"
     optional: true
@@ -25,7 +25,6 @@ appId: ph.reviewnatin.app
     text: "e.g. reviewer@email.com"
     optional: true
 - inputText: "f1.agent@reviewnatinph.com"
-- hideKeyboard
 - tapOn:
     text: "Password"
     optional: true
@@ -33,7 +32,6 @@ appId: ph.reviewnatin.app
     text: "Create a password"
     optional: true
 - inputText: "ReviewNatin1"
-- hideKeyboard
 - openLink: reviewnatin://login
 - extendedWaitUntil:
     visible: "Log in"
@@ -45,7 +43,6 @@ appId: ph.reviewnatin.app
     text: "e.g. reviewer@email.com"
     optional: true
 - inputText: "f1.agent@reviewnatinph.com"
-- hideKeyboard
 - tapOn:
     text: "Password"
     optional: true
