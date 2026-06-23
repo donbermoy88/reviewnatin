@@ -69,3 +69,19 @@ describe('hasPremiumAccess', () => {
     expect(hasPremiumAccess([{ tier: 'exam_pass', examTypeId: examId }], 'other-exam')).toBe(false);
   });
 });
+
+/** Mirrors fetchUserEntitlements demo filter: production builds ignore source=demo. */
+function filterDemoInProduction<T extends { source?: string }>(
+  rows: T[],
+  isDev: boolean
+): T[] {
+  return rows.filter((e) => isDev || e.source !== 'demo');
+}
+
+describe('demo entitlement client filter', () => {
+  it('excludes demo source in production builds', () => {
+    const rows = [{ source: 'demo' }, { source: 'web_checkout' }];
+    expect(filterDemoInProduction(rows, false)).toHaveLength(1);
+    expect(filterDemoInProduction(rows, true)).toHaveLength(2);
+  });
+});

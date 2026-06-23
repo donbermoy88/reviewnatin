@@ -14,6 +14,7 @@ const AUTH_MIGRATION_PREFIXES = [
   '20260622120001_auth_login_events.sql',
   '20260622120002_auth_login_rpc.sql',
   '20260622130000_grant_disposable_email_check.sql',
+  '20260623120000_client_login_rate_limit.sql',
 ];
 
 async function runQuery(token, projectRef, sql) {

@@ -3,15 +3,12 @@ import { Pressable, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAppTheme } from '../hooks/use-app-theme';
 import { getAdMobConfig } from '../lib/ads/config';
+import { resolveMonthlyPlusDisplay } from '../lib/subscription/pricing-display';
 import { useEntitlements } from '../providers/entitlements-provider';
 
 type Props = {
   onPress?: () => void;
 };
-
-function formatPeso(amount: number): string {
-  return `₱${Math.round(amount).toLocaleString('en-PH')}`;
-}
 
 function GoogleBannerAd({
   unitId,
@@ -102,10 +99,7 @@ export function AdBanner({ onPress }: Props) {
   const router = useRouter();
   const adConfig = getAdMobConfig();
   const { isPremium, products, storePrices } = useEntitlements();
-  const monthly = products.find((product) => product.tier === 'plus' && product.sku.toLowerCase().includes('monthly'));
-  const monthlyPrice = monthly
-    ? storePrices[monthly.sku]?.displayPrice ?? formatPeso(monthly.pricePhp)
-    : '₱159';
+  const monthlyPrice = resolveMonthlyPlusDisplay(products, storePrices);
 
   // Defense-in-depth: never render a banner (ad or upgrade CTA) for a Plus
   // member, even if a call site forgets to gate on entitlement. Exam-pass

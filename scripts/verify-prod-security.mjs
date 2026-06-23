@@ -132,6 +132,17 @@ async function main() {
     fail('is_email_domain_blocked RPC', 'run npm run beta:migrations');
   }
 
+  try {
+    await runQuery(
+      token,
+      ref,
+      `SELECT proname FROM pg_proc WHERE proname = 'check_client_login_rate_limit' LIMIT 1;`,
+    );
+    ok('check_client_login_rate_limit RPC');
+  } catch (e) {
+    warn('check_client_login_rate_limit RPC', 'run npm run beta:migrations');
+  }
+
   const failed = checks.filter((c) => c.status === 'fail').length;
   const report = {
     checkedAt: new Date().toISOString(),

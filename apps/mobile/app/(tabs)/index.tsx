@@ -47,6 +47,7 @@ import type { OnboardingData } from '../../lib/onboarding-store';
 import type { SubjectArea } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
+import { resolveMonthlyPlusDisplay } from '../../lib/subscription/pricing-display';
 import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -477,11 +478,7 @@ function DashboardScreenContent() {
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
   const firstName = user ? displayName.split(/\s+/)[0] ?? displayName : 'Guest';
   const remainingQuestions = Math.max(questionsTarget - questionsDone, 0);
-  const monthlyPlusPrice =
-    products.find((product) => product.tier === 'plus' && product.sku.toLowerCase().includes('monthly')) ?? null;
-  const monthlyPlusPriceText = monthlyPlusPrice
-    ? storePrices[monthlyPlusPrice.sku]?.displayPrice ?? `₱${Math.round(monthlyPlusPrice.pricePhp).toLocaleString('en-PH')}`
-    : '₱159';
+  const monthlyPlusPriceText = resolveMonthlyPlusDisplay(products, storePrices);
   const displayExamName = formatExamDisplayName(examSlug, examName);
   const dailyGoalText =
     questionsDone >= questionsTarget

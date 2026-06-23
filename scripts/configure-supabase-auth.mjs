@@ -48,6 +48,14 @@ async function main() {
 
   const after = await patchAuthConfig(REF, TOKEN, patch);
 
+  if (isProd && after.mailer_autoconfirm !== false) {
+    console.error(
+      '\n✗ Production verification failed: mailer_autoconfirm is still ON.',
+      'Users would skip email OTP. Re-run after fixing Management API access or patch manually in Supabase Dashboard → Auth → Email.',
+    );
+    process.exit(1);
+  }
+
   console.log(`Supabase auth configured for ReviewNatin (${isProd ? 'PRODUCTION' : 'DEV'}):\n`);
   console.log(`  Project:      ${REF}`);
   console.log(`  Email auth:   ${after.external_email_enabled ? 'ON' : 'OFF'}`);
@@ -56,7 +64,8 @@ async function main() {
   console.log(`  Sign-ups:     ${after.disable_signup ? 'disabled' : 'enabled'}`);
 
   if (isProd) {
-    console.log('\nProduction mode: users must verify email via 6-digit OTP before access.');
+    console.log('\n✓ Verified: mailer_autoconfirm OFF — OTP required before access.');
+    console.log('Production mode: users must verify email via 6-digit OTP before access.');
     if (!skipSmtp) {
       try {
         execSync('node scripts/configure-supabase-smtp.mjs', {

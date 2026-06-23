@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { planMonthlyEquivalent, resolveProductPrice, savingsPercent } from './pricing-display';
+import { planMonthlyEquivalent, resolveMonthlyPlusDisplay, resolveProductPrice, savingsPercent } from './pricing-display';
 
 describe('resolveProductPrice', () => {
   it('uses DB price when store quote missing', () => {
@@ -15,6 +15,20 @@ describe('resolveProductPrice', () => {
     );
     expect(result.amount).toBe(149);
     expect(result.display).toBe('₱149.00');
+  });
+});
+
+describe('resolveMonthlyPlusDisplay', () => {
+  it('falls back when catalog empty', () => {
+    expect(resolveMonthlyPlusDisplay([], {})).toBe('₱159');
+  });
+
+  it('uses DB price from catalog', () => {
+    const display = resolveMonthlyPlusDisplay(
+      [{ sku: 'plus_monthly', pricePhp: 199 }],
+      {}
+    );
+    expect(display).toContain('199');
   });
 });
 

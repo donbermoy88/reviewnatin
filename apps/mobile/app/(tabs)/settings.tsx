@@ -36,15 +36,12 @@ import {
 } from '../../lib/offline/sync-status';
 import { formatEntitlementSummary } from '../../lib/entitlements/format';
 import { openBetaFeedback } from '../../lib/beta-feedback';
+import { resolveMonthlyPlusDisplay } from '../../lib/subscription/pricing-display';
 
 type SettingsStyles = ReturnType<typeof createSettingsStyles>;
 
 function SettingsGroup({ children, styles }: { children: React.ReactNode; styles: SettingsStyles }) {
   return <View style={styles.group}>{children}</View>;
-}
-
-function formatPeso(amount: number): string {
-  return `₱${Math.round(amount).toLocaleString('en-PH')}`;
 }
 
 function SettingsRow({
@@ -254,12 +251,7 @@ function SettingsScreenContent() {
   };
 
   const switchTrack = { false: colors.border, true: colors.primary };
-  const monthlyProduct = products.find(
-    (product) => product.tier === 'plus' && product.sku.toLowerCase().includes('monthly')
-  );
-  const monthlyPrice = monthlyProduct
-    ? storePrices[monthlyProduct.sku]?.displayPrice ?? formatPeso(monthlyProduct.pricePhp)
-    : '₱159';
+  const monthlyPrice = resolveMonthlyPlusDisplay(products, storePrices);
 
   return (
     <View style={styles.root}>

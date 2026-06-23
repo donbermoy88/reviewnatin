@@ -20,6 +20,24 @@ export function resolveProductPrice(
   return { display, amount };
 }
 
+/** Fallback monthly Plus display when catalog has not loaded yet (UI only — not billing SoT). */
+export function fallbackMonthlyPlusDisplay(pricePhp = 159): string {
+  return formatPeso(pricePhp);
+}
+
+/** Resolve monthly Plus price text from catalog + optional store quote. */
+export function resolveMonthlyPlusDisplay(
+  products: PricedProduct[],
+  storePrices: Record<string, StorePriceQuote | undefined>,
+  fallbackPhp = 159
+): string {
+  const monthly = products.find(
+    (p) => p.sku.toLowerCase().includes('monthly') && p.sku.toLowerCase().includes('plus')
+  ) ?? products.find((p) => p.sku.toLowerCase().includes('monthly'));
+  if (!monthly) return fallbackMonthlyPlusDisplay(fallbackPhp);
+  return resolveProductPrice(monthly, storePrices).display;
+}
+
 export function formatPeso(amount: number): string {
   return `₱${Math.round(amount).toLocaleString('en-PH')}`;
 }

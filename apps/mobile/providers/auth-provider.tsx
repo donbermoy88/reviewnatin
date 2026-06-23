@@ -11,6 +11,7 @@ import {
   recordFailedLoginAttempt,
 } from '../lib/auth/login-lockout';
 import { logAuthLoginAttempt } from '../lib/auth/login-events';
+import { assertLoginRateLimitAllowed } from '../lib/auth/server-rate-limit';
 import { sendPasswordResetEmail, signInWithApple, signInWithGoogle, updatePassword } from '../lib/auth/oauth';
 import { isTurnstileRequired } from '../lib/auth/turnstile-config';
 import { normalizeDisplayName, normalizeEmail, validateDisplayName } from '../lib/auth/validation';
@@ -130,6 +131,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (lockout) return { error: lockout };
 
         const normalized = normalizeEmail(email);
+        const serverRateLimit = await assertLoginRateLimitAllowed(normalized);
+        if (serverRateLimit) return { error: serverRateLimit };
+
         const disposableError = validateEmailNotDisposable(normalized);
         if (disposableError) return { error: disposableError };
 

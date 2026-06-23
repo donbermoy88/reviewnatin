@@ -30,6 +30,7 @@ import {
   WEB_CHECKOUT_BETA_BANNER,
   WEB_CHECKOUT_TRIAL_NOTE,
   WEB_CHECKOUT_STICKY_HINT,
+  GUEST_WEB_CHECKOUT_HINT,
 } from '../../lib/subscription/checkout-copy';
 import {
   clearPendingCheckoutRef,
@@ -483,6 +484,7 @@ export default function SubscribeScreen() {
               <Text style={styles.guestBannerTitleDark}>Mag-log in muna</Text>
               <Text style={styles.guestBannerSubDark}>
                 Kailangan ng account para mag-subscribe sa Plus. Libre ang sign-up — i-save ang progress mo sa cloud.
+                {webCheckoutPrimary ? ` ${GUEST_WEB_CHECKOUT_HINT}` : ''}
               </Text>
             </View>
             <Pressable

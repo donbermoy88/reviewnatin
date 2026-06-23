@@ -10,4 +10,6 @@ appId: ph.reviewnatin.app
 - extendedWaitUntil:
     visible: "Mag-log in para mag-subscribe"
     timeout: 25000
-- assertVisible: "Hindi affiliated sa CSC"
+- extendedWaitUntil:
+    visible: "Mag-log in muna"
+    timeout: 30000

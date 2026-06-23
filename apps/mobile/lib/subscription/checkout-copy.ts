@@ -6,6 +6,10 @@ export const WEB_CHECKOUT_BETA_BANNER =
 export const WEB_CHECKOUT_TRIAL_NOTE =
   'Walang free trial sa web checkout — buong access agad pag na-activate ang Plus. Pwede mag-cancel anytime sa Settings.';
 
+/** Shown on Subscribe for guests on Android APK beta (web checkout primary). */
+export const GUEST_WEB_CHECKOUT_HINT =
+  'Pagkatapos mag-sign up: bayad via GCash o Maya sa browser — ito ang primary path sa APK beta (walang Play Billing).';
+
 export const WEB_CHECKOUT_STICKY_HINT = (price: string) =>
   `Isang tap → GCash/Maya · ${price} · instant Plus access pag paid`;
 

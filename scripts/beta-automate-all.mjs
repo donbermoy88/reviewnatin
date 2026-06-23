@@ -77,11 +77,9 @@ function parseEasJsonStdout(stdout) {
   for (const line of trimmed.split('\n').map((l) => l.trim()).filter(Boolean)) {
     if (line.startsWith('{') || line.startsWith('[')) attempts.push(line);
   }
-  for (let i = trimmed.lastIndexOf('{'); i >= 0; i = trimmed.lastIndexOf('{', i - 1)) {
-    attempts.push(trimmed.slice(i));
-  }
-  for (let i = trimmed.lastIndexOf('['); i >= 0; i = trimmed.lastIndexOf('[', i - 1)) {
-    attempts.push(trimmed.slice(i));
+  for (let i = 0; i < trimmed.length; i += 1) {
+    const ch = trimmed[i];
+    if (ch === '{' || ch === '[') attempts.push(trimmed.slice(i));
   }
   for (const chunk of attempts) {
     try {
@@ -272,12 +270,15 @@ async function main() {
     } else {
       step('5/9 — Download latest finished EAS APK');
       const listJson = runCapture(
-        'cd apps/mobile && npx eas-cli build:list --platform android --limit 1 --json --non-interactive',
+        'cd apps/mobile && npx eas-cli build:list --platform android --limit 5 --json --non-interactive',
       );
       const builds = parseEasJsonStdout(listJson);
-      const latest = Array.isArray(builds) ? builds[0] : builds;
+      const buildRows = Array.isArray(builds) ? builds : [builds];
+      const latest = buildRows.find(
+        (b) => b?.status === 'FINISHED' && b?.artifacts?.applicationArchiveUrl,
+      );
       const apkUrl = latest?.artifacts?.applicationArchiveUrl;
-      if (apkUrl && latest.status === 'FINISHED') {
+      if (apkUrl && latest) {
         versionCode = Number(latest.appBuildVersion ?? versionCode);
         apkPath = join(DIST, `reviewnatin-beta-v${versionCode}.apk`);
         run(`curl -fsSL -o "${apkPath}" "${apkUrl}"`);
