@@ -35,6 +35,7 @@
     "beta:phase0:verify": "node scripts/beta-phase0-verify.mjs",
     "beta:phase1:verify": "node scripts/beta-phase1-verify.mjs",
     "beta:phase2:verify": "node scripts/beta-phase2-verify.mjs",
+    "beta:phase3:verify": "node scripts/beta-phase3-verify.mjs",
     "beta:release-notes": "node scripts/beta-release-notes.mjs",
     "beta:agents": "node scripts/beta-ai-testers.mjs",
     "beta:agents:cloud-only": "node scripts/beta-ai-testers.mjs --skip-emulator --skip-maestro",

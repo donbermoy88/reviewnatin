@@ -8,6 +8,7 @@ export type AnalyticsEventName =
   | 'otp_sent'
   | 'otp_verified'
   | 'onboarding_completed'
+  | 'onboarding_activation_shown'
   | 'practice_started'
   | 'practice_completed'
   | 'mock_exam_started'

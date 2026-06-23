@@ -2,9 +2,9 @@
 
 Continuous feedback, testing, and release workflow for **12 daily Android beta testers** (4 per cohort) distributing via direct APK (EAS `preview` profile).
 
-**Phases:** [Phase 0 — Beta infrastructure](./android-beta-program-phase-0.md) · [Phase 1 — Auth hardening](./android-beta-program-phase-1.md) · [Phase 2 — Screen audit & UX](./android-beta-program-phase-2.md) · Phase 3+ (onboarding redesign, charts, Play migration)
+**Phases:** [Phase 0](./android-beta-program-phase-0.md) · [Phase 1](./android-beta-program-phase-1.md) · [Phase 2](./android-beta-program-phase-2.md) · [Phase 3 — Onboarding](./android-beta-program-phase-3.md) · Phase 4+ (charts, Play migration)
 
-Phase 0 verify: `npm run beta:phase0:verify` · Phase 1: `npm run beta:phase1:verify` · Phase 2: `npm run beta:phase2:verify` · **12 AI testers:** `npm run beta:agents`
+Phase 0: `npm run beta:phase0:verify` · Phase 1: `npm run beta:phase1:verify` · Phase 2: `npm run beta:phase2:verify` · Phase 3: `npm run beta:phase3:verify` · **12 AI testers:** `npm run beta:agents`
 
 ## Three tester cohorts
 
@@ -185,6 +185,17 @@ npm run beta:maestro
 ```
 
 Checklist: [android-beta-program-phase-2.md](./android-beta-program-phase-2.md) · [beta-route-audit-matrix.md](./beta-route-audit-matrix.md).
+
+### Phase 3 verification
+
+Before shipping onboarding changes:
+
+```bash
+npm run beta:phase3:verify
+npm run mobile:test -- onboarding-first-practice onboarding-nav
+```
+
+Checklist: [android-beta-program-phase-3.md](./android-beta-program-phase-3.md).
 
 ### 12 AI subagent testers (automated distribution)
 

@@ -82,11 +82,28 @@ describe('getPostOnboardingHref', () => {
   });
 
   it('sends guests to dashboard', async () => {
+    mockGetOnboarding.mockResolvedValue({ ...sampleGoal(), completed: true });
     await expect(getPostOnboardingHref()).resolves.toBe('/(tabs)');
   });
 
   it('sends signed-in users to dashboard', async () => {
+    mockGetOnboarding.mockResolvedValue({ ...sampleGoal(), completed: true });
     await expect(getPostOnboardingHref('user-1')).resolves.toBe('/(tabs)');
+  });
+
+  it('deep links to first practice when requested', async () => {
+    mockGetOnboarding.mockResolvedValue({ ...sampleGoal(), completed: true, level: 'beginner' });
+    await expect(getPostOnboardingHref('user-1', { startPractice: true })).resolves.toContain('/practice/quiz');
+    await expect(getPostOnboardingHref('user-1', { startPractice: true })).resolves.toContain('mode=daily');
+  });
+
+  it('uses weak_area mode for advanced level', async () => {
+    mockGetOnboarding.mockResolvedValue({
+      ...sampleGoal(),
+      completed: true,
+      level: 'advanced',
+    });
+    await expect(getPostOnboardingHref(undefined, { startPractice: true })).resolves.toContain('mode=weak_area');
   });
 });
 

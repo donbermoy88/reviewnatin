@@ -12,6 +12,7 @@ import { FeatureRow } from '../../components/feature-row';
 import { SparkleStar } from '../../components/sparkle-star';
 import { LogoMark } from '../../components/logo-mark';
 import { OnboardingHeader } from '../../components/onboarding-header';
+import { OnboardingStepHero } from '../../components/onboarding-step-hero';
 import { Pill } from '../../components/pill';
 import { PrimaryButton } from '../../components/primary-button';
 import { ScreenScroll } from '../../components/screen-scroll';
@@ -25,6 +26,8 @@ import { fetchExamSchedules } from '../../lib/api/exam-calendar';
 import { fetchExamCatalog } from '../../lib/api/exam-catalog';
 import { saveOnboarding, saveOnboardingDraft, hasOnboardingDraft, getOnboarding } from '../../lib/onboarding-store';
 import { getPostOnboardingHref } from '../../lib/onboarding-nav';
+import { markOnboardingActivationPending } from '../../lib/onboarding-activation';
+import { previewReadinessPercent } from '../../lib/onboarding-first-practice';
 import { useAuth } from '../../providers/auth-provider';
 import { usePreferences } from '../../providers/preferences-provider';
 import { useOnboardingGate } from '../../providers/onboarding-gate';
@@ -221,7 +224,7 @@ export default function OnboardingScreen() {
     setStep(step + 1);
   };
 
-  const finish = async () => {
+  const finish = async (options?: { startPractice?: boolean }) => {
     const data = {
       examSlug,
       targetDate: dateStr,
@@ -244,8 +247,17 @@ export default function OnboardingScreen() {
       }
     }
     await refreshOnboarding();
-    trackEvent('onboarding_completed', { examSlug, level, dailyMinutes });
-    router.replace((await getPostOnboardingHref(user?.id)) as '/(tabs)');
+    trackEvent('onboarding_completed', {
+      examSlug,
+      level,
+      dailyMinutes,
+      majorSlug: majorSlug ?? null,
+      isGuest: !user,
+      startPractice: Boolean(options?.startPractice),
+    });
+    await markOnboardingActivationPending();
+    const href = await getPostOnboardingHref(user?.id, { startPractice: options?.startPractice });
+    router.replace(href as '/(tabs)');
   };
 
   const renderExamCard = (opts: {
@@ -334,10 +346,10 @@ export default function OnboardingScreen() {
           style={[styles.welcomeBody, { paddingBottom: insets.bottom + spacing.lg }]}
         >
           <Text style={styles.welcomeTitle}>
-            Your study buddy for{'\n'}every Filipino board exam.
+            Handa ka na bang pumasa sa{'\n'}CSE, LET, o PNLE?
           </Text>
           <Text style={styles.welcomeSub}>
-            CSE Full, CSE Sub, PNLE, LET Elementary & Secondary — one app, one streak, one goal.
+            Your study buddy for every Filipino board exam — one app, one streak, one goal.
           </Text>
           <PrimaryButton
             label="Get started — it's free"
@@ -392,7 +404,7 @@ export default function OnboardingScreen() {
               <Text style={styles.dashboardPreviewLbl}>Dashboard preview</Text>
               <View style={styles.dashboardPreviewRow}>
                 <GoalRing
-                  percent={42}
+                  percent={previewReadinessPercent(level)}
                   size={72}
                   strokeWidth={8}
                   trackColor={colors.primaryMuted}
@@ -456,8 +468,19 @@ export default function OnboardingScreen() {
               label={isSwitchMode ? 'Save new track' : 'Pumunta sa Dashboard'}
               size="lg"
               icon="arrow-forward"
-              onPress={finish}
+              onPress={() => void finish()}
             />
+            {!isSwitchMode ? (
+              <PrimaryButton
+                label="Simulan ang unang practice"
+                variant="outline"
+                icon="play-outline"
+                iconPosition="left"
+                onPress={() => void finish({ startPractice: true })}
+                style={{ marginTop: spacing.sm }}
+                accessibilityLabel="Start first practice quiz based on your level"
+              />
+            ) : null}
           </View>
         </LinearGradient>
       </View>
@@ -508,6 +531,7 @@ export default function OnboardingScreen() {
 
       <ScreenScroll contentContainerStyle={{ paddingBottom: insets.bottom + 100 }}>
         <View style={styles.pagePad}>
+          {step >= 1 && step <= 4 ? <OnboardingStepHero step={step as 1 | 2 | 3 | 4} /> : null}
           {step === 1 && (
             <View style={styles.list}>
               <Text style={styles.fieldLabel}>Civil Service Exams</Text>

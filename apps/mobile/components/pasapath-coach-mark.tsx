@@ -34,12 +34,12 @@ export function PasaPathCoachMark({ visible, taskTitle, onDismiss, onStart }: Pr
           <Ionicons name="map-outline" size={20} color={colors.primary} />
         </View>
         <Text style={[styles.title, { fontFamily: fonts.bodyBold, color: colors.text }]}>
-          Start today&apos;s PasaPath task
+          Simulan ang PasaPath task ngayon
         </Text>
         <Text style={[styles.sub, { fontFamily: fonts.bodyMedium, color: colors.textMuted }]}>
           {taskTitle
-            ? `Your first step: "${taskTitle}". Tap below to begin your daily study path.`
-            : 'Complete your daily PasaPath tasks to build streaks and lift readiness.'}
+            ? `Unang hakbang: "${taskTitle}". Tap below para sa daily study path mo.`
+            : 'Tapusin ang daily PasaPath tasks para tumaas ang readiness at streak mo.'}
         </Text>
         <View style={styles.actions}>
           <Pressable
@@ -49,7 +49,7 @@ export function PasaPathCoachMark({ visible, taskTitle, onDismiss, onStart }: Pr
             accessibilityLabel="Start PasaPath task"
           >
             <Ionicons name="play" size={16} color="#fff" />
-            <Text style={[styles.primaryText, { fontFamily: fonts.bodyBold }]}>Start next step</Text>
+            <Text style={[styles.primaryText, { fontFamily: fonts.bodyBold }]}>Simulan</Text>
           </Pressable>
           <Pressable onPress={onDismiss} hitSlop={8} accessibilityRole="button" accessibilityLabel="Got it">
             <Text style={[styles.skip, { fontFamily: fonts.bodySemiBold, color: colors.textMuted }]}>Got it</Text>

@@ -1,5 +1,6 @@
 import { resolveOnboardingGoal } from './api/goals';
 import { getOnboarding, saveOnboarding } from './onboarding-store';
+import { firstPracticeHref } from './onboarding-first-practice';
 
 /**
  * True when onboarding is finished — checks local storage, then Supabase goal for signed-in users.
@@ -29,8 +30,22 @@ export async function getAppEntryHref(userId?: string): Promise<'/onboarding' | 
   return (await isOnboardingComplete(userId)) ? '/(tabs)' : '/onboarding';
 }
 
-/** After onboarding finish, land in the main app. Diagnostic remains optional. */
-export async function getPostOnboardingHref(userId?: string): Promise<string> {
+export type PostOnboardingOptions = {
+  /** Deep link to first practice quiz from onboarding level + exam. */
+  startPractice?: boolean;
+};
+
+/**
+ * After onboarding finish — dashboard by default, or first practice quiz when requested.
+ */
+export async function getPostOnboardingHref(
+  userId?: string,
+  options?: PostOnboardingOptions
+): Promise<string> {
   void userId;
+  const data = await getOnboarding();
+  if (options?.startPractice && data?.examSlug && data?.level) {
+    return firstPracticeHref(data.examSlug, data.level);
+  }
   return '/(tabs)';
 }

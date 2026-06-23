@@ -40,6 +40,7 @@ import { buildAnalyticsInsights } from '../../lib/analytics/insights';
 import { StudyTrendChart } from '../../components/analytics/study-trend-chart';
 import { AnalyticsInsightCards, SubjectStrengthChart } from '../../components/analytics/subject-strength-chart';
 import { PASAPATH_COACH_MARK_KEY, PasaPathCoachMark } from '../../components/pasapath-coach-mark';
+import { consumeOnboardingActivationPending } from '../../lib/onboarding-activation';
 import { DEFAULT_EXAM_SLUG, EXAM_TYPES } from '@reviewnatin/shared';
 import type { OnboardingData } from '../../lib/onboarding-store';
 import type { SubjectArea } from '../../lib/types';
@@ -446,6 +447,20 @@ function DashboardScreenContent() {
   const hasActivity = stats.sessionCount > 0;
   const visiblePasapathTasks = pasapath ? filterVisiblePasapathTasks(pasapath.tasks) : [];
   const nextTask = pasapath ? primaryPasapathTask(pasapath.tasks) : null;
+
+  useEffect(() => {
+    if (loading) return;
+    void consumeOnboardingActivationPending().then((pending) => {
+      if (!pending) return;
+      if (user && pasapath && nextTask) {
+        setCoachMarkVisible(true);
+        return;
+      }
+      if (!user) {
+        trackEvent('onboarding_activation_shown', { cohort: 'guest' });
+      }
+    });
+  }, [user, loading, pasapath, nextTask]);
 
   useEffect(() => {
     if (!user || loading || !pasapath || !nextTask) return;

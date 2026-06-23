@@ -33,11 +33,24 @@ See [android-beta-program-phase-2.md](./android-beta-program-phase-2.md) and [be
 - [ ] Full Maestro pass on release candidate emulator
 - [ ] Update route matrix status column for new build
 
+## Phase 3 — Onboarding redesign (2026-06-23)
+
+See [android-beta-program-phase-3.md](./android-beta-program-phase-3.md).
+
+- [x] Step heroes + Taglish welcome headline
+- [x] Dashboard preview readiness ring by proficiency
+- [x] First practice deep link + step 5 CTA
+- [x] Post-onboarding activation coach (PasaPath Taglish)
+- [x] `onboarding_completed` with dailyMinutes + startPractice
+- [x] `npm run beta:phase3:verify`
+- [ ] Maestro guest onboarding smoke on release candidate
+
 ## Automated gates
 
 - [x] `npm run mobile:test` passes (Vitest) — **124/124 pass (2026-06-22)**
 - [x] `npm run beta:phase1:verify` passes locally
 - [x] `npm run beta:phase2:verify` passes locally
+- [x] `npm run beta:phase3:verify` passes locally
 - [ ] Product UX audit P0 items shipped — see [product-experience-audit-2026-06-22.md](./product-experience-audit-2026-06-22.md)
 - [ ] `npm run ci:local` passes (if touching shared packages)
 - [ ] `npm run release:check:android` passes (production AAB only)
