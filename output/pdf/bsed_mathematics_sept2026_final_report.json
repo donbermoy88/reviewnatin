@@ -1,0 +1,74 @@
+{
+  "generated_at": "2026-06-23T23:32:57.042Z",
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-",
+  "source_pdfs": 10,
+  "extraction_summary": {
+    "total_questions_found": 500,
+    "ready_for_upload": 484,
+    "duplicates_detected": 16,
+    "without_answer_key": 0,
+    "with_images": 0,
+    "topic_breakdown": {
+      "Calculus": 47,
+      "Algebra": 221,
+      "Trigonometry": 52,
+      "Linear Algebra and Complex Numbers": 7,
+      "Statistics and Probability": 80,
+      "Geometry": 64,
+      "Sequences, Ratio, and Financial Mathematics": 23,
+      "Mathematics Pedagogy": 6
+    }
+  },
+  "upload_summary": {
+    "inserted": 470,
+    "updated": 14,
+    "skipped_duplicates": 16,
+    "duplicate_existing_content": 0
+  },
+  "live_counts": [
+    {
+      "published": 515,
+      "section": "math_total",
+      "total": 515
+    },
+    {
+      "published": 484,
+      "section": "bsed_math_source",
+      "total": 484
+    }
+  ],
+  "live_bsed_mathematics_sub_tag_breakdown": [
+    {
+      "sub_tag": "Algebra",
+      "total": 209
+    },
+    {
+      "sub_tag": "Statistics and Probability",
+      "total": 79
+    },
+    {
+      "sub_tag": "Geometry",
+      "total": 64
+    },
+    {
+      "sub_tag": "Trigonometry",
+      "total": 50
+    },
+    {
+      "sub_tag": "Calculus",
+      "total": 46
+    },
+    {
+      "sub_tag": "Sequences, Ratio, and Financial Mathematics",
+      "total": 23
+    },
+    {
+      "sub_tag": "Linear Algebra and Complex Numbers",
+      "total": 7
+    },
+    {
+      "sub_tag": "Mathematics Pedagogy",
+      "total": 6
+    }
+  ]
+}

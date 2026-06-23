@@ -1,0 +1,200 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_mathematics_sept2026_extracted_questions.json",
+  "extracted_rows": 500,
+  "ready_rows": 484,
+  "source_duplicates_or_non_ready_skipped": 16,
+  "existing_math_questions_before": 45,
+  "insertable": 470,
+  "updatable_by_source_key": 14,
+  "duplicate_existing_content": 0,
+  "inserted": 470,
+  "updated": 14,
+  "skipped_samples": [
+    {
+      "row": "106",
+      "source_pdf": "BSED Mathematics P2.pdf",
+      "original_no": "6",
+      "status": "Duplicate",
+      "duplicate_of": "52"
+    },
+    {
+      "row": "192",
+      "source_pdf": "BSED Mathematics P3.pdf",
+      "original_no": "42",
+      "status": "Duplicate",
+      "duplicate_of": "107"
+    },
+    {
+      "row": "206",
+      "source_pdf": "BSED Mathematics P4.pdf",
+      "original_no": "6",
+      "status": "Duplicate",
+      "duplicate_of": "107"
+    },
+    {
+      "row": "210",
+      "source_pdf": "BSED Mathematics P4.pdf",
+      "original_no": "10",
+      "status": "Duplicate",
+      "duplicate_of": "52"
+    },
+    {
+      "row": "230",
+      "source_pdf": "BSED Mathematics P4.pdf",
+      "original_no": "30",
+      "status": "Duplicate",
+      "duplicate_of": "123"
+    },
+    {
+      "row": "244",
+      "source_pdf": "BSED Mathematics P4.pdf",
+      "original_no": "44",
+      "status": "Duplicate",
+      "duplicate_of": "243"
+    },
+    {
+      "row": "245",
+      "source_pdf": "BSED Mathematics P4.pdf",
+      "original_no": "45",
+      "status": "Duplicate",
+      "duplicate_of": "163"
+    },
+    {
+      "row": "297",
+      "source_pdf": "BSED Mathematics P5.pdf",
+      "original_no": "47",
+      "status": "Duplicate",
+      "duplicate_of": "193"
+    },
+    {
+      "row": "321",
+      "source_pdf": "BSED Mathematics P6.pdf",
+      "original_no": "21",
+      "status": "Duplicate",
+      "duplicate_of": "137"
+    },
+    {
+      "row": "323",
+      "source_pdf": "BSED Mathematics P6.pdf",
+      "original_no": "23",
+      "status": "Duplicate",
+      "duplicate_of": "322"
+    },
+    {
+      "row": "326",
+      "source_pdf": "BSED Mathematics P6.pdf",
+      "original_no": "26",
+      "status": "Duplicate",
+      "duplicate_of": "110"
+    },
+    {
+      "row": "350",
+      "source_pdf": "BSED Mathematics P6.pdf",
+      "original_no": "50",
+      "status": "Duplicate",
+      "duplicate_of": "79"
+    },
+    {
+      "row": "375",
+      "source_pdf": "BSED Mathematics P7.pdf",
+      "original_no": "25",
+      "status": "Duplicate",
+      "duplicate_of": "218"
+    },
+    {
+      "row": "428",
+      "source_pdf": "BSED Mathematics P8.pdf",
+      "original_no": "28",
+      "status": "Duplicate",
+      "duplicate_of": "277"
+    },
+    {
+      "row": "458",
+      "source_pdf": "BSED Mathematics P9.pdf",
+      "original_no": "8",
+      "status": "Duplicate",
+      "duplicate_of": "209"
+    },
+    {
+      "row": "483",
+      "source_pdf": "BSED Mathematics P9.pdf",
+      "original_no": "33",
+      "status": "Duplicate",
+      "duplicate_of": "215"
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "43f8212f-63b6-44ec-865a-02e7fea59442",
+      "source_key": "BSED Mathematics P1.pdf#6",
+      "stem": "Differentiate y = e^(2x)."
+    },
+    {
+      "id": "ffb6971d-3054-4670-a221-cb3b68ca7381",
+      "source_key": "BSED Mathematics P1.pdf#7",
+      "stem": "If y = tan(x), find dy/dx."
+    },
+    {
+      "id": "042d0958-8d55-438b-93cf-bfa981228ac7",
+      "source_key": "BSED Mathematics P10.pdf#1",
+      "stem": "What is the inverse of the function f(x) = 3x + 5?"
+    },
+    {
+      "id": "2bd88d5c-f3c2-449d-9b90-4ac5d462ecc1",
+      "source_key": "BSED Mathematics P2.pdf#1",
+      "stem": "Simplify (2x³y²)(3x²y³)."
+    },
+    {
+      "id": "b6ca0de5-6e01-4796-a16d-916115215ed5",
+      "source_key": "BSED Mathematics P2.pdf#2",
+      "stem": "Simplify (4x²y⁻³) / (2x⁻¹y²)."
+    },
+    {
+      "id": "aacd99d2-3e92-4b73-9d10-aebf35c32540",
+      "source_key": "BSED Mathematics P3.pdf#4",
+      "stem": "Find the length of the diagonal of a rectangle with sides 9 cm and 12 cm."
+    },
+    {
+      "id": "1a01d339-3ecb-43f9-8879-17b6a7f13d2b",
+      "source_key": "BSED Mathematics P4.pdf#2",
+      "stem": "Find the slope of the line passing through (1, 2) and (4, 8)."
+    },
+    {
+      "id": "09040382-be14-49c3-a0c4-98ecd13b3178",
+      "source_key": "BSED Mathematics P6.pdf#2",
+      "stem": "Simplify: (x³)²"
+    },
+    {
+      "id": "08219045-9a6b-41da-9f70-264b871c4de7",
+      "source_key": "BSED Mathematics P8.pdf#2",
+      "stem": "The perimeter of a square is 48 cm. Find its area."
+    },
+    {
+      "id": "c58ad1a9-b604-4799-9565-c2ac5a3bee66",
+      "source_key": "BSED Mathematics P8.pdf#3",
+      "stem": "The volume of a cube with side 5 cm is:"
+    },
+    {
+      "id": "e660b97f-3f73-4b3d-a317-22336d0436f1",
+      "source_key": "BSED Mathematics P8.pdf#4",
+      "stem": "Find the circumference of a circle with radius 7 cm (use π = 3.14)."
+    },
+    {
+      "id": "55ef274d-1ebe-418d-9d13-2ab8dabf591f",
+      "source_key": "BSED Mathematics P8.pdf#5",
+      "stem": "Find the area of a circle with radius 6 cm."
+    },
+    {
+      "id": "6474cafb-aaff-48aa-a3b7-edca4d336d8d",
+      "source_key": "BSED Mathematics P8.pdf#6",
+      "stem": "The diagonal of a square is 10 cm. Find the side."
+    },
+    {
+      "id": "d3fbaeeb-3016-4347-870f-96e595614ba5",
+      "source_key": "BSED Mathematics P9.pdf#1",
+      "stem": "What is the remainder when 7^100 is divided by 6?"
+    }
+  ]
+}
