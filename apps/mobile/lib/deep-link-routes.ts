@@ -8,7 +8,9 @@ function pathFromParsed(parsed: Linking.ParsedURL): string {
     return parsed.path?.replace(/^\//, '') ?? '';
   }
   const path = parsed.path?.replace(/^\//, '') ?? '';
-  return path || hostname || '';
+  if (path) return path;
+  if (hostname && !HTTPS_HOSTS.has(hostname)) return hostname;
+  return '';
 }
 
 function hrefWithQueryParams(
@@ -72,16 +74,33 @@ export function verifyEmailParamsFromUrl(url: string): { email: string; displayN
   try {
     const parsed = Linking.parse(url);
     const path = pathFromParsed(parsed);
-    if (path !== 'verify-email') return null;
-    const email = queryParam(parsed, 'email');
+    if (path !== 'verify-email' && !url.includes('verify-email')) return null;
+    const email = queryParam(parsed, 'email') ?? regexQueryParam(url, 'email');
     if (!email) return null;
-    const displayName = queryParam(parsed, 'displayName');
+    const displayName = queryParam(parsed, 'displayName') ?? regexQueryParam(url, 'displayName');
     return {
       email: email.toLowerCase(),
       ...(displayName ? { displayName } : {}),
     };
   } catch {
-    return null;
+    if (!url.includes('verify-email')) return null;
+    const email = regexQueryParam(url, 'email');
+    if (!email) return null;
+    const displayName = regexQueryParam(url, 'displayName');
+    return {
+      email: email.toLowerCase(),
+      ...(displayName ? { displayName } : {}),
+    };
+  }
+}
+
+function regexQueryParam(url: string, key: string): string | undefined {
+  const match = url.match(new RegExp(`[?&]${key}=([^&]+)`, 'i'));
+  if (!match?.[1]) return undefined;
+  try {
+    return decodeURIComponent(match[1].replace(/\+/g, ' ')).trim() || undefined;
+  } catch {
+    return match[1].trim() || undefined;
   }
 }
 

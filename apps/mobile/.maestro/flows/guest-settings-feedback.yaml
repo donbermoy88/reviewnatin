@@ -25,6 +25,11 @@ appId: ph.reviewnatin.app
     visible: "Home"
     timeout: 15000
 - tapOn: "Profile"
+- scrollUntilVisible:
+    element: "Tip: Buksan ang Settings dito"
+    direction: DOWN
+    timeout: 15000
+- assertVisible: "Tip: Buksan ang Settings dito"
 - extendedWaitUntil:
     visible: "Open settings"
     timeout: 10000

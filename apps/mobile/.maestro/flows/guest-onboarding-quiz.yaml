@@ -24,6 +24,10 @@ appId: ph.reviewnatin.app
 - extendedWaitUntil:
     visible: "Home"
     timeout: 15000
+- extendedWaitUntil:
+    visible: "Simulan dito — libre, walang signup"
+    timeout: 15000
+- assertVisible: "Mag-practice ngayon"
 - tapOn: "Review"
 - extendedWaitUntil:
     visible: "Start practice quiz"

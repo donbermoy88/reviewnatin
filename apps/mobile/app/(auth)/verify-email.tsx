@@ -23,6 +23,7 @@ import { updateUserDisplayName } from '../../lib/api/profile';
 import { getAppEntryHref } from '../../lib/onboarding-nav';
 import { toUserFacingError } from '../../lib/errors/user-facing';
 import { verifyEmailParamsFromUrl } from '../../lib/deep-link-routes';
+import { consumeInitialUrl } from '../../lib/initial-url';
 import { trackEvent } from '../../lib/analytics/events';
 import { useAuth } from '../../providers/auth-provider';
 
@@ -62,40 +63,19 @@ export default function VerifyEmailScreen() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      let emailFromLink = '';
-      let nameFromLink = '';
+      let emailFromLink = normalizeParam(emailParam);
+      let nameFromLink = normalizeParam(displayNameParam).trim();
 
       const applyParams = (params: ReturnType<typeof verifyEmailParamsFromUrl>) => {
         if (!params) return;
-        emailFromLink = params.email;
-        nameFromLink = params.displayName ?? '';
+        emailFromLink = emailFromLink || params.email;
+        nameFromLink = nameFromLink || params.displayName || '';
       };
 
       try {
-        applyParams(verifyEmailParamsFromUrl((await Linking.getInitialURL()) ?? ''));
+        applyParams(verifyEmailParamsFromUrl((await consumeInitialUrl()) ?? ''));
       } catch {
-        // Non-fatal — parseInitialURLAsync / router params may still carry email.
-      }
-
-      if (!emailFromLink) {
-        try {
-          const parsed = await Linking.parseInitialURLAsync();
-          const path = parsed.path?.replace(/^\//, '') || parsed.hostname || '';
-          if (path === 'verify-email' || path.endsWith('verify-email')) {
-            const rawEmail = parsed.queryParams?.email;
-            const rawName = parsed.queryParams?.displayName;
-            const emailVal = Array.isArray(rawEmail) ? rawEmail[0] : rawEmail;
-            const nameVal = Array.isArray(rawName) ? rawName[0] : rawName;
-            if (typeof emailVal === 'string' && emailVal.trim()) {
-              emailFromLink = emailVal.trim().toLowerCase();
-            }
-            if (typeof nameVal === 'string' && nameVal.trim()) {
-              nameFromLink = nameVal.trim();
-            }
-          }
-        } catch {
-          // Non-fatal — router params may still carry email.
-        }
+        // Non-fatal — router params may still carry email.
       }
 
       if (!cancelled) {
@@ -107,7 +87,7 @@ export default function VerifyEmailScreen() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [displayNameParam, emailParam]);
 
   const email = (
     normalizeParam(emailParam) ||
@@ -120,10 +100,12 @@ export default function VerifyEmailScreen() {
   useEffect(() => {
     if (!bootReady || email) return;
     const timer = setTimeout(() => {
+      const routeEmail = normalizeParam(emailParam).trim().toLowerCase();
+      if (routeEmail || fallbackEmail || user?.email) return;
       router.replace('/(auth)/signup');
-    }, 1200);
+    }, 4000);
     return () => clearTimeout(timer);
-  }, [bootReady, email, router]);
+  }, [bootReady, email, emailParam, fallbackEmail, router, user?.email]);
 
   useEffect(() => {
     if (cooldown <= 0) return;

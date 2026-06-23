@@ -54,6 +54,12 @@ describe('verifyEmailParamsFromUrl', () => {
       email: 'test@mail.com',
     });
   });
+
+  it('extracts email via regex when path parsing differs', () => {
+    expect(verifyEmailParamsFromUrl('reviewnatin:///verify-email?email=a%40b.com')).toEqual({
+      email: 'a@b.com',
+    });
+  });
 });
 
 describe('isAuthDeepLink', () => {

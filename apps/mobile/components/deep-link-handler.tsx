@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
 import { isAuthDeepLink, routeTargetFromUrl, verifyEmailParamsFromUrl } from '../lib/deep-link-routes';
+import { consumeInitialUrl } from '../lib/initial-url';
 
 /** Handles reviewnatin:// navigation deep links (Barkada invites, checkout ref, etc.). */
 export function DeepLinkHandler() {
@@ -32,7 +33,7 @@ export function DeepLinkHandler() {
       }
     };
 
-    Linking.getInitialURL().then(handle);
+    void consumeInitialUrl().then(handle);
 
     const sub = Linking.addEventListener('url', (event) => {
       handle(event.url);

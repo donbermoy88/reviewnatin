@@ -1,7 +1,8 @@
 # Free cohort smoke: OTP verification UI + signup form (email delivery needs SMTP)
-# Run after: adb shell pm clear ph.reviewnatin.app
 appId: ph.reviewnatin.app
 ---
+- launchApp:
+    clearState: true
 - openLink: reviewnatin://verify-email?email=f1.agent@reviewnatinph.com
 - extendedWaitUntil:
     visible: "I-verify ang email"

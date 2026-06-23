@@ -17,6 +17,7 @@ import {
   readFileSync,
   writeFileSync,
   readdirSync,
+  statSync,
 } from 'node:fs';
 import { join } from 'node:path';
 import { REPO_ROOT } from './lib/supabase-env.mjs';
@@ -187,24 +188,50 @@ async function main() {
       const buildCmd = localBuild
         ? 'cd apps/mobile && npx eas-cli build --profile preview --platform android --local --non-interactive --json'
         : 'cd apps/mobile && npx eas-cli build --profile preview --platform android --non-interactive --json --wait';
-      const out = runCapture(buildCmd, { env: buildEnv });
-      const buildLine = out.split('\n').filter((l) => l.trim().startsWith('{')).pop() ?? '{}';
-      const last = JSON.parse(buildLine);
-      const buildId = last.id ?? last.buildDetails?.id;
-      if (!buildId) throw new Error('No build id from EAS');
-      report.easBuildId = buildId;
-      report.easBuildUrl = `https://expo.dev/accounts/donbermoy88/projects/reviewnatin/builds/${buildId}`;
-      logStep('eas-build', 'ok', buildId);
+      let buildId = null;
+      let localApkPath = null;
+      if (localBuild) {
+        run(buildCmd, { env: buildEnv });
+        const mobileDir = join(REPO_ROOT, 'apps/mobile');
+        const apkCandidates = readdirSync(mobileDir)
+          .filter((f) => f.startsWith('build-') && f.endsWith('.apk'))
+          .map((f) => ({ name: f, mtime: statSync(join(mobileDir, f)).mtimeMs }))
+          .sort((a, b) => b.mtime - a.mtime);
+        const latest = apkCandidates[0]?.name;
+        if (!latest) throw new Error('Local EAS build finished but no build-*.apk found in apps/mobile');
+        localApkPath = join(mobileDir, latest);
+        report.easBuildId = 'local';
+        report.easBuildUrl = `file://${localApkPath}`;
+        logStep('eas-build', 'ok', latest);
+      } else {
+        const out = runCapture(buildCmd, { env: buildEnv });
+        const buildLine = out.split('\n').filter((l) => l.trim().startsWith('{')).pop() ?? '{}';
+        const last = JSON.parse(buildLine);
+        buildId = last.id ?? last.buildDetails?.id;
+        if (!buildId) throw new Error('No build id from EAS');
+        report.easBuildId = buildId;
+        report.easBuildUrl = `https://expo.dev/accounts/donbermoy88/projects/reviewnatin/builds/${buildId}`;
+        logStep('eas-build', 'ok', buildId);
+      }
 
       step('5/9 — Download APK');
-      const apkUrl = await pollEasBuild(buildId);
-      if (!apkUrl) throw new Error('No APK URL on finished build');
-      apkPath = join(DIST, `reviewnatin-beta-v${versionCode}.apk`);
-      run(`curl -fsSL -o "${apkPath}" "${apkUrl}"`);
-      report.sha256 = sha256File(apkPath);
-      report.apkPath = apkPath;
-      logStep('apk-download', 'ok', report.sha256);
-      console.log(`APK: ${apkPath}\nSHA-256: ${report.sha256}`);
+      if (localApkPath) {
+        apkPath = join(DIST, `reviewnatin-beta-v${versionCode}.apk`);
+        run(`cp "${localApkPath}" "${apkPath}"`);
+        report.sha256 = sha256File(apkPath);
+        report.apkPath = apkPath;
+        logStep('apk-download', 'ok', report.sha256);
+        console.log(`APK: ${apkPath}\nSHA-256: ${report.sha256}`);
+      } else {
+        const apkUrl = await pollEasBuild(buildId);
+        if (!apkUrl) throw new Error('No APK URL on finished build');
+        apkPath = join(DIST, `reviewnatin-beta-v${versionCode}.apk`);
+        run(`curl -fsSL -o "${apkPath}" "${apkUrl}"`);
+        report.sha256 = sha256File(apkPath);
+        report.apkPath = apkPath;
+        logStep('apk-download', 'ok', report.sha256);
+        console.log(`APK: ${apkPath}\nSHA-256: ${report.sha256}`);
+      }
     } else {
       const existing = readdirSync(DIST).filter((f) => f.endsWith('.apk')).sort().pop();
       if (existing) {

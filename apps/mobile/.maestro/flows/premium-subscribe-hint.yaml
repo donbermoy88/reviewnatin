@@ -21,12 +21,9 @@ appId: ph.reviewnatin.app
 - extendedWaitUntil:
     visible: "Home"
     timeout: 15000
-- scrollUntilVisible:
-    element: "See ReviewNatin Plus plans"
-    direction: DOWN
-    timeout: 15000
-- tapOn: "See ReviewNatin Plus plans"
+- openLink: reviewnatin://subscribe
 - extendedWaitUntil:
-    visible: "Mag-log in para mag-subscribe"
+    visible: "Lahat ng kailangan mo"
     timeout: 15000
+- assertVisible: "Hindi affiliated sa CSC"
 - assertVisible: "Mag-log in para mag-subscribe"

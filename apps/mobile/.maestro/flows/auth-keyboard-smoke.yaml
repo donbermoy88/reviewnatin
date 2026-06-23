@@ -2,11 +2,8 @@
 # Avoid hideKeyboard — Maestro often cannot dismiss Android soft keyboard on API 35.
 appId: ph.reviewnatin.app
 ---
-- runFlow:
-    when:
-      visible: "Get started"
-    commands:
-      - tapOn: "Get started"
+- launchApp:
+    clearState: true
 - openLink: reviewnatin://signup
 - extendedWaitUntil:
     visible: "Gumawa ng account"
