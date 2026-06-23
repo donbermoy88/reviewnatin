@@ -1,0 +1,8 @@
+# Local native build artifacts (EAS rebuilds these)
+android/app/build/
+android/.gradle/
+android/build/
+ios/build/
+ios/Pods/
+build-*.apk
+*.apk

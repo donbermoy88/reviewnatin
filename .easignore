@@ -1,0 +1,20 @@
+# Shrink EAS upload — not needed for mobile builds
+apps/mobile/build-*.apk
+apps/mobile/*.apk
+apps/mobile/android/app/build/
+apps/mobile/android/.gradle/
+apps/mobile/android/build/
+apps/mobile/ios/build/
+apps/mobile/ios/Pods/
+audit/
+tmp/
+output/
+dist/beta/
+.claude/
+.agents/
+**/.git/
+**/node_modules/
+**/.expo/
+**/.next/
+**/playwright-report/
+**/test-results/

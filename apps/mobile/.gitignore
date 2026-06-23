@@ -38,7 +38,9 @@ yarn-error.*
 
 # generated native folders
 /ios
-/android
+/android/app/build
+/android/.gradle
+/android/build
 
 # App Store Connect API key directory (the .p8 itself is already ignored above)
 credentials/
