@@ -73,17 +73,24 @@ function sha256File(path) {
 /** EAS CLI mixes spinner lines with JSON arrays/objects on stdout. */
 function parseEasJsonStdout(stdout) {
   const trimmed = stdout.trim();
-  try {
-    return JSON.parse(trimmed);
-  } catch {
-    /* fall through */
+  const attempts = [trimmed];
+  for (const line of trimmed.split('\n').map((l) => l.trim()).filter(Boolean)) {
+    if (line.startsWith('{') || line.startsWith('[')) attempts.push(line);
   }
-  const startArray = trimmed.indexOf('[');
-  const startObject = trimmed.indexOf('{');
-  const start =
-    startArray >= 0 && (startObject < 0 || startArray < startObject) ? startArray : startObject;
-  if (start < 0) throw new Error('No JSON in EAS CLI output');
-  return JSON.parse(trimmed.slice(start));
+  for (let i = trimmed.lastIndexOf('{'); i >= 0; i = trimmed.lastIndexOf('{', i - 1)) {
+    attempts.push(trimmed.slice(i));
+  }
+  for (let i = trimmed.lastIndexOf('['); i >= 0; i = trimmed.lastIndexOf('[', i - 1)) {
+    attempts.push(trimmed.slice(i));
+  }
+  for (const chunk of attempts) {
+    try {
+      return JSON.parse(chunk);
+    } catch {
+      /* try next */
+    }
+  }
+  throw new Error('No JSON in EAS CLI output');
 }
 
 function pickEasBuildRecord(parsed) {
@@ -227,7 +234,16 @@ async function main() {
         logStep('eas-build', 'ok', latest);
       } else {
         const out = runCapture(buildCmd, { env: buildEnv });
-        const last = pickEasBuildRecord(parseEasJsonStdout(out));
+        let last;
+        try {
+          last = pickEasBuildRecord(parseEasJsonStdout(out));
+        } catch (parseErr) {
+          console.warn('EAS build JSON parse failed, falling back to build:list:', parseErr.message);
+          const listJson = runCapture(
+            'cd apps/mobile && npx eas-cli build:list --platform android --limit 1 --json --non-interactive',
+          );
+          last = pickEasBuildRecord(parseEasJsonStdout(listJson));
+        }
         buildId = last.id ?? last.buildDetails?.id;
         if (!buildId) throw new Error('No build id from EAS');
         report.easBuildId = buildId;
@@ -254,31 +270,38 @@ async function main() {
         console.log(`APK: ${apkPath}\nSHA-256: ${report.sha256}`);
       }
     } else {
-      const existing = readdirSync(DIST).filter((f) => f.endsWith('.apk')).sort().pop();
-      if (existing) {
-        apkPath = join(DIST, existing);
-        report.apkPath = apkPath;
+      step('5/9 — Download latest finished EAS APK');
+      const listJson = runCapture(
+        'cd apps/mobile && npx eas-cli build:list --platform android --limit 1 --json --non-interactive',
+      );
+      const builds = parseEasJsonStdout(listJson);
+      const latest = Array.isArray(builds) ? builds[0] : builds;
+      const apkUrl = latest?.artifacts?.applicationArchiveUrl;
+      if (apkUrl && latest.status === 'FINISHED') {
+        versionCode = Number(latest.appBuildVersion ?? versionCode);
+        apkPath = join(DIST, `reviewnatin-beta-v${versionCode}.apk`);
+        run(`curl -fsSL -o "${apkPath}" "${apkUrl}"`);
         report.sha256 = sha256File(apkPath);
-        logStep('apk-download', 'skip', existing);
+        report.apkPath = apkPath;
+        report.easBuildId = latest.id;
+        report.easBuildUrl = latest.id
+          ? `https://expo.dev/accounts/donbermoy88/projects/reviewnatin/builds/${latest.id}`
+          : undefined;
+        logStep('apk-download', 'ok', `build ${versionCode}`);
+        console.log(`APK: ${apkPath}\nSHA-256: ${report.sha256}`);
       } else {
-        step('5/9 — Download latest finished EAS APK');
-        const listJson = runCapture(
-          'cd apps/mobile && npx eas-cli build:list --platform android --limit 1 --json --non-interactive',
-        );
-        const builds = parseEasJsonStdout(listJson);
-        const latest = Array.isArray(builds) ? builds[0] : builds;
-        const apkUrl = latest?.artifacts?.applicationArchiveUrl;
-        if (apkUrl && latest.status === 'FINISHED') {
-          versionCode = Number(latest.appBuildVersion ?? versionCode);
-          report.easBuildId = latest.id;
-          apkPath = join(DIST, `reviewnatin-beta-v${versionCode}.apk`);
-          run(`curl -fsSL -o "${apkPath}" "${apkUrl}"`);
-          report.sha256 = sha256File(apkPath);
+        const existing = readdirSync(DIST)
+          .filter((f) => f.endsWith('.apk'))
+          .map((f) => {
+            const match = f.match(/v(\d+)\.apk$/);
+            return { name: f, version: match ? Number(match[1]) : 0 };
+          })
+          .sort((a, b) => b.version - a.version)[0];
+        if (existing) {
+          apkPath = join(DIST, existing.name);
           report.apkPath = apkPath;
-          report.easBuildUrl = latest.id
-            ? `https://expo.dev/accounts/donbermoy88/projects/reviewnatin/builds/${latest.id}`
-            : undefined;
-          logStep('apk-download', 'ok', 'from latest EAS build');
+          report.sha256 = sha256File(apkPath);
+          logStep('apk-download', 'skip', existing.name);
         }
       }
     }
