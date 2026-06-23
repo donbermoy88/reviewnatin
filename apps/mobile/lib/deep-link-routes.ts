@@ -69,6 +69,28 @@ export function routeTargetFromUrl(
   }
 }
 
+/**
+ * Expo Router receives native Android cold-start intents before React hooks can
+ * run. Normalize those raw system paths here so `reviewnatin://practice` and
+ * friends never hit Expo Router's unmatched route or the root spinner first.
+ */
+export function routeFromNativeIntentPath(path: string): string {
+  const raw = path.trim();
+  if (!raw) return '/';
+  if (isAuthDeepLink(raw)) return raw;
+
+  const url =
+    raw.includes('://') || raw.startsWith('https://') || raw.startsWith('http://')
+      ? raw
+      : `reviewnatin://${raw.replace(/^\/+/, '').replace(/^--\//, '')}`;
+
+  return routeFromUrl(url) ?? raw;
+}
+
+export function isVerifyEmailDeepLink(url: string | null | undefined): boolean {
+  return Boolean(url?.includes('verify-email'));
+}
+
 /** Extract verify-email params from a deep link URL (cold-start fallback). */
 export function verifyEmailParamsFromUrl(url: string): { email: string; displayName?: string } | null {
   try {
@@ -145,10 +167,6 @@ export function routeFromUrl(url: string): string | null {
       return hrefWithQueryParams('/(auth)/verify-email', parsed, ['email', 'displayName']);
     }
     if (path === 'checkout') {
-      const ref = parsed.queryParams?.ref;
-      if (typeof ref === 'string' && ref.trim()) {
-        return `/subscribe?ref=${encodeURIComponent(ref.trim())}`;
-      }
       return '/subscribe';
     }
     if (path === 'exam-calendar' || path === 'calendar') return '/exam-calendar';

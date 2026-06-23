@@ -5,6 +5,8 @@ import { useAuth } from './auth-provider';
 import { colors } from '../constants/theme';
 import { isOnboardingComplete } from '../lib/onboarding-nav';
 
+const ONBOARDING_RESOLVE_TIMEOUT_MS = 2500;
+
 type OnboardingGateContextValue = {
   ready: boolean;
   complete: boolean;
@@ -22,8 +24,17 @@ export function useOnboardingGate() {
 function isAllowedWithoutOnboarding(segments: string[]): boolean {
   const root = segments[0];
   if (!root || root === 'index') return true;
-  if (root === 'onboarding' || root === '(auth)' || root === 'auth' || root === 'subscribe') return true;
+  if (root === 'onboarding' || root === '(auth)' || root === 'auth' || root === 'subscribe' || root === 'practice') return true;
   return false;
+}
+
+async function isOnboardingCompleteWithTimeout(userId?: string): Promise<boolean> {
+  return Promise.race([
+    isOnboardingComplete(userId),
+    new Promise<boolean>((resolve) => {
+      setTimeout(() => resolve(false), ONBOARDING_RESOLVE_TIMEOUT_MS);
+    }),
+  ]);
 }
 
 export function OnboardingGate({ children }: { children: React.ReactNode }) {
@@ -37,7 +48,7 @@ export function OnboardingGate({ children }: { children: React.ReactNode }) {
   // false on re-resolves (e.g. when the user id changes), otherwise the whole
   // app tree unmounts behind a full-screen spinner on every auth transition.
   const refresh = useCallback(async () => {
-    const done = user ? true : await isOnboardingComplete();
+    const done = user ? true : await isOnboardingCompleteWithTimeout();
     setComplete(done);
     setReady(true);
     return done;

@@ -1,6 +1,13 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { isAuthDeepLink, routeFromUrl, routeTargetFromUrl, verifyEmailParamsFromUrl } from './deep-link-routes';
+import {
+  isAuthDeepLink,
+  isVerifyEmailDeepLink,
+  routeFromNativeIntentPath,
+  routeFromUrl,
+  routeTargetFromUrl,
+  verifyEmailParamsFromUrl,
+} from './deep-link-routes';
 
 vi.mock('expo-linking', () => ({
   parse: (url: string) => {
@@ -18,8 +25,8 @@ describe('routeFromUrl', () => {
     expect(routeFromUrl('reviewnatin://subscribe')).toBe('/subscribe');
   });
 
-  it('routes custom scheme checkout links with refs', () => {
-    expect(routeFromUrl('reviewnatin://checkout?ref=RN-123')).toBe('/subscribe?ref=RN-123');
+  it('routes custom scheme checkout links to subscribe without ref', () => {
+    expect(routeFromUrl('reviewnatin://checkout?ref=RN-123')).toBe('/subscribe');
   });
 
   it('routes verify-email links with email query params', () => {
@@ -48,6 +55,26 @@ describe('routeTargetFromUrl', () => {
   });
 });
 
+describe('routeFromNativeIntentPath', () => {
+  it('normalizes raw Android custom-scheme cold-start intents', () => {
+    expect(routeFromNativeIntentPath('reviewnatin://subscribe')).toBe('/subscribe');
+    expect(routeFromNativeIntentPath('reviewnatin://signup')).toBe('/(auth)/signup');
+    expect(routeFromNativeIntentPath('reviewnatin://login')).toBe('/(auth)/login');
+    expect(routeFromNativeIntentPath('reviewnatin://practice')).toBe('/practice/quiz');
+  });
+
+  it('normalizes bare native paths', () => {
+    expect(routeFromNativeIntentPath('/subscribe')).toBe('/subscribe');
+    expect(routeFromNativeIntentPath('practice')).toBe('/practice/quiz');
+  });
+
+  it('preserves auth token links for Supabase-owned screens', () => {
+    expect(routeFromNativeIntentPath('reviewnatin://auth/callback#access_token=abc')).toBe(
+      'reviewnatin://auth/callback#access_token=abc'
+    );
+  });
+});
+
 describe('verifyEmailParamsFromUrl', () => {
   it('extracts email from verify-email URLs', () => {
     expect(verifyEmailParamsFromUrl('reviewnatin://verify-email?email=Test@Mail.com')).toEqual({
@@ -59,6 +86,14 @@ describe('verifyEmailParamsFromUrl', () => {
     expect(verifyEmailParamsFromUrl('reviewnatin:///verify-email?email=a%40b.com')).toEqual({
       email: 'a@b.com',
     });
+  });
+});
+
+describe('isVerifyEmailDeepLink', () => {
+  it('detects verify-email URLs', () => {
+    expect(isVerifyEmailDeepLink('reviewnatin://verify-email?email=a@b.com')).toBe(true);
+    expect(isVerifyEmailDeepLink('reviewnatin://signup')).toBe(false);
+    expect(isVerifyEmailDeepLink(null)).toBe(false);
   });
 });
 

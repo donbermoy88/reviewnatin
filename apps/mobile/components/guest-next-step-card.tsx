@@ -49,6 +49,20 @@ export function GuestNextStepCard({
           <Ionicons name="rocket-outline" size={20} color={colors.primary} />
         </View>
         <View style={{ flex: 1 }}>
+          <View
+            style={{
+              alignSelf: 'flex-start',
+              borderRadius: radii.full,
+              backgroundColor: colors.primaryMuted,
+              paddingHorizontal: spacing.sm,
+              paddingVertical: 3,
+              marginBottom: 6,
+            }}
+          >
+            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 10, color: colors.primary }}>
+              {GUEST_NEXT_STEPS.trustPill}
+            </Text>
+          </View>
           <Text style={{ fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text }}>
             {GUEST_NEXT_STEPS.title}
           </Text>

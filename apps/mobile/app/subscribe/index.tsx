@@ -1,9 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, AppState, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
+import { useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
 import { ManagePlusCard } from '../../components/manage-plus-card';
@@ -14,81 +13,35 @@ import { DEFAULT_EXAM_SLUG, DISCLAIMERS } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { useIap } from '../../providers/iap-provider';
-import { createWebCheckoutSession, fetchWebCheckoutStatus, checkoutAttributionOptions, submitWebCheckout } from '../../lib/api/web-checkout';
-import { captureAttributionFromQuery, loadCheckoutAttribution } from '../../lib/checkout-attribution';
+import { captureAttributionFromQuery } from '../../lib/checkout-attribution';
 import { toUserFacingError } from '../../lib/errors/user-facing';
-import { PREMIUM_HEADLINE } from '../../lib/product-copy';
 import { trackEvent } from '../../lib/analytics/events';
 import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
-import { preferWebCheckout } from '../../lib/iap/availability';
+import { canUseStorePurchases } from '../../lib/iap/availability';
 import {
   planMonthlyEquivalent,
   resolveProductPrice,
   savingsPercent,
 } from '../../lib/subscription/pricing-display';
 import {
-  WEB_CHECKOUT_BETA_BANNER,
-  WEB_CHECKOUT_TRIAL_NOTE,
-  WEB_CHECKOUT_STICKY_HINT,
-  GUEST_WEB_CHECKOUT_HINT,
-} from '../../lib/subscription/checkout-copy';
-import {
-  clearPendingCheckoutRef,
-  getPendingCheckoutRef,
-  savePendingCheckoutRef,
-} from '../../lib/web-checkout-pending';
+  HOW_TO_PAY_STEPS,
+  HOW_TO_PAY_TITLE,
+  PAYWALL_BENEFITS,
+  PAYWALL_CTA_PRIMARY,
+  PAYWALL_CTA_SECONDARY,
+  PAYWALL_GUEST_BODY,
+  PAYWALL_GUEST_TITLE,
+  PAYWALL_HEADLINE,
+  PAYWALL_PAYMENT_EXPLANATION,
+  PAYWALL_POLICY_FOOTER,
+  PAYWALL_SUBHEADING,
+  PLAN_DISPLAY,
+  STORE_LOAD_ERROR,
+  STORE_LOAD_TRY_AGAIN,
+} from '../../lib/subscription/paywall-copy';
 
 const isDevBuild = __DEV__;
-const webCheckoutPrimary = preferWebCheckout();
-const checkoutDemoEnabled = process.env.EXPO_PUBLIC_CHECKOUT_DEMO === 'true';
-
-const PLUS_FEATURES = [
-  'All exams unlocked (CSE, LET, PNLE)',
-  'Unlimited practice & full mock exams',
-  'Offline review packs',
-  'AI tutor & explanations',
-  'No ads',
-];
-
-const MONTHLY_FEATURES = [
-  'Access to all Phase 1 exams',
-  'Practice quizzes',
-  'Mock exams',
-  'Flashcards',
-  'Diagnostic exams',
-  'Progress tracking',
-  'No ads',
-  'Basic PasaPath access',
-];
-
-const SIX_MONTH_FEATURES = [
-  'Longer review access for one exam season',
-  'Full PasaPath access',
-  'Offline review packs',
-  'Weakness-based recommendations',
-  'Priority access to newly added questions',
-  'Save compared with monthly billing',
-];
-
-const YEARLY_FEATURES = [
-  'Full 12-month access',
-  'Full PasaPath access',
-  'Offline review packs',
-  'Weakness-based recommendations',
-  'Priority access to newly added questions',
-  'Access to future Phase 1 question updates',
-  'Best for users reviewing for multiple exams',
-];
-
-type PlusPlanKind = 'monthly' | 'six_months' | 'yearly';
-
-type PlusPlanMeta = {
-  kind: PlusPlanKind;
-  positioning: string;
-  featureIntro: string;
-  features: string[];
-  badge?: string;
-};
+const storeEnabled = canUseStorePurchases();
 
 type ProductRow = {
   id: string;
@@ -107,32 +60,16 @@ function isSixMonthPlus(sku: string): boolean {
   return sku.toLowerCase().includes('six_months');
 }
 
-function getPlusPlanMeta(sku: string): PlusPlanMeta {
-  if (isSixMonthPlus(sku)) {
-    return {
-      kind: 'six_months',
-      badge: 'BEST VALUE',
-      positioning: 'Best for one exam preparation season',
-      featureIntro: 'All features in Plus Monthly, plus:',
-      features: SIX_MONTH_FEATURES,
-    };
-  }
+function planDisplayMeta(sku: string) {
+  if (isSixMonthPlus(sku)) return PLAN_DISPLAY.six_months;
+  if (isYearlyPlus(sku)) return PLAN_DISPLAY.yearly;
+  return PLAN_DISPLAY.monthly;
+}
 
-  if (isYearlyPlus(sku)) {
-    return {
-      kind: 'yearly',
-      positioning: 'Best for long-term review and multiple exam preparation',
-      featureIntro: 'All features in Plus Monthly, plus:',
-      features: YEARLY_FEATURES,
-    };
-  }
-
-  return {
-    kind: 'monthly',
-    positioning: 'Starter access',
-    featureIntro: 'Includes:',
-    features: MONTHLY_FEATURES,
-  };
+function planSuffix(sku: string): string {
+  if (isSixMonthPlus(sku)) return '/6 mo';
+  if (isYearlyPlus(sku)) return '/year';
+  return '/month';
 }
 
 export default function SubscribeScreen() {
@@ -141,8 +78,7 @@ export default function SubscribeScreen() {
   const theme = useAppTheme();
   const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const { ref: checkoutRefParam, utm_source, utm_medium, utm_campaign, source: sourceParam } = useLocalSearchParams<{
-    ref?: string;
+  const { utm_source, utm_medium, utm_campaign, source: sourceParam } = useLocalSearchParams<{
     utm_source?: string;
     utm_medium?: string;
     utm_campaign?: string;
@@ -153,28 +89,25 @@ export default function SubscribeScreen() {
     products,
     entitlements,
     storePrices,
+    storePricesReady,
+    storePricesError,
+    reloadStorePrices,
     loading,
     activateDemoPass,
     isPremium,
     restoreStorePurchases,
     refresh: refreshEntitlements,
   } = useEntitlements();
-  const [pendingRef, setPendingRef] = useState<string | null>(null);
-  const [checkingPayment, setCheckingPayment] = useState(false);
   const { purchaseProduct, purchasingSku } = useIap();
   const [busy, setBusy] = useState<string | null>(null);
   const [restoring, setRestoring] = useState(false);
-  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
   const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
-  const [comparePlansOpen, setComparePlansOpen] = useState(false);
-  const [ewalletPickerOpen, setEwalletPickerOpen] = useState(false);
+  const [howToPayOpen, setHowToPayOpen] = useState(false);
   const [sheet, setSheet] = useState<
     | null
     | { kind: 'purchase_error'; message: string }
     | { kind: 'restore'; ok: boolean; message: string }
-    | { kind: 'ewallet'; provider: 'gcash' | 'maya'; reference: string; amount: number }
-    | { kind: 'checkout_error'; message: string }
   >(null);
 
   useEffect(() => {
@@ -205,66 +138,6 @@ export default function SubscribeScreen() {
     });
   }, [utm_source, utm_medium, utm_campaign, sourceParam]);
 
-  useEffect(() => {
-    void (async () => {
-      const stored = await getPendingCheckoutRef();
-      const ref = checkoutRefParam ?? stored;
-      if (ref) {
-        setPendingRef(ref);
-        if (checkoutRefParam) await savePendingCheckoutRef(checkoutRefParam);
-      }
-    })();
-  }, [checkoutRefParam]);
-
-  const pollCheckoutStatus = useCallback(async () => {
-    const ref = pendingRef ?? (await getPendingCheckoutRef());
-    if (!ref) return;
-    setCheckingPayment(true);
-    try {
-      const status = await fetchWebCheckoutStatus(ref);
-      if (status.status === 'paid') {
-        await clearPendingCheckoutRef();
-        setPendingRef(null);
-        await refreshEntitlements();
-        setPaymentConfirmed(true);
-        trackEvent('subscription_active', { method: 'web_checkout', ref });
-      }
-    } finally {
-      setCheckingPayment(false);
-    }
-  }, [pendingRef, refreshEntitlements]);
-
-  const confirmBetaCheckout = useCallback(async () => {
-    const ref = pendingRef ?? (await getPendingCheckoutRef());
-    if (!ref) return;
-    setCheckingPayment(true);
-    try {
-      const result = await submitWebCheckout(ref, true);
-      if (result.ok && result.status === 'paid') {
-        await clearPendingCheckoutRef();
-        setPendingRef(null);
-        await refreshEntitlements();
-        setPaymentConfirmed(true);
-        trackEvent('subscription_active', { method: 'web_checkout_demo', ref });
-      } else if (result.error) {
-        setSheet({ kind: 'checkout_error', message: toUserFacingError(result.error, 'checkout') });
-      }
-    } catch (e) {
-      captureAppException(e, { area: 'checkout', action: 'confirm_beta_checkout' }, { ref });
-      setSheet({ kind: 'checkout_error', message: toUserFacingError(e, 'checkout') });
-    } finally {
-      setCheckingPayment(false);
-    }
-  }, [pendingRef, refreshEntitlements]);
-
-  useEffect(() => {
-    void pollCheckoutStatus();
-    const sub = AppState.addEventListener('change', (state) => {
-      if (state === 'active') void pollCheckoutStatus();
-    });
-    return () => sub.remove();
-  }, [pollCheckoutStatus]);
-
   const plusProducts = products.filter((p) => p.tier === 'plus');
   const sortedPlus = [...plusProducts].sort((a, b) => {
     const order = (sku: string) => {
@@ -285,38 +158,22 @@ export default function SubscribeScreen() {
 
   const selectedProduct = sortedPlus.find((p) => p.id === selectedPlanId) ?? null;
 
-  const resolvePrice = (product: ProductRow): { display: string; amount: number } =>
-    resolveProductPrice(product, storePrices);
+  const resolvePrice = (product: ProductRow) => resolveProductPrice(product, storePrices);
 
   const monthlyPlan = sortedPlus.find((p) => p.sku.toLowerCase().includes('monthly'));
   const monthlyBaseAmount = monthlyPlan ? resolvePrice(monthlyPlan).amount : 0;
 
-  function planMonthlyEquiv(product: ProductRow): number {
-    return planMonthlyEquivalent(resolvePrice(product).amount, product.sku);
-  }
-
   function planSubLabel(product: ProductRow): string {
+    const meta = planDisplayMeta(product.sku);
     if (isSixMonthPlus(product.sku) || isYearlyPlus(product.sku)) {
-      const monthly = planMonthlyEquiv(product);
+      const monthly = planMonthlyEquivalent(resolvePrice(product).amount, product.sku);
       const total = resolvePrice(product).amount;
       const baselineMonths = isSixMonthPlus(product.sku) ? 6 : 12;
       const baseline = monthlyBaseAmount * baselineMonths;
       const savePct = savingsPercent(total, baseline);
-      return savePct > 0 ? `₱${monthly}/mo · save ${savePct}%` : `₱${monthly}/mo`;
+      return savePct > 0 ? `₱${monthly}/mo · save ${savePct}%` : meta.subcopy;
     }
-    return 'Starter access';
-  }
-
-  function planShortName(product: ProductRow): string {
-    if (isSixMonthPlus(product.sku)) return '6-Month Pass';
-    if (isYearlyPlus(product.sku)) return 'Yearly';
-    return 'Monthly';
-  }
-
-  function planSuffix(product: ProductRow): string {
-    if (isSixMonthPlus(product.sku)) return '/6 mo';
-    if (isYearlyPlus(product.sku)) return '/year';
-    return '/month';
+    return meta.subcopy;
   }
 
   const requireLogin = () => {
@@ -330,7 +187,6 @@ export default function SubscribeScreen() {
       return;
     }
     setBusy(productId);
-    addAppBreadcrumb('paywall', 'demo entitlement activation requested', { productId, tier });
     try {
       const product = products.find((p) => p.id === productId);
       await activateDemoPass(
@@ -358,7 +214,12 @@ export default function SubscribeScreen() {
       trackEvent('subscription_active', { method: 'store', sku });
     }
     if (!result.ok && result.error && !result.error.includes('cancel')) {
-      captureAppMessage('store purchase request failed', { area: 'paywall', action: 'store_purchase_request' }, { sku, error: result.error }, 'warning');
+      captureAppMessage(
+        'store purchase request failed',
+        { area: 'paywall', action: 'store_purchase_request' },
+        { sku, error: result.error },
+        'warning'
+      );
       setSheet({ kind: 'purchase_error', message: toUserFacingError(result.error, 'checkout') });
     }
   };
@@ -368,12 +229,6 @@ export default function SubscribeScreen() {
     addAppBreadcrumb('iap', 'restore purchases requested');
     try {
       const result = await restoreStorePurchases();
-      captureAppMessage(
-        result.ok ? 'restore purchases completed' : 'restore purchases failed',
-        { area: 'iap', action: 'restore_purchases' },
-        { ok: result.ok, restoredCount: result.restoredCount },
-        result.ok ? 'info' : 'warning'
-      );
       setSheet({ kind: 'restore', ok: result.ok, message: result.message });
     } catch (error) {
       captureAppException(error, { area: 'iap', action: 'restore_purchases' });
@@ -383,43 +238,25 @@ export default function SubscribeScreen() {
     }
   };
 
-  const payWithEwallet = async (sku: string, provider: 'gcash' | 'maya') => {
-    if (!user) {
-      requireLogin();
-      return;
-    }
-    try {
-      addAppBreadcrumb('checkout', 'e-wallet checkout requested', { sku, provider });
-      trackEvent('checkout_started', { method: provider, sku });
-      const attribution = await loadCheckoutAttribution();
-      const attrOpts = checkoutAttributionOptions(attribution);
-      const session = await createWebCheckoutSession(sku, provider, attrOpts);
-      await savePendingCheckoutRef(session.referenceCode);
-      setPendingRef(session.referenceCode);
-      await WebBrowser.openBrowserAsync(session.checkoutUrl);
-      setSheet({
-        kind: 'ewallet',
-        provider,
-        reference: session.referenceCode,
-        amount: session.amountPhp,
-      });
-    } catch (e) {
-      captureAppException(e, { area: 'checkout', action: 'create_ewallet_checkout' }, { sku, provider });
-      setSheet({ kind: 'checkout_error', message: toUserFacingError(e, 'checkout') });
-    }
-  };
+  const storeLoadFailed =
+    storeEnabled && storePricesReady && storePricesError && sortedPlus.length > 0;
+
+  const ctaDisabled =
+    !selectedProduct ||
+    !!busy ||
+    !!purchasingSku ||
+    storeLoadFailed ||
+    (storeEnabled && !storePricesReady);
 
   const ctaLabel = hasAccess
-    ? 'Plus active'
+    ? 'Premium active'
     : !user
-      ? 'Mag-log in para mag-subscribe'
+      ? 'Sign in to subscribe'
       : busy || purchasingSku
         ? 'Processing…'
-        : selectedProduct
-          ? webCheckoutPrimary && !isDevBuild
-            ? WEB_CHECKOUT_STICKY_HINT(resolvePrice(selectedProduct).display)
-            : `Start ${planShortName(selectedProduct)} · ${resolvePrice(selectedProduct).display}`
-          : 'Choose a plan';
+        : isDevBuild
+          ? `Demo: ${planDisplayMeta(selectedProduct?.sku ?? '').name}`
+          : PAYWALL_CTA_PRIMARY;
 
   const onCtaPress = () => {
     if (hasAccess || !selectedProduct) return;
@@ -431,11 +268,14 @@ export default function SubscribeScreen() {
       void buyDemo(selectedProduct.id, selectedProduct.tier);
       return;
     }
-    if (webCheckoutPrimary) {
-      setEwalletPickerOpen(true);
+    if (storeEnabled) {
+      void buyStore(selectedProduct.sku);
       return;
     }
-    void buyStore(selectedProduct.sku);
+    setSheet({
+      kind: 'purchase_error',
+      message: 'In-app purchases require a production build installed from Google Play or the App Store.',
+    });
   };
 
   return (
@@ -457,7 +297,7 @@ export default function SubscribeScreen() {
         <View style={styles.topRow}>
           <View style={styles.plusBadge}>
             <Ionicons name="star" size={12} color={colors.primaryDark} />
-            <Text style={styles.plusBadgeText}>PLUS</Text>
+            <Text style={styles.plusBadgeText}>PREMIUM</Text>
           </View>
           <Pressable
             onPress={() => router.back()}
@@ -470,12 +310,11 @@ export default function SubscribeScreen() {
           </Pressable>
         </View>
 
-        <Text style={styles.headlineDark}>{PREMIUM_HEADLINE.title}</Text>
-        <Text style={[styles.headlineSubDark, { marginTop: spacing.sm }]}>{PREMIUM_HEADLINE.subtitle}</Text>
-        <Text style={[styles.trustLineDark, { marginTop: spacing.xs }]}>{PREMIUM_HEADLINE.trust}</Text>
+        <Text style={styles.headlineDark}>{PAYWALL_HEADLINE}</Text>
+        <Text style={[styles.headlineSubDark, { marginTop: spacing.sm }]}>{PAYWALL_SUBHEADING}</Text>
 
         <View style={styles.featuresList}>
-          {PLUS_FEATURES.map((f) => (
+          {PAYWALL_BENEFITS.map((f) => (
             <View key={f} style={styles.featureRowDark}>
               <View style={styles.checkCircle}>
                 <Ionicons name="checkmark" size={13} color="#fff" />
@@ -484,13 +323,6 @@ export default function SubscribeScreen() {
             </View>
           ))}
         </View>
-
-        {paymentConfirmed ? (
-          <View style={styles.successBannerDark}>
-            <Ionicons name="checkmark-circle" size={20} color={colors.accent} />
-            <Text style={styles.successBannerDarkText}>Payment confirmed — your subscription is now active!</Text>
-          </View>
-        ) : null}
 
         {hasAccess ? (
           <View style={styles.manageBlock}>
@@ -505,20 +337,27 @@ export default function SubscribeScreen() {
           <View style={styles.guestBannerDark}>
             <Ionicons name="person-circle-outline" size={20} color={colors.accent} />
             <View style={{ flex: 1 }}>
-              <Text style={styles.guestBannerTitleDark}>Mag-log in muna</Text>
-              <Text style={styles.guestBannerSubDark}>
-                Kailangan ng account para mag-subscribe sa Plus. Libre ang sign-up — i-save ang progress mo sa cloud.
-                {webCheckoutPrimary ? ` ${GUEST_WEB_CHECKOUT_HINT}` : ''}
-              </Text>
+              <Text style={styles.guestBannerTitleDark}>{PAYWALL_GUEST_TITLE}</Text>
+              <Text style={styles.guestBannerSubDark}>{PAYWALL_GUEST_BODY}</Text>
             </View>
-            <Pressable
-              onPress={() => router.push('/(auth)/signup')}
-              style={({ pressed }) => [styles.guestBannerBtn, pressed && { opacity: 0.9 }]}
-              accessibilityRole="button"
-              accessibilityLabel="Mag-sign up"
-            >
-              <Text style={styles.guestBannerBtnText}>Sign up</Text>
-            </Pressable>
+            <View style={styles.guestBannerActions}>
+              <Pressable
+                onPress={() => router.push('/(auth)/signup')}
+                style={({ pressed }) => [styles.guestBannerBtn, pressed && { opacity: 0.9 }]}
+                accessibilityRole="button"
+                accessibilityLabel="Create a free account"
+              >
+                <Text style={styles.guestBannerBtnText}>Create free account</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => router.replace('/(tabs)')}
+                style={({ pressed }) => [styles.guestBannerLink, pressed && { opacity: 0.75 }]}
+                accessibilityRole="button"
+                accessibilityLabel="Keep practicing as guest"
+              >
+                <Text style={styles.guestBannerLinkText}>Keep guest mode</Text>
+              </Pressable>
+            </View>
           </View>
         ) : loading ? (
           <ActivityIndicator color={colors.accent} style={{ marginTop: spacing.lg }} />
@@ -526,7 +365,7 @@ export default function SubscribeScreen() {
           <View style={{ gap: spacing.sm, marginTop: spacing.lg }}>
             {sortedPlus.map((p) => {
               const selected = selectedPlanId === p.id;
-              const isBest = isSixMonthPlus(p.sku);
+              const meta = planDisplayMeta(p.sku);
               return (
                 <Pressable
                   key={p.id}
@@ -538,24 +377,24 @@ export default function SubscribeScreen() {
                   ]}
                   accessibilityRole="radio"
                   accessibilityState={{ selected }}
-                  accessibilityLabel={`${planShortName(p)} ${resolvePrice(p).display}${planSuffix(p)}`}
+                  accessibilityLabel={`${meta.name} ${resolvePrice(p).display}${planSuffix(p.sku)}`}
                 >
                   <View style={[styles.planRadio, selected && styles.planRadioSelected]}>
                     {selected ? <Ionicons name="checkmark" size={14} color={colors.primaryDark} /> : null}
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Text style={styles.planRowName}>{planShortName(p)}</Text>
+                    <Text style={styles.planRowName}>{meta.name}</Text>
                     <Text style={styles.planRowSub}>{planSubLabel(p)}</Text>
                   </View>
                   <View style={{ alignItems: 'flex-end' }}>
                     <Text style={styles.planRowPrice}>
                       {resolvePrice(p).display}
-                      <Text style={styles.planRowPriceSuffix}>{planSuffix(p)}</Text>
+                      <Text style={styles.planRowPriceSuffix}>{planSuffix(p.sku)}</Text>
                     </Text>
                   </View>
-                  {isBest ? (
+                  {'badge' in meta && meta.badge ? (
                     <View style={styles.bestValuePillDark}>
-                      <Text style={styles.bestValuePillDarkText}>BEST VALUE</Text>
+                      <Text style={styles.bestValuePillDarkText}>{meta.badge}</Text>
                     </View>
                   ) : null}
                 </Pressable>
@@ -564,61 +403,46 @@ export default function SubscribeScreen() {
           </View>
         )}
 
-        {pendingRef && !hasAccess ? (
-          <View style={styles.pendingBlock}>
+        {!hasAccess && user ? (
+          <View style={[styles.infoBannerDark, { marginTop: spacing.md }]}>
+            <Ionicons name="shield-checkmark-outline" size={16} color={colors.accent} />
+            <Text style={styles.infoBannerDarkText}>{PAYWALL_PAYMENT_EXPLANATION}</Text>
+          </View>
+        ) : null}
+
+        {storeLoadFailed ? (
+          <View style={[styles.errorBanner, { marginTop: spacing.md }]}>
+            <Ionicons name="cloud-offline-outline" size={18} color={colors.accent} />
+            <Text style={styles.errorBannerText}>{STORE_LOAD_ERROR}</Text>
             <Pressable
-              style={styles.pendingCardDark}
-              onPress={() => void pollCheckoutStatus()}
+              onPress={() => void reloadStorePrices()}
+              style={styles.tryAgainBtn}
               accessibilityRole="button"
-              accessibilityLabel="Refresh checkout status"
+              accessibilityLabel={STORE_LOAD_TRY_AGAIN}
             >
-              <Ionicons name="time-outline" size={18} color={colors.accent} />
-              <View style={{ flex: 1 }}>
-                <Text style={styles.pendingTitleDark}>Payment pending</Text>
-                <Text style={styles.pendingSubDark}>
-                  {checkingPayment ? 'Checking…' : `Ref ${pendingRef} · Tap to refresh`}
-                </Text>
-              </View>
-              <Ionicons name="refresh" size={16} color="rgba(255,255,255,0.6)" />
+              <Text style={styles.tryAgainBtnText}>{STORE_LOAD_TRY_AGAIN}</Text>
             </Pressable>
-            {checkoutDemoEnabled ? (
-              <Pressable
-                style={styles.betaConfirmBtn}
-                onPress={() => void confirmBetaCheckout()}
-                disabled={checkingPayment}
-                accessibilityRole="button"
-                accessibilityLabel="Confirm beta test payment"
-              >
-                <Text style={styles.betaConfirmBtnText}>
-                  {checkingPayment ? 'Confirming…' : 'Beta: Kumpirmahin ang test payment'}
-                </Text>
-              </Pressable>
-            ) : null}
           </View>
         ) : null}
 
-        {webCheckoutPrimary && !hasAccess && user ? (
-          <View style={styles.betaBannerDark}>
-            <Ionicons name="phone-portrait-outline" size={14} color={colors.accent} />
-            <Text style={styles.betaBannerDarkText}>{WEB_CHECKOUT_BETA_BANNER}</Text>
-          </View>
-        ) : null}
-
-        {webCheckoutPrimary && !hasAccess && user ? (
-          <View style={[styles.betaBannerDark, { marginTop: spacing.xs }]}>
-            <Ionicons name="information-circle-outline" size={14} color={colors.accent} />
-            <Text style={styles.betaBannerDarkText}>{WEB_CHECKOUT_TRIAL_NOTE}</Text>
-          </View>
+        {!hasAccess && user ? (
+          <Pressable
+            onPress={() => setHowToPayOpen(true)}
+            style={({ pressed }) => [styles.howToPayLink, pressed && { opacity: 0.8 }]}
+            accessibilityRole="button"
+            accessibilityLabel={HOW_TO_PAY_TITLE}
+          >
+            <Ionicons name="help-circle-outline" size={16} color={colors.accent} />
+            <Text style={styles.howToPayLinkText}>{HOW_TO_PAY_TITLE}</Text>
+            <Ionicons name="chevron-forward" size={14} color="rgba(255,255,255,0.5)" />
+          </Pressable>
         ) : null}
 
         {isDevBuild ? (
           <View style={styles.devBannerDark}>
             <Ionicons name="code-slash" size={14} color={colors.accent} />
             <Text style={styles.devBannerDarkText}>
-              Dev build — purchases are simulated.{' '}
-              {Platform.OS === 'android'
-                ? 'APK beta uses GCash/Maya web checkout; Play Billing on store release.'
-                : 'StoreKit applies on production.'}
+              Dev build — purchases are simulated. Production uses Google Play Billing on Android and App Store on iOS.
             </Text>
           </View>
         ) : null}
@@ -628,10 +452,10 @@ export default function SubscribeScreen() {
         <View style={[styles.stickyCta, { paddingBottom: insets.bottom + spacing.md }]}>
           <Pressable
             onPress={onCtaPress}
-            disabled={!selectedProduct || !!busy || !!purchasingSku}
+            disabled={ctaDisabled}
             style={({ pressed }) => [
               styles.bigCta,
-              (!selectedProduct || busy || purchasingSku) && { opacity: 0.6 },
+              ctaDisabled && { opacity: 0.6 },
               pressed && { opacity: 0.9 },
             ]}
             accessibilityRole="button"
@@ -639,50 +463,29 @@ export default function SubscribeScreen() {
           >
             <Text style={styles.bigCtaText}>{ctaLabel}</Text>
           </Pressable>
-          <View style={styles.ctaLinksRow}>
-            {!webCheckoutPrimary ? (
-              <Pressable
-                onPress={() => (user ? void handleRestore() : requireLogin())}
-                hitSlop={8}
-                disabled={restoring}
-                accessibilityRole="button"
-                accessibilityLabel="Restore purchase"
-              >
-                <Text style={styles.ctaLinkText}>
-                  {restoring ? 'Restoring…' : 'Restore purchase'}
-                </Text>
-              </Pressable>
-            ) : null}
+          <Pressable
+            onPress={() => router.back()}
+            hitSlop={8}
+            style={{ alignItems: 'center', marginTop: spacing.sm }}
+            accessibilityRole="button"
+            accessibilityLabel={PAYWALL_CTA_SECONDARY}
+          >
+            <Text style={styles.ctaLinkText}>{PAYWALL_CTA_SECONDARY}</Text>
+          </Pressable>
+          {storeEnabled ? (
             <Pressable
-              onPress={() => setComparePlansOpen(true)}
+              onPress={() => (user ? void handleRestore() : requireLogin())}
               hitSlop={8}
+              disabled={restoring}
+              style={{ alignItems: 'center', marginTop: spacing.xs }}
               accessibilityRole="button"
-              accessibilityLabel="Compare subscription plans"
+              accessibilityLabel="Restore purchases"
             >
-              <Text style={styles.ctaLinkText}>Compare plans</Text>
+              <Text style={styles.ctaLinkText}>{restoring ? 'Restoring…' : 'Restore purchases'}</Text>
             </Pressable>
-            {webCheckoutPrimary && user && !isDevBuild ? (
-              <Pressable
-                onPress={() => setEwalletPickerOpen(true)}
-                hitSlop={8}
-                accessibilityRole="button"
-                accessibilityLabel="Pay with GCash or Maya"
-              >
-                <Text style={styles.ctaLinkText}>GCash/Maya</Text>
-              </Pressable>
-            ) : !webCheckoutPrimary && !isDevBuild ? (
-              <Pressable
-                onPress={() => setEwalletPickerOpen(true)}
-                hitSlop={8}
-                accessibilityRole="button"
-                accessibilityLabel="Pay with GCash or Maya"
-              >
-                <Text style={styles.ctaLinkText}>GCash/Maya</Text>
-              </Pressable>
-            ) : null}
-          </View>
+          ) : null}
           <Text style={styles.footnoteDark}>
-            {DISCLAIMERS.subscription} {DISCLAIMERS.short}
+            {PAYWALL_POLICY_FOOTER} {DISCLAIMERS.short}
           </Text>
         </View>
       ) : null}
@@ -702,319 +505,30 @@ export default function SubscribeScreen() {
         actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}
       />
       <AppSheet
-        visible={sheet?.kind === 'ewallet'}
-        title="Complete your payment"
-        subtitle={
-          sheet?.kind === 'ewallet'
-            ? `Send ₱${sheet.amount} via ${sheet.provider === 'gcash' ? 'GCash' : 'Maya'} using reference ${sheet.reference}, then confirm on the checkout page.`
-            : undefined
-        }
-        onClose={() => setSheet(null)}
-        actions={[
-          {
-            label: 'Open checkout',
-            onPress: () => {
-              if (sheet?.kind === 'ewallet') {
-                void WebBrowser.openBrowserAsync(
-                  `https://reviewnatinph.com/checkout?ref=${encodeURIComponent(sheet.reference)}`
-                );
-              }
-              setSheet(null);
-            },
-          },
-          { label: 'OK', onPress: () => setSheet(null), variant: 'outline' },
-        ]}
-      />
-      <AppSheet
-        visible={sheet?.kind === 'checkout_error'}
-        title="Checkout failed"
-        subtitle={sheet?.kind === 'checkout_error' ? sheet.message : undefined}
-        onClose={() => setSheet(null)}
-        actions={[{ label: 'OK', onPress: () => setSheet(null), variant: 'outline' }]}
-      />
-      <AppSheet
-        visible={comparePlansOpen}
-        title="Compare plans"
-        subtitle="Every Plus tier unlocks the same features. Longer durations save money per month."
-        onClose={() => setComparePlansOpen(false)}
-        actions={[{ label: 'Close', onPress: () => setComparePlansOpen(false), variant: 'outline' }]}
+        visible={howToPayOpen}
+        title={HOW_TO_PAY_TITLE}
+        onClose={() => setHowToPayOpen(false)}
+        actions={[{ label: 'Close', onPress: () => setHowToPayOpen(false), variant: 'outline' }]}
       >
-        {sortedPlus.map((p) => {
-          const meta = getPlusPlanMeta(p.sku);
-          return (
-            <View key={p.id} style={{ marginBottom: spacing.md }}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 15, color: colors.text }}>
-                  {planShortName(p)}
-                </Text>
-                <Text style={{ fontFamily: theme.fonts.display, fontSize: 16, color: colors.primary }}>
-                  {resolvePrice(p).display}
-                  <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted }}>
-                    {planSuffix(p)}
-                  </Text>
-                </Text>
-              </View>
-              <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 }}>
-                {meta.positioning}
-              </Text>
-              <View style={{ marginTop: spacing.sm, gap: 4 }}>
-                {meta.features.slice(0, 4).map((f) => (
-                  <View key={f} style={{ flexDirection: 'row', gap: 6, alignItems: 'center' }}>
-                    <Ionicons name="checkmark-circle" size={13} color={colors.success} />
-                    <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 12, color: colors.textMuted, flex: 1 }}>
-                      {f}
-                    </Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-          );
-        })}
+        {HOW_TO_PAY_STEPS.map((step, i) => (
+          <Text key={step} style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 14, color: colors.text, marginBottom: spacing.sm }}>
+            {i + 1}. {step}
+          </Text>
+        ))}
       </AppSheet>
-      <AppSheet
-        visible={ewalletPickerOpen}
-        title="Pay with e-wallet"
-        subtitle={selectedProduct ? `${planShortName(selectedProduct)} · ${resolvePrice(selectedProduct).display}` : 'Select a plan first'}
-        onClose={() => setEwalletPickerOpen(false)}
-        actions={
-          selectedProduct
-            ? [
-                {
-                  label: 'GCash',
-                  onPress: () => {
-                    setEwalletPickerOpen(false);
-                    void payWithEwallet(selectedProduct.sku, 'gcash');
-                  },
-                },
-                {
-                  label: 'Maya',
-                  onPress: () => {
-                    setEwalletPickerOpen(false);
-                    void payWithEwallet(selectedProduct.sku, 'maya');
-                  },
-                  variant: 'outline',
-                },
-                { label: 'Cancel', onPress: () => setEwalletPickerOpen(false), variant: 'ghost' },
-              ]
-            : [{ label: 'OK', onPress: () => setEwalletPickerOpen(false), variant: 'outline' }]
-        }
-      />
     </View>
   );
 }
 
 function createStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii, shadows } = theme;
+  const { colors, fonts, spacing, radii } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
-    header: {
-      paddingHorizontal: spacing.lg,
-      paddingBottom: spacing.xl,
-      borderBottomLeftRadius: radii.xxl,
-      borderBottomRightRadius: radii.xxl,
-      overflow: 'hidden',
-    },
-    headerNav: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: spacing.md,
-    },
-    backBtn: {
-      width: 40,
-      height: 40,
-      borderRadius: radii.lg,
-      backgroundColor: 'rgba(255,255,255,0.14)',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderWidth: 1,
-      borderColor: 'rgba(255,255,255,0.12)',
-    },
-    headerTitle: {
-      fontFamily: fonts.display,
-      fontSize: 26,
-      color: '#fff',
-      letterSpacing: -0.6,
-      lineHeight: 32,
-    },
-    headerSub: {
-      fontFamily: fonts.bodyMedium,
-      fontSize: 14,
-      color: 'rgba(255,255,255,0.78)',
-      lineHeight: 20,
-      marginTop: spacing.xs,
-      maxWidth: 320,
-    },
-    headerPills: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: spacing.xs,
-      marginTop: spacing.md,
-    },
-    headerPill: {
-      paddingHorizontal: spacing.sm,
-      paddingVertical: 4,
-      borderRadius: radii.full,
-      backgroundColor: 'rgba(255,255,255,0.14)',
-      borderWidth: 1,
-      borderColor: 'rgba(255,255,255,0.1)',
-    },
-    headerPillText: {
-      fontFamily: fonts.bodySemiBold,
-      fontSize: 11,
-      color: 'rgba(255,255,255,0.9)',
-    },
-    body: { padding: spacing.lg, marginTop: -spacing.sm },
-    sectionTitle: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 18,
-      color: colors.text,
-      letterSpacing: -0.2,
-      marginBottom: spacing.xs,
-    },
-    sectionSub: {
-      fontFamily: fonts.bodyMedium,
-      fontSize: 13,
-      color: colors.textMuted,
-      lineHeight: 19,
-      marginBottom: spacing.lg,
-    },
-    planGroup: { marginBottom: spacing.lg, gap: spacing.sm },
-    planGroupLabel: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 12,
-      color: colors.primary,
-      letterSpacing: 0.8,
-      textTransform: 'uppercase',
-      marginBottom: spacing.xs,
-    },
-    planGroupSub: {
-      fontFamily: fonts.bodyMedium,
-      fontSize: 12,
-      color: colors.textMuted,
-      marginBottom: spacing.sm,
-      marginTop: -2,
-    },
-    planCard: {
-      backgroundColor: colors.surface,
-      borderRadius: radii.xl,
-      padding: spacing.lg,
-      gap: spacing.md,
-      borderWidth: 1,
-      borderColor: colors.border,
-      ...shadows.card,
-    },
-    planCardHighlighted: {
-      borderColor: colors.primary,
-      borderWidth: 2,
-      backgroundColor: theme.isDark ? colors.surface : colors.primaryMuted,
-    },
-    planCardTop: {
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      justifyContent: 'space-between',
-      gap: spacing.sm,
-    },
-    bestValueBadge: {
-      alignSelf: 'flex-start',
-      backgroundColor: colors.accent,
-      borderRadius: radii.sm,
-      paddingHorizontal: spacing.sm,
-      paddingVertical: 3,
-      marginBottom: spacing.xs,
-    },
-    bestValueText: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 10,
-      color: colors.accentDark,
-      letterSpacing: 0.4,
-      textTransform: 'uppercase',
-    },
-    planName: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 17,
-      color: colors.text,
-      letterSpacing: -0.2,
-    },
-    planPositioning: {
-      fontFamily: fonts.bodyMedium,
-      fontSize: 12,
-      color: colors.textMuted,
-      lineHeight: 17,
-      marginTop: 3,
-    },
-    priceRow: { flexDirection: 'row', alignItems: 'baseline', gap: 4, marginTop: 4 },
-    planPrice: { fontFamily: fonts.display, fontSize: 28, color: colors.primary, letterSpacing: -0.8 },
-    planSuffix: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted },
-    savingsCallout: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 12,
-      color: colors.success,
-      marginTop: 4,
-      letterSpacing: 0.2,
-    },
-    featureIntro: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 12,
-      color: colors.text,
-      marginBottom: -spacing.xs,
-    },
-    featureList: { gap: spacing.xs },
-    featureRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-    featureText: { flex: 1, fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, lineHeight: 18 },
-    ewalletRow: { flexDirection: 'row', gap: spacing.sm },
-    devBanner: {
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      gap: spacing.sm,
-      backgroundColor: colors.accentLight,
-      borderRadius: radii.lg,
-      padding: spacing.md,
-      marginBottom: spacing.md,
-      borderWidth: 1,
-      borderColor: 'rgba(245,166,35,0.25)',
-    },
-    devBannerText: {
-      flex: 1,
-      fontFamily: fonts.bodyMedium,
-      fontSize: 12,
-      color: colors.textMuted,
-      lineHeight: 17,
-    },
-    pendingCard: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.sm,
-      backgroundColor: colors.surface,
-      borderRadius: radii.lg,
-      padding: spacing.md,
-      marginBottom: spacing.md,
-      borderWidth: 1,
-      borderColor: colors.border,
-      ...shadows.card,
-    },
-    pendingTitle: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text },
-    pendingSub: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 },
-    footerBlock: { marginTop: spacing.md, gap: spacing.sm },
-    disclaimer: { fontFamily: fonts.bodyMedium, fontSize: 11, color: colors.textMuted, lineHeight: 16 },
-    activeText: { fontFamily: fonts.bodySemiBold, fontSize: 12, color: colors.success },
-    successBanner: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.sm,
-      backgroundColor: colors.successBg,
-      borderRadius: radii.lg,
-      padding: spacing.md,
-      marginBottom: spacing.md,
-      borderWidth: 1,
-      borderColor: colors.success,
-    },
-    successBannerText: { fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.text, flex: 1, lineHeight: 20 },
     topRow: {
       flexDirection: 'row',
+      alignItems: 'center',
       justifyContent: 'space-between',
-      alignItems: 'flex-start',
-      marginBottom: spacing.lg,
+      marginBottom: spacing.md,
     },
     plusBadge: {
       flexDirection: 'row',
@@ -1022,22 +536,15 @@ function createStyles(theme: AppTheme) {
       gap: 4,
       backgroundColor: colors.accent,
       paddingHorizontal: spacing.sm,
-      paddingVertical: 5,
-      borderRadius: radii.full,
+      paddingVertical: 4,
+      borderRadius: radii.sm,
     },
-    plusBadgeText: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 11,
-      color: colors.primaryDark,
-      letterSpacing: 0.5,
-    },
+    plusBadgeText: { fontFamily: fonts.bodyBold, fontSize: 10, color: colors.primaryDark, letterSpacing: 0.6 },
     closeBtn: {
-      width: 40,
-      height: 40,
-      borderRadius: 13,
-      backgroundColor: 'rgba(255,255,255,0.14)',
-      borderWidth: 1,
-      borderColor: 'rgba(255,255,255,0.12)',
+      width: 36,
+      height: 36,
+      borderRadius: radii.lg,
+      backgroundColor: 'rgba(255,255,255,0.12)',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -1047,108 +554,60 @@ function createStyles(theme: AppTheme) {
       color: '#fff',
       letterSpacing: -0.6,
       lineHeight: 34,
-      marginBottom: spacing.xs,
     },
     headlineSubDark: {
       fontFamily: fonts.bodyMedium,
       fontSize: 15,
-      color: 'rgba(255,255,255,0.88)',
+      color: 'rgba(255,255,255,0.82)',
       lineHeight: 22,
-      marginBottom: spacing.sm,
     },
-    trustLineDark: {
-      fontFamily: fonts.bodyMedium,
-      fontSize: 11,
-      color: 'rgba(255,255,255,0.55)',
-      lineHeight: 16,
-      marginBottom: spacing.lg,
-    },
-    featuresList: { gap: spacing.sm },
+    featuresList: { marginTop: spacing.lg, gap: spacing.sm },
     featureRowDark: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
     checkCircle: {
-      width: 24,
-      height: 24,
-      borderRadius: 12,
-      backgroundColor: colors.success,
+      width: 22,
+      height: 22,
+      borderRadius: 11,
+      backgroundColor: 'rgba(255,255,255,0.18)',
       alignItems: 'center',
       justifyContent: 'center',
     },
-    featureTextDark: {
-      flex: 1,
-      fontFamily: fonts.bodySemiBold,
-      fontSize: 14,
-      color: '#fff',
-      letterSpacing: -0.1,
-    },
+    featureTextDark: { fontFamily: fonts.bodyMedium, fontSize: 14, color: 'rgba(255,255,255,0.92)', flex: 1 },
     manageBlock: { marginTop: spacing.lg },
-    planRow: {
-      position: 'relative',
+    guestBannerDark: {
       flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.md,
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.md,
+      alignItems: 'flex-start',
+      gap: spacing.sm,
+      backgroundColor: 'rgba(255,255,255,0.08)',
       borderRadius: radii.lg,
-      borderWidth: 1.5,
-      borderColor: 'rgba(255,255,255,0.18)',
-      backgroundColor: 'rgba(255,255,255,0.04)',
+      padding: spacing.md,
+      marginTop: spacing.lg,
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.12)',
     },
-    planRowSelected: {
-      borderColor: colors.accent,
-      backgroundColor: 'rgba(255,201,40,0.10)',
+    guestBannerTitleDark: { fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' },
+    guestBannerSubDark: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 13,
+      color: 'rgba(255,255,255,0.72)',
+      lineHeight: 19,
+      marginTop: 4,
     },
-    planRadio: {
-      width: 24,
-      height: 24,
-      borderRadius: 12,
-      borderWidth: 2,
-      borderColor: 'rgba(255,255,255,0.4)',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    planRadioSelected: {
+    guestBannerBtn: {
       backgroundColor: colors.accent,
-      borderColor: colors.accent,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      borderRadius: radii.lg,
+      alignSelf: 'center',
     },
-    planRowName: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 16,
-      color: '#fff',
-      letterSpacing: -0.2,
+    guestBannerActions: { alignItems: 'center', gap: spacing.xs },
+    guestBannerBtnText: { fontFamily: fonts.bodyBold, fontSize: 12, color: colors.primaryDark },
+    guestBannerLink: {
+      paddingHorizontal: spacing.xs,
+      paddingVertical: spacing.xs,
+      alignSelf: 'center',
     },
-    planRowSub: {
-      fontFamily: fonts.bodySemiBold,
-      fontSize: 12,
-      color: 'rgba(255,255,255,0.66)',
-      marginTop: 2,
-    },
-    planRowPrice: {
-      fontFamily: fonts.display,
-      fontSize: 18,
-      color: '#fff',
-      letterSpacing: -0.4,
-    },
-    planRowPriceSuffix: {
-      fontFamily: fonts.bodySemiBold,
-      fontSize: 12,
-      color: 'rgba(255,255,255,0.6)',
-    },
-    bestValuePillDark: {
-      position: 'absolute',
-      top: -10,
-      right: spacing.md,
-      backgroundColor: colors.accent,
-      paddingHorizontal: spacing.sm,
-      paddingVertical: 3,
-      borderRadius: radii.sm,
-    },
-    bestValuePillDarkText: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 10,
-      color: colors.primaryDark,
-      letterSpacing: 0.5,
-    },
-    pendingCardDark: {
+    guestBannerLinkText: { fontFamily: fonts.bodyBold, fontSize: 12, color: 'rgba(255,255,255,0.78)' },
+    planRow: {
       flexDirection: 'row',
       alignItems: 'center',
       gap: spacing.sm,
@@ -1156,28 +615,75 @@ function createStyles(theme: AppTheme) {
       borderRadius: radii.lg,
       padding: spacing.md,
       borderWidth: 1,
-      borderColor: 'rgba(255,255,255,0.12)',
+      borderColor: 'rgba(255,255,255,0.1)',
     },
-    pendingBlock: {
-      marginTop: spacing.md,
+    planRowSelected: { borderColor: colors.accent, backgroundColor: 'rgba(255,201,40,0.12)' },
+    planRadio: {
+      width: 22,
+      height: 22,
+      borderRadius: 11,
+      borderWidth: 2,
+      borderColor: 'rgba(255,255,255,0.35)',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    planRadioSelected: { borderColor: colors.accent, backgroundColor: colors.accent },
+    planRowName: { fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' },
+    planRowSub: { fontFamily: fonts.bodyMedium, fontSize: 12, color: 'rgba(255,255,255,0.65)', marginTop: 2 },
+    planRowPrice: { fontFamily: fonts.display, fontSize: 17, color: '#fff' },
+    planRowPriceSuffix: { fontFamily: fonts.bodyMedium, fontSize: 11, color: 'rgba(255,255,255,0.55)' },
+    bestValuePillDark: {
+      position: 'absolute',
+      top: -8,
+      right: spacing.sm,
+      backgroundColor: colors.accent,
+      paddingHorizontal: 8,
+      paddingVertical: 2,
+      borderRadius: radii.sm,
+    },
+    bestValuePillDarkText: { fontFamily: fonts.bodyBold, fontSize: 9, color: colors.primaryDark, letterSpacing: 0.3 },
+    infoBannerDark: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: spacing.sm,
+      backgroundColor: 'rgba(255,255,255,0.06)',
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.1)',
+    },
+    infoBannerDarkText: {
+      flex: 1,
+      fontFamily: fonts.bodyMedium,
+      fontSize: 12,
+      color: 'rgba(255,255,255,0.78)',
+      lineHeight: 18,
+    },
+    errorBanner: {
+      backgroundColor: 'rgba(255,255,255,0.08)',
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      borderWidth: 1,
+      borderColor: 'rgba(255,201,40,0.25)',
       gap: spacing.sm,
     },
-    betaConfirmBtn: {
-      backgroundColor: 'rgba(255,201,40,0.18)',
-      borderRadius: radii.lg,
-      paddingVertical: spacing.sm,
+    errorBannerText: { fontFamily: fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 19 },
+    tryAgainBtn: {
+      alignSelf: 'flex-start',
+      backgroundColor: colors.accent,
       paddingHorizontal: spacing.md,
-      borderWidth: 1,
-      borderColor: 'rgba(255,201,40,0.35)',
+      paddingVertical: spacing.sm,
+      borderRadius: radii.lg,
+    },
+    tryAgainBtnText: { fontFamily: fonts.bodyBold, fontSize: 13, color: colors.primaryDark },
+    howToPayLink: {
+      flexDirection: 'row',
       alignItems: 'center',
+      gap: spacing.xs,
+      marginTop: spacing.md,
+      paddingVertical: spacing.sm,
     },
-    betaConfirmBtnText: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 13,
-      color: colors.accent,
-    },
-    pendingTitleDark: { fontFamily: fonts.bodyBold, fontSize: 14, color: '#fff' },
-    pendingSubDark: { fontFamily: fonts.bodyMedium, fontSize: 12, color: 'rgba(255,255,255,0.6)', marginTop: 2 },
+    howToPayLinkText: { flex: 1, fontFamily: fonts.bodySemiBold, fontSize: 13, color: colors.accent },
     devBannerDark: {
       flexDirection: 'row',
       alignItems: 'flex-start',
@@ -1196,76 +702,6 @@ function createStyles(theme: AppTheme) {
       color: 'rgba(255,255,255,0.78)',
       lineHeight: 17,
     },
-    betaBannerDark: {
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      gap: spacing.sm,
-      backgroundColor: 'rgba(11,95,255,0.18)',
-      borderRadius: radii.lg,
-      padding: spacing.md,
-      marginTop: spacing.md,
-      borderWidth: 1,
-      borderColor: 'rgba(255,255,255,0.14)',
-    },
-    betaBannerDarkText: {
-      flex: 1,
-      fontFamily: fonts.bodyMedium,
-      fontSize: 12,
-      color: 'rgba(255,255,255,0.85)',
-      lineHeight: 17,
-    },
-    guestBannerDark: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.sm,
-      backgroundColor: 'rgba(255,255,255,0.08)',
-      borderRadius: radii.lg,
-      padding: spacing.md,
-      marginTop: spacing.lg,
-      borderWidth: 1,
-      borderColor: 'rgba(255,255,255,0.12)',
-    },
-    guestBannerTitleDark: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 14,
-      color: '#fff',
-    },
-    guestBannerSubDark: {
-      fontFamily: fonts.bodyMedium,
-      fontSize: 12,
-      color: 'rgba(255,255,255,0.65)',
-      marginTop: 2,
-      lineHeight: 17,
-    },
-    guestBannerBtn: {
-      backgroundColor: colors.accent,
-      borderRadius: radii.md,
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm,
-    },
-    guestBannerBtnText: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 13,
-      color: colors.primaryDark,
-    },
-    successBannerDark: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.sm,
-      backgroundColor: 'rgba(34,197,94,0.16)',
-      borderRadius: radii.lg,
-      padding: spacing.md,
-      marginTop: spacing.md,
-      borderWidth: 1,
-      borderColor: 'rgba(34,197,94,0.3)',
-    },
-    successBannerDarkText: {
-      fontFamily: fonts.bodySemiBold,
-      fontSize: 13,
-      color: '#fff',
-      flex: 1,
-      lineHeight: 19,
-    },
     stickyCta: {
       position: 'absolute',
       left: 0,
@@ -1273,42 +709,25 @@ function createStyles(theme: AppTheme) {
       bottom: 0,
       paddingHorizontal: spacing.lg,
       paddingTop: spacing.md,
-      backgroundColor: 'rgba(8,36,92,0.92)',
+      backgroundColor: 'rgba(8,36,92,0.96)',
       borderTopWidth: 1,
       borderTopColor: 'rgba(255,255,255,0.08)',
     },
     bigCta: {
       backgroundColor: colors.accent,
-      borderRadius: radii.md,
-      paddingVertical: 16,
+      borderRadius: radii.xl,
+      paddingVertical: spacing.md,
       alignItems: 'center',
-      justifyContent: 'center',
     },
-    bigCtaText: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 16,
-      color: colors.primaryDark,
-      letterSpacing: -0.2,
-    },
-    ctaLinksRow: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      gap: spacing.lg,
-      marginTop: spacing.md,
-      flexWrap: 'wrap',
-    },
-    ctaLinkText: {
-      fontFamily: fonts.bodySemiBold,
-      fontSize: 13,
-      color: '#fff',
-    },
+    bigCtaText: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.primaryDark },
+    ctaLinkText: { fontFamily: fonts.bodySemiBold, fontSize: 13, color: 'rgba(255,255,255,0.65)' },
     footnoteDark: {
       fontFamily: fonts.bodyMedium,
-      fontSize: 11,
-      color: 'rgba(255,255,255,0.52)',
+      fontSize: 10,
+      color: 'rgba(255,255,255,0.45)',
+      lineHeight: 14,
+      marginTop: spacing.md,
       textAlign: 'center',
-      lineHeight: 16,
-      marginTop: spacing.sm,
     },
   });
 }

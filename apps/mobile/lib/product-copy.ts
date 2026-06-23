@@ -6,10 +6,11 @@ export const BRAND_LINE = 'Mag-review tayo. Pasa tayo.';
 
 export const GUEST_NEXT_STEPS = {
   title: 'Simulan dito — libre, walang signup',
-  subtitle: '20 tanong bawat araw sa guest mode. I-save ang progress kapag handa ka nang mag-sign up.',
+  subtitle: 'Subukan muna ang ReviewNatin. Local stats are saved on this device; account is optional until you want cloud sync.',
   ctaPractice: 'Mag-practice ngayon',
   ctaReview: 'Tingnan ang subjects',
-  ctaSignup: 'Gumawa ng account (optional)',
+  ctaSignup: 'Save progress when ready',
+  trustPill: 'Guest mode: no email needed',
 } as const;
 
 export const GUEST_SAVE_PROGRESS = {
@@ -19,11 +20,19 @@ export const GUEST_SAVE_PROGRESS = {
   ctaSignup: 'Mag-sign up — libre',
 } as const;
 
+export const GUEST_PROGRESS_NUDGE = {
+  title: 'Nice work — saved locally muna',
+  subtitle:
+    'Naka-save ang guest score sa device na ito. Gumawa ng free account kapag ready ka para hindi mawala kapag nagpalit ng phone.',
+  ctaSignup: 'Save to free account',
+  ctaContinue: 'Continue as guest',
+} as const;
+
 export const DAILY_LIMIT = {
   title: 'Abot na ang libreng tanong ngayon',
   body: (used = FREE_DAILY_QUESTIONS_COPY) =>
     `Nagamit mo na ang ${used}/${FREE_DAILY_QUESTIONS_COPY} libreng tanong ngayong araw. Balik bukas o i-unlock ang unlimited practice sa Plus.`,
-  ctaUpgrade: 'Tingnan ang Plus plans',
+  ctaUpgrade: 'View Premium Plans',
   ctaTomorrow: 'Balik bukas',
   valueBullets: [
     'Unlimited practice at full mock exams',

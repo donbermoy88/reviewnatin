@@ -22,6 +22,7 @@ import { completePasaPathTask } from '../../lib/api/pasapath';
 import { submitBarkadaChallengeResult } from '../../lib/api/barkada';
 import { MOCK_PASS_THRESHOLD } from '../../lib/api/mock-history';
 import { fetchAiExplanation } from '../../lib/api/ai-explain';
+import { PREMIUM_LOCK_CTA } from '../../lib/subscription/paywall-copy';
 import { recomputeReadiness } from '../../lib/api/readiness';
 import { fetchUsageLimits } from '../../lib/api/iap';
 import { canUseTts, speakText, stopSpeaking } from '../../lib/tts/speak';
@@ -32,6 +33,7 @@ import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
+import { GUEST_PROGRESS_NUDGE } from '../../lib/product-copy';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
@@ -200,7 +202,10 @@ export default function PracticeResultScreen() {
       const result = await fetchAiExplanation(questionId, { examSlug });
       if (!result.ok) {
         if (result.error === 'daily_limit_reached') {
-          Alert.alert('Abot na ang daily limit', 'Free tier: 5 AI explanations kada araw. Mag-upgrade para unlimited.');
+          Alert.alert('Abot na ang daily limit', 'Free tier: 5 AI explanations kada araw.', [
+            { text: 'Not now', style: 'cancel' },
+            { text: PREMIUM_LOCK_CTA, onPress: () => router.push('/subscribe') },
+          ]);
         } else {
           Alert.alert('Hindi available', 'Pakisubukan ulit mamaya.');
         }
@@ -540,6 +545,87 @@ export default function PracticeResultScreen() {
         <View style={styles.actions}>
           {!isPremium(examTypeId) && mode !== 'mock' && mode !== 'diagnostic' && mode !== 'board' ? (
             <AdBanner onPress={() => router.push('/subscribe')} />
+          ) : null}
+          {!user ? (
+            <View
+              style={{
+                borderRadius: radii.lg,
+                backgroundColor: colors.surface,
+                borderWidth: 1,
+                borderColor: colors.border,
+                padding: spacing.md,
+                marginBottom: spacing.md,
+                gap: spacing.sm,
+              }}
+            >
+              <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: spacing.sm }}>
+                <View
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: 18,
+                    backgroundColor: colors.primaryMuted,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Ionicons name="shield-checkmark-outline" size={18} color={colors.primary} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text }}>
+                    {GUEST_PROGRESS_NUDGE.title}
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: fonts.bodyMedium,
+                      fontSize: 13,
+                      color: colors.textMuted,
+                      lineHeight: 18,
+                      marginTop: 3,
+                    }}
+                  >
+                    {GUEST_PROGRESS_NUDGE.subtitle}
+                  </Text>
+                </View>
+              </View>
+              <View style={{ flexDirection: 'row', gap: spacing.sm }}>
+                <Pressable
+                  onPress={() => router.push('/(auth)/signup')}
+                  style={({ pressed }) => ({
+                    flex: 1,
+                    borderRadius: radii.md,
+                    backgroundColor: colors.primary,
+                    paddingVertical: spacing.sm,
+                    alignItems: 'center',
+                    opacity: pressed ? 0.9 : 1,
+                  })}
+                  accessibilityRole="button"
+                  accessibilityLabel={GUEST_PROGRESS_NUDGE.ctaSignup}
+                >
+                  <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: '#fff' }}>
+                    {GUEST_PROGRESS_NUDGE.ctaSignup}
+                  </Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => router.replace('/(tabs)')}
+                  style={({ pressed }) => ({
+                    flex: 1,
+                    borderRadius: radii.md,
+                    borderWidth: 1,
+                    borderColor: colors.border,
+                    paddingVertical: spacing.sm,
+                    alignItems: 'center',
+                    opacity: pressed ? 0.8 : 1,
+                  })}
+                  accessibilityRole="button"
+                  accessibilityLabel={GUEST_PROGRESS_NUDGE.ctaContinue}
+                >
+                  <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.textMuted }}>
+                    {GUEST_PROGRESS_NUDGE.ctaContinue}
+                  </Text>
+                </Pressable>
+              </View>
+            </View>
           ) : null}
           <PrimaryButton
             label={sharing ? 'Hinahanda…' : 'I-share ang score'}
