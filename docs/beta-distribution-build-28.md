@@ -1,4 +1,4 @@
-# Beta APK Distribution — Build 28 (current)
+# Beta Distribution — Build 28 (prior)
 
 **Date:** 2026-06-23  
 **Audience:** 12 agent QA personas (G1–G4 · F1–F4 · P1–P4) — see [beta-testers.md](./beta-testers.md)

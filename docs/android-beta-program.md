@@ -172,7 +172,7 @@ npm run beta:security:verify    # hosted Supabase security (needs .env.supabase)
 ```
 
 Checklist and acceptance criteria: [android-beta-program-phase-1.md](./android-beta-program-phase-1.md).  
-Current ship candidate: [beta-distribution-build-28.md](./beta-distribution-build-28.md).
+Current ship candidate: [beta-distribution-build-36.md](./beta-distribution-build-36.md).
 
 ### Phase 2 verification
 
@@ -232,8 +232,8 @@ npm run beta:agents
 # Cloud + release notes only (no emulator)
 npm run beta:agents:cloud-only
 
-# Reuse build 28 APK
-npm run beta:agents -- --apk dist/beta/reviewnatin-beta-v28.apk --skip-cloud
+# Reuse build 36 APK
+npm run beta:agents -- --apk dist/beta/reviewnatin-beta-v36.apk --skip-cloud
 ```
 
 Outputs:

@@ -4,28 +4,28 @@
 
 These are **automated QA personas** (emulator + Maestro + adb audit agents) representing the 12 daily beta testers. Each persona maps to a cohort smoke, exam focus, and audit owner for release gates.
 
-| # | Cohort | Persona | Device profile | Android | Exam focus | Build v12 | Last audit | Notes |
+| # | Cohort | Persona | Device profile | Android | Exam focus | Build v36 | Last audit | Notes |
 |---|--------|---------|----------------|---------|------------|-----------|------------|-------|
-| 1 | **Guest** | **Mara Santos** (G1) | Pixel 8 emulator | API 35 | CSE Professional | ✓ v28 | 2026-06-23 | P0 guest card PASS |
-| 2 | **Guest** | **Diego Reyes** (G2) | Samsung A54 profile | API 35 | LET Elementary | ✓ v28 | 2026-06-23 | P0 “libre, walang signup” |
-| 3 | **Guest** | **Anica Cruz** (G3) | Redmi Note 13 profile | API 35 | PNLE | ✓ v28 | 2026-06-23 | 20 Q Tagalog panel — manual |
-| 4 | **Guest** | **Paolo Mendoza** (G4) | Vivo Y36 profile | API 35 | CSE Subprofessional | ✓ v28 | 2026-06-23 | Settings hint + feedback path |
-| 5 | **Free** | **Jasmine Lo** (F1) | Pixel 7a profile | API 35 | CSE Professional | ✓ v28 | 2026-06-23 | OTP UI; verify deeplink Maestro ✗ |
-| 6 | **Free** | **Kyle Tan** (F2) | Samsung S23 profile | API 35 | LET Secondary | ✓ v28 | 2026-06-23 | OAuth skip OTP — not exercised |
-| 7 | **Free** | **Rica Villanueva** (F3) | Oppo A98 profile | API 35 | PNLE | ✓ v28 | 2026-06-23 | P0 limit copy at 20 Q |
-| 8 | **Free** | **Lea Fernandez** (F4) | Galaxy A55 profile | API 35 | LET Elementary | ✓ v28 | 2026-06-23 | Mock preview — manual |
-| 9 | **Premium** | **Andrea Bautista** (P1) | Pixel 8 Pro profile | API 35 | CSE Professional | ✓ v28 | 2026-06-23 | P0 Plus headline + login gate |
-| 10 | **Premium** | **Marco Silva** (P2) | Tab S9 profile | API 35 | CSE Subprofessional | ✓ v28 | 2026-06-23 | Web checkout — manual |
-| 11 | **Premium** | **Nico Almario** (P3) | OnePlus Nord profile | API 35 | Mixed exams | ✓ v28 | 2026-06-23 | Plus entitlement — manual |
-| 12 | **Premium** | **Patricia Gomez** (P4) | Realme 11 profile | API 35 | LET Elementary | ✓ v28 | 2026-06-23 | Offline + AI — manual |
+| 1 | **Guest** | **Mara Santos** (G1) | Pixel 8 emulator | API 35 | CSE Professional | ✓ v36 | 2026-06-23 | Maestro onboarding PASS |
+| 2 | **Guest** | **Diego Reyes** (G2) | Samsung A54 profile | API 35 | LET Elementary | ✓ v36 | 2026-06-23 | 20 Q limit — manual |
+| 3 | **Guest** | **Anica Cruz** (G3) | Redmi Note 13 profile | API 35 | PNLE | ✓ v36 | 2026-06-23 | Ads visibility — manual |
+| 4 | **Guest** | **Paolo Mendoza** (G4) | Vivo Y36 profile | API 35 | CSE Subprofessional | ✓ v36 | 2026-06-23 | Maestro settings feedback PASS |
+| 5 | **Free** | **Jasmine Lo** (F1) | Pixel 7a profile | API 35 | CSE Professional | ✓ v36 | 2026-06-23 | Maestro signup PASS; cold verify-email deeplink warn |
+| 6 | **Free** | **Kyle Tan** (F2) | Samsung S23 profile | API 35 | LET Secondary | ✓ v36 | 2026-06-23 | Maestro keyboard PASS; OAuth — manual |
+| 7 | **Free** | **Rica Villanueva** (F3) | Oppo A98 profile | API 35 | PNLE | ✓ v36 | 2026-06-23 | 20 Q limit — manual |
+| 8 | **Free** | **Lea Fernandez** (F4) | Galaxy A55 profile | API 35 | LET Elementary | ✓ v36 | 2026-06-23 | Mock preview — manual |
+| 9 | **Premium** | **Andrea Bautista** (P1) | Pixel 8 Pro profile | API 35 | CSE Professional | ✓ v36 | 2026-06-23 | Maestro subscribe hint PASS |
+| 10 | **Premium** | **Marco Silva** (P2) | Tab S9 profile | API 35 | CSE Subprofessional | ✓ v36 | 2026-06-23 | **Web checkout — manual (physical device)** |
+| 11 | **Premium** | **Nico Almario** (P3) | OnePlus Nord profile | API 35 | Mixed exams | ✓ v36 | 2026-06-23 | Plus entitlement — manual |
+| 12 | **Premium** | **Patricia Gomez** (P4) | Realme 11 profile | API 35 | LET Elementary | ✓ v36 | 2026-06-23 | Offline + AI — manual |
 
-## Distribution — build 28 (current)
+## Distribution — build 36 (current)
 
-**Automated drop for AI subagents:** `npm run beta:agents` (or `npm run beta:agents -- --apk dist/beta/reviewnatin-beta-v28.apk`).
+**APK:** [beta-distribution-build-36.md](./beta-distribution-build-36.md)  
+**Automated drop:** `npm run beta:agents -- --apk dist/beta/reviewnatin-beta-v36.apk --skip-cloud`  
+**Taglish post:** `dist/beta/release-notes-taglish-build-36.txt`
 
-See [beta-distribution-build-28.md](./beta-distribution-build-28.md) for APK path, SHA-256, P0 UX checklist, and per-persona results. Latest agent run: `dist/beta/last-ai-testers-report.json`.
-
-**Prior builds:** [build 12](./beta-distribution-build-12.md) · [build 10](./beta-distribution-build-10.md)
+**Prior builds:** [build 28](./beta-distribution-build-28.md) · [build 12](./beta-distribution-build-12.md)
 
 ## Cohort setup instructions
 
@@ -40,15 +40,16 @@ See [beta-distribution-build-28.md](./beta-distribution-build-28.md) for APK pat
 
 ### Premium (P1–P4)
 - Register → OTP → onboarding
-- Subscribe via **web checkout** on Subscribe screen (APK beta)
+- Subscribe via **web checkout** on Subscribe screen (APK beta) — **use physical device**
 - Confirm ads hidden, unlimited practice, full mocks, AI tutor, offline pack
 
 ## Onboarding checklist (all 12 personas)
 
-- [x] APK v28 distributed (`dist/beta/reviewnatin-beta-v28.apk`) — **includes P0 product UX audit**
-- [x] Verify-email deeplink hardening (F1 still needs Maestro openLink pass)
-- [x] Maestro: P0 copy assertions on guest card + Plus headline
-- [x] SMTP configured for end-to-end OTP email (`npm run supabase:resend:setup` — verified 2026-06-22)
+- [x] APK v36 distributed (`dist/beta/reviewnatin-beta-v36.apk`)
+- [x] Maestro 5/5 flows PASS on build 36
+- [x] SMTP configured for OTP email (Resend verified)
+- [x] `beta:security:verify` green on prod
+- [ ] Release notes posted to tester group — **manual**
 - [ ] Premium web checkout live test on physical device
 
 ## Feedback channels

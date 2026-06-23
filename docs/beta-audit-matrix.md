@@ -7,16 +7,16 @@ Screen × cohort expected behavior. Update **Status** after each beta build (`�
 | Flow / Screen | G (Guest) | F (Free) | P (Premium) | Status |
 |---------------|-----------|----------|-------------|--------|
 | **Auth — skip login** | Can tap "Magpatuloy bilang guest" on login | N/A (signed in) | N/A | ✓ v10 Maestro |
-| **Auth — email signup + OTP** | N/A | OTP required before app access | Same as Free | ✓ v10 keyboard · verify deeplink fix in code · SMTP pending |
+| **Auth — email signup + OTP** | N/A | OTP required before app access | Same as Free | ✓ v36 Maestro free-signup · cold verify-email deeplink **warn** |
 | **Auth — OAuth** | N/A | Google/Apple → skip OTP | Same | — |
-| **Onboarding** | Required once (local); cloud sync on signup later | Required; syncs to account | Same | ✓ v10 Maestro |
-| **Dashboard** | Guest stats fallback; signup CTAs | Full dashboard; ads may show | Full; no ads | ✓ v10 guest |
+| **Onboarding** | Required once (local); cloud sync on signup later | Required; syncs to account | Same | ✓ v36 Maestro |
+| **Dashboard** | Guest stats fallback; signup CTAs | Full dashboard; ads may show | Full; no ads | ✓ v36 guest Maestro |
 | **Daily practice (20 Q limit)** | 20 Q/day then paywall | 20 Q/day then paywall | Unlimited | — |
 | **Mock exam preview** | Preview / limited questions | Preview / limited | Full mock access | — |
 | **AI tutor** | Signup prompt or limited | Daily limit (free tier) | Unlimited | — |
 | **Ads (banner/interstitial)** | Shown on Home/Study/Result | Shown | Hidden | — |
 | **Offline pack download** | Premium gate / signup prompt | Premium gate → subscribe | Download works | — |
-| **Subscribe / paywall** | Prompt to create account | Web checkout (APK beta) | Manage subscription | ✓ v10 Maestro · P2–P4 checkout manual |
+| **Subscribe / paywall** | Prompt to create account | Web checkout (APK beta) | Manage subscription | ✓ v36 Maestro premium-subscribe · P2–P4 checkout **manual** |
 | **Restore purchases** | Hidden (no account) | N/A on APK (web checkout primary) | N/A on APK | — |
 | **Leaderboard** | May show; scores local only | Full with account | Full | — |
 | **Stats / Profile** | Guest progress local | Cloud sync | Cloud sync | — |
@@ -24,10 +24,10 @@ Screen × cohort expected behavior. Update **Status** after each beta build (`�
 | **Flashcards** | Available if content exists | Full (within limits) | Full | — |
 | **Mistake Bank** | Local / limited without account | Cloud sync | Cloud sync | — |
 | **Bookmarks** | Signup prompt for sync | Cloud sync | Cloud sync | — |
-| **Settings — beta feedback** | Works (no user id in email) | Works with user id | Works | ✓ v10 code |
+| **Settings — beta feedback** | Works (no user id in email) | Works with user id | Works | ✓ v36 Maestro |
 | **Settings — delete account** | Hidden / N/A | Available | Available | — |
 
-**Current build:** v28 (2026-06-23) — P0 product UX audit shipped; see [beta-distribution-build-28.md](./beta-distribution-build-28.md), [product-experience-audit-2026-06-22.md](./product-experience-audit-2026-06-22.md).
+**Current build:** v36 (2026-06-23) — Phase 5 + audit remediation; see [beta-distribution-build-36.md](./beta-distribution-build-36.md), [android-audit-remediation-2026-06.md](./android-audit-remediation-2026-06.md).
 
 ## Release gates
 
