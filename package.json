@@ -38,7 +38,6 @@
     "beta:phase3:verify": "node scripts/beta-phase3-verify.mjs",
     "beta:phase4:verify": "node scripts/beta-phase4-verify.mjs",
     "beta:phase5:verify": "node scripts/beta-phase5-verify.mjs",
-    "beta:phase5:verify": "node scripts/beta-phase5-verify.mjs",
     "posthog:setup": "node scripts/setup-posthog-interactive.mjs",
     "beta:release-notes": "node scripts/beta-release-notes.mjs",
     "beta:agents": "node scripts/beta-ai-testers.mjs",

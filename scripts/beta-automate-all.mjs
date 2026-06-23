@@ -70,6 +70,28 @@ function sha256File(path) {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
 
+/** EAS CLI mixes spinner lines with JSON arrays/objects on stdout. */
+function parseEasJsonStdout(stdout) {
+  const trimmed = stdout.trim();
+  try {
+    return JSON.parse(trimmed);
+  } catch {
+    /* fall through */
+  }
+  const startArray = trimmed.indexOf('[');
+  const startObject = trimmed.indexOf('{');
+  const start =
+    startArray >= 0 && (startObject < 0 || startArray < startObject) ? startArray : startObject;
+  if (start < 0) throw new Error('No JSON in EAS CLI output');
+  return JSON.parse(trimmed.slice(start));
+}
+
+function pickEasBuildRecord(parsed) {
+  if (Array.isArray(parsed)) return parsed[0] ?? parsed.at(-1);
+  if (parsed?.buildDetails) return parsed.buildDetails;
+  return parsed;
+}
+
 function ensureMaestro() {
   return ensureMaestroCli();
 }
@@ -113,7 +135,7 @@ async function pollEasBuild(buildId, maxMin = 45) {
   const start = Date.now();
   while (Date.now() - start < maxMin * 60 * 1000) {
     const json = runCapture(`cd apps/mobile && npx eas-cli build:view ${buildId} --json`);
-    const build = JSON.parse(json);
+    const build = pickEasBuildRecord(parseEasJsonStdout(json));
     console.log(`  Build ${buildId}: ${build.status}`);
     if (build.status === 'FINISHED') {
       return build.artifacts?.applicationArchiveUrl ?? build.artifacts?.buildUrl ?? null;
@@ -205,8 +227,7 @@ async function main() {
         logStep('eas-build', 'ok', latest);
       } else {
         const out = runCapture(buildCmd, { env: buildEnv });
-        const buildLine = out.split('\n').filter((l) => l.trim().startsWith('{')).pop() ?? '{}';
-        const last = JSON.parse(buildLine);
+        const last = pickEasBuildRecord(parseEasJsonStdout(out));
         buildId = last.id ?? last.buildDetails?.id;
         if (!buildId) throw new Error('No build id from EAS');
         report.easBuildId = buildId;
@@ -244,11 +265,12 @@ async function main() {
         const listJson = runCapture(
           'cd apps/mobile && npx eas-cli build:list --platform android --limit 1 --json --non-interactive',
         );
-        const builds = JSON.parse(listJson);
+        const builds = parseEasJsonStdout(listJson);
         const latest = Array.isArray(builds) ? builds[0] : builds;
         const apkUrl = latest?.artifacts?.applicationArchiveUrl;
         if (apkUrl && latest.status === 'FINISHED') {
-          versionCode = latest.appVersionCode ?? versionCode;
+          versionCode = Number(latest.appBuildVersion ?? versionCode);
+          report.easBuildId = latest.id;
           apkPath = join(DIST, `reviewnatin-beta-v${versionCode}.apk`);
           run(`curl -fsSL -o "${apkPath}" "${apkUrl}"`);
           report.sha256 = sha256File(apkPath);
