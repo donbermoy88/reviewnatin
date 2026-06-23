@@ -14,7 +14,7 @@ import { DEFAULT_EXAM_SLUG, DISCLAIMERS } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { useIap } from '../../providers/iap-provider';
-import { createWebCheckoutSession, fetchWebCheckoutStatus, checkoutAttributionOptions } from '../../lib/api/web-checkout';
+import { createWebCheckoutSession, fetchWebCheckoutStatus, checkoutAttributionOptions, submitWebCheckout } from '../../lib/api/web-checkout';
 import { captureAttributionFromQuery, loadCheckoutAttribution } from '../../lib/checkout-attribution';
 import { toUserFacingError } from '../../lib/errors/user-facing';
 import { PREMIUM_HEADLINE } from '../../lib/product-copy';
@@ -40,6 +40,7 @@ import {
 
 const isDevBuild = __DEV__;
 const webCheckoutPrimary = preferWebCheckout();
+const checkoutDemoEnabled = process.env.EXPO_PUBLIC_CHECKOUT_DEMO === 'true';
 
 const PLUS_FEATURES = [
   'All exams unlocked (CSE, LET, PNLE)',
@@ -228,6 +229,29 @@ export default function SubscribeScreen() {
         setPaymentConfirmed(true);
         trackEvent('subscription_active', { method: 'web_checkout', ref });
       }
+    } finally {
+      setCheckingPayment(false);
+    }
+  }, [pendingRef, refreshEntitlements]);
+
+  const confirmBetaCheckout = useCallback(async () => {
+    const ref = pendingRef ?? (await getPendingCheckoutRef());
+    if (!ref) return;
+    setCheckingPayment(true);
+    try {
+      const result = await submitWebCheckout(ref, true);
+      if (result.ok && result.status === 'paid') {
+        await clearPendingCheckoutRef();
+        setPendingRef(null);
+        await refreshEntitlements();
+        setPaymentConfirmed(true);
+        trackEvent('subscription_active', { method: 'web_checkout_demo', ref });
+      } else if (result.error) {
+        setSheet({ kind: 'checkout_error', message: toUserFacingError(result.error, 'checkout') });
+      }
+    } catch (e) {
+      captureAppException(e, { area: 'checkout', action: 'confirm_beta_checkout' }, { ref });
+      setSheet({ kind: 'checkout_error', message: toUserFacingError(e, 'checkout') });
     } finally {
       setCheckingPayment(false);
     }
@@ -541,21 +565,36 @@ export default function SubscribeScreen() {
         )}
 
         {pendingRef && !hasAccess ? (
-          <Pressable
-            style={styles.pendingCardDark}
-            onPress={() => void pollCheckoutStatus()}
-            accessibilityRole="button"
-            accessibilityLabel="Refresh checkout status"
-          >
-            <Ionicons name="time-outline" size={18} color={colors.accent} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.pendingTitleDark}>Payment pending</Text>
-              <Text style={styles.pendingSubDark}>
-                {checkingPayment ? 'Checking…' : `Ref ${pendingRef} · Tap to refresh`}
-              </Text>
-            </View>
-            <Ionicons name="refresh" size={16} color="rgba(255,255,255,0.6)" />
-          </Pressable>
+          <View style={styles.pendingBlock}>
+            <Pressable
+              style={styles.pendingCardDark}
+              onPress={() => void pollCheckoutStatus()}
+              accessibilityRole="button"
+              accessibilityLabel="Refresh checkout status"
+            >
+              <Ionicons name="time-outline" size={18} color={colors.accent} />
+              <View style={{ flex: 1 }}>
+                <Text style={styles.pendingTitleDark}>Payment pending</Text>
+                <Text style={styles.pendingSubDark}>
+                  {checkingPayment ? 'Checking…' : `Ref ${pendingRef} · Tap to refresh`}
+                </Text>
+              </View>
+              <Ionicons name="refresh" size={16} color="rgba(255,255,255,0.6)" />
+            </Pressable>
+            {checkoutDemoEnabled ? (
+              <Pressable
+                style={styles.betaConfirmBtn}
+                onPress={() => void confirmBetaCheckout()}
+                disabled={checkingPayment}
+                accessibilityRole="button"
+                accessibilityLabel="Confirm beta test payment"
+              >
+                <Text style={styles.betaConfirmBtnText}>
+                  {checkingPayment ? 'Confirming…' : 'Beta: Kumpirmahin ang test payment'}
+                </Text>
+              </Pressable>
+            ) : null}
+          </View>
         ) : null}
 
         {webCheckoutPrimary && !hasAccess && user ? (
@@ -1116,9 +1155,26 @@ function createStyles(theme: AppTheme) {
       backgroundColor: 'rgba(255,255,255,0.08)',
       borderRadius: radii.lg,
       padding: spacing.md,
-      marginTop: spacing.md,
       borderWidth: 1,
       borderColor: 'rgba(255,255,255,0.12)',
+    },
+    pendingBlock: {
+      marginTop: spacing.md,
+      gap: spacing.sm,
+    },
+    betaConfirmBtn: {
+      backgroundColor: 'rgba(255,201,40,0.18)',
+      borderRadius: radii.lg,
+      paddingVertical: spacing.sm,
+      paddingHorizontal: spacing.md,
+      borderWidth: 1,
+      borderColor: 'rgba(255,201,40,0.35)',
+      alignItems: 'center',
+    },
+    betaConfirmBtnText: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 13,
+      color: colors.accent,
     },
     pendingTitleDark: { fontFamily: fonts.bodyBold, fontSize: 14, color: '#fff' },
     pendingSubDark: { fontFamily: fonts.bodyMedium, fontSize: 12, color: 'rgba(255,255,255,0.6)', marginTop: 2 },

@@ -16,6 +16,18 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: cohort
+    attributes:
+      label: Tester cohort
+      options:
+        - Guest (G1–G4)
+        - Free (F1–F4)
+        - Premium (P1–P4)
+        - Unknown / not assigned
+    validations:
+      required: false
+
   - type: input
     id: screen
     attributes:

@@ -115,11 +115,17 @@ Also saved: `dist/beta/release-notes-taglish-build-36.txt`
 
 ### Premium cohort — web checkout (P1–P4, physical device)
 
-1. Install build 36 on a **real Android phone** (not emulator).
-2. Register → OTP → onboarding → **Subscribe**.
-3. Tap web checkout → complete payment (GCash/Maya test or prod as configured).
-4. Return to app → confirm **Plus active**, **no ads**, unlimited practice.
-5. Report pass/fail in GitHub beta-feedback with `cohort:premium`.
+**Full runbook:** [premium-web-checkout-test-runbook.md](./premium-web-checkout-test-runbook.md)
+
+**Path A (no money, build 36):** Phone → checkout → confirm submitted → laptop `npm run beta:premium:fulfill -- RN-…` → phone refresh → verify Plus.
+
+**Path B (live):** Real GCash/Maya payment + admin fulfill or wait for verification.
+
+```bash
+npm run beta:premium:verify
+npm run beta:premium:fulfill -- --list
+npm run checkout:demo:on   # optional instant demo when marketing/app demo flags set
+```
 
 ### PostHog live smoke (optional, 10 min)
 

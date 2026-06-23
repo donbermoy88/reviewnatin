@@ -106,6 +106,9 @@ export default function CheckoutPage() {
   const providerLabel =
     status?.provider === 'maya' ? 'Maya' : status?.provider === 'gcash' ? 'GCash' : 'E-wallet';
 
+  const checkoutDemoEnabled =
+    process.env.NEXT_PUBLIC_CHECKOUT_DEMO === 'true' || process.env.NODE_ENV !== 'production';
+
   return (
     <main className="mx-auto flex min-h-screen max-w-lg flex-col px-6 py-12">
       <p className="text-sm font-semibold uppercase tracking-wide text-[var(--rn-blue)]">ReviewNatin Checkout</p>
@@ -151,7 +154,7 @@ export default function CheckoutPage() {
             <button
               type="button"
               disabled={submitting || status.status === 'expired'}
-              onClick={() => void submitPayment(process.env.NODE_ENV !== 'production')}
+              onClick={() => void submitPayment(checkoutDemoEnabled)}
               className="w-full rounded-xl bg-[var(--rn-blue)] px-4 py-3 font-semibold text-white disabled:opacity-50"
             >
               {submitting ? 'Submitting…' : 'I sent payment — confirm'}
