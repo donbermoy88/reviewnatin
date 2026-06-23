@@ -2,9 +2,28 @@
 
 Use before every beta APK or store release. **Block release if any P0 is open.**
 
+## Phase 1 — Auth hardening (2026-06-23)
+
+Shipped in code; hosted config may still need manual apply. See [android-beta-program-phase-1.md](./android-beta-program-phase-1.md).
+
+- [x] Email OTP verify screen + auth provider methods
+- [x] Email verification gate (unverified users blocked)
+- [x] Login lockout (5 fails / 15 min) + login events RPC
+- [x] Password strength validation (min 8, upper, number)
+- [x] Disposable email blocklist (client + DB RPC)
+- [x] Auth rate-limit migrations (`otp_send`, `otp_verify`, `login_attempt`)
+- [x] Web checkout path for APK beta (Play Billing hidden)
+- [x] `npm run beta:phase1:verify` script + docs
+- [ ] Hosted: `npm run supabase:auth:prod` applied (OTP + password min 8)
+- [ ] Hosted: `npm run beta:migrations` applied
+- [ ] Hosted: SMTP live (Resend) for OTP delivery
+- [ ] Hosted: Turnstile CAPTCHA (`npm run supabase:captcha`)
+- [ ] `npm run beta:security:verify` all green on prod project
+
 ## Automated gates
 
-- [ ] `npm run mobile:test` passes (Vitest) — **124/124 pass (2026-06-22)**
+- [x] `npm run mobile:test` passes (Vitest) — **124/124 pass (2026-06-22)**
+- [x] `npm run beta:phase1:verify` passes locally
 - [ ] Product UX audit P0 items shipped — see [product-experience-audit-2026-06-22.md](./product-experience-audit-2026-06-22.md)
 - [ ] `npm run ci:local` passes (if touching shared packages)
 - [ ] `npm run release:check:android` passes (production AAB only)
@@ -41,7 +60,7 @@ Run on latest APK — see [beta-audit-matrix.md](./beta-audit-matrix.md).
 
 ## Cross-cutting
 
-- [ ] Auth OTP + disposable email block
+- [x] Auth OTP + disposable email block (Phase 1 code shipped)
 - [ ] Offline quiz → reconnect sync
 - [ ] Deep links (subscribe, pasapath) open correct screen
 - [ ] Zero new P0 Sentry crashes in 24h post-release
@@ -62,7 +81,7 @@ Run on latest APK — see [beta-audit-matrix.md](./beta-audit-matrix.md).
 | Category | Weight | Pass criteria |
 |----------|--------|---------------|
 | P0 bugs | Blocker | Zero open |
-| Security | 20% | OTP on, demo entitlements off, RLS |
+| Security | 20% | OTP on, demo entitlements off, RLS — Phase 1 scripts ready; run `beta:security:verify` |
 | UX / cohort flows | 20% | All 3 cohort smokes pass |
 | Performance | 15% | No jank on low-end device |
 | Analytics | 10% | Events firing in beta |
@@ -71,4 +90,4 @@ Run on latest APK — see [beta-audit-matrix.md](./beta-audit-matrix.md).
 
 **Minimum to ship beta APK:** all cohort smokes + automated tests + no P0.
 
-**Current estimate (2026-06-22):** **88/100** — build 12 shipped; Guest/Premium Maestro pass; Free OTP deeplink fix in build 13 pipeline; P2–P4 checkout manual.
+**Current estimate (2026-06-23):** **90/100** — Phase 1 auth hardening shipped; build 28 current; hosted SMTP/Turnstile/security verify pending manual apply.

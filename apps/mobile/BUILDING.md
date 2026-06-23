@@ -1,5 +1,11 @@
 # Building ReviewNatin (iOS / Android)
 
+**Android beta program:** Phase 0/1 checklists and ship gates live in
+[`docs/android-beta-program-phase-0.md`](../../docs/android-beta-program-phase-0.md) and
+[`docs/android-beta-program-phase-1.md`](../../docs/android-beta-program-phase-1.md).
+From this app: `npm run beta:phase0:verify` · `npm run beta:phase1:verify` ·
+`npm run beta:release-notes -- --build N --apk dist/beta/...`.
+
 ## Native projects are NOT committed (Expo Continuous Native Generation)
 
 `ios/` and `android/` are gitignored (`.gitignore`). They are **generated**, not
@@ -117,15 +123,30 @@ Before each beta release:
 2. Tag: `git tag beta-v1.0.X`.
 3. Record SHA-256 from the EAS artifact in release notes.
 
-**Preview profile env** (EAS dashboard `preview` env block):
+**Preview profile env** (EAS dashboard → project → Environment variables →
+`preview` profile, or local `.env` for dev client builds):
 
-| Variable | Required |
-|----------|----------|
-| `EXPO_PUBLIC_SUPABASE_URL` | Yes |
-| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Yes |
-| `EXPO_PUBLIC_SENTRY_DSN` | Recommended |
-| `EXPO_PUBLIC_ADMOB_ANDROID_APP_ID` | Optional (test IDs OK) |
+| Variable | Required | Notes |
+|----------|----------|-------|
+| `EXPO_PUBLIC_SUPABASE_URL` | Yes | Backend API |
+| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Yes | Public anon key |
+| `EXPO_PUBLIC_SENTRY_DSN` | Recommended | Crash reporting (optional — preview does not throw like production) |
+| `EXPO_PUBLIC_ADMOB_ANDROID_APP_ID` | Optional | Ads; Google test app ID OK for beta |
+| `EXPO_PUBLIC_TURNSTILE_SITE_KEY` | Phase 1+ | Signup CAPTCHA widget |
 
-**Beta limitations:** Play Billing IAP and FCM remote push do not work on
-sideloaded APKs. Testers subscribe via **web checkout**; local notification
-scheduling still works. See `docs/android-beta-program.md` for the daily SOP.
+Unlike `production`, the `preview` profile does **not** fail prebuild when
+Sentry or AdMob are unset — suitable for early beta drops while keys are
+being configured.
+
+**APK sideload limitations (12-tester beta):**
+
+- **Google Play Billing / IAP** does not work — Premium testers use **web
+  checkout** on the Subscribe screen.
+- **FCM remote push** requires Play signing — only **local notification
+  scheduling** works during direct APK distribution.
+- Testers must enable **Install from unknown sources** for their browser or
+  file manager.
+- Always publish **SHA-256** checksum with each APK (`npm run beta:release-notes`).
+
+Program SOP: [docs/android-beta-program-phase-0.md](../../docs/android-beta-program-phase-0.md) ·
+[docs/android-beta-program.md](../../docs/android-beta-program.md).

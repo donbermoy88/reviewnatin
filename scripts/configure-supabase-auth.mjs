@@ -38,6 +38,7 @@ async function main() {
         external_email_enabled: true,
         mailer_autoconfirm: false,
         mailer_secure_email_change_enabled: true,
+        password_min_length: 8,
       }
     : {
         disable_signup: false,
@@ -51,6 +52,7 @@ async function main() {
   console.log(`  Project:      ${REF}`);
   console.log(`  Email auth:   ${after.external_email_enabled ? 'ON' : 'OFF'}`);
   console.log(`  Auto-confirm: ${after.mailer_autoconfirm ? 'ON (no inbox needed)' : 'OFF (OTP required)'}`);
+  console.log(`  Min password: ${after.password_min_length ?? 'default'}`);
   console.log(`  Sign-ups:     ${after.disable_signup ? 'disabled' : 'enabled'}`);
 
   if (isProd) {

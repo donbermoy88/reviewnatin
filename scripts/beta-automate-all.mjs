@@ -338,6 +338,12 @@ async function main() {
       `## Cohorts (12 testers)`,
       `- Guest G1–G4 · Free F1–F4 · Premium P1–P4`,
       ``,
+      `## Taglish summary (post to tester group)`,
+      `Kumusta testers! Bagong beta build ${versionCode} na. I-install ang APK sa link sa taas.`,
+      `- **Plus:** web checkout lang muna (walang Play Billing sa APK beta).`,
+      `- **Report bugs:** Settings → Report a problem, o GitHub beta-feedback issue.`,
+      `- **Focus today:** [cohort + area — e.g. Free: OTP signup + practice limit]`,
+      ``,
       `## Gates`,
       ...report.steps.map((s) => `- ${s.name}: ${s.status}`),
     ].join('\n');

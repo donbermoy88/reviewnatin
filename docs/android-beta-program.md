@@ -2,6 +2,10 @@
 
 Continuous feedback, testing, and release workflow for **12 daily Android beta testers** (4 per cohort) distributing via direct APK (EAS `preview` profile).
 
+**Phases:** [Phase 0 — Beta infrastructure](./android-beta-program-phase-0.md) · [Phase 1 — Auth hardening & P0 blockers](./android-beta-program-phase-1.md) · Phase 2+ (screen audit, analytics, Play migration)
+
+Phase 0 verify: `npm run beta:phase0:verify` · Phase 1 verify: `npm run beta:phase1:verify`
+
 ## Three tester cohorts
 
 Every beta release must be validated across all three cohorts:
@@ -62,6 +66,7 @@ Use the `preview` EAS profile. Required env vars (set in EAS dashboard or `.env`
 | `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Yes | Backend |
 | `EXPO_PUBLIC_SENTRY_DSN` | Optional | Crash reporting (recommended) |
 | `EXPO_PUBLIC_ADMOB_ANDROID_APP_ID` | Optional | Ads (test IDs OK for beta) |
+| `EXPO_PUBLIC_TURNSTILE_SITE_KEY` | Phase 1+ | Signup CAPTCHA (Cloudflare Turnstile) |
 
 **Beta limitations (APK sideload):**
 
@@ -147,6 +152,28 @@ See also [release-readiness-checklist.md](./release-readiness-checklist.md).
 
 ## Ops runbook (cloud + local)
 
+### Phase 0 verification
+
+Before standing up the 12-tester loop:
+
+```bash
+npm run beta:phase0:verify
+```
+
+Checklist and acceptance criteria: [android-beta-program-phase-0.md](./android-beta-program-phase-0.md).
+
+### Phase 1 verification
+
+Before shipping auth-related beta builds, run:
+
+```bash
+npm run beta:phase1:verify      # local files + tests
+npm run beta:security:verify    # hosted Supabase security (needs .env.supabase)
+```
+
+Checklist and acceptance criteria: [android-beta-program-phase-1.md](./android-beta-program-phase-1.md).  
+Current ship candidate: [beta-distribution-build-28.md](./beta-distribution-build-28.md).
+
 ### One-command automation (recommended)
 
 Runs tests → Supabase OTP prod → auth migrations → EAS preview APK → emulator install → Maestro smokes → release notes.
@@ -180,8 +207,11 @@ cd apps/mobile && npm run typecheck
 Requires `.env.supabase` with `SUPABASE_ACCESS_TOKEN` and `SUPABASE_PROJECT_ID`.
 
 ```bash
-# Enable email OTP (disable auto-confirm) + OTP templates
+# Enable email OTP (disable auto-confirm) + OTP templates + password min 8
 npm run supabase:auth:prod
+
+# Turnstile CAPTCHA on signup (needs TURNSTILE_SECRET_KEY in .env.supabase)
+npm run supabase:captcha
 
 # SMTP for OTP delivery (automated — no dashboard clicks)
 npm run supabase:resend:setup   # one-time: Resend API key + reviewnatinph.com DNS
