@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Alert, BackHandler, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, BackHandler, Platform, Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { FadeIn, FadeInUp, ZoomIn, FadeInDown } from 'react-native-reanimated';
 import { Card } from '../../components/card';
@@ -109,6 +109,8 @@ export default function OnboardingScreen() {
   const theme = useAppTheme();
   const { colors, spacing } = theme;
   const styles = useMemo(() => createOnboardingStyles(theme), [theme]);
+  const { height: windowHeight } = useWindowDimensions();
+  const compactWelcome = windowHeight < 760;
 
   useEffect(() => {
     fetchExamCatalog().then((rows) => {
@@ -310,7 +312,11 @@ export default function OnboardingScreen() {
           colors={[colors.primary, colors.primaryDark]}
           start={{ x: 0, y: 0 }}
           end={{ x: 0.3, y: 1 }}
-          style={[styles.welcomeBlob, { paddingTop: insets.top + 40 }]}
+          style={[
+            styles.welcomeBlob,
+            compactWelcome && styles.welcomeBlobCompact,
+            { paddingTop: insets.top + (compactWelcome ? spacing.md : spacing.xl) },
+          ]}
         >
           <View style={styles.welcomeGlow} />
           <Animated.View entering={FadeIn.delay(300).duration(500)} style={styles.sparkleWelcomeTop}>
@@ -319,8 +325,11 @@ export default function OnboardingScreen() {
           <Animated.View entering={FadeIn.delay(450).duration(500)} style={styles.sparkleWelcomeMid}>
             <SparkleStar size={14} opacity={0.5} />
           </Animated.View>
-          <Animated.View entering={ZoomIn.delay(120).springify().damping(12)} style={styles.markWrap}>
-            <LogoMark size={120} />
+          <Animated.View
+            entering={ZoomIn.delay(120).springify().damping(12)}
+            style={[styles.markWrap, compactWelcome && styles.markWrapCompact]}
+          >
+            <LogoMark size={compactWelcome ? 92 : 108} />
           </Animated.View>
           <View style={styles.welcomeIllustrationRow}>
             {WELCOME_EXAM_CHIPS.map((chip, index) => (
@@ -763,11 +772,16 @@ function createOnboardingStyles(theme: AppTheme) {
   return StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background },
   welcomeBlob: {
-    height: 480,
+    height: 430,
     borderBottomLeftRadius: 80,
     borderBottomRightRadius: 80,
     alignItems: 'center',
     overflow: 'hidden',
+  },
+  welcomeBlobCompact: {
+    height: 360,
+    borderBottomLeftRadius: 48,
+    borderBottomRightRadius: 48,
   },
   welcomeGlow: {
     position: 'absolute',
@@ -779,11 +793,12 @@ function createOnboardingStyles(theme: AppTheme) {
   },
   sparkleWelcomeTop: { position: 'absolute', top: 60, right: 40, zIndex: 2 },
   sparkleWelcomeMid: { position: 'absolute', top: 130, left: 50, zIndex: 2 },
-  markWrap: { marginTop: 40, ...shadows.soft },
+  markWrap: { marginTop: spacing.md, ...shadows.soft },
+  markWrapCompact: { marginTop: spacing.xs },
   welcomeIllustrationRow: {
     flexDirection: 'row',
     gap: spacing.sm,
-    marginTop: spacing.lg,
+    marginTop: spacing.md,
   },
   welcomeChip: {
     paddingHorizontal: spacing.md,
@@ -798,9 +813,9 @@ function createOnboardingStyles(theme: AppTheme) {
   },
   welcomeBrand: {
     fontFamily: type.brand.fontFamily,
-    fontSize: 34,
+    fontSize: 32,
     color: '#fff',
-    marginTop: spacing.lg,
+    marginTop: spacing.md,
     letterSpacing: -0.5,
   },
   welcomeTag: {
@@ -814,8 +829,8 @@ function createOnboardingStyles(theme: AppTheme) {
   welcomeBody: {
     flex: 1,
     paddingHorizontal: spacing.lg,
-    paddingTop: spacing.lg,
-    justifyContent: 'flex-end',
+    paddingTop: spacing.md,
+    justifyContent: 'flex-start',
   },
   welcomeTitle: {
     ...type.headline,
