@@ -37,6 +37,7 @@
     "beta:phase2:verify": "node scripts/beta-phase2-verify.mjs",
     "beta:phase3:verify": "node scripts/beta-phase3-verify.mjs",
     "beta:phase4:verify": "node scripts/beta-phase4-verify.mjs",
+    "posthog:setup": "node scripts/setup-posthog-interactive.mjs",
     "beta:release-notes": "node scripts/beta-release-notes.mjs",
     "beta:agents": "node scripts/beta-ai-testers.mjs",
     "beta:agents:cloud-only": "node scripts/beta-ai-testers.mjs --skip-emulator --skip-maestro",

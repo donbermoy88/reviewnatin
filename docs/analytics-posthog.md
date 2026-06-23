@@ -15,6 +15,41 @@ EXPO_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com   # or https://eu.i.posthog.co
 
 4. Rebuild the dev client or EAS build so env vars are baked in.
 
+### One-command setup (recommended)
+
+From repo root (opens PostHog in your browser, then prompts for the key):
+
+```bash
+npm run posthog:setup
+```
+
+Non-interactive (CI or if you already have the key):
+
+```bash
+npm run posthog:setup -- --key phc_your_key --host https://us.i.posthog.com
+```
+
+This writes `apps/mobile/.env` and runs:
+
+```bash
+cd apps/mobile
+npx eas-cli env:create preview --name EXPO_PUBLIC_POSTHOG_API_KEY --value 'phc_…' --visibility sensitive --force --non-interactive
+npx eas-cli env:create preview --name EXPO_PUBLIC_POSTHOG_HOST --value 'https://us.i.posthog.com' --visibility plaintext --force --non-interactive
+# repeat for production
+```
+
+Verify EAS vars:
+
+```bash
+cd apps/mobile && npx eas-cli env:list --environment preview
+```
+
+Rebuild preview APK after setting keys:
+
+```bash
+cd apps/mobile && npx eas-cli build --profile preview --platform android
+```
+
 Without `EXPO_PUBLIC_POSTHOG_API_KEY`, analytics falls back to dev console logs + Sentry breadcrumbs only.
 
 ## Architecture
