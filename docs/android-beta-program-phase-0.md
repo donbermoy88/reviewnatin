@@ -1,7 +1,7 @@
 # Phase 0 — Beta Program Infrastructure
 
 **Sprint:** Week 1, Days 1–3  
-**Status:** Complete (local) — distribution to 12 testers is manual each release  
+**Status:** Complete (local) — **12 AI subagent testers** run via `npm run beta:agents` (no Drive/chat)  
 **Current ship candidate:** [Build 28](./beta-distribution-build-28.md)
 
 Parent program: [android-beta-program.md](./android-beta-program.md)  
@@ -28,6 +28,7 @@ Stand up the **continuous feedback loop** before auth hardening: APK build/distr
 | 12-tester roster (Guest / Free / Premium) | ✅ | [beta-testers.md](./beta-testers.md) |
 | Cohort audit matrix | ✅ | [beta-audit-matrix.md](./beta-audit-matrix.md) |
 | Automated build + Maestro gate | ✅ | `npm run beta:automate:local` |
+| **12 AI subagent distribution + smokes** | ✅ | `npm run beta:agents` → `dist/beta/last-ai-testers-report.json` |
 
 ### 0.2 Feedback collection
 
@@ -55,6 +56,8 @@ Stand up the **continuous feedback loop** before auth hardening: APK build/distr
 
 ```bash
 npm run beta:phase0:verify
+npm run beta:agents          # full: cloud + APK + 12 persona Maestro runs
+npm run beta:agents:cloud-only   # Supabase + release notes only (no emulator)
 ```
 
 Writes `dist/beta/phase0-verify.json`.
@@ -96,6 +99,9 @@ npm run beta:maestro
 
 ## Manual steps (each release)
 
+**Automated (12 Cursor AI subagents):** run `npm run beta:agents` — applies hosted Supabase config, writes local release notes with `file://` APK URI, runs Maestro per persona (G1–P4), and writes `dist/beta/ai-testers-distribution-build-N.md`. No Drive, Firebase, or chat required.
+
+**Optional human ops:**
 1. **Share APK** — Drive/Firebase/direct link; include SHA-256 from release notes.
 2. **Install instructions** — Enable "Install from unknown sources" on Android.
 3. **Cohort assignment** — Each tester knows Guest / Free / Premium setup from roster.

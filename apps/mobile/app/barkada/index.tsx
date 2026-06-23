@@ -31,6 +31,7 @@ import {
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 
 export default function BarkadaScreen() {
   const router = useRouter();
@@ -98,7 +99,7 @@ export default function BarkadaScreen() {
       await createBarkadaGroup(examSlug, groupName || 'My Barkada');
       await load();
     } catch (e) {
-      Alert.alert('Could not create group', (e as Error).message);
+      Alert.alert('Hindi makagawa ng group', toUserFacingError(e, 'load'));
     } finally {
       setBusy(false);
     }

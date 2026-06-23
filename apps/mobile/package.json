@@ -78,7 +78,9 @@
     "generate-icons": "node scripts/generate-app-icons.mjs",
     "beta:phase0:verify": "npm --prefix ../.. run beta:phase0:verify",
     "beta:phase1:verify": "npm --prefix ../.. run beta:phase1:verify",
-    "beta:release-notes": "npm --prefix ../.. run beta:release-notes"
+    "beta:phase2:verify": "npm --prefix ../.. run beta:phase2:verify",
+    "beta:release-notes": "npm --prefix ../.. run beta:release-notes",
+    "beta:agents": "npm --prefix ../.. run beta:agents"
   },
   "private": true
 }

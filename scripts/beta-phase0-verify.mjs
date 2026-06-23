@@ -23,6 +23,8 @@ const REQUIRED_FILES = [
   'apps/mobile/app.json',
   'scripts/beta-automate-all.mjs',
   'scripts/beta-maestro-run.mjs',
+  'scripts/beta-ai-testers.mjs',
+  'scripts/lib/beta-ai-personas.mjs',
   'scripts/beta-release-notes.mjs',
   'apps/mobile/.maestro/flows/guest-settings-feedback.yaml',
 ];

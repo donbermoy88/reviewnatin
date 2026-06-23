@@ -2,9 +2,9 @@
 
 Continuous feedback, testing, and release workflow for **12 daily Android beta testers** (4 per cohort) distributing via direct APK (EAS `preview` profile).
 
-**Phases:** [Phase 0 — Beta infrastructure](./android-beta-program-phase-0.md) · [Phase 1 — Auth hardening & P0 blockers](./android-beta-program-phase-1.md) · Phase 2+ (screen audit, analytics, Play migration)
+**Phases:** [Phase 0 — Beta infrastructure](./android-beta-program-phase-0.md) · [Phase 1 — Auth hardening](./android-beta-program-phase-1.md) · [Phase 2 — Screen audit & UX](./android-beta-program-phase-2.md) · Phase 3+ (onboarding redesign, charts, Play migration)
 
-Phase 0 verify: `npm run beta:phase0:verify` · Phase 1 verify: `npm run beta:phase1:verify`
+Phase 0 verify: `npm run beta:phase0:verify` · Phase 1: `npm run beta:phase1:verify` · Phase 2: `npm run beta:phase2:verify` · **12 AI testers:** `npm run beta:agents`
 
 ## Three tester cohorts
 
@@ -173,6 +173,42 @@ npm run beta:security:verify    # hosted Supabase security (needs .env.supabase)
 
 Checklist and acceptance criteria: [android-beta-program-phase-1.md](./android-beta-program-phase-1.md).  
 Current ship candidate: [beta-distribution-build-28.md](./beta-distribution-build-28.md).
+
+### Phase 2 verification
+
+Before shipping UX-heavy beta builds:
+
+```bash
+npm run beta:phase2:verify
+npm run mobile:test -- user-facing deep-link-routes
+npm run beta:maestro
+```
+
+Checklist: [android-beta-program-phase-2.md](./android-beta-program-phase-2.md) · [beta-route-audit-matrix.md](./beta-route-audit-matrix.md).
+
+### 12 AI subagent testers (automated distribution)
+
+All 12 roster personas are **Cursor AI subagents** — no Drive, Firebase, or chat required.
+
+```bash
+# Full: verify → Supabase cloud → local release notes → emulator → 12 persona Maestro runs
+npm run beta:agents
+
+# Cloud + release notes only (no emulator)
+npm run beta:agents:cloud-only
+
+# Reuse build 28 APK
+npm run beta:agents -- --apk dist/beta/reviewnatin-beta-v28.apk --skip-cloud
+```
+
+Outputs:
+
+- `dist/beta/last-ai-testers-report.json` — aggregate pass/fail per persona
+- `dist/beta/agent-reports/G1-mara-santos.json` — per-agent detail
+- `dist/beta/ai-testers-distribution-build-N.md` — local `file://` APK + Taglish
+- `dist/beta/release-notes-taglish-build-N.txt` — copy for agent channel
+
+Persona definitions: `scripts/lib/beta-ai-personas.mjs`.
 
 ### One-command automation (recommended)
 

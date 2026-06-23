@@ -20,10 +20,24 @@ Shipped in code; hosted config may still need manual apply. See [android-beta-pr
 - [ ] Hosted: Turnstile CAPTCHA (`npm run supabase:captcha`)
 - [ ] `npm run beta:security:verify` all green on prod project
 
+## Phase 2 — Screen audit & UX (2026-06-23)
+
+See [android-beta-program-phase-2.md](./android-beta-program-phase-2.md) and [beta-route-audit-matrix.md](./beta-route-audit-matrix.md).
+
+- [x] `toUserFacingError()` mapper + tests
+- [x] No raw `error.message` in Alert.alert
+- [x] ErrorState + retry on analytics, leaderboard, mistakes, bookmarks, mock-review
+- [x] Accessibility on auth fields, quiz choices, tab bar, onboarding exam cards
+- [x] Deep link Vitest + Maestro deeplink flow in suite
+- [x] `npm run beta:phase2:verify` script + 36-route matrix
+- [ ] Full Maestro pass on release candidate emulator
+- [ ] Update route matrix status column for new build
+
 ## Automated gates
 
 - [x] `npm run mobile:test` passes (Vitest) — **124/124 pass (2026-06-22)**
 - [x] `npm run beta:phase1:verify` passes locally
+- [x] `npm run beta:phase2:verify` passes locally
 - [ ] Product UX audit P0 items shipped — see [product-experience-audit-2026-06-22.md](./product-experience-audit-2026-06-22.md)
 - [ ] `npm run ci:local` passes (if touching shared packages)
 - [ ] `npm run release:check:android` passes (production AAB only)

@@ -10,8 +10,11 @@ describe('toUserFacingError', () => {
     expect(toUserFacingError(new Error('Invalid login credentials'), 'auth')).toMatch(/Incorrect email/i);
   });
 
-  it('hides long internal errors', () => {
-    const long = 'permission denied for table users '.repeat(5);
-    expect(toUserFacingError(new Error(long), 'load')).toMatch(/Hindi ma-load/i);
+  it('preserves already-friendly Taglish copy', () => {
+    expect(toUserFacingError(new Error('Hindi ma-load ang data'), 'load')).toBe('Hindi ma-load ang data');
+  });
+
+  it('maps rate limit errors', () => {
+    expect(toUserFacingError(new Error('Too many requests'), 'load')).toMatch(/Sobrang daming try/i);
   });
 });

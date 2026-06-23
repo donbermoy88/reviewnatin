@@ -32,6 +32,7 @@ const FLOWS = [
   'premium-subscribe-hint.yaml',
   'auth-keyboard-smoke.yaml',
   'free-signup-path.yaml',
+  'deeplink-verify-email.yaml',
 ];
 
 function run(cmd) {

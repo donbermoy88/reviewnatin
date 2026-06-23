@@ -18,6 +18,7 @@ import { ScreenScroll } from '../../components/screen-scroll';
 import { SegmentedControl } from '../../components/ui';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { trackEvent } from '../../lib/analytics/events';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { DISCLAIMERS, DEFAULT_EXAM_SLUG, EXAM_CATALOG, LET_SECONDARY_MAJORS, ONBOARDING_LEVELS } from '@reviewnatin/shared';
 import { syncExamGoalSafe } from '../../lib/api/goals';
 import { fetchExamSchedules } from '../../lib/api/exam-calendar';
@@ -233,7 +234,8 @@ export default function OnboardingScreen() {
     if (user) {
       const result = await syncExamGoalSafe(user.id, data);
       if (!result.ok) {
-        Alert.alert('Goal sync failed', result.message);
+        const syncError = toUserFacingError(result.message, 'load');
+        Alert.alert('Hindi na-sync ang goal', syncError);
       }
       try {
         await setNotificationsEnabled(reminderOn);
@@ -262,6 +264,9 @@ export default function OnboardingScreen() {
       style={({ pressed }) => [styles.examCard, opts.selected && styles.examCardOn, pressed && { opacity: 0.85 }]}
       android_ripple={{ color: colors.primaryMuted, borderless: false }}
       onPress={opts.onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${opts.name} exam${opts.selected ? ', selected' : ''}`}
+      accessibilityState={{ selected: opts.selected }}
     >
       <View style={[styles.examIcon, { backgroundColor: opts.abbrBg }]}>
         <Text style={[styles.examAbbr, { color: opts.abbrColor }]}>{opts.abbr}</Text>

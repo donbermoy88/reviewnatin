@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AnalyticsInsightCards, SubjectStrengthChart } from '../../components/analytics/subject-strength-chart';
 import { StudyTrendChart } from '../../components/analytics/study-trend-chart';
 import { EmptyState } from '../../components/empty-state';
+import { ErrorState } from '../../components/error-state';
 import { MasteryBar } from '../../components/mastery-bar';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReadinessBreakdownSheet } from '../../components/readiness-breakdown-sheet';
@@ -27,6 +28,7 @@ import {
 } from '../../lib/api/readiness';
 import { createAnalyticsStyles } from '../../lib/themed-styles';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
+import { toUserFacingError } from '../../lib/errors/user-facing';
 import { useAuth } from '../../providers/auth-provider';
 
 export default function AnalyticsScreen() {
@@ -44,9 +46,11 @@ export default function AnalyticsScreen() {
   const [accuracyPercent, setAccuracyPercent] = useState<number | null>(null);
   const [readiness, setReadiness] = useState<ReadinessSnapshot | null>(null);
   const [breakdownOpen, setBreakdownOpen] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     try {
+      setLoadError(null);
       const goal = await resolveOnboardingGoal(user?.id);
       const slug = goal?.examSlug ?? DEFAULT_EXAM_SLUG;
       setExamSlug(slug);
@@ -72,13 +76,15 @@ export default function AnalyticsScreen() {
         setReadiness(latestReadiness);
         setStudyTrend(trend);
         setAccuracyPercent(practiceStats.accuracyPercent);
-      } catch {
+      } catch (e) {
+        setLoadError(toUserFacingError(e, 'load'));
         setSubjects([]);
         setStudyTrend([]);
         setAccuracyPercent(null);
         setReadiness(null);
       }
-    } catch {
+    } catch (e) {
+      setLoadError(toUserFacingError(e, 'load'));
       setSubjects([]);
       setReadiness(null);
     } finally {
@@ -149,6 +155,20 @@ export default function AnalyticsScreen() {
           description="Kailangan ng signed-in account para sa analytics at weak-topic tracking."
           actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
+        />
+      </StackShell>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <StackShell title="Analytics" subtitle="Readiness and weak-topic tracking">
+        <ErrorState
+          description={loadError}
+          onRetry={() => {
+            setLoading(true);
+            void load();
+          }}
         />
       </StackShell>
     );

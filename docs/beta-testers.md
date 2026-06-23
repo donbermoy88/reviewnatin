@@ -21,7 +21,9 @@ These are **automated QA personas** (emulator + Maestro + adb audit agents) repr
 
 ## Distribution — build 28 (current)
 
-See [beta-distribution-build-28.md](./beta-distribution-build-28.md) for APK path, SHA-256, P0 UX checklist, and per-persona results.
+**Automated drop for AI subagents:** `npm run beta:agents` (or `npm run beta:agents -- --apk dist/beta/reviewnatin-beta-v28.apk`).
+
+See [beta-distribution-build-28.md](./beta-distribution-build-28.md) for APK path, SHA-256, P0 UX checklist, and per-persona results. Latest agent run: `dist/beta/last-ai-testers-report.json`.
 
 **Prior builds:** [build 12](./beta-distribution-build-12.md) · [build 10](./beta-distribution-build-10.md)
 
