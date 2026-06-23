@@ -1,14 +1,14 @@
 {
   "total_questions_found": 1291,
-  "total_ready_for_upload": 555,
+  "total_ready_for_upload": 900,
   "total_needing_review": 30,
-  "total_without_answer_key": 489,
+  "total_without_answer_key": 144,
   "total_duplicates_detected": 217,
   "total_questions_with_images": 88,
   "status_counts": {
-    "Needs Answer": 489,
+    "Ready for Upload": 900,
     "Duplicate": 217,
-    "Ready for Upload": 555,
+    "Needs Answer": 144,
     "Incomplete": 30
   },
   "exam_type_counts": {
@@ -91,5 +91,6 @@
     "Source PDF/Page/Notes": "questions.source_note",
     "Status": "questions.status or import staging status"
   },
-  "recommended_next_action": "Review Needs Answer, Needs Review, and Incomplete rows before uploading. Upload Ready for Upload rows only after topic mapping is confirmed."
+  "recommended_next_action": "Review Needs Answer, Needs Review, and Incomplete rows before uploading. Upload Ready for Upload rows only after topic mapping is confirmed.",
+  "answer_resolution_report": "output/pdf/let_needs_answer_resolution_report.json"
 }

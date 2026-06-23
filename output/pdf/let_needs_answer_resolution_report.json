@@ -1,0 +1,48 @@
+{
+  "baseline": "HEAD before LET answer resolution",
+  "before_status_counts": {
+    "Ready for Upload": 1523,
+    "Needs Answer": 917,
+    "Incomplete": 41,
+    "Duplicate": 260,
+    "Needs Review": 276
+  },
+  "after_status_counts": {
+    "Ready for Upload": 2115,
+    "Incomplete": 41,
+    "Duplicate": 260,
+    "Needs Review": 276,
+    "Needs Answer": 325
+  },
+  "resolved_total": 592,
+  "resolved_by_source": {
+    "6. LET PROF ED Q&A.pdf": 197,
+    "Updated Prof-Ed-150-items.pdf": 2,
+    "05. GEN ED WITH EXPLANATION (SECONDARY).pdf": 18,
+    "16. 200-ITEMS-BEED-WITH-ANSWER-KEY.pdf": 30,
+    "1. FINAL COACHING WITH ANSWER KEY.pdf": 179,
+    "3. GEN-ED_PROF_ED.pdf": 8,
+    "Updated Prof-Ed-139-items.pdf": 86,
+    "Part 8 General Education (200 Items).pdf": 67,
+    "1. FILIPINO LET 60 ITEMS WITH RATIONALIZATION.pdf": 3,
+    "1. FINAL COACHING.pdf": 2
+  },
+  "remaining_needs_answer_by_source": {
+    "05. GEN ED WITH EXPLANATION (SECONDARY).pdf": 14,
+    "16. 200-ITEMS-BEED-WITH-ANSWER-KEY.pdf": 167,
+    "1. FINAL COACHING WITH ANSWER KEY.pdf": 1,
+    "Professional-Education-A.pdf": 71,
+    "Part 8 General Education (200 Items).pdf": 1,
+    "1. FILIPINO LET 60 ITEMS WITH RATIONALIZATION.pdf": 1,
+    "1. FINAL COACHING.pdf": 70
+  },
+  "upload_report": {
+    "batch_id": "8454e77b-c303-410e-a283-793f03944530",
+    "inserted": 1131,
+    "candidate_targets": 4170,
+    "duplicates": 3039,
+    "skipped": 6,
+    "report_path": "output/pdf/let_ready_questions_upload_report.json"
+  },
+  "notes": "Only rows with answer evidence in the PDF text, bold/visual highlighting, embedded rationale, trailing answer key, or exact answered duplicate were promoted to Ready for Upload. Rows still lacking source-backed answers remain Needs Answer."
+}

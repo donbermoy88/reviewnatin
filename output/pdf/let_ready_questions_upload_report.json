@@ -1,19 +1,19 @@
 {
-  "batch_id": "a5d5a98d-77b6-40f6-8520-e1e04931bd9b",
-  "inserted": 2982,
-  "candidate_targets": 3036,
-  "skipped": 5,
-  "duplicates": 54,
+  "batch_id": "8454e77b-c303-410e-a283-793f03944530",
+  "inserted": 1131,
+  "candidate_targets": 4170,
+  "skipped": 6,
+  "duplicates": 3039,
   "source_stats": {
     "output/pdf/let_elementary_secondary_extracted_questions.csv": {
-      "readyRows": 968,
-      "candidateTargets": 1934,
+      "readyRows": 1215,
+      "candidateTargets": 2380,
       "skipped": 1
     },
     "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv": {
-      "readyRows": 555,
-      "candidateTargets": 1102,
-      "skipped": 4
+      "readyRows": 900,
+      "candidateTargets": 1790,
+      "skipped": 5
     }
   },
   "skipped_samples": [
@@ -22,6 +22,12 @@
       "row": "410",
       "page": "11",
       "reason": "invalid_correct_answer_or_choice"
+    },
+    {
+      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
+      "row": "16",
+      "page": "2",
+      "reason": "question_too_short"
     },
     {
       "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
@@ -51,6 +57,86 @@
   "duplicate_samples": [
     {
       "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "1",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "1",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "2",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "2",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "3",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "3",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "4",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "4",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "5",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "5",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
       "row": "6",
       "page": "1",
       "exam": "elementary",
@@ -67,386 +153,306 @@
     },
     {
       "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
-      "row": "31",
-      "page": "3",
-      "exam": "elementary",
-      "topic": "gen-ed/mathematics",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
-      "row": "31",
-      "page": "3",
-      "exam": "secondary",
-      "topic": "gen-ed/mathematics",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
-      "row": "495",
-      "page": "27",
-      "exam": "elementary",
-      "topic": "prof-ed/educational-technology",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
-      "row": "495",
-      "page": "27",
-      "exam": "secondary",
-      "topic": "prof-ed/educational-technology",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
-      "row": "499",
-      "page": "27",
-      "exam": "elementary",
-      "topic": "prof-ed/educational-technology",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
-      "row": "499",
-      "page": "27",
-      "exam": "secondary",
-      "topic": "prof-ed/educational-technology",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "690",
-      "page": "2",
-      "exam": "elementary",
-      "topic": "gen-ed/mathematics",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "690",
-      "page": "2",
-      "exam": "secondary",
-      "topic": "gen-ed/mathematics",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "693",
-      "page": "2",
-      "exam": "elementary",
-      "topic": "gen-ed/mathematics",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "693",
-      "page": "2",
-      "exam": "secondary",
-      "topic": "gen-ed/mathematics",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "700",
-      "page": "2",
+      "row": "7",
+      "page": "1",
       "exam": "elementary",
       "topic": "gen-ed/social-science",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "700",
-      "page": "2",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "7",
+      "page": "1",
       "exam": "secondary",
       "topic": "gen-ed/social-science",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "704",
-      "page": "3",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "8",
+      "page": "1",
       "exam": "elementary",
-      "topic": "gen-ed/ict-current-trends",
+      "topic": "gen-ed/mathematics",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "704",
-      "page": "3",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "8",
+      "page": "1",
       "exam": "secondary",
-      "topic": "gen-ed/ict-current-trends",
+      "topic": "gen-ed/mathematics",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "730",
-      "page": "5",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "730",
-      "page": "5",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "736",
-      "page": "5",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "736",
-      "page": "5",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "773",
-      "page": "8",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "773",
-      "page": "8",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "782",
-      "page": "9",
-      "exam": "elementary",
-      "topic": "gen-ed/social-science",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "782",
-      "page": "9",
-      "exam": "secondary",
-      "topic": "gen-ed/social-science",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "783",
-      "page": "9",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "9",
+      "page": "1",
       "exam": "elementary",
       "topic": "gen-ed/science",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "783",
-      "page": "9",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "9",
+      "page": "1",
       "exam": "secondary",
       "topic": "gen-ed/science",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "802",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "10",
       "page": "1",
       "exam": "elementary",
       "topic": "gen-ed/filipino",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "802",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "10",
       "page": "1",
       "exam": "secondary",
       "topic": "gen-ed/filipino",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "803",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "11",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "11",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "12",
       "page": "1",
       "exam": "elementary",
       "topic": "gen-ed/filipino",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "803",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "12",
       "page": "1",
       "exam": "secondary",
       "topic": "gen-ed/filipino",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "805",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "13",
       "page": "1",
       "exam": "elementary",
-      "topic": "gen-ed/filipino",
+      "topic": "gen-ed/social-science",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "805",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "13",
       "page": "1",
       "exam": "secondary",
-      "topic": "gen-ed/filipino",
+      "topic": "gen-ed/social-science",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "807",
-      "page": "1",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "807",
-      "page": "1",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "809",
-      "page": "1",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "809",
-      "page": "1",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "811",
-      "page": "1",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "811",
-      "page": "1",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_stem"
-    },
-    {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "822",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "14",
       "page": "1",
       "exam": "elementary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "822",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "14",
       "page": "1",
       "exam": "secondary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "836",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "15",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "15",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "16",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "16",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "17",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "17",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "18",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "18",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "19",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "19",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "20",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/values-humanities",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "20",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/values-humanities",
+      "reason": "duplicate_existing_stem"
+    },
+    {
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "21",
       "page": "2",
       "exam": "elementary",
       "topic": "gen-ed/filipino",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "836",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "21",
       "page": "2",
       "exam": "secondary",
       "topic": "gen-ed/filipino",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "837",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "22",
       "page": "2",
       "exam": "elementary",
-      "topic": "gen-ed/filipino",
+      "topic": "gen-ed/english",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "837",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "22",
       "page": "2",
       "exam": "secondary",
-      "topic": "gen-ed/filipino",
+      "topic": "gen-ed/english",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "838",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "23",
       "page": "2",
       "exam": "elementary",
-      "topic": "gen-ed/filipino",
+      "topic": "gen-ed/social-science",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "838",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "23",
       "page": "2",
       "exam": "secondary",
-      "topic": "gen-ed/filipino",
+      "topic": "gen-ed/social-science",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "845",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "24",
       "page": "2",
       "exam": "elementary",
-      "topic": "gen-ed/science",
+      "topic": "gen-ed/english",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "845",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "24",
       "page": "2",
       "exam": "secondary",
-      "topic": "gen-ed/science",
+      "topic": "gen-ed/english",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "849",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "25",
       "page": "2",
       "exam": "elementary",
-      "topic": "gen-ed/science",
+      "topic": "gen-ed/english",
       "reason": "duplicate_existing_stem"
     },
     {
-      "source": "output/pdf/let_reviewer_2026_batch2_extracted_questions.csv",
-      "row": "849",
+      "source": "output/pdf/let_elementary_secondary_extracted_questions.csv",
+      "row": "25",
       "page": "2",
       "exam": "secondary",
-      "topic": "gen-ed/science",
+      "topic": "gen-ed/english",
       "reason": "duplicate_existing_stem"
     }
   ]
