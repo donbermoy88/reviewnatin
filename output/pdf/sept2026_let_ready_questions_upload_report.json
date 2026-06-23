@@ -1,13 +1,13 @@
 {
-  "batch_id": "f19efe16-077d-425a-8266-84a3f07b6b6b",
+  "batch_id": "fee72a83-a055-495c-a375-e6dee20d86ee",
   "dry_run": false,
   "source": "output/pdf/sept2026_let_extracted_questions.json",
   "ready_rows": 5068,
   "candidate_targets": 6717,
-  "insertable": 1224,
-  "inserted": 1224,
+  "insertable": 0,
+  "inserted": 0,
   "skipped": 103,
-  "duplicates": 5493,
+  "duplicates": 6717,
   "source_stats": {
     "output/pdf/sept2026_let_extracted_questions.json": {
       "readyRows": 5068,

@@ -1,0 +1,120 @@
+{
+  "file_counts": {
+    ".doc": 16,
+    ".docx": 135,
+    ".jpg": 42,
+    ".pdf": 258,
+    ".ppt": 2,
+    ".pptx": 3
+  },
+  "pdfs_total": 258,
+  "pdfs_with_existing_rows_before_ocr": 247,
+  "pdfs_ocr_attempted": 11,
+  "ocr_rows_appended": 778,
+  "ocr_ready_for_upload": 0,
+  "ocr_needs_answer": 63,
+  "ocr_needs_review_or_incomplete": 691,
+  "ocr_duplicates": 24,
+  "ocr_sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Gen-Ed-Set-A-A-Questionaire.pdf",
+      "status": "processed",
+      "rows": 115,
+      "pages": 34,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "processed"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. Comprehensive LET Reviewer pdfbooksforum.com.pdf",
+      "status": "processed",
+      "rows": 321,
+      "pages": 196,
+      "method": "ocr",
+      "answer_keys_detected": 156,
+      "previous_status": "processed"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. TOPNOTCHER LET REVER PDFBOOKSFORUM.COM.pdf",
+      "status": "processed",
+      "rows": 125,
+      "pages": 42,
+      "method": "ocr",
+      "answer_keys_detected": 93,
+      "previous_status": "processed"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/BLEPT_PE-Philosophy-in-Education.pdf",
+      "status": "no_questions_found_after_ocr",
+      "rows": 0,
+      "pages": 1,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found_after_ocr"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Philosophical_Foundation_of_Education.pdf",
+      "status": "no_questions_found_after_ocr",
+      "rows": 0,
+      "pages": 9,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found_after_ocr"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/F. JUNE LET EXAMS 2026/Extra JUNELET P1.pdf",
+      "status": "processed",
+      "rows": 97,
+      "pages": 16,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "processed"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/F. JUNE LET EXAMS 2026/Extra JUNELET P2.pdf",
+      "status": "processed",
+      "rows": 19,
+      "pages": 13,
+      "method": "ocr",
+      "answer_keys_detected": 7,
+      "previous_status": "processed"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/YELLOW BOOK 4.0_102420.pdf",
+      "status": "processed",
+      "rows": 60,
+      "pages": 107,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "processed"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/Yellow Book 3.0 Edition Part 2 Prof Ed.pdf",
+      "status": "processed",
+      "rows": 35,
+      "pages": 55,
+      "method": "ocr",
+      "answer_keys_detected": 22,
+      "previous_status": "processed"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - English-/A LET-ENG-Regular verbs list.pdf",
+      "status": "no_questions_found_after_ocr",
+      "rows": 0,
+      "pages": 5,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found_after_ocr"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - General Science-/BSED General Science P5.pdf",
+      "status": "processed",
+      "rows": 6,
+      "pages": 11,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "processed"
+    }
+  ],
+  "non_pdf_files_not_imported": 198
+}
