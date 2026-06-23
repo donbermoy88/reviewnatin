@@ -4,6 +4,7 @@ import { Pressable, Text, View, type PressableProps, type StyleProp, type ViewSt
 import { Ionicons } from '@expo/vector-icons';
 import type { ComponentProps } from 'react';
 import { useAppTheme } from '../hooks/use-app-theme';
+import { useReducedMotion } from '../hooks/use-reduced-motion';
 import { trackMicrointeraction } from '../lib/analytics/events';
 import { createPrimaryButtonStyles } from '../lib/themed-styles';
 
@@ -30,6 +31,7 @@ export function PrimaryButton({
   ...rest
 }: Props) {
   const theme = useAppTheme();
+  const reduceMotion = useReducedMotion();
   const styles = useMemo(() => createPrimaryButtonStyles(theme), [theme]);
   const height = size === 'lg' ? 56 : theme.touchTarget.min;
   const iconColor =
@@ -59,7 +61,8 @@ export function PrimaryButton({
           variant === 'white' && styles.white,
           variant === 'ghost' && styles.ghost,
           variant === 'success' && styles.success,
-          state.pressed && styles.pressed,
+          state.pressed && !reduceMotion && styles.pressed,
+          state.pressed && reduceMotion && styles.pressedReducedMotion,
           disabled && styles.disabled,
         ];
         if (typeof style === 'function') return [...base, style(state)];

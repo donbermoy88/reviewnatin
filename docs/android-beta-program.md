@@ -2,9 +2,9 @@
 
 Continuous feedback, testing, and release workflow for **12 daily Android beta testers** (4 per cohort) distributing via direct APK (EAS `preview` profile).
 
-**Phases:** [Phase 0](./android-beta-program-phase-0.md) · [Phase 1](./android-beta-program-phase-1.md) · [Phase 2](./android-beta-program-phase-2.md) · [Phase 3 — Onboarding](./android-beta-program-phase-3.md) · Phase 4+ (charts, Play migration)
+**Phases:** [Phase 0](./android-beta-program-phase-0.md) · [Phase 1](./android-beta-program-phase-1.md) · [Phase 2](./android-beta-program-phase-2.md) · [Phase 3](./android-beta-program-phase-3.md) · [Phase 4 — Analytics & charts](./android-beta-program-phase-4.md) · Phase 5+ (perf, Play migration)
 
-Phase 0: `npm run beta:phase0:verify` · Phase 1: `npm run beta:phase1:verify` · Phase 2: `npm run beta:phase2:verify` · Phase 3: `npm run beta:phase3:verify` · **12 AI testers:** `npm run beta:agents`
+Phase 0–3: `beta:phase0:verify` … `beta:phase3:verify` · Phase 4: `npm run beta:phase4:verify` · **12 AI testers:** `npm run beta:agents`
 
 ## Three tester cohorts
 
@@ -196,6 +196,19 @@ npm run mobile:test -- onboarding-first-practice onboarding-nav
 ```
 
 Checklist: [android-beta-program-phase-3.md](./android-beta-program-phase-3.md).
+
+### Phase 4 verification
+
+Before shipping analytics-heavy builds:
+
+```bash
+npm run beta:phase4:verify
+npm run mobile:test -- funnel-catalog insights posthog
+```
+
+Requires `EXPO_PUBLIC_POSTHOG_API_KEY` on EAS for live funnels — see [analytics-posthog.md](./analytics-posthog.md).
+
+Checklist: [android-beta-program-phase-4.md](./android-beta-program-phase-4.md).
 
 ### 12 AI subagent testers (automated distribution)
 

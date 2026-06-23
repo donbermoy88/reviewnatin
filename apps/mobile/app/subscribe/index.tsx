@@ -219,6 +219,7 @@ export default function SubscribeScreen() {
         setPendingRef(null);
         await refreshEntitlements();
         setPaymentConfirmed(true);
+        trackEvent('subscription_active', { method: 'web_checkout', ref });
       }
     } finally {
       setCheckingPayment(false);
@@ -334,6 +335,9 @@ export default function SubscribeScreen() {
     addAppBreadcrumb('paywall', 'store purchase button pressed', { sku });
     trackEvent('checkout_started', { method: 'store', sku });
     const result = await purchaseProduct(sku);
+    if (result.ok) {
+      trackEvent('subscription_active', { method: 'store', sku });
+    }
     if (!result.ok && result.error && !result.error.includes('cancel')) {
       captureAppMessage('store purchase request failed', { area: 'paywall', action: 'store_purchase_request' }, { sku, error: result.error }, 'warning');
       setSheet({ kind: 'purchase_error', message: toUserFacingError(result.error, 'checkout') });

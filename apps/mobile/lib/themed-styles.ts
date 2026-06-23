@@ -74,6 +74,7 @@ export function createPrimaryButtonStyles(theme: AppTheme) {
     ghost: { backgroundColor: 'transparent', borderColor: colors.border },
     success: { backgroundColor: colors.success },
     pressed: { opacity: 0.92, transform: [{ scale: 0.98 }] },
+    pressedReducedMotion: { opacity: 0.88 },
     disabled: { opacity: 0.5 },
     text: { ...type.label, color: '#fff' },
     textLg: { fontSize: 16 },

@@ -45,12 +45,25 @@ See [android-beta-program-phase-3.md](./android-beta-program-phase-3.md).
 - [x] `npm run beta:phase3:verify`
 - [ ] Maestro guest onboarding smoke on release candidate
 
+## Phase 4 — Analytics & charts (2026-06-23)
+
+See [android-beta-program-phase-4.md](./android-beta-program-phase-4.md) and [analytics-posthog.md](./analytics-posthog.md).
+
+- [x] PostHog provider + typed funnel events
+- [x] Home dashboard charts + insight cards + `dashboard_charts_viewed`
+- [x] Full `/analytics` screen with trend + subject charts
+- [x] `subscription_active` on web checkout paid + store purchase
+- [x] PrimaryButton reduced-motion + haptic microinteractions
+- [x] `npm run beta:phase4:verify`
+- [ ] PostHog live smoke on preview build (EAS env)
+
 ## Automated gates
 
 - [x] `npm run mobile:test` passes (Vitest) — **124/124 pass (2026-06-22)**
 - [x] `npm run beta:phase1:verify` passes locally
 - [x] `npm run beta:phase2:verify` passes locally
 - [x] `npm run beta:phase3:verify` passes locally
+- [x] `npm run beta:phase4:verify` passes locally
 - [ ] Product UX audit P0 items shipped — see [product-experience-audit-2026-06-22.md](./product-experience-audit-2026-06-22.md)
 - [ ] `npm run ci:local` passes (if touching shared packages)
 - [ ] `npm run release:check:android` passes (production AAB only)

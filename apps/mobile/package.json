@@ -80,6 +80,7 @@
     "beta:phase1:verify": "npm --prefix ../.. run beta:phase1:verify",
     "beta:phase2:verify": "npm --prefix ../.. run beta:phase2:verify",
     "beta:phase3:verify": "npm --prefix ../.. run beta:phase3:verify",
+    "beta:phase4:verify": "npm --prefix ../.. run beta:phase4:verify",
     "beta:release-notes": "npm --prefix ../.. run beta:release-notes",
     "beta:agents": "npm --prefix ../.. run beta:agents"
   },
