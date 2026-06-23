@@ -51,20 +51,35 @@ shasum -a 256 reviewnatin-beta-v28.apk
 
 | Persona | Cohort | P0 UX | Automated smoke | Notes |
 |---------|--------|-------|-----------------|-------|
-| Mara Santos (G1) | Guest | ✓ guest card | ✓ onboarding→Review (v21 emulator) | Start path clear |
-| Diego Reyes (G2) | Guest | ✓ guest card | ✓ | “Libre, walang signup” copy |
+| Mara Santos (G1) | Guest | ✓ guest card | ✓ Maestro | Start path clear |
+| Diego Reyes (G2) | Guest | ✓ guest card | ✓ Maestro | “Libre, walang signup” copy |
 | Anica Cruz (G3) | Guest | ✓ | — | 20 Q limit panel — manual |
-| Paolo Mendoza (G4) | Guest | ✓ settings hint | ✓ settings feedback (Maestro scroll fix) | Profile → Settings → Report |
-| Jasmine Lo (F1) | Free | N/A | ✗ verify-email openLink | Cold OTP deeplink still flaky; signup UI OK via adb |
-| Kyle Tan (F2) | Free | N/A | — | OAuth path not exercised |
+| Paolo Mendoza (G4) | Guest | ✓ settings path | ✓ Maestro | Profile → Settings → Report |
+| Jasmine Lo (F1) | Free | N/A | ✓ verify-email Maestro | SMTP live for inbox OTP |
+| Kyle Tan (F2) | Free | N/A | ✓ keyboard smoke | OAuth path not exercised |
 | Rica Villanueva (F3) | Free | ✓ limit copy | — | Hit 20 Q → Tagalog panel |
 | Lea Fernandez (F4) | Free | ✓ limit copy | — | Mock preview limits — manual |
-| Andrea Bautista (P1) | Premium | ✓ Plus headline | ✓ subscribe deeplink smoke | Login gate before checkout |
-| Marco Silva (P2) | Premium | ✓ Plus headline | — | Web checkout — manual |
+| Andrea Bautista (P1) | Premium | ✓ Plus copy in APK | ✗ subscribe deeplink v28 | Manual subscribe screen on v28 |
+| Marco Silva (P2) | Premium | ✓ Plus copy in APK | — | Web checkout — manual |
 | Nico Almario (P3) | Premium | ✓ | — | Plus entitlement — manual |
 | Patricia Gomez (P4) | Premium | ✓ | — | Offline + AI — manual |
 
-**Ship gate:** Guest P0 UX + Plus copy **PASS**. Free verify-email deeplink remains **P0 doc** (same class as build 12; SMTP live for manual OTP).
+**Ship gate:** **Cleared for 12-tester distribution** — Guest P0 UX and Free verify-email Maestro **PASS** on v28. Premium subscribe deeplink fails on v28 APK (onboarding gate); Plus copy verified in bundle — P1 manual subscribe check. Gate fix committed for next build.
+
+---
+
+## Maestro results (v28 APK, 2026-06-23)
+
+| Flow | Cohort | Result |
+|------|--------|--------|
+| `guest-onboarding-quiz.yaml` | G1–G2 | **PASS** |
+| `guest-settings-feedback.yaml` | G4 | **PASS** |
+| `auth-keyboard-smoke.yaml` | F1–F2 | **PASS** |
+| `free-signup-path.yaml` | F1 | **PASS** |
+| `deeplink-verify-email.yaml` | F1 | **PASS** |
+| `premium-subscribe-hint.yaml` | P1 | **FAIL** (v28; gate fix pending rebuild) |
+
+Report: `dist/beta/last-maestro-report.json`
 
 ---
 

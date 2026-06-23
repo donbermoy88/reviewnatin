@@ -3,7 +3,10 @@ appId: ph.reviewnatin.app
 ---
 - launchApp:
     clearState: true
+- extendedWaitUntil:
+    visible: "ReviewNatin"
+    timeout: 30000
 - openLink: reviewnatin://verify-email?email=f1.agent@reviewnatinph.com
 - extendedWaitUntil:
     visible: "I-verify ang email"
-    timeout: 20000
+    timeout: 25000

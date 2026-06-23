@@ -22,7 +22,7 @@ export function useOnboardingGate() {
 function isAllowedWithoutOnboarding(segments: string[]): boolean {
   const root = segments[0];
   if (!root || root === 'index') return true;
-  if (root === 'onboarding' || root === '(auth)' || root === 'auth') return true;
+  if (root === 'onboarding' || root === '(auth)' || root === 'auth' || root === 'subscribe') return true;
   return false;
 }
 

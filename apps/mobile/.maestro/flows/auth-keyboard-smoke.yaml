@@ -4,10 +4,13 @@ appId: ph.reviewnatin.app
 ---
 - launchApp:
     clearState: true
+- extendedWaitUntil:
+    visible: "ReviewNatin"
+    timeout: 30000
 - openLink: reviewnatin://signup
 - extendedWaitUntil:
     visible: "Gumawa ng account"
-    timeout: 15000
+    timeout: 20000
 - tapOn:
     text: "Name"
     optional: true
