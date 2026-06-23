@@ -1,476 +1,476 @@
 {
-  "batch_id": "525261e1-d38a-4dfc-8970-21c2b6892023",
+  "batch_id": "f19efe16-077d-425a-8266-84a3f07b6b6b",
   "dry_run": false,
   "source": "output/pdf/sept2026_let_extracted_questions.json",
-  "ready_rows": 4155,
-  "candidate_targets": 5491,
-  "insertable": 4625,
-  "inserted": 4625,
-  "skipped": 99,
-  "duplicates": 866,
+  "ready_rows": 5068,
+  "candidate_targets": 6717,
+  "insertable": 1224,
+  "inserted": 1224,
+  "skipped": 103,
+  "duplicates": 5493,
   "source_stats": {
     "output/pdf/sept2026_let_extracted_questions.json": {
-      "readyRows": 4155,
-      "candidateTargets": 5491,
-      "skipped": 99
+      "readyRows": 5068,
+      "candidateTargets": 6717,
+      "skipped": 103
     }
   },
   "skipped_by_reason": {
     "missing_required_choice_a_to_d": 70,
     "invalid_correct_answer_or_choice": 21,
     "question_too_short": 3,
-    "topic_mapping_missing": 5
+    "topic_mapping_missing": 9
   },
   "duplicate_samples": [
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "245",
+      "row": "1",
       "page": "1",
       "exam": "elementary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "14c04dda-07cc-48c2-b2f1-1467a5d72880"
+      "existing_id": "8bfad5b5-2fe3-45cf-9b5d-c774c6cc783b"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "245",
+      "row": "1",
       "page": "1",
       "exam": "secondary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "4e4f8f11-6630-4e7b-8d34-39a56edda74b"
+      "existing_id": "d4edb6dc-9a94-4b85-95ab-b0fbebda6376"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "248",
+      "row": "2",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "af3ff6ac-e05a-423f-aac6-8da8559ec686"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "2",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "08260904-36f5-4124-96f5-e83a1b9b776d"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "3",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8acbff8f-d0c7-494f-ab17-f137f9aef2dd"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "3",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0651488f-c62e-4de7-8b46-9641351dba88"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "4",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2aa00aab-66a3-47f3-9588-fd263751b532"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "4",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3e02c7c0-a916-4ad9-9d28-7a8018cc4072"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "5",
       "page": "1",
       "exam": "elementary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "6a78d4e5-c2e3-4a03-9764-f066875ed68c"
+      "existing_id": "e1d3b91c-e5d9-4097-8b32-94ce3edf3e17"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "248",
+      "row": "5",
       "page": "1",
       "exam": "secondary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "427e3fa4-a070-4dfd-a892-b8f6d9f22486"
+      "existing_id": "d33ae529-bbba-4a2d-a218-7080b3a5d011"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "250",
-      "page": "1",
+      "row": "6",
+      "page": "1-2",
       "exam": "elementary",
-      "topic": "gen-ed/english",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "4c65ae17-d2ad-4482-9223-a4ed1d2fef3c"
+      "existing_id": "677d70b5-9b1a-432f-ac85-4e9dc2a0ac2b"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "250",
-      "page": "1",
+      "row": "6",
+      "page": "1-2",
       "exam": "secondary",
-      "topic": "gen-ed/english",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "1d671c3c-617c-49d7-b060-ad6e1e081903"
+      "existing_id": "2258874d-672c-4790-b335-dfd81c97480d"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "251",
-      "page": "1",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "ff5dbbe8-89d0-49e5-9336-8c19af6f66bf"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "251",
-      "page": "1",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "eb35eb39-2584-4d92-b8b6-a385a8519c41"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "252",
-      "page": "1",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "ffe2384d-6368-4583-8a56-af1ddb761c55"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "252",
-      "page": "1",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "08f49492-7e03-4485-af09-6206014820f6"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "253",
-      "page": "1",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "d0e347e0-6d76-4aa3-be9a-1c974e72615d"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "253",
-      "page": "1",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "34a48c0e-7824-4106-8466-def6cd60ebfb"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "254",
-      "page": "1",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "2f6d0f6e-792a-4d0a-aa7b-2f868fce4bcb"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "254",
-      "page": "1",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "cb8ffb86-c93a-4971-b0f6-ad8c25cd3d84"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "255",
-      "page": "1",
-      "exam": "elementary",
-      "topic": "gen-ed/mathematics",
-      "reason": "duplicate_existing_content",
-      "existing_id": "9b41c423-5697-474b-ab69-7d3fc33d1ba5"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "255",
-      "page": "1",
-      "exam": "secondary",
-      "topic": "gen-ed/mathematics",
-      "reason": "duplicate_existing_content",
-      "existing_id": "bd77abfe-dc93-4ef1-b621-d3a2325d29ca"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "257",
-      "page": "2",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "685ee87c-bc1a-48c7-8d0a-56a7c0c5a2bd"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "257",
-      "page": "2",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "ae76b7b4-d901-4d67-98c2-b0672f454a89"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "258",
-      "page": "2",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "a02998c5-d3c5-4c89-89bb-cefc851a9c03"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "258",
-      "page": "2",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "ae1e8ba6-985b-4579-a4d7-38808b7387e6"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "262",
+      "row": "7",
       "page": "2",
       "exam": "elementary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "ddba328f-00dc-4a91-9cf2-824e02fb648e"
+      "existing_id": "d39fcf66-db60-4a2c-94cb-bc2705211cb1"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "262",
+      "row": "7",
       "page": "2",
       "exam": "secondary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "7dc2c4d1-d1c0-4ab4-be1f-fe05a93d5857"
+      "existing_id": "bb8ee770-8377-4812-a62c-87fb5ce7d373"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "263",
+      "row": "8",
       "page": "2",
       "exam": "elementary",
-      "topic": "gen-ed/social-science",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "e54ac34e-b149-49cd-a706-948fd9a94a38"
+      "existing_id": "d0a646d9-9252-4a79-926a-f6aff6eadede"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "263",
+      "row": "8",
       "page": "2",
       "exam": "secondary",
-      "topic": "gen-ed/social-science",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "d4ee6bb1-f054-4d7a-aa46-68f392f04a95"
+      "existing_id": "70d289d8-67f0-463a-b0c5-1b0b019dba7a"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "264",
+      "row": "9",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1d118d26-d105-4bd4-94d5-e6b9726e51f3"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "9",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3db47906-3929-4a07-9d8c-d2623ce8f138"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "10",
       "page": "2",
       "exam": "elementary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "83f8db10-3d3b-493c-b668-91a3fd78bb8e"
+      "existing_id": "719bc017-3a4b-4bb3-aa6c-e5b7dca295f0"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "264",
+      "row": "10",
       "page": "2",
       "exam": "secondary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "deb4face-c8a3-4f1f-b213-76d5a1c3e86e"
+      "existing_id": "308ba7ab-e553-4c8b-8bbd-b6a20c56b23a"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "265",
-      "page": "2",
+      "row": "11",
+      "page": "2-3",
       "exam": "elementary",
-      "topic": "gen-ed/english",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "33a33270-6b37-402b-a637-f3ec3ecc2267"
+      "existing_id": "fc6fc376-6cb2-4647-9a0b-c3b20fd67782"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "265",
-      "page": "2",
+      "row": "11",
+      "page": "2-3",
       "exam": "secondary",
-      "topic": "gen-ed/english",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "0d69d7f3-49d3-49b6-b8bc-c4fd84f523e9"
+      "existing_id": "c2bd5012-b347-4aab-8345-0df180cd85f7"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "268",
-      "page": "3",
-      "exam": "elementary",
-      "topic": "gen-ed/english",
-      "reason": "duplicate_existing_content",
-      "existing_id": "cc5677f2-1358-4052-a1fa-05b016333fed"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "268",
-      "page": "3",
-      "exam": "secondary",
-      "topic": "gen-ed/english",
-      "reason": "duplicate_existing_content",
-      "existing_id": "c6bb1085-7e0c-4a17-9966-354ea6c69bcf"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "269",
+      "row": "12",
       "page": "3",
       "exam": "elementary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "ed7a2d10-1610-497b-83d8-94e2655721d8"
+      "existing_id": "9d42069f-6840-42a8-8851-b41ba29d2b78"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "269",
+      "row": "12",
       "page": "3",
       "exam": "secondary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "81748cb0-668b-4591-bdd6-ede63093f84f"
+      "existing_id": "6011aa56-d02f-4998-9799-b1406694f509"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "270",
+      "row": "13",
       "page": "3",
       "exam": "elementary",
-      "topic": "gen-ed/mathematics",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "23d2e9fd-df0d-44cb-8666-64799d19c763"
+      "existing_id": "1508c2bf-ee39-45bf-ad61-4bf16538bd24"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "270",
+      "row": "13",
       "page": "3",
       "exam": "secondary",
-      "topic": "gen-ed/mathematics",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "8ba28dc6-1ada-4032-8abe-469e1eb6a464"
+      "existing_id": "a6213fb0-126f-4f2e-af52-caef9e7d5cbf"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "271",
-      "page": "3",
-      "exam": "elementary",
-      "topic": "gen-ed/english",
-      "reason": "duplicate_existing_content",
-      "existing_id": "a04b4696-ec82-4088-8aba-36f41898f7ce"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "271",
-      "page": "3",
-      "exam": "secondary",
-      "topic": "gen-ed/english",
-      "reason": "duplicate_existing_content",
-      "existing_id": "8bf808e5-5fdc-4e30-ba39-b0578f586dc1"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "273",
-      "page": "3",
-      "exam": "elementary",
-      "topic": "gen-ed/social-science",
-      "reason": "duplicate_existing_content",
-      "existing_id": "0d2084e4-28b0-4c6a-8c30-5f0a0a2e82a7"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "273",
-      "page": "3",
-      "exam": "secondary",
-      "topic": "gen-ed/social-science",
-      "reason": "duplicate_existing_content",
-      "existing_id": "098e6898-0ca1-4b19-8c4a-c2d8ed3f1689"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "274",
-      "page": "3",
-      "exam": "elementary",
-      "topic": "gen-ed/social-science",
-      "reason": "duplicate_existing_content",
-      "existing_id": "6a416696-66af-4b35-a375-d4ec7c4ded5e"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "274",
-      "page": "3",
-      "exam": "secondary",
-      "topic": "gen-ed/social-science",
-      "reason": "duplicate_existing_content",
-      "existing_id": "50a53810-afa6-42f8-9a30-20fe73cfd4a9"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "275",
-      "page": "3",
-      "exam": "elementary",
-      "topic": "gen-ed/social-science",
-      "reason": "duplicate_existing_content",
-      "existing_id": "09e2cb1c-e2b5-4704-ad69-e9f5e14dbf89"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "275",
-      "page": "3",
-      "exam": "secondary",
-      "topic": "gen-ed/social-science",
-      "reason": "duplicate_existing_content",
-      "existing_id": "52da4027-d7b5-4844-a223-728204556e43"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "276",
-      "page": "3",
-      "exam": "elementary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "a84b908a-dc6a-4961-be20-054f011bb17c"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "276",
-      "page": "3",
-      "exam": "secondary",
-      "topic": "gen-ed/filipino",
-      "reason": "duplicate_existing_content",
-      "existing_id": "239526ea-a6e1-4475-ba2b-22511c912f8c"
-    },
-    {
-      "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "277",
+      "row": "14",
       "page": "3",
       "exam": "elementary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "77f36883-9e44-4bc4-962a-ac2ff6cbfad2"
+      "existing_id": "f2a2141f-9935-4477-9f29-663ec2da1aa6"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "277",
+      "row": "14",
       "page": "3",
       "exam": "secondary",
       "topic": "gen-ed/english",
       "reason": "duplicate_existing_content",
-      "existing_id": "d8515d79-03a2-4952-8b20-9f0fc153899c"
+      "existing_id": "8e55044b-a0d4-46dc-b1b2-383504a3e970"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "279",
-      "page": "3",
+      "row": "15",
+      "page": "3-4",
       "exam": "elementary",
-      "topic": "gen-ed/filipino",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "b2f7a7ec-5822-42bf-934d-a26255dd5eb1"
+      "existing_id": "c028e651-1ed3-40e9-bdb8-667a632b6f57"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "279",
-      "page": "3",
+      "row": "15",
+      "page": "3-4",
       "exam": "secondary",
-      "topic": "gen-ed/filipino",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "ede1d159-000f-40b3-b235-bc201b23e9af"
+      "existing_id": "53d24a39-1a6f-4037-9ddb-3068e579d220"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "280",
-      "page": "3",
+      "row": "16",
+      "page": "4",
       "exam": "elementary",
-      "topic": "gen-ed/mathematics",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "94dff9d3-9ab3-4cfe-8efd-749b888b7f1a"
+      "existing_id": "d05b7426-26b6-42e3-9536-4eebf9b8e9c7"
     },
     {
       "source": "output/pdf/sept2026_let_extracted_questions.json",
-      "row": "280",
-      "page": "3",
+      "row": "16",
+      "page": "4",
       "exam": "secondary",
-      "topic": "gen-ed/mathematics",
+      "topic": "gen-ed/science",
       "reason": "duplicate_existing_content",
-      "existing_id": "00106cd7-4556-4595-9bd1-9c7d1c575619"
+      "existing_id": "83b982c8-ee57-45e2-a7e3-59d8b8d7c796"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "17",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5c4c958e-fea4-4cde-a9fa-37d8656ba5c6"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "17",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b78794ff-a972-4f44-933a-c9bf42997cbf"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "18",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "84ef7a84-8cd7-4f85-9080-5e170aa361b0"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "18",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c2f9c554-ae87-43e5-80dc-6c2c5ef27787"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "19",
+      "page": "4-5",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9fb4af5f-88df-4d4a-9806-38e30313775b"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "19",
+      "page": "4-5",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b838dd1f-30e7-41d3-b0a9-4547844e1347"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "20",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ee35d133-3c71-45fd-ad38-eab6234302f5"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "20",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "65c8ae2c-54e4-4148-a38a-00f8525c0ca9"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "21",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7ffe2a2a-3d2e-42f7-901e-28cc71afe89b"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "21",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "93ac8870-4143-41bc-a18c-c472fc89b057"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "22",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "71b937db-be40-4c01-92f1-f58e9e5d7063"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "22",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "97e2c448-66cb-46cd-8fc4-501dbd2ef3f4"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "23",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5201cd48-d1dd-413c-9708-a8fcb1a44744"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "23",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c884ac4b-3f8e-4e7f-835f-c4f17bf975ef"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "24",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5513f3e7-f57f-4353-aa68-78f5be9d2483"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "24",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "45d4dcd2-a18b-49f2-98a7-98d3bc5a9c99"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "25",
+      "page": "5-6",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b04ae228-c06e-4fe5-bc2f-13fa73d8e7d9"
+    },
+    {
+      "source": "output/pdf/sept2026_let_extracted_questions.json",
+      "row": "25",
+      "page": "5-6",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e4079f61-553e-4f41-95de-da87b34bbf43"
     }
   ],
   "skipped_samples": [
@@ -630,6 +630,13 @@
       "reason": "missing_required_choice_a_to_d"
     },
     {
+      "row": "1640",
+      "page": "7-8",
+      "exam": "elementary",
+      "subject": "Biological Science",
+      "reason": "topic_mapping_missing"
+    },
+    {
       "row": "2422",
       "page": "7-8",
       "reason": "missing_required_choice_a_to_d"
@@ -748,10 +755,31 @@
       "reason": "missing_required_choice_a_to_d"
     },
     {
+      "row": "4546",
+      "page": "21-22",
+      "exam": "elementary",
+      "subject": "Elementary / Cannot Determine",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "4546",
+      "page": "21-22",
+      "exam": "secondary",
+      "subject": "Elementary / Cannot Determine",
+      "reason": "topic_mapping_missing"
+    },
+    {
       "row": "4824",
       "page": "4",
       "exam": "elementary",
       "subject": "Arts",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "5362",
+      "page": "4",
+      "exam": "elementary",
+      "subject": "Health",
       "reason": "topic_mapping_missing"
     },
     {
@@ -962,21 +990,6 @@
     {
       "row": "10165",
       "page": "13-14",
-      "reason": "invalid_correct_answer_or_choice"
-    },
-    {
-      "row": "10232",
-      "page": "4",
-      "reason": "missing_required_choice_a_to_d"
-    },
-    {
-      "row": "10280",
-      "page": "5",
-      "reason": "missing_required_choice_a_to_d"
-    },
-    {
-      "row": "11314",
-      "page": "1",
       "reason": "invalid_correct_answer_or_choice"
     }
   ]

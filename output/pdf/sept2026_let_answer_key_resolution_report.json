@@ -1,0 +1,1006 @@
+{
+  "resolved_answers": 945,
+  "newly_ready_for_upload": 913,
+  "status_counts": {
+    "Ready for Upload": 5068,
+    "Needs Review": 2545,
+    "Duplicate": 2021,
+    "Needs Image Extraction": 17,
+    "Incomplete": 402,
+    "Needs Answer": 1982
+  },
+  "sources_processed": 128,
+  "source_reports": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/2025-2026 UPDATE (GEN ED AND PROF ED)/Latest ProfEd P1.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/2025-2026 UPDATE (GEN ED AND PROF ED)/Latest ProfEd P2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 1,
+      "letter_answers_found": 148,
+      "answer_texts_found": 1,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/2025-2026 UPDATE (GEN ED AND PROF ED)/Latest ProfEd P3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 21,
+      "letter_answers_found": 13,
+      "answer_texts_found": 6,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/A. Part 4 General Education LET Reviewers.pdf",
+      "status": "processed",
+      "needs_answer_rows": 1,
+      "letter_answers_found": 149,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-150 No Keys.pdf",
+      "status": "processed",
+      "needs_answer_rows": 121,
+      "letter_answers_found": 17,
+      "answer_texts_found": 10,
+      "resolved": 11
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Biological-Science-review.pdf",
+      "status": "processed",
+      "needs_answer_rows": 96,
+      "letter_answers_found": 100,
+      "answer_texts_found": 0,
+      "resolved": 96
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Gen Ed 1-35.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Teach Like a Champion 49 Techniques that Put Students on the Path to College.pdf",
+      "status": "processed",
+      "needs_answer_rows": 4,
+      "letter_answers_found": 9,
+      "answer_texts_found": 10,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/A PNU LET Reviewer for Professional Education.pdf",
+      "status": "processed",
+      "needs_answer_rows": 1,
+      "letter_answers_found": 44,
+      "answer_texts_found": 28,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Teachers Sociology.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. 3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 47,
+      "letter_answers_found": 50,
+      "answer_texts_found": 0,
+      "resolved": 47
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. 5.pdf",
+      "status": "processed",
+      "needs_answer_rows": 70,
+      "letter_answers_found": 100,
+      "answer_texts_found": 0,
+      "resolved": 70
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/A. Preboard-Answer-Key-Profed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 182,
+      "letter_answers_found": 8,
+      "answer_texts_found": 4,
+      "resolved": 8
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Professional-Education-A.pdf",
+      "status": "processed",
+      "needs_answer_rows": 6,
+      "letter_answers_found": 0,
+      "answer_texts_found": 2,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/D. FINAL COACHING 2026/A. Profed Final Coaching 2025.pdf",
+      "status": "processed",
+      "needs_answer_rows": 144,
+      "letter_answers_found": 2,
+      "answer_texts_found": 2,
+      "resolved": 2
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/D. FINAL COACHING 2026/B. Final Coaching 2025.pdf",
+      "status": "processed",
+      "needs_answer_rows": 30,
+      "letter_answers_found": 273,
+      "answer_texts_found": 136,
+      "resolved": 16
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/D. FINAL COACHING 2026/C. Gen Ed Final Coaching 2024.pdf",
+      "status": "processed",
+      "needs_answer_rows": 3,
+      "letter_answers_found": 13,
+      "answer_texts_found": 0,
+      "resolved": 1
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/D. FINAL COACHING 2026/C. Gen Ed Final Coaching 2025.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/BLEPT_ProfEd_Assessment_of_Learning_-_M_Balagtas.pdf",
+      "status": "processed",
+      "needs_answer_rows": 2,
+      "letter_answers_found": 0,
+      "answer_texts_found": 10,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Essentialism-Perennialism.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_PROF_ED_FILE_2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 4,
+      "letter_answers_found": 42,
+      "answer_texts_found": 30,
+      "resolved": 1
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_Reviewer_-_Pillars_of_Learning_1.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_Reviewer_Notes.pdf",
+      "status": "processed",
+      "needs_answer_rows": 2,
+      "letter_answers_found": 1,
+      "answer_texts_found": 8,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROFED12_ans.pdf",
+      "status": "processed",
+      "needs_answer_rows": 36,
+      "letter_answers_found": 39,
+      "answer_texts_found": 0,
+      "resolved": 35
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/SIMULATED_TEST-CURRICULUM_DEVELOPMENT_AND_DEVELOPMENTAL_READING.pdf",
+      "status": "processed",
+      "needs_answer_rows": 3,
+      "letter_answers_found": 39,
+      "answer_texts_found": 0,
+      "resolved": 3
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/SIMULATED_TEST-EDUCATIONAL_TEACHNOLOGY.pdf",
+      "status": "processed",
+      "needs_answer_rows": 15,
+      "letter_answers_found": 100,
+      "answer_texts_found": 0,
+      "resolved": 15
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/SIMULATED_TEST_PRINCIPLES_AND_STRATEGIES_OF_TEACHING.pdf",
+      "status": "processed",
+      "needs_answer_rows": 15,
+      "letter_answers_found": 100,
+      "answer_texts_found": 0,
+      "resolved": 15
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/Yellowbook.pdf",
+      "status": "processed",
+      "needs_answer_rows": 45,
+      "letter_answers_found": 501,
+      "answer_texts_found": 6,
+      "resolved": 29
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set1 Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set10 Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set2 Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set3 Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 49,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set4 Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 25,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set5Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 10,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set6Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 5,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set7 Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set8Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 47,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set9 Early Childhood Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET1 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 6,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET10 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 7,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET2 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET3 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET4 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET5 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 7,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET6 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET7 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET8 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Special Needs Education-/SET9 Special Needs Ed.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Biological Science-/BSED Biological Science P1.pdf",
+      "status": "processed",
+      "needs_answer_rows": 50,
+      "letter_answers_found": 0,
+      "answer_texts_found": 37,
+      "resolved": 35
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Biological Science-/BSED Biological Science P4.pdf",
+      "status": "processed",
+      "needs_answer_rows": 49,
+      "letter_answers_found": 1,
+      "answer_texts_found": 34,
+      "resolved": 31
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P1.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P10.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P4.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P5.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P6.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P7.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P8.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-/BSED CAEd P9.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - English-/BSED English Part3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 2,
+      "letter_answers_found": 48,
+      "answer_texts_found": 1,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - English-/SET1 Drill&Booster English.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - English-/SET2 Drill&Booster English.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Filipino-/BSED Filipino Part4.pdf",
+      "status": "processed",
+      "needs_answer_rows": 50,
+      "letter_answers_found": 0,
+      "answer_texts_found": 45,
+      "resolved": 23
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Filipino-/BSED Filipino Part5.pdf",
+      "status": "processed",
+      "needs_answer_rows": 50,
+      "letter_answers_found": 0,
+      "answer_texts_found": 40,
+      "resolved": 37
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Filipino-/BSED Filipino Part6.pdf",
+      "status": "processed",
+      "needs_answer_rows": 50,
+      "letter_answers_found": 0,
+      "answer_texts_found": 44,
+      "resolved": 41
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - General Science-/BSED General Science A.pdf",
+      "status": "processed",
+      "needs_answer_rows": 48,
+      "letter_answers_found": 0,
+      "answer_texts_found": 34,
+      "resolved": 32
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - General Science-/BSED General Science B.pdf",
+      "status": "processed",
+      "needs_answer_rows": 46,
+      "letter_answers_found": 1,
+      "answer_texts_found": 34,
+      "resolved": 32
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - General Science-/BSED General Science C.pdf",
+      "status": "processed",
+      "needs_answer_rows": 48,
+      "letter_answers_found": 0,
+      "answer_texts_found": 33,
+      "resolved": 32
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - General Science-/BSED General Science P4.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - General Science-/BSED General Science P7.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - General Science-/BSED General Science P8.pdf",
+      "status": "no_key_section",
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P1.pdf",
+      "status": "processed",
+      "needs_answer_rows": 6,
+      "letter_answers_found": 2,
+      "answer_texts_found": 10,
+      "resolved": 2
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P10.pdf",
+      "status": "processed",
+      "needs_answer_rows": 2,
+      "letter_answers_found": 2,
+      "answer_texts_found": 11,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 2,
+      "letter_answers_found": 2,
+      "answer_texts_found": 10,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 6,
+      "letter_answers_found": 0,
+      "answer_texts_found": 13,
+      "resolved": 1
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P4.pdf",
+      "status": "processed",
+      "needs_answer_rows": 1,
+      "letter_answers_found": 1,
+      "answer_texts_found": 14,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P5.pdf",
+      "status": "processed",
+      "needs_answer_rows": 3,
+      "letter_answers_found": 1,
+      "answer_texts_found": 14,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P6.pdf",
+      "status": "processed",
+      "needs_answer_rows": 4,
+      "letter_answers_found": 1,
+      "answer_texts_found": 13,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P7.pdf",
+      "status": "processed",
+      "needs_answer_rows": 1,
+      "letter_answers_found": 0,
+      "answer_texts_found": 8,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P8.pdf",
+      "status": "processed",
+      "needs_answer_rows": 7,
+      "letter_answers_found": 2,
+      "answer_texts_found": 9,
+      "resolved": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-/BSED Mathematics P9.pdf",
+      "status": "processed",
+      "needs_answer_rows": 2,
+      "letter_answers_found": 1,
+      "answer_texts_found": 9,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P1.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P10.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 2,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P5.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P6.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P7.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P8.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Education-/BSED Physical Ed P9.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Science-/BSED Physical Science A.pdf",
+      "status": "processed",
+      "needs_answer_rows": 48,
+      "letter_answers_found": 1,
+      "answer_texts_found": 35,
+      "resolved": 32
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Science-/BSED Physical Science B.pdf",
+      "status": "processed",
+      "needs_answer_rows": 47,
+      "letter_answers_found": 1,
+      "answer_texts_found": 30,
+      "resolved": 27
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Social Science & Social Studies-/BSED Social Studies-Science P3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 1,
+      "letter_answers_found": 149,
+      "answer_texts_found": 0,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Social Science & Social Studies-/BSED Social Studies-Science P6.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 1,
+      "answer_texts_found": 6,
+      "resolved": 5
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Social Science & Social Studies-/BSED Social Studies-Science P9.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 0,
+      "answer_texts_found": 6,
+      "resolved": 3
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Home Economics-/BSED TLEd-HE P1.pdf",
+      "status": "processed",
+      "needs_answer_rows": 45,
+      "letter_answers_found": 0,
+      "answer_texts_found": 27,
+      "resolved": 24
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Home Economics-/BSED TLEd-HE P2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 45,
+      "letter_answers_found": 0,
+      "answer_texts_found": 26,
+      "resolved": 23
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Home Economics-/BSED TLEd-HE P4.pdf",
+      "status": "processed",
+      "needs_answer_rows": 44,
+      "letter_answers_found": 0,
+      "answer_texts_found": 29,
+      "resolved": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P1.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 5,
+      "resolved": 3
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P10.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 8,
+      "resolved": 7
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 1,
+      "answer_texts_found": 7,
+      "resolved": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 1,
+      "answer_texts_found": 6,
+      "resolved": 5
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P4.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 1,
+      "answer_texts_found": 6,
+      "resolved": 5
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P5.pdf",
+      "status": "processed",
+      "needs_answer_rows": 7,
+      "letter_answers_found": 2,
+      "answer_texts_found": 6,
+      "resolved": 2
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P6.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 7,
+      "resolved": 6
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P7.pdf",
+      "status": "processed",
+      "needs_answer_rows": 7,
+      "letter_answers_found": 2,
+      "answer_texts_found": 4,
+      "resolved": 3
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P8.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 8,
+      "resolved": 7
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-/BSED TLEd-IA P9.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 1,
+      "answer_texts_found": 6,
+      "resolved": 5
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-/BSED TLEd-ICT P1.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 1,
+      "answer_texts_found": 5,
+      "resolved": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-/BSED TLEd-ICT P10.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 6,
+      "resolved": 6
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-/BSED TLEd-ICT P2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 1,
+      "answer_texts_found": 5,
+      "resolved": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-/BSED TLEd-ICT P3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 0,
+      "answer_texts_found": 6,
+      "resolved": 5
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-/BSED TLEd-ICT P4.pdf",
+      "status": "processed",
+      "needs_answer_rows": 9,
+      "letter_answers_found": 1,
+      "answer_texts_found": 7,
+      "resolved": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-/BSED TLEd-ICT P5.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 2,
+      "answer_texts_found": 9,
+      "resolved": 6
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-/BSED TLEd-ICT P6.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 1,
+      "answer_texts_found": 6,
+      "resolved": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-/BSED TLEd-ICT P9.pdf",
+      "status": "processed",
+      "needs_answer_rows": 8,
+      "letter_answers_found": 3,
+      "answer_texts_found": 8,
+      "resolved": 5
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Technology-Vocational Teacher Education-/BSED TVTED P10.pdf",
+      "status": "processed",
+      "needs_answer_rows": 1,
+      "letter_answers_found": 49,
+      "answer_texts_found": 3,
+      "resolved": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P1.pdf",
+      "status": "processed",
+      "needs_answer_rows": 48,
+      "letter_answers_found": 0,
+      "answer_texts_found": 29,
+      "resolved": 2
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P10.pdf",
+      "status": "processed",
+      "needs_answer_rows": 50,
+      "letter_answers_found": 0,
+      "answer_texts_found": 34,
+      "resolved": 14
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P2.pdf",
+      "status": "processed",
+      "needs_answer_rows": 49,
+      "letter_answers_found": 0,
+      "answer_texts_found": 41,
+      "resolved": 2
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P3.pdf",
+      "status": "processed",
+      "needs_answer_rows": 48,
+      "letter_answers_found": 0,
+      "answer_texts_found": 35,
+      "resolved": 2
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P4.pdf",
+      "status": "processed",
+      "needs_answer_rows": 49,
+      "letter_answers_found": 0,
+      "answer_texts_found": 34,
+      "resolved": 2
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P5.pdf",
+      "status": "processed",
+      "needs_answer_rows": 47,
+      "letter_answers_found": 0,
+      "answer_texts_found": 33,
+      "resolved": 1
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P6.pdf",
+      "status": "processed",
+      "needs_answer_rows": 49,
+      "letter_answers_found": 0,
+      "answer_texts_found": 37,
+      "resolved": 24
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P7.pdf",
+      "status": "processed",
+      "needs_answer_rows": 47,
+      "letter_answers_found": 0,
+      "answer_texts_found": 38,
+      "resolved": 27
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P8.pdf",
+      "status": "processed",
+      "needs_answer_rows": 49,
+      "letter_answers_found": 0,
+      "answer_texts_found": 38,
+      "resolved": 7
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-/BSED Values Ed P9.pdf",
+      "status": "processed",
+      "needs_answer_rows": 48,
+      "letter_answers_found": 0,
+      "answer_texts_found": 35,
+      "resolved": 21
+    }
+  ]
+}

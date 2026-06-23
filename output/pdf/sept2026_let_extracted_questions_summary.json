@@ -4,9 +4,9 @@
   "total_pdfs_seen": 258,
   "total_pdfs_processed": 247,
   "total_questions_found": 12035,
-  "total_ready_for_upload": 4155,
-  "total_needing_review": 2932,
-  "total_without_answer_key": 2927,
+  "total_ready_for_upload": 5068,
+  "total_needing_review": 2964,
+  "total_without_answer_key": 1982,
   "total_duplicates_detected": 2021,
   "total_questions_with_images": 24,
   "total_questions_with_image_based_answer_choices": 0,
@@ -14,12 +14,12 @@
   "total_secondary_questions": 5401,
   "total_both_or_cannot_determine_questions": 6367,
   "status_counts": {
-    "Ready for Upload": 4155,
+    "Ready for Upload": 5068,
     "Needs Review": 2545,
     "Duplicate": 2021,
     "Needs Image Extraction": 17,
-    "Incomplete": 370,
-    "Needs Answer": 2927
+    "Incomplete": 402,
+    "Needs Answer": 1982
   },
   "exam_type_counts": {
     "Both": 6367,
