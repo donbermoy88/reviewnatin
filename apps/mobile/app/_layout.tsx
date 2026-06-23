@@ -21,13 +21,16 @@ import { NotificationTapHandler } from '../components/notification-tap-handler';
 import { OfflineBanner } from '../components/offline-banner';
 import { OfflineQueueFlusher } from '../components/offline-queue-flusher';
 import { initializeMobileAds } from '../lib/ads/init';
+import { runAfterInteractions } from '../lib/performance/defer-after-interaction';
 
 function ThemedStack() {
   const { isDark } = usePreferences();
   const { colors } = useAppTheme();
 
   useEffect(() => {
-    void initializeMobileAds();
+    runAfterInteractions(() => {
+      void initializeMobileAds();
+    });
   }, []);
 
   return (

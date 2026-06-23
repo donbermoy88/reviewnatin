@@ -57,13 +57,24 @@ See [android-beta-program-phase-4.md](./android-beta-program-phase-4.md) and [an
 - [x] `npm run beta:phase4:verify`
 - [ ] PostHog live smoke on preview build (EAS env)
 
+## Phase 5 — Performance & subscription (2026-06-23)
+
+See [android-beta-program-phase-5.md](./android-beta-program-phase-5.md).
+
+- [x] Defer dashboard charts + AdMob after first interaction
+- [x] Free daily limit strip + exam countdown Plus CTA
+- [x] DB-authoritative pricing + web checkout copy
+- [x] `npm run beta:phase5:verify`
+- [ ] Maestro premium subscribe on build 34+
+
 ## Automated gates
 
-- [x] `npm run mobile:test` passes (Vitest) — **124/124 pass (2026-06-22)**
+- [x] `npm run mobile:test` passes (Vitest) — **144/144 pass (2026-06-23)**
 - [x] `npm run beta:phase1:verify` passes locally
 - [x] `npm run beta:phase2:verify` passes locally
 - [x] `npm run beta:phase3:verify` passes locally
 - [x] `npm run beta:phase4:verify` passes locally
+- [x] `npm run beta:phase5:verify` passes locally
 - [ ] Product UX audit P0 items shipped — see [product-experience-audit-2026-06-22.md](./product-experience-audit-2026-06-22.md)
 - [ ] `npm run ci:local` passes (if touching shared packages)
 - [ ] `npm run release:check:android` passes (production AAB only)

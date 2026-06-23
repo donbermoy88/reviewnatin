@@ -5,7 +5,7 @@
 **Ship candidate:** [Build 28](./beta-distribution-build-28.md)
 
 Parent program: [android-beta-program.md](./android-beta-program.md)  
-Prior: [Phase 3 — Onboarding](./android-beta-program-phase-3.md) · Next: Phase 5 — Performance & subscription
+Prior: [Phase 3 — Onboarding](./android-beta-program-phase-3.md) · Next: [Phase 5 — Performance & subscription](./android-beta-program-phase-5.md)
 
 PostHog setup: [analytics-posthog.md](./analytics-posthog.md)
 

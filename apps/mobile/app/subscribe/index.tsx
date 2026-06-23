@@ -22,6 +22,16 @@ import { trackEvent } from '../../lib/analytics/events';
 import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
 import { preferWebCheckout } from '../../lib/iap/availability';
 import {
+  planMonthlyEquivalent,
+  resolveProductPrice,
+  savingsPercent,
+} from '../../lib/subscription/pricing-display';
+import {
+  WEB_CHECKOUT_BETA_BANNER,
+  WEB_CHECKOUT_TRIAL_NOTE,
+  WEB_CHECKOUT_STICKY_HINT,
+} from '../../lib/subscription/checkout-copy';
+import {
   clearPendingCheckoutRef,
   getPendingCheckoutRef,
   savePendingCheckoutRef,
@@ -121,10 +131,6 @@ function getPlusPlanMeta(sku: string): PlusPlanMeta {
     featureIntro: 'Includes:',
     features: MONTHLY_FEATURES,
   };
-}
-
-function formatPeso(amount: number): string {
-  return `₱${amount.toLocaleString('en-PH')}`;
 }
 
 export default function SubscribeScreen() {
@@ -254,24 +260,14 @@ export default function SubscribeScreen() {
 
   const selectedProduct = sortedPlus.find((p) => p.id === selectedPlanId) ?? null;
 
-  // Source of truth for what the user is charged is the store's localized price.
-  // Fall back to the DB price only when the store is unavailable (dev/guest).
-  const resolvePrice = (product: ProductRow): { display: string; amount: number } => {
-    const store = storePrices[product.sku];
-    const amount = typeof store?.amount === 'number' && store.amount > 0 ? store.amount : product.pricePhp;
-    return { display: store?.displayPrice ?? formatPeso(product.pricePhp), amount };
-  };
+  const resolvePrice = (product: ProductRow): { display: string; amount: number } =>
+    resolveProductPrice(product, storePrices);
 
-  // Per-month savings are benchmarked against the actual monthly plan's resolved
-  // price, not a hardcoded constant, so the "save X%" label stays truthful.
   const monthlyPlan = sortedPlus.find((p) => p.sku.toLowerCase().includes('monthly'));
   const monthlyBaseAmount = monthlyPlan ? resolvePrice(monthlyPlan).amount : 0;
 
   function planMonthlyEquiv(product: ProductRow): number {
-    const { amount } = resolvePrice(product);
-    if (isSixMonthPlus(product.sku)) return Math.round(amount / 6);
-    if (isYearlyPlus(product.sku)) return Math.round(amount / 12);
-    return amount;
+    return planMonthlyEquivalent(resolvePrice(product).amount, product.sku);
   }
 
   function planSubLabel(product: ProductRow): string {
@@ -280,10 +276,8 @@ export default function SubscribeScreen() {
       const total = resolvePrice(product).amount;
       const baselineMonths = isSixMonthPlus(product.sku) ? 6 : 12;
       const baseline = monthlyBaseAmount * baselineMonths;
-      const savePct = baseline > total ? Math.round(((baseline - total) / baseline) * 100) : 0;
-      return savePct > 0
-        ? `₱${monthly}/mo · save ${savePct}%`
-        : `₱${monthly}/mo`;
+      const savePct = savingsPercent(total, baseline);
+      return savePct > 0 ? `₱${monthly}/mo · save ${savePct}%` : `₱${monthly}/mo`;
     }
     return 'Starter access';
   }
@@ -398,7 +392,7 @@ export default function SubscribeScreen() {
         ? 'Processing…'
         : selectedProduct
           ? webCheckoutPrimary && !isDevBuild
-            ? `Magbayad via GCash/Maya · ${resolvePrice(selectedProduct).display}`
+            ? WEB_CHECKOUT_STICKY_HINT(resolvePrice(selectedProduct).display)
             : `Start ${planShortName(selectedProduct)} · ${resolvePrice(selectedProduct).display}`
           : 'Choose a plan';
 
@@ -565,9 +559,14 @@ export default function SubscribeScreen() {
         {webCheckoutPrimary && !hasAccess && user ? (
           <View style={styles.betaBannerDark}>
             <Ionicons name="phone-portrait-outline" size={14} color={colors.accent} />
-            <Text style={styles.betaBannerDarkText}>
-              Beta APK — magbayad via GCash o Maya web checkout. Google Play billing darating kapag live na sa Play Store.
-            </Text>
+            <Text style={styles.betaBannerDarkText}>{WEB_CHECKOUT_BETA_BANNER}</Text>
+          </View>
+        ) : null}
+
+        {webCheckoutPrimary && !hasAccess && user ? (
+          <View style={[styles.betaBannerDark, { marginTop: spacing.xs }]}>
+            <Ionicons name="information-circle-outline" size={14} color={colors.accent} />
+            <Text style={styles.betaBannerDarkText}>{WEB_CHECKOUT_TRIAL_NOTE}</Text>
           </View>
         ) : null}
 
