@@ -8,6 +8,18 @@ export type TopicRow = {
   sort_order: number;
 };
 
+const LET_SECONDARY_MAJOR_SLUGS = new Set([
+  'english',
+  'mathematics',
+  'filipino',
+  'social-studies-araling-panlipunan',
+  'biological-science',
+  'physical-science',
+  'values-education',
+  'mapeh',
+  'tle',
+]);
+
 export async function fetchTopicsBySubjectSlug(
   examSlug: string,
   subjectSlug: string
@@ -28,7 +40,11 @@ export async function fetchTopicsBySubjectSlug(
     .order('sort_order');
 
   if (error) throw error;
-  return data ?? [];
+  const rows = data ?? [];
+  if (examSlug === 'let-secondary' && subjectSlug === 'major') {
+    return rows.filter((topic) => LET_SECONDARY_MAJOR_SLUGS.has(topic.slug));
+  }
+  return rows;
 }
 
 /**

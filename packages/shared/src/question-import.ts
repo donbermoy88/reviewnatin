@@ -54,6 +54,18 @@ export type ValidatedQuestionImportRow = QuestionImportRow & {
   stemKey: string;
 };
 
+const APPROVED_LET_SECONDARY_MAJOR_TOPICS = new Set([
+  'english',
+  'mathematics',
+  'filipino',
+  'social-studies-araling-panlipunan',
+  'biological-science',
+  'physical-science',
+  'values-education',
+  'mapeh',
+  'tle',
+]);
+
 function parseCsvLine(line: string): string[] {
   const fields: string[] = [];
   let current = '';
@@ -170,6 +182,20 @@ export function validateQuestionImportRows(
         rowNumber: row.rowNumber,
         field: 'topic_slug',
         message: `Unknown topic "${row.topic_slug}" under ${row.exam_type_slug}/${row.subject_slug}`,
+      });
+    }
+
+    if (
+      row.exam_type_slug === 'let-secondary' &&
+      row.subject_slug === 'major' &&
+      row.topic_slug &&
+      !APPROVED_LET_SECONDARY_MAJOR_TOPICS.has(row.topic_slug)
+    ) {
+      rowErrors.push({
+        rowNumber: row.rowNumber,
+        field: 'topic_slug',
+        message:
+          'LET Secondary major must be one of the approved 2026 major slugs. Use biological-science or physical-science instead of science, and tle instead of Home Economics/ICT/TVTEd sub-areas.',
       });
     }
 

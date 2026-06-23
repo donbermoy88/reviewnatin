@@ -1,0 +1,304 @@
+{
+  "generated_at": "2026-06-23T16:15:21.099Z",
+  "taxonomy_version": "LET_SECONDARY_MAJOR_TAXONOMY_2026",
+  "exam_totals": [
+    {
+      "name": "LET Elementary",
+      "published": 5047,
+      "slug": "let-elementary",
+      "total": 5068
+    },
+    {
+      "name": "LET Secondary",
+      "published": 8364,
+      "slug": "let-secondary",
+      "total": 8385
+    }
+  ],
+  "secondary_major_topics": [
+    {
+      "name": "English",
+      "published": 289,
+      "slug": "english",
+      "sort_order": 1,
+      "total": 289
+    },
+    {
+      "name": "Mathematics",
+      "published": 45,
+      "slug": "mathematics",
+      "sort_order": 2,
+      "total": 45
+    },
+    {
+      "name": "Filipino",
+      "published": 499,
+      "slug": "filipino",
+      "sort_order": 3,
+      "total": 499
+    },
+    {
+      "name": "Social Studies / Araling Panlipunan",
+      "published": 453,
+      "slug": "social-studies-araling-panlipunan",
+      "sort_order": 4,
+      "total": 453
+    },
+    {
+      "name": "Biological Science",
+      "published": 465,
+      "slug": "biological-science",
+      "sort_order": 5,
+      "total": 465
+    },
+    {
+      "name": "Physical Science",
+      "published": 430,
+      "slug": "physical-science",
+      "sort_order": 6,
+      "total": 430
+    },
+    {
+      "name": "Values Education",
+      "published": 88,
+      "slug": "values-education",
+      "sort_order": 7,
+      "total": 88
+    },
+    {
+      "name": "MAPEH",
+      "published": 552,
+      "slug": "mapeh",
+      "sort_order": 8,
+      "total": 552
+    },
+    {
+      "name": "Technology and Livelihood Education (TLE)",
+      "published": 523,
+      "slug": "tle",
+      "sort_order": 9,
+      "total": 523
+    },
+    {
+      "name": "Special Needs Education",
+      "published": 0,
+      "slug": "special-needs-education",
+      "sort_order": 13,
+      "total": 0
+    },
+    {
+      "name": "Early Childhood Education",
+      "published": 0,
+      "slug": "early-childhood-education",
+      "sort_order": 14,
+      "total": 0
+    },
+    {
+      "name": "Science Review Needed",
+      "published": 31,
+      "slug": "science-review-needed",
+      "sort_order": 100,
+      "total": 31
+    },
+    {
+      "name": "Home Economics (Legacy - use TLE)",
+      "published": 0,
+      "slug": "home-economics",
+      "sort_order": 109,
+      "total": 0
+    },
+    {
+      "name": "ICT (Legacy - use TLE)",
+      "published": 0,
+      "slug": "ict",
+      "sort_order": 110,
+      "total": 0
+    },
+    {
+      "name": "Industrial Arts (Legacy - use TLE)",
+      "published": 0,
+      "slug": "industrial-arts",
+      "sort_order": 111,
+      "total": 0
+    },
+    {
+      "name": "Agriculture & Fishery Arts (Legacy - use TLE)",
+      "published": 0,
+      "slug": "agriculture-fishery-arts",
+      "sort_order": 112,
+      "total": 0
+    },
+    {
+      "name": "Technical-Vocational Education (Legacy - use TLE)",
+      "published": 0,
+      "slug": "tvted",
+      "sort_order": 113,
+      "total": 0
+    },
+    {
+      "name": "Science (Legacy - split into Biological/Physical)",
+      "published": 0,
+      "slug": "science",
+      "sort_order": 114,
+      "total": 0
+    }
+  ],
+  "app_visible_secondary_majors": [
+    {
+      "name": "English",
+      "published": 289,
+      "slug": "english",
+      "sort_order": 1,
+      "total": 289
+    },
+    {
+      "name": "Mathematics",
+      "published": 45,
+      "slug": "mathematics",
+      "sort_order": 2,
+      "total": 45
+    },
+    {
+      "name": "Filipino",
+      "published": 499,
+      "slug": "filipino",
+      "sort_order": 3,
+      "total": 499
+    },
+    {
+      "name": "Social Studies / Araling Panlipunan",
+      "published": 453,
+      "slug": "social-studies-araling-panlipunan",
+      "sort_order": 4,
+      "total": 453
+    },
+    {
+      "name": "Biological Science",
+      "published": 465,
+      "slug": "biological-science",
+      "sort_order": 5,
+      "total": 465
+    },
+    {
+      "name": "Physical Science",
+      "published": 430,
+      "slug": "physical-science",
+      "sort_order": 6,
+      "total": 430
+    },
+    {
+      "name": "Values Education",
+      "published": 88,
+      "slug": "values-education",
+      "sort_order": 7,
+      "total": 88
+    },
+    {
+      "name": "MAPEH",
+      "published": 552,
+      "slug": "mapeh",
+      "sort_order": 8,
+      "total": 552
+    },
+    {
+      "name": "Technology and Livelihood Education (TLE)",
+      "published": 523,
+      "slug": "tle",
+      "sort_order": 9,
+      "total": 523
+    }
+  ],
+  "manual_review_bucket": [
+    {
+      "name": "Science Review Needed",
+      "published": 31,
+      "slug": "science-review-needed",
+      "sort_order": 100,
+      "total": 31
+    }
+  ],
+  "legacy_or_hidden_secondary_major_topics": [
+    {
+      "name": "Special Needs Education",
+      "published": 0,
+      "slug": "special-needs-education",
+      "sort_order": 13,
+      "total": 0
+    },
+    {
+      "name": "Early Childhood Education",
+      "published": 0,
+      "slug": "early-childhood-education",
+      "sort_order": 14,
+      "total": 0
+    },
+    {
+      "name": "Home Economics (Legacy - use TLE)",
+      "published": 0,
+      "slug": "home-economics",
+      "sort_order": 109,
+      "total": 0
+    },
+    {
+      "name": "ICT (Legacy - use TLE)",
+      "published": 0,
+      "slug": "ict",
+      "sort_order": 110,
+      "total": 0
+    },
+    {
+      "name": "Industrial Arts (Legacy - use TLE)",
+      "published": 0,
+      "slug": "industrial-arts",
+      "sort_order": 111,
+      "total": 0
+    },
+    {
+      "name": "Agriculture & Fishery Arts (Legacy - use TLE)",
+      "published": 0,
+      "slug": "agriculture-fishery-arts",
+      "sort_order": 112,
+      "total": 0
+    },
+    {
+      "name": "Technical-Vocational Education (Legacy - use TLE)",
+      "published": 0,
+      "slug": "tvted",
+      "sort_order": 113,
+      "total": 0
+    },
+    {
+      "name": "Science (Legacy - split into Biological/Physical)",
+      "published": 0,
+      "slug": "science",
+      "sort_order": 114,
+      "total": 0
+    }
+  ],
+  "safeguards": [
+    {
+      "check_name": "backup_count",
+      "value": 3375
+    },
+    {
+      "check_name": "manual_review_count",
+      "value": 31
+    },
+    {
+      "check_name": "missing_question_ids",
+      "value": 0
+    },
+    {
+      "check_name": "legacy_topics_with_questions",
+      "value": 0
+    },
+    {
+      "check_name": "secondary_major_total",
+      "value": 3375
+    },
+    {
+      "check_name": "secondary_major_published",
+      "value": 3375
+    }
+  ]
+}

@@ -103,10 +103,13 @@ export function getExamCategoryLabel(slug: string): string {
 export const LET_SECONDARY_MAJORS = [
   { slug: 'english', name: 'English' },
   { slug: 'mathematics', name: 'Mathematics' },
+  { slug: 'filipino', name: 'Filipino' },
+  { slug: 'social-studies-araling-panlipunan', name: 'Social Studies / Araling Panlipunan' },
   { slug: 'biological-science', name: 'Biological Science' },
   { slug: 'physical-science', name: 'Physical Science' },
-  { slug: 'filipino', name: 'Filipino' },
-  { slug: 'social-studies', name: 'Social Studies' },
+  { slug: 'values-education', name: 'Values Education' },
+  { slug: 'mapeh', name: 'MAPEH' },
+  { slug: 'tle', name: 'Technology and Livelihood Education (TLE)' },
 ] as const;
 
 export type OnboardingLevel = 'beginner' | 'average' | 'advanced';

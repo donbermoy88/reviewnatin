@@ -146,30 +146,69 @@ function professionalEducationTopic(row) {
   return ['prof-ed', 'principles-of-teaching'];
 }
 
+function slugify(value) {
+  return String(value ?? '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function majorLabel(slug) {
+  if (slug === 'social-studies-araling-panlipunan') return 'Social Studies / Araling Panlipunan';
+  if (slug === 'biological-science') return 'Biological Science';
+  if (slug === 'physical-science') return 'Physical Science';
+  if (slug === 'values-education') return 'Values Education';
+  if (slug === 'mapeh') return 'MAPEH';
+  if (slug === 'tle') return 'Technology and Livelihood Education (TLE)';
+  return slug.split('-').map((part) => part[0]?.toUpperCase() + part.slice(1)).join(' ');
+}
+
+function classifySecondaryScience(row) {
+  const text = `${row.Question ?? ''} ${row['Choice A'] ?? ''} ${row['Choice B'] ?? ''} ${row['Choice C'] ?? ''} ${row['Choice D'] ?? ''} ${row['Source Path'] ?? ''} ${row['Source PDF'] ?? ''}`.toLowerCase();
+  if (/biological science|biology|botany|zoology|cell|gene|genetic|dna|rna|plant|animal|ecosystem|photosynthesis|anatomy|physiology|microbiology/.test(text)) {
+    return 'biological-science';
+  }
+  if (/physical science|chemistry|physics|atom|molecule|electron|chemical|periodic|bond|acid|base|solution|force|motion|energy|electric|magnet|wave|light|earth science|astronomy|weather|climate|volcano|rock|planet/.test(text)) {
+    return 'physical-science';
+  }
+  return null;
+}
+
+function mapehSubTag(row) {
+  const text = `${row['Subject Area'] ?? ''} ${row.Question ?? ''} ${row['Source Path'] ?? ''} ${row['Source PDF'] ?? ''}`.toLowerCase();
+  if (/music|song|rhythm|melody|instrument/.test(text)) return 'Music';
+  if (/health|nutrition|disease|wellness|first aid|hygiene/.test(text)) return 'Health';
+  if (/physical education|physical ed|\bpe\b|sport|fitness|exercise|dance/.test(text)) return 'Physical Education';
+  if (/culture and arts|caed/.test(text)) return 'CAE';
+  if (/arts?|painting|drawing|sculpture|artist|design/.test(text)) return 'Arts';
+  return 'MAPEH General';
+}
+
+function tleSubTag(row) {
+  const text = `${row['Subject Area'] ?? ''} ${row.Question ?? ''} ${row['Source Path'] ?? ''} ${row['Source PDF'] ?? ''}`.toLowerCase();
+  if (/home economics|\bhe\b|cook|baking|food|garment|sewing|housekeeping/.test(text)) return 'Home Economics';
+  if (/industrial arts|\bia\b|woodwork|carpentry|welding|electrical installation|plumbing|drafting/.test(text)) return 'Industrial Arts';
+  if (/agriculture|fishery|afa|farming|crop|livestock|aquaculture|poultry/.test(text)) return 'Agriculture and Fishery Arts';
+  if (/\bict\b|information and communication|computer|software|hardware|programming|network|internet/.test(text)) return 'ICT';
+  if (/entrepreneur|business|marketing|profit|capital|enterprise/.test(text)) return 'Entrepreneurship';
+  return 'TLE General';
+}
+
 function secondaryMajorTopic(row) {
   const subject = row['Subject Area'] ?? '';
-  if (subject === 'English') return ['major', 'english'];
-  if (subject === 'Filipino') return ['major', 'filipino'];
-  if (subject === 'Mathematics') return ['major', 'mathematics'];
-  if (['Science', 'Biological Science', 'Physical Science'].includes(subject)) return ['major', 'science'];
-  if (subject === 'Social Studies') return ['major', 'social-studies'];
-  if (subject === 'Values Education') return ['major', 'values-education'];
-  if (['Music', 'Arts', 'Physical Education', 'Health'].includes(subject)) return ['major', 'mapeh'];
-  if (subject === 'Agriculture and Fishery Arts') return ['major', 'agriculture-fishery-arts'];
-  if (subject === 'Information and Communication Technology') return ['major', 'ict'];
-  if (subject === 'Technology and Livelihood Education') {
-    const path = `${row['Source Path'] ?? ''} ${row['Source PDF'] ?? ''}`.toLowerCase();
-    if (/home economics|\bhe\b/.test(path)) return ['major', 'home-economics'];
-    if (/industrial arts|\bia\b/.test(path)) return ['major', 'industrial-arts'];
-    if (/ict|information/.test(path)) return ['major', 'ict'];
-    if (/agriculture|fishery|afa/.test(path)) return ['major', 'agriculture-fishery-arts'];
-    if (/tvt|technology-vocational/.test(path)) return ['major', 'tvted'];
-    return ['major', 'tle'];
+  if (subject === 'English') return ['major', 'english', null];
+  if (subject === 'Filipino') return ['major', 'filipino', null];
+  if (subject === 'Mathematics') return ['major', 'mathematics', null];
+  if (subject === 'Biological Science') return ['major', 'biological-science', null];
+  if (subject === 'Physical Science') return ['major', 'physical-science', null];
+  if (subject === 'Science') {
+    const scienceSlug = classifySecondaryScience(row);
+    return scienceSlug ? ['major', scienceSlug, null] : null;
   }
-  if (subject === 'Elementary / Cannot Determine') {
-    const path = `${row['Source Path'] ?? ''} ${row['Source PDF'] ?? ''}`.toLowerCase();
-    if (/early childhood/.test(path)) return ['major', 'early-childhood-education'];
-    if (/special needs/.test(path)) return ['major', 'special-needs-education'];
+  if (subject === 'Social Studies') return ['major', 'social-studies-araling-panlipunan', null];
+  if (subject === 'Values Education') return ['major', 'values-education', null];
+  if (['Music', 'Arts', 'Physical Education', 'Health'].includes(subject)) return ['major', 'mapeh', mapehSubTag(row)];
+  if (subject === 'Agriculture and Fishery Arts') return ['major', 'tle', 'Agriculture and Fishery Arts'];
+  if (subject === 'Information and Communication Technology') return ['major', 'tle', 'ICT'];
+  if (subject === 'Technology and Livelihood Education') {
+    return ['major', 'tle', tleSubTag(row)];
   }
   return null;
 }
@@ -286,7 +325,7 @@ for (const row of rows) {
       continue;
     }
 
-    const [subjectSlug, topicSlug] = mapped;
+    const [subjectSlug, topicSlug, subTag] = mapped;
     const topicId = topicByKey.get(`${examKind}:${subjectSlug}:${topicSlug}`);
     if (!topicId) {
       skipped.push({
@@ -301,7 +340,7 @@ for (const row of rows) {
       continue;
     }
 
-    candidates.push({ row, examKind, topicId, subjectSlug, topicSlug, choices, letter });
+    candidates.push({ row, examKind, topicId, subjectSlug, topicSlug, subTag, choices, letter });
     sourceStats[sourceFile].candidateTargets += 1;
   }
 }
@@ -312,6 +351,8 @@ for (const candidate of candidates) {
   const keyStem = candidateContentKey(candidate);
   const map = existingByTopic.get(candidate.topicId) ?? new Map();
   const existing = map.get(keyStem);
+  const isSecondaryMajor = candidate.examKind === 'secondary' && candidate.subjectSlug === 'major';
+  const subTagSlug = candidate.subTag ? slugify(candidate.subTag) : null;
   if (existing) {
     duplicates.push({
       source: sourceFile,
@@ -353,7 +394,22 @@ for (const candidate of candidates) {
       candidate.examKind === 'elementary' ? 'let-elementary' : 'let-secondary',
       sourceSlug(sourceFile),
       candidate.row['Subject Area']?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+      isSecondaryMajor ? `major:${candidate.topicSlug}` : '',
+      subTagSlug ? `subtag:${subTagSlug}` : '',
     ].filter(Boolean),
+    ...(isSecondaryMajor
+      ? {
+          major: majorLabel(candidate.topicSlug),
+          major_slug: candidate.topicSlug,
+          sub_tag: candidate.subTag ?? null,
+          sub_tag_slug: subTagSlug,
+          exam_level: 'LET Secondary',
+          exam_area: 'Area of Specialization',
+          taxonomy_version: 'LET_SECONDARY_MAJOR_TAXONOMY_2026',
+          needs_review: false,
+          review_reason: null,
+        }
+      : {}),
   });
   map.set(keyStem, { id: null, topic_id: candidate.topicId, stem: candidate.row.Question, image_url: null });
   existingByTopic.set(candidate.topicId, map);

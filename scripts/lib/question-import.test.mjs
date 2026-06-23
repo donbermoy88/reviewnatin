@@ -20,6 +20,18 @@ function catalog() {
         ],
       ]),
     ],
+    [
+      'let-secondary',
+      new Map([
+        [
+          'major',
+          new Map([
+            ['science', { topicId: 'topic-science-legacy', examActive: true }],
+            ['biological-science', { topicId: 'topic-biological-science', examActive: true }],
+          ]),
+        ],
+      ]),
+    ],
   ]);
 }
 
@@ -87,6 +99,26 @@ describe('question import validation', () => {
 
     assert.ok(result.errors.some((error) => error.message.includes('quotation marks')));
     assert.ok(result.errors.some((error) => error.message.includes('parentheses')));
+  });
+
+  it('rejects legacy LET Secondary major topics', () => {
+    const result = validateQuestionImportRows([
+      row({
+        exam_type_slug: 'let-secondary',
+        subject_slug: 'major',
+        topic_slug: 'science',
+      }),
+      row({
+        rowNumber: 3,
+        exam_type_slug: 'let-secondary',
+        subject_slug: 'major',
+        topic_slug: 'biological-science',
+      }),
+    ], catalog());
+
+    assert.ok(result.errors.some((error) => error.field === 'topic_slug' && error.message.includes('approved 2026 major slugs')));
+    assert.equal(result.valid.length, 1);
+    assert.equal(result.valid[0].topicId, 'topic-biological-science');
   });
 
   it('builds admin import error reports for author correction', () => {
