@@ -1,0 +1,264 @@
+{
+  "dry_run": true,
+  "source": "output/pdf/gened_profed_review_materials.json",
+  "source_rows": 87,
+  "insertable_materials": 0,
+  "inserted": 0,
+  "skipped": 174,
+  "skipped_by_reason": {
+    "duplicate_title": 168,
+    "thin_material": 6
+  },
+  "skipped_samples": [
+    {
+      "title": "LET GenEd/ProfEd Notes: Survival Reviewers (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Survival Reviewers (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Survival Reviewers (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Survival Reviewers (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Survival Reviewers (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Survival Reviewers (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Survival Reviewers (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Survival Reviewers (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: LET MIXED GenEd ProfEd Notes Lectures (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 5) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 5) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 6) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 6) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 7) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 7) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 8) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 8) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 9) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 9) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 10) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 10) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 11) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 11) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 12) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Curriculum Development 2 (Part 12) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Educational Philosophies and their Proponents - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET GenEd/ProfEd Notes: Educational Philosophies and their Proponents - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    }
+  ]
+}

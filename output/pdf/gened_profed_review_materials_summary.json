@@ -1,0 +1,68 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-",
+  "source_files_processed": 10,
+  "materials_generated": 87,
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Survival Reviewers.docx",
+      "status": "processed",
+      "text_chars": 17497,
+      "chunks": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-MIXED-GenEd ProfEd Notes Lectures.docx",
+      "status": "processed",
+      "text_chars": 17463,
+      "chunks": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-MIXED-GenEd ProfEd Notes Lectures.docx",
+      "status": "processed",
+      "text_chars": 17464,
+      "chunks": 4
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Curriculum-Development 2.docx",
+      "status": "processed",
+      "text_chars": 73560,
+      "chunks": 12
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Educational-Philosophies-and-their-Proponents.docx",
+      "status": "processed",
+      "text_chars": 5122,
+      "chunks": 1
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Educational-Technology.docx",
+      "status": "processed",
+      "text_chars": 45894,
+      "chunks": 9
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Facilitating-Human-Learning.docx",
+      "status": "processed",
+      "text_chars": 10133,
+      "chunks": 2
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-List of Scientist.docx",
+      "status": "processed",
+      "text_chars": 3187,
+      "chunks": 1
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-PHILOSOPHICAL FOUNDATIONS and THEORIES OF EDUCATION.ppt",
+      "status": "processed",
+      "text_chars": 194563,
+      "chunks": 38
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Prof-Ed-Key-Concepts-Theories-1.docx",
+      "status": "processed",
+      "text_chars": 56973,
+      "chunks": 12
+    }
+  ],
+  "output": "/Users/lyndon/reviewnatin/output/pdf/gened_profed_review_materials.json"
+}

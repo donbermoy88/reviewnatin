@@ -1,0 +1,1160 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-",
+  "generated_at": "2026-06-25",
+  "total_office_files_seen": 113,
+  "total_office_files_processed": 101,
+  "format_counts": {
+    ".docx": 100,
+    ".doc": 8,
+    ".pptx": 3,
+    ".ppt": 2
+  },
+  "total_questions_found": 3600,
+  "total_ready_for_upload": 829,
+  "total_needing_review": 339,
+  "total_without_answer_key": 993,
+  "total_duplicates_detected": 1439,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 0,
+  "total_both_or_cannot_determine_questions": 3600,
+  "status_counts": {
+    "Needs Answer": 993,
+    "Duplicate": 1439,
+    "Needs Review": 174,
+    "Ready for Upload": 829,
+    "Incomplete": 165
+  },
+  "exam_type_counts": {
+    "Both": 3600
+  },
+  "subject_category_breakdown": {
+    "General Education": 2839,
+    "Filipino": 41,
+    "English": 70,
+    "Science": 74,
+    "Health": 9,
+    "Music": 11,
+    "Mathematics": 54,
+    "Biological Science": 2,
+    "Child and Adolescent Development": 1,
+    "Assessment of Learning": 124,
+    "Arts": 3,
+    "Technology and Livelihood Education": 17,
+    "Educational Technology": 51,
+    "Elementary / Cannot Determine": 9,
+    "Curriculum Development": 50,
+    "Social Studies": 4,
+    "Values Education": 2,
+    "Professional Education": 236,
+    "Facilitating Learning": 1,
+    "Physical Education": 2
+  },
+  "difficulty_breakdown": {
+    "Cannot Determine": 3600
+  },
+  "source_counts_top_75": {
+    "Z. 1-200-ITEMS-PROF-ED-EXAM-DRILL.docx": 197,
+    "LET-GEN-ED-2018-200 items.docx": 190,
+    "LET-GEN-ED-General Education 200 items no keys.doc": 190,
+    "LET-GEN-ED-Random 200 No Keys.doc": 190,
+    "LET-GEN-ED-General Education Reviewers 500 Q_A.docx": 152,
+    "LET-GEN-ED-150 Q_As.doc": 150,
+    "LET-GEN-ED-Random 150 items.docx": 126,
+    "LET-PROF-ED-PROFED LET A.docx": 99,
+    "LET-PROF-ED-PROFED LET B.docx": 97,
+    "LET-PROF-ED-SETB 100.docx": 87,
+    "LET-PROF-ED-BLEPT.docx": 66,
+    "LET-GEN-ED-Final Coaching 3.docx": 60,
+    "LET-PROF-ED-60 Rationalizations.docx": 60,
+    "LET-Prof-ED-1Random 60 items Q_A + Rationalizations.docx": 60,
+    "LET-GEN-ED-General Education Reviewers Complete.docx": 57,
+    "LET-Gen-Ed-SocScie 50 items Q_A.docx": 51,
+    "LET-PROF-ED-2018-PROF-ED-A.docx": 51,
+    "LET-Gen-Ed-English 50 items Q_A.docx": 50,
+    "LET-Gen-Ed-1Random 50 items Q_A.docx": 49,
+    "LET-GEN-ED-Final Coaching 1.docx": 47,
+    "LET-GEN-ED-Final Coaching 2.doc": 47,
+    "LET-PROF-ED-Final Coaching.docx": 47,
+    "LET-GEN-ED-World-Geography.doc": 40,
+    "LET-GEN-ED-Complete Notes.docx": 38,
+    "LET-GEN-ED-All subjects.docx": 35,
+    "LET-MIXED-GenEd ProfEd 1000+.docx": 35,
+    "LET-GEN-ED-GENERAL-EDUCATION.docx": 34,
+    "LET-MIXED-GenEd ProfEd 500 items.docx": 34,
+    "LET-PROF-ED-Philosophies of Ed 34 items rationalizations.docx": 34,
+    "LET-GEN-ED-All subjects 151-200.docx": 31,
+    "LET-GEN-ED-Sample Tests Set10.docx": 31,
+    "LET-GEN-ED-Sample Tests Set1.docx": 30,
+    "LET-GEN-ED-Sample Tests Set2.docx": 30,
+    "LET-GEN-ED-Sample Tests Set5.docx": 30,
+    "LET-GEN-ED-Sample Tests Set11.docx": 28,
+    "LET-PROF-ED-A PROF ED.docx": 27,
+    "LET-GEN-ED-Sample Tests Set6.docx": 26,
+    "LET-GEN-ED-Sample Tests Set8.docx": 26,
+    "LET-GEN-ED-Sample Tests Set9.docx": 26,
+    "LET-PROF-ED-Assessment of Learning.docx": 26,
+    "LET-PROF-ED-Statistics and Research.docx": 26,
+    "LET-GEN-ED-All subjects 51-100.docx": 25,
+    "LET-GEN-ED-Sample Tests Set7.docx": 25,
+    "LET-GEN-ED-Social Science Drill 1.docx": 25,
+    "LET-GEN-ED-Social Science Drill 2.docx": 25,
+    "LET-PROF-ED-Foundation of Education 25.docx": 25,
+    "LET-PROF-ED-Social Dimensions.docx": 25,
+    "Z. Educational Technology Part 1.docx": 25,
+    "Principles and Strategies of Teaching Part 1.docx": 24,
+    "Principles of Learning and Motivation Part 1.docx": 24,
+    "Social Dimensions in Education Part 2.docx": 24,
+    "Teaching Profession Part 2.docx": 24,
+    "Z. Assessment and Evaluation of Learning Part 2.docx": 24,
+    "Z. Child and Adolscent Development Part 1.docx": 24,
+    "Z. Child and Adolscent Development Part 2.docx": 24,
+    "Z. Educational Technology Part 2.docx": 24,
+    "LET-GEN-ED-All subjects 101-150.docx": 23,
+    "LET-GEN-ED-Sample Tests Set4.docx": 23,
+    "Principles and Strategies of Teaching Part 2.docx": 23,
+    "Principles of Learning and Motivation Part 2.docx": 23,
+    "Social Dimensions in Education Part 1.docx": 23,
+    "Z. Assessment and Evaluation of Learning Part 1.docx": 23,
+    "Z. Foundation of Education Part 1.docx": 23,
+    "Z. Foundation of Education Part 2.docx": 23,
+    "LET-GEN-ED-All Subjects 201-250.docx": 22,
+    "Teaching Profession Part 1.docx": 22,
+    "LET-GEN-ED-Identification-of-Errors.docx": 20,
+    "Z. Assessment and Evaluation of Learning Part 3.docx": 20,
+    "LET-GEN-ED-All subjects 1-50.docx": 19,
+    "LET-GEN-ED-Sample Tests Set3.docx": 19,
+    "Z. Assessment and Evaluation of Learning Part 4.docx": 19,
+    "LET-GEN-ED-Mathematics.docx": 18,
+    "Principles and Strategies of Teaching Part 3.docx": 18,
+    "LET-GEN-ED-1000plus QAs.docx": 17,
+    "LET-MIXED-GenEd ProfEd (1).docx": 17
+  },
+  "sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED (W-ANSWER KEY) (1).docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 28,
+      "text_chars": 37240
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED (W-ANSWER KEY).doc",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 32,
+      "text_chars": 38979
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-1000plus QAs.docx",
+      "status": "processed",
+      "rows": 17,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 327361
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-150 Q_As.doc",
+      "status": "processed",
+      "rows": 150,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 150,
+      "text_chars": 30273
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-2018-200 items.docx",
+      "status": "processed",
+      "rows": 190,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 58946
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-All Subjects 201-250.docx",
+      "status": "processed",
+      "rows": 22,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 6130
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-All subjects 1-50.docx",
+      "status": "processed",
+      "rows": 19,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 7381
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-All subjects 101-150.docx",
+      "status": "processed",
+      "rows": 23,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 6415
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-All subjects 151-200.docx",
+      "status": "processed",
+      "rows": 31,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 6545
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-All subjects 51-100.docx",
+      "status": "processed",
+      "rows": 25,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 6542
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-All subjects.docx",
+      "status": "processed",
+      "rows": 35,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 206572
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Complete Notes.docx",
+      "status": "processed",
+      "rows": 38,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 5,
+      "text_chars": 181157
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Filipino 100 items.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 3,
+      "text_chars": 11826
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Final Coaching 1.docx",
+      "status": "processed",
+      "rows": 47,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 30,
+      "text_chars": 16955
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Final Coaching 2.doc",
+      "status": "processed",
+      "rows": 47,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 0,
+      "text_chars": 10572
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Final Coaching 3.docx",
+      "status": "processed",
+      "rows": 60,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 26723
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Final Coaching PPT 130 items.pptx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".pptx",
+      "answer_keys_detected": 0,
+      "text_chars": 24133
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-GENERAL-EDUCATION.docx",
+      "status": "processed",
+      "rows": 34,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 35996
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-General Education 200 items no keys.doc",
+      "status": "processed",
+      "rows": 190,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 0,
+      "text_chars": 72267
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-General Education Reviewers 500 Q_A.docx",
+      "status": "processed",
+      "rows": 152,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 141,
+      "text_chars": 88009
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-General Education Reviewers Complete.docx",
+      "status": "processed",
+      "rows": 57,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 102,
+      "text_chars": 200833
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-General Science 100 items.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 15025
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Human Growth and Development 100 items.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 24088
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Identification-of-Errors.docx",
+      "status": "processed",
+      "rows": 20,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 5765
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-LET REVIEWER.doc",
+      "status": "processed",
+      "rows": 11,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 0,
+      "text_chars": 74120
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-MATH No keys.docx",
+      "status": "processed",
+      "rows": 12,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 7481
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Mathematics.docx",
+      "status": "processed",
+      "rows": 18,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 5316
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Random 150 items.docx",
+      "status": "processed",
+      "rows": 126,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 150,
+      "text_chars": 30011
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Random 200 No Keys.doc",
+      "status": "processed",
+      "rows": 190,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 0,
+      "text_chars": 72267
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set1.docx",
+      "status": "processed",
+      "rows": 30,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 6797
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set10.docx",
+      "status": "processed",
+      "rows": 31,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 61566
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set11.docx",
+      "status": "processed",
+      "rows": 28,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 37094
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set2.docx",
+      "status": "processed",
+      "rows": 30,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 6211
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set3.docx",
+      "status": "processed",
+      "rows": 19,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 5370
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set4.docx",
+      "status": "processed",
+      "rows": 23,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 9216
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set5.docx",
+      "status": "processed",
+      "rows": 30,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 6618
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set6.docx",
+      "status": "processed",
+      "rows": 26,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 10431
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set7.docx",
+      "status": "processed",
+      "rows": 25,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 7281
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set8.docx",
+      "status": "processed",
+      "rows": 26,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 4,
+      "text_chars": 29938
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests Set9.docx",
+      "status": "processed",
+      "rows": 26,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 14482
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Sample Tests.docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 28,
+      "text_chars": 37292
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Social Science 100 items.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 20183
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Social Science Drill 1.docx",
+      "status": "processed",
+      "rows": 25,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 5342
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Social Science Drill 2.docx",
+      "status": "processed",
+      "rows": 25,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 5151
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-Survival Reviewers.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 17542
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-W-ANSWER-KEY.doc",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 32,
+      "text_chars": 38972
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-GEN-ED-World-Geography.doc",
+      "status": "processed",
+      "rows": 40,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 0,
+      "text_chars": 21125
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-Gen-Ed-1Random 50 items Q_A.docx",
+      "status": "processed",
+      "rows": 49,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 10539
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-Gen-Ed-English 50 items Q_A.docx",
+      "status": "processed",
+      "rows": 50,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 11577
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-Gen-Ed-SocScie 50 items Q_A.docx",
+      "status": "processed",
+      "rows": 51,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 10115
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-MIXED-GenEd ProfEd (1).docx",
+      "status": "processed",
+      "rows": 17,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 323387
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-MIXED-GenEd ProfEd 1000+.docx",
+      "status": "processed",
+      "rows": 35,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 33,
+      "text_chars": 201025
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-MIXED-GenEd ProfEd 500 items.docx",
+      "status": "processed",
+      "rows": 34,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 161,
+      "text_chars": 223330
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-MIXED-GenEd ProfEd Notes Lectures.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 17503
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/LET-MIXED-GenEd ProfEd.docx",
+      "status": "processed",
+      "rows": 17,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 322121
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/GENERAL EDUCATION/PREBOARD GEN ED 100 items QA.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 22201
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-MIXED-GenEd ProfEd Notes Lectures.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 17509
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED--SOCIAL-DIMENSIONS.docx",
+      "status": "processed",
+      "rows": 12,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 37800
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-1-50.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 13675
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-101-150 (1).docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 10912
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-101-150.docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 11217
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-2018-PROF-ED-A.docx",
+      "status": "processed",
+      "rows": 51,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 11,
+      "text_chars": 160326
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-51-100.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 12363
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-60 Rationalizations.docx",
+      "status": "processed",
+      "rows": 60,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 60430
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-A PROF ED.docx",
+      "status": "processed",
+      "rows": 27,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 33,
+      "text_chars": 164485
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Assessment of Learning.docx",
+      "status": "processed",
+      "rows": 26,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 18855
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-BLEPT.docx",
+      "status": "processed",
+      "rows": 66,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 239419
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Curriculum-Development 2.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 73677
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Curriculum_Development.ppt-1.pptx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".pptx",
+      "answer_keys_detected": 0,
+      "text_chars": 38763
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Educational-Philosophies-and-their-Proponents.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 5124
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Educational-Technology.docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 46684
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Facilitating-Human-Learning.docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 10138
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Final Coaching.docx",
+      "status": "processed",
+      "rows": 47,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 10547
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Foundation of Education 25.docx",
+      "status": "processed",
+      "rows": 25,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 14544
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-List of Scientist.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 3188
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-PHILOSOPHICAL FOUNDATIONS and THEORIES OF EDUCATION.ppt",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".ppt",
+      "answer_keys_detected": 0,
+      "text_chars": 304636
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-POLITICAL-SCIENCE (OK).pptx",
+      "status": "processed",
+      "rows": 12,
+      "pages": 0,
+      "format": ".pptx",
+      "answer_keys_detected": 0,
+      "text_chars": 43110
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-PROFED LET A.docx",
+      "status": "processed",
+      "rows": 99,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 26937
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-PROFED LET B.docx",
+      "status": "processed",
+      "rows": 97,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 29772
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-PhilED PPT.ppt",
+      "status": "processed",
+      "rows": 3,
+      "pages": 0,
+      "format": ".ppt",
+      "answer_keys_detected": 0,
+      "text_chars": 3363803
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Philosophies of Ed 34 items rationalizations.docx",
+      "status": "processed",
+      "rows": 34,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 20460
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Philosophy Sample Questions No Keys.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 7407
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-PreBoard 150 items.docx",
+      "status": "processed",
+      "rows": 3,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 41653
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Principles and Strategies of Teaching 100 items.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 18182
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Prof-Ed-Key-Concepts-Theories-1.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 56974
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Prof.docx",
+      "status": "processed",
+      "rows": 8,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 15,
+      "text_chars": 26079
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Random 200.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 46664
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-SETA 100.docx",
+      "status": "processed",
+      "rows": 13,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 7,
+      "text_chars": 26653
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-SETB 100.docx",
+      "status": "processed",
+      "rows": 87,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 26132
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Social Dimensions.docx",
+      "status": "processed",
+      "rows": 25,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 20716
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-PROF-ED-Statistics and Research.docx",
+      "status": "processed",
+      "rows": 26,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 11509
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/LET-Prof-ED-1Random 60 items Q_A + Rationalizations.docx",
+      "status": "processed",
+      "rows": 60,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 60845
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Principles and Strategies of Teaching Part 1.docx",
+      "status": "processed",
+      "rows": 24,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 7459
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Principles and Strategies of Teaching Part 2.docx",
+      "status": "processed",
+      "rows": 23,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 5830
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Principles and Strategies of Teaching Part 3.docx",
+      "status": "processed",
+      "rows": 18,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 20,
+      "text_chars": 5280
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Principles of Learning and Motivation Part 1.docx",
+      "status": "processed",
+      "rows": 24,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 8109
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Principles of Learning and Motivation Part 2.docx",
+      "status": "processed",
+      "rows": 23,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 6745
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Social Dimensions in Education Part 1.docx",
+      "status": "processed",
+      "rows": 23,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 11941
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Social Dimensions in Education Part 2.docx",
+      "status": "processed",
+      "rows": 24,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 8696
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Teaching Profession Part 1.docx",
+      "status": "processed",
+      "rows": 22,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 7594
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Teaching Profession Part 2.docx",
+      "status": "processed",
+      "rows": 24,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 8340
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. 1 PROFED.docx",
+      "status": "processed",
+      "rows": 13,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 7,
+      "text_chars": 26633
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. 1-200-ITEMS-PROF-ED-EXAM-DRILL.docx",
+      "status": "processed",
+      "rows": 197,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 49931
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Assessment and Evaluation of Learning Part 1.docx",
+      "status": "processed",
+      "rows": 23,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 9096
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Assessment and Evaluation of Learning Part 2.docx",
+      "status": "processed",
+      "rows": 24,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 6919
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Assessment and Evaluation of Learning Part 3.docx",
+      "status": "processed",
+      "rows": 20,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 5790
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Assessment and Evaluation of Learning Part 4.docx",
+      "status": "processed",
+      "rows": 19,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 5707
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Child and Adolscent Development Part 1.docx",
+      "status": "processed",
+      "rows": 24,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 6919
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Child and Adolscent Development Part 2.docx",
+      "status": "processed",
+      "rows": 24,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 6919
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Educational Technology Part 1.docx",
+      "status": "processed",
+      "rows": 25,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 24,
+      "text_chars": 8131
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Educational Technology Part 2.docx",
+      "status": "processed",
+      "rows": 24,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 7685
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Foundation of Education Part 1.docx",
+      "status": "processed",
+      "rows": 23,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 7493
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/A. BEED&BSED GENED & PROFED-/PROFESSIONAL EDUCATION/Z. Foundation of Education Part 2.docx",
+      "status": "processed",
+      "rows": 23,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 25,
+      "text_chars": 6986
+    }
+  ],
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/gened_profed_office_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/gened_profed_office_sept2026_extracted_questions.json",
+    "md": "/Users/lyndon/reviewnatin/output/pdf/gened_profed_office_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/gened_profed_office_sept2026_extracted_questions_summary.json"
+  },
+  "recommended_next_action_before_uploading": "Upload only Ready for Upload rows. Office rows marked Needs Answer usually lack a reliably parsed answer key. Rows marked Incomplete often came from unlabelled multiple-choice blocks and need manual review."
+}

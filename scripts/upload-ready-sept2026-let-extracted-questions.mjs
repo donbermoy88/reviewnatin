@@ -6,9 +6,14 @@ import { createClient } from '@supabase/supabase-js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
-const sourceFile = 'output/pdf/sept2026_let_extracted_questions.json';
-const reportFile = 'output/pdf/sept2026_let_ready_questions_upload_report.json';
+const sourceFileArg = process.argv.find((arg) => arg.startsWith('--source-file='));
+const sourceFile = sourceFileArg ? sourceFileArg.slice('--source-file='.length) : 'output/pdf/sept2026_let_extracted_questions.json';
 const dryRun = process.argv.includes('--dry-run');
+const sourcePrefixArg = process.argv.find((arg) => arg.startsWith('--source-prefix='));
+const sourcePrefix = sourcePrefixArg ? sourcePrefixArg.slice('--source-prefix='.length) : '';
+const reportFile = sourcePrefix
+  ? `output/pdf/${sourceFile.replace(/^output\/pdf\//, '').replace(/\.json$/, '')}_upload_report_filtered.json`
+  : `output/pdf/${sourceFile.replace(/^output\/pdf\//, '').replace(/\.json$/, '')}_upload_report.json`;
 
 function loadEnv(file) {
   try {
@@ -34,6 +39,14 @@ function normalizeChoiceText(value) {
   return normalizeText(value);
 }
 
+function cleanForDb(value) {
+  return String(value ?? '')
+    .replace(/\u0000/g, '')
+    .replace(/[\u0001-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, ' ')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
+}
+
 function existingContentKey(question) {
   const choices = Array.isArray(question.choices) ? question.choices : [];
   const choiceKey = choices
@@ -46,7 +59,7 @@ function candidateContentKey(candidate) {
   const choiceKey = candidate.choices
     .map((choice) => `${choice.id}:${normalizeChoiceText(choice.text)}`)
     .join('|');
-  return `${normalizeText(candidate.row.Question)}::${choiceKey}::${candidate.letter}`;
+  return `${normalizeText(cleanForDb(candidate.row.Question))}::${choiceKey}::${candidate.letter}`;
 }
 
 function hasAny(text, patterns) {
@@ -81,7 +94,7 @@ function targetExams(row) {
 function buildChoices(row) {
   const choices = [];
   for (const letter of ['a', 'b', 'c', 'd', 'e']) {
-    const text = row[`Choice ${letter.toUpperCase()}`]?.trim();
+    const text = cleanForDb(row[`Choice ${letter.toUpperCase()}`]);
     if (text) choices.push({ id: letter, text });
   }
   return choices;
@@ -283,7 +296,10 @@ for (const question of await fetchAllExistingQuestions()) {
   existingByTopic.set(question.topic_id, map);
 }
 
-const rows = JSON.parse(readFileSync(resolve(root, sourceFile), 'utf8'));
+const allRows = JSON.parse(readFileSync(resolve(root, sourceFile), 'utf8'));
+const rows = sourcePrefix
+  ? allRows.filter((row) => String(row['Source Path'] ?? '').startsWith(sourcePrefix))
+  : allRows;
 const candidates = [];
 const skipped = [];
 const sourceStats = { [sourceFile]: { readyRows: 0, candidateTargets: 0, skipped: 0 } };
@@ -368,12 +384,12 @@ for (const candidate of candidates) {
 
   inserts.push({
     topic_id: candidate.topicId,
-    stem: candidate.row.Question,
+    stem: cleanForDb(candidate.row.Question),
     choices: candidate.choices,
     correct_choice_id: candidate.letter,
     explanation_en:
-      candidate.row.Explanation?.trim() ||
-      `Answer key from extracted Sept2026 LET PDF: ${candidate.row['Correct Answer']}.`,
+      cleanForDb(candidate.row.Explanation) ||
+      `Answer key from extracted Sept2026 LET source: ${cleanForDb(candidate.row['Correct Answer'])}.`,
     explanation_fil: null,
     difficulty: difficultyValue(candidate.row.Difficulty),
     status: 'published',
@@ -385,7 +401,7 @@ for (const candidate of candidates) {
       candidate.row['Source PDF'] ?? '',
       candidate.row['Original No.'] ? `original no. ${candidate.row['Original No.']}` : '',
       candidate.row.Notes ?? '',
-    ].filter(Boolean).join('; ').slice(0, 1000),
+    ].filter(Boolean).map(cleanForDb).join('; ').slice(0, 1000),
     is_verified: true,
     tags: [
       'let',
@@ -397,6 +413,8 @@ for (const candidate of candidates) {
       isSecondaryMajor ? `major:${candidate.topicSlug}` : '',
       subTagSlug ? `subtag:${subTagSlug}` : '',
     ].filter(Boolean),
+    needs_review: false,
+    review_reason: null,
     ...(isSecondaryMajor
       ? {
           major: majorLabel(candidate.topicSlug),
@@ -406,12 +424,10 @@ for (const candidate of candidates) {
           exam_level: 'LET Secondary',
           exam_area: 'Area of Specialization',
           taxonomy_version: 'LET_SECONDARY_MAJOR_TAXONOMY_2026',
-          needs_review: false,
-          review_reason: null,
         }
       : {}),
   });
-  map.set(keyStem, { id: null, topic_id: candidate.topicId, stem: candidate.row.Question, image_url: null });
+  map.set(keyStem, { id: null, topic_id: candidate.topicId, stem: cleanForDb(candidate.row.Question), image_url: null });
   existingByTopic.set(candidate.topicId, map);
 }
 
@@ -449,6 +465,8 @@ const report = {
   batch_id: batchId,
   dry_run: dryRun,
   source: sourceFile,
+  source_prefix: sourcePrefix || null,
+  source_rows: rows.length,
   ready_rows: sourceStats[sourceFile].readyRows,
   candidate_targets: candidates.length,
   insertable: inserts.length,
