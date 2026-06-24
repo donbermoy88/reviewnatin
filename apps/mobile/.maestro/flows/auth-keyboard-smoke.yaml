@@ -11,8 +11,12 @@ appId: ph.reviewnatin.app
 - extendedWaitUntil:
     visible: "Gumawa ng account"
     timeout: 20000
+- scrollUntilVisible:
+    element: "Fast sign-up option"
+    direction: DOWN
+    timeout: 15000
 - extendedWaitUntil:
-    visible: "Google sign-in skips the email code"
+    visible: "Google sign-in skips the email code. LET Secondary reviewers can still choose their major during onboarding."
     timeout: 10000
 - tapOn:
     text: "Name"

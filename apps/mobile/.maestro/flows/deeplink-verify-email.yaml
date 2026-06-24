@@ -14,5 +14,5 @@ appId: ph.reviewnatin.app
     visible: "Free account setup"
     timeout: 10000
 - extendedWaitUntil:
-    visible: "f1.agent@reviewnatinph.com"
-    timeout: 10000
+    visible: "Code sent to f1.agent@reviewnatinph.com"
+    timeout: 15000
