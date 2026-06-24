@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { execSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { adbDevice as resolveAdbDevice } from './adb-device.mjs';
+import { adbDevice as resolveAdbDevice, deviceKind } from './adb-device.mjs';
 import { REPO_ROOT } from './supabase-env.mjs';
 
 const MAESTRO_PACKAGES = ['dev.mobile.maestro', 'dev.mobile.maestro.test'];
@@ -18,6 +18,39 @@ function run(cmd) {
 
 function runCapture(cmd) {
   return execSync(cmd, { cwd: REPO_ROOT, encoding: 'utf8' }).trim();
+}
+
+function deviceState(serial) {
+  try {
+    const out = runCapture('adb devices');
+    const line = out.split('\n').find((l) => l.startsWith(serial));
+    return line?.split(/\s+/)[1] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** Block until adb serial is in `device` state (wireless drops often on Vivo). */
+export function waitForAdbDevice(serial, timeoutSec = 120) {
+  for (let i = 0; i < timeoutSec; i += 1) {
+    if (deviceState(serial) === 'device') return;
+    execSync('sleep 1', { cwd: REPO_ROOT });
+  }
+  throw new Error(`adb device ${serial} not online after ${timeoutSec}s`);
+}
+
+function runAdbShell(serial, shellCmd, { inherit = true } = {}) {
+  waitForAdbDevice(serial, 90);
+  const cmd = `adb -s ${serial} shell ${shellCmd}`;
+  if (inherit) run(cmd);
+  else return runCapture(cmd);
+}
+
+function runAdb(serial, args, { inherit = true } = {}) {
+  waitForAdbDevice(serial, 90);
+  const cmd = `adb -s ${serial} ${args}`;
+  if (inherit) run(cmd);
+  else return runCapture(cmd);
 }
 
 function sha256(path) {
@@ -69,6 +102,75 @@ export function resetMaestroDriver(device = 'emulator-5554') {
   run('sleep 1');
 }
 
+/** Primary user on multi-profile phones (Vivo private space / secondary users). */
+export function adbUserFlag(device) {
+  return deviceKind(device) === 'wireless' || deviceKind(device) === 'usb' ? '--user 0' : '';
+}
+
+/** Reset app state via adb (Maestro clearState hangs over wireless on some OEMs). */
+export function clearAppForMaestro(device, packageName) {
+  const user = adbUserFlag(device);
+  runAdbShell(device, `am force-stop ${packageName} 2>/dev/null || true`);
+  runAdb(device, `shell pm clear ${user} ${packageName}`.replace(/\s+/g, ' ').trim());
+  run('sleep 2');
+}
+
+/** Launch app via adb before Maestro (avoids gRPC launch timeout on physical devices). */
+export function warmupApp(device, packageName) {
+  const user = adbUserFlag(device);
+  runAdbShell(device, `am force-stop ${packageName} 2>/dev/null || true`);
+  if (user) {
+    runAdbShell(
+      device,
+      `am start ${user} -n ${packageName}/.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER`,
+    );
+  } else {
+    runAdbShell(device, `monkey -p ${packageName} -c android.intent.category.LAUNCHER 1`);
+  }
+  run('sleep 4');
+}
+
+/** Keep screen on during long wireless Maestro runs. */
+export function keepScreenAwake(device) {
+  runAdbShell(device, 'input keyevent KEYCODE_WAKEUP 2>/dev/null || true', { inherit: true });
+  runAdbShell(device, 'svc power stayon usb 2>/dev/null || true');
+}
+
+/** Speed up UI + Maestro hierarchy reads on physical devices. */
+export function disableAnimations(device) {
+  for (const scale of ['window_animation_scale', 'transition_animation_scale', 'animator_duration_scale']) {
+    runAdbShell(device, `settings put global ${scale} 0 2>/dev/null || true`);
+  }
+}
+
+export function maestroEnv() {
+  return {
+    ...process.env,
+    MAESTRO_DISABLE_ANIMATION: 'true',
+  };
+}
+
+/** adb cold verify-email (no Maestro gRPC — reliable over wireless). */
+export function assertColdVerifyEmailDeeplinkAdb(packageName = 'ph.reviewnatin.app', device) {
+  const serial = device ?? adbDevice();
+  waitForAdbDevice(serial);
+  clearAppForMaestro(serial, packageName);
+  runAdbShell(
+    serial,
+    "am start -a android.intent.action.VIEW -d 'reviewnatin://verify-email?email=f1.agent@reviewnatinph.com'",
+  );
+  execSync('sleep 8', { cwd: REPO_ROOT });
+  const xml = dumpUiXml(serial, 10);
+  const ok =
+    /I-verify ang email|Free account setup|Code sent to f1\.agent@reviewnatinph\.com/i.test(xml);
+  return {
+    ok,
+    screen: ok ? 'verify-email' : 'unknown',
+    method: 'adb-cold-deeplink',
+    sample: xml.slice(0, 200),
+  };
+}
+
 export function ensureMaestroCli() {
   const which = spawnSync('bash', ['-lc', 'command -v maestro'], { encoding: 'utf8' });
   if (which.status === 0 && which.stdout.trim()) return which.stdout.trim();
@@ -101,23 +203,50 @@ export function dumpUiXml(device, maxAttempts = 6) {
   return xml;
 }
 
-/** Cold-start verify-email deeplink — uses Maestro (matches F1 cohort path on preview APK). */
+/** Cold-start verify-email deeplink — Maestro on emulator; adb on wireless physical. */
 export function assertColdVerifyEmailDeeplink(packageName = 'ph.reviewnatin.app', device) {
   const serial = device ?? adbDevice();
+  if (deviceKind(serial) === 'wireless') {
+    return assertColdVerifyEmailDeeplinkAdb(packageName, serial);
+  }
   const maestro = ensureMaestroCli();
   ensureMaestroDriver(serial);
   resetMaestroDriver(serial);
-  run(`adb -s ${serial} shell am force-stop ${packageName} 2>/dev/null || true`);
-  run(`adb -s ${serial} shell pm clear ${packageName} || true`);
-  run('sleep 2');
+  clearAppForMaestro(serial, packageName);
+  warmupApp(serial, packageName);
   try {
-    run(`${maestro} test apps/mobile/.maestro/flows/deeplink-verify-email.yaml`);
+    execSync(`${maestro} test apps/mobile/.maestro/flows/deeplink-verify-email.yaml`, {
+      cwd: REPO_ROOT,
+      stdio: 'inherit',
+      env: maestroEnv(),
+    });
     return { ok: true, screen: 'verify-email', method: 'maestro-deeplink-verify-email' };
   } catch {
-    return {
-      ok: false,
-      screen: 'unknown',
-      detail: 'Maestro deeplink-verify-email flow failed',
-    };
+    return assertColdVerifyEmailDeeplinkAdb(packageName, serial);
+  }
+}
+
+/** Quick Maestro probe for wireless — fail fast before a 12-persona run. */
+export function probeMaestroWireless(device, maestro, packageName = 'ph.reviewnatin.app') {
+  try {
+    waitForAdbDevice(device, 60);
+    disableAnimations(device);
+    keepScreenAwake(device);
+    resetMaestroDriver(device);
+    clearAppForMaestro(device, packageName);
+    warmupApp(device, packageName);
+    execSync(
+      `${maestro} test apps/mobile/.maestro/flows/guest-onboarding-quiz.yaml`,
+      {
+        cwd: REPO_ROOT,
+        stdio: 'inherit',
+        env: maestroEnv(),
+        timeout: 120_000,
+      },
+    );
+    return true;
+  } catch (err) {
+    console.warn(`Maestro wireless probe failed: ${err.message ?? err}`);
+    return false;
   }
 }

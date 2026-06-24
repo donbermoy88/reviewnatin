@@ -11,20 +11,15 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   adbDevice,
+  clearAppForMaestro,
   ensureMaestroCli,
   ensureMaestroDriver,
   resetMaestroDriver,
+  warmupApp,
 } from './lib/maestro-driver.mjs';
 import { REPO_ROOT } from './lib/supabase-env.mjs';
 
 const PACKAGE = 'ph.reviewnatin.app';
-
-function warmupApp(packageName = PACKAGE, device) {
-  const serial = device ?? adbDevice();
-  run(`adb -s ${serial} shell am force-stop ${packageName} 2>/dev/null || true`);
-  run(`adb -s ${serial} shell monkey -p ${packageName} -c android.intent.category.LAUNCHER 1`);
-  run('sleep 4');
-}
 const skipDeeplink = process.argv.includes('--no-deeplink');
 const FLOWS = [
   'guest-onboarding-quiz.yaml',
@@ -61,9 +56,8 @@ function main() {
   for (const flow of FLOWS) {
     console.log(`\n▶ Maestro: ${flow}`);
     resetMaestroDriver(device);
-    run(`adb -s ${device} shell am force-stop ${PACKAGE} 2>/dev/null || true`);
-    run(`adb -s ${device} shell pm clear ${PACKAGE} || true`);
-    run('sleep 2');
+    clearAppForMaestro(device, PACKAGE);
+    warmupApp(device, PACKAGE);
 
     let status = 'pass';
     try {

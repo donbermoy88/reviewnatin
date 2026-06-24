@@ -2,8 +2,6 @@
 # Avoid hideKeyboard — Maestro often cannot dismiss Android soft keyboard on API 35.
 appId: ph.reviewnatin.app
 ---
-- launchApp:
-    clearState: true
 - extendedWaitUntil:
     visible: "ReviewNatin"
     timeout: 30000

@@ -1,8 +1,6 @@
 appId: ph.reviewnatin.app
 ---
 # Guest cohort: skip login, complete onboarding, start practice
-- launchApp:
-    clearState: true
 - extendedWaitUntil:
     visible: "Get started — it's free"
     timeout: 45000

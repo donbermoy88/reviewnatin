@@ -1,8 +1,6 @@
 # G4 smoke: Profile → Settings → Report a problem (guest)
 appId: ph.reviewnatin.app
 ---
-- launchApp:
-    clearState: true
 - extendedWaitUntil:
     visible: "ReviewNatin"
     timeout: 30000

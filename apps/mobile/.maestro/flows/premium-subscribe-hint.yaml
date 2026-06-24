@@ -1,8 +1,6 @@
 # Premium cohort smoke: subscribe paywall shows Play-compliant copy (guest)
 appId: ph.reviewnatin.app
 ---
-- launchApp:
-    clearState: false
 - extendedWaitUntil:
     visible: "ReviewNatin|Development Build|DEVELOPMENT SERVERS"
     timeout: 45000

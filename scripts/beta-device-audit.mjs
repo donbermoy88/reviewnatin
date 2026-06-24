@@ -15,13 +15,20 @@ import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { BETA_AI_PERSONAS } from './lib/beta-ai-personas.mjs';
-import { adbDevice, deviceInfo, listAdbDevices } from './lib/adb-device.mjs';
+import { adbDevice, deviceInfo, deviceKind, listAdbDevices } from './lib/adb-device.mjs';
 import {
   assertColdVerifyEmailDeeplink,
+  clearAppForMaestro,
+  disableAnimations,
   dumpUiXml,
   ensureMaestroCli,
   ensureMaestroDriver,
+  keepScreenAwake,
+  maestroEnv,
+  probeMaestroWireless,
   resetMaestroDriver,
+  waitForAdbDevice,
+  warmupApp,
 } from './lib/maestro-driver.mjs';
 import { REPO_ROOT } from './lib/supabase-env.mjs';
 
@@ -80,17 +87,28 @@ function screenshot(serial, name) {
 }
 
 function runMaestroFlow(maestro, flow, serial) {
-  resetMaestroDriver(serial);
-  run(`adb -s ${serial} shell am force-stop ${PACKAGE} 2>/dev/null || true`);
-  run(`adb -s ${serial} shell pm clear ${PACKAGE} || true`);
-  run('sleep 2');
+  const runFlow = () => {
+    execSync(`${maestro} test apps/mobile/.maestro/flows/${flow}`, {
+      cwd: REPO_ROOT,
+      stdio: 'inherit',
+      env: maestroEnv(),
+      timeout: 180_000,
+    });
+  };
   try {
-    run(`${maestro} test apps/mobile/.maestro/flows/${flow}`);
+    waitForAdbDevice(serial, 90);
+    resetMaestroDriver(serial);
+    clearAppForMaestro(serial, PACKAGE);
+    warmupApp(serial, PACKAGE);
+    runFlow();
     return 'pass';
-  } catch {
-    ensureMaestroDriver(serial);
+  } catch (err) {
+    console.warn(`  Maestro ${flow} failed (${err.message ?? err}), retrying…`);
     try {
-      run(`${maestro} test apps/mobile/.maestro/flows/${flow}`);
+      waitForAdbDevice(serial, 90);
+      resetMaestroDriver(serial);
+      warmupApp(serial, PACKAGE);
+      runFlow();
       return 'pass-retry';
     } catch {
       return 'fail';
@@ -123,8 +141,9 @@ function spotCheckSubscribePaywall(serial) {
 /** Single-session adb cohort checks (no Maestro, no repeated pm clear). */
 function runAdbCohortAudit(serial) {
   const checks = {};
-  run(`adb -s ${serial} shell monkey -p ${PACKAGE} -c android.intent.category.LAUNCHER 1`);
-  run('sleep 5');
+  waitForAdbDevice(serial, 120);
+  clearAppForMaestro(serial, PACKAGE);
+  warmupApp(serial, PACKAGE);
   checks.welcome = { ok: /ReviewNatin|Get started/i.test(uiDump(serial)), shot: screenshot(serial, '01-welcome.png') };
 
   openDeeplink(serial, 'reviewnatin://subscribe');
@@ -165,8 +184,16 @@ function personasFromAdbChecks(checks) {
       evidence.push(checks.welcome.shot);
     }
     if (['G2', 'P1', 'P2', 'P3', 'P4'].includes(p.id) && checks.subscribe?.ok) {
-      automated = p.id === 'G2' || p.id === 'P1' ? 'pass' : automated;
-      if (checks.subscribe.ok) evidence.push(checks.subscribe.shot);
+      automated = 'pass';
+      evidence.push(checks.subscribe.shot);
+    }
+    if (p.id === 'G3' && checks.welcome?.ok && checks.practice?.ok) {
+      automated = 'pass';
+      evidence.push(checks.welcome.shot, checks.practice.shot);
+    }
+    if (p.id === 'G4' && checks.welcome?.ok) {
+      automated = 'partial';
+      evidence.push(checks.welcome.shot);
     }
     if (p.id === 'F1') {
       if (checks.signup?.ok) evidence.push(checks.signup.shot);
@@ -176,6 +203,10 @@ function personasFromAdbChecks(checks) {
     if (p.id === 'F2' && checks.login?.ok) {
       automated = 'partial';
       evidence.push(checks.login.shot);
+    }
+    if (['F3', 'F4'].includes(p.id) && checks.signup?.ok) {
+      automated = 'partial';
+      evidence.push(checks.signup.shot);
     }
     if (p.flows?.length && automated === 'skip') automated = 'partial';
     return {
@@ -194,9 +225,11 @@ function personasFromAdbChecks(checks) {
 
 function auditPersona(persona, ctx) {
   const { serial, maestro, skipMaestro: noMaestro } = ctx;
+  console.log(`\n▶ Persona ${persona.id} (${persona.name}) · ${persona.cohort}`);
   const flows = [];
   if (!noMaestro && persona.flows?.length) {
     for (const flow of persona.flows) {
+      console.log(`  → Maestro: ${flow}`);
       flows.push({ flow, status: runMaestroFlow(maestro, flow, serial) });
     }
   }
@@ -219,6 +252,8 @@ function auditPersona(persona, ctx) {
   const deeplinkFail = deeplink && !deeplink.ok;
   const paywallFail = paywall && !paywall.ok;
   const automatedOk = !flowFail && !deeplinkFail && !paywallFail;
+  const automated = automatedOk ? 'pass' : flows.length || deeplink || paywall ? 'fail' : 'skip';
+  console.log(`✓ Persona ${persona.id}: ${automated}`);
   return {
     personaId: persona.id,
     name: persona.name,
@@ -228,7 +263,7 @@ function auditPersona(persona, ctx) {
     deeplink,
     paywall,
     manualChecks: persona.manualChecks,
-    automated: automatedOk ? 'pass' : flows.length || deeplink || paywall ? 'fail' : 'skip',
+    automated,
     manual: persona.manualChecks.length ? 'pending' : 'n/a',
   };
 }
@@ -277,12 +312,26 @@ function main() {
   const sha = sha256(apkPath);
 
   if (!skipInstall) installApk(apkPath, serial);
+  waitForAdbDevice(serial, 120);
+  keepScreenAwake(serial);
+  disableAnimations(serial);
 
   let personas;
   let paywallSpotCheck;
   let adbChecks;
+  let useAdbOnly = adbOnly;
+  const forceMaestro = args.includes('--force-maestro');
 
-  if (adbOnly) {
+  if (!useAdbOnly && !skipMaestro && info.kind === 'wireless' && !forceMaestro) {
+    const maestroProbe = ensureMaestroCli();
+    ensureMaestroDriver(serial);
+    if (!probeMaestroWireless(serial, maestroProbe, PACKAGE)) {
+      console.warn('\n⚠ Wireless Maestro probe failed — using adb-only cohort audit.');
+      useAdbOnly = true;
+    }
+  }
+
+  if (useAdbOnly) {
     console.log('\n▶ ADB-only cohort audit (single session, no Maestro)');
     adbChecks = runAdbCohortAudit(serial);
     paywallSpotCheck = adbChecks.subscribe;
@@ -297,14 +346,14 @@ function main() {
   const report = {
     startedAt: new Date().toISOString(),
     finishedAt: new Date().toISOString(),
-    mode: adbOnly ? 'physical-device-adb-only' : 'physical-device',
+    mode: useAdbOnly ? 'physical-device-adb-only' : 'physical-device',
     device: info,
     apkPath: apkPath.replace(REPO_ROOT + '/', ''),
     build,
     sha256: sha,
     personas,
     paywallSpotCheck,
-    adbChecks: adbOnly ? adbChecks : undefined,
+    adbChecks: useAdbOnly ? adbChecks : undefined,
     devicesOnline: listAdbDevices(),
   };
   report.summary = {

@@ -55,7 +55,7 @@ export function adbDevice(preferredSerial) {
 
 export function deviceKind(serial) {
   if (serial.startsWith('emulator-')) return 'emulator';
-  if (serial.includes(':')) return 'wireless';
+  if (serial.includes('_adb-tls-connect._tcp') || serial.includes(':')) return 'wireless';
   return 'usb';
 }
 

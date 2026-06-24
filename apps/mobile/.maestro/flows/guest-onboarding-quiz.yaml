@@ -1,8 +1,6 @@
 # Guest cohort smoke: welcome → onboarding → dashboard → Review tab
 appId: ph.reviewnatin.app
 ---
-- launchApp:
-    clearState: true
 - extendedWaitUntil:
     visible: "Get started — it's free"
     timeout: 45000
