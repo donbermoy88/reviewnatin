@@ -1,0 +1,1426 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_biological_science_sept2026_extracted_questions.json",
+  "extracted_rows": 495,
+  "ready_rows": 389,
+  "source_duplicates_or_non_ready_skipped": 106,
+  "existing_biological_science_questions_before": 465,
+  "insertable": 77,
+  "updatable_by_source_key": 312,
+  "archivable_duplicate_sources": 21,
+  "duplicate_existing_content": 0,
+  "updatable_by_content_key": 61,
+  "inserted": 77,
+  "updated": 312,
+  "archived_duplicate_sources": 21,
+  "skipped_samples": [
+    {
+      "row": "93",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "43",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: D."
+    },
+    {
+      "row": "102",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "52",
+      "status": "Duplicate",
+      "duplicate_of": "101",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 101."
+    },
+    {
+      "row": "214",
+      "source_pdf": "BSED Biological Science P5.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "77",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 77."
+    },
+    {
+      "row": "218",
+      "source_pdf": "BSED Biological Science P5.pdf",
+      "original_no": "18",
+      "status": "Duplicate",
+      "duplicate_of": "79",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 79."
+    },
+    {
+      "row": "226",
+      "source_pdf": "BSED Biological Science P5.pdf",
+      "original_no": "26",
+      "status": "Duplicate",
+      "duplicate_of": "85",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 85."
+    },
+    {
+      "row": "249",
+      "source_pdf": "BSED Biological Science P5.pdf",
+      "original_no": "49",
+      "status": "Duplicate",
+      "duplicate_of": "73",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 73."
+    },
+    {
+      "row": "251",
+      "source_pdf": "BSED Biological Science P6.pdf",
+      "original_no": "1",
+      "status": "Duplicate",
+      "duplicate_of": "106",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 106."
+    },
+    {
+      "row": "254",
+      "source_pdf": "BSED Biological Science P6.pdf",
+      "original_no": "4",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "278",
+      "source_pdf": "BSED Biological Science P6.pdf",
+      "original_no": "28",
+      "status": "Duplicate",
+      "duplicate_of": "149",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 149."
+    },
+    {
+      "row": "301",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "1",
+      "status": "Duplicate",
+      "duplicate_of": "51",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 51."
+    },
+    {
+      "row": "302",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "2",
+      "status": "Duplicate",
+      "duplicate_of": "52",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 52."
+    },
+    {
+      "row": "303",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "3",
+      "status": "Duplicate",
+      "duplicate_of": "53",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 53."
+    },
+    {
+      "row": "304",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "4",
+      "status": "Duplicate",
+      "duplicate_of": "54",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 54."
+    },
+    {
+      "row": "305",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "5",
+      "status": "Duplicate",
+      "duplicate_of": "55",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 55."
+    },
+    {
+      "row": "306",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "6",
+      "status": "Duplicate",
+      "duplicate_of": "56",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 56."
+    },
+    {
+      "row": "307",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "7",
+      "status": "Duplicate",
+      "duplicate_of": "57",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 57."
+    },
+    {
+      "row": "308",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "8",
+      "status": "Duplicate",
+      "duplicate_of": "58",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 58."
+    },
+    {
+      "row": "309",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "9",
+      "status": "Duplicate",
+      "duplicate_of": "59",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 59."
+    },
+    {
+      "row": "310",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "10",
+      "status": "Duplicate",
+      "duplicate_of": "60",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 60."
+    },
+    {
+      "row": "311",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "11",
+      "status": "Duplicate",
+      "duplicate_of": "61",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 61."
+    },
+    {
+      "row": "312",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "12",
+      "status": "Duplicate",
+      "duplicate_of": "62",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 62."
+    },
+    {
+      "row": "313",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "13",
+      "status": "Duplicate",
+      "duplicate_of": "63",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 63."
+    },
+    {
+      "row": "314",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "64",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 64."
+    },
+    {
+      "row": "315",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "15",
+      "status": "Duplicate",
+      "duplicate_of": "65",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 65."
+    },
+    {
+      "row": "316",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "16",
+      "status": "Duplicate",
+      "duplicate_of": "66",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 66."
+    },
+    {
+      "row": "317",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "17",
+      "status": "Duplicate",
+      "duplicate_of": "67",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 67."
+    },
+    {
+      "row": "318",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "18",
+      "status": "Duplicate",
+      "duplicate_of": "68",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 68."
+    },
+    {
+      "row": "319",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "19",
+      "status": "Duplicate",
+      "duplicate_of": "69",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 69."
+    },
+    {
+      "row": "320",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "20",
+      "status": "Duplicate",
+      "duplicate_of": "70",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 70."
+    },
+    {
+      "row": "321",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "21",
+      "status": "Duplicate",
+      "duplicate_of": "71",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 71."
+    },
+    {
+      "row": "322",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "22",
+      "status": "Duplicate",
+      "duplicate_of": "72",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 72."
+    },
+    {
+      "row": "323",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "23",
+      "status": "Duplicate",
+      "duplicate_of": "73",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 73."
+    },
+    {
+      "row": "324",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "24",
+      "status": "Duplicate",
+      "duplicate_of": "74",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 74."
+    },
+    {
+      "row": "325",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "25",
+      "status": "Duplicate",
+      "duplicate_of": "208",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 208."
+    },
+    {
+      "row": "326",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "26",
+      "status": "Duplicate",
+      "duplicate_of": "76",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 76."
+    },
+    {
+      "row": "327",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "27",
+      "status": "Duplicate",
+      "duplicate_of": "77",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 77."
+    },
+    {
+      "row": "328",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "28",
+      "status": "Duplicate",
+      "duplicate_of": "78",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 78."
+    },
+    {
+      "row": "329",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "29",
+      "status": "Duplicate",
+      "duplicate_of": "79",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 79."
+    },
+    {
+      "row": "330",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "30",
+      "status": "Duplicate",
+      "duplicate_of": "80",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 80."
+    },
+    {
+      "row": "331",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "31",
+      "status": "Duplicate",
+      "duplicate_of": "81",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 81."
+    },
+    {
+      "row": "332",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "32",
+      "status": "Duplicate",
+      "duplicate_of": "82",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 82."
+    },
+    {
+      "row": "334",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "34",
+      "status": "Duplicate",
+      "duplicate_of": "84",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 84."
+    },
+    {
+      "row": "335",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "35",
+      "status": "Duplicate",
+      "duplicate_of": "85",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 85."
+    },
+    {
+      "row": "336",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "36",
+      "status": "Duplicate",
+      "duplicate_of": "86",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 86."
+    },
+    {
+      "row": "337",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "37",
+      "status": "Duplicate",
+      "duplicate_of": "87",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 87."
+    },
+    {
+      "row": "338",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "38",
+      "status": "Duplicate",
+      "duplicate_of": "88",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 88."
+    },
+    {
+      "row": "339",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "39",
+      "status": "Duplicate",
+      "duplicate_of": "89",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 89."
+    },
+    {
+      "row": "340",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "40",
+      "status": "Duplicate",
+      "duplicate_of": "90",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 90."
+    },
+    {
+      "row": "341",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "41",
+      "status": "Duplicate",
+      "duplicate_of": "91",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 91."
+    },
+    {
+      "row": "342",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "42",
+      "status": "Duplicate",
+      "duplicate_of": "92",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 92."
+    },
+    {
+      "row": "343",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "43",
+      "status": "Duplicate",
+      "duplicate_of": "93",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 93."
+    },
+    {
+      "row": "344",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "44",
+      "status": "Duplicate",
+      "duplicate_of": "94",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 94."
+    },
+    {
+      "row": "345",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "45",
+      "status": "Duplicate",
+      "duplicate_of": "95",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 95."
+    },
+    {
+      "row": "346",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "46",
+      "status": "Duplicate",
+      "duplicate_of": "96",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 96."
+    },
+    {
+      "row": "347",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "47",
+      "status": "Duplicate",
+      "duplicate_of": "97",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 97."
+    },
+    {
+      "row": "348",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "48",
+      "status": "Duplicate",
+      "duplicate_of": "98",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 98."
+    },
+    {
+      "row": "349",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "49",
+      "status": "Duplicate",
+      "duplicate_of": "99",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 99."
+    },
+    {
+      "row": "350",
+      "source_pdf": "BSED Biological Science P7.pdf",
+      "original_no": "50",
+      "status": "Duplicate",
+      "duplicate_of": "100",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 100."
+    },
+    {
+      "row": "384",
+      "source_pdf": "BSED Biological Science P8.pdf",
+      "original_no": "85",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B, C, D."
+    },
+    {
+      "row": "388",
+      "source_pdf": "BSED Biological Science P8.pdf",
+      "original_no": "89",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "416",
+      "source_pdf": "BSED Biological Science P9.pdf",
+      "original_no": "17",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B."
+    },
+    {
+      "row": "450",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "51",
+      "status": "Duplicate",
+      "duplicate_of": "101",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 101."
+    },
+    {
+      "row": "451",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "52",
+      "status": "Duplicate",
+      "duplicate_of": "101",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 101."
+    },
+    {
+      "row": "452",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "53",
+      "status": "Duplicate",
+      "duplicate_of": "103",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 103."
+    },
+    {
+      "row": "453",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "54",
+      "status": "Duplicate",
+      "duplicate_of": "104",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 104."
+    },
+    {
+      "row": "454",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "55",
+      "status": "Duplicate",
+      "duplicate_of": "105",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 105."
+    },
+    {
+      "row": "455",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "56",
+      "status": "Duplicate",
+      "duplicate_of": "106",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 106."
+    },
+    {
+      "row": "456",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "57",
+      "status": "Duplicate",
+      "duplicate_of": "107",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 107."
+    },
+    {
+      "row": "457",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "58",
+      "status": "Duplicate",
+      "duplicate_of": "108",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 108."
+    },
+    {
+      "row": "458",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "59",
+      "status": "Duplicate",
+      "duplicate_of": "109",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 109."
+    },
+    {
+      "row": "459",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "60",
+      "status": "Duplicate",
+      "duplicate_of": "110",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 110."
+    },
+    {
+      "row": "460",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "61",
+      "status": "Duplicate",
+      "duplicate_of": "111",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 111."
+    },
+    {
+      "row": "461",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "62",
+      "status": "Duplicate",
+      "duplicate_of": "112",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 112."
+    },
+    {
+      "row": "462",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "63",
+      "status": "Duplicate",
+      "duplicate_of": "113",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 113."
+    },
+    {
+      "row": "463",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "64",
+      "status": "Duplicate",
+      "duplicate_of": "114",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 114."
+    },
+    {
+      "row": "464",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "65",
+      "status": "Duplicate",
+      "duplicate_of": "115",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 115."
+    },
+    {
+      "row": "465",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "66",
+      "status": "Duplicate",
+      "duplicate_of": "116",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 116."
+    },
+    {
+      "row": "466",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "67",
+      "status": "Duplicate",
+      "duplicate_of": "117",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 117."
+    },
+    {
+      "row": "467",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "68",
+      "status": "Duplicate",
+      "duplicate_of": "118",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 118."
+    },
+    {
+      "row": "468",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "69",
+      "status": "Duplicate",
+      "duplicate_of": "119",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 119."
+    },
+    {
+      "row": "469",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "70",
+      "status": "Duplicate",
+      "duplicate_of": "120",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 120."
+    },
+    {
+      "row": "470",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "71",
+      "status": "Duplicate",
+      "duplicate_of": "121",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 121."
+    },
+    {
+      "row": "471",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "72",
+      "status": "Duplicate",
+      "duplicate_of": "122",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 122."
+    },
+    {
+      "row": "472",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "73",
+      "status": "Duplicate",
+      "duplicate_of": "123",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 123."
+    },
+    {
+      "row": "473",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "74",
+      "status": "Duplicate",
+      "duplicate_of": "124",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 124."
+    },
+    {
+      "row": "474",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "75",
+      "status": "Duplicate",
+      "duplicate_of": "125",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 125."
+    },
+    {
+      "row": "475",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "76",
+      "status": "Duplicate",
+      "duplicate_of": "126",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 126."
+    },
+    {
+      "row": "476",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "77",
+      "status": "Duplicate",
+      "duplicate_of": "127",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 127."
+    },
+    {
+      "row": "477",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "78",
+      "status": "Duplicate",
+      "duplicate_of": "128",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 128."
+    },
+    {
+      "row": "478",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "79",
+      "status": "Duplicate",
+      "duplicate_of": "129",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 129."
+    },
+    {
+      "row": "479",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "80",
+      "status": "Duplicate",
+      "duplicate_of": "130",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 130."
+    },
+    {
+      "row": "480",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "81",
+      "status": "Duplicate",
+      "duplicate_of": "131",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 131."
+    },
+    {
+      "row": "481",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "82",
+      "status": "Duplicate",
+      "duplicate_of": "132",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 132."
+    },
+    {
+      "row": "482",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "83",
+      "status": "Duplicate",
+      "duplicate_of": "133",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 133."
+    },
+    {
+      "row": "484",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "85",
+      "status": "Duplicate",
+      "duplicate_of": "135",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 135."
+    },
+    {
+      "row": "485",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "90",
+      "status": "Duplicate",
+      "duplicate_of": "140",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 140."
+    },
+    {
+      "row": "486",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "91",
+      "status": "Duplicate",
+      "duplicate_of": "141",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 141."
+    },
+    {
+      "row": "487",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "92",
+      "status": "Duplicate",
+      "duplicate_of": "142",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 142."
+    },
+    {
+      "row": "488",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "93",
+      "status": "Duplicate",
+      "duplicate_of": "143",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 143."
+    },
+    {
+      "row": "489",
+      "source_pdf": "BSED Biological Science P10.pdf",
+      "original_no": "94",
+      "status": "Duplicate",
+      "duplicate_of": "144",
+      "notes": "Path and PDF header indicate BSED/Secondary Biological Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 144."
+    }
+  ],
+  "duplicate_samples": [],
+  "content_update_samples": [
+    {
+      "row": "51",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "1",
+      "reason": "adopt_existing_content",
+      "existing_id": "d64efa36-162f-4310-8471-4f2aee977d8b"
+    },
+    {
+      "row": "52",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "2",
+      "reason": "adopt_existing_content",
+      "existing_id": "c68fbcb0-418f-4257-af41-64e35e7746f5"
+    },
+    {
+      "row": "55",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "5",
+      "reason": "adopt_existing_content",
+      "existing_id": "83286615-8c41-4c8c-a1a1-51af43cb3b1d"
+    },
+    {
+      "row": "58",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "8",
+      "reason": "adopt_existing_content",
+      "existing_id": "b37e9e8d-10bd-46a6-b064-5337ca7d86e6"
+    },
+    {
+      "row": "59",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "9",
+      "reason": "adopt_existing_content",
+      "existing_id": "78fce94b-ac6b-4aab-a331-ea7686fe46fb"
+    },
+    {
+      "row": "60",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "10",
+      "reason": "adopt_existing_content",
+      "existing_id": "f972e567-d6ac-49f4-8926-392d7faed005"
+    },
+    {
+      "row": "61",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "11",
+      "reason": "adopt_existing_content",
+      "existing_id": "fe376e81-5587-402e-9ac6-85bb49b85c24"
+    },
+    {
+      "row": "62",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "12",
+      "reason": "adopt_existing_content",
+      "existing_id": "4cfafcfd-b4b4-46f1-b708-959de7744692"
+    },
+    {
+      "row": "63",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "13",
+      "reason": "adopt_existing_content",
+      "existing_id": "142e9c3e-c778-4e6c-b9cd-f4ec0226a026"
+    },
+    {
+      "row": "65",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "15",
+      "reason": "adopt_existing_content",
+      "existing_id": "3fde4cc3-5aa7-4827-95a3-ba5529f7e48d"
+    },
+    {
+      "row": "66",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "16",
+      "reason": "adopt_existing_content",
+      "existing_id": "afed9b9f-4a25-4f35-ab8f-9e918659f8df"
+    },
+    {
+      "row": "68",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "18",
+      "reason": "adopt_existing_content",
+      "existing_id": "4a68bdbe-a8e7-4642-a00b-45eed699e49c"
+    },
+    {
+      "row": "69",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "19",
+      "reason": "adopt_existing_content",
+      "existing_id": "62798e37-e0dd-4218-a77c-757282a0e03d"
+    },
+    {
+      "row": "72",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "22",
+      "reason": "adopt_existing_content",
+      "existing_id": "02b42800-47b8-4ab3-9e26-8d953fe67ee2"
+    },
+    {
+      "row": "74",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "24",
+      "reason": "adopt_existing_content",
+      "existing_id": "0cbc5863-f68e-4965-8c72-2f34a3b6540d"
+    },
+    {
+      "row": "78",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "28",
+      "reason": "adopt_existing_content",
+      "existing_id": "a6fb135f-e382-4d12-adba-8149fc2edf31"
+    },
+    {
+      "row": "80",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "30",
+      "reason": "adopt_existing_content",
+      "existing_id": "ca978600-707e-4fbf-bcef-bac926f1bd75"
+    },
+    {
+      "row": "81",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "31",
+      "reason": "adopt_existing_content",
+      "existing_id": "7259e7a6-8874-4ff0-8d61-4362d8d22630"
+    },
+    {
+      "row": "82",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "32",
+      "reason": "adopt_existing_content",
+      "existing_id": "7f4f9dec-a425-4965-8f04-292679a3255a"
+    },
+    {
+      "row": "84",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "34",
+      "reason": "adopt_existing_content",
+      "existing_id": "29aaffdd-87df-4631-9c82-05feb1c14708"
+    },
+    {
+      "row": "86",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "36",
+      "reason": "adopt_existing_content",
+      "existing_id": "9684ed41-123a-4b5e-98cc-83153c95ce97"
+    },
+    {
+      "row": "87",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "37",
+      "reason": "adopt_existing_content",
+      "existing_id": "66838ccd-4016-43fb-9133-705494d4a34a"
+    },
+    {
+      "row": "88",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "38",
+      "reason": "adopt_existing_content",
+      "existing_id": "d4848789-fcb0-4bdd-8570-aee14560fc31"
+    },
+    {
+      "row": "89",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "39",
+      "reason": "adopt_existing_content",
+      "existing_id": "fa1f6cdd-0446-4dfe-8819-064d36dc0be9"
+    },
+    {
+      "row": "91",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "41",
+      "reason": "adopt_existing_content",
+      "existing_id": "fd66c9bf-1b54-46bd-bdfb-601a59d90f6e"
+    },
+    {
+      "row": "92",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "42",
+      "reason": "adopt_existing_content",
+      "existing_id": "1f7c7879-ae67-4b99-9098-c7bf652d5000"
+    },
+    {
+      "row": "94",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "44",
+      "reason": "adopt_existing_content",
+      "existing_id": "17bd06dc-b2c1-419b-a3ef-e7086f4603b5"
+    },
+    {
+      "row": "95",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "45",
+      "reason": "adopt_existing_content",
+      "existing_id": "a4e2cfeb-a8a7-4b23-8607-317d7992bd35"
+    },
+    {
+      "row": "96",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "46",
+      "reason": "adopt_existing_content",
+      "existing_id": "b3527069-5e42-406b-91e2-e933246f5a02"
+    },
+    {
+      "row": "98",
+      "source_pdf": "BSED Biological Science P2.pdf",
+      "original_no": "48",
+      "reason": "adopt_existing_content",
+      "existing_id": "d7d81951-0ade-4446-a0cd-92fc7c5d5271"
+    },
+    {
+      "row": "101",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "51",
+      "reason": "adopt_existing_content",
+      "existing_id": "248cee75-c1f2-4dec-8535-5e956340f43c"
+    },
+    {
+      "row": "103",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "53",
+      "reason": "adopt_existing_content",
+      "existing_id": "daea3b10-6b78-41b1-983a-250aba120f41"
+    },
+    {
+      "row": "104",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "54",
+      "reason": "adopt_existing_content",
+      "existing_id": "283fa0fd-bf9c-4c20-97ce-9985090c89cc"
+    },
+    {
+      "row": "105",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "55",
+      "reason": "adopt_existing_content",
+      "existing_id": "294e8494-87e7-4260-a2e2-54a34382d4fe"
+    },
+    {
+      "row": "106",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "56",
+      "reason": "adopt_existing_content",
+      "existing_id": "f6783447-4f88-469a-a809-33e6242c38a2"
+    },
+    {
+      "row": "108",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "58",
+      "reason": "adopt_existing_content",
+      "existing_id": "6f266c15-7275-4104-b313-e8ce3a043ce0"
+    },
+    {
+      "row": "109",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "59",
+      "reason": "adopt_existing_content",
+      "existing_id": "1a2d84c5-63cb-415c-8992-941e7b89708d"
+    },
+    {
+      "row": "110",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "60",
+      "reason": "adopt_existing_content",
+      "existing_id": "4f32d96a-9bbf-4ee0-a7db-f663dbced62a"
+    },
+    {
+      "row": "112",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "62",
+      "reason": "adopt_existing_content",
+      "existing_id": "5a4bb157-9a02-44af-a482-ad87d2a8035d"
+    },
+    {
+      "row": "113",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "63",
+      "reason": "adopt_existing_content",
+      "existing_id": "f9ae96ac-b653-4a33-8549-f698d5cbbec2"
+    },
+    {
+      "row": "116",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "66",
+      "reason": "adopt_existing_content",
+      "existing_id": "ac2b96ab-ed44-4a15-9820-f8e1ae159c73"
+    },
+    {
+      "row": "117",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "67",
+      "reason": "adopt_existing_content",
+      "existing_id": "ddae5956-2914-4626-bd5e-18629112202e"
+    },
+    {
+      "row": "118",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "68",
+      "reason": "adopt_existing_content",
+      "existing_id": "cb07e99f-f6d0-4022-9a6d-d6a333d0a442"
+    },
+    {
+      "row": "119",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "69",
+      "reason": "adopt_existing_content",
+      "existing_id": "c3a68521-5764-4632-9d26-9b9af339d16d"
+    },
+    {
+      "row": "121",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "71",
+      "reason": "adopt_existing_content",
+      "existing_id": "490b90ae-49d4-4fde-b64b-ce18748bf623"
+    },
+    {
+      "row": "122",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "72",
+      "reason": "adopt_existing_content",
+      "existing_id": "0281718e-7a34-4f64-9dbc-2317615c2d8d"
+    },
+    {
+      "row": "123",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "73",
+      "reason": "adopt_existing_content",
+      "existing_id": "65409cce-1ac3-4a7a-a7e6-107f80eb8cc4"
+    },
+    {
+      "row": "124",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "74",
+      "reason": "adopt_existing_content",
+      "existing_id": "ed1a36c2-6e6c-494c-863a-a46d188632c1"
+    },
+    {
+      "row": "125",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "75",
+      "reason": "adopt_existing_content",
+      "existing_id": "07a36298-97f2-486e-98eb-b5f879202724"
+    },
+    {
+      "row": "128",
+      "source_pdf": "BSED Biological Science P3.pdf",
+      "original_no": "78",
+      "reason": "adopt_existing_content",
+      "existing_id": "84b57faf-6078-4fe0-9e6d-10c540bf6711"
+    }
+  ],
+  "archived_duplicate_samples": [
+    {
+      "id": "e75efa36-0472-46df-85c4-6be303f93a23",
+      "source_key": "BSED Biological Science P5.pdf#14",
+      "duplicate_of": "77",
+      "stem": "The bipolar nature of the cell membrane is due to ."
+    },
+    {
+      "id": "dcd70cd1-d4da-447a-b497-d3207c8924c7",
+      "source_key": "BSED Biological Science P5.pdf#18",
+      "duplicate_of": "79",
+      "stem": "Which plant has underground stem modified for reproduction?"
+    },
+    {
+      "id": "45b768ae-a22e-4970-b1b1-e7c97a3732cb",
+      "source_key": "BSED Biological Science P5.pdf#26",
+      "duplicate_of": "85",
+      "stem": "Which pigment is dominant in red algae?"
+    },
+    {
+      "id": "995aa4f1-561a-4447-bc24-d3504d889faa",
+      "source_key": "BSED Biological Science P5.pdf#49",
+      "duplicate_of": "73",
+      "stem": "The cell wall of plant is made of ."
+    },
+    {
+      "id": "3a5dfd6c-35e6-4140-a152-75381acceddc",
+      "source_key": "BSED Biological Science P7.pdf#7",
+      "duplicate_of": "57",
+      "stem": "Which of the following is the building block carbohydrate?"
+    },
+    {
+      "id": "31525f8a-f758-49d2-8592-6bb5db2a0b09",
+      "source_key": "BSED Biological Science P7.pdf#14",
+      "duplicate_of": "64",
+      "stem": "Which of the following organelles produces turbo pressure against cell wall and mainly acts as water reservoir"
+    },
+    {
+      "id": "66b512d2-8025-42f8-bbd4-c7fb02cb4b5f",
+      "source_key": "BSED Biological Science P7.pdf#17",
+      "duplicate_of": "67",
+      "stem": "The process involved in the production of mRNA using DNA as template is termed ?"
+    },
+    {
+      "id": "935c0649-0774-43c3-b19b-2afe369eb0af",
+      "source_key": "BSED Biological Science P7.pdf#20",
+      "duplicate_of": "70",
+      "stem": "What muscle is described as involuntary, not striated, and have a single nucleus?"
+    },
+    {
+      "id": "1a103e67-4c76-4436-b95b-c8ead7c5dd92",
+      "source_key": "BSED Biological Science P7.pdf#21",
+      "duplicate_of": "71",
+      "stem": "We feel warmer just before it rains because"
+    },
+    {
+      "id": "70d05fc9-6315-45a8-882e-7dbe4f1dd2d4",
+      "source_key": "BSED Biological Science P7.pdf#26",
+      "duplicate_of": "76",
+      "stem": "Which of the following is an example of behavioral adaption?"
+    },
+    {
+      "id": "182a567a-3dc6-4695-b3f3-df778805466d",
+      "source_key": "BSED Biological Science P7.pdf#40",
+      "duplicate_of": "90",
+      "stem": "What is the enzyme in the mouth that breaks starch to maltose?"
+    },
+    {
+      "id": "76619b72-ba94-4622-bf0d-5ead9836c794",
+      "source_key": "BSED Biological Science P7.pdf#43",
+      "duplicate_of": "93",
+      "stem": "Which stage of incomplete metamorphism is undergone by grasshopper?"
+    },
+    {
+      "id": "198c4d3d-264a-422a-909a-a6d56bea0dd0",
+      "source_key": "BSED Biological Science P7.pdf#47",
+      "duplicate_of": "97",
+      "stem": "Why do you experience not seeing things clearly for some seconds when you enter suddenly a well-lighted room after coming from a dark room, you?"
+    },
+    {
+      "id": "90286bd5-bb04-4f12-98ed-ae87154e8c9c",
+      "source_key": "BSED Biological Science P7.pdf#50",
+      "duplicate_of": "100",
+      "stem": "Which is the smallest unit of life that can survive and reproduce on its own?"
+    },
+    {
+      "id": "ddd55a16-f132-4d0f-8a87-f12e25f0d0fa",
+      "source_key": "BSED Biological Science P10.pdf#57",
+      "duplicate_of": "107",
+      "stem": "Which of these materials is not a major component of the plasma membrane?"
+    },
+    {
+      "id": "f1b81343-62e9-4d66-9449-c8cf108493a6",
+      "source_key": "BSED Biological Science P10.pdf#64",
+      "duplicate_of": "114",
+      "stem": "What branch of Biology is involved when one is studying the characteristic structure and functions of all kinds of cells?"
+    },
+    {
+      "id": "0b8db48a-a7ed-4dd3-8214-f698bb2b1ffc",
+      "source_key": "BSED Biological Science P10.pdf#65",
+      "duplicate_of": "115",
+      "stem": "Which part of seed appears as a scar which marks the entry of the pollen tube during fertilization?"
+    },
+    {
+      "id": "2bb4df7d-4e90-45fa-bad5-4ea3476ab95b",
+      "source_key": "BSED Biological Science P10.pdf#70",
+      "duplicate_of": "120",
+      "stem": "Which of the following makes up the plant cell wall?"
+    },
+    {
+      "id": "b98630eb-c836-46c8-a605-74783eefed72",
+      "source_key": "BSED Biological Science P10.pdf#77",
+      "duplicate_of": "127",
+      "stem": "Which of the following happens when man exhale?"
+    },
+    {
+      "id": "438d81c7-4bc4-4cbc-bfbb-7ff4c3469f24",
+      "source_key": "BSED Biological Science P10.pdf#79",
+      "duplicate_of": "129",
+      "stem": "Which of the following has the lowest velocity of blood flow"
+    },
+    {
+      "id": "a50919a5-9dba-47b6-a679-8eea07879327",
+      "source_key": "BSED Biological Science P10.pdf#100",
+      "duplicate_of": "150",
+      "stem": "Which is considered the master gland due to its influence on the activity of all the other glands?"
+    }
+  ],
+  "update_samples": [
+    {
+      "id": "a2176109-1820-4bba-a457-515fa4c3c016",
+      "source_key": "BSED Biological Science P1.pdf#1",
+      "stem": "Which organelle is responsible for energy production in a cell?"
+    },
+    {
+      "id": "b8d462c1-7df2-41a8-b136-856f56ab6644",
+      "source_key": "BSED Biological Science P1.pdf#2",
+      "stem": "The plasma membrane is described as a “fluid mosaic model” because:"
+    },
+    {
+      "id": "b3057aef-8ad3-4bef-9525-b4cc091e9120",
+      "source_key": "BSED Biological Science P1.pdf#3",
+      "stem": "The process by which water moves across a selectively permeable membrane is called:"
+    },
+    {
+      "id": "a25cf41a-2916-42c3-8e2f-755a2e060717",
+      "source_key": "BSED Biological Science P1.pdf#4",
+      "stem": "Which macromolecule stores genetic information?"
+    },
+    {
+      "id": "671181c6-d150-4c82-9b16-9da07a97bdd2",
+      "source_key": "BSED Biological Science P1.pdf#6",
+      "stem": "The observable characteristics of an organism are called its:"
+    },
+    {
+      "id": "4eecc0a1-ab74-4033-af39-770675b5e4d0",
+      "source_key": "BSED Biological Science P1.pdf#7",
+      "stem": "A heterozygous condition means:"
+    },
+    {
+      "id": "3216c861-89a6-40f2-bda2-92d559aa47e2",
+      "source_key": "BSED Biological Science P1.pdf#8",
+      "stem": "Incomplete dominance occurs when:"
+    },
+    {
+      "id": "4356d167-2c76-4b77-8ab4-262d35de16fa",
+      "source_key": "BSED Biological Science P1.pdf#9",
+      "stem": "A trait controlled by several genes is said to be:"
+    },
+    {
+      "id": "848de19f-55e3-41ed-b7a8-db2aeb268396",
+      "source_key": "BSED Biological Science P1.pdf#13",
+      "stem": "The kingdom that includes multicellular, eukaryotic organisms that perform photosynthesis is:"
+    },
+    {
+      "id": "8449e2a3-7dc9-4376-80e6-4affacb5bd53",
+      "source_key": "BSED Biological Science P1.pdf#14",
+      "stem": "A species name consists of:"
+    },
+    {
+      "id": "032ff9bf-de52-43b2-8a57-9e3a73c9d903",
+      "source_key": "BSED Biological Science P1.pdf#15",
+      "stem": "Which evidence supports evolution most directly?"
+    },
+    {
+      "id": "aca3936f-0d3c-4766-8d31-3aad79a764fa",
+      "source_key": "BSED Biological Science P1.pdf#16",
+      "stem": "The ultimate source of energy for most ecosystems is:"
+    },
+    {
+      "id": "e1400017-9532-4e64-8d23-9e2e1443ad13",
+      "source_key": "BSED Biological Science P1.pdf#17",
+      "stem": "The relationship between a clownfish and sea anemone is:"
+    },
+    {
+      "id": "e42beebf-6374-49cf-8a3f-24f34ece6b86",
+      "source_key": "BSED Biological Science P1.pdf#18",
+      "stem": "Which biome has permafrost and very low temperatures?"
+    },
+    {
+      "id": "43ef95f4-a713-4563-9f10-96a3e70c21dd",
+      "source_key": "BSED Biological Science P1.pdf#19",
+      "stem": "The process by which green plants convert light energy into chemical energy is:"
+    },
+    {
+      "id": "d9a53782-dd82-4ed0-aad9-2040bb68620d",
+      "source_key": "BSED Biological Science P1.pdf#21",
+      "stem": "The functional unit of the kidney is the:"
+    },
+    {
+      "id": "358f5058-6c54-4ad6-bfbb-71809186d041",
+      "source_key": "BSED Biological Science P1.pdf#22",
+      "stem": "The pulmonary vein carries:"
+    },
+    {
+      "id": "2c6725b9-5005-4d7f-b383-07b7016a97bf",
+      "source_key": "BSED Biological Science P1.pdf#25",
+      "stem": "Which part of the digestive system absorbs most nutrients?"
+    },
+    {
+      "id": "fc0f26d9-0945-4ae6-bff3-2cf6bac15c3e",
+      "source_key": "BSED Biological Science P1.pdf#27",
+      "stem": "The process of converting milk to yogurt involves:"
+    },
+    {
+      "id": "c42e7894-8182-4105-8bc5-249902fa1b8c",
+      "source_key": "BSED Biological Science P1.pdf#28",
+      "stem": "Which organism causes malaria?"
+    },
+    {
+      "id": "976c1487-1016-4758-9aa5-572e65ed4814",
+      "source_key": "BSED Biological Science P1.pdf#30",
+      "stem": "The process of inserting foreign DNA into an organism is known as:"
+    },
+    {
+      "id": "398703e2-0a84-4786-b7b7-fb8dbfc37a76",
+      "source_key": "BSED Biological Science P1.pdf#31",
+      "stem": "The main function of xylem is to:"
+    },
+    {
+      "id": "78ea7b69-3e19-4cbe-9fc6-4d848cc52cf9",
+      "source_key": "BSED Biological Science P1.pdf#32",
+      "stem": "The process of water loss through leaves is called:"
+    },
+    {
+      "id": "57f3c1bd-503c-4eea-9ec3-47b588aba68a",
+      "source_key": "BSED Biological Science P1.pdf#33",
+      "stem": "The male reproductive part of a flower is the:"
+    },
+    {
+      "id": "2916fba8-b983-42f0-9e9b-bce86476f929",
+      "source_key": "BSED Biological Science P1.pdf#36",
+      "stem": "The main goal of science education is to:"
+    }
+  ]
+}

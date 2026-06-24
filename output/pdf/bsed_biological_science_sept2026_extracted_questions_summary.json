@@ -1,0 +1,82 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Biological Science-",
+  "source_pdfs": 10,
+  "total_questions_found": 495,
+  "total_ready_for_upload": 389,
+  "total_needing_review": 5,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 101,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 495,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 389,
+    "Needs Review": 3,
+    "Duplicate": 101,
+    "Incomplete": 2
+  },
+  "subject_category_breakdown": {
+    "Biological Science": 495
+  },
+  "topic_breakdown": {
+    "Cell Biology and Biochemistry": 70,
+    "Genetics and Heredity": 35,
+    "Biological Science": 160,
+    "Evolution and Classification": 18,
+    "Ecology and Environment": 23,
+    "Zoology": 25,
+    "Botany": 56,
+    "Anatomy and Physiology": 82,
+    "Microbiology and Immunology": 16,
+    "Biology Pedagogy and Research": 10
+  },
+  "difficulty_breakdown": {
+    "3": 495
+  },
+  "source_counts": {
+    "BSED Biological Science P1.pdf": 50,
+    "BSED Biological Science P2.pdf": 50,
+    "BSED Biological Science P3.pdf": 50,
+    "BSED Biological Science P4.pdf": 50,
+    "BSED Biological Science P5.pdf": 50,
+    "BSED Biological Science P6.pdf": 50,
+    "BSED Biological Science P7.pdf": 50,
+    "BSED Biological Science P8.pdf": 49,
+    "BSED Biological Science P9.pdf": 50,
+    "BSED Biological Science P10.pdf": 46
+  },
+  "processed_pdfs": 10,
+  "skipped_sources": {},
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Biological Science",
+    "topic": "Biological Science",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "choice_e_text": "Choice E",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows to LET Secondary major/biological-science, then verify live source counts and sub-tag breakdown.",
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_biological_science_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_biological_science_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_biological_science_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_biological_science_sept2026_extracted_questions_summary.json"
+  }
+}
