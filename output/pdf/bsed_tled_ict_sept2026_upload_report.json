@@ -1,0 +1,248 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_tled_ict_sept2026_extracted_questions.json",
+  "extracted_rows": 500,
+  "ready_rows": 485,
+  "source_duplicates_or_non_ready_skipped": 15,
+  "existing_tle_questions_before": 523,
+  "insertable": 427,
+  "updatable_by_source_key": 58,
+  "duplicate_existing_content": 0,
+  "inserted": 427,
+  "updated": 58,
+  "skipped_samples": [
+    {
+      "row": "196",
+      "source_pdf": "BSED TLEd-ICT P3.pdf",
+      "original_no": "46",
+      "status": "Duplicate",
+      "duplicate_of": "142"
+    },
+    {
+      "row": "197",
+      "source_pdf": "BSED TLEd-ICT P3.pdf",
+      "original_no": "47",
+      "status": "Duplicate",
+      "duplicate_of": "69"
+    },
+    {
+      "row": "226",
+      "source_pdf": "BSED TLEd-ICT P4.pdf",
+      "original_no": "26",
+      "status": "Duplicate",
+      "duplicate_of": "31"
+    },
+    {
+      "row": "254",
+      "source_pdf": "BSED TLEd-ICT P5.pdf",
+      "original_no": "4",
+      "status": "Duplicate",
+      "duplicate_of": "160"
+    },
+    {
+      "row": "261",
+      "source_pdf": "BSED TLEd-ICT P5.pdf",
+      "original_no": "11",
+      "status": "Duplicate",
+      "duplicate_of": "167"
+    },
+    {
+      "row": "288",
+      "source_pdf": "BSED TLEd-ICT P5.pdf",
+      "original_no": "38",
+      "status": "Duplicate",
+      "duplicate_of": "31"
+    },
+    {
+      "row": "294",
+      "source_pdf": "BSED TLEd-ICT P5.pdf",
+      "original_no": "44",
+      "status": "Duplicate",
+      "duplicate_of": "242"
+    },
+    {
+      "row": "310",
+      "source_pdf": "BSED TLEd-ICT P6.pdf",
+      "original_no": "10",
+      "status": "Duplicate",
+      "duplicate_of": "204"
+    },
+    {
+      "row": "371",
+      "source_pdf": "BSED TLEd-ICT P7.pdf",
+      "original_no": "21",
+      "status": "Duplicate",
+      "duplicate_of": "18"
+    },
+    {
+      "row": "396",
+      "source_pdf": "BSED TLEd-ICT P7.pdf",
+      "original_no": "46",
+      "status": "Duplicate",
+      "duplicate_of": "180"
+    },
+    {
+      "row": "430",
+      "source_pdf": "BSED TLEd-ICT P8.pdf",
+      "original_no": "30",
+      "status": "Duplicate",
+      "duplicate_of": "81"
+    },
+    {
+      "row": "473",
+      "source_pdf": "BSED TLEd-ICT P9.pdf",
+      "original_no": "23",
+      "status": "Duplicate",
+      "duplicate_of": "3"
+    },
+    {
+      "row": "477",
+      "source_pdf": "BSED TLEd-ICT P9.pdf",
+      "original_no": "27",
+      "status": "Duplicate",
+      "duplicate_of": "410"
+    },
+    {
+      "row": "486",
+      "source_pdf": "BSED TLEd-ICT P9.pdf",
+      "original_no": "36",
+      "status": "Duplicate",
+      "duplicate_of": "28"
+    },
+    {
+      "row": "489",
+      "source_pdf": "BSED TLEd-ICT P9.pdf",
+      "original_no": "39",
+      "status": "Duplicate",
+      "duplicate_of": "204"
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "875e15f2-bb46-4d48-a6c2-48d8859bb281",
+      "source_key": "BSED TLEd-ICT P1.pdf#1",
+      "stem": "The main circuit board of a computer is called:"
+    },
+    {
+      "id": "b1dd9a7d-f3d4-432c-bbe9-9e5b831e170e",
+      "source_key": "BSED TLEd-ICT P1.pdf#2",
+      "stem": "Which component temporarily stores data for processing?"
+    },
+    {
+      "id": "b9ccf2b7-45a9-4a3f-8083-14bb96c94a65",
+      "source_key": "BSED TLEd-ICT P1.pdf#6",
+      "stem": "Which device is used to store data permanently?"
+    },
+    {
+      "id": "9e57355c-57a5-45bd-8f44-677ab1855b16",
+      "source_key": "BSED TLEd-ICT P1.pdf#8",
+      "stem": "Which type of cable is used in most LAN setups?"
+    },
+    {
+      "id": "e7f7dff7-7ae2-407f-8224-faf84ad22792",
+      "source_key": "BSED TLEd-ICT P10.pdf#1",
+      "stem": "The use of ICT to enhance teaching and learning is called:"
+    },
+    {
+      "id": "43a272cb-4a9a-4eba-a8bd-c7e52274285c",
+      "source_key": "BSED TLEd-ICT P10.pdf#2",
+      "stem": "Which of the following is NOT an ICT tool for instruction?"
+    },
+    {
+      "id": "a4d51ccd-8181-407e-bd5e-ba7a77de5be6",
+      "source_key": "BSED TLEd-ICT P10.pdf#4",
+      "stem": "A teacher using PowerPoint in presenting lessons demonstrates:"
+    },
+    {
+      "id": "c5896ba8-6101-4574-a49e-abaee087bdf8",
+      "source_key": "BSED TLEd-ICT P10.pdf#6",
+      "stem": "A computer virus that disguises itself as legitimate software is called:"
+    },
+    {
+      "id": "120d7d71-544a-4f4b-a7ea-43fcf166a641",
+      "source_key": "BSED TLEd-ICT P10.pdf#7",
+      "stem": "Which is an example of a strong password?"
+    },
+    {
+      "id": "14953a1a-ce27-4bb4-a3fe-2f9915d338a0",
+      "source_key": "BSED TLEd-ICT P10.pdf#8",
+      "stem": "The act of stealing personal information online is called:"
+    },
+    {
+      "id": "2b8e4e1d-32c8-4509-89a9-9d57c9f14f6b",
+      "source_key": "BSED TLEd-ICT P2.pdf#1",
+      "stem": "Which software is best for word processing tasks?"
+    },
+    {
+      "id": "3cdfdda7-2111-443e-88e2-c5cfaf9cd11b",
+      "source_key": "BSED TLEd-ICT P2.pdf#4",
+      "stem": "In Excel, which function calculates the sum of cells A1 to A5?"
+    },
+    {
+      "id": "a3ae41ff-ccaf-4d2e-b03e-781b58368522",
+      "source_key": "BSED TLEd-ICT P2.pdf#6",
+      "stem": "In PowerPoint, which view shows slides in miniature form?"
+    },
+    {
+      "id": "c886b4cb-5eb4-4153-85bf-fbc8b61c6459",
+      "source_key": "BSED TLEd-ICT P2.pdf#7",
+      "stem": "The default extension for a PowerPoint presentation is:"
+    },
+    {
+      "id": "3d6aefa5-6a05-47f5-8b97-a947e3fe1c28",
+      "source_key": "BSED TLEd-ICT P3.pdf#2",
+      "stem": "Which component provides temporary data storage?"
+    },
+    {
+      "id": "67a9148a-fa7d-45b1-aeab-b552289b62bb",
+      "source_key": "BSED TLEd-ICT P3.pdf#3",
+      "stem": "What type of memory is non-volatile and retains data when power is off?"
+    },
+    {
+      "id": "a5eaa59e-0d25-4964-93a7-82ff472ea71f",
+      "source_key": "BSED TLEd-ICT P3.pdf#5",
+      "stem": "Which of the following is an example of an input device?"
+    },
+    {
+      "id": "36b58c22-ded3-428d-9002-59c09f9d26e4",
+      "source_key": "BSED TLEd-ICT P3.pdf#6",
+      "stem": "Which port is used for network connections?"
+    },
+    {
+      "id": "27168088-a82e-454d-83b9-d20652966f3f",
+      "source_key": "BSED TLEd-ICT P3.pdf#8",
+      "stem": "Which of the following is NOT a storage device?"
+    },
+    {
+      "id": "0c6688db-b155-40c8-bea0-4c3f0bfd94cd",
+      "source_key": "BSED TLEd-ICT P4.pdf#1",
+      "stem": "The set of instructions that tells the computer what to do is called:"
+    },
+    {
+      "id": "a98aae95-6b39-4967-961a-29f4fc377ec8",
+      "source_key": "BSED TLEd-ICT P4.pdf#2",
+      "stem": "Which of the following languages is a high-level programming language?"
+    },
+    {
+      "id": "aaaca3cd-3fb2-4c0e-adcc-ef1a981a6193",
+      "source_key": "BSED TLEd-ICT P4.pdf#7",
+      "stem": "In programming, variables are used to:"
+    },
+    {
+      "id": "c0217736-9804-4459-8f03-944f096218aa",
+      "source_key": "BSED TLEd-ICT P4.pdf#8",
+      "stem": "Which data type is used to store text?"
+    },
+    {
+      "id": "f10fb3d6-390f-49c0-b9d3-f9c9c3355bc9",
+      "source_key": "BSED TLEd-ICT P5.pdf#1",
+      "stem": "The physical layout of a network is known as:"
+    },
+    {
+      "id": "6d3c6fb4-ff0d-4a65-af8b-fb7d83d24351",
+      "source_key": "BSED TLEd-ICT P5.pdf#2",
+      "stem": "A network that covers a small geographic area such as a school or office is:"
+    }
+  ]
+}

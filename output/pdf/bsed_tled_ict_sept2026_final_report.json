@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-06-24T01:35:22.901Z",
+  "source_folder": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Information and Communication Technology-",
+  "source_pdfs": 10,
+  "extraction_summary": {
+    "total_questions_found": 500,
+    "ready_for_upload": 485,
+    "duplicates_detected": 15,
+    "needing_review": 0,
+    "without_answer_key": 0,
+    "with_images": 0,
+    "with_image_based_answer_choices": 0,
+    "status_counts": {
+      "Ready for Upload": 485,
+      "Duplicate": 15
+    },
+    "topic_breakdown": {
+      "ICT Trends and Emerging Technologies": 49,
+      "Information and Communication Technology": 121,
+      "Computer Hardware and Troubleshooting": 47,
+      "Programming and Databases": 74,
+      "Networking": 84,
+      "Cybersecurity and Digital Citizenship": 48,
+      "Web and Multimedia": 12,
+      "ICT in Education": 50,
+      "Productivity Tools": 15
+    },
+    "difficulty_breakdown": {
+      "3": 500
+    }
+  },
+  "upload_summary": {
+    "inserted": 427,
+    "updated": 58,
+    "skipped_source_duplicates_or_non_ready": 15,
+    "duplicate_existing_content": 0,
+    "ready_rows": 485
+  },
+  "live_database_verification": {
+    "let_secondary_major_tle_total": 950,
+    "let_secondary_major_tle_published": 950,
+    "bsed_tled_ict_source_total": 485,
+    "bsed_tled_ict_source_published": 485,
+    "source_topic_breakdown": {
+      "Information and Communication Technology": 121,
+      "Networking": 81,
+      "Programming and Databases": 70,
+      "ICT in Education": 49,
+      "ICT Trends and Emerging Technologies": 48,
+      "Cybersecurity and Digital Citizenship": 45,
+      "Computer Hardware and Troubleshooting": 44,
+      "Productivity Tools": 15,
+      "Web and Multimedia": 12
+    },
+    "sample_verified_question": {
+      "source_pdf": "BSED TLEd-ICT P1.pdf",
+      "original_no": 7,
+      "stem": "The function of the power supply unit (PSU) is to:",
+      "correct_choice_id": "b",
+      "explanation_en": "Function of PSU."
+    }
+  },
+  "supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Technology and Livelihood Education",
+    "topic": "tle",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "No additional upload action is needed for this folder. Review the 15 duplicate rows only if exact duplicate retention is required for audit display."
+}
