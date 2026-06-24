@@ -2,8 +2,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, Text, View } from 'react-native';
 import type { ExamCountdown } from '../lib/exam-countdown';
-import { EXAM_COUNTDOWN_PLUS_CTA } from '../lib/subscription/checkout-copy';
+import { EXAM_COUNTDOWN_PLUS_CTA, PREMIUM_EXAM_PREP } from '../lib/subscription/paywall-copy';
 import type { AppTheme } from '../hooks/use-app-theme';
+
+type PremiumExamPrepActions = {
+  offlineReady: boolean;
+  onOfflinePress: () => void;
+  onTutorPress: () => void;
+};
 
 type Props = {
   theme: AppTheme;
@@ -11,6 +17,7 @@ type Props = {
   examName: string;
   onPress?: () => void;
   onPlusPress?: () => void;
+  premiumExamPrep?: PremiumExamPrepActions;
 };
 
 const toneColors = {
@@ -20,11 +27,13 @@ const toneColors = {
   normal: { bg: ['#0B5FFF', '#08245C'] as const, accent: '#DBEAFE' },
 };
 
-export function ExamCountdownCard({ theme, countdown, examName, onPress, onPlusPress }: Props) {
+export function ExamCountdownCard({ theme, countdown, examName, onPress, onPlusPress, premiumExamPrep }: Props) {
   const { spacing, radii, fonts } = theme;
   const palette = toneColors[countdown.tone];
   const showPlusCta =
     onPlusPress != null && countdown.daysLeft >= 0 && countdown.daysLeft <= 30 && countdown.tone !== 'past';
+  const showPremiumPrep =
+    premiumExamPrep != null && countdown.daysLeft >= 0 && countdown.daysLeft <= 30 && countdown.tone !== 'past';
 
   const content = (
     <LinearGradient
@@ -87,6 +96,58 @@ export function ExamCountdownCard({ theme, countdown, examName, onPress, onPlusP
               {EXAM_COUNTDOWN_PLUS_CTA.button}
             </Text>
           </Pressable>
+        ) : null}
+        {showPremiumPrep ? (
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs, marginTop: spacing.sm }}>
+            <Pressable
+              onPress={premiumExamPrep.onOfflinePress}
+              accessibilityRole="button"
+              accessibilityLabel={
+                premiumExamPrep.offlineReady
+                  ? PREMIUM_EXAM_PREP.offlineReady
+                  : PREMIUM_EXAM_PREP.offlineDownload
+              }
+              style={({ pressed }) => ({
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 4,
+                backgroundColor: 'rgba(255,255,255,0.18)',
+                borderRadius: radii.md,
+                paddingHorizontal: spacing.sm,
+                paddingVertical: 6,
+                opacity: pressed ? 0.85 : 1,
+              })}
+            >
+              <Ionicons
+                name={premiumExamPrep.offlineReady ? 'checkmark-circle' : 'cloud-download-outline'}
+                size={12}
+                color="#fff"
+              />
+              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: '#fff' }}>
+                {PREMIUM_EXAM_PREP.countdownOffline}
+              </Text>
+            </Pressable>
+            <Pressable
+              onPress={premiumExamPrep.onTutorPress}
+              accessibilityRole="button"
+              accessibilityLabel={PREMIUM_EXAM_PREP.tutorCta}
+              style={({ pressed }) => ({
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 4,
+                backgroundColor: 'rgba(255,255,255,0.18)',
+                borderRadius: radii.md,
+                paddingHorizontal: spacing.sm,
+                paddingVertical: 6,
+                opacity: pressed ? 0.85 : 1,
+              })}
+            >
+              <Ionicons name="chatbubbles-outline" size={12} color="#fff" />
+              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: '#fff' }}>
+                {PREMIUM_EXAM_PREP.countdownTutor}
+              </Text>
+            </Pressable>
+          </View>
         ) : null}
       </View>
       {onPress ? <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.8)" /> : null}

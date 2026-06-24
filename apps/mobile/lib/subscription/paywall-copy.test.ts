@@ -9,6 +9,7 @@ import {
   PAYWALL_PAYMENT_EXPLANATION,
   PREMIUM_LOCK_CTA,
   PREMIUM_ACTIVE,
+  PREMIUM_EXAM_PREP,
   PREMIUM_PURCHASE,
 } from './paywall-copy';
 
@@ -56,6 +57,14 @@ describe('paywall-copy', () => {
     expect(PREMIUM_ACTIVE.syncHint).toContain('sync entitlements');
   });
 
+  it('guides premium users nearing exam to offline pack and AI tutor', () => {
+    expect(PREMIUM_EXAM_PREP.title(14)).toContain('14 araw');
+    expect(PREMIUM_EXAM_PREP.subtitle).toContain('offline pack');
+    expect(PREMIUM_EXAM_PREP.subtitle).toContain('AI tutor');
+    expect(PREMIUM_EXAM_PREP.offlineDownload).toContain('offline pack');
+    expect(PREMIUM_EXAM_PREP.tutorCta).toContain('AI tutor');
+  });
+
   it('does not include forbidden external payment strings', () => {
     const corpus = [
       PAYWALL_HEADLINE,
@@ -67,6 +76,7 @@ describe('paywall-copy', () => {
       PREMIUM_PURCHASE.successSubtitle,
       PREMIUM_PURCHASE.restoreHint,
       PREMIUM_ACTIVE.subtitle,
+      PREMIUM_EXAM_PREP.subtitle,
       ...HOW_TO_PAY_STEPS,
       EXAM_COUNTDOWN_PLUS_CTA.button,
     ].join('\n');

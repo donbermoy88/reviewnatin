@@ -16,7 +16,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { StackShell } from '../../components/stack-shell';
-import { PrimaryButton } from '../../components/primary-button';
+import { PremiumLock } from '../../components/premium-lock';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createLeaderboardStyles } from '../../lib/themed-styles';
 import { sendAiTutorMessage, type AiTutorMessage } from '../../lib/api/ai-tutor';
@@ -26,12 +26,19 @@ import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
 import { trackEvent } from '../../lib/analytics/events';
+import { PREMIUM_LOCK_BODY, PREMIUM_LOCK_CTA, PREMIUM_LOCK_TITLE } from '../../lib/subscription/paywall-copy';
 
-const STARTER: AiTutorMessage = {
+const EXAM_PREP_STARTER: AiTutorMessage = {
   role: 'assistant',
   content:
-    "Hi! I'm your AI tutor. Ask me about weak topics, your study plan, or mock exam prep. What would you like to talk about?",
+    'Kumusta! AI tutor mo ako para sa huling sprint bago exam. Magtanong tungkol sa weak topics mo, mock exam strategy, o kung ano ang dapat unahin ngayong araw. Ano ang gusto mong pag-aralan?',
 };
+
+const QUICK_PROMPTS = [
+  'Ano ang dapat i-review ngayong araw?',
+  'Paano maghanda sa mock exam?',
+  'Explain my weakest topic',
+] as const;
 
 export default function AiTutorScreen() {
   const router = useRouter();
@@ -45,7 +52,7 @@ export default function AiTutorScreen() {
   const scrollRef = useRef<ScrollView>(null);
 
   const [examSlug, setExamSlug] = useState<string>(DEFAULT_EXAM_SLUG);
-  const [messages, setMessages] = useState<AiTutorMessage[]>([STARTER]);
+  const [messages, setMessages] = useState<AiTutorMessage[]>([EXAM_PREP_STARTER]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const [remaining, setRemaining] = useState<number | null>(null);
@@ -68,9 +75,9 @@ export default function AiTutorScreen() {
     }
 
     if (!isPremium()) {
-      Alert.alert('ReviewNatin Plus required', 'AI tutor chat is available for premium subscribers only.', [
+      Alert.alert(PREMIUM_LOCK_TITLE, PREMIUM_LOCK_BODY, [
         { text: 'Not now', style: 'cancel' },
-        { text: 'View plans', onPress: () => router.push('/subscribe') },
+        { text: PREMIUM_LOCK_CTA, onPress: () => router.push('/subscribe') },
       ]);
       return;
     }
@@ -84,7 +91,10 @@ export default function AiTutorScreen() {
       const result = await sendAiTutorMessage(nextMessages, { examSlug, locale });
       if (!result.ok) {
         if (result.error === 'premium_required') {
-          Alert.alert('ReviewNatin Plus required', 'Upgrade to chat with the AI tutor.');
+          Alert.alert(PREMIUM_LOCK_TITLE, PREMIUM_LOCK_BODY, [
+            { text: 'Not now', style: 'cancel' },
+            { text: PREMIUM_LOCK_CTA, onPress: () => router.push('/subscribe') },
+          ]);
           return;
         }
         if (result.error === 'daily_limit_reached') {
@@ -149,9 +159,9 @@ export default function AiTutorScreen() {
         <Text style={styles.headerSub}>
           {isPremium()
             ? remaining != null
-              ? `Premium · ${remaining} message${remaining === 1 ? '' : 's'} left today`
-              : 'Premium · Ask anything about your exam prep'
-            : 'Premium feature — upgrade to unlock'}
+              ? `Plus · ${remaining} AI message${remaining === 1 ? '' : 's'} left today`
+              : 'Plus · AI tutor unlocked for exam prep'
+            : PREMIUM_LOCK_TITLE}
         </Text>
       </LinearGradient>
 
@@ -187,6 +197,29 @@ export default function AiTutorScreen() {
           </View>
         ))}
         {sending ? <ActivityIndicator color={colors.primary} style={{ alignSelf: 'flex-start' }} /> : null}
+        {isPremium() && !sending ? (
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs, marginTop: spacing.xs }}>
+            {QUICK_PROMPTS.map((prompt) => (
+              <Pressable
+                key={prompt}
+                onPress={() => setInput(prompt)}
+                accessibilityRole="button"
+                accessibilityLabel={prompt}
+                style={({ pressed }) => ({
+                  borderRadius: 999,
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                  backgroundColor: colors.surface,
+                  paddingHorizontal: spacing.sm,
+                  paddingVertical: 6,
+                  opacity: pressed ? 0.85 : 1,
+                })}
+              >
+                <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted }}>{prompt}</Text>
+              </Pressable>
+            ))}
+          </View>
+        ) : null}
       </ScrollView>
 
       <View
@@ -241,7 +274,13 @@ export default function AiTutorScreen() {
 
       {!isPremium() ? (
         <View style={{ paddingHorizontal: spacing.lg, paddingBottom: insets.bottom + spacing.sm }}>
-          <PrimaryButton label="I-unlock ang AI tutor" size="lg" onPress={() => router.push('/subscribe')} />
+          <PremiumLock
+            description="Buksan ang unlimited AI tutor para sa exam prep mo."
+            onPress={() => {
+              trackEvent('subscription_viewed', { source: 'ai_tutor' });
+              router.push('/subscribe');
+            }}
+          />
         </View>
       ) : null}
     </KeyboardAvoidingView>

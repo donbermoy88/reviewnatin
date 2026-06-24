@@ -9,6 +9,7 @@ import { ErrorBoundary } from '../../components/error-boundary';
 import { GuestNextStepCard } from '../../components/guest-next-step-card';
 import { FreeDailyLimitStrip } from '../../components/dashboard/free-daily-limit-strip';
 import { PremiumActiveStrip } from '../../components/dashboard/premium-active-strip';
+import { PremiumExamPrepStrip } from '../../components/dashboard/premium-exam-prep-strip';
 import { HomeStudyInsights } from '../../components/dashboard/home-study-insights';
 import { GoalRing } from '../../components/goal-ring';
 import { PrimaryButton } from '../../components/primary-button';
@@ -44,7 +45,7 @@ import {
 } from '../../lib/notifications';
 import { fetchDueFlashcardCount } from '../../lib/api/flashcards';
 import { fetchTopicAnalytics, type SubjectAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
-import { trackEvent } from '../../lib/analytics/events';
+import { trackEvent, trackMicrointeraction } from '../../lib/analytics/events';
 import { fetchDailyStudyTrend, type DailyStudyPoint } from '../../lib/api/study-trend';
 import { buildAnalyticsInsights } from '../../lib/analytics/insights';
 import { runAfterInteractions } from '../../lib/performance/defer-after-interaction';
@@ -56,6 +57,11 @@ import type { SubjectArea } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { resolveMonthlyPlusDisplay } from '../../lib/subscription/pricing-display';
+import {
+  downloadOfflinePack,
+  getOfflinePackMeta,
+  type OfflinePackMeta,
+} from '../../lib/offline/pack';
 import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -270,6 +276,8 @@ function DashboardScreenContent() {
   const [notificationSheetOpen, setNotificationSheetOpen] = useState(false);
   const [updatesSheetOpen, setUpdatesSheetOpen] = useState(false);
   const [milestoneVisible, setMilestoneVisible] = useState(false);
+  const [offlineMeta, setOfflineMeta] = useState<OfflinePackMeta | null>(null);
+  const [offlineBusy, setOfflineBusy] = useState(false);
 
   useEffect(() => {
     Animated.timing(introAnim, {
@@ -578,6 +586,47 @@ function DashboardScreenContent() {
   const completedPasapathTasks = visiblePasapathTasks.filter((task) => task.completed).length;
   const remainingPasapathTasks = Math.max(visiblePasapathTasks.length - completedPasapathTasks, 0);
   const examCountdown = goal?.targetDate ? formatExamCountdown(goal.targetDate) : null;
+  const examPrepUrgent =
+    premium &&
+    examCountdown != null &&
+    examCountdown.daysLeft >= 0 &&
+    examCountdown.daysLeft <= 30 &&
+    examCountdown.tone !== 'past';
+  const offlineReady = offlineMeta != null;
+
+  useEffect(() => {
+    if (!user || !premium) {
+      setOfflineMeta(null);
+      return;
+    }
+    let cancelled = false;
+    void getOfflinePackMeta(examSlug).then((meta) => {
+      if (!cancelled) setOfflineMeta(meta);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [user, premium, examSlug]);
+
+  const handleDownloadOfflinePack = useCallback(async () => {
+    if (!user || !premium || offlineBusy || offlineMeta) return;
+    setOfflineBusy(true);
+    try {
+      const result = await downloadOfflinePack(examSlug);
+      if (result.ok) {
+        setOfflineMeta(result.meta);
+        trackMicrointeraction('offline_pack_download', { examSlug, source: 'home_exam_prep' });
+      }
+    } finally {
+      setOfflineBusy(false);
+    }
+  }, [user, premium, offlineBusy, offlineMeta, examSlug]);
+
+  const openAiTutor = useCallback(() => {
+    trackMicrointeraction('ai_tutor_open', { examSlug, source: 'home_exam_prep' });
+    router.push('/tutor');
+  }, [router, examSlug]);
+
   const firstName = user ? displayName.split(/\s+/)[0] ?? displayName : 'Guest';
   const remainingQuestions = Math.max(questionsTarget - questionsDone, 0);
   const monthlyPlusPriceText = resolveMonthlyPlusDisplay(products, storePrices);
@@ -863,7 +912,15 @@ function DashboardScreenContent() {
             />
           ) : null}
 
-          {user && premium ? (
+          {user && premium && examPrepUrgent ? (
+            <PremiumExamPrepStrip
+              daysLeft={examCountdown!.daysLeft}
+              offlineReady={offlineReady}
+              offlineBusy={offlineBusy}
+              onDownloadOffline={() => void handleDownloadOfflinePack()}
+              onOpenTutor={openAiTutor}
+            />
+          ) : user && premium ? (
             <PremiumActiveStrip onManage={() => router.push('/(tabs)/settings')} />
           ) : null}
 
@@ -938,6 +995,15 @@ function DashboardScreenContent() {
               examName={displayExamName}
               onPress={() => router.push('/exam-calendar')}
               onPlusPress={!premium ? () => router.push('/subscribe') : undefined}
+              premiumExamPrep={
+                premium && examPrepUrgent
+                  ? {
+                      offlineReady,
+                      onOfflinePress: () => void handleDownloadOfflinePack(),
+                      onTutorPress: openAiTutor,
+                    }
+                  : undefined
+              }
             />
           ) : null}
 

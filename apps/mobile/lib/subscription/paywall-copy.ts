@@ -77,6 +77,26 @@ export const EXAM_COUNTDOWN_PLUS_CTA = {
   button: 'View Premium Plans',
 } as const;
 
+/** Premium users with exam ≤30 days — offline pack + AI tutor discoverability (P4). */
+export const PREMIUM_EXAM_PREP = {
+  title: (days: number) =>
+    days === 0
+      ? 'Exam day na — handa ka na ba?'
+      : days === 1
+        ? '1 araw na lang — i-maximize ang review mo'
+        : `${days} araw na lang — i-maximize ang review mo`,
+  subtitle:
+    'I-download ang offline pack para sa walang-data review, o magtanong sa AI tutor tungkol sa weak topics at mock strategy.',
+  offlineDownload: 'Download offline pack',
+  offlineReady: 'Offline pack ready',
+  offlineBusy: 'Downloading…',
+  tutorCta: 'Open AI tutor',
+  countdownOffline: 'Offline pack',
+  countdownTutor: 'AI tutor',
+  accessibilityLabel: (days: number) =>
+    `${days} days until exam. Download offline content or open AI tutor for final review.`,
+} as const;
+
 export const PLAN_DISPLAY = {
   monthly: {
     name: 'Monthly Premium',

@@ -36,7 +36,7 @@ import {
 } from '../../lib/offline/sync-status';
 import { formatEntitlementSummary } from '../../lib/entitlements/format';
 import { openBetaFeedback } from '../../lib/beta-feedback';
-import { PREMIUM_ACTIVE, PREMIUM_LOCK_CTA } from '../../lib/subscription/paywall-copy';
+import { PREMIUM_ACTIVE, PREMIUM_EXAM_PREP, PREMIUM_LOCK_CTA } from '../../lib/subscription/paywall-copy';
 import { SETTINGS_SUPPORT } from '../../lib/product-copy';
 
 type SettingsStyles = ReturnType<typeof createSettingsStyles>;
@@ -520,7 +520,11 @@ function SettingsScreenContent() {
               colors={colors}
               icon={<Ionicons name="chatbubbles-outline" size={18} color={colors.primary} />}
               label="AI tutor"
-              sub={premiumActive ? 'Chat about weak topics & study plan' : 'Premium feature'}
+              sub={
+                premiumActive
+                  ? 'Plus unlocked — ask about weak topics & mock strategy'
+                  : 'Premium feature'
+              }
               onPress={() => router.push('/tutor')}
               right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
             />
@@ -543,7 +547,9 @@ function SettingsScreenContent() {
                   ? `${offlineMeta.questionCount} Q · ${offlineMeta.flashcardCount} cards downloaded`
                   : offlineBusy
                     ? 'Downloading…'
-                    : 'Premium · save content for offline review'
+                    : premiumActive
+                      ? PREMIUM_EXAM_PREP.offlineDownload
+                      : 'Premium · save content for offline review'
               }
               onPress={handleOfflinePack}
               right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
