@@ -39,11 +39,30 @@ export function waitForAdbDevice(serial, timeoutSec = 120) {
   throw new Error(`adb device ${serial} not online after ${timeoutSec}s`);
 }
 
-function runAdbShell(serial, shellCmd, { inherit = true } = {}) {
+/** Inject `--user 0` into pm/am commands (Vivo multi-user). `adb shell --user 0` is unsupported on this platform-tools build. */
+export function withPrimaryUserCmd(serial, shellCmd) {
+  if (deviceKind(serial) !== 'wireless' && deviceKind(serial) !== 'usb') {
+    return shellCmd;
+  }
+  if (/^pm clear\s/.test(shellCmd)) {
+    return shellCmd.replace(/^pm clear\s+/, 'pm clear --user 0 ');
+  }
+  if (/^am start\s/.test(shellCmd)) {
+    return shellCmd.replace(/^am start\s+/, 'am start --user 0 ');
+  }
+  return shellCmd;
+}
+
+/** Run adb shell on primary user (Vivo / multi-profile phones use user 11 by default). */
+export function adbShell(serial, shellCmd, { inherit = true } = {}) {
   waitForAdbDevice(serial, 90);
-  const cmd = `adb -s ${serial} shell ${shellCmd}`;
+  const cmd = `adb -s ${serial} shell ${withPrimaryUserCmd(serial, shellCmd)}`;
   if (inherit) run(cmd);
   else return runCapture(cmd);
+}
+
+function runAdbShell(serial, shellCmd, opts = {}) {
+  return adbShell(serial, shellCmd, opts);
 }
 
 function runAdb(serial, args, { inherit = true } = {}) {
@@ -109,30 +128,25 @@ export function adbUserFlag(device) {
 
 /** Reset app state via adb (Maestro clearState hangs over wireless on some OEMs). */
 export function clearAppForMaestro(device, packageName) {
-  const user = adbUserFlag(device);
   runAdbShell(device, `am force-stop ${packageName} 2>/dev/null || true`);
-  runAdb(device, `shell pm clear ${user} ${packageName}`.replace(/\s+/g, ' ').trim());
+  adbShell(device, `pm clear ${packageName}`);
   run('sleep 2');
 }
 
 /** Launch app via adb before Maestro (avoids gRPC launch timeout on physical devices). */
 export function warmupApp(device, packageName) {
-  const user = adbUserFlag(device);
   runAdbShell(device, `am force-stop ${packageName} 2>/dev/null || true`);
-  if (user) {
-    runAdbShell(
-      device,
-      `am start ${user} -n ${packageName}/.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER`,
-    );
-  } else {
-    runAdbShell(device, `monkey -p ${packageName} -c android.intent.category.LAUNCHER 1`);
-  }
-  run('sleep 4');
+  runAdbShell(
+    device,
+    `am start -n ${packageName}/.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER`,
+  );
+  run('sleep 6');
 }
 
 /** Keep screen on during long wireless Maestro runs. */
 export function keepScreenAwake(device) {
   runAdbShell(device, 'input keyevent KEYCODE_WAKEUP 2>/dev/null || true', { inherit: true });
+  runAdbShell(device, 'input keyevent KEYCODE_BACK 2>/dev/null || true');
   runAdbShell(device, 'svc power stayon usb 2>/dev/null || true');
 }
 
@@ -155,11 +169,13 @@ export function assertColdVerifyEmailDeeplinkAdb(packageName = 'ph.reviewnatin.a
   const serial = device ?? adbDevice();
   waitForAdbDevice(serial);
   clearAppForMaestro(serial, packageName);
-  runAdbShell(
+  adbShell(
     serial,
     "am start -a android.intent.action.VIEW -d 'reviewnatin://verify-email?email=f1.agent@reviewnatinph.com'",
   );
   execSync('sleep 8', { cwd: REPO_ROOT });
+  adbShell(serial, 'input keyevent KEYCODE_BACK 2>/dev/null || true');
+  execSync('sleep 1', { cwd: REPO_ROOT });
   const xml = dumpUiXml(serial, 10);
   const ok =
     /I-verify ang email|Free account setup|Code sent to f1\.agent@reviewnatinph\.com/i.test(xml);
@@ -189,11 +205,9 @@ export function dumpUiXml(device, maxAttempts = 6) {
   let xml = '';
   for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
     try {
-      execSync(`adb -s ${serial} shell uiautomator dump /sdcard/window_dump.xml 2>/dev/null`, {
-        cwd: REPO_ROOT,
-        stdio: 'pipe',
-      });
-      xml = runCapture(`adb -s ${serial} shell cat /sdcard/window_dump.xml 2>/dev/null || echo ''`);
+      waitForAdbDevice(serial, 30);
+      adbShell(serial, 'uiautomator dump /sdcard/window_dump.xml 2>/dev/null', { inherit: false });
+      xml = adbShell(serial, 'cat /sdcard/window_dump.xml 2>/dev/null || echo ""', { inherit: false });
       if (xml.includes('<hierarchy')) return xml;
     } catch {
       /* app may still be animating */

@@ -31,10 +31,16 @@ import {
   warmupApp,
 } from './lib/maestro-driver.mjs';
 import { REPO_ROOT } from './lib/supabase-env.mjs';
+import {
+  personaResultsFromAutomation,
+  runAutomatedPersonaChecks,
+  openDeeplinkCold,
+} from './lib/device-audit-automation.mjs';
 
 const args = process.argv.slice(2);
 const skipMaestro = args.includes('--skip-maestro') || args.includes('--adb-only');
 const adbOnly = args.includes('--adb-only');
+const legacyMaestro = args.includes('--legacy-maestro');
 const skipInstall = args.includes('--skip-install');
 const PACKAGE = 'ph.reviewnatin.app';
 const DIST = join(REPO_ROOT, 'dist/beta');
@@ -84,6 +90,59 @@ function screenshot(serial, name) {
   const path = join(SCREENSHOTS, name);
   execSync(`adb -s ${serial} exec-out screencap -p > "${path}"`, { stdio: 'inherit' });
   return path.replace(REPO_ROOT + '/', '');
+}
+
+function runFullAutomationAudit(serial) {
+  console.log('\n▶ Full automated 12-persona audit (adb UI automation)');
+  const automation = runAutomatedPersonaChecks(serial);
+  const byId = personaResultsFromAutomation(automation);
+
+  const personas = BETA_AI_PERSONAS.map((p) => {
+    const result = byId[p.id] ?? { automated: 'fail', evidence: [] };
+    const checkKeys = Object.keys(automation.checks).filter(
+      (k) => k === p.id || k.startsWith(`${p.id}_`),
+    );
+    return {
+      personaId: p.id,
+      name: p.name,
+      cohort: p.cohort,
+      examFocus: p.examFocus,
+      automated: result.automated,
+      manual: 'n/a',
+      manualChecks: [],
+      automatedChecks: checkKeys.map((k) => ({
+        id: k,
+        ok: automation.checks[k]?.ok ?? false,
+        missing: automation.checks[k]?.missing ?? [],
+      })),
+      evidence: result.evidence,
+      verifyEmail:
+        p.id === 'F1'
+          ? {
+              ok: automation.checks.F1?.ok ?? false,
+              screen: automation.checks.F1?.ok ? 'verify-email' : 'unknown',
+              method: 'adb-full-automation',
+            }
+          : undefined,
+    };
+  });
+
+  openDeeplinkCold(serial, 'reviewnatin://subscribe', 6);
+  const shot = screenshot(serial, 'subscribe-deeplink.png');
+  const xml = dumpUiXml(serial);
+  const forbidden = ['Pay with GCash', 'reviewnatinph.com/checkout', 'Upload Proof'];
+  const hits = forbidden.filter((s) => xml.includes(s));
+  const paywallSpotCheck = {
+    ok:
+      (/Unlock ReviewNatin Premium|Mag-log in para mag-subscribe|Sign in to continue/i.test(xml) ||
+        /Subscribe|Premium/i.test(xml)) &&
+      hits.length === 0,
+    shot,
+    forbiddenHits: hits,
+    sample: xml.slice(0, 200),
+  };
+
+  return { personas, paywallSpotCheck, adbChecks: automation.checks, mode: 'physical-device-full-auto' };
 }
 
 function runMaestroFlow(maestro, flow, serial) {
@@ -319,41 +378,35 @@ function main() {
   let personas;
   let paywallSpotCheck;
   let adbChecks;
-  let useAdbOnly = adbOnly;
-  const forceMaestro = args.includes('--force-maestro');
+  let mode;
 
-  if (!useAdbOnly && !skipMaestro && info.kind === 'wireless' && !forceMaestro) {
-    const maestroProbe = ensureMaestroCli();
-    ensureMaestroDriver(serial);
-    if (!probeMaestroWireless(serial, maestroProbe, PACKAGE)) {
-      console.warn('\n⚠ Wireless Maestro probe failed — using adb-only cohort audit.');
-      useAdbOnly = true;
-    }
-  }
-
-  if (useAdbOnly) {
-    console.log('\n▶ ADB-only cohort audit (single session, no Maestro)');
-    adbChecks = runAdbCohortAudit(serial);
-    paywallSpotCheck = adbChecks.subscribe;
-    personas = personasFromAdbChecks(adbChecks);
-  } else {
+  if (legacyMaestro && !adbOnly) {
     const maestro = skipMaestro ? null : ensureMaestroCli();
     if (maestro) ensureMaestroDriver(serial);
     personas = BETA_AI_PERSONAS.map((p) => auditPersona(p, { serial, maestro, skipMaestro }));
     paywallSpotCheck = spotCheckSubscribePaywall(serial);
+    mode = 'physical-device';
+  } else if (adbOnly && legacyMaestro) {
+    console.log('\n▶ Legacy adb-only cohort audit');
+    adbChecks = runAdbCohortAudit(serial);
+    paywallSpotCheck = adbChecks.subscribe;
+    personas = personasFromAdbChecks(adbChecks);
+    mode = 'physical-device-adb-only';
+  } else {
+    ({ personas, paywallSpotCheck, adbChecks, mode } = runFullAutomationAudit(serial));
   }
 
   const report = {
     startedAt: new Date().toISOString(),
     finishedAt: new Date().toISOString(),
-    mode: useAdbOnly ? 'physical-device-adb-only' : 'physical-device',
+    mode,
     device: info,
     apkPath: apkPath.replace(REPO_ROOT + '/', ''),
     build,
     sha256: sha,
     personas,
     paywallSpotCheck,
-    adbChecks: useAdbOnly ? adbChecks : undefined,
+    adbChecks: adbChecks ?? undefined,
     devicesOnline: listAdbDevices(),
   };
   report.summary = {
@@ -362,7 +415,7 @@ function main() {
     automatedFail: personas.filter((p) => p.automated === 'fail').length,
     manualPending: personas.filter((p) => p.manual === 'pending').length,
   };
-  report.ok = report.summary.automatedFail === 0;
+  report.ok = report.summary.automatedFail === 0 && report.summary.automatedPartial === 0;
 
   writeFileSync(join(DIST, 'last-device-audit-report.json'), JSON.stringify(report, null, 2));
   report.auditDoc = writeAuditMarkdown(report);
