@@ -1,0 +1,87 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - English-",
+  "source_pdfs": 16,
+  "total_questions_found": 390,
+  "total_ready_for_upload": 332,
+  "total_needing_review": 4,
+  "total_without_answer_key": 1,
+  "total_duplicates_detected": 53,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 390,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 332,
+    "Duplicate": 53,
+    "Needs Answer": 1,
+    "Incomplete": 3,
+    "Needs Review": 1
+  },
+  "subject_category_breakdown": {
+    "English": 390
+  },
+  "topic_breakdown": {
+    "Literature": 89,
+    "English": 219,
+    "Reading Comprehension": 36,
+    "Grammar": 15,
+    "Discourse and Writing": 1,
+    "English Language Teaching": 5,
+    "Vocabulary": 25
+  },
+  "difficulty_breakdown": {
+    "3": 390
+  },
+  "source_counts": {
+    "BSED English Part1.pdf": 50,
+    "BSED English Part2.pdf": 47,
+    "BSED English Part3.pdf": 50,
+    "BSED English Part4.pdf": 45,
+    "BSED English Part5.pdf": 20,
+    "BSED English Part6.pdf": 23,
+    "BSED English Part7.pdf": 23,
+    "BSED English Part8.pdf": 20,
+    "SET3 Drill&Booster English.pdf": 42,
+    "SET4 Drill&Booster English.pdf": 20,
+    "SET5 Drill&Booster English.pdf": 30,
+    "SET6 Drill&Booster English.pdf": 20
+  },
+  "processed_pdfs": 12,
+  "skipped_sources": {
+    "9000+ English Booster Test.pdf": "Large general booster bank with compact answer-key formatting; held back for a dedicated batch instead of mixing low-confidence extraction into this BSED English major import.",
+    "A LET-ENG-Regular verbs list.pdf": "Reference verb list, not multiple-choice LET questions.",
+    "SET1 Drill&Booster English.pdf": "No answer key marker found in the PDF; rows would require answer review.",
+    "SET2 Drill&Booster English.pdf": "No answer key marker found in the PDF; rows would require answer review."
+  },
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "English",
+    "topic": "English",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "choice_e_text": "Choice E",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows to LET Secondary major/english, then verify live source counts and sub-tag breakdown.",
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_english_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_english_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_english_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_english_sept2026_extracted_questions_summary.json"
+  }
+}

@@ -1,0 +1,629 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_english_sept2026_extracted_questions.json",
+  "extracted_rows": 390,
+  "ready_rows": 332,
+  "source_duplicates_or_non_ready_skipped": 58,
+  "existing_english_questions_before": 289,
+  "insertable": 70,
+  "updatable_by_source_key": 262,
+  "archivable_duplicate_sources": 3,
+  "duplicate_existing_content": 0,
+  "inserted": 70,
+  "updated": 262,
+  "archived_duplicate_sources": 3,
+  "skipped_samples": [
+    {
+      "row": "89",
+      "source_pdf": "BSED English Part2.pdf",
+      "original_no": "42",
+      "status": "Duplicate",
+      "duplicate_of": "88",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 88."
+    },
+    {
+      "row": "119",
+      "source_pdf": "BSED English Part3.pdf",
+      "original_no": "72",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "145",
+      "source_pdf": "BSED English Part3.pdf",
+      "original_no": "98",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "236",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "1",
+      "status": "Duplicate",
+      "duplicate_of": "213",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 213."
+    },
+    {
+      "row": "238",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "3",
+      "status": "Duplicate",
+      "duplicate_of": "215",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 215."
+    },
+    {
+      "row": "242",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "7",
+      "status": "Duplicate",
+      "duplicate_of": "219",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 219."
+    },
+    {
+      "row": "244",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "9",
+      "status": "Duplicate",
+      "duplicate_of": "221",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 221."
+    },
+    {
+      "row": "247",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "12",
+      "status": "Duplicate",
+      "duplicate_of": "224",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 224."
+    },
+    {
+      "row": "249",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "226",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 226."
+    },
+    {
+      "row": "251",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "16",
+      "status": "Duplicate",
+      "duplicate_of": "228",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 228."
+    },
+    {
+      "row": "254",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "19",
+      "status": "Duplicate",
+      "duplicate_of": "231",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 231."
+    },
+    {
+      "row": "256",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "21",
+      "status": "Duplicate",
+      "duplicate_of": "233",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 233."
+    },
+    {
+      "row": "257",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "22",
+      "status": "Duplicate",
+      "duplicate_of": "234",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 234."
+    },
+    {
+      "row": "258",
+      "source_pdf": "BSED English Part7.pdf",
+      "original_no": "23",
+      "status": "Duplicate",
+      "duplicate_of": "235",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 235."
+    },
+    {
+      "row": "259",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "1",
+      "status": "Duplicate",
+      "duplicate_of": "193",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 193."
+    },
+    {
+      "row": "260",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "2",
+      "status": "Duplicate",
+      "duplicate_of": "194",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 194."
+    },
+    {
+      "row": "261",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "3",
+      "status": "Duplicate",
+      "duplicate_of": "195",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 195."
+    },
+    {
+      "row": "262",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "4",
+      "status": "Duplicate",
+      "duplicate_of": "196",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 196."
+    },
+    {
+      "row": "263",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "5",
+      "status": "Duplicate",
+      "duplicate_of": "197",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 197."
+    },
+    {
+      "row": "264",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "6",
+      "status": "Duplicate",
+      "duplicate_of": "198",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 198."
+    },
+    {
+      "row": "265",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "7",
+      "status": "Duplicate",
+      "duplicate_of": "199",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 199."
+    },
+    {
+      "row": "266",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "8",
+      "status": "Duplicate",
+      "duplicate_of": "200",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 200."
+    },
+    {
+      "row": "267",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "9",
+      "status": "Duplicate",
+      "duplicate_of": "201",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 201."
+    },
+    {
+      "row": "268",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "10",
+      "status": "Duplicate",
+      "duplicate_of": "202",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 202."
+    },
+    {
+      "row": "269",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "11",
+      "status": "Duplicate",
+      "duplicate_of": "203",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 203."
+    },
+    {
+      "row": "270",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "12",
+      "status": "Duplicate",
+      "duplicate_of": "204",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 204."
+    },
+    {
+      "row": "271",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "13",
+      "status": "Duplicate",
+      "duplicate_of": "205",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 205."
+    },
+    {
+      "row": "272",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "206",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 206."
+    },
+    {
+      "row": "273",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "15",
+      "status": "Duplicate",
+      "duplicate_of": "207",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 207."
+    },
+    {
+      "row": "274",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "16",
+      "status": "Duplicate",
+      "duplicate_of": "208",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 208."
+    },
+    {
+      "row": "275",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "17",
+      "status": "Duplicate",
+      "duplicate_of": "209",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 209."
+    },
+    {
+      "row": "276",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "18",
+      "status": "Duplicate",
+      "duplicate_of": "210",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 210."
+    },
+    {
+      "row": "277",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "19",
+      "status": "Duplicate",
+      "duplicate_of": "211",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 211."
+    },
+    {
+      "row": "278",
+      "source_pdf": "BSED English Part8.pdf",
+      "original_no": "20",
+      "status": "Duplicate",
+      "duplicate_of": "212",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 212."
+    },
+    {
+      "row": "292",
+      "source_pdf": "SET3 Drill&Booster English.pdf",
+      "original_no": "14",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "339",
+      "source_pdf": "SET4 Drill&Booster English.pdf",
+      "original_no": "19",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B, C, D."
+    },
+    {
+      "row": "340",
+      "source_pdf": "SET4 Drill&Booster English.pdf",
+      "original_no": "20",
+      "status": "Duplicate",
+      "duplicate_of": "339",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B, C, D. Duplicate or near-duplicate of row 339."
+    },
+    {
+      "row": "359",
+      "source_pdf": "SET5 Drill&Booster English.pdf",
+      "original_no": "19",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "371",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "1",
+      "status": "Duplicate",
+      "duplicate_of": "339",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B, C, D. Duplicate or near-duplicate of row 339."
+    },
+    {
+      "row": "372",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "2",
+      "status": "Duplicate",
+      "duplicate_of": "339",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B, C, D. Duplicate or near-duplicate of row 339."
+    },
+    {
+      "row": "373",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "3",
+      "status": "Duplicate",
+      "duplicate_of": "323",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 323."
+    },
+    {
+      "row": "374",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "4",
+      "status": "Duplicate",
+      "duplicate_of": "324",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 324."
+    },
+    {
+      "row": "375",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "5",
+      "status": "Duplicate",
+      "duplicate_of": "325",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 325."
+    },
+    {
+      "row": "376",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "6",
+      "status": "Duplicate",
+      "duplicate_of": "326",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 326."
+    },
+    {
+      "row": "377",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "7",
+      "status": "Duplicate",
+      "duplicate_of": "327",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 327."
+    },
+    {
+      "row": "378",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "8",
+      "status": "Duplicate",
+      "duplicate_of": "328",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 328."
+    },
+    {
+      "row": "379",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "9",
+      "status": "Duplicate",
+      "duplicate_of": "329",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 329."
+    },
+    {
+      "row": "380",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "10",
+      "status": "Duplicate",
+      "duplicate_of": "330",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 330."
+    },
+    {
+      "row": "381",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "11",
+      "status": "Duplicate",
+      "duplicate_of": "331",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 331."
+    },
+    {
+      "row": "382",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "12",
+      "status": "Duplicate",
+      "duplicate_of": "332",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 332."
+    },
+    {
+      "row": "383",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "13",
+      "status": "Duplicate",
+      "duplicate_of": "333",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 333."
+    },
+    {
+      "row": "384",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "334",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 334."
+    },
+    {
+      "row": "385",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "15",
+      "status": "Duplicate",
+      "duplicate_of": "335",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 335."
+    },
+    {
+      "row": "386",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "16",
+      "status": "Duplicate",
+      "duplicate_of": "336",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 336."
+    },
+    {
+      "row": "387",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "17",
+      "status": "Duplicate",
+      "duplicate_of": "337",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 337."
+    },
+    {
+      "row": "388",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "18",
+      "status": "Duplicate",
+      "duplicate_of": "338",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 338."
+    },
+    {
+      "row": "389",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "19",
+      "status": "Duplicate",
+      "duplicate_of": "321",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 321."
+    },
+    {
+      "row": "390",
+      "source_pdf": "SET6 Drill&Booster English.pdf",
+      "original_no": "20",
+      "status": "Duplicate",
+      "duplicate_of": "322",
+      "notes": "Path and PDF header indicate BSED/Secondary English major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 322."
+    }
+  ],
+  "duplicate_samples": [],
+  "archived_duplicate_samples": [
+    {
+      "id": "8e172ee4-e797-4eb7-ab7f-c7d0217ac4ca",
+      "source_key": "BSED English Part7.pdf#19",
+      "duplicate_of": "231",
+      "stem": "What 17th Century philosophy does Browning assert in the following lines from Rabbi Ben Ezra? Ay, note that Potter’s wheel, That metaphor! and feel Why time spins fast, why passive lies our clay, — Thou, to whom fools propound, When the wine makes its round, “Since life fleets, all is change; the Past gone, seize to-day!”"
+    },
+    {
+      "id": "f7ba8c68-b499-4d67-8715-7e88c0331da5",
+      "source_key": "BSED English Part8.pdf#8",
+      "duplicate_of": "200",
+      "stem": "Who are the summer soldier and the sunshine patriot Paine alluded to in The Crisis? THESE are the times that try men's souls. The summer soldier and the sunshine patriot will, in this crisis, shrink from the service of their country; but he that stands it now, deserves the love and thanks of man and woman."
+    },
+    {
+      "id": "586f54a0-fd11-47b5-9ab3-6b10eed236fe",
+      "source_key": "BSED English Part8.pdf#17",
+      "duplicate_of": "209",
+      "stem": "How does the speaker picture God in the following sermon? The God that holds you over the pit of hell, much as one holds a spider; or some loathsome insect, over the fire, abhors you, and is dreadfully provoked: his wrath towards you burns like fire; he looks upon you as worthy of nothing else, but to be cast into the fire; he is of purer eyes than to bear to have you in his sight; you are ten thousand times more abominable in his eyes, than the most hateful venomous serpent is in ours."
+    }
+  ],
+  "update_samples": [
+    {
+      "id": "498aa9e2-a7da-4049-966e-640d75bdb250",
+      "source_key": "BSED English Part1.pdf#101",
+      "stem": "The poetry of Ezia Pound is best described"
+    },
+    {
+      "id": "58f3988b-8877-4eab-960b-6338e9d2732f",
+      "source_key": "BSED English Part1.pdf#102",
+      "stem": "To punish himself for murdering his father and having sexual relations with his mother, what did Oedipus do?"
+    },
+    {
+      "id": "97d6baf2-6709-4323-9418-94ac97adb712",
+      "source_key": "BSED English Part1.pdf#103",
+      "stem": "What can be inferred from Iseneses “answer”?"
+    },
+    {
+      "id": "af20a63c-8c7f-4f25-ac08-2fe945ffd8f7",
+      "source_key": "BSED English Part1.pdf#104",
+      "stem": "Who is NOT a romantic poet?"
+    },
+    {
+      "id": "6cb10ad1-4755-4357-80af-a24fe4952888",
+      "source_key": "BSED English Part1.pdf#105",
+      "stem": "The playwright who used the “alienation effect” in his plays to educate the audience and not merely to play upon their emotion is ."
+    },
+    {
+      "id": "7f2c5206-133a-41d9-9cd1-0eca8ebd431d",
+      "source_key": "BSED English Part1.pdf#106",
+      "stem": "To read the sentences below at the LITERAL LEVEL: I could be forgiven a few siddity aris. In fact, a pretension to worldiness was expected of me, and I was too happy to disappoint. I should say"
+    },
+    {
+      "id": "5f6bd9d4-0c80-4968-ae9c-044a062a10fd",
+      "source_key": "BSED English Part1.pdf#107",
+      "stem": "The Maranao stories about Pilandok are examples of ."
+    },
+    {
+      "id": "095368ad-45e6-44f3-948d-887ece4c80fc",
+      "source_key": "BSED English Part1.pdf#108",
+      "stem": "Which of the following epic is about the exploits of early Muslim warriors who fought in defense of Islam?"
+    },
+    {
+      "id": "aaa01b50-8924-4407-8ffd-a320629440b7",
+      "source_key": "BSED English Part1.pdf#109",
+      "stem": "Which book in the New Testament includes a vision of the end of the world and the second coming of Jesus?"
+    },
+    {
+      "id": "240f4156-6b43-4675-b09a-ea15ee026333",
+      "source_key": "BSED English Part1.pdf#110",
+      "stem": "Which of the following terms describes the subject matter, style, tone and attitude of the literature of ancient Greek and Rome?"
+    },
+    {
+      "id": "fb269e0a-8ad7-4536-b3f2-5b9a4bc2d647",
+      "source_key": "BSED English Part1.pdf#111",
+      "stem": "The Greek alphabet is adapted from the consonantal writing developed by the"
+    },
+    {
+      "id": "c1a599e1-89ee-4dd1-a9db-6e5606055b8d",
+      "source_key": "BSED English Part1.pdf#112",
+      "stem": "Which of the following is Carlos Bulosan’s celebrated autobiography?"
+    },
+    {
+      "id": "5aa4c350-ef76-4ef5-95ef-65d67f0c56ca",
+      "source_key": "BSED English Part1.pdf#113",
+      "stem": "The type of novel which became popular, in the 18th century is ."
+    },
+    {
+      "id": "ee9f0b4c-0277-4757-b827-99cd690d5a2e",
+      "source_key": "BSED English Part1.pdf#114",
+      "stem": "Who died at the end of Iliad?"
+    },
+    {
+      "id": "cea942aa-d49d-4d21-9fef-0f6b2610023a",
+      "source_key": "BSED English Part1.pdf#115",
+      "stem": "Which of the following is NOT a lyric poem?"
+    },
+    {
+      "id": "c0cdde56-7c34-4c6d-ac66-f816afa0f171",
+      "source_key": "BSED English Part1.pdf#116",
+      "stem": "The most authentic record of Confucian teaching form which the Tao or Way was learned the correct principles of governing both self and state is ."
+    },
+    {
+      "id": "0baa5e31-5d3b-4db4-a86d-4bddae63fa28",
+      "source_key": "BSED English Part1.pdf#117",
+      "stem": "What literacy movement in American literature examines life as it is?"
+    },
+    {
+      "id": "cec192ce-7ab3-44d7-9947-3408678c2a26",
+      "source_key": "BSED English Part1.pdf#118",
+      "stem": "“The Tale of Genji” was written by ."
+    },
+    {
+      "id": "db081536-295c-4042-b752-827d02f8e337",
+      "source_key": "BSED English Part1.pdf#119",
+      "stem": "Madame Bovary is considered as the best example of French ."
+    },
+    {
+      "id": "389b5bbe-1895-40d4-9262-e405749e42d6",
+      "source_key": "BSED English Part1.pdf#120",
+      "stem": "What is the English translation of Rabindranath Tagore’s “Gitanjail”"
+    },
+    {
+      "id": "d5730d4b-5919-400f-bb67-d4ba54ad558e",
+      "source_key": "BSED English Part1.pdf#121",
+      "stem": "Who of the following Romans was never emperor?"
+    },
+    {
+      "id": "be3c0545-7956-4614-9a61-8a0c4061f962",
+      "source_key": "BSED English Part1.pdf#122",
+      "stem": "Which is NOT a work of Leo Tolstoy?"
+    },
+    {
+      "id": "6ea00c6b-8d3e-4308-8aae-92394b8032c4",
+      "source_key": "BSED English Part1.pdf#123",
+      "stem": "Which of the following cities was NOT a center of government, religion and culture in the third millennium B.C.?"
+    },
+    {
+      "id": "47ef78d3-7216-4ada-a66c-b7a6f99049de",
+      "source_key": "BSED English Part1.pdf#124",
+      "stem": "Who among these writers is famous for using local color in his stories?"
+    },
+    {
+      "id": "3fc25c70-5e47-4747-8b23-aae19e72c012",
+      "source_key": "BSED English Part1.pdf#125",
+      "stem": "What narrative poem tells of the heroic exploits of great heroes?"
+    }
+  ]
+}
