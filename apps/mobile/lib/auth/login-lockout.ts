@@ -1,8 +1,14 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { deleteSecureItem, getSecureItem, setSecureItem } from '../secure-storage';
 
+// Stored in the keychain/keystore (via secure-storage) so the lockout cannot be
+// trivially reset by clearing AsyncStorage / app data.
 const STORAGE_KEY = 'reviewnatin:login_lockout';
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MS = 15 * 60 * 1000;
+
+function isDevBuild(): boolean {
+  return typeof __DEV__ !== 'undefined' && __DEV__;
+}
 
 type LockoutState = {
   attempts: number;
@@ -11,7 +17,7 @@ type LockoutState = {
 
 async function readState(): Promise<LockoutState> {
   try {
-    const raw = await AsyncStorage.getItem(STORAGE_KEY);
+    const raw = await getSecureItem(STORAGE_KEY);
     if (!raw) return { attempts: 0, lockedUntil: null };
     const parsed = JSON.parse(raw) as LockoutState;
     return {
@@ -24,10 +30,15 @@ async function readState(): Promise<LockoutState> {
 }
 
 async function writeState(state: LockoutState): Promise<void> {
-  await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if (state.attempts === 0 && state.lockedUntil === null) {
+    await deleteSecureItem(STORAGE_KEY);
+    return;
+  }
+  await setSecureItem(STORAGE_KEY, JSON.stringify(state));
 }
 
 export async function getLoginLockoutMessage(): Promise<string | null> {
+  if (isDevBuild()) return null;
   const state = await readState();
   if (!state.lockedUntil) return null;
   if (Date.now() >= state.lockedUntil) {
@@ -39,6 +50,7 @@ export async function getLoginLockoutMessage(): Promise<string | null> {
 }
 
 export async function recordFailedLoginAttempt(): Promise<string | null> {
+  if (isDevBuild()) return null;
   const state = await readState();
   if (state.lockedUntil && Date.now() < state.lockedUntil) {
     return getLoginLockoutMessage();

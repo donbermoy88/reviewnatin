@@ -1,5 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { compactVerify, decodeProtectedHeader, importX509 } from "npm:jose@5.9.6";
+import * as x509 from "npm:@peculiar/x509";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -16,6 +18,8 @@ const ANDROID_SKU_MAP: Record<string, string> = {
   exam_pass_let_sec: "com.reviewnatin.exampass.let_sec",
   exam_pass_pnle: "com.reviewnatin.exampass.pnle",
 };
+
+const APPLE_ROOT_CA_G3_SHA256 = "63343abfb89a6a03ebb57e9b3f5fa7be7c4f5c756f3017b3a8c488c3653e9179";
 
 type EntitlementStatus =
   | "active"
@@ -120,16 +124,64 @@ function normalizeSku(platform: "apple" | "google", productId?: string): string 
   return platform === "google" ? ANDROID_SKU_MAP[productId] ?? productId : productId;
 }
 
-function base64UrlDecode(input: string): string {
-  const padded = input.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(input.length / 4) * 4, "=");
-  return atob(padded);
+function base64ToArrayBuffer(input: string): ArrayBuffer {
+  const raw = atob(input);
+  const bytes = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+  return bytes.buffer;
 }
 
-function decodeJwtPayload<T>(signedPayload?: string): T | null {
+async function sha256Hex(data: BufferSource): Promise<string> {
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function trustedAppleLeafCertPem(x5cHeader: unknown): Promise<string | null> {
+  const chain = Array.isArray(x5cHeader) && x5cHeader.every((cert) => typeof cert === "string")
+    ? (x5cHeader as string[])
+    : [];
+  if (chain.length < 2) return null;
+
+  const certificates = chain.map((cert) => new x509.X509Certificate(base64ToArrayBuffer(cert)));
+  const root = certificates[certificates.length - 1];
+  if ((await sha256Hex(root.rawData)) !== APPLE_ROOT_CA_G3_SHA256) return null;
+
+  const now = new Date();
+  for (const cert of certificates) {
+    if (cert.notBefore > now || cert.notAfter < now) return null;
+  }
+
+  for (let i = 0; i < certificates.length - 1; i++) {
+    const validSignature = await certificates[i].verify({
+      signatureOnly: true,
+      publicKey: certificates[i + 1],
+    });
+    if (!validSignature) return null;
+  }
+
+  return [
+    "-----BEGIN CERTIFICATE-----",
+    chain[0].match(/.{1,64}/g)?.join("\n") ?? chain[0],
+    "-----END CERTIFICATE-----",
+  ].join("\n");
+}
+
+async function verifyAppleJwsPayload<T>(signedPayload?: string): Promise<T | null> {
   if (!signedPayload) return null;
-  const [, payload] = signedPayload.split(".");
-  if (!payload) return null;
-  return JSON.parse(base64UrlDecode(payload)) as T;
+
+  try {
+    const header = decodeProtectedHeader(signedPayload);
+    const pem = await trustedAppleLeafCertPem(header.x5c);
+    if (header.alg !== "ES256" || !pem) {
+      return null;
+    }
+
+    const key = await importX509(pem, "ES256");
+    const { payload } = await compactVerify(signedPayload, key);
+    return JSON.parse(new TextDecoder().decode(payload)) as T;
+  } catch {
+    return null;
+  }
 }
 
 function dateFromMillis(ms?: number): string | null {
@@ -148,7 +200,12 @@ function eventSecret(req: Request): string | null {
 
 function assertWebhookSecret(req: Request): Response | null {
   const expected = Deno.env.get("STORE_WEBHOOK_SECRET");
-  if (!expected) return null;
+  // Fail closed: an unset secret previously let any caller POST fake store
+  // lifecycle events (fraudulent entitlement grants/revocations). Require the
+  // secret to be configured and to match before processing.
+  if (!expected) {
+    return jsonResponse({ error: "Webhook secret not configured" }, 503);
+  }
   if (eventSecret(req) === expected) return null;
   return jsonResponse({ error: "Unauthorized" }, 401);
 }
@@ -286,7 +343,7 @@ async function fetchGoogleSubscription(
 
 async function handleApple(req: Request, adminClient: ReturnType<typeof createClient>) {
   const body = (await req.json()) as AppleWebhookBody;
-  const payload = decodeJwtPayload<AppleDecodedPayload>(body.signedPayload);
+  const payload = await verifyAppleJwsPayload<AppleDecodedPayload>(body.signedPayload);
   if (!payload) return jsonResponse({ error: "Invalid signedPayload" }, 400);
 
   const expectedBundleId = Deno.env.get("APPLE_BUNDLE_ID");
@@ -294,8 +351,8 @@ async function handleApple(req: Request, adminClient: ReturnType<typeof createCl
     return jsonResponse({ error: "Invalid bundleId" }, 400);
   }
 
-  const transaction = decodeJwtPayload<AppleTransactionInfo>(payload.data?.signedTransactionInfo);
-  const renewal = decodeJwtPayload<AppleRenewalInfo>(payload.data?.signedRenewalInfo);
+  const transaction = await verifyAppleJwsPayload<AppleTransactionInfo>(payload.data?.signedTransactionInfo);
+  const renewal = await verifyAppleJwsPayload<AppleRenewalInfo>(payload.data?.signedRenewalInfo);
   const notificationType = payload.notificationType ?? "UNKNOWN";
   const subtype = payload.subtype ?? null;
   const status = appleStatus(notificationType, subtype ?? undefined);

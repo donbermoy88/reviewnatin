@@ -22,8 +22,17 @@ Deno.serve(async (req) => {
     });
   }
 
+  // Fail closed: without an enforced secret this cron endpoint could be invoked
+  // by anyone (verify_jwt = false), triggering expensive recompute batches.
+  if (!cronSecret) {
+    return new Response(JSON.stringify({ error: "cron_secret_not_configured" }), {
+      status: 503,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   const authHeader = req.headers.get("Authorization");
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+  if (authHeader !== `Bearer ${cronSecret}`) {
     return new Response(JSON.stringify({ error: "unauthorized" }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

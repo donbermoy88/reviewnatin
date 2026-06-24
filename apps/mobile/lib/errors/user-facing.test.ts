@@ -7,7 +7,7 @@ describe('toUserFacingError', () => {
   });
 
   it('maps auth errors via mapAuthError', () => {
-    expect(toUserFacingError(new Error('Invalid login credentials'), 'auth')).toMatch(/Incorrect email/i);
+    expect(toUserFacingError(new Error('Invalid login credentials'), 'auth')).toMatch(/mali ang email/i);
   });
 
   it('preserves already-friendly Taglish copy', () => {

@@ -2,7 +2,7 @@ import type { Session, User } from '@supabase/supabase-js';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { AppState } from 'react-native';
 import { updateUserDisplayName } from '../lib/api/profile';
-import { mapAuthError } from '../lib/auth/errors';
+import { isEmailNotConfirmedError, mapAuthError } from '../lib/auth/errors';
 import { validateEmailNotDisposable } from '../lib/auth/disposable-email';
 import { isEmailBlockedForSignup } from '../lib/auth/disposable-email-server';
 import {
@@ -11,7 +11,7 @@ import {
   recordFailedLoginAttempt,
 } from '../lib/auth/login-lockout';
 import { logAuthLoginAttempt } from '../lib/auth/login-events';
-import { assertLoginRateLimitAllowed } from '../lib/auth/server-rate-limit';
+import { assertLoginRateLimitAllowed, assertOtpResendRateLimitAllowed } from '../lib/auth/server-rate-limit';
 import { sendPasswordResetEmail, signInWithApple, signInWithGoogle, updatePassword } from '../lib/auth/oauth';
 import { isTurnstileRequired } from '../lib/auth/turnstile-config';
 import { normalizeDisplayName, normalizeEmail, validateDisplayName } from '../lib/auth/validation';
@@ -143,6 +143,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         });
 
         if (error) {
+          if (isEmailNotConfirmedError(error.message)) {
+            return { error: null, needsEmailConfirmation: true };
+          }
           const mapped = mapAuthError(error.message);
           const lockoutMsg = await recordFailedLoginAttempt();
           void logAuthLoginAttempt(normalized, false, null, mapped);
@@ -205,6 +208,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           return { error: null, session: data.session };
         }
 
+        if (data.user && !data.session) {
+          const confirmed = Boolean(data.user.email_confirmed_at ?? data.user.confirmed_at);
+          if (!confirmed) {
+            addAppBreadcrumb('auth', 'email sign-up pending verification');
+            return { error: null, needsEmailConfirmation: true };
+          }
+        }
+
         // Auto-confirm projects sometimes omit session on signUp — sign in immediately
         const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
           email: normalized,
@@ -215,6 +226,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           addAppBreadcrumb('auth', 'email sign-up auto sign-in completed');
           setSession(signInData.session);
           return { error: null, session: signInData.session };
+        }
+
+        if (isEmailNotConfirmedError(signInError?.message ?? '')) {
+          addAppBreadcrumb('auth', 'email sign-up pending verification');
+          return { error: null, needsEmailConfirmation: true };
         }
 
         if (data.user && !data.session) {
@@ -258,6 +274,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (!isSupabaseConfigured) return NOT_CONFIGURED;
 
         const normalized = normalizeEmail(email);
+
+        const resendLimit = await assertOtpResendRateLimitAllowed(normalized);
+        if (resendLimit) return { error: resendLimit };
+
         const { error } = await supabase.auth.resend({
           type: 'signup',
           email: normalized,
