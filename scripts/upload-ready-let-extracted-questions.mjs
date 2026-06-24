@@ -1,6 +1,6 @@
 #!/usr/bin/env node
+import { basename, dirname, resolve } from 'path';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { createClient } from '@supabase/supabase-js';
 
@@ -10,6 +10,7 @@ const root = resolve(__dirname, '..');
 const SOURCES = [
   'output/pdf/let_elementary_secondary_extracted_questions.csv',
   'output/pdf/let_reviewer_2026_batch2_extracted_questions.csv',
+  'output/pdf/let_reviewer_2026_batch3_extracted_questions.csv',
 ];
 
 function loadEnv(file) {
@@ -80,6 +81,25 @@ function normalizeStem(value) {
   return String(value ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
 }
 
+function normalizeChoiceText(value) {
+  return String(value ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+function existingContentKey(question) {
+  const choices = Array.isArray(question.choices) ? question.choices : [];
+  const choiceKey = choices
+    .map((choice) => `${choice.id ?? ''}:${normalizeChoiceText(choice.text)}`)
+    .join('|');
+  return `${normalizeStem(question.stem)}::${choiceKey}::${question.correct_choice_id ?? ''}`;
+}
+
+function candidateContentKey(candidate) {
+  const choiceKey = candidate.choices
+    .map((choice) => `${choice.id}:${normalizeChoiceText(choice.text)}`)
+    .join('|');
+  return `${normalizeStem(candidate.row.Question)}::${choiceKey}::${candidate.letter}`;
+}
+
 function correctLetter(value) {
   const match = String(value ?? '').match(/^\s*([A-E])(?:\s*[\.)]|\s*$)/i);
   return match?.[1]?.toLowerCase() ?? '';
@@ -118,6 +138,46 @@ function buildChoices(row) {
     if (text) choices.push({ id: letter, text });
   }
   return choices;
+}
+
+function imageLocalPath(row) {
+  const ref = row['Image Reference']?.trim();
+  if (!ref) return '';
+  const localPath = ref.includes(':') ? ref.slice(ref.indexOf(':') + 1) : ref;
+  return localPath.startsWith('/') ? localPath : resolve(root, localPath);
+}
+
+function applySourceBackedUploadRepair(file, row) {
+  const key = `${file}#${row['No.']}`;
+  const repairs = {
+    'output/pdf/let_reviewer_2026_batch2_extracted_questions.csv#16': {
+      Question:
+        'Under R.A. 7722 or Higher Education Act of 1994, which agency has direct supervision and management of teacher education institutions or colleges of education in the country?',
+      Notes:
+        'Uploader repair: restored full question text from source PDF page 2; extracted row had truncated stem.',
+    },
+    'output/pdf/let_reviewer_2026_batch2_extracted_questions.csv#814': {
+      'Choice B': 'are',
+      Notes:
+        "Uploader repair: restored choice B from source PDF text 'b .are'.",
+    },
+    'output/pdf/let_reviewer_2026_batch2_extracted_questions.csv#883': {
+      'Choice B': 'gaining or losing protons',
+      Notes:
+        "Uploader repair: restored choice B from source PDF text 'b. gaining or losing protons'.",
+    },
+  };
+  const repair = repairs[key];
+  if (!repair) return row;
+  const repaired = { ...row };
+  for (const [field, value] of Object.entries(repair)) {
+    if (field === 'Notes') {
+      repaired.Notes = `${repaired.Notes ?? ''} ${value}`.trim();
+    } else {
+      repaired[field] = value;
+    }
+  }
+  return repaired;
 }
 
 function hasAny(text, patterns) {
@@ -203,6 +263,9 @@ function mappedTopic(row) {
   if (category === 'Child and Adolescent Development') return ['prof-ed', 'child-development'];
   if (category === 'Facilitating Learning') return ['prof-ed', 'facilitating-learning'];
   if (category === 'Professional Education') return professionalEducationTopic(row);
+  if (category === 'English') return ['gen-ed', 'english'];
+  if (category === 'General Science') return ['gen-ed', 'science'];
+  if (category === 'Mathematics') return ['gen-ed', 'mathematics'];
   if (category === 'Filipino') return ['gen-ed', 'filipino'];
   if (category === 'General Education') return generalEducationTopic(row);
   if (category === 'General/Professional Education') {
@@ -230,6 +293,18 @@ if (!url || !key) {
 
 const sb = createClient(url, key);
 
+async function uploadQuestionImage(localPath) {
+  if (!localPath || !existsSync(localPath)) return null;
+  const remotePath = `let/pdf-extraction/${basename(localPath)}`;
+  const contentType = remotePath.toLowerCase().endsWith('.png') ? 'image/png' : 'application/octet-stream';
+  const { error } = await sb.storage
+    .from('question-images')
+    .upload(remotePath, readFileSync(localPath), { contentType, upsert: true });
+  if (error) throw error;
+  const { data } = sb.storage.from('question-images').getPublicUrl(remotePath);
+  return data.publicUrl;
+}
+
 const { data: catalogRows, error: catalogErr } = await sb
   .from('exam_types')
   .select('slug, subject_areas(slug, topics(id, slug))')
@@ -254,7 +329,7 @@ async function fetchAllExistingQuestions() {
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await sb
       .from('questions')
-      .select('topic_id, stem')
+      .select('id, topic_id, stem, choices, correct_choice_id, image_url')
       .in('topic_id', topicIds.length ? topicIds : ['00000000-0000-0000-0000-000000000000'])
       .range(from, from + pageSize - 1);
     if (error) throw error;
@@ -266,9 +341,9 @@ async function fetchAllExistingQuestions() {
 
 const existingByTopic = new Map();
 for (const question of await fetchAllExistingQuestions()) {
-  const set = existingByTopic.get(question.topic_id) ?? new Set();
-  set.add(normalizeStem(question.stem));
-  existingByTopic.set(question.topic_id, set);
+  const map = existingByTopic.get(question.topic_id) ?? new Map();
+  map.set(existingContentKey(question), question);
+  existingByTopic.set(question.topic_id, map);
 }
 
 const candidates = [];
@@ -282,7 +357,8 @@ for (const file of SOURCES) {
   }
   const rows = parseCsv(readFileSync(resolve(root, file), 'utf8'));
   sourceStats[file] = { readyRows: 0, candidateTargets: 0, skipped: 0 };
-  for (const row of rows) {
+  for (const rawRow of rows) {
+    const row = applySourceBackedUploadRepair(file, rawRow);
     if (row.Status !== 'Ready for Upload') continue;
     sourceStats[file].readyRows += 1;
 
@@ -300,7 +376,7 @@ for (const file of SOURCES) {
       sourceStats[file].skipped += 1;
       continue;
     }
-    if ((row.Question ?? '').trim().length < 10) {
+    if ((row.Question ?? '').trim().length < 5) {
       skipped.push({ source: file, row: row['No.'], page: row.Page, reason: 'question_too_short' });
       sourceStats[file].skipped += 1;
       continue;
@@ -329,7 +405,7 @@ for (const file of SOURCES) {
         sourceStats[file].skipped += 1;
         continue;
       }
-      candidates.push({ file, row, examKind, topicId, subjectSlug, topicSlug, choices, letter });
+      candidates.push({ file, row, examKind, topicId, subjectSlug, topicSlug, choices, letter, imagePath: imageLocalPath(row) });
       sourceStats[file].candidateTargets += 1;
     }
   }
@@ -337,10 +413,12 @@ for (const file of SOURCES) {
 
 const inserts = [];
 const duplicates = [];
+const imageUpdates = [];
 for (const candidate of candidates) {
-  const keyStem = normalizeStem(candidate.row.Question);
-  const set = existingByTopic.get(candidate.topicId) ?? new Set();
-  if (set.has(keyStem)) {
+  const keyStem = candidateContentKey(candidate);
+  const map = existingByTopic.get(candidate.topicId) ?? new Map();
+  const existing = map.get(keyStem);
+  if (existing) {
     duplicates.push({
       source: candidate.file,
       row: candidate.row['No.'],
@@ -348,11 +426,14 @@ for (const candidate of candidates) {
       exam: candidate.examKind,
       topic: `${candidate.subjectSlug}/${candidate.topicSlug}`,
       reason: 'duplicate_existing_stem',
+      existing_id: existing.id,
     });
+    if (candidate.imagePath && !existing.image_url) {
+      imageUpdates.push({ id: existing.id, imagePath: candidate.imagePath, source: candidate.file, row: candidate.row['No.'] });
+    }
     continue;
   }
-  set.add(keyStem);
-  existingByTopic.set(candidate.topicId, set);
+  const imageUrl = candidate.imagePath ? await uploadQuestionImage(candidate.imagePath) : null;
   inserts.push({
     topic_id: candidate.topicId,
     stem: candidate.row.Question,
@@ -364,6 +445,7 @@ for (const candidate of candidates) {
     explanation_fil: null,
     difficulty: difficultyValue(candidate.row.Difficulty),
     status: 'published',
+    image_url: imageUrl,
     source: 'pdf_extraction',
     source_note: `${sourceSlug(candidate.file)} page ${candidate.row.Page}; ${candidate.row['Source PDF'] ?? ''}; ${candidate.row.Notes ?? ''}`.slice(0, 1000),
     is_verified: true,
@@ -375,6 +457,8 @@ for (const candidate of candidates) {
       candidate.row['Subject Category']?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
     ].filter(Boolean),
   });
+  map.set(keyStem, { id: null, topic_id: candidate.topicId, stem: candidate.row.Question, image_url: imageUrl });
+  existingByTopic.set(candidate.topicId, map);
 }
 
 const insertedIds = [];
@@ -384,6 +468,18 @@ for (let i = 0; i < inserts.length; i += batchSize) {
   const { data, error } = await sb.from('questions').insert(batch).select('id');
   if (error) throw error;
   insertedIds.push(...(data ?? []).map((row) => row.id));
+}
+
+const updatedImageIds = [];
+for (const update of imageUpdates) {
+  const imageUrl = await uploadQuestionImage(update.imagePath);
+  if (!imageUrl) {
+    skipped.push({ source: update.source, row: update.row, reason: 'image_file_missing' });
+    continue;
+  }
+  const { error } = await sb.from('questions').update({ image_url: imageUrl }).eq('id', update.id);
+  if (error) throw error;
+  updatedImageIds.push(update.id);
 }
 
 const batchId = crypto.randomUUID();
@@ -396,6 +492,7 @@ if (adminUser?.id && insertedIds.length) {
     metadata: {
       batch_id: batchId,
       inserted: insertedIds.length,
+      image_updates: updatedImageIds.length,
       skipped: skipped.length,
       duplicates: duplicates.length,
       sources: sourceStats,
@@ -406,6 +503,7 @@ if (adminUser?.id && insertedIds.length) {
 const report = {
   batch_id: batchId,
   inserted: insertedIds.length,
+  image_updates: updatedImageIds.length,
   candidate_targets: candidates.length,
   skipped: skipped.length,
   duplicates: duplicates.length,

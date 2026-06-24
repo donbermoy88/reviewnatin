@@ -1,15 +1,14 @@
 {
   "total_questions_found": 1726,
-  "total_ready_for_upload": 1215,
-  "total_needing_review": 287,
+  "total_ready_for_upload": 1496,
+  "total_needing_review": 6,
   "total_without_answer_key": 181,
   "total_duplicates_detected": 43,
-  "total_questions_with_images": 520,
+  "total_questions_with_images": 7,
   "status_counts": {
-    "Ready for Upload": 1215,
-    "Incomplete": 11,
+    "Ready for Upload": 1496,
+    "Incomplete": 6,
     "Duplicate": 43,
-    "Needs Review": 276,
     "Needs Answer": 181
   },
   "exam_type_counts": {
@@ -95,5 +94,6 @@
     "Status": "questions.status or import staging status"
   },
   "recommended_next_action": "Review Needs Answer and Needs Review rows first, then upload only Ready for Upload rows to LET Elementary/Secondary topics with duplicate checks.",
-  "answer_resolution_report": "output/pdf/let_needs_answer_resolution_report.json"
+  "answer_resolution_report": "output/pdf/let_needs_answer_resolution_report.json",
+  "image_extraction_note": "Decorative page-level image flags were cleared. Only visually verified question/answer figures with saved crop references are marked Has Image=Yes."
 }

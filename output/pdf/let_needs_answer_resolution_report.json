@@ -15,6 +15,25 @@
     "Needs Answer": 325
   },
   "resolved_total": 592,
+  "resolved_by_method": {
+    "Correct answer recovered from bold/highlighted answer choice in the PDF.": 387,
+    "Correct answer recovered from the bolded C choice in the PDF; repaired choice text split by extraction.": 1,
+    "Correct answer matched from trailing answer-key text: No, without the consent of the school head.": 1,
+    "Correct answer matched from trailing answer-key text: Existentialism.": 1,
+    "Correct answer matched against the explanation text in the PDF.": 17,
+    "Correct answer copied from an exact duplicate question already answered in the extracted LET files.": 18,
+    "Correct answer recovered from the bolded D choice in the PDF; repaired merged C/D choice text.": 1,
+    "Correct answer recovered from the trailing answer key.": 75,
+    "Correct answer recovered from yellow-highlighted answer choice in the PDF render.": 74,
+    "Correct answer recovered from the yellow-highlighted A choice in the PDF render.": 7,
+    "Correct answer recovered from the yellow-highlighted A choice in the PDF render; repaired blank A choice text.": 1,
+    "Correct answer recovered from the yellow-highlighted D choice in the PDF render.": 1,
+    "Correct answer recovered from the yellow-highlighted C choice in the PDF render.": 1,
+    "Correct answer recovered from the yellow-highlighted B choice in the PDF render.": 1,
+    "Correct answer recovered from the yellow-highlighted B choice in the PDF render; repaired merged A/B choice text.": 1,
+    "Correct answer and rationale recovered from embedded Filipino rationalization text.": 3,
+    "Correct answer recovered from bullet-marked answer choice in the PDF.": 2
+  },
   "resolved_by_source": {
     "6. LET PROF ED Q&A.pdf": 197,
     "Updated Prof-Ed-150-items.pdf": 2,

@@ -1,0 +1,76 @@
+{
+  "total_questions_found": 450,
+  "total_ready_for_upload": 399,
+  "total_needing_review": 1,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 50,
+  "total_questions_with_images": 0,
+  "status_counts": {
+    "Ready for Upload": 399,
+    "Duplicate": 50,
+    "Incomplete": 1
+  },
+  "exam_type_counts": {
+    "LET Elementary": 20,
+    "Both": 430
+  },
+  "source_counts": {
+    "let_english_proficiency_test_20_elementary": 20,
+    "let_general_education_english_practice_30": 30,
+    "let_gen_ed_reviewer_50_inline_answers": 50,
+    "let_gen_ed_reviewer_100_with_answer_key": 100,
+    "let_general_science_100_with_answer_key": 100,
+    "let_professional_education_150_inline_answers": 150
+  },
+  "sources": [
+    {
+      "slug": "let_english_proficiency_test_20_elementary",
+      "status": "processed",
+      "rows": 20,
+      "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/07. ENGLISH PROFICIENCY TEST 20 ITEMS.pdf"
+    },
+    {
+      "slug": "let_general_education_english_practice_30",
+      "status": "processed",
+      "rows": 30,
+      "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/11. GENERAL EDUCATION- ENGLISH PRACTICE TEST WITH ANSWER KEY.pdf"
+    },
+    {
+      "slug": "let_gen_ed_reviewer_50_inline_answers",
+      "status": "processed",
+      "rows": 50,
+      "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/G. Others/1. GEN. ED REVIEWER 50 ITEMS.pdf"
+    },
+    {
+      "slug": "let_gen_ed_reviewer_100_with_answer_key",
+      "status": "processed",
+      "rows": 100,
+      "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/G. Others/2. GEN. ED. REVIEWER 100 ITEMS WITH ANSWER KEY.pdf"
+    },
+    {
+      "slug": "let_general_science_100_with_answer_key",
+      "status": "processed",
+      "rows": 100,
+      "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE DRILLS II/GENERAL SCIENCE 100 ITEMS.pdf"
+    },
+    {
+      "slug": "let_professional_education_150_inline_answers",
+      "status": "processed",
+      "rows": 150,
+      "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/22. PROFESIONAL-EDUCATION-150-ITEMS-WITH-ANSWERS-KEY.pdf"
+    }
+  ],
+  "image_extraction_note": "No visually verified question/answer figures were found in this batch. Page-sized scan/background images and decorative repeated page images were not attached as question assets.",
+  "suggested_supabase_mapping": {
+    "Question": "questions.stem",
+    "Choice A-D/E": "questions.choices JSONB",
+    "Correct Answer": "questions.correct_choice_id",
+    "Explanation": "questions.explanation",
+    "Exam Type": "exam_types.slug/name (let-elementary, let-secondary; Both should target both exams)",
+    "Subject Category": "subject_areas/topics mapping",
+    "Source PDF/Page/Notes": "questions.source_note",
+    "Status": "questions.status or import staging status",
+    "Image Reference": "question_assets.storage_path or question_media.url when Has Image is Yes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows after duplicate review; keep Needs Answer/Incomplete out of production until manually checked."
+}

@@ -4,7 +4,7 @@
   "total_needing_review": 30,
   "total_without_answer_key": 144,
   "total_duplicates_detected": 217,
-  "total_questions_with_images": 88,
+  "total_questions_with_images": 0,
   "status_counts": {
     "Ready for Upload": 900,
     "Duplicate": 217,
@@ -92,5 +92,6 @@
     "Status": "questions.status or import staging status"
   },
   "recommended_next_action": "Review Needs Answer, Needs Review, and Incomplete rows before uploading. Upload Ready for Upload rows only after topic mapping is confirmed.",
-  "answer_resolution_report": "output/pdf/let_needs_answer_resolution_report.json"
+  "answer_resolution_report": "output/pdf/let_needs_answer_resolution_report.json",
+  "image_extraction_note": "Decorative page-level image flags were cleared. Only visually verified question/answer figures with saved crop references are marked Has Image=Yes."
 }

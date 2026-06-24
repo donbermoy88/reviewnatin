@@ -1,0 +1,259 @@
+{
+  "image_dir": "/Users/lyndon/reviewnatin/output/pdf/images/let_questions",
+  "figures_extracted": [
+    {
+      "output": "let_elementary_secondary_extracted_questions",
+      "row_no": 832,
+      "source_pdf": "2. GEN ED AND PROF ED.pdf",
+      "source_question_no": 4,
+      "page": 96,
+      "image_reference": "question:/Users/lyndon/reviewnatin/output/pdf/images/let_questions/let_gen_ed_prof_ed_p096_q004_fig01.png"
+    },
+    {
+      "output": "let_elementary_secondary_extracted_questions",
+      "row_no": 861,
+      "source_pdf": "2. GEN ED AND PROF ED.pdf",
+      "source_question_no": 8,
+      "page": 101,
+      "image_reference": "question:/Users/lyndon/reviewnatin/output/pdf/images/let_questions/let_gen_ed_prof_ed_p101_q008_fig01.png"
+    },
+    {
+      "output": "let_elementary_secondary_extracted_questions",
+      "row_no": 862,
+      "source_pdf": "2. GEN ED AND PROF ED.pdf",
+      "source_question_no": 9,
+      "page": 102,
+      "image_reference": "question:/Users/lyndon/reviewnatin/output/pdf/images/let_questions/let_gen_ed_prof_ed_p102_q009_fig01.png"
+    },
+    {
+      "output": "let_elementary_secondary_extracted_questions",
+      "row_no": 863,
+      "source_pdf": "2. GEN ED AND PROF ED.pdf",
+      "source_question_no": 10,
+      "page": 102,
+      "image_reference": "question:/Users/lyndon/reviewnatin/output/pdf/images/let_questions/let_gen_ed_prof_ed_p102_q010_fig01.png"
+    },
+    {
+      "output": "let_elementary_secondary_extracted_questions",
+      "row_no": 864,
+      "source_pdf": "2. GEN ED AND PROF ED.pdf",
+      "source_question_no": 11,
+      "page": 102,
+      "image_reference": "question:/Users/lyndon/reviewnatin/output/pdf/images/let_questions/let_gen_ed_prof_ed_p102_q011_fig01.png"
+    },
+    {
+      "output": "let_elementary_secondary_extracted_questions",
+      "row_no": 865,
+      "source_pdf": "2. GEN ED AND PROF ED.pdf",
+      "source_question_no": 12,
+      "page": 103,
+      "image_reference": "question:/Users/lyndon/reviewnatin/output/pdf/images/let_questions/let_gen_ed_prof_ed_p103_q012_fig01.png"
+    },
+    {
+      "output": "let_elementary_secondary_extracted_questions",
+      "row_no": 866,
+      "source_pdf": "2. GEN ED AND PROF ED.pdf",
+      "source_question_no": 13,
+      "page": 103,
+      "image_reference": "question:/Users/lyndon/reviewnatin/output/pdf/images/let_questions/let_gen_ed_prof_ed_p103_q013_fig01.png"
+    }
+  ],
+  "outputs_updated": {
+    "let_elementary_secondary_extracted_questions": {
+      "total_questions_found": 1726,
+      "total_ready_for_upload": 1496,
+      "total_needing_review": 6,
+      "total_without_answer_key": 181,
+      "total_duplicates_detected": 43,
+      "total_questions_with_images": 7,
+      "status_counts": {
+        "Ready for Upload": 1496,
+        "Incomplete": 6,
+        "Duplicate": 43,
+        "Needs Answer": 181
+      },
+      "exam_type_counts": {
+        "Both": 1378,
+        "LET Secondary": 148,
+        "LET Elementary": 200
+      },
+      "source_counts": {
+        "let_general_education_qa_with_answer_keys": 150,
+        "let_professional_education_qa": 197,
+        "let_gen_ed_and_prof_ed_embedded_answers": 631,
+        "let_updated_gen_ed_150": 150,
+        "let_updated_prof_ed_150": 150,
+        "let_prof_ed_child_adolescent_development_50": 50,
+        "let_prof_ed_facilitating_learning_50": 50,
+        "let_secondary_gen_ed_with_explanation": 148,
+        "let_beed_200_items_with_answer_key": 200
+      },
+      "sources": [
+        {
+          "slug": "let_general_education_qa_with_answer_keys",
+          "status": "processed",
+          "rows": 150,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/C. Q&A EXERCISES/5. LET GENERAL EDUCATION Q&A WITH ANSWER KEYS.pdf"
+        },
+        {
+          "slug": "let_professional_education_qa",
+          "status": "processed",
+          "rows": 197,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/C. Q&A EXERCISES/6. LET PROF ED Q&A.pdf"
+        },
+        {
+          "slug": "let_gen_ed_and_prof_ed_embedded_answers",
+          "status": "processed",
+          "rows": 656,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/C. Q&A EXERCISES/2. GEN ED AND PROF ED.pdf"
+        },
+        {
+          "slug": "let_updated_gen_ed_150",
+          "status": "processed",
+          "rows": 150,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/1. GEN. ED & PROF. ED (New-Old Curriculum) (BEED-BSED)/2025-2026 UPDATE (GEN ED AND PROF ED)/Updated Gen-Ed-150-items.pdf"
+        },
+        {
+          "slug": "let_updated_prof_ed_150",
+          "status": "processed",
+          "rows": 150,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/1. GEN. ED & PROF. ED (New-Old Curriculum) (BEED-BSED)/2025-2026 UPDATE (GEN ED AND PROF ED)/Updated Prof-Ed-150-items.pdf"
+        },
+        {
+          "slug": "let_prof_ed_child_adolescent_development_50",
+          "status": "processed",
+          "rows": 50,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/1. GEN. ED & PROF. ED (New-Old Curriculum) (BEED-BSED)/2025-2026 UPDATE (GEN ED AND PROF ED)/Updated Prof-Ed-child-and-adolescent-development 50-items.pdf"
+        },
+        {
+          "slug": "let_prof_ed_facilitating_learning_50",
+          "status": "processed",
+          "rows": 50,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/1. GEN. ED & PROF. ED (New-Old Curriculum) (BEED-BSED)/2025-2026 UPDATE (GEN ED AND PROF ED)/Updated Prof-Ed-Facilitating-Learning-50-items.pdf"
+        },
+        {
+          "slug": "let_secondary_gen_ed_with_explanation",
+          "status": "processed",
+          "rows": 148,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/J. Other References 21-22/05. GEN ED WITH EXPLANATION (SECONDARY).pdf"
+        },
+        {
+          "slug": "let_beed_200_items_with_answer_key",
+          "status": "processed",
+          "rows": 200,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/16. 200-ITEMS-BEED-WITH-ANSWER-KEY.pdf"
+        }
+      ],
+      "suggested_supabase_mapping": {
+        "Question": "questions.stem",
+        "Choice A-D/E": "questions.choices JSONB",
+        "Correct Answer": "questions.correct_choice_id",
+        "Explanation": "questions.explanation",
+        "Exam Type": "exam_types.slug/name (let-elementary, let-secondary; Both should target both exams)",
+        "Subject Category": "subject_areas/topics mapping",
+        "Source PDF/Page/Notes": "questions.source_note",
+        "Status": "questions.status or import staging status"
+      },
+      "recommended_next_action": "Review Needs Answer and Needs Review rows first, then upload only Ready for Upload rows to LET Elementary/Secondary topics with duplicate checks.",
+      "answer_resolution_report": "output/pdf/let_needs_answer_resolution_report.json",
+      "image_extraction_note": "Decorative page-level image flags were cleared. Only visually verified question/answer figures with saved crop references are marked Has Image=Yes."
+    },
+    "let_reviewer_2026_batch2_extracted_questions": {
+      "total_questions_found": 1291,
+      "total_ready_for_upload": 900,
+      "total_needing_review": 30,
+      "total_without_answer_key": 144,
+      "total_duplicates_detected": 217,
+      "total_questions_with_images": 0,
+      "status_counts": {
+        "Ready for Upload": 900,
+        "Duplicate": 217,
+        "Needs Answer": 144,
+        "Incomplete": 30
+      },
+      "exam_type_counts": {
+        "Both": 1291
+      },
+      "source_counts": {
+        "let_final_coaching_with_answer_key_prof_ed": 200,
+        "let_gen_ed_prof_ed_1000_hot_questions": 280,
+        "let_professional_education_preboard_a": 100,
+        "let_updated_prof_ed_139": 88,
+        "let_part1_general_education_150_with_answers": 126,
+        "let_part3_general_education_100": 97,
+        "let_part8_general_education_200": 191,
+        "let_filipino_65_with_rationalization": 65,
+        "let_final_coaching_beed_bsed_marked_answers": 144
+      },
+      "sources": [
+        {
+          "slug": "let_final_coaching_with_answer_key_prof_ed",
+          "status": "processed",
+          "rows": 200,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/C. Q&A EXERCISES/1. FINAL COACHING WITH ANSWER KEY.pdf"
+        },
+        {
+          "slug": "let_gen_ed_prof_ed_1000_hot_questions",
+          "status": "processed",
+          "rows": 280,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/C. Q&A EXERCISES/3. GEN-ED_PROF_ED.pdf"
+        },
+        {
+          "slug": "let_professional_education_preboard_a",
+          "status": "processed",
+          "rows": 100,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/2. LET DRILLS & BOOSTER (BEED-BSED)/Professional-Education-A.pdf"
+        },
+        {
+          "slug": "let_updated_prof_ed_139",
+          "status": "processed",
+          "rows": 88,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/1. GEN. ED & PROF. ED (New-Old Curriculum) (BEED-BSED)/2025-2026 UPDATE (GEN ED AND PROF ED)/Updated Prof-Ed-139-items.pdf"
+        },
+        {
+          "slug": "let_part1_general_education_150_with_answers",
+          "status": "processed",
+          "rows": 126,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/1. GEN. ED & PROF. ED (New-Old Curriculum) (BEED-BSED)/GENERAL EDUCATION/Part 1 General Education 150 QUESTIONS With ANSWERS.pdf"
+        },
+        {
+          "slug": "let_part3_general_education_100",
+          "status": "processed",
+          "rows": 97,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/1. GEN. ED & PROF. ED (New-Old Curriculum) (BEED-BSED)/GENERAL EDUCATION/PART 3 GENERAL EDUCATION (100 Items).pdf"
+        },
+        {
+          "slug": "let_part8_general_education_200",
+          "status": "processed",
+          "rows": 191,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/H. FREEBIES!/E. UPLOADS/1. GEN. ED & PROF. ED (New-Old Curriculum) (BEED-BSED)/GENERAL EDUCATION/Part 8 General Education (200 Items).pdf"
+        },
+        {
+          "slug": "let_filipino_65_with_rationalization",
+          "status": "processed",
+          "rows": 65,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/F. REVIEWERS WITH RATIONALE/1. FILIPINO LET 60 ITEMS WITH RATIONALIZATION.pdf"
+        },
+        {
+          "slug": "let_final_coaching_beed_bsed_marked_answers",
+          "status": "processed",
+          "rows": 144,
+          "path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/G. FINAL COACHING (BEED-BSED)/1. FINAL COACHING.pdf"
+        }
+      ],
+      "suggested_supabase_mapping": {
+        "Question": "questions.stem",
+        "Choice A-D/E": "questions.choices JSONB",
+        "Correct Answer": "questions.correct_choice_id",
+        "Explanation": "questions.explanation",
+        "Exam Type": "exam_types.slug/name (let-elementary, let-secondary; Both should target both exams)",
+        "Subject Category": "subject_areas/topics mapping",
+        "Source PDF/Page/Notes": "questions.source_note",
+        "Status": "questions.status or import staging status"
+      },
+      "recommended_next_action": "Review Needs Answer, Needs Review, and Incomplete rows before uploading. Upload Ready for Upload rows only after topic mapping is confirmed.",
+      "answer_resolution_report": "output/pdf/let_needs_answer_resolution_report.json",
+      "image_extraction_note": "Decorative page-level image flags were cleared. Only visually verified question/answer figures with saved crop references are marked Has Image=Yes."
+    }
+  }
+}

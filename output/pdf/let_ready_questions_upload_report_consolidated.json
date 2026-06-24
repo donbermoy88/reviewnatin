@@ -1,0 +1,56 @@
+{
+  "request": "Upload all recommended LET extracted questions, including image-backed questions.",
+  "runs": [
+    {
+      "batch_id": "20a1dc3e-fa37-460b-976c-60269301a4b2",
+      "inserted": 791,
+      "image_updates": 0,
+      "candidate_targets": 4980,
+      "skipped": 223,
+      "duplicates": 4189,
+      "notes": "Initial upload after adding batch 3 source to the uploader. Some batch 3 rows were skipped due to missing direct category mappings."
+    },
+    {
+      "batch_id": "28d793a9-79c6-498d-bb18-2b41cfef3959",
+      "inserted": 392,
+      "image_updates": 0,
+      "candidate_targets": 5392,
+      "skipped": 7,
+      "duplicates": 5000,
+      "notes": "Second upload after mapping English, General Science, and Mathematics categories."
+    },
+    {
+      "batch_id": "01cfc815-d69f-4ec0-8c24-bb6b9e93ac2d",
+      "inserted": 33,
+      "image_updates": 0,
+      "candidate_targets": 5392,
+      "skipped": 7,
+      "duplicates": 5359,
+      "notes": "Final upload after improving duplicate detection from stem-only to stem plus choices plus correct answer, allowing distinct shared-stem figure questions."
+    },
+    {
+      "batch_id": "6f792a10-09eb-430e-a6b1-30316ce1c537",
+      "inserted": 12,
+      "image_updates": 0,
+      "candidate_targets": 5404,
+      "skipped": 1,
+      "duplicates": 5392,
+      "notes": "Final validation upload after source-backed repairs for truncated/missing OCR fields and allowing short but valid source-backed stems."
+    }
+  ],
+  "total_inserted_this_request": 1228,
+  "final_database_verification": {
+    "total_let_published": 7562,
+    "pdf_extraction_let_published": 5341,
+    "pdf_extraction_let_with_images": 14,
+    "image_backed_source_questions": 7,
+    "image_backed_exam_targets": 14
+  },
+  "remaining_skips_after_final_run": {
+    "total": 1,
+    "reasons": [
+      "invalid_correct_answer_or_choice"
+    ],
+    "notes": "One source row remains blocked: output/pdf/let_elementary_secondary_extracted_questions.csv row 410 has correct answer D, but the source extraction only contains choices A-C. It should be reviewed against the PDF before any force upload."
+  }
+}
