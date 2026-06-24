@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { useAppTheme } from '../hooks/use-app-theme';
+import { PREMIUM_LOCK_BODY, PREMIUM_LOCK_CTA, PREMIUM_LOCK_TITLE } from '../lib/subscription/paywall-copy';
 
 const INK_ON_ACCENT = '#0E1B3D';
 
@@ -22,9 +23,9 @@ type Props = {
  * - overlay: absolute-fill scrim over gated content (parent must be positioned)
  */
 export function PremiumLock({
-  title = 'ReviewNatin Plus feature',
-  description = 'Mag-upgrade para ma-unlock ito.',
-  ctaLabel = 'See plans',
+  title = PREMIUM_LOCK_TITLE,
+  description = PREMIUM_LOCK_BODY,
+  ctaLabel = PREMIUM_LOCK_CTA,
   onPress,
   variant = 'card',
   style,

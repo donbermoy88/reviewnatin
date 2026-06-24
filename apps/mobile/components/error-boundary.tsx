@@ -1,5 +1,6 @@
-import { Component, type ReactNode } from 'react';
+import { Component, useEffect, useState, type ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Sentry from '@sentry/react-native';
 import { colors as lightColors } from '@reviewnatin/shared';
 import { darkColors } from '../constants/dark-theme';
@@ -10,9 +11,31 @@ type State = { error: Error | null };
 // This boundary wraps everything, including the providers that back useAppTheme
 // (FontProvider/AuthProvider/PreferencesProvider) — if one of those throws, the
 // boundary renders without them mounted. So the fallback can't call useAppTheme()
-// and must pick colors from the OS setting directly instead.
+// and must pick colors directly. It prefers the user's saved in-app dark-mode
+// toggle (persisted under 'reviewnatin:prefs') and only falls back to the OS
+// setting when no preference has been saved yet.
 function ErrorFallback({ error, onRetry }: { error: Error; onRetry: () => void }) {
-  const isDark = useColorScheme() === 'dark';
+  const systemDark = useColorScheme() === 'dark';
+  const [savedDark, setSavedDark] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const raw = await AsyncStorage.getItem('reviewnatin:prefs');
+        if (cancelled || !raw) return;
+        const parsed = JSON.parse(raw) as { darkMode?: boolean };
+        if (typeof parsed.darkMode === 'boolean') setSavedDark(parsed.darkMode);
+      } catch {
+        // Ignore — fall back to the system setting.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const isDark = savedDark ?? systemDark;
   const colors = isDark ? darkColors : lightColors;
 
   return (

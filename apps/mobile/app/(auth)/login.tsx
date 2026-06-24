@@ -20,6 +20,7 @@ import { LogoMark } from '../../components/logo-mark';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { syncOnboardingAfterAuth } from '../../lib/auth/post-auth';
+import { getAppEntryHref } from '../../lib/onboarding-nav';
 import {
   validateEmail,
   validatePassword,
@@ -102,8 +103,8 @@ export default function LoginScreen() {
     setCaptchaResetKey((k) => k + 1);
   };
 
-  const replaceAfterAuth = async (_userId: string) => {
-    router.replace('/(tabs)');
+  const replaceAfterAuth = async (userId: string) => {
+    router.replace((await getAppEntryHref(userId)) ?? '/onboarding');
   };
 
   const submit = async () => {
@@ -155,17 +156,6 @@ export default function LoginScreen() {
         : await signUp(email, password, captchaToken ?? undefined);
 
     if (result.error) {
-      if (
-        mode === 'signin' &&
-        result.error.toLowerCase().includes('confirm your email')
-      ) {
-        setLoading(false);
-        router.replace({
-          pathname: '/(auth)/verify-email',
-          params: { email: email.trim().toLowerCase() },
-        });
-        return;
-      }
       setError(toUserFacingError(result.error, 'auth'));
       if (mode === 'signup') {
         setCaptchaToken(null);

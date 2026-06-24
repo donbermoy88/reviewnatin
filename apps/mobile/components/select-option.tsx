@@ -32,6 +32,7 @@ export function SelectOption({ label, subtitle, icon, selected, onPress }: Props
       }}
       onPress={onPress}
       accessibilityRole="radio"
+      accessibilityLabel={subtitle ? `${label}. ${subtitle}` : label}
       accessibilityState={{ selected }}
     >
       <View

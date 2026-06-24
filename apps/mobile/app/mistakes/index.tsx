@@ -7,6 +7,7 @@ import { EmptyState } from '../../components/empty-state';
 import { ErrorState } from '../../components/error-state';
 import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
+import { PremiumLock } from '../../components/premium-lock';
 import { ReportContentButton } from '../../components/report-content-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createListScreenStyles } from '../../lib/themed-styles';
@@ -15,6 +16,7 @@ import { fetchMistakes, type MistakeItem } from '../../lib/api/mistakes';
 import { fetchUsageLimits } from '../../lib/api/iap';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { FREE_MISTAKE_DAYS } from '../../lib/paywall';
+import { trackEvent } from '../../lib/analytics/events';
 import { toUserFacingError } from '../../lib/errors/user-facing';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
@@ -24,7 +26,7 @@ export default function MistakesScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, spacing, fonts } = theme;
+  const { colors, spacing } = theme;
   const styles = useMemo(() => createListScreenStyles(theme), [theme]);
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
@@ -103,23 +105,15 @@ export default function MistakesScreen() {
       </View>
 
       {!isPremium(examTypeId) && showFreeLimitBanner ? (
-        <Pressable
-          style={{
-            marginHorizontal: spacing.lg,
-            marginBottom: spacing.sm,
-            backgroundColor: colors.warnBg,
-            borderRadius: 12,
-            padding: spacing.md,
+        <PremiumLock
+          title="Buong Mistake Bank history"
+          description={`Free tier: huling ${FREE_MISTAKE_DAYS} araw lang. I-unlock ang kumpletong history.`}
+          style={{ marginHorizontal: spacing.lg, marginBottom: spacing.sm }}
+          onPress={() => {
+            trackEvent('subscription_viewed', { source: 'mistake_bank' });
+            router.push('/subscribe');
           }}
-          onPress={() => router.push('/subscribe')}
-        >
-          <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text }}>
-            Full Mistake Bank history is a premium feature
-          </Text>
-          <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 4 }}>
-            Free tier shows last {FREE_MISTAKE_DAYS} days. Upgrade for complete history.
-          </Text>
-        </Pressable>
+        />
       ) : null}
 
       {!loading && mistakes.length > 0 ? (
