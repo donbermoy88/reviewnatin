@@ -1,0 +1,178 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_physical_education_sept2026_extracted_questions.json",
+  "extracted_rows": 500,
+  "ready_rows": 485,
+  "source_duplicates_or_non_ready_skipped": 15,
+  "existing_mapeh_questions_before": 552,
+  "insertable": 477,
+  "updatable_by_source_key": 8,
+  "duplicate_existing_content": 0,
+  "inserted": 477,
+  "updated": 8,
+  "skipped_samples": [
+    {
+      "row": "160",
+      "source_pdf": "BSED Physical Ed P3.pdf",
+      "original_no": "10",
+      "status": "Duplicate",
+      "duplicate_of": "56",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 56."
+    },
+    {
+      "row": "252",
+      "source_pdf": "BSED Physical Ed P5.pdf",
+      "original_no": "2",
+      "status": "Duplicate",
+      "duplicate_of": "152",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 152."
+    },
+    {
+      "row": "274",
+      "source_pdf": "BSED Physical Ed P5.pdf",
+      "original_no": "24",
+      "status": "Duplicate",
+      "duplicate_of": "66",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 66."
+    },
+    {
+      "row": "306",
+      "source_pdf": "BSED Physical Ed P6.pdf",
+      "original_no": "6",
+      "status": "Duplicate",
+      "duplicate_of": "152",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 152."
+    },
+    {
+      "row": "312",
+      "source_pdf": "BSED Physical Ed P6.pdf",
+      "original_no": "12",
+      "status": "Duplicate",
+      "duplicate_of": "76",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 76."
+    },
+    {
+      "row": "317",
+      "source_pdf": "BSED Physical Ed P6.pdf",
+      "original_no": "17",
+      "status": "Duplicate",
+      "duplicate_of": "128",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 128."
+    },
+    {
+      "row": "335",
+      "source_pdf": "BSED Physical Ed P6.pdf",
+      "original_no": "35",
+      "status": "Duplicate",
+      "duplicate_of": "99",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 99."
+    },
+    {
+      "row": "337",
+      "source_pdf": "BSED Physical Ed P6.pdf",
+      "original_no": "37",
+      "status": "Duplicate",
+      "duplicate_of": "292",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 292."
+    },
+    {
+      "row": "365",
+      "source_pdf": "BSED Physical Ed P7.pdf",
+      "original_no": "15",
+      "status": "Duplicate",
+      "duplicate_of": "28",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 28."
+    },
+    {
+      "row": "377",
+      "source_pdf": "BSED Physical Ed P7.pdf",
+      "original_no": "27",
+      "status": "Duplicate",
+      "duplicate_of": "2",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 2."
+    },
+    {
+      "row": "386",
+      "source_pdf": "BSED Physical Ed P7.pdf",
+      "original_no": "36",
+      "status": "Duplicate",
+      "duplicate_of": "6",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 6."
+    },
+    {
+      "row": "402",
+      "source_pdf": "BSED Physical Ed P8.pdf",
+      "original_no": "2",
+      "status": "Duplicate",
+      "duplicate_of": "258",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 258."
+    },
+    {
+      "row": "417",
+      "source_pdf": "BSED Physical Ed P8.pdf",
+      "original_no": "17",
+      "status": "Duplicate",
+      "duplicate_of": "159",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 159."
+    },
+    {
+      "row": "419",
+      "source_pdf": "BSED Physical Ed P8.pdf",
+      "original_no": "19",
+      "status": "Duplicate",
+      "duplicate_of": "400",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 400."
+    },
+    {
+      "row": "425",
+      "source_pdf": "BSED Physical Ed P8.pdf",
+      "original_no": "25",
+      "status": "Duplicate",
+      "duplicate_of": "152",
+      "notes": "Path and PDF header indicate BSED/Secondary MAPEH - Physical Education. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 152."
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "497dd094-4e7d-412b-839d-c5ce260327a9",
+      "source_key": "BSED Physical Ed P4.pdf#1",
+      "stem": "A PE coordinator is organizing the Palarong Pambansa tryouts. What should be his first step in management?"
+    },
+    {
+      "id": "f310a168-0a3c-46a0-b057-9bb481575008",
+      "source_key": "BSED Physical Ed P4.pdf#2",
+      "stem": "A PE teacher handling a school sports festival ensures fairness by following event rules strictly. This demonstrates:"
+    },
+    {
+      "id": "9fb65f68-1da3-4e57-ab92-2bae072d9e65",
+      "source_key": "BSED Physical Ed P4.pdf#4",
+      "stem": "What is the best way to evaluate the success of a school intramural event?"
+    },
+    {
+      "id": "a95bf7aa-4bda-4749-bf13-47853d5af9f1",
+      "source_key": "BSED Physical Ed P4.pdf#5",
+      "stem": "The span of control in sports management refers to:"
+    },
+    {
+      "id": "5aaaafcb-aa10-4bf1-8c64-f83eb820a720",
+      "source_key": "BSED Physical Ed P4.pdf#6",
+      "stem": "When a sports manager conducts performance appraisals for coaches, it falls under:"
+    },
+    {
+      "id": "de79a11f-7bb0-4aca-a5bd-4587e6339e83",
+      "source_key": "BSED Physical Ed P4.pdf#7",
+      "stem": "The most important financial document for a sports event is the:"
+    },
+    {
+      "id": "1299b4de-437d-42c0-913b-f3e96b7e613d",
+      "source_key": "BSED Physical Ed P4.pdf#8",
+      "stem": "A school PE head seeks funds for a sports program. Which approach is most sustainable?"
+    },
+    {
+      "id": "cee0cc30-119d-4a7a-89e4-699971ea0b33",
+      "source_key": "BSED Physical Ed P4.pdf#9",
+      "stem": "In a Barangay basketball league, the tournament director mainly oversees:"
+    }
+  ]
+}
