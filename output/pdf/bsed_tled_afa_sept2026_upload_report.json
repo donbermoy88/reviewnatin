@@ -1,0 +1,42 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_tled_afa_sept2026_extracted_questions.json",
+  "extracted_rows": 500,
+  "ready_rows": 500,
+  "source_duplicates_or_non_ready_skipped": 0,
+  "existing_tle_questions_before": 1566,
+  "insertable": 495,
+  "updatable_by_source_key": 5,
+  "duplicate_existing_content": 0,
+  "inserted": 495,
+  "updated": 5,
+  "skipped_samples": [],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "575e60a7-c669-4a01-950a-5f4eb8d379ea",
+      "source_key": "BSED TLEd-AFA P1.pdf#1",
+      "stem": "The science and practice of growing field crops is called:"
+    },
+    {
+      "id": "d80d888a-e90c-4f6e-b99e-5e31222ead24",
+      "source_key": "BSED TLEd-AFA P10.pdf#26",
+      "stem": "The science and art of raising fish and other aquatic organisms is:"
+    },
+    {
+      "id": "d70f226b-7772-4b21-869a-4679a3e16ff9",
+      "source_key": "BSED TLEd-AFA P2.pdf#5",
+      "stem": "The science of breeding and raising animals for food and other products is called:"
+    },
+    {
+      "id": "271569da-c580-41f5-b98a-9b83c79b490c",
+      "source_key": "BSED TLEd-AFA P2.pdf#27",
+      "stem": "The science of managing and culturing fish and aquatic organisms is called:"
+    },
+    {
+      "id": "479b2dee-571e-4ed5-b6f7-b9b7a83a4893",
+      "source_key": "BSED TLEd-AFA P5.pdf#26",
+      "stem": "The science and practice of raising aquatic organisms under controlled conditions is:"
+    }
+  ]
+}

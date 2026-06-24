@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-06-24T01:55:59.282Z",
+  "source_folder": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Agriculture and Fishery Arts-",
+  "source_pdfs": 10,
+  "extraction_summary": {
+    "total_questions_found": 500,
+    "ready_for_upload": 500,
+    "duplicates_detected": 0,
+    "needing_review": 0,
+    "without_answer_key": 0,
+    "with_images": 0,
+    "with_image_based_answer_choices": 0,
+    "status_counts": {
+      "Ready for Upload": 500
+    },
+    "topic_breakdown": {
+      "Crop Production": 78,
+      "Agriculture and Fishery Arts": 68,
+      "Postharvest and Food Processing": 30,
+      "Farm Tools, Equipment, and Mechanization": 27,
+      "Animal Production": 67,
+      "Agribusiness and Farm Management": 67,
+      "Agricultural Extension and Research": 36,
+      "Aquaculture and Fishery Arts": 127
+    },
+    "difficulty_breakdown": {
+      "3": 500
+    }
+  },
+  "upload_summary": {
+    "inserted": 495,
+    "updated": 5,
+    "skipped_source_duplicates_or_non_ready": 0,
+    "duplicate_existing_content": 0,
+    "ready_rows": 500
+  },
+  "live_database_verification": {
+    "let_secondary_major_tle_total": 2061,
+    "let_secondary_major_tle_published": 2061,
+    "bsed_tled_afa_source_total": 500,
+    "bsed_tled_afa_source_published": 500,
+    "source_topic_breakdown": {
+      "Aquaculture and Fishery Arts": 127,
+      "Crop Production": 78,
+      "Agriculture and Fishery Arts": 68,
+      "Agribusiness and Farm Management": 67,
+      "Animal Production": 67,
+      "Agricultural Extension and Research": 36,
+      "Postharvest and Food Processing": 30,
+      "Farm Tools, Equipment, and Mechanization": 27
+    },
+    "sample_verified_question": {
+      "source_pdf": "BSED TLEd-AFA P1.pdf",
+      "original_no": 1,
+      "stem": "The science and practice of growing field crops is called:",
+      "correct_choice_id": "a",
+      "explanation_en": "Agronomy – Field crop science."
+    }
+  },
+  "supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Technology and Livelihood Education",
+    "topic": "tle",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "No additional upload action is needed for this folder. All extracted AFA questions were ready and uploaded or source-key updated."
+}
