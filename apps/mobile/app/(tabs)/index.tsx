@@ -20,6 +20,8 @@ import { fetchTopicQuestionCounts, fetchTopicsBySubjectSlug, type TopicRow } fro
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchTodayPasaPath, type PasaPathPlan, type PasaPathTask } from '../../lib/api/pasapath';
 import { fetchLatestReadiness, type ReadinessSnapshot } from '../../lib/api/readiness';
+import { hasCompletedDiagnostic } from '../../lib/api/diagnostic';
+import { dismissDiagnosticPrompt, isDiagnosticPromptDismissed } from '../../lib/diagnostic-prompt';
 import { fetchPracticeStats } from '../../lib/api/stats';
 import { fetchGuestPracticeStats } from '../../lib/guest-quiz-history';
 import { ExamCountdownCard } from '../../components/exam-countdown-card';
@@ -34,7 +36,12 @@ import { formatExamCountdown } from '../../lib/exam-countdown';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
 import { GUEST_SAVE_PROGRESS } from '../../lib/product-copy';
 import { canStartPractice } from '../../lib/paywall';
-import { scheduleDailyReminder, scheduleExamReminders } from '../../lib/notifications';
+import {
+  cancelStreakAtRiskReminder,
+  scheduleDailyReminder,
+  scheduleExamReminders,
+  scheduleStreakAtRiskReminder,
+} from '../../lib/notifications';
 import { fetchDueFlashcardCount } from '../../lib/api/flashcards';
 import { fetchTopicAnalytics, type SubjectAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
 import { trackEvent } from '../../lib/analytics/events';
@@ -259,6 +266,7 @@ function DashboardScreenContent() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [readinessSheetOpen, setReadinessSheetOpen] = useState(false);
+  const [showDiagnosticPrompt, setShowDiagnosticPrompt] = useState(false);
   const [notificationSheetOpen, setNotificationSheetOpen] = useState(false);
   const [updatesSheetOpen, setUpdatesSheetOpen] = useState(false);
   const [milestoneVisible, setMilestoneVisible] = useState(false);
@@ -470,6 +478,51 @@ function DashboardScreenContent() {
       .then((schedules) => scheduleExamReminders(schedules))
       .catch(() => {});
   }, [prefs.examRemindersEnabled, user, examSlug]);
+
+  // Evening streak-at-risk nudge: schedule only when an active streak exists and
+  // the user hasn't practiced today; cancel once they do (or notifications off).
+  useEffect(() => {
+    if (!user || !prefs.notificationsEnabled) {
+      void cancelStreakAtRiskReminder();
+      return;
+    }
+    if (stats.streakDays >= 1 && stats.questionsToday === 0) {
+      void scheduleStreakAtRiskReminder(stats.streakDays);
+    } else {
+      void cancelStreakAtRiskReminder();
+    }
+  }, [user, prefs.notificationsEnabled, stats.streakDays, stats.questionsToday]);
+
+  // Surface the (previously orphaned) diagnostic prompt: signed-in users who
+  // have not completed a baseline diagnostic and have not dismissed the prompt
+  // today see a card. Completing the diagnostic is what seeds PasaPath/readiness.
+  useEffect(() => {
+    const userId = user?.id;
+    if (!userId) {
+      setShowDiagnosticPrompt(false);
+      return;
+    }
+    let cancelled = false;
+    void (async () => {
+      try {
+        const [done, dismissed] = await Promise.all([
+          hasCompletedDiagnostic(examSlug),
+          isDiagnosticPromptDismissed(userId, examSlug),
+        ]);
+        if (!cancelled) setShowDiagnosticPrompt(!done && !dismissed);
+      } catch {
+        if (!cancelled) setShowDiagnosticPrompt(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user?.id, examSlug, loading]);
+
+  const dismissDiagnostic = useCallback(async () => {
+    setShowDiagnosticPrompt(false);
+    if (user?.id) await dismissDiagnosticPrompt(user.id, examSlug).catch(() => {});
+  }, [user, examSlug]);
 
   const dismissCoachMark = useCallback(async () => {
     setCoachMarkVisible(false);
@@ -812,6 +865,33 @@ function DashboardScreenContent() {
 
           {user && premium ? (
             <PremiumActiveStrip onManage={() => router.push('/(tabs)/settings')} />
+          ) : null}
+
+          {user && showDiagnosticPrompt ? (
+            <Pressable
+              style={({ pressed }) => [styles.diagnosticCard, pressed && styles.cardPressed]}
+              onPress={() => router.push('/diagnostic/intro')}
+              accessibilityRole="button"
+              accessibilityLabel="Kunin ang diagnostic quiz para sa baseline readiness mo"
+            >
+              <View style={styles.diagnosticIcon}>
+                <Ionicons name="analytics-outline" size={22} color={colors.primary} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.diagnosticTitle}>Kunin ang baseline mo</Text>
+                <Text style={styles.diagnosticSub} numberOfLines={2}>
+                  40-tanong na diagnostic — ito ang magbubuo ng PasaPath plan at readiness score mo.
+                </Text>
+              </View>
+              <Pressable
+                onPress={() => void dismissDiagnostic()}
+                hitSlop={10}
+                accessibilityRole="button"
+                accessibilityLabel="I-dismiss ang diagnostic prompt"
+              >
+                <Ionicons name="close" size={18} color={colors.textMuted} />
+              </Pressable>
+            </Pressable>
           ) : null}
 
           <View style={styles.planRow}>

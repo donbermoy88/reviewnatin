@@ -8,6 +8,8 @@ export { canUseExpoNotifications, canUseLocalNotifications, canUseRemotePushNoti
 
 const DAILY_REMINDER_ID = 'daily-reminder';
 const EXAM_REMINDER_PREFIX = 'exam-reminder-';
+const STREAK_AT_RISK_ID = 'streak-at-risk';
+const STREAK_AT_RISK_HOUR = 20;
 
 /** Deep imports avoid expo-notifications barrel side effects (Keychain auto-registration). */
 async function loadNotificationsCore() {
@@ -142,6 +144,61 @@ export async function scheduleDailyReminder(
   }
 }
 
+/**
+ * Evening "streak at risk" nudge. Scheduled as a one-shot for the next 8 PM when
+ * the user has an active streak but hasn't practiced today. Re-evaluated on each
+ * app open (callers cancel it once the user practices), which keeps it
+ * conditional without a server. Local-only until FCM remote push ships.
+ */
+export async function scheduleStreakAtRiskReminder(streakDays: number): Promise<void> {
+  if (!canUseLocalNotifications()) return;
+  if (streakDays < 1) return;
+
+  try {
+    await ensureHandler();
+    const Notifications = await loadNotificationsCore();
+    if (!Notifications) return;
+
+    const { status } = await Notifications.getPermissionsAsync();
+    if (status !== 'granted') return;
+
+    const now = new Date();
+    const trigger = new Date(now);
+    trigger.setHours(STREAK_AT_RISK_HOUR, 0, 0, 0);
+    if (trigger.getTime() <= now.getTime()) {
+      trigger.setDate(trigger.getDate() + 1);
+    }
+
+    await Notifications.cancelScheduledNotificationAsync(STREAK_AT_RISK_ID).catch(() => {});
+    await Notifications.scheduleNotificationAsync({
+      identifier: STREAK_AT_RISK_ID,
+      content: {
+        title: 'ReviewNatin 🔥',
+        body: `${streakDays}-day streak mo — mag-quick review bago mag-hatinggabi para hindi maputol!`,
+        sound: true,
+        data: { url: 'reviewnatin://home', screen: 'home' },
+      },
+      trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.DATE,
+        date: trigger,
+      },
+    });
+  } catch {
+    /* unsigned simulator builds */
+  }
+}
+
+export async function cancelStreakAtRiskReminder(): Promise<void> {
+  if (!canUseLocalNotifications()) return;
+  try {
+    const Notifications = await loadNotificationsCore();
+    if (!Notifications) return;
+    await Notifications.cancelScheduledNotificationAsync(STREAK_AT_RISK_ID).catch(() => {});
+  } catch {
+    /* ignore */
+  }
+}
+
 export async function cancelReminders(): Promise<void> {
   if (!canUseLocalNotifications()) return;
 
@@ -150,6 +207,7 @@ export async function cancelReminders(): Promise<void> {
     if (!Notifications) return;
 
     await Notifications.cancelScheduledNotificationAsync(DAILY_REMINDER_ID).catch(() => {});
+    await Notifications.cancelScheduledNotificationAsync(STREAK_AT_RISK_ID).catch(() => {});
     await cancelExamReminders();
   } catch {
     /* ignore */
