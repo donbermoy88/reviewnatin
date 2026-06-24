@@ -13,8 +13,8 @@ Every beta release must be validated across all three cohorts:
 | Cohort | Account | Plus | Primary test focus |
 |--------|---------|------|-------------------|
 | **Guest** | None (guest mode) | No | Skip login, local progress, signup CTAs at limits |
-| **Free** | Registered (email/OAuth + OTP if email) | No | 20 Q/day limit, ads, mock preview, web checkout paywall |
-| **Premium** | Registered | Yes (web checkout on APK beta) | No ads, unlimited practice, full mocks, AI tutor, offline |
+| **Free** | Registered (email/OAuth + OTP if email) | No | 20 Q/day limit, ads, mock preview, Play Billing paywall |
+| **Premium** | Registered | Yes (Google Play Billing on Play internal track) | No ads, unlimited practice, full mocks, AI tutor, offline |
 
 Roster: [beta-testers.md](./beta-testers.md) (4 testers each).  
 Audit matrix: [beta-audit-matrix.md](./beta-audit-matrix.md).
@@ -68,10 +68,12 @@ Use the `preview` EAS profile. Required env vars (set in EAS dashboard or `.env`
 | `EXPO_PUBLIC_ADMOB_ANDROID_APP_ID` | Optional | Ads (test IDs OK for beta) |
 | `EXPO_PUBLIC_TURNSTILE_SITE_KEY` | Phase 1+ | Signup CAPTCHA (Cloudflare Turnstile) |
 
-**Beta limitations (APK sideload):**
+**Beta limitations (APK sideload — build 36 and earlier only):**
 
-- Google Play Billing IAP does not work — **Premium cohort** uses **web checkout** for ReviewNatin Plus.
+- Google Play Billing IAP does not work on sideload APK — **deprecated**; migrate testers to Play internal testing (build 37+).
 - Remote push notifications require FCM + Play signing — local reminders only during APK beta.
+
+**Premium purchases (build 37+):** Google Play internal testing only. QA: [play-billing-paywall-compliance.md](./play-billing-paywall-compliance.md).
 
 ## Feedback channels
 
@@ -106,7 +108,7 @@ Run this every weekday while beta is active:
 9. Run **cohort smokes** per today's rotation (see table above):
    - Guest: onboarding → 20 Q → paywall
    - Free: OTP signup → practice → ads → mock preview
-   - Premium: web checkout → no ads → full mock → offline pack
+   - Premium: Google Play Billing → no ads → full mock → offline pack
 10. **Release gate:** Block beta push if any open P0 or Sentry crash spike in last 24h.
 
 ### Evening (communication)
@@ -134,7 +136,7 @@ Run this every weekday while beta is active:
 - [ ] ...
 
 ### Known issues
-- Plus subscription via web checkout only (Premium cohort; no Play Billing during APK beta)
+- Plus subscription via Google Play Billing (Play internal testing track; build 37+)
 ```
 
 ## Release readiness gate (per beta build)
@@ -144,7 +146,7 @@ See also [release-readiness-checklist.md](./release-readiness-checklist.md).
 - [ ] `npm run mobile:test` passes
 - [ ] **Guest cohort** smoke on 1 device
 - [ ] **Free cohort** smoke on 1 device (OTP → practice → limit)
-- [ ] **Premium cohort** smoke on 1 device (web checkout → no ads)
+- [ ] **Premium cohort** smoke on 1 device (Play purchase sheet → no ads)
 - [ ] Offline: airplane mode quiz → reconnect sync (Free or Premium)
 - [ ] Zero new P0 Sentry crashes in 24h post-release
 - [ ] [beta-audit-matrix.md](./beta-audit-matrix.md) updated for changed flows

@@ -1,0 +1,6 @@
+Starting: Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... pkg=ph.reviewnatin.app }
+Status: timeout
+LaunchState: UNKNOWN (-1)
+Activity: ph.reviewnatin.app/.MainActivity
+WaitTime: 10586
+Complete

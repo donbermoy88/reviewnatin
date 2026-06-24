@@ -1,0 +1,356 @@
+INFO         | Android emulator version 35.3.11.0 (build_id 12836668) (CL:N/A)
+INFO         | Graphics backend: gfxstream
+INFO         | Found systemPath /Users/lyndon/Library/Android/sdk/system-images/android-35/google_apis_playstore/arm64-v8a/
+INFO         | Checking system compatibility:
+INFO         |   Checking: hasSufficientDiskSpace
+INFO         |      Ok: Disk space requirements to run avd: `Medium_Phone_API_35` are met.
+INFO         |   Checking: hasSufficientHwGpu
+INFO         |      Ok: Hardware GPU requirements to run avd: `Medium_Phone_API_35` are passed.
+INFO         |   Checking: hasSufficientSystem
+INFO         |      Ok: System requirements to run avd: `Medium_Phone_API_35` are met.
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_new_posture_requested(int) ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_posture_selection_dialog() ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_new_resizable_requested(PresetEmulatorSizeType) ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_resizable_dialog() ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_sleep_timer_done() ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_unfold_timer_done() ((null):0, (null))
+
+INFO         | Storing crashdata in: /tmp/android-lyndon/emu-crash-35.3.11.db, detection is enabled for process: 18845
+library_mode host gpu mode host
+INFO         | Initializing hardware OpenGLES emulation support
+I0622 21:15:17.230167 9bbde80 opengles.cpp:285] android_startOpenglesRenderer: gpu info
+I0622 21:15:17.230211 9bbde80 opengles.cpp:286] 
+INFO         | HealthMonitor disabled.
+INFO         | initIcdPaths: ICD set to 'swiftshader', using Swiftshader ICD
+INFO         | Setting ICD filenames for the loader = /Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/vk_swiftshader_icd.json:/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/vk_swiftshader_icd.json
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib]
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib] (posix): begin
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib] (posix,darwin): call dlopen
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib] (posix,darwin): failed, try again with [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib]
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib] failed (posix). dlerror: []
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib]
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib] (posix): begin
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib] (posix,darwin): call dlopen
+
+INFO         | Added library: /Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib
+INFO         | Selecting Vulkan device: SwiftShader Device (LLVM 10.0.0), Version: 1.2.0
+INFO         | Supports id properties, got a vulkan device UUID
+INFO         | SharedLibrary::open for [/System/Library/Frameworks/OpenGL.framework/OpenGL]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [/System/Library/Frameworks/OpenGL.framework/OpenGL] (posix): begin
+
+INFO         | SharedLibrary::open for [/System/Library/Frameworks/OpenGL.framework/OpenGL] (posix,darwin): call dlopen
+
+INFO         | SharedLibrary::open for [libshadertranslator.dylib]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [libshadertranslator.dylib] (posix): begin
+
+INFO         | SharedLibrary::open for [libshadertranslator.dylib] (posix,darwin): call dlopen
+
+INFO         | Initializing VkEmulation features:
+INFO         |     glInteropSupported: false
+INFO         |     useDeferredCommands: true
+INFO         |     createResourceWithRequirements: true
+INFO         |     useVulkanComposition: false
+INFO         |     useVulkanNativeSwapchain: false
+INFO         |     enable guestRenderDoc: false
+INFO         |     ASTC LDR emulation mode: 2
+INFO         |     enable ETC2 emulation: true
+INFO         |     enable Ycbcr emulation: false
+INFO         |     guestVulkanOnly: false
+INFO         |     useDedicatedAllocations: false
+INFO         | Graphics Adapter Vendor Google (Apple)
+INFO         | Graphics Adapter Android Emulator OpenGL ES Translator (Apple M4)
+INFO         | Graphics API Version OpenGL ES 3.0 (4.1 Metal - 90.5)
+INFO         | Graphics API Extensions GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 
+INFO         | Graphics Device Extensions N/A
+INFO         | Sending adb public key [QAAAAKeEsL/pHCMR7cukxy0MGeKDdxHWTPNzHD+857cD25YY/gbsQNb8JHziWQ0PlZwzJVxMwhQsJmKbYNPz2NHCgebDdw61HkQf3O6HYV37zgy0gSnk50LVCg0w6tTY63aqOLo+98uaZwdH+3AT5rcw3w+orUyMAlgiM6W89jxHcofhItA+eBWSjaeWYKANqxrDhsYgwo0CR9NnP7JkeFkFWhqEDKKnkTssyfKbYAC6UrugloJ1PGI/ktqVN2gMoTjr5ob14HzAiMcGsZ78GFq+9dA9Lkb8eD8tMfo6Q9+zaVDVSw6NYxJJ5kEtZKXHsFtSh1qgEbuehGHSEC/h7kTAx78vof6/0mdCkxAph5jE3dH15V4jrCujjb+hsqXk0OiWqff8FmjNSMJdGav7DEAhp4lIbvMVGUGbepQB5nJrXn7CxMhjgN20rSfZQ4b0mNiK0ZEGH2rlCikscrDsaIxyJeHOttr5IvhODWiyDcX+3UacBsLmXJXoTVyihSNEOAVJa7ZDEIYpa2rc7NAs5z6z4G5F7lUM1KdotSCKZKeTgOMQ2Z4qLQAs6+4Vyz089pbcMYrRb9mR/vwBdoUeFoHDACpBP3fYJnKH68rTFZSuTYL0lFCFxgff5bERzUYhEod3kqlamsRlchNcDM40jHPqi8lolU3UacrqXLnaYtVM2hey20XCawEAAQA= lyndon@unknown]
+INFO         | Monitoring duration of emulator setup.
+WARNING      | The emulator now requires a signed jwt token for gRPC access! Use the -grpc flag if you really want an open unprotected grpc port
+INFO         | Using security allow list from: /Users/lyndon/Library/Android/sdk/emulator/lib/emulator_access.json
+WARNING      | *** Basic token auth should only be used by android-studio ***
+INFO         | The active JSON Web Key Sets can be found here: /Users/lyndon/Library/Caches/TemporaryItems/avd/running/18845/jwks/e69d1ef0-cbe9-49ed-8a8a-5c4772d5cc28/active.jwk
+INFO         | Scanning /Users/lyndon/Library/Caches/TemporaryItems/avd/running/18845/jwks/e69d1ef0-cbe9-49ed-8a8a-5c4772d5cc28 for jwk keys.
+INFO         | Started GRPC server at 127.0.0.1:8554, security: Local, auth: +token
+INFO         | Advertising in: /Users/lyndon/Library/Caches/TemporaryItems/avd/running/pid_18845.ini
+INFO         | Setting display: 0 configuration to: 1080x2400, dpi: 420x420 
+INFO         | setDisplayActiveConfig 0
+USER_INFO    | Emulator is performing a full startup. This may take upto two minutes, or more.
+INFO         | Activated packet streamer for bluetooth emulation
+INFO         | Android emulator version 35.3.11.0 (build_id 12836668) (CL:N/A)
+INFO         | Graphics backend: gfxstream
+INFO         | Found systemPath /Users/lyndon/Library/Android/sdk/system-images/android-35/google_apis_playstore/arm64-v8a/
+INFO         | Checking system compatibility:
+INFO         |   Checking: hasSufficientDiskSpace
+INFO         |      Ok: Disk space requirements to run avd: `Medium_Phone_API_35` are met.
+INFO         |   Checking: hasSufficientHwGpu
+INFO         |      Ok: Hardware GPU requirements to run avd: `Medium_Phone_API_35` are passed.
+INFO         |   Checking: hasSufficientSystem
+INFO         |      Ok: System requirements to run avd: `Medium_Phone_API_35` are met.
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_new_posture_requested(int) ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_posture_selection_dialog() ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_new_resizable_requested(PresetEmulatorSizeType) ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_resizable_dialog() ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_sleep_timer_done() ((null):0, (null))
+
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_unfold_timer_done() ((null):0, (null))
+
+INFO         | Storing crashdata in: /tmp/android-lyndon/emu-crash-35.3.11.db, detection is enabled for process: 21336
+library_mode host gpu mode host
+INFO         | Initializing hardware OpenGLES emulation support
+I0622 21:21:41.862585 9bbde80 opengles.cpp:285] android_startOpenglesRenderer: gpu info
+I0622 21:21:41.862614 9bbde80 opengles.cpp:286] 
+INFO         | HealthMonitor disabled.
+INFO         | initIcdPaths: ICD set to 'swiftshader', using Swiftshader ICD
+INFO         | Setting ICD filenames for the loader = /Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/vk_swiftshader_icd.json:/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/vk_swiftshader_icd.json
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib]
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib] (posix): begin
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib] (posix,darwin): call dlopen
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib] (posix,darwin): failed, try again with [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib]
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib] failed (posix). dlerror: []
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib]
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib] (posix): begin
+
+INFO         | SharedLibrary::open for [/Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib] (posix,darwin): call dlopen
+
+INFO         | Added library: /Users/lyndon/Library/Android/sdk/emulator/lib64/vulkan/libvulkan.dylib
+INFO         | Selecting Vulkan device: SwiftShader Device (LLVM 10.0.0), Version: 1.2.0
+INFO         | Supports id properties, got a vulkan device UUID
+INFO         | SharedLibrary::open for [/System/Library/Frameworks/OpenGL.framework/OpenGL]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [/System/Library/Frameworks/OpenGL.framework/OpenGL] (posix): begin
+
+INFO         | SharedLibrary::open for [/System/Library/Frameworks/OpenGL.framework/OpenGL] (posix,darwin): call dlopen
+
+INFO         | SharedLibrary::open for [libshadertranslator.dylib]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [libshadertranslator.dylib] (posix): begin
+
+INFO         | SharedLibrary::open for [libshadertranslator.dylib] (posix,darwin): call dlopen
+
+INFO         | Initializing VkEmulation features:
+INFO         |     glInteropSupported: false
+INFO         |     useDeferredCommands: true
+INFO         |     createResourceWithRequirements: true
+INFO         |     useVulkanComposition: false
+INFO         |     useVulkanNativeSwapchain: false
+INFO         |     enable guestRenderDoc: false
+INFO         |     ASTC LDR emulation mode: 2
+INFO         |     enable ETC2 emulation: true
+INFO         |     enable Ycbcr emulation: false
+INFO         |     guestVulkanOnly: false
+INFO         |     useDedicatedAllocations: false
+INFO         | Graphics Adapter Vendor Google (Apple)
+INFO         | Graphics Adapter Android Emulator OpenGL ES Translator (Apple M4)
+INFO         | Graphics API Version OpenGL ES 3.0 (4.1 Metal - 90.5)
+INFO         | Graphics API Extensions GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 
+INFO         | Graphics Device Extensions N/A
+INFO         | Sending adb public key [QAAAAKeEsL/pHCMR7cukxy0MGeKDdxHWTPNzHD+857cD25YY/gbsQNb8JHziWQ0PlZwzJVxMwhQsJmKbYNPz2NHCgebDdw61HkQf3O6HYV37zgy0gSnk50LVCg0w6tTY63aqOLo+98uaZwdH+3AT5rcw3w+orUyMAlgiM6W89jxHcofhItA+eBWSjaeWYKANqxrDhsYgwo0CR9NnP7JkeFkFWhqEDKKnkTssyfKbYAC6UrugloJ1PGI/ktqVN2gMoTjr5ob14HzAiMcGsZ78GFq+9dA9Lkb8eD8tMfo6Q9+zaVDVSw6NYxJJ5kEtZKXHsFtSh1qgEbuehGHSEC/h7kTAx78vof6/0mdCkxAph5jE3dH15V4jrCujjb+hsqXk0OiWqff8FmjNSMJdGav7DEAhp4lIbvMVGUGbepQB5nJrXn7CxMhjgN20rSfZQ4b0mNiK0ZEGH2rlCikscrDsaIxyJeHOttr5IvhODWiyDcX+3UacBsLmXJXoTVyihSNEOAVJa7ZDEIYpa2rc7NAs5z6z4G5F7lUM1KdotSCKZKeTgOMQ2Z4qLQAs6+4Vyz089pbcMYrRb9mR/vwBdoUeFoHDACpBP3fYJnKH68rTFZSuTYL0lFCFxgff5bERzUYhEod3kqlamsRlchNcDM40jHPqi8lolU3UacrqXLnaYtVM2hey20XCawEAAQA= lyndon@unknown]
+INFO         | Monitoring duration of emulator setup.
+WARNING      | The emulator now requires a signed jwt token for gRPC access! Use the -grpc flag if you really want an open unprotected grpc port
+INFO         | Using security allow list from: /Users/lyndon/Library/Android/sdk/emulator/lib/emulator_access.json
+WARNING      | *** Basic token auth should only be used by android-studio ***
+INFO         | The active JSON Web Key Sets can be found here: /Users/lyndon/Library/Caches/TemporaryItems/avd/running/21336/jwks/eece1186-8ae7-4503-8956-4c029af55f64/active.jwk
+INFO         | Scanning /Users/lyndon/Library/Caches/TemporaryItems/avd/running/21336/jwks/eece1186-8ae7-4503-8956-4c029af55f64 for jwk keys.
+INFO         | Started GRPC server at 127.0.0.1:8554, security: Local, auth: +token
+INFO         | Advertising in: /Users/lyndon/Library/Caches/TemporaryItems/avd/running/pid_21336.ini
+INFO         | Setting display: 0 configuration to: 1080x2400, dpi: 420x420 
+INFO         | setDisplayActiveConfig 0
+INFO         | Loading snapshot 'default_boot'...
+WARNING      | Device 'encrypt' does not have the requested snapshot 'default_boot'
+
+WARNING      | Failed to load snapshot 'default_boot'
+USER_WARNING | The saved emulator state could not be loaded, performing a cold boot.
+INFO         | Activated packet streamer for bluetooth emulation
+INFO         | Boot completed in 9704 ms
+INFO         | Increasing screen off timeout, logcat buffer size to 2M.
+INFO         | Created VkInstance:0x13162de00 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1083.68,128.683 gbl=1083.68,128.683 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1083.68,-128.683 last=-1083.68,-128.683 Δ 1083.68,128.683) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1090.73,861.975 gbl=1090.73,861.975 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1090.73,-861.975 last=-1090.73,-861.975 Δ 1090.73,861.975) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1112.5,854.438 gbl=1112.5,854.438 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1112.5,-854.438 last=-1112.5,-854.438 Δ 1112.5,854.438) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1057.6,786.543 gbl=1057.6,786.543 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1057.6,-786.543 last=-1057.6,-786.543 Δ 1057.6,786.543) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1236.95,746.728 gbl=1236.95,746.728 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1236.95,-746.728 last=-1236.95,-746.728 Δ 1236.95,746.728) : no target window ((null):0, (null))
+
+INFO         | Created VkInstance:0x1358eea00 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1183.79,805.718 gbl=1183.79,805.718 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1183.79,-805.718 last=-1183.79,-805.718 Δ 1183.79,805.718) : no target window ((null):0, (null))
+
+INFO         | Created VkInstance:0x3dc20e400 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1366.78,661.416 gbl=1366.78,661.416 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1366.78,-661.416 last=-1366.78,-661.416 Δ 1366.78,661.416) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=2 ts=0 pos=0,0 scn=1178.99,530.137 gbl=1178.99,530.137 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1178.99,-530.137 last=-1178.99,-530.137 Δ 1178.99,530.137) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=2 ts=0 pos=0,0 scn=1509.47,454.229 gbl=1509.47,454.229 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1509.47,-454.229 last=-1509.47,-454.229 Δ 1509.47,454.229) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=3 ts=0 pos=0,0 scn=1323.47,320.813 gbl=1323.47,320.813 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1323.47,-320.813 last=-1323.47,-320.813 Δ 1323.47,320.813) : no target window ((null):0, (null))
+
+INFO         | Boot completed in 31071 ms
+INFO         | Increasing screen off timeout, logcat buffer size to 2M.
+INFO         | Created VkInstance:0x3e6f7ce00 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Warning: skipping QEventPoint(id=3 ts=0 pos=0,0 scn=1256.04,865.83 gbl=1256.04,865.83 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1256.04,-865.83 last=-1256.04,-865.83 Δ 1256.04,865.83) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=4 ts=0 pos=0,0 scn=1428.99,1001.02 gbl=1428.99,1001.02 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1428.99,-1001.02 last=-1428.99,-1001.02 Δ 1428.99,1001.02) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1236.48,475.436 gbl=1236.48,475.436 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1236.48,-475.436 last=-1236.48,-475.436 Δ 1236.48,475.436) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1234.02,275.729 gbl=1234.02,275.729 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1234.02,-275.729 last=-1234.02,-275.729 Δ 1234.02,275.729) : no target window ((null):0, (null))
+
+INFO         | Created VkInstance:0x3e7860a00 for application: engine:.
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1229.15,686.768 gbl=1229.15,686.768 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1229.15,-686.768 last=-1229.15,-686.768 Δ 1229.15,686.768) : no target window ((null):0, (null))
+
+INFO         | Created VkInstance:0x3e4ee2000 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Created VkInstance:0x3e29da200 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Created VkInstance:0x3e2b51200 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Created VkInstance:0x3e2c6ee00 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Created VkInstance:0x3e2dabc00 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Boot completed in 25216 ms
+INFO         | Increasing screen off timeout, logcat buffer size to 2M.
+INFO         | Created VkInstance:0x3e7acb600 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Created VkInstance:0x11b39ea00 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Created VkInstance:0x1317b3600 for application:Chromium engine:.
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+../../third_party/SwiftShader/src/Vulkan/VkPhysicalDevice.cpp:462 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1257.93,616.467 gbl=1257.93,616.467 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1257.93,-616.467 last=-1257.93,-616.467 Δ 1257.93,616.467) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1013.34,858.966 gbl=1013.34,858.966 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1013.34,-858.966 last=-1013.34,-858.966 Δ 1013.34,858.966) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1156.99,400.018 gbl=1156.99,400.018 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1156.99,-400.018 last=-1156.99,-400.018 Δ 1156.99,400.018) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1124.68,668.863 gbl=1124.68,668.863 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1124.68,-668.863 last=-1124.68,-668.863 Δ 1124.68,668.863) : no target window ((null):0, (null))
+
+INFO         | Warning: skipping QEventPoint(id=1 ts=0 pos=0,0 scn=1284.35,880.051 gbl=1284.35,880.051 Released ellipse=(1x1 ∡ 0) vel=0,0 press=-1284.35,-880.051 last=-1284.35,-880.051 Δ 1284.35,880.051) : no target window ((null):0, (null))
+
+INFO         | Wait for emulator (pid 21336) 20 seconds to shutdown gracefully before kill;you can set environment variable ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL(in seconds) to change the default value (20 seconds)
+
+INFO         | Wait for emulator (pid 21336) 20 seconds to shutdown gracefully before kill;you can set environment variable ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL(in seconds) to change the default value (20 seconds)
+
+WARNING      | Not saving state: current state does not support snapshotting
+INFO         | Deleting snapshot default_boot
+ERROR        | Failed to restore previous context: 12297

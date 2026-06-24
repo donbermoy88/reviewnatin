@@ -1,0 +1,7 @@
+Starting: Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin:///... pkg=ph.reviewnatin.app }
+Status: ok
+LaunchState: COLD
+Activity: ph.reviewnatin.app/.MainActivity
+TotalTime: 686
+WaitTime: 687
+Complete

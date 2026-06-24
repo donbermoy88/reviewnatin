@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { execSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { adbDevice as resolveAdbDevice } from './adb-device.mjs';
 import { REPO_ROOT } from './supabase-env.mjs';
 
 const MAESTRO_PACKAGES = ['dev.mobile.maestro', 'dev.mobile.maestro.test'];
@@ -76,11 +77,8 @@ export function ensureMaestroCli() {
   return existsSync(path) ? path : 'maestro';
 }
 
-export function adbDevice() {
-  const out = runCapture('adb devices');
-  const line = out.split('\n').find((l) => l.includes('emulator') && l.includes('device'));
-  if (!line) throw new Error('No Android emulator online — start an AVD first');
-  return line.split('\t')[0].trim();
+export function adbDevice(preferredSerial) {
+  return resolveAdbDevice(preferredSerial);
 }
 
 /** Cold-start verify-email deeplink must land on OTP screen, not signup. */

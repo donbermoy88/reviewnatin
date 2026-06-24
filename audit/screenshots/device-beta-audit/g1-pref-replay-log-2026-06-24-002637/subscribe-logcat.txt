@@ -1,0 +1,805 @@
+--------- beginning of system
+06-24 00:26:35.455 11605 11605 D ActivityThread: Package [ph.reviewnatin.app] reported as REPLACED, but missing application info. Assuming REMOVED.
+--------- beginning of main
+06-24 00:26:35.466 11314 11314 I Finsky  : [2] akoj - Received: android.intent.action.PACKAGE_ADDED, [T3hetVCtQml0tjS-ZO5_Ix2WfTHkafaJQAaPxRHggOo]
+06-24 00:26:35.469 11314 11314 I Finsky  : [2] DTU: Received onPackageAdded, replacing: true
+06-24 00:26:35.475 11543 12758 I Finsky:background: [115] Wrote row to frosting DB: 497
+06-24 00:26:35.475 11543 11543 I Finsky:background: [2] aknz - Received: android.intent.action.PACKAGE_ADDED, [T3hetVCtQml0tjS-ZO5_Ix2WfTHkafaJQAaPxRHggOo]
+06-24 00:26:35.476 11543 11543 I Finsky:background: [2] aknz - Deduping intent android.intent.action.PACKAGE_ADDED
+06-24 00:26:35.476   565   760 D ShortcutService: Package ph.reviewnatin.app has 0 manifest shortcut(s), and 0 share target(s)
+06-24 00:26:35.478 11543 11543 I Finsky:background: [2] aknz - Received: android.intent.action.PACKAGE_ADDED, [T3hetVCtQml0tjS-ZO5_Ix2WfTHkafaJQAaPxRHggOo]
+06-24 00:26:35.481 11543 11543 I Finsky:background: [2] aknz - Deduping intent android.intent.action.PACKAGE_ADDED
+06-24 00:26:35.481 11543 11591 I Finsky:background: [53] IQ:PSL: skipping onPackageRemoved(replacing=true) for untracked package=ph.reviewnatin.app
+06-24 00:26:35.481 11543 11594 I Finsky:background: [55] RECEIVER_PACKAGE_MONITOR_BACKGROUND#logWorkEndAndFinishGoAsync: SUCCESS
+06-24 00:26:35.482 12735 12735 D nativeloader: Configuring clns-9 for other apk /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/lib/arm64:/data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.google.android.gms
+06-24 00:26:35.484 11543 12758 I Finsky:background: [115] Wrote row to frosting DB: 498
+06-24 00:26:35.490   565  1848 W JobInfo : Job 'com.google.android.providers.media.module/com.android.providers.media.MediaService#-300' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+06-24 00:26:35.492 11314 12487 I Finsky  : [145] SCH: Received scheduling request: Id: 12-1, Constraints: [{ L: 15000, D: 86400000, C: CHARGING_NONE, I: IDLE_NONE, N: NET_ANY, B: BATTERY_ANY }]
+06-24 00:26:35.498 11384 12775 I Blockstore: [PackageIntentOperation] Checking IS_RESTORE extra. [CONTEXT service_id=258 ]
+06-24 00:26:35.498 11314 12487 I Finsky  : [145] SCH: Received scheduling request: Id: 12-1, Constraints: [{ L: 15000, D: 86400000, C: CHARGING_NONE, I: IDLE_NONE, N: NET_ANY, B: BATTERY_ANY }]
+06-24 00:26:35.499 11543 12758 I Finsky:background: [115] Wrote row to frosting DB: 499
+06-24 00:26:35.500 11384 12704 I AppBackupStateCleanupIO: Backup state cleanup on uninstall is disabled. [CONTEXT service_id=229 ]
+06-24 00:26:35.503 11314 11314 I Finsky  : [2] akoj - Received: android.intent.action.PACKAGE_ADDED, [T3hetVCtQml0tjS-ZO5_Ix2WfTHkafaJQAaPxRHggOo]
+06-24 00:26:35.505 11384 12781 I NearbyDiscovery: (REDACTED) processGrantSlicePermission: %s
+06-24 00:26:35.512   565  1039 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+06-24 00:26:35.515  1292  1785 I MediaProvider: Begin Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+06-24 00:26:35.516  1292  1785 D MediaProvider: Deleted 0 Android/media items belonging to ph.reviewnatin.app on /data/user/0/com.google.android.providers.media.module/databases/external.db
+06-24 00:26:35.518 11543 12758 I Finsky:background: [115] Wrote row to frosting DB: 500
+06-24 00:26:35.521 11314 11314 I Finsky  : [2] akoj - Deduping intent android.intent.action.PACKAGE_ADDED
+06-24 00:26:35.522 11314 11314 I Finsky  : [2] akoj - Received: android.intent.action.PACKAGE_ADDED, [T3hetVCtQml0tjS-ZO5_Ix2WfTHkafaJQAaPxRHggOo]
+06-24 00:26:35.524  1292  1785 D MediaGrants: Removed 0 media_grants for 0 user for [ph.reviewnatin.app, ph.reviewnatin.app]. Reason: Package orphaned
+06-24 00:26:35.525  1292  1785 I MediaProvider: End Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+06-24 00:26:35.526 11384 12704 I AppBackupStateCleanupIO: Backup state cleanup on uninstall is disabled. [CONTEXT service_id=229 ]
+06-24 00:26:35.527 11384 12704 I FraudProtectUtils: (REDACTED) Latest bank app list size: %d, %s isBankApp: %b
+06-24 00:26:35.527 11384 12704 I PackageInstalledIntentO: (REDACTED) Package %s is not a bank app. Skipping updates.
+06-24 00:26:35.528 11314 11314 I Finsky  : [2] akoj - Deduping intent android.intent.action.PACKAGE_ADDED
+06-24 00:26:35.528 11314 11348 I Finsky  : [48] RECEIVER_PACKAGE_MONITOR#logWorkEndAndFinishGoAsync: SUCCESS
+06-24 00:26:35.531 11384 12733 I Icing   : doRemovePackageData ph.reviewnatin.app
+06-24 00:26:35.534   565  1081 V SafetySourceDataValidat: Package: com.android.vending has expected signature
+06-24 00:26:35.534   565  1081 V SafetySourceDataValidat: Package: com.android.vending has expected signature
+06-24 00:26:35.535 11543 11594 I Finsky:background: [55] RECEIVER_ENGAGE_PACKAGE_CHANGED#logWorkEndAndFinishGoAsync: SUCCESS
+06-24 00:26:35.537   565   760 D ShortcutService: Saving package item com.google.android.as to /data/system_ce/0/shortcut_service/launchers/com.google.android.as0.xml
+06-24 00:26:35.537 11461 11461 D PersistedStoragePackageUninstalledReceiver: Received android.intent.action.PACKAGE_DATA_CLEARED for ph.reviewnatin.app for u0
+06-24 00:26:35.537 11543 12758 I Finsky:background: [115] Wrote row to frosting DB: 501
+06-24 00:26:35.542   565   760 D ShortcutService: Saving package item com.google.android.apps.nexuslauncher to /data/system_ce/0/shortcut_service/launchers/com.google.android.apps.nexuslauncher0.xml
+06-24 00:26:35.549 11543 11543 I Finsky:background: [2] Memory trim requested to level 40
+06-24 00:26:35.549 11314 12482 D TrafficStats: tagSocket(133) with statsTag=0xffffffff, statsUid=-1
+06-24 00:26:35.552 12735 12735 V GraphicsEnvironment: Currently set values for:
+06-24 00:26:35.552 12735 12735 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+06-24 00:26:35.552 12735 12735 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+06-24 00:26:35.552 12735 12735 V GraphicsEnvironment: Global.Settings values are invalid: number of packages: 0, number of values: 0
+06-24 00:26:35.552 12735 12735 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+06-24 00:26:35.559 11384 12778 W SQLiteLog: (28) double-quoted string literal: "ph.reviewnatin.app"
+06-24 00:26:35.561   565   760 D ShortcutService: Saving package item com.android.systemui to /data/system_ce/0/shortcut_service/launchers/com.android.systemui0.xml
+06-24 00:26:35.566  1310  1310 I GsaVoiceInteractionSrv: (REDACTED) O received %s
+06-24 00:26:35.566  1021 12702 I Fitness : (REDACTED) FitCleanupIntentOperation received Intent %s
+06-24 00:26:35.566 11314 11314 I Finsky  : [2] Memory trim requested to level 40
+06-24 00:26:35.566 11314 11314 I Finsky  : [2] Flushing in-memory image cache
+06-24 00:26:35.572  1310  1310 I GsaVoiceInteractionSrv: (REDACTED) O received %s
+06-24 00:26:35.582  1310  1310 I GsaVoiceInteractionSrv: (REDACTED) O received %s
+06-24 00:26:35.602 10471 10505 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of buoi@bebd1b6
+06-24 00:26:35.604  1021 12780 I ProximityAuth: [RecentAppsMediator] Package added: (user=UserHandle{0}) ph.reviewnatin.app
+06-24 00:26:35.605 11384 12787 I Auth    : (REDACTED) [SupervisedAccountIntentOperation] onHandleIntent: %s
+06-24 00:26:35.613 11384 12704 W AppInstallOperation: FDL Migration::InstallIntentOperation by FDL Module [CONTEXT service_id=77 ]
+06-24 00:26:35.614 11384 12704 I FraudProtectUtils: (REDACTED) Latest bank app list size: %d, %s isBankApp: %b
+06-24 00:26:35.615 11384 12704 I PackageInstalledIntentO: (REDACTED) Package %s is not a bank app. Skipping updates.
+06-24 00:26:35.616  1021 12799 I Fitness : (REDACTED) FitCleanupIntentOperation received Intent %s
+06-24 00:26:35.618 11384 12787 I NearbyDiscovery: (REDACTED) processGrantSlicePermission: %s
+06-24 00:26:35.654 11384 11511 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=AppsCorpus serviceId=36
+06-24 00:26:35.663 11314 11355 I Finsky  : [55] WM::SCH: Logging work initialize for 12-1
+06-24 00:26:35.675 11328 11656 W SearchServiceCore: Abort, client detached.
+06-24 00:26:35.675 11328 11656 W SearchServiceCore: Abort, client detached.
+06-24 00:26:35.679 11314 11359 I Finsky  : [59] SCH: Scheduling phonesky job Id: 12-1, CT: 1782231995492, Constraints: [{ L: 15000, D: 86400000, C: CHARGING_NONE, I: IDLE_NONE, N: NET_ANY, B: BATTERY_ANY }]
+06-24 00:26:35.680 11328 11656 W SearchServiceCore: Abort, client detached.
+06-24 00:26:35.681 11314 11318 W android.vending: Missing inline cache for java.lang.Object bech.apply(java.lang.Object)
+06-24 00:26:35.685 11314 11362 I Finsky  : [62] SCH: Scheduling 1 system job(s)
+06-24 00:26:35.686 11314 11362 I Finsky  : [62] SCH: Scheduling system job Id: 9610, L: 14807, D: 63723070, C: false, I: false, N: 1
+06-24 00:26:35.691 11384 11384 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+06-24 00:26:35.691 11384 11384 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+06-24 00:26:35.696 11314 11354 I Finsky  : [54] [ContentSync] finished, scheduled=true
+06-24 00:26:35.699 11384 11438 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=30
+06-24 00:26:35.699 12735 12735 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+06-24 00:26:35.699 12735 12735 I DynamiteModule: Considering local module com.google.android.gms.providerinstaller.dynamite:1 and remote module com.google.android.gms.providerinstaller.dynamite:0
+06-24 00:26:35.699 12735 12735 I DynamiteModule: Selected local version of com.google.android.gms.providerinstaller.dynamite
+06-24 00:26:35.701  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.704 11384 12733 I Icing   : Usage reports ok 1, Failed Usage reports 0, indexed 0, rejected 0
+06-24 00:26:35.710  1021  4423 W PhBaseOp: Phenotype API error. Event: # jhgv@36041081, EventCode: COMMIT_CONFIG [CONTEXT service_id=51 ]
+06-24 00:26:35.710  1021  4423 W PhBaseOp: fdsi: 29547: Stale snapshot for com.google.android.gms(new configuration available)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at fdul.d(:com.google.android.gms@262031035@26.20.31 (260400-919905943):63)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at fdul.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):44)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at fduk.i(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):34)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.710  1021  4423 W PhBaseOp: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29547 [CONTEXT service_id=51 ]
+06-24 00:26:35.710  1021  4423 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms(new configuration available), resolution=null}]
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):64)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.710  1021  4423 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: Phenotype API error. Event: # jhgv@5f56e2c8, EventCode: COMMIT_CONFIG [CONTEXT service_id=51 ]
+06-24 00:26:35.713  1021  5763 W PhBaseOp: fdsi: 29547: Stale snapshot for com.google.android.gms.gmsplatform#com.google.android.gms(new configuration available)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at fdul.d(:com.google.android.gms@262031035@26.20.31 (260400-919905943):63)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at fdul.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):44)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at fduk.i(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):34)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):85)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.713  1021  5763 W PhBaseOp: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29547 [CONTEXT service_id=51 ]
+06-24 00:26:35.713  1021  5763 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms.gmsplatform#com.google.android.gms(new configuration available), resolution=null}]
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):64)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):85)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.713  1021  5763 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.715 12735 12735 D nativeloader: Load /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/base.apk!/lib/arm64-v8a/libconscrypt_gmscore_jni.so using ns clns-9 from class loader (caller=/data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/base.apk): ok
+06-24 00:26:35.715 12735 12735 V NativeCrypto: Registering com/google/android/gms/org/conscrypt/NativeCrypto's 337 native methods...
+06-24 00:26:35.722  1021  5763 W PhBaseOp: Phenotype API error. Event: # jhgv@412a4f4e, EventCode: COMMIT_CONFIG [CONTEXT service_id=51 ]
+06-24 00:26:35.722  1021  5763 W PhBaseOp: fdsi: 29547: Stale snapshot for com.google.android.gms.fido(new configuration available)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at fdul.d(:com.google.android.gms@262031035@26.20.31 (260400-919905943):63)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at fdul.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):44)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at fduk.i(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):34)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.722  1021  5763 W PhBaseOp: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29547 [CONTEXT service_id=51 ]
+06-24 00:26:35.722  1021  5763 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms.fido(new configuration available), resolution=null}]
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):64)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.722  1021  5763 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: Phenotype API error. Event: # jhgv@28293837, EventCode: COMMIT_CONFIG [CONTEXT service_id=51 ]
+06-24 00:26:35.723  1021  4423 W PhBaseOp: fdsi: 29547: Stale snapshot for com.google.android.gms.providerinstaller#com.google.android.gms(new configuration available)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at fdul.d(:com.google.android.gms@262031035@26.20.31 (260400-919905943):63)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at fdul.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):44)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at fduk.i(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):34)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):85)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.723  1021  4423 W PhBaseOp: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29547 [CONTEXT service_id=51 ]
+06-24 00:26:35.723  1021  4423 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms.providerinstaller#com.google.android.gms(new configuration available), resolution=null}]
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):64)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):85)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.723  1021  4423 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.723  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.724  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.724  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.725  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.725 12735 12735 I ProviderInstaller: Installed default security provider GmsCore_OpenSSL
+06-24 00:26:35.725  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.726  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.727  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.728  1306  1842 I AiAiTextClassifier: [VisualCortexAdapter]: provideRegistration: Registered Prominent Screen Entities for updates.
+06-24 00:26:35.729 11384 12733 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+06-24 00:26:35.729 12735 12814 I Watchcat: Started
+06-24 00:26:35.732 12735 12814 I GMS_MM_Logger: (REDACTED) Start time: %s
+06-24 00:26:35.733 12735 12814 I GMS_MM_Logger: Started.
+06-24 00:26:35.737 11384 12733 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+06-24 00:26:35.743 11384 12733 I Icing   : Indexing done com.google.android.gms-apps
+06-24 00:26:35.751  1021  5763 W PhBaseOp: Phenotype API error. Event: # jhgv@b894b09f, EventCode: COMMIT_CONFIG [CONTEXT service_id=51 ]
+06-24 00:26:35.751  1021  5763 W PhBaseOp: fdsi: 29547: Stale snapshot for com.google.android.gms.gmscompliance(new configuration available)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at fdul.d(:com.google.android.gms@262031035@26.20.31 (260400-919905943):63)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at fdul.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):44)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at fduk.i(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):34)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.751  1021  5763 W PhBaseOp: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29547 [CONTEXT service_id=51 ]
+06-24 00:26:35.752  1021  5763 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms.gmscompliance(new configuration available), resolution=null}]
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):64)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.752  1021  5763 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: Phenotype API error. Event: # jhgv@d1bf2498, EventCode: COMMIT_CONFIG [CONTEXT service_id=51 ]
+06-24 00:26:35.767  1021  5763 W PhBaseOp: fdsi: 29547: Stale snapshot for com.google.android.gms.droidguard(new configuration available)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at fdul.d(:com.google.android.gms@262031035@26.20.31 (260400-919905943):63)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at fdul.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):44)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at fduk.i(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):34)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.767  1021  5763 W PhBaseOp: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29547 [CONTEXT service_id=51 ]
+06-24 00:26:35.767  1021  5763 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms.droidguard(new configuration available), resolution=null}]
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):64)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.767  1021  5763 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: Phenotype API error. Event: # jhgv@100e4660, EventCode: COMMIT_CONFIG [CONTEXT service_id=51 ]
+06-24 00:26:35.783  1021  5763 W PhBaseOp: fdsi: 29547: Stale snapshot for com.google.android.gms.gmslogger#com.google.android.gms(new configuration available)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at fdul.d(:com.google.android.gms@262031035@26.20.31 (260400-919905943):63)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at fdul.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):44)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at fduk.i(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):34)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.783  1021  5763 W PhBaseOp: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29547 [CONTEXT service_id=51 ]
+06-24 00:26:35.783  1021  5763 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms.gmslogger#com.google.android.gms(new configuration available), resolution=null}]
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):64)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.783  1021  5763 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.795 12735 12747 W TracingHelper: No RequestContext found in the trace or trace not available. [CONTEXT service_id=259 ratelimit_count=1410065408 ]
+06-24 00:26:35.796 12735 12747 W TracingHelper: Mismatched RequestContext found for module DROIDGUARD. Module id from RequestContext is MODULEID_UNKNOWN [CONTEXT service_id=259 ratelimit_count=1410065408 ]
+06-24 00:26:35.799  1021  1021 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.libs.gmscorelogger.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }
+06-24 00:26:35.823 12735 12747 D nativeloader: Configuring clns-10 for other apk . target_sdk_version=37, uses_libraries=ALL, library_path=, permitted_path=/data:/mnt/expand
+06-24 00:26:35.823 12735 12747 D nativeloader: Load /data/user/0/com.google.android.gms/app_dg_cache/10FF5D5C646CC9E2F04BD9D73A072BD012EF1A7A/the.apk!/libdB445D3AC8F1C.so using isolated ns clns-10 (caller=/data/user/0/com.google.android.gms/app_dg_cache/10FF5D5C646CC9E2F04BD9D73A072BD012EF1A7A/the.apk): ok
+06-24 00:26:35.837   565  1444 D FileUtils: Rounded bytes from 2070597632 to 4000000000
+06-24 00:26:35.838 12735 12747 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+06-24 00:26:35.838 12735 12747 W libc    : Access denied finding property "service.adb.tls.port"
+06-24 00:26:35.835 12735 12735 W binder:12735_2: type=1400 audit(0.0:127): avc:  denied  { read } for  name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=305 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+06-24 00:26:35.835 12735 12735 W binder:12735_2: type=1400 audit(0.0:128): avc:  denied  { read } for  name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=50 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+06-24 00:26:35.848 11384 11384 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+06-24 00:26:35.848 11384 11384 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+06-24 00:26:35.850  1021  5763 W PhBaseOp: Phenotype API error. Event: # jhgv@b43994ac, EventCode: COMMIT_CONFIG [CONTEXT service_id=51 ]
+06-24 00:26:35.850  1021  5763 W PhBaseOp: fdsi: 29547: Stale snapshot for com.google.android.gms.checkin(new configuration available)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at fdul.d(:com.google.android.gms@262031035@26.20.31 (260400-919905943):63)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at fdul.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):44)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at fduk.i(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):34)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.850  1021  5763 W PhBaseOp: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29547 [CONTEXT service_id=51 ]
+06-24 00:26:35.850  1021  5763 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms.checkin(new configuration available), resolution=null}]
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at fdug.h(:com.google.android.gms@262031035@26.20.31 (260400-919905943):64)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at fdug.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):16)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at czxw.fH(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at czyh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):121)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at hdna.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):23)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:35.850  1021  5763 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:35.850 11384 11584 I Checkin : [CheckinApiChimeraService] onGetService
+06-24 00:26:35.856 12735 12747 D TrafficStats: tagSocket(113) with statsTag=0x1809, statsUid=-1
+06-24 00:26:35.879  1021 12527 W GmsUrlRequestImpl: [https://android.googleapis.com/auth/devicekey] Content-Type header is overwritten.
+06-24 00:26:36.099 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/YouTube/YouTube.apk' with 1 weak references
+06-24 00:26:36.099 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/DisplayCutoutEmulationCorner/DisplayCutoutEmulationCornerOverlay.apk' with 1 weak references
+06-24 00:26:36.099 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.extservices/priv-app/GoogleExtServices@350820300/GoogleExtServices.apk' with 1 weak references
+06-24 00:26:36.099 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/DisplayCutoutEmulationDouble/DisplayCutoutEmulationDoubleOverlay.apk' with 1 weak references
+06-24 00:26:36.099 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/TelephonyProvider/TelephonyProvider.apk' with 1 weak references
+06-24 00:26:36.099 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '/product/overlay/TelephonyProvider__sdk_gphone64_arm64__auto_generated_rro_product.apk' with 1 weak references
+06-24 00:26:36.099 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/DynamicSystemInstallationService/DynamicSystemInstallationService.apk' with 1 weak references
+06-24 00:26:36.099 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/priv-app/Velvet/Velvet.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/CalendarProvider/CalendarProvider.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/priv-app/GoogleOneTimeInitializer/GoogleOneTimeInitializer.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/GoogleExtShared/GoogleExtShared.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/ExternalStorageProvider/ExternalStorageProvider.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/HTMLViewer/HTMLViewer.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/CompanionDeviceManager/CompanionDeviceManager.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/DownloadProvider/DownloadProvider.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/priv-app/PrebuiltBugle/PrebuiltBugle.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/SoundPickerPrebuilt/SoundPickerPrebuilt.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.mediaprovider/priv-app/MediaProviderGoogle@350820300/MediaProviderGoogle.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/priv-app/SafetyHubPrebuilt/SafetyHubPrebuilt.apk' with 1 weak references
+06-24 00:26:36.100 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/DownloadProviderUi/DownloadProviderUi.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.wifi/app/OsuLoginGoogle@350820300/OsuLoginGoogle.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ABktms8-qj1sBENMMOZWdQ==/com.android.vending-PV57SVo-q7jGmvBy-90UBw==/base.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ABktms8-qj1sBENMMOZWdQ==/com.android.vending-PV57SVo-q7jGmvBy-90UBw==/split_config.arm64_v8a.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ABktms8-qj1sBENMMOZWdQ==/com.android.vending-PV57SVo-q7jGmvBy-90UBw==/split_config.en.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ABktms8-qj1sBENMMOZWdQ==/com.android.vending-PV57SVo-q7jGmvBy-90UBw==/split_phonesky_data_loader.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ABktms8-qj1sBENMMOZWdQ==/com.android.vending-PV57SVo-q7jGmvBy-90UBw==/split_phonesky_data_loader.config.arm64_v8a.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ABktms8-qj1sBENMMOZWdQ==/com.android.vending-PV57SVo-q7jGmvBy-90UBw==/split_phonesky_webrtc_native_lib.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ABktms8-qj1sBENMMOZWdQ==/com.android.vending-PV57SVo-q7jGmvBy-90UBw==/split_phonesky_webrtc_native_lib.config.arm64_v8a.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/PacProcessor/PacProcessor.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/SimAppDialog/SimAppDialog.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '/product/overlay/SimAppDialog__sdk_gphone64_arm64__auto_generated_rro_product.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.adservices/priv-app/AdServicesApkGoogle@350820260/AdServicesApkGoogle.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/DisplayCutoutEmulationHole/DisplayCutoutEmulationHoleOverlay.apk' with 1 weak references
+06-24 00:26:36.101 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/DisplayCutoutEmulationTall/DisplayCutoutEmulationTallOverlay.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/CertInstaller/CertInstaller.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/talkback/talkback.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '/vendor/overlay/EmulatorTalkBackOverlay/EmulatorTalkBackOverlay.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/NavigationBarMode3Button/NavigationBarMode3ButtonOverlay.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/Camera2/Camera2.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/EasterEgg/EasterEgg.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/MtpService/MtpService.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.nfcservices/priv-app/NfcNciApexGoogle@AE3A.240806.036/NfcNciApexGoogle.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/Stk/Stk.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/PrebuiltDeskClockGoogle/PrebuiltDeskClockGoogle.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/NavigationBarMode2Button/NavigationBarMode2ButtonOverlay.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/priv-app/DevicePersonalizationPrebuiltPixel2021-aiai_20240329.00_RC16/DevicePersonalizationPrebuiltPixel2021-aiai_20240329.00_RC16.apk' with 1 weak references
+06-24 00:26:36.102 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/PrebuiltGmail/PrebuiltGmail.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.permission/priv-app/GooglePermissionController@350820360/GooglePermissionController.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '/product/overlay/GooglePermissionControllerOverlay.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.btservices/app/BluetoothGoogle@342010060/BluetoothGoogle.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/SettingsProvider/SettingsProvider.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '/product/overlay/LargeScreenSettingsProviderOverlay.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '/product/overlay/SettingsProvider__sdk_gphone64_arm64__auto_generated_rro_product.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/PrintSpooler/PrintSpooler.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/BasicDreams/BasicDreams.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ffmdeDqm0vKkYFXyDml6tQ==/com.google.android.as.oss-q_RzmSdRoMa4o0iuy3T1pQ==/base.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ffmdeDqm0vKkYFXyDml6tQ==/com.google.android.as.oss-q_RzmSdRoMa4o0iuy3T1pQ==/split_config.arm64_v8a.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ffmdeDqm0vKkYFXyDml6tQ==/com.google.android.as.oss-q_RzmSdRoMa4o0iuy3T1pQ==/split_config.en.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~ffmdeDqm0vKkYFXyDml6tQ==/com.google.android.as.oss-q_RzmSdRoMa4o0iuy3T1pQ==/split_config.xhdpi.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/InputDevices/InputDevices.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.devicelock/priv-app/DeviceLockControllerGoogle@AE3A.240806.036/DeviceLockControllerGoogle.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/priv-app/GoogleDialer/GoogleDialer.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/BuiltInPrintService/BuiltInPrintService.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '/product/overlay/BuiltInPrintService__sdk_gphone64_arm64__auto_generated_rro_product.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/CaptivePortalLoginGoogle/CaptivePortalLoginGoogle.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/MusicFX/MusicFX.apk' with 1 weak references
+06-24 00:26:36.103 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/Drive/Drive.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/Maps/Maps.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/ModuleMetadataGoogle/ModuleMetadataGoogle.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/DisplayCutoutEmulationEmu01/DisplayCutoutEmulationEmu01Overlay.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system_ext/priv-app/AvatarPickerGoogle/AvatarPickerGoogle.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/MarkupGoogle_v2/MarkupGoogle_v2.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/NetworkStackGoogle/NetworkStackGoogle.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.rkpd/priv-app/rkpdapp.google@350820300/rkpdapp.google.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/GoogleContacts/GoogleContacts.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/Telecom/Telecom.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '/product/overlay/Telecom__sdk_gphone64_arm64__auto_generated_rro_product.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/KeyChain/KeyChain.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~GpWfNakbUOegIiyzUUfDCw==/com.android.chrome-okk8VB4ORxonQwOfRO-cWQ==/Chrome.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~oHwg9-EzBUJhldO07dqXKw==/com.google.android.trichromelibrary_636771932-e9t3kgYKT6fVPEkLoaXxLg==/TrichromeLibrary.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/PixelThemesStub/PixelThemesStub.apk' with 1 weak references
+06-24 00:26:36.104 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system_ext/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/TagGoogle/TagGoogle.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/GoogleTTS/GoogleTTS.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/CallLogBackup/CallLogBackup.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~aROyIvn-Ci_VWlGVcu2B0Q==/com.google.android.partnersetup-QJMeyjsKq8dby3gQWCWeeA==/base.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~aROyIvn-Ci_VWlGVcu2B0Q==/com.google.android.partnersetup-QJMeyjsKq8dby3gQWCWeeA==/split_config.en.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~aROyIvn-Ci_VWlGVcu2B0Q==/com.google.android.partnersetup-QJMeyjsKq8dby3gQWCWeeA==/split_config.xhdpi.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/CameraExtensionsProxy/CameraExtensionsProxy.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/NexusWallpapersStubPrebuilt2018/NexusWallpapersStubPrebuilt2018.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system_ext/priv-app/NexusLauncherRelease/NexusLauncherRelease.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/app/CarrierDefaultApp/CarrierDefaultApp.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/CredentialManager/CredentialManager.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/FontNotoSerifSource/FontNotoSerifSourceOverlay.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/DeviceAsWebcam/DeviceAsWebcam.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/ProxyHandler/ProxyHandler.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /apex/com.android.permission/priv-app/GoogleSafetyCenterResources@350820360/GoogleSafetyCenterResources.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /product/overlay/DisplayCutoutEmulationWaterfall/DisplayCutoutEmulationWaterfallOverlay.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/IntentResolver/IntentResolver.apk' with 1 weak references
+06-24 00:26:36.105 11499 11507 W .apps.wellbeing: ApkAssets: Deleting an ApkAssets object '<empty> and /system/priv-app/E2eeContactKeysProvider/E2eeContactKeysProvider.apk' with 1 weak references
+06-24 00:26:36.183  1079  1402 D EGL_emulation: app_time_stats: avg=65.03ms min=9.65ms max=1412.74ms count=28
+06-24 00:26:37.414   565  1436 D WifiNl80211Manager: Scan result ready event
+06-24 00:26:37.414   565  1436 D WifiNative: Scan result ready event
+06-24 00:26:37.417   565   704 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+06-24 00:26:37.536   565  1436 W ActivityTaskManager: callingPackage for (uid=2000, pid=12828) has no WPC
+06-24 00:26:37.545   565  1436 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE
+06-24 00:26:37.545   565  1436 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE
+06-24 00:26:37.545   565  1436 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-24 00:26:37.553   565  1436 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@7e25c56c does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-24 00:26:37.553   565  1436 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-24 00:26:37.553   565  1436 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-24 00:26:37.581   799   836 V WindowManagerShell: Transition requested (#95): android.os.BinderProxy@7d31d1a TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=66 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity } baseActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} topActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} origActivity=null realActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} numActivities=1 lastActiveTime=2728925 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@3dd804b} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{768aa28 ph.reviewnatin.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=768 topActivityLetterboxHeight=1280 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 95 }
+06-24 00:26:37.583   565  1436 I ActivityTaskManager: START u0 {act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+06-24 00:26:37.591  1079  1079 W SplitSelectStateCtor: Missing session instanceIds
+06-24 00:26:37.591  1079  1079 D StatsLog: LAUNCHER_SPLIT_SELECTION_EXIT_INTERRUPTED
+06-24 00:26:37.595   799   836 D WindowManagerShell: setLauncherKeepClearAreaHeight: visible=false, height=350
+06-24 00:26:37.598   414   414 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-24 00:26:37.610  1079  1079 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=66, baseIntent=Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity }
+06-24 00:26:37.616   565   591 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@7e25c56c does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-24 00:26:37.625   565  2076 D CoreBackPreview: Window{4cacb51 u0 Splash Screen ph.reviewnatin.app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@e426424, mPriority=0, mIsAnimationCallback=false}
+06-24 00:26:37.659  1079  1402 D EGL_emulation: app_time_stats: avg=28.73ms min=1.73ms max=723.36ms count=37
+06-24 00:26:37.692   370   370 D Zygote  : Forked child process 12832
+06-24 00:26:37.693   565   599 W ActivityManager: Slow operation: 72ms so far, now at startProcess: returned from zygote!
+06-24 00:26:37.694   565   599 W ActivityManager: Slow operation: 73ms so far, now at startProcess: done updating battery stats
+06-24 00:26:37.694   565   599 W ActivityManager: Slow operation: 73ms so far, now at startProcess: building log message
+06-24 00:26:37.694   565   599 I ActivityManager: Start proc 12832:ph.reviewnatin.app/u0a209 for next-top-activity {ph.reviewnatin.app/ph.reviewnatin.app.MainActivity}
+06-24 00:26:37.694   565   599 W ActivityManager: Slow operation: 73ms so far, now at startProcess: starting to update pids map
+06-24 00:26:37.697   565   599 W ActivityManager: Slow operation: 76ms so far, now at startProcess: done updating pids map
+06-24 00:26:37.714   799   812 V WindowManagerShell: onTransitionReady(transaction=2426656526114)
+06-24 00:26:37.715   565   588 V WindowManager: Sent Transition (#95) createdAt=06-24 00:26:37.554 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=66 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity } baseActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} topActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} origActivity=null realActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} numActivities=1 lastActiveTime=2728925 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{9539e90 Task{267af8c #66 type=standard A=10209:ph.reviewnatin.app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{64a9389 ph.reviewnatin.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=768 topActivityLetterboxHeight=1280 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 95 }
+06-24 00:26:37.715   565   588 V WindowManager:     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-24 00:26:37.715   565   588 V WindowManager:     info={id=95 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-24 00:26:37.715   565   588 V WindowManager:         {WCT{RemoteToken{9539e90 Task{267af8c #66 type=standard A=10209:ph.reviewnatin.app}}} m=OPEN f=NONE leash=Surface(name=Task=66)/@0x41cd142 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},
+06-24 00:26:37.715   565   588 V WindowManager:         {WCT{RemoteToken{5ce8c7b Task{a8b451c #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x3f7bb80 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1}
+06-24 00:26:37.715   565   588 V WindowManager:     ]}
+06-24 00:26:37.723   799   836 V WindowManagerShell: onTransitionReady (#95) android.os.BinderProxy@7d31d1a: {id=95 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@518704} m=OPEN f=NONE leash=Surface(name=Task=66)/@0xc3d00ca sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@af1e4ed} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x273123b sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1}]}
+06-24 00:26:37.724   799   836 V WindowManagerShell: Playing animation for (#95) android.os.BinderProxy@7d31d1a@0
+06-24 00:26:37.724   799   836 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultMixedHandler@c03ea0f
+06-24 00:26:37.724   799   836 V WindowManagerShell:  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@5956a9c
+06-24 00:26:37.724   799   836 V WindowManagerShell:  try handler com.android.wm.shell.pip.PipTransition@7c21ca5
+06-24 00:26:37.724   565   931 W UserManagerService: Requested status bar icon for non-badged user 0
+06-24 00:26:37.724   799   836 V WindowManagerShell:  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@efea87a
+06-24 00:26:37.724   799   836 V WindowManagerShell:  try handler com.android.wm.shell.recents.RecentsTransitionHandler@21f182b
+06-24 00:26:37.724   799   836 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+06-24 00:26:37.724   799   836 V WindowManagerShell:  try handler com.android.wm.shell.splitscreen.StageCoordinator@cdc9488
+06-24 00:26:37.724   799   836 V WindowManagerShell:  try handler com.android.wm.shell.transition.RemoteTransitionHandler@85cde21
+06-24 00:26:37.724   799   836 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=95 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@518704} m=OPEN f=NONE leash=Surface(name=Task=66)/@0xc3d00ca sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@af1e4ed} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x273123b sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1}]}
+06-24 00:26:37.724   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=undefined independent=true modes=[OPEN,TO_FRONT] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null},{atype=undefined independent=true modes=[CLOSE,TO_BACK] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@4cf5474, appThread = android.app.IApplicationThread$Stub$Proxy@dba7d9d, debugName = OverlaySwipeBack }}
+06-24 00:26:37.724   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@f1b8212, appThread = android.app.IApplicationThread$Stub$Proxy@c440de3, debugName = LauncherToDream }}
+06-24 00:26:37.724   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5c743e0, appThread = android.app.IApplicationThread$Stub$Proxy@bc65699, debugName = QuickstepLaunchHome }}
+06-24 00:26:37.724   799   836 V WindowManagerShell:  Delegate animation for (#95) to null
+06-24 00:26:37.724   799   836 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultTransitionHandler@c576ca0
+06-24 00:26:37.724   799   836 V WindowManagerShell: start default transition animation, info = {id=95 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@518704} m=OPEN f=NONE leash=Surface(name=Task=66)/@0xc3d00ca sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@af1e4ed} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x273123b sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1}]}
+06-24 00:26:37.724   799   836 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@90cdf22 animAttr=0x13 type=OPEN isEntrance=false
+06-24 00:26:37.725   799   836 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@cc38db3 animAttr=0x12 type=OPEN isEntrance=true
+06-24 00:26:37.727   799   836 V WindowManagerShell:  animated by com.android.wm.shell.transition.DefaultTransitionHandler@c576ca0
+06-24 00:26:37.732 12832 12832 I reviewnatin.app: Using CollectorTypeCMC GC.
+06-24 00:26:37.737 12832 12832 E reviewnatin.app: Not starting debugger since process cannot load the jdwp agent.
+06-24 00:26:37.743 12832 12832 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+06-24 00:26:37.754  1079  1402 D EGL_emulation: app_time_stats: avg=214.19ms min=1.88ms max=3981.74ms count=20
+06-24 00:26:37.761 12832 12832 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+06-24 00:26:37.761 12832 12832 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+06-24 00:26:37.765 12832 12832 D nativeloader: Configuring clns-7 for other apk /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/lib/arm64:/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/ph.reviewnatin.app
+06-24 00:26:37.774 12832 12832 V GraphicsEnvironment: Currently set values for:
+06-24 00:26:37.774 12832 12832 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+06-24 00:26:37.774 12832 12832 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+06-24 00:26:37.774 12832 12832 V GraphicsEnvironment: Global.Settings values are invalid: number of packages: 0, number of values: 0
+06-24 00:26:37.774 12832 12832 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+06-24 00:26:37.782 12832 12832 W FirebaseApp: Default FirebaseApp failed to initialize because no default options were found. This usually means that com.google.gms:google-services was not applied to your gradle project.
+06-24 00:26:37.782 12832 12832 I FirebaseInitProvider: FirebaseApp initialization unsuccessful
+06-24 00:26:37.784 12832 12832 D Sentry  : io.sentry.auto-init read: false
+06-24 00:26:37.787 12832 12832 D WM-WrkMgrInitializer: Initializing WorkManager with default configuration.
+06-24 00:26:37.806 12832 12832 W SoLoader: Initializing SoLoader: 0
+06-24 00:26:37.809 12832 12832 W SoLoader: Recording new base apk path: /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk
+06-24 00:26:37.809 12832 12832 W SoLoader: Previously recorded 0 base apk paths.
+06-24 00:26:37.813 12832 12832 I SoLoader: Preparing SO source: DirectorySoSource[root = /vendor/lib64 flags = 2]
+06-24 00:26:37.813 12832 12832 I SoLoader: Preparing SO source: DirectorySoSource[root = /system/lib64 flags = 2]
+06-24 00:26:37.813 12832 12832 I SoLoader: Preparing SO source: DirectApkSoSource[root = [/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a]]
+06-24 00:26:37.817 12832 12832 I SoLoader: Preparing SO source: ApplicationSoSource[DirectorySoSource[root = /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/lib/arm64 flags = 0]]
+06-24 00:26:37.817 12832 12832 I SoLoader: init finish: 4 SO sources prepared
+06-24 00:26:37.817 12832 12832 W SoLoader: SoLoader initialized: 8
+06-24 00:26:37.829 12832 12832 D nativeloader: Load /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a/libc++_shared.so using ns clns-7 from class loader (caller=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!classes3.dex): ok
+06-24 00:26:37.832 12832 12832 D nativeloader: Load /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a/libjsi.so using ns clns-7 from class loader (caller=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!classes3.dex): ok
+06-24 00:26:37.836 12832 12832 D nativeloader: Load /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a/libfbjni.so using ns clns-7 from class loader (caller=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!classes3.dex): ok
+06-24 00:26:37.842 12832 12832 D nativeloader: Load /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a/libreactnative.so using ns clns-7 from class loader (caller=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!classes3.dex): ok
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Entering merged library JNI_OnLoad.
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x6e2fdefb00
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x6e2fec3444
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x6e2fedeef8
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x6e2ff21268
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x6e2fffbaf8
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x6e30007b5c
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x6e3000aa20
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x6e3002fe44
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x6e300d3e4c
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x6e300da864
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x6e300e1e28
+06-24 00:26:37.842 12832 12832 D jni_lib_merge: About to register 11 actual methods.
+06-24 00:26:37.848 12832 12832 D nativeloader: Load /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a/libreact_codegen_rnscreens.so using ns clns-7 from class loader (caller=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!classes3.dex): ok
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Entering merged library JNI_OnLoad.
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x6e2fdefb00
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x6e2fec3444
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x6e2fedeef8
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x6e2ff21268
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x6e2fffbaf8
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x6e30007b5c
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x6e3000aa20
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x6e3002fe44
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x6e300d3e4c
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x6e300da864
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x6e300e1e28
+06-24 00:26:37.848 12832 12832 D jni_lib_merge: About to register 11 actual methods.
+06-24 00:26:37.852 12832 12832 D nativeloader: Load /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a/libreact_codegen_rnsvg.so using ns clns-7 from class loader (caller=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!classes3.dex): ok
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Entering merged library JNI_OnLoad.
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x6e2fdefb00
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x6e2fec3444
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x6e2fedeef8
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x6e2ff21268
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x6e2fffbaf8
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x6e30007b5c
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x6e3000aa20
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x6e3002fe44
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x6e300d3e4c
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x6e300da864
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x6e300e1e28
+06-24 00:26:37.853 12832 12832 D jni_lib_merge: About to register 11 actual methods.
+06-24 00:26:37.859 12832 12832 D nativeloader: Load /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a/libreact_codegen_safeareacontext.so using ns clns-7 from class loader (caller=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!classes3.dex): ok
+06-24 00:26:37.864 12832 12832 D nativeloader: Load /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!/lib/arm64-v8a/libappmodules.so using ns clns-7 from class loader (caller=/data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk!classes3.dex): ok
+06-24 00:26:37.875   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS
+06-24 00:26:37.904 12832 12832 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+06-24 00:26:37.913 12832 12832 I ReviewNatinLink: Stored cold VIEW intent for replay
+06-24 00:26:37.919   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE
+06-24 00:26:37.919   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE
+06-24 00:26:37.919   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-24 00:26:37.920   565  2076 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@7e25c56c does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-24 00:26:37.920   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-24 00:26:37.921   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-24 00:26:37.933   565  2076 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=ph.reviewnatin.app/.MainActivity} with LAUNCH_SINGLE_TASK from uid 10209 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+06-24 00:26:37.933   799   836 V WindowManagerShell: Transition requested (#96): android.os.BinderProxy@edf520f TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=66 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity } baseActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} topActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} origActivity=null realActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} numActivities=1 lastActiveTime=2729274 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@6b0b29c} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{4fc4a5 ph.reviewnatin.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=768 topActivityLetterboxHeight=1280 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 96 }
+06-24 00:26:37.939   565  1444 W ActivityTaskManager: Duplicate finish request for r=ActivityRecord{1b16cbf u0 ph.reviewnatin.app/.MainActivity t66 f}}
+06-24 00:26:37.961 12832 12832 E TransactionExecutor: Failed to execute the transaction: tId:-1455255978 ClientTransaction{
+06-24 00:26:37.961 12832 12832 E TransactionExecutor: tId:-1455255978   transactionItems=[
+06-24 00:26:37.961 12832 12832 E TransactionExecutor: tId:-1455255978     LaunchActivityItem{activityToken=android.os.BinderProxy@b58a52f,intent=Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity },ident=28404927,info=ActivityInfo{2142907 ph.reviewnatin.app.MainActivity},curConfig={1.0 310mcc260mnc [en_US] ldltr sw384dp w384dp h640dp 320dpi nrml long port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 768, 1280) mAppBounds=Rect(0, 0 - 768, 1280) mMaxBounds=Rect(0, 0 - 768, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.8 fontWeightAdjustment=0},overrideConfig={1.0 310mcc260mnc [en_US] ldltr sw384dp w384dp h640dp 320dpi nrml long port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 768, 1280) mAppBounds=Rect(0, 0 - 768, 1280) mMaxBounds=Rect(0, 0 - 768, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.3 fontWeightAdjustment=0},deviceId=0,referrer=com.android.shell,procState=2,state=null,persistentState=null,pendingResults=null,pendingNewIntents=null,sceneTransitionInfo=null,profilerInfo=null,assistToken=android.os.BinderProxy@79e5d88,shareableActivityToken=android.os.BinderProxy@e1d7321,activityWindowInfo=ActivityWindowInfo{isEmbedded=false, taskBounds=Rect(0, 0 - 768, 1280), taskFragmentBounds=Rect(0, 0 - 768, 1280)}}
+06-24 00:26:37.961 12832 12832 E TransactionExecutor: tId:-1455255978     ResumeActivityItem{mActivityToken=android.os.BinderProxy@b58a52f,procState=-1,updateProcState=false,isForward=true,shouldSendCompatFakeFocus=false}
+06-24 00:26:37.961 12832 12832 E TransactionExecutor: tId:-1455255978     Target activity: ph.reviewnatin.app.MainActivity
+06-24 00:26:37.961 12832 12832 E TransactionExecutor: tId:-1455255978   ]
+06-24 00:26:37.961 12832 12832 E TransactionExecutor: tId:-1455255978 }
+06-24 00:26:37.961 12832 12832 D AndroidRuntime: Shutting down VM
+--------- beginning of crash
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: FATAL EXCEPTION: main
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: Process: ph.reviewnatin.app, PID: 12832
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: android.util.SuperNotCalledException: Activity {ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} did not call through to super.onCreate()
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4034)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4235)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:112)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:174)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:109)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:81)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2636)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:107)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:232)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:317)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:8705)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+06-24 00:26:37.962 12832 12832 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+06-24 00:26:37.970   565   589 I ActivityManager: Showing crash dialog for package ph.reviewnatin.app u0
+06-24 00:26:37.970   565 12851 I DropBoxManagerService: add tag=data_app_crash isTagEnabled=true flags=0x2
+06-24 00:26:38.000   565   589 D CoreBackPreview: Window{a9dc84c u0 Application Error: ph.reviewnatin.app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper@6524d4d, mPriority=0, mIsAnimationCallback=false}
+06-24 00:26:38.023   799   836 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#95) android.os.BinderProxy@7d31d1a@0
+06-24 00:26:38.025  1079  1079 D VRI[NexusLauncherActivity]: visibilityChanged oldVisibility=true newVisibility=false
+06-24 00:26:38.025   799   836 V WindowManagerShell: Track 0 became idle
+06-24 00:26:38.026   565   588 V WindowManager: Finish Transition (#95): created at 06-24 00:26:37.554 collect-started=0.115ms request-sent=20.652ms started=31.116ms ready=150.97ms sent=158.319ms finished=470.547ms
+06-24 00:26:38.031  1079  1079 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=7}
+06-24 00:26:38.057   565  2076 W UserManagerService: Requested status bar icon for non-badged user 0
+06-24 00:26:38.058   565  2076 W UserManagerService: Requested status bar icon for non-badged user 0
+06-24 00:26:38.424   565   591 W ActivityTaskManager: Activity top resumed state loss timeout for ActivityRecord{1b16cbf u0 ph.reviewnatin.app/.MainActivity t66 f}}
+06-24 00:26:38.424   565   591 W ActivityTaskManager: Activity pause timeout for ActivityRecord{1b16cbf u0 ph.reviewnatin.app/.MainActivity t66 f}}
+06-24 00:26:38.426   565   591 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS
+06-24 00:26:38.428   565   588 V WindowManager: Sent Transition (#96) createdAt=06-24 00:26:37.921 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=66 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity } baseActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} topActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} origActivity=null realActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} numActivities=1 lastActiveTime=2729274 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{9539e90 Task{267af8c #66 type=standard A=10209:ph.reviewnatin.app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{6527103 ph.reviewnatin.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=768 topActivityLetterboxHeight=1280 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 96 }
+06-24 00:26:38.428   565   588 V WindowManager:     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-24 00:26:38.428   799   812 V WindowManagerShell: onTransitionReady(transaction=2426656526195)
+06-24 00:26:38.428   565   588 V WindowManager:     info={id=96 t=OPEN f=0x0 trk=1 r=[0@Point(0, 0)] c=[
+06-24 00:26:38.428   565   588 V WindowManager:         {null m=OPEN f=STARTING_WINDOW_TRANSFER|FILLS_TASK|IS_BEHIND_STARTING_WINDOW leash=Surface(name=ActivityRecord{d104943 u0 ph.reviewnatin.app/.MainActivity)/@0x51e23bd sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 768, 1280) d=-1->0 r=-1->0:-1 bc=ff000000 component=ph.reviewnatin.app/.MainActivity},
+06-24 00:26:38.428   565   588 V WindowManager:         {null m=CLOSE f=FILLS_TASK|IS_BEHIND_STARTING_WINDOW|IS_OCCLUDED leash=Surface(name=ActivityRecord{1b16cbf u0 ph.reviewnatin.app/.MainActivity)/@0x5bf3f14 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 bc=ff000000 component=ph.reviewnatin.app/.MainActivity}
+06-24 00:26:38.428   565   588 V WindowManager:     ]}
+06-24 00:26:38.428   799   836 V WindowManagerShell: onTransitionReady (#96) android.os.BinderProxy@edf520f: {id=96 t=OPEN f=0x0 trk=1 r=[0@Point(0, 0)] c=[{null m=OPEN f=STARTING_WINDOW_TRANSFER|FILLS_TASK|IS_BEHIND_STARTING_WINDOW leash=Surface(name=ActivityRecord{d104943 u0 ph.reviewnatin.app/.MainActivity)/@0xc7f307a sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 768, 1280) d=-1->0 r=-1->0:-1 bc=ff000000 component=ph.reviewnatin.app/.MainActivity},{null m=CLOSE f=FILLS_TASK|IS_BEHIND_STARTING_WINDOW|IS_OCCLUDED leash=Surface(name=ActivityRecord{1b16cbf u0 ph.reviewnatin.app/.MainActivity)/@0xb49002b sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 bc=ff000000 component=ph.reviewnatin.app/.MainActivity}]}
+06-24 00:26:38.428   799   836 V WindowManagerShell: Non-visible anim so abort: (#96) android.os.BinderProxy@edf520f@1
+06-24 00:26:38.429   799   836 V WindowManagerShell: Transition animation finished (aborted=true), notifying core (#96) android.os.BinderProxy@edf520f@1
+06-24 00:26:38.430   565   588 V WindowManager: Finish Transition (#96): created at 06-24 00:26:37.921 collect-started=0.037ms request-sent=6.588ms started=15.822ms ready=504.878ms sent=506.101ms finished=508.173ms
+06-24 00:26:38.430   799   836 V WindowManagerShell: Track 1 became idle
+06-24 00:26:38.430   799   836 V WindowManagerShell: All active transition animations finished
+06-24 00:26:38.431   565  2076 W UserManagerService: Requested status bar icon for non-badged user 0
+06-24 00:26:38.432   565  2076 W UserManagerService: Requested status bar icon for non-badged user 0
+06-24 00:26:38.433   565  2076 W UserManagerService: Requested status bar icon for non-badged user 0
+06-24 00:26:40.479   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-24 00:26:40.479   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-24 00:26:40.479   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10146} in 1ms
+06-24 00:26:40.479   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-24 00:26:40.479   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-24 00:26:40.479   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={20146} in 0ms
+06-24 00:26:41.082   565  1384 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+06-24 00:26:43.381  1344  2004 I BugleRcsEngine: handleMessage processing message:[NOTIFY_UPTIME_IGNORE_STATE_CHANGED] with [non-null]:RcsEngineImpl reference [CONTEXT log_prefix="RcsEngineImpl[DUAL_REG]:[2059d6c1-3e63]>Handler" thread_id=63 ]
+06-24 00:26:43.381  1344  1628 I BugleRcsEngine: Connected state: [1], networkType: [WIFI] [CONTEXT thread_id=55 ]
+06-24 00:26:43.381   565   711 D ConnectivityService: NetReassign [no changes] [c 0] [a 1] [i 0]
+06-24 00:26:43.381  1021  5763 I NearbyMediums: Wifi changed new SSID: "AndroidWifi"
+06-24 00:26:43.382  1021  1030 I NullBinder: NullBinder for android.net.action.RECOMMEND_NETWORKS triggering remote TransactionTooLargeException due to Service without Chimera impl, calling uid: 1000, calling pid: 0
+06-24 00:26:43.382  1021  1030 W .gms.persistent: Large reply transaction of 1056768 bytes, interface descriptor , code 1
+06-24 00:26:43.382  1021  5763 I NearbyMediums: WifiLanConnectivityInfo is not changed, skip notify.
+06-24 00:26:43.388  1344  2004 I BugleRcsEngine: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897] [CONTEXT log_prefix="ProvisioningEngineDataRetriever" thread_id=63 ]
+06-24 00:26:43.542   799   977 D EGL_emulation: app_time_stats: avg=2020.88ms min=7.36ms max=10015.19ms count=5
+06-24 00:26:43.881  1021  1021 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+06-24 00:26:45.498   565   660 D ActivityManager: freezing 11684 com.google.android.documentsui
+06-24 00:26:45.499   565   660 D ActivityManager: freezing 11605 com.android.chrome
+06-24 00:26:45.500   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-24 00:26:45.500   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-24 00:26:45.500   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10098} in 0ms
+06-24 00:26:45.500   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-24 00:26:45.500   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-24 00:26:45.500   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10146} in 0ms
+06-24 00:26:45.550   565   660 D ActivityManager: freezing 11543 com.android.vending:background
+06-24 00:26:45.624   565   660 D ActivityManager: freezing 11314 com.android.vending
+06-24 00:26:45.626   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-24 00:26:45.626   565   711 D InetDiagMessage: Destroyed 1 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-24 00:26:45.626   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10141} in 1ms
+06-24 00:26:45.922   182 12752 I keystore2: system/security/keystore2/watchdog/src/lib.rs:319 - Watchdog thread idle -> terminating. Have a great day.
+06-24 00:26:46.379  1021  1029 I NullBinder: NullBinder for android.net.action.RECOMMEND_NETWORKS triggering remote TransactionTooLargeException due to Service without Chimera impl, calling uid: 1000, calling pid: 0
+06-24 00:26:46.380  1021  1029 W .gms.persistent: Large reply transaction of 1056768 bytes, interface descriptor , code 1
+06-24 00:26:46.380  1344  2004 I BugleRcsEngine: handleMessage processing message:[NOTIFY_UPTIME_IGNORE_STATE_CHANGED] with [non-null]:RcsEngineImpl reference [CONTEXT log_prefix="RcsEngineImpl[DUAL_REG]:[2059d6c1-3e63]>Handler" thread_id=63 ]
+06-24 00:26:46.380  1344  1628 I BugleRcsEngine: Connected state: [1], networkType: [WIFI] [CONTEXT thread_id=55 ]
+06-24 00:26:46.380   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:46.380   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:46.382   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:46.382   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:46.382   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:46.382   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:46.383  1021  5763 I NearbyMediums: Wifi changed new SSID: "AndroidWifi"
+06-24 00:26:46.383  1021  5763 I NearbyMediums: WifiLanConnectivityInfo is not changed, skip notify.
+06-24 00:26:46.383   565   711 D ConnectivityService: NetReassign [no changes] [c 0] [a 1] [i 0]
+06-24 00:26:46.384  1344  2004 I BugleRcsEngine: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897] [CONTEXT log_prefix="ProvisioningEngineDataRetriever" thread_id=63 ]
+06-24 00:26:46.801   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-24 00:26:46.801   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-24 00:26:46.801   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10143} in 1ms
+06-24 00:26:46.801   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-24 00:26:46.802   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-24 00:26:46.802   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={20143} in 1ms
+06-24 00:26:46.881  1021  1021 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+06-24 00:26:46.945  1021  2919 D TrafficStats: tagSocket(105) with statsTag=0x4000401, statsUid=10144
+06-24 00:26:47.082  1021 12527 W GLSUser : [AppCertManager] Exception while requesting key: 
+06-24 00:26:47.082  1021 12527 W GLSUser : java.util.concurrent.ExecutionException: dbik: Parsing Exception
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at hmle.j(:com.google.android.gms@262031035@26.20.31 (260400-919905943):21)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at hmln.t(:com.google.android.gms@262031035@26.20.31 (260400-919905943):73)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at amze.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):435)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at amzc.a(:com.google.android.gms@262031035@26.20.31 (260400-919905943):67)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at amyy.a(:com.google.android.gms@262031035@26.20.31 (260400-919905943):3)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at amza.a(:com.google.android.gms@262031035@26.20.31 (260400-919905943):58)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at amza.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):21)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkjf.m(:com.google.android.gms@262031035@26.20.31 (260400-919905943):13)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkju.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):10)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at gtnb.a(:com.google.android.gms@262031035@26.20.31 (260400-919905943):45)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at gtmv.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):293)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at gvfn.call(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1001)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:47.082  1021 12527 W GLSUser : Caused by: dbik: Parsing Exception
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at dbjp.ku(:com.google.android.gms@262031035@26.20.31 (260400-919905943):15)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at hmnx.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):56)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):85)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	... 4 more
+06-24 00:26:47.082  1021 12527 W GLSUser : Caused by: japu: Protocol message end-group tag did not match expected tag.
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at jarq.a(:com.google.android.gms@262031035@26.20.31 (260400-919905943):57)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at jaqo.l(:com.google.android.gms@262031035@26.20.31 (260400-919905943):60)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at jaoq.s(:com.google.android.gms@262031035@26.20.31 (260400-919905943):26)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at jamm.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):7)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at jamm.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at jamm.o(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at dbjo.a(:com.google.android.gms@262031035@26.20.31 (260400-919905943):15)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at dbjt.call(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:47.082  1021 12527 W GLSUser : 	... 4 more
+06-24 00:26:47.083  1021 12527 W GLSUser : [DeviceKeyStore] Cannot load key: Device key file not found.
+06-24 00:26:47.087  1021 12759 D TrafficStats: tagSocket(217) with statsTag=0x4000609, statsUid=10133
+06-24 00:26:47.115  1021 12759 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+06-24 00:26:47.115  1021 12759 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@262031035@26.20.31 (260400-919905943):204)
+06-24 00:26:47.115  1021 12759 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@262031035@26.20.31 (260400-919905943):4)
+06-24 00:26:47.166  1021 12759 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+06-24 00:26:47.166  1021 12759 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@262031035@26.20.31 (260400-919905943):204)
+06-24 00:26:47.166  1021 12759 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@262031035@26.20.31 (260400-919905943):4)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: Voilatile gRPC failure INVALID_ARGUMENT: Application credential header not valid. Please fix the client to pass a valid application credential header. [CONTEXT service_id=6 ]
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: jxhi: INVALID_ARGUMENT: Application credential header not valid. Please fix the client to pass a valid application credential header.
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at bkju.r(:com.google.android.gms@262031035@26.20.31 (260400-919905943):31)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at bkju.f(:com.google.android.gms@262031035@26.20.31 (260400-919905943):90)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at gtnb.a(:com.google.android.gms@262031035@26.20.31 (260400-919905943):45)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at gtmv.b(:com.google.android.gms@262031035@26.20.31 (260400-919905943):293)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at gvfn.call(:com.google.android.gms@262031035@26.20.31 (260400-919905943):1001)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at bkqh.c(:com.google.android.gms@262031035@26.20.31 (260400-919905943):50)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at bkqh.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):66)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at bkvz.run(:com.google.android.gms@262031035@26.20.31 (260400-919905943):8)
+06-24 00:26:47.247  1021 12527 W GlsClientGrpc: 	at java.lang.Thread.run(Thread.java:1012)
+06-24 00:26:47.250  1021 12527 I FrewleTileCacheManagerV: (REDACTED) Fetched %d AP models from cache
+06-24 00:26:47.254  1021  1744 I ActivityScheduler: nextTriggerTime: 2964467, in 225861ms, detectorType: 39, FULL_TYPE alarmWindowMillis: 80000
+06-24 00:26:47.586   565   591 W ActivityTaskManager: Launch timeout has expired, giving up wake lock!
+06-24 00:26:47.882  1079  1079 D BaseDepthController: setSurface:
+06-24 00:26:47.882  1079  1079 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+06-24 00:26:47.882  1079  1079 D BaseDepthController: 	mSurface: null
+06-24 00:26:47.882  1079  1079 D BaseDepthController: mSurface is null and mCurrentBlur is: 0
+06-24 00:26:47.883   565   591 W ProcessStats: Tracking association SourceState{8f5102e com.google.android.apps.nexuslauncher/10176 BFgs #7000} whose proc state 4 is better than process ProcessState{646f412 com.google.android.googlequicksearchbox:search/10145 pkg=com.google.android.googlequicksearchbox} proc state 14 (18 skipped)
+06-24 00:26:47.885  1079  1079 D StateManager: goToState - fromState: Normal, toState: Normal, partial trace:
+06-24 00:26:47.885  1079  1079 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:4)
+06-24 00:26:47.885  1079  1079 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:1)
+06-24 00:26:47.885  1079  1079 D StateManager: 	at com.android.launcher3.statemanager.StatefulActivity.onStop(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:34)
+06-24 00:26:47.886  1079  1079 D StatsLog: LAUNCHER_ONSTOP
+06-24 00:26:47.887  1079  1449 D OneSearchSuggestProvider: Shut down the binder channel
+06-24 00:26:47.888  1079  1079 D StatsLog: LAUNCHER_GOOGLE_SEARCH_RESTORE_LIST_SIZE_AFTER_ACTIVITY_RESTART
+06-24 00:26:47.888  1079  1089 I IPCThreadState: oneway function results for code 2 on binder at 0xb400006f518c1c10 will be dropped but finished with status UNKNOWN_TRANSACTION
+06-24 00:26:48.046 11328 11583 V ClearcutMetricXmitter: Transmission is done.
+06-24 00:26:50.090   565   598 I ActivityManager: Waited long enough for: ServiceRecord{74c36de u0 com.google.android.gms/.statementservice.OperationService c:com.google.android.gms}
+06-24 00:26:50.715 11384 11384 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+06-24 00:26:50.810  1021  1021 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.libs.gmscorelogger.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }
+06-24 00:26:50.857 11384 11384 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+06-24 00:26:52.391  1344  2004 I BugleRcsEngine: handleMessage processing message:[NOTIFY_UPTIME_IGNORE_STATE_CHANGED] with [non-null]:RcsEngineImpl reference [CONTEXT log_prefix="RcsEngineImpl[DUAL_REG]:[2059d6c1-3e63]>Handler" thread_id=63 ]
+06-24 00:26:52.391  1344  1628 I BugleRcsEngine: Connected state: [1], networkType: [WIFI] [CONTEXT thread_id=55 ]
+06-24 00:26:52.391   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:52.391   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:52.392   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:52.392   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:52.392   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:52.392   565   711 W IPCThreadState: Sending oneway calls to frozen process.
+06-24 00:26:52.394  1021  2832 I NullBinder: NullBinder for android.net.action.RECOMMEND_NETWORKS triggering remote TransactionTooLargeException due to Service without Chimera impl, calling uid: 1000, calling pid: 0
+06-24 00:26:52.394  1021  2832 W .gms.persistent: Large reply transaction of 1056768 bytes, interface descriptor , code 1
+06-24 00:26:52.396   565   711 D ConnectivityService: NetReassign [no changes] [c 1] [a 1] [i 0]
+06-24 00:26:52.396  1021  5763 I NearbyMediums: Wifi changed new SSID: "AndroidWifi"
+06-24 00:26:52.396  1021  5763 I NearbyMediums: WifiLanConnectivityInfo is not changed, skip notify.
+06-24 00:26:52.398  1344  2004 I BugleRcsEngine: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897] [CONTEXT log_prefix="ProvisioningEngineDataRetriever" thread_id=63 ]
+06-24 00:26:52.893  1021  1021 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+06-24 00:26:55.333   565   660 D ActivityManager: freezing 11461 com.google.android.permissioncontroller
+06-24 00:26:55.335   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-24 00:26:55.335   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-24 00:26:55.335   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10187} in 1ms
+06-24 00:26:55.407 11384 11391 W gle.android.gms: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~jr0-XlhCDM6B6rlHGBaMPA==/ph.reviewnatin.app-c960MBYpJ64KG5Ez-oEqqg==/base.apk' with 1 weak references

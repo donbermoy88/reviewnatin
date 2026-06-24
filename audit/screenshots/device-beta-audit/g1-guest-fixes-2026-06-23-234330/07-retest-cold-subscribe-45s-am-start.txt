@@ -1,0 +1,7 @@
+Starting: Intent { act=android.intent.action.VIEW dat=reviewnatin://subscribe/... pkg=ph.reviewnatin.app }
+Status: ok
+LaunchState: COLD
+Activity: ph.reviewnatin.app/.MainActivity
+TotalTime: 684
+WaitTime: 685
+Complete

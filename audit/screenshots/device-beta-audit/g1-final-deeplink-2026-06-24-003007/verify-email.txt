@@ -1,0 +1,8 @@
+=== verify-email reviewnatin://verify-email?email=g1.agent%40reviewnatinph.com ===
+Starting: Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://verify-email/... pkg=ph.reviewnatin.app }
+Status: ok
+LaunchState: COLD
+Activity: ph.reviewnatin.app/.MainActivity
+TotalTime: 692
+WaitTime: 692
+Complete

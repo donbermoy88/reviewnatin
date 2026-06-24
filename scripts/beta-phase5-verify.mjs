@@ -23,7 +23,7 @@ const REQUIRED_FILES = [
   'apps/mobile/lib/performance/defer-after-interaction.ts',
   'apps/mobile/lib/performance/perf-catalog.ts',
   'apps/mobile/lib/subscription/pricing-display.ts',
-  'apps/mobile/lib/subscription/checkout-copy.ts',
+  'apps/mobile/lib/subscription/paywall-copy.ts',
   'apps/mobile/components/dashboard/free-daily-limit-strip.tsx',
   'apps/mobile/components/dashboard/home-study-insights.tsx',
   'apps/mobile/hooks/use-network-status.ts',
@@ -81,10 +81,10 @@ function main() {
   else fail('subscription:db-pricing-only', 'hardcoded pricing map still present');
 
   const subscribe = readFileSync(join(MOBILE, 'app/subscribe/index.tsx'), 'utf8');
-  if (subscribe.includes('WEB_CHECKOUT_BETA_BANNER') && subscribe.includes('resolveProductPrice')) {
-    ok('subscribe:checkout-copy');
+  if (subscribe.includes('PAYWALL_HEADLINE') && subscribe.includes('PAYWALL_CTA_PRIMARY')) {
+    ok('subscribe:paywall-copy');
   } else {
-    fail('subscribe:checkout-copy');
+    fail('subscribe:paywall-copy');
   }
 
   const countdown = readFileSync(join(MOBILE, 'components/exam-countdown-card.tsx'), 'utf8');
@@ -95,7 +95,7 @@ function main() {
   }
 
   try {
-    execSync('npm run mobile:test -- perf-catalog pricing-display checkout-copy defer', {
+    execSync('npm run mobile:test -- perf-catalog pricing-display paywall-copy defer', {
       cwd: REPO_ROOT,
       stdio: 'pipe',
     });

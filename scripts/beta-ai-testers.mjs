@@ -39,6 +39,10 @@ const skipCloud = args.includes('--skip-cloud');
 const skipBuild = args.includes('--skip-build');
 const skipEmulator = args.includes('--skip-emulator');
 const skipMaestro = args.includes('--skip-maestro');
+const deviceArg = (() => {
+  const i = args.indexOf('--device');
+  return i >= 0 && args[i + 1] ? args[i + 1] : null;
+})();
 
 const DIST = join(REPO_ROOT, 'dist/beta');
 const REPORTS = join(DIST, 'agent-reports');
@@ -267,7 +271,7 @@ async function main() {
 
   if (!skipEmulator && !skipMaestro) {
     step('4 — Install APK on emulator');
-    const device = adbDevice();
+    const device = adbDevice(deviceArg);
     report.device = device;
     installApk(apkPath, device);
 

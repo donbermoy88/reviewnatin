@@ -82,7 +82,7 @@ export const BETA_AI_PERSONAS = [
     cohort: 'premium',
     examFocus: 'CSE Subprofessional',
     flows: ['premium-subscribe-hint.yaml'],
-    manualChecks: ['Web checkout banner'],
+    manualChecks: ['Google Play purchase sheet (Play internal track)'],
   },
   {
     id: 'P3',
@@ -90,7 +90,7 @@ export const BETA_AI_PERSONAS = [
     cohort: 'premium',
     examFocus: 'Mixed exams',
     flows: ['premium-subscribe-hint.yaml'],
-    manualChecks: ['Plus entitlement after web checkout'],
+    manualChecks: ['Plus entitlement after Google Play purchase'],
   },
   {
     id: 'P4',

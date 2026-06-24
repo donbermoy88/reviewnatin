@@ -1,0 +1,16 @@
+Running on Medium_Phone_API_35
+ > Flow premium-subscribe-hint
+Launch app "ph.reviewnatin.app" with clear state... COMPLETED
+Assert that "Get started — it's free" is visible... COMPLETED
+Tap on "Get started — it's free"... COMPLETED
+Assert that "Continue →" is visible... COMPLETED
+Tap on "Continue →"... COMPLETED
+Tap on "Continue →"... COMPLETED
+Tap on "I'm committed →"... COMPLETED
+Tap on "Skip muna (guest)"... COMPLETED
+Tap on "Pumunta sa Dashboard"... COMPLETED
+Assert that "Home" is visible... COMPLETED
+Scrolling DOWN until "See ReviewNatin Plus plans" is visible with speed 40, visibility percentage 100%, timeout 15000 ms, with centering disabled... COMPLETED
+Tap on "See ReviewNatin Plus plans"... COMPLETED
+Assert that "Mag-log in para mag-subscribe" is visible... COMPLETED
+Assert that "Mag-log in para mag-subscribe" is visible... COMPLETED

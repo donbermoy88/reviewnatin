@@ -1,0 +1,8 @@
+=== practice reviewnatin://practice ===
+Starting: Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://practice/... pkg=ph.reviewnatin.app }
+Status: ok
+LaunchState: COLD
+Activity: ph.reviewnatin.app/.MainActivity
+TotalTime: 480
+WaitTime: 488
+Complete

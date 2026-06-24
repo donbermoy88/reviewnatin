@@ -1,0 +1,7 @@
+Starting: Intent { act=android.intent.action.VIEW dat=reviewnatin://verify-email/... pkg=ph.reviewnatin.app }
+Status: ok
+LaunchState: COLD
+Activity: ph.reviewnatin.app/.MainActivity
+TotalTime: 945
+WaitTime: 972
+Complete

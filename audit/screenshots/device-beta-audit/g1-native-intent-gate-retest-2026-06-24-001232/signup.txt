@@ -1,0 +1,8 @@
+=== signup reviewnatin://signup ===
+Starting: Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://signup/... pkg=ph.reviewnatin.app }
+Status: ok
+LaunchState: COLD
+Activity: ph.reviewnatin.app/.MainActivity
+TotalTime: 714
+WaitTime: 719
+Complete

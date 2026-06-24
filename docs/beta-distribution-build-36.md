@@ -1,4 +1,6 @@
-# Beta APK Distribution — Build 36 (current)
+# Beta APK Distribution — Build 36 (superseded for Premium IAP)
+
+> **Build 37+:** Premium purchases use **Google Play Billing** via Play internal testing — not sideload APK web checkout. See [play-billing-paywall-compliance.md](./play-billing-paywall-compliance.md) and [play-console-migration.md](./play-console-migration.md).
 
 **Date:** 2026-06-23  
 **Audience:** 12 beta testers (G1–G4 · F1–F4 · P1–P4) — see [beta-testers.md](./beta-testers.md)
@@ -72,12 +74,12 @@ Report: `dist/beta/last-automation-report.json`
 | Kyle Tan (F2) | Free | ✓ keyboard | Google/Apple OAuth path |
 | Rica Villanueva (F3) | Free | — | 20 Q limit enforcement |
 | Lea Fernandez (F4) | Free | — | Mock preview limits |
-| Andrea Bautista (P1) | Premium | ✓ subscribe hint | **Web checkout on physical device** |
-| Marco Silva (P2) | Premium | — | GCash/Maya → Plus active → no ads |
+| Andrea Bautista (P1) | Premium | ✓ subscribe hint | **Play Billing on physical device (internal track)** |
+| Marco Silva (P2) | Premium | — | Google Play purchase → Plus active → no ads |
 | Nico Almario (P3) | Premium | — | Unlimited practice + full mock |
 | Patricia Gomez (P4) | Premium | — | Offline pack + AI tutor |
 
-**Ship gate:** **Cleared for 12-tester distribution** on automated gates. **Blockers for “full beta sign-off”:** Premium web checkout on a real device + optional PostHog live smoke.
+**Ship gate:** Historical record for build 36. **Build 37+:** use Play internal testing + [play-billing-paywall-compliance.md](./play-billing-paywall-compliance.md).
 
 ---
 

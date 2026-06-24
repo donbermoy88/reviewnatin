@@ -1,0 +1,15 @@
+Running on Medium_Phone_API_35
+ > Flow guest-onboarding-quiz
+Launch app "ph.reviewnatin.app" with clear state... COMPLETED
+Assert that "Get started — it's free" is visible... COMPLETED
+Tap on "Get started — it's free"... COMPLETED
+Assert that "Continue →" is visible... COMPLETED
+Tap on "Continue →"... COMPLETED
+Tap on "Continue →"... COMPLETED
+Tap on "I'm committed →"... COMPLETED
+Tap on "Skip muna (guest)"... COMPLETED
+Assert that "Pumunta sa Dashboard" is visible... COMPLETED
+Tap on "Pumunta sa Dashboard"... COMPLETED
+Assert that "Home" is visible... COMPLETED
+Tap on "Review"... COMPLETED
+Assert that "Start practice quiz" is visible... COMPLETED

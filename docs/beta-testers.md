@@ -15,7 +15,7 @@ These are **automated QA personas** (emulator + Maestro + adb audit agents) repr
 | 7 | **Free** | **Rica Villanueva** (F3) | Oppo A98 profile | API 35 | PNLE | ✓ v36 | 2026-06-23 | 20 Q limit — manual |
 | 8 | **Free** | **Lea Fernandez** (F4) | Galaxy A55 profile | API 35 | LET Elementary | ✓ v36 | 2026-06-23 | Mock preview — manual |
 | 9 | **Premium** | **Andrea Bautista** (P1) | Pixel 8 Pro profile | API 35 | CSE Professional | ✓ v36 | 2026-06-23 | Maestro subscribe hint PASS |
-| 10 | **Premium** | **Marco Silva** (P2) | Tab S9 profile | API 35 | CSE Subprofessional | ✓ v36 | 2026-06-23 | **Web checkout — manual (physical device)** |
+| 10 | **Premium** | **Marco Silva** (P2) | Tab S9 profile | API 35 | CSE Subprofessional | ✓ v36 | 2026-06-23 | **Google Play purchase — manual (physical device)** |
 | 11 | **Premium** | **Nico Almario** (P3) | OnePlus Nord profile | API 35 | Mixed exams | ✓ v36 | 2026-06-23 | Plus entitlement — manual |
 | 12 | **Premium** | **Patricia Gomez** (P4) | Realme 11 profile | API 35 | LET Elementary | ✓ v36 | 2026-06-23 | Offline + AI — manual |
 
@@ -23,6 +23,7 @@ These are **automated QA personas** (emulator + Maestro + adb audit agents) repr
 
 **APK:** [beta-distribution-build-36.md](./beta-distribution-build-36.md)  
 **Automated drop:** `npm run beta:agents -- --apk dist/beta/reviewnatin-beta-v36.apk --skip-cloud`  
+**Physical device audit:** `npm run adb:wireless` (pair) → `npm run beta:device-audit -- --apk …`  
 **Taglish post:** `dist/beta/release-notes-taglish-build-36.txt`
 
 **Prior builds:** [build 28](./beta-distribution-build-28.md) · [build 12](./beta-distribution-build-12.md)
@@ -40,7 +41,7 @@ These are **automated QA personas** (emulator + Maestro + adb audit agents) repr
 
 ### Premium (P1–P4)
 - Register → OTP → onboarding
-- Subscribe via **web checkout** on Subscribe screen (APK beta) — **use physical device**
+- Subscribe via **Google Play Billing** on Subscribe screen (Play internal testing) — see [play-billing-paywall-compliance.md](./play-billing-paywall-compliance.md)
 - Confirm ads hidden, unlimited practice, full mocks, AI tutor, offline pack
 
 ## Onboarding checklist (all 12 personas)
@@ -50,7 +51,7 @@ These are **automated QA personas** (emulator + Maestro + adb audit agents) repr
 - [x] SMTP configured for OTP email (Resend verified)
 - [x] `beta:security:verify` green on prod
 - [ ] Release notes posted to tester group — **manual**
-- [ ] Premium web checkout live test on physical device
+- [ ] Premium Google Play purchase on physical device (Play internal track)
 
 ## Feedback channels
 

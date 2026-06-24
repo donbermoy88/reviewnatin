@@ -2,7 +2,7 @@
 
 Screen × cohort expected behavior. Update **Status** after each beta build (`—` untested, `✓` pass, `✗` fail).
 
-**Cohorts:** **G** = Guest (no account) · **F** = Free (registered, no Plus) · **P** = Premium (active Plus via web checkout)
+**Cohorts:** **G** = Guest (no account) · **F** = Free (registered, no Plus) · **P** = Premium (active Plus via Google Play Billing)
 
 | Flow / Screen | G (Guest) | F (Free) | P (Premium) | Status |
 |---------------|-----------|----------|-------------|--------|
@@ -16,8 +16,8 @@ Screen × cohort expected behavior. Update **Status** after each beta build (`�
 | **AI tutor** | Signup prompt or limited | Daily limit (free tier) | Unlimited | — |
 | **Ads (banner/interstitial)** | Shown on Home/Study/Result | Shown | Hidden | — |
 | **Offline pack download** | Premium gate / signup prompt | Premium gate → subscribe | Download works | — |
-| **Subscribe / paywall** | Prompt to create account | Web checkout (APK beta) | Manage subscription | ✓ v36 Maestro premium-subscribe · P2–P4 checkout **manual** |
-| **Restore purchases** | Hidden (no account) | N/A on APK (web checkout primary) | N/A on APK | — |
+| **Subscribe / paywall** | Sign in to continue (Play Billing copy) | Google Play Billing paywall | Manage subscription in Play | ✓ v36 Maestro · P2–P4 purchase **manual (physical device)** |
+| **Restore purchases** | Hidden (no account) | Available when store enabled | Restore + Manage in Play | — |
 | **Leaderboard** | May show; scores local only | Full with account | Full | — |
 | **Stats / Profile** | Guest progress local | Cloud sync | Cloud sync | — |
 | **PasaPath** | Basic access per free tier | Basic / limited | Full | — |
@@ -33,7 +33,7 @@ Screen × cohort expected behavior. Update **Status** after each beta build (`�
 
 Before shipping any beta APK, complete the **cohort smokes** and weighted score in [release-readiness-checklist.md](./release-readiness-checklist.md). Friday rotation must pass all three cohorts on the release candidate.
 
-Automated helpers: `npm run mobile:test` (Vitest) and Maestro flows in `apps/mobile/.maestro/flows/`.
+Automated helpers: `npm run mobile:test` (Vitest), Maestro flows in `apps/mobile/.maestro/flows/`, physical device: `npm run adb:wireless` then `npm run beta:device-audit`.
 
 ## Daily cohort rotation
 
@@ -43,7 +43,7 @@ Each weekday, QA runs one cohort-focused pass (rotate G → F → P → repeat):
 |-----|--------------|---------------|
 | Mon | **Guest (G)** | Guest onboarding → 20 Q practice → paywall → feedback report |
 | Tue | **Free (F)** | Signup → OTP → practice → mock preview → leaderboard |
-| Wed | **Premium (P)** | Web checkout Plus → no ads → full mock → AI tutor → offline pack |
+| Wed | **Premium (P)** | Google Play purchase → no ads → full mock → AI tutor → offline pack |
 | Thu | **Cross-cohort** | Re-test any P0/P1 from tester feedback (all cohorts) |
 | Fri | **Release gate** | All three cohort smokes on latest APK before ship |
 

@@ -1,0 +1,7 @@
+Starting: Intent { cmp=ph.reviewnatin.app/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: ph.reviewnatin.app/.MainActivity
+TotalTime: 381
+WaitTime: 383
+Complete

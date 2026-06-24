@@ -1,0 +1,831 @@
+--------- beginning of system
+06-23 23:46:57.018   565   899 I ActivityManager: Force stopping ph.reviewnatin.app appid=10209 user=0: clear data
+06-23 23:46:57.020   565   899 I ActivityManager: Killing 4828:ph.reviewnatin.app/u0a209 (adj 0): stop ph.reviewnatin.app due to clear data
+06-23 23:46:57.021   565   589 D DisplayManagerService: Drop pending events for gone uid 10209
+06-23 23:46:57.022   565   899 W ActivityTaskManager: Force removing ActivityRecord{13f9c6e u0 ph.reviewnatin.app/.MainActivity t30 f}}: app died, no saved state
+--------- beginning of main
+06-23 23:46:57.024   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-23 23:46:57.024   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-23 23:46:57.024   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10209} in 0ms
+06-23 23:46:57.024   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-23 23:46:57.024   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-23 23:46:57.024   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={20209} in 0ms
+06-23 23:46:57.024   799   836 V WindowManagerShell: Transition requested (#20): android.os.BinderProxy@a539389 TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=30 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.VIEW dat=reviewnatin://practice/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} numActivities=0 lastActiveTime=360223 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@17fbf8e} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 20 }
+06-23 23:46:57.037   565   899 D OomAdjuster: Not killing cached processes
+06-23 23:46:57.049  1079  1079 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=24, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.google.android.apps.nexuslauncher/.NexusLauncherActivity }
+06-23 23:46:57.049   565   598 I ActivityManager: Force stopping ph.reviewnatin.app appid=10209 user=-1: clearApplicationUserData
+06-23 23:46:57.050   565   598 I WindowManager:   Force removing ActivityRecord{13f9c6e u0 ph.reviewnatin.app/.MainActivity t30 f} isExiting}
+06-23 23:46:57.050   565   598 W WindowManager: removeAppToken: Attempted to remove non-existing token: Token{39b485d ActivityRecord{13f9c6e u0 ph.reviewnatin.app/.MainActivity t30 f} isExiting}}
+06-23 23:46:57.050  1079  1079 D StatsLog: LAUNCHER_ONRESUME
+06-23 23:46:57.053   799   836 D WindowManagerShell: setLauncherKeepClearAreaHeight: visible=true, height=350
+06-23 23:46:57.056  1079  1079 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=6}
+06-23 23:46:57.060   565  1343 W AppSearchIcing: icing-search-engine.cc:321: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+06-23 23:46:57.062  1079  1131 D QuickstepModelDelegate: notifyAppTargetEvent action=1 launchLocation=workspace/0/[-1,-1]/[1,1]
+06-23 23:46:57.064  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:46:57.067   414   414 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-23 23:46:57.068   565  1384 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+06-23 23:46:57.073  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:46:57.073  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:46:57.073  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:46:57.073   182  3606 I keystore2: system/security/keystore2/src/maintenance.rs:341 - clearNamespace(r#APP, nspace=10209)
+06-23 23:46:57.073  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:46:57.074  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: AppSearch 0-state cache not available, fallback to AGA
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: java.util.concurrent.CompletionException: java.util.NoSuchElementException: No value present
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:308)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:323)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:684)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:486)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2138)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at com.google.android.apps.nexuslauncher.allapps.E0.onResult(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:67)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at android.app.appsearch.SearchSessionUtil$1.lambda$onResult$0(go/retraceme 64eee9e9f568ff45978879ad2ff83146f2618ee8a88278736fbdf5fae931976e:144)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at android.app.appsearch.SearchSessionUtil$1.$r8$lambda$CEk3q8sDAQVhU3rQwVueB8FAj_M(go/retraceme 64eee9e9f568ff45978879ad2ff83146f2618ee8a88278736fbdf5fae931976e:1)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at android.app.appsearch.SearchSessionUtil$1$$ExternalSyntheticLambda0.run(go/retraceme 64eee9e9f568ff45978879ad2ff83146f2618ee8a88278736fbdf5fae931976e:22)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at android.os.Handler.handleCallback(Handler.java:959)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at android.os.Handler.dispatchMessage(Handler.java:100)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at android.os.Looper.loopOnce(Looper.java:232)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at android.os.Looper.loop(Looper.java:317)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at android.os.HandlerThread.run(HandlerThread.java:85)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: Caused by: java.util.NoSuchElementException: No value present
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at java.util.Optional.get(Optional.java:143)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	at com.google.android.apps.nexuslauncher.allapps.E0.onResult(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:28)
+06-23 23:46:57.075  1079  1449 D OneSearchSuggestProvider: 	... 8 more
+06-23 23:46:57.079  1079  1079 D BaseDepthController: setSurface:
+06-23 23:46:57.079  1079  1079 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+06-23 23:46:57.079  1079  1079 D BaseDepthController: 	mSurface: Surface(name=com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity)/@0xfe6aa5c
+06-23 23:46:57.106   565  2076 I WindowManager: WIN DEATH: Window{b7f1a1d u0 ph.reviewnatin.app/ph.reviewnatin.app.MainActivity}
+06-23 23:46:57.106   565  2076 W InputManager-JNI: Input channel object 'b7f1a1d ph.reviewnatin.app/ph.reviewnatin.app.MainActivity (client)' was disposed without first being removed with the input manager!
+06-23 23:46:57.111   947   947 D CarrierSvcBindHelper: onHandleForceStop: [ph.reviewnatin.app]
+06-23 23:46:57.115   799  1408 V WindowManagerShell: onTransitionReady(transaction=2426656523051)
+06-23 23:46:57.115   799   836 V WindowManagerShell: onTransitionReady (#20) android.os.BinderProxy@a539389: {id=20 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@3ad2ac1} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xf58df45 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@6083266} m=CLOSE f=NONE leash=Surface(name=Task=30)/@0x13c469a sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{2525baf token=android.os.Binder@496778e})/@0x9492bcb sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0}]}
+06-23 23:46:57.115   799   836 V WindowManagerShell: Playing animation for (#20) android.os.BinderProxy@a539389@0
+06-23 23:46:57.116   799   836 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultMixedHandler@c03ea0f
+06-23 23:46:57.116   799   836 V WindowManagerShell:  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@5956a9c
+06-23 23:46:57.116   799   836 V WindowManagerShell:  try handler com.android.wm.shell.pip.PipTransition@7c21ca5
+06-23 23:46:57.116   799   836 V WindowManagerShell:  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@efea87a
+06-23 23:46:57.116   799   836 V WindowManagerShell:  try handler com.android.wm.shell.recents.RecentsTransitionHandler@21f182b
+06-23 23:46:57.116   799   836 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+06-23 23:46:57.116   799   836 V WindowManagerShell:  try handler com.android.wm.shell.splitscreen.StageCoordinator@cdc9488
+06-23 23:46:57.116   799   836 V WindowManagerShell:  try handler com.android.wm.shell.transition.RemoteTransitionHandler@85cde21
+06-23 23:46:57.116   799   836 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=20 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@3ad2ac1} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xf58df45 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@6083266} m=CLOSE f=NONE leash=Surface(name=Task=30)/@0x13c469a sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{2525baf token=android.os.Binder@496778e})/@0x9492bcb sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0}]}
+06-23 23:46:57.116   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=undefined independent=true modes=[OPEN,TO_FRONT] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null},{atype=undefined independent=true modes=[CLOSE,TO_BACK] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@4cf5474, appThread = android.app.IApplicationThread$Stub$Proxy@dba7d9d, debugName = OverlaySwipeBack }}
+06-23 23:46:57.116   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@f1b8212, appThread = android.app.IApplicationThread$Stub$Proxy@c440de3, debugName = LauncherToDream }}
+06-23 23:46:57.116   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5c743e0, appThread = android.app.IApplicationThread$Stub$Proxy@bc65699, debugName = QuickstepLaunchHome }}
+06-23 23:46:57.116   799   836 D RemoteTransitionHandler: Found filterPair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5c743e0, appThread = android.app.IApplicationThread$Stub$Proxy@bc65699, debugName = QuickstepLaunchHome }}
+06-23 23:46:57.116   799   836 V WindowManagerShell:  Delegate animation for (#20) to RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5c743e0, appThread = android.app.IApplicationThread$Stub$Proxy@bc65699, debugName = QuickstepLaunchHome }
+06-23 23:46:57.122  1079  1449 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=i1{delegate=f{logId=25, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=l2.Z@882ab63
+06-23 23:46:57.127   565   588 V WindowManager: Sent Transition (#20) createdAt=06-23 23:46:57.023 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=30 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.VIEW dat=reviewnatin://practice/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} numActivities=0 lastActiveTime=360223 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{6df2532 Task{55d9234 #30 type=standard A=10209:ph.reviewnatin.app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 20 }
+06-23 23:46:57.128  1079  1079 D StateManager: createAtomicAnimation - fromState: Background, toState: Normal, partial trace:
+06-23 23:46:57.128  1079  1079 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.prepareToAnimate(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:22)
+06-23 23:46:57.128  1079  1079 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.<init>(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:11)
+06-23 23:46:57.128  1079  1079 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager.createWallpaperOpenAnimations(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:735)
+06-23 23:46:57.129   565   588 V WindowManager:     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-23 23:46:57.133   370   370 I Zygote  : Process 4828 exited due to signal 9 (Killed)
+06-23 23:46:57.141   565   588 V WindowManager:     info={id=20 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-23 23:46:57.141   565   588 V WindowManager:         {WCT{RemoteToken{5ce8c7b Task{a8b451c #1 type=home}}} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0x3f7bb80 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},
+06-23 23:46:57.141   565   588 V WindowManager:         {WCT{RemoteToken{6df2532 Task{55d9234 #30 type=standard A=10209:ph.reviewnatin.app}}} m=CLOSE f=NONE leash=Surface(name=Task=30)/@0x9163a94 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},
+06-23 23:46:57.141   565   588 V WindowManager:         {null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{2525baf token=android.os.Binder@496778e})/@0xf3730ff sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0}
+06-23 23:46:57.141   565   588 V WindowManager:     ]}
+06-23 23:46:57.142   565   760 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 (has extras) }
+06-23 23:46:57.142   565   600 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_10209/pid_4828
+06-23 23:46:57.154  1079  1402 D EGL_emulation: app_time_stats: avg=1884.29ms min=1.10ms max=71201.16ms count=38
+06-23 23:46:57.159   947   947 D CarrierSvcBindHelper: No carrier app for: 0
+06-23 23:46:57.165   565   760 D ShortcutService: clearing data for package: ph.reviewnatin.app userId0
+06-23 23:46:57.165   565   760 D ShortcutService: handlePackageDataCleared: ph.reviewnatin.app user=0
+06-23 23:46:57.169   565   899 W UserManagerService: Requested status bar icon for non-badged user 0
+06-23 23:46:57.169   799   836 V WindowManagerShell:  animated by com.android.wm.shell.transition.RemoteTransitionHandler@85cde21
+06-23 23:46:57.170   565   598 D ActivityManager: sync unfroze 3671 com.google.android.documentsui for 3
+06-23 23:46:57.173   565   598 D ActivityManager: sync unfroze 2950 com.android.chrome for 3
+06-23 23:46:57.180   565   598 D ActivityManager: sync unfroze 3626 com.android.vending:background for 3
+06-23 23:46:57.199   565   677 I ImeTracker: com.google.android.apps.nexuslauncher:e95994a0: onRequestHide at ORIGIN_SERVER reason HIDE_SAME_WINDOW_FOCUSED_WITHOUT_EDITOR fromUser false
+06-23 23:46:57.199   565   677 I ImeTracker: com.google.android.apps.nexuslauncher:e95994a0: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-23 23:46:57.199   565   931 V ActivityManager: Got obituary of 4828:ph.reviewnatin.app
+06-23 23:46:57.205   565   634 I ActivityManager: Force stopping ph.reviewnatin.app appid=10209 user=0: from pid 4916
+06-23 23:46:57.206   799   865 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@52ae032
+06-23 23:46:57.206   565  2042 D CoreBackPreview: Window{c5b80b8 u0 Splash Screen ph.reviewnatin.app EXITING}: Setting back callback null
+06-23 23:46:57.207   565   634 I WindowManager:   Force removing ActivityRecord{13f9c6e u0 ph.reviewnatin.app/.MainActivity t30 f} isExiting}
+06-23 23:46:57.207   565   634 W WindowManager: removeAppToken: Attempted to remove non-existing token: Token{39b485d ActivityRecord{13f9c6e u0 ph.reviewnatin.app/.MainActivity t30 f} isExiting}}
+06-23 23:46:57.209   565  2055 W InputManager-JNI: Input channel object 'c5b80b8 Splash Screen ph.reviewnatin.app (client)' was disposed without first being removed with the input manager!
+06-23 23:46:57.213  1230  1230 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3157 
+06-23 23:46:57.215  1567  1767 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+06-23 23:46:57.219  3626  3626 I Finsky:background: [2] Memory trim requested to level 40
+06-23 23:46:57.221   453   513 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:46:57.222  3626  3626 I Finsky:background: [2] Memory trim requested to level 40
+06-23 23:46:57.225  1230  1230 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2248 repeatCheckTimes = 0, locked = false
+06-23 23:46:57.227  1230  1230 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1986 onStartInput(EditorInfo{EditorInfo{packageName=com.google.android.apps.nexuslauncher, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+06-23 23:46:57.228  1230  1230 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2248 repeatCheckTimes = 1, locked = false
+06-23 23:46:57.229  1230  1230 I AndroidIME: InputBundleManager.loadActiveInputBundleId():450 loadActiveInputBundleId: und-Latn-x-password, password
+06-23 23:46:57.229   565   931 W PackageConfigPersister: App-specific configuration not found for packageName: com.google.android.apps.nexuslauncher and userId: 0
+06-23 23:46:57.235  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+06-23 23:46:57.236   565   760 D ShortcutService: rescanPackageIfNeeded 0@ph.reviewnatin.app, forceRescan=true , isNewApp=true
+06-23 23:46:57.236   565   760 D ShortcutService: Package ph.reviewnatin.app has 0 manifest shortcut(s), and 0 share target(s)
+06-23 23:46:57.238   565   591 W ActivityManager: setHasOverlayUi called on unknown pid: 4828
+06-23 23:46:57.241   565  2076 D ActivityManager: sync unfroze 1451 com.google.android.googlequicksearchbox:search for 6
+06-23 23:46:57.246   565   598 D ActivityManager: sync unfroze 1213 com.google.android.permissioncontroller for 3
+06-23 23:46:57.249   565   921 W JobInfo : Job 'com.google.android.providers.media.module/com.android.providers.media.MediaService#-300' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+06-23 23:46:57.253  1079  1079 D SsBaseTemplateCard: No text view can be set up
+06-23 23:46:57.253  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:46:57.253  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:46:57.253  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:46:57.253  1079  1079 I SsBaseTemplateCard: Secondary card pane is null
+06-23 23:46:57.265  1213  1413 D AccessibilitySourceService: enabled a11y services count 0
+06-23 23:46:57.265  1213  1413 D AccessibilitySourceService: a11y source sending 0 issue to sc
+06-23 23:46:57.268   565   899 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+06-23 23:46:57.273   947   947 D CarrierSvcBindHelper: onHandleForceStop: [ph.reviewnatin.app]
+06-23 23:46:57.274   947   947 D CarrierSvcBindHelper: No carrier app for: 0
+06-23 23:46:57.279   565   899 D SafetySourceDataValidat: No cert check requested for package com.google.android.permissioncontroller
+06-23 23:46:57.290   565   585 D ActivityManager: sync unfroze 1513 com.google.android.gms for 6
+06-23 23:46:57.303  1451  1451 I A       : (REDACTED) Created gRPC endpoint for service %s
+06-23 23:46:57.305  3626  3666 I Finsky:background: [50] RECEIVER_ENGAGE_PACKAGE_CHANGED#logWorkEndAndFinishGoAsync: SUCCESS
+06-23 23:46:57.314   565  2076 W ActivityTaskManager: callingPackage for (uid=2000, pid=4931) has no WPC
+06-23 23:46:57.315   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE
+06-23 23:46:57.316   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE
+06-23 23:46:57.316   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-23 23:46:57.316   565   591 W ProcessStats: Tracking association SourceState{8f5102e com.google.android.apps.nexuslauncher/10176 BTop #2682} whose proc state 2 is better than process ProcessState{646f412 com.google.android.googlequicksearchbox:search/10145 pkg=com.google.android.googlequicksearchbox} proc state 14 (0 skipped)
+06-23 23:46:57.317   565  2076 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@7e25c56c does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-23 23:46:57.318   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-23 23:46:57.318   565  2076 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-23 23:46:57.325  1213  1213 D PersistedStoragePackageUninstalledReceiver: Received android.intent.action.PACKAGE_DATA_CLEARED for ph.reviewnatin.app for u0
+06-23 23:46:57.344  3626  3626 I Finsky:background: [2] Memory trim requested to level 40
+06-23 23:46:57.349   799   836 V WindowManagerShell: Transition requested (#21): android.os.BinderProxy@ff14943 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=31 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity } baseActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} topActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} origActivity=null realActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} numActivities=1 lastActiveTime=431897 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@ae0cbc0} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{64b70f9 ph.reviewnatin.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=768 topActivityLetterboxHeight=1280 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 21 }
+06-23 23:46:57.349   565  2076 I ActivityTaskManager: START u0 {act=android.intent.action.VIEW dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+06-23 23:46:57.353  1451  1690 I A       : NGA disabled due to not being eligible.
+06-23 23:46:57.353  1451  1690 I A       : NGA disabled due to not being eligible.
+06-23 23:46:57.360   565   591 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@7e25c56c does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-23 23:46:57.363  1292  1785 I MediaProvider: Begin Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+06-23 23:46:57.372   565   760 D ShortcutService: Saving package item com.google.android.as to /data/system_ce/0/shortcut_service/launchers/com.google.android.as0.xml
+06-23 23:46:57.373  1079  1079 W SplitSelectStateCtor: Missing session instanceIds
+06-23 23:46:57.374  1079  1079 D StatsLog: LAUNCHER_SPLIT_SELECTION_EXIT_INTERRUPTED
+06-23 23:46:57.374   799   836 D WindowManagerShell: setLauncherKeepClearAreaHeight: visible=false, height=350
+06-23 23:46:57.377  1513  4944 I AppBackupStateCleanupIO: Backup state cleanup on uninstall is disabled. [CONTEXT service_id=229 ]
+06-23 23:46:57.378  1513  4946 I Blockstore: [PackageIntentOperation] Checking IS_RESTORE extra. [CONTEXT service_id=258 ]
+06-23 23:46:57.389  1292  1785 D MediaProvider: Deleted 0 Android/media items belonging to ph.reviewnatin.app on /data/user/0/com.google.android.providers.media.module/databases/external.db
+06-23 23:46:57.390  1292  1785 D MediaGrants: Removed 0 media_grants for 0 user for [ph.reviewnatin.app, ph.reviewnatin.app]. Reason: Package orphaned
+06-23 23:46:57.393  1292  1785 I MediaProvider: End Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+06-23 23:46:57.395   370   370 D Zygote  : Forked child process 4950
+06-23 23:46:57.398  1513  4943 I NearbyDiscovery: (REDACTED) processGrantSlicePermission: %s
+06-23 23:46:57.403   565  1706 D CoreBackPreview: Window{2e5b9c3 u0 Splash Screen ph.reviewnatin.app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@ec33cca, mPriority=0, mIsAnimationCallback=false}
+06-23 23:46:57.404  1079  1079 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=31, baseIntent=Intent { act=android.intent.action.VIEW dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity }
+06-23 23:46:57.407   453  3604 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:46:57.412  1021  4939 I Fitness : (REDACTED) FitCleanupIntentOperation received Intent %s
+06-23 23:46:57.415   565   760 D ShortcutService: Saving package item com.google.android.apps.nexuslauncher to /data/system_ce/0/shortcut_service/launchers/com.google.android.apps.nexuslauncher0.xml
+06-23 23:46:57.423   565   599 W ActivityManager: Slow operation: 58ms so far, now at startProcess: done updating battery stats
+06-23 23:46:57.423   565   599 W ActivityManager: Slow operation: 58ms so far, now at startProcess: building log message
+06-23 23:46:57.423   565   599 I ActivityManager: Start proc 4950:ph.reviewnatin.app/u0a209 for next-top-activity {ph.reviewnatin.app/ph.reviewnatin.app.MainActivity}
+06-23 23:46:57.423   565   599 W ActivityManager: Slow operation: 58ms so far, now at startProcess: starting to update pids map
+06-23 23:46:57.424   565   599 W ActivityManager: Slow operation: 59ms so far, now at startProcess: done updating pids map
+06-23 23:46:57.425  4950  4950 I reviewnatin.app: Using CollectorTypeCMC GC.
+06-23 23:46:57.431   565   760 D ShortcutService: Saving package item com.android.systemui to /data/system_ce/0/shortcut_service/launchers/com.android.systemui0.xml
+06-23 23:46:57.431  4950  4950 E reviewnatin.app: Not starting debugger since process cannot load the jdwp agent.
+06-23 23:46:57.433   565   580 I system_server: Background concurrent mark compact GC freed 23MB AllocSpace bytes, 63(1660KB) LOS objects, 44% free, 29MB/53MB, paused 2.096ms,2.917ms total 332.436ms
+06-23 23:46:57.440  1513  1513 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.backup.GMS_MODULE_RESTORE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+06-23 23:46:57.440  1513  1513 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.backup.GMS_MODULE_RESTORE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+06-23 23:46:57.442   565   582 W System  : A resource failed to call HardwareBuffer.close. 
+06-23 23:46:57.442   565   582 W System  : A resource failed to call release. 
+06-23 23:46:57.442   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/LatinIMEGooglePrebuilt/LatinIMEGooglePrebuilt.apk' with 1 weak references
+06-23 23:46:57.445  4950  4950 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+06-23 23:46:57.448  1513  3601 I Icing   : doRemovePackageData ph.reviewnatin.app
+06-23 23:46:57.451   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/base.apk' with 1 weak references
+06-23 23:46:57.451   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/GoogleTTS/GoogleTTS.apk' with 1 weak references
+06-23 23:46:57.452   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_AdsDynamite_installtime.apk' with 1 weak references
+06-23 23:46:57.452   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_CronetDynamite_installtime.apk' with 1 weak references
+06-23 23:46:57.452   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_DynamiteLoader_installtime.apk' with 1 weak references
+06-23 23:46:57.452   565   582 W System  : A resource failed to call HardwareBuffer.close. 
+06-23 23:46:57.452   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_DynamiteModulesA_installtime.apk' with 1 weak references
+06-23 23:46:57.452   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_DynamiteModulesC_installtime.apk' with 1 weak references
+06-23 23:46:57.452   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_GoogleCertificates_installtime.apk' with 1 weak references
+06-23 23:46:57.452   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_MapsDynamite_installtime.apk' with 1 weak references
+06-23 23:46:57.453   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_MeasurementDynamite_installtime.apk' with 1 weak references
+06-23 23:46:57.453   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_all_locale_splits.apk' with 1 weak references
+06-23 23:46:57.453   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_config.en.apk' with 1 weak references
+06-23 23:46:57.453   565   582 W system_server: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~AEwqpSSLZSQhoRAzpNalvw==/com.google.android.gms-2S-D86kzgH86v8pXG7HMaQ==/split_config.xhdpi.apk' with 1 weak references
+06-23 23:46:57.453   565   588 V WindowManager: Sent Transition (#21) createdAt=06-23 23:46:57.319 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=31 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW dat=reviewnatin://subscribe/... flg=0x10000000 pkg=ph.reviewnatin.app cmp=ph.reviewnatin.app/.MainActivity } baseActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} topActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} origActivity=null realActivity=ComponentInfo{ph.reviewnatin.app/ph.reviewnatin.app.MainActivity} numActivities=1 lastActiveTime=431897 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{3d093b8 Task{149abc5 #31 type=standard A=10209:ph.reviewnatin.app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{5212591 ph.reviewnatin.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=768 topActivityLetterboxHeight=1280 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 21 }
+06-23 23:46:57.453   565   588 V WindowManager:     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-23 23:46:57.453   565   588 V WindowManager:     info={id=21 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-23 23:46:57.453   565   588 V WindowManager:         {WCT{RemoteToken{3d093b8 Task{149abc5 #31 type=standard A=10209:ph.reviewnatin.app}}} m=OPEN f=NONE leash=Surface(name=Task=31)/@0xf98e82a sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},
+06-23 23:46:57.453   565   588 V WindowManager:         {WCT{RemoteToken{5ce8c7b Task{a8b451c #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x3f7bb80 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1}
+06-23 23:46:57.453   565   588 V WindowManager:     ]}
+06-23 23:46:57.455   565   582 W System  : A resource failed to call release. 
+06-23 23:46:57.455   565   582 W System  : A resource failed to call release. 
+06-23 23:46:57.455   565   582 W System  : A resource failed to call HardwareBuffer.close. 
+06-23 23:46:57.455   565   582 W System  : A resource failed to call release. 
+06-23 23:46:57.456   799   815 V WindowManagerShell: onTransitionReady(transaction=2426656523072)
+06-23 23:46:57.456   799   836 V WindowManagerShell: onTransitionReady (#21) android.os.BinderProxy@ff14943: {id=21 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@feb18a2} m=OPEN f=NONE leash=Surface(name=Task=31)/@0x4f15a97 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@7e70933} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xc27c484 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1}]}
+06-23 23:46:57.456   799   836 V WindowManagerShell: Transition (#21) android.os.BinderProxy@ff14943@0 ready while (#20) android.os.BinderProxy@a539389@0 is still animating. Notify the animating transition in case they can be merged
+06-23 23:46:57.456   799   836 V WindowManagerShell:    Merge into remote: RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5c743e0, appThread = android.app.IApplicationThread$Stub$Proxy@bc65699, debugName = QuickstepLaunchHome }
+06-23 23:46:57.458   799   836 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#20) android.os.BinderProxy@a539389@0
+06-23 23:46:57.460   565   588 V WindowManager: Finish Transition (#20): created at 06-23 23:46:57.023 collect-started=0.11ms request-sent=0.31ms started=14.09ms ready=31.439ms sent=89.556ms finished=435.556ms
+06-23 23:46:57.464   799   836 V WindowManagerShell: Playing animation for (#21) android.os.BinderProxy@ff14943@0
+06-23 23:46:57.464   799   836 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultMixedHandler@c03ea0f
+06-23 23:46:57.464   799   836 V WindowManagerShell:  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@5956a9c
+06-23 23:46:57.464   799   836 V WindowManagerShell:  try handler com.android.wm.shell.pip.PipTransition@7c21ca5
+06-23 23:46:57.464   799   836 V WindowManagerShell:  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@efea87a
+06-23 23:46:57.464   799   836 V WindowManagerShell:  try handler com.android.wm.shell.recents.RecentsTransitionHandler@21f182b
+06-23 23:46:57.464   799   836 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+06-23 23:46:57.464   799   836 V WindowManagerShell:  try handler com.android.wm.shell.splitscreen.StageCoordinator@cdc9488
+06-23 23:46:57.465   799   836 V WindowManagerShell:  try handler com.android.wm.shell.transition.RemoteTransitionHandler@85cde21
+06-23 23:46:57.465   799   836 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=21 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@feb18a2} m=OPEN f=NONE leash=Surface(name=Task=31)/@0x4f15a97 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@7e70933} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xc27c484 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1}]}
+06-23 23:46:57.465   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=undefined independent=true modes=[OPEN,TO_FRONT] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null},{atype=undefined independent=true modes=[CLOSE,TO_BACK] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@4cf5474, appThread = android.app.IApplicationThread$Stub$Proxy@dba7d9d, debugName = OverlaySwipeBack }}
+06-23 23:46:57.465   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@f1b8212, appThread = android.app.IApplicationThread$Stub$Proxy@c440de3, debugName = LauncherToDream }}
+06-23 23:46:57.465   799   836 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5c743e0, appThread = android.app.IApplicationThread$Stub$Proxy@bc65699, debugName = QuickstepLaunchHome }}
+06-23 23:46:57.465   799   836 V WindowManagerShell:  Delegate animation for (#21) to null
+06-23 23:46:57.465   799   836 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultTransitionHandler@c576ca0
+06-23 23:46:57.465   799   836 V WindowManagerShell: start default transition animation, info = {id=21 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@feb18a2} m=OPEN f=NONE leash=Surface(name=Task=31)/@0x4f15a97 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@7e70933} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xc27c484 sb=Rect(0, 0 - 768, 1280) eb=Rect(0, 0 - 768, 1280) d=0 taskParent=-1}]}
+06-23 23:46:57.465   799   836 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@56d8a69 animAttr=0x13 type=OPEN isEntrance=false
+06-23 23:46:57.465   799   836 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@6061cee animAttr=0x12 type=OPEN isEntrance=true
+06-23 23:46:57.465  4950  4950 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+06-23 23:46:57.465  4950  4950 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+06-23 23:46:57.465   565  2042 W UserManagerService: Requested status bar icon for non-badged user 0
+06-23 23:46:57.465   565  2042 W UserManagerService: Requested status bar icon for non-badged user 0
+06-23 23:46:57.466   565  2042 W UserManagerService: Requested status bar icon for non-badged user 0
+06-23 23:46:57.467   799   836 V WindowManagerShell:  animated by com.android.wm.shell.transition.DefaultTransitionHandler@c576ca0
+06-23 23:46:57.469  4950  4950 D nativeloader: Configuring clns-7 for other apk /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/lib/arm64:/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/ph.reviewnatin.app
+06-23 23:46:57.470  1079  1079 I TopTaskTracker: onTaskRemoved: taskId=30
+06-23 23:46:57.470  1079  1079 I TopTaskTracker: onTaskRemoved: taskId=30
+06-23 23:46:57.474  4950  4950 V GraphicsEnvironment: Currently set values for:
+06-23 23:46:57.474  4950  4950 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+06-23 23:46:57.474  4950  4950 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+06-23 23:46:57.474  4950  4950 V GraphicsEnvironment: Global.Settings values are invalid: number of packages: 0, number of values: 0
+06-23 23:46:57.474  4950  4950 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+06-23 23:46:57.481  4950  4950 W FirebaseApp: Default FirebaseApp failed to initialize because no default options were found. This usually means that com.google.gms:google-services was not applied to your gradle project.
+06-23 23:46:57.481  4950  4950 I FirebaseInitProvider: FirebaseApp initialization unsuccessful
+06-23 23:46:57.482  4950  4950 D Sentry  : io.sentry.auto-init read: false
+06-23 23:46:57.482  4950  4950 D WM-WrkMgrInitializer: Initializing WorkManager with default configuration.
+06-23 23:46:57.490  4950  4950 W SoLoader: Initializing SoLoader: 0
+06-23 23:46:57.490  4950  4950 W SoLoader: Recording new base apk path: /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk
+06-23 23:46:57.490  4950  4950 W SoLoader: Previously recorded 0 base apk paths.
+06-23 23:46:57.491  4950  4950 I SoLoader: Preparing SO source: DirectorySoSource[root = /vendor/lib64 flags = 2]
+06-23 23:46:57.491  4950  4950 I SoLoader: Preparing SO source: DirectorySoSource[root = /system/lib64 flags = 2]
+06-23 23:46:57.491  4950  4950 I SoLoader: Preparing SO source: DirectApkSoSource[root = [/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a]]
+06-23 23:46:57.491  4950  4950 I SoLoader: Preparing SO source: ApplicationSoSource[DirectorySoSource[root = /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/lib/arm64 flags = 0]]
+06-23 23:46:57.491  4950  4950 I SoLoader: init finish: 4 SO sources prepared
+06-23 23:46:57.491  4950  4950 W SoLoader: SoLoader initialized: 8
+06-23 23:46:57.495  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libc++_shared.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.496  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libjsi.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.497  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libfbjni.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.499  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libreactnative.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Entering merged library JNI_OnLoad.
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x6e32626b00
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x6e326fa444
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x6e32715ef8
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x6e32758268
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x6e32832af8
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x6e3283eb5c
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x6e32841a20
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x6e32866e44
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x6e3290ae4c
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x6e32911864
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x6e32918e28
+06-23 23:46:57.499  4950  4950 D jni_lib_merge: About to register 11 actual methods.
+06-23 23:46:57.504  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libreact_codegen_rnscreens.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Entering merged library JNI_OnLoad.
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x6e32626b00
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x6e326fa444
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x6e32715ef8
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x6e32758268
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x6e32832af8
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x6e3283eb5c
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x6e32841a20
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x6e32866e44
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x6e3290ae4c
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x6e32911864
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x6e32918e28
+06-23 23:46:57.504  4950  4950 D jni_lib_merge: About to register 11 actual methods.
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: queryLength=0 size=15
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=gilas pilipinas brisbane training,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=gilas pilipinas brisbane training searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: dcd31d13-f790-488e-ae29-9a422e3e55ed
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=peso closes p61 per dollar,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=peso closes p61 per dollar searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: c7d5c8e2-4365-40d9-8318-581ce97177a5
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=aemond kissing alicent,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=aemond kissing alicent searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: 56f22626-fa06-418c-94ca-2696c7124e78
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=market market mall lease extension,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=market market mall lease extension searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: 21a3092e-84f9-445d-b1f8-d8f51b0dcbcf
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=tecno camon slim,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=tecno camon slim searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: 295d88a9-1e92-4a5d-89b1-2819e59822fe
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=from episode 9 season 4,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=from episode 9 season 4 searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: 96b8ac76-94a2-4a62-b910-24948f9f10ce
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=extra_tall_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{bitmap_url=data:image/jpeg;base64,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,suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=true,is_personal=false,suggest_raw_text=caitlin clark,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=Caitlin Clark searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: f727848f-ec05-4f95-bda1-da021d5723f3
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=extra_tall_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{bitmap_url=data:image/jpeg;base64,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,suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=true,is_personal=false,suggest_raw_text=prime minister keir starmer,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=Keir Starmer searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: bf57b074-ef08-4e20-998f-0fe9f487a3a8
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=june 24 social security check,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=june 24 social security check searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: f44b0b33-0758-4526-84f2-37d9f7d37dc3
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=sony playstation,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=sony playstation searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: 04b37e3e-5ed9-4259-a6b6-42cb92bb65ed
+06-23 23:46:57.504  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=rick and morty season 9 episode 5,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=rick and morty season 9 episode 5 searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: 6e13fd44-2ba6-4661-9fbd-3b1ea30ddba0
+06-23 23:46:57.505  1079  1079 D SearchTargetUtil: layoutType=extra_tall_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{bitmap_url=data:image/jpeg;base64,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
+06-23 23:46:57.505  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=cpd undertaking,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=cpd undertaking searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: fd25a422-a2cf-456c-90be-d2d93a66e551
+06-23 23:46:57.505  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=honkai nexus anima gameplay,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=honkai nexus anima gameplay searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: cacceb5e-f39e-4380-81b6-b139057937f3
+06-23 23:46:57.505  1079  1079 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=blood pressure medication recalled,input_query=android.app.search.Query@7d6d733,group_id=web431601,response_id=92d5a405-c117-4bb2-a6ff-71e849728b9a,support_query_builder=false,} searchAction=blood pressure medication recalled searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=true,suggestion_action_rpc=2,}ParentID: null targetID: 0a249e63-259a-4317-9627-da75aae68c88
+06-23 23:46:57.505  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libreact_codegen_rnsvg.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Entering merged library JNI_OnLoad.
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x6e32626b00
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x6e326fa444
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x6e32715ef8
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x6e32758268
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x6e32832af8
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x6e3283eb5c
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x6e32841a20
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x6e32866e44
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x6e3290ae4c
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x6e32911864
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x6e32918e28
+06-23 23:46:57.505  4950  4950 D jni_lib_merge: About to register 11 actual methods.
+06-23 23:46:57.506  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libreact_codegen_safeareacontext.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.507  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libappmodules.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.514   565  2042 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS
+06-23 23:46:57.517   565  2042 I BroadcastQueue: BOOT_COMPLETED_BROADCAST_COMPLETION_LATENCY_REPORTED action:android.intent.action.BOOT_COMPLETED dispatchLatency:2 completeLatency:59 dispatchRealLatency:2 completeRealLatency:59 receiversSize:1 userId:0 userType:android.os.usertype.full.SYSTEM
+06-23 23:46:57.524  4950  4950 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+06-23 23:46:57.537  4950  4950 I NitroIapOnLoad: Loading NitroIap C++ library...
+06-23 23:46:57.540  4950  4950 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libNitroIap.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes5.dex): ok
+06-23 23:46:57.540  4950  4950 I NitroIapOnLoad: Successfully loaded NitroIap C++ library!
+06-23 23:46:57.545  4950  4950 W unknown:BridgelessReact: ReactHost{0}.startSurface(surfaceId = 0): Schedule
+06-23 23:46:57.545  4950  4950 W unknown:BridgelessReact: ReactHost{0}.attachSurface(surfaceId = 0)
+06-23 23:46:57.545  4950  4978 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask()
+06-23 23:46:57.545  4950  4978 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Start
+06-23 23:46:57.545  4950  4978 W unknown:BridgelessReact: ReactHost{0}.getJSBundleLoader()
+06-23 23:46:57.545  4950  4978 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Creating BridgelessReactContext
+06-23 23:46:57.545  4950  4978 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Creating ReactInstance
+06-23 23:46:57.548  4950  4978 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libhermesvm.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.549  4950  4950 W unknown:BridgelessReact: ReactHost{0}.onHostResume(activity)
+06-23 23:46:57.549  4950  4950 W unknown:BridgelessReact: ReactHost{0}.ReactContext.onHostResume()
+06-23 23:46:57.549  4950  4978 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libhermestooling.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.549  4950  4978 D jni_lib_merge: Entering merged library JNI_OnLoad.
+06-23 23:46:57.549  4950  4978 D jni_lib_merge: Preparing 4 pre-merged libs (including stub)
+06-23 23:46:57.549  4950  4978 D jni_lib_merge: Preparing to register libhermes_executor_so.  onload_func: 0x6f170606ac
+06-23 23:46:57.549  4950  4978 D jni_lib_merge: Preparing to register libhermesinstancejni_so.  onload_func: 0x6f17067c94
+06-23 23:46:57.549  4950  4978 D jni_lib_merge: Preparing to register libjsijniprofiler_so.  onload_func: 0x6f17068480
+06-23 23:46:57.549  4950  4978 D jni_lib_merge: About to register 3 actual methods.
+06-23 23:46:57.552  4950  4950 W HWUI    : Unknown dataspace 0
+06-23 23:46:57.568   565   931 D CoreBackPreview: Window{7e7c38a u0 ph.reviewnatin.app/ph.reviewnatin.app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@ee04e18, mPriority=0, mIsAnimationCallback=false}
+06-23 23:46:57.571  4950  4974 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+06-23 23:46:57.571  4950  4974 I EGL_emulation: Opening libGLESv2_emulation.so
+06-23 23:46:57.577  4950  4974 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+06-23 23:46:57.578  4950  4974 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+06-23 23:46:57.582   159   159 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+06-23 23:46:57.582  4950  4974 I Gralloc4: mapper 4.x is not supported
+06-23 23:46:57.585  4950  4978 I ExpoModulesCore: ✅ AppContext was initialized
+06-23 23:46:57.599  4950  4978 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Loading JS Bundle
+06-23 23:46:57.599  4950  4978 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): DevSupportManager.onNewReactContextCreated()
+06-23 23:46:57.599  4950  4978 W unknown:BridgelessReact: ReactHost{0}.startSurface(surfaceId = 0): Execute
+06-23 23:46:57.603  4950  4950 W unknown:BridgelessReact: ReactHost{0}.ReactContext.onHostResume()
+06-23 23:46:57.603  4950  4950 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Executing ReactInstanceEventListeners
+06-23 23:46:57.627  4950  4979 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libworklets.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.630  4950  4979 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libexpo-modules-core.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.631  4950  4979 W BridgelessReactContext: [WARNING] Bridgeless doesn't support CatalystInstance. Accessing an API that's not part of the new architecture is not encouraged usage.
+06-23 23:46:57.656  4950  4979 I ExpoModulesCore: ✅ JSI interop was installed
+06-23 23:46:57.660  4950  4979 I ExpoModulesCore: ✅ Constants were exported
+06-23 23:46:57.684  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class expo.modules.kotlin.views.GroupViewManagerWrapper
+06-23 23:46:57.684  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.uimanager.LayoutShadowNode
+06-23 23:46:57.685  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenContainerViewManager
+06-23 23:46:57.687  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class expo.modules.kotlin.views.SimpleViewManagerWrapper
+06-23 23:46:57.687  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.tabs.host.TabsHostViewManager
+06-23 23:46:57.688  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenStackHeaderConfigViewManager
+06-23 23:46:57.688  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenStackHeaderSubviewManager
+06-23 23:46:57.689  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class io.invertase.googlemobileads.ReactNativeGoogleMobileAdsNativeAdViewManager
+06-23 23:46:57.689  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.scrollviewmarker.ScrollViewMarkerViewManager
+06-23 23:46:57.690  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenContentWrapperManager
+06-23 23:46:57.690  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class io.invertase.googlemobileads.ReactNativeGoogleMobileAdsMediaViewManager
+06-23 23:46:57.690  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class io.invertase.googlemobileads.ReactNativeGoogleMobileAdsBannerAdViewManager
+06-23 23:46:57.691  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.stack.screen.StackScreenViewManager
+06-23 23:46:57.692  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaViewManager
+06-23 23:46:57.693  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaViewShadowNode
+06-23 23:46:57.693  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenViewManager
+06-23 23:46:57.693  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.stack.header.config.StackHeaderConfigViewManager
+06-23 23:46:57.693  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class io.sentry.react.RNSentryOnDrawReporterManager
+06-23 23:46:57.694  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaProviderManager
+06-23 23:46:57.694  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.SearchBarManager
+06-23 23:46:57.694  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.stack.host.StackHostViewManager
+06-23 23:46:57.695  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class io.sentry.react.replay.RNSentryReplayMaskManager
+06-23 23:46:57.695  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenFooterManager
+06-23 23:46:57.695  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class io.sentry.react.replay.RNSentryReplayUnmaskManager
+06-23 23:46:57.696  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ModalScreenViewManager
+06-23 23:46:57.696  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.safearea.SafeAreaViewManager
+06-23 23:46:57.696  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenStackViewManager
+06-23 23:46:57.696  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.stack.header.subview.StackHeaderSubviewViewManager
+06-23 23:46:57.696  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.reactnative.maskedview.RNCMaskedViewManager
+06-23 23:46:57.697  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.tabs.screen.TabsScreenViewManager
+06-23 23:46:57.724  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$DefsViewManager
+06-23 23:46:57.725  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.VirtualViewManager$RenderableShadowNode
+06-23 23:46:57.726  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeMergeManager
+06-23 23:46:57.726  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.safeareaview.ReactSafeAreaViewManager
+06-23 23:46:57.727  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$LinearGradientManager
+06-23 23:46:57.731  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeGaussianBlurManager
+06-23 23:46:57.731  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ReactProgressBarViewManager
+06-23 23:46:57.731  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollViewManager
+06-23 23:46:57.732  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextViewManager
+06-23 23:46:57.733  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeColorMatrixManager
+06-23 23:46:57.733  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollContainerViewManager
+06-23 23:46:57.735  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$ClipPathViewManager
+06-23 23:46:57.736  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$SymbolManager
+06-23 23:46:57.736  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$PatternManager
+06-23 23:46:57.737  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeBlendManager
+06-23 23:46:57.737  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.view.ReactViewManager
+06-23 23:46:57.738  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.SvgViewManager
+06-23 23:46:57.738  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchManager
+06-23 23:46:57.739  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$UseViewManager
+06-23 23:46:57.739  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$CircleViewManager
+06-23 23:46:57.739  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$TSpanViewManager
+06-23 23:46:57.740  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FilterManager
+06-23 23:46:57.740  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$MarkerManager
+06-23 23:46:57.741  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.gesturehandler.react.RNGestureHandlerButtonViewManager
+06-23 23:46:57.741  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.modal.ReactModalHostManager
+06-23 23:46:57.742  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$ForeignObjectManager
+06-23 23:46:57.743  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$EllipseViewManager
+06-23 23:46:57.743  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$LineViewManager
+06-23 23:46:57.743  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeFloodManager
+06-23 23:46:57.744  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$GroupViewManager
+06-23 23:46:57.744  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$TextViewManager
+06-23 23:46:57.744  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$ImageViewManager
+06-23 23:46:57.745  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeCompositeManager
+06-23 23:46:57.745  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.image.ReactImageManager
+06-23 23:46:57.746  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$RadialGradientManager
+06-23 23:46:57.746  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$MaskManager
+06-23 23:46:57.747  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.unimplementedview.ReactUnimplementedViewManager
+06-23 23:46:57.747  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$RectViewManager
+06-23 23:46:57.747  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$TextPathViewManager
+06-23 23:46:57.748  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactScrollViewManager
+06-23 23:46:57.748  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeOffsetManager
+06-23 23:46:57.749  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$PathViewManager
+06-23 23:46:57.749  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.drawer.ReactDrawerLayoutManager
+06-23 23:46:57.749  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.swiperefresh.SwipeRefreshLayoutManager
+06-23 23:46:57.751  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputManager
+06-23 23:46:57.752  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.SelectableTextViewManager
+06-23 23:46:57.753  4950  4979 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.gesturehandler.react.RNGestureHandlerRootViewManager
+06-23 23:46:57.763  4950  4979 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/librnscreens.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes5.dex): ok
+06-23 23:46:57.765  4950  4979 I ReactNativeJS: Running "main"
+06-23 23:46:57.768   799   836 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#21) android.os.BinderProxy@ff14943@0
+06-23 23:46:57.769   565   588 V WindowManager: Finish Transition (#21): created at 06-23 23:46:57.319 collect-started=0.029ms request-sent=28.823ms started=29.901ms ready=130.067ms sent=132.747ms finished=449.351ms
+06-23 23:46:57.770  1079  1079 D VRI[NexusLauncherActivity]: visibilityChanged oldVisibility=true newVisibility=false
+06-23 23:46:57.770   799   836 V WindowManagerShell: Track 0 became idle
+06-23 23:46:57.770   799   836 V WindowManagerShell: All active transition animations finished
+06-23 23:46:57.770   565   931 W UserManagerService: Requested status bar icon for non-badged user 0
+06-23 23:46:57.771   565   931 W UserManagerService: Requested status bar icon for non-badged user 0
+06-23 23:46:57.784  1079  1079 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=7}
+06-23 23:46:57.796  4950  4979 D nativeloader: Load /data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!/lib/arm64-v8a/libreanimated.so using ns clns-7 from class loader (caller=/data/app/~~OS7cJoEtWxKeYbqULWqrxw==/ph.reviewnatin.app-bxoZoSaUvRaIVAuEwPIg4A==/base.apk!classes3.dex): ok
+06-23 23:46:57.872  4950  4950 I ExpoModulesCore: ✅ JSI interop was installed
+06-23 23:46:57.876  4950  4979 V AsyncStorageExpoMigration: No scoped database found
+06-23 23:46:57.879   565  2046 D FileUtils: Rounded bytes from 2070597632 to 4000000000
+06-23 23:46:57.879   565  2046 D FileUtils: Rounded bytes from 2070597632 to 4000000000
+06-23 23:46:57.955  4950  4998 I WebViewFactory: Loading com.google.android.webview version 149.0.7827.91 (code 782709103)
+06-23 23:46:57.956  4950  4998 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=d9597fe1 mResDir=null mSplitDirs=[] mOverlayDirs=[/product/overlay/NavigationBarModeGestural/NavigationBarModeGesturalOverlay.apk,/data/resource-cache/com.android.systemui-neutral-6hBQ.frro,/data/resource-cache/com.android.systemui-accent-gTgK.frro,/data/resource-cache/com.android.systemui-dynamic-tW2c.frro] mLibDirs=[/data/app/~~83l8symif-QimyEqDZ2x8w==/com.google.android.webview-IXBUSDN_FaA29qOuKmE5ew==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v35 mCompatInfo={320dpi always-compat} mLoaders=[]}
+06-23 23:46:57.957  4950  4998 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+06-23 23:46:57.957  4950  4998 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+06-23 23:46:57.958  4950  4998 D nativeloader: Configuring clns-8 for other apk /data/app/~~83l8symif-QimyEqDZ2x8w==/com.google.android.webview-IXBUSDN_FaA29qOuKmE5ew==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~83l8symif-QimyEqDZ2x8w==/com.google.android.webview-IXBUSDN_FaA29qOuKmE5ew==/lib/arm64:/data/app/~~83l8symif-QimyEqDZ2x8w==/com.google.android.webview-IXBUSDN_FaA29qOuKmE5ew==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand
+06-23 23:46:57.983  1079  1079 D BaseDepthController: setSurface:
+06-23 23:46:57.983  1079  1079 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+06-23 23:46:57.983  1079  1079 D BaseDepthController: 	mSurface: null
+06-23 23:46:57.983  1079  1079 D BaseDepthController: mSurface is null and mCurrentBlur is: 0
+06-23 23:46:57.986  1079  1079 D StateManager: goToState - fromState: Normal, toState: Normal, partial trace:
+06-23 23:46:57.986  1079  1079 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:4)
+06-23 23:46:57.986  1079  1079 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:1)
+06-23 23:46:57.986  1079  1079 D StateManager: 	at com.android.launcher3.statemanager.StatefulActivity.onStop(go/retraceme 2855a437b73635ce9cad76b9289087e631bbb67fc90008a0da13d343a00e5041:34)
+06-23 23:46:57.986  1079  1079 D StatsLog: LAUNCHER_ONSTOP
+06-23 23:46:57.986  1079  1449 D OneSearchSuggestProvider: Shut down the binder channel
+06-23 23:46:57.988  1079  2136 I IPCThreadState: oneway function results for code 2 on binder at 0xb400006f518a62b0 will be dropped but finished with status UNKNOWN_TRANSACTION
+06-23 23:46:57.988   565   588 I ActivityTaskManager: Displayed ph.reviewnatin.app/.MainActivity for user 0: +684ms
+06-23 23:46:57.989  1079  1079 D StatsLog: LAUNCHER_GOOGLE_SEARCH_RESTORE_LIST_SIZE_AFTER_ACTIVITY_RESTART
+06-23 23:46:57.992  4950  4998 I cr_WVCFactoryProvider: version=149.0.7827.91 (782709103) minSdkVersion=29 multiprocess=true packageId=2 splits=<none>
+06-23 23:46:57.997  4950  4998 D nativeloader: Load /data/app/~~83l8symif-QimyEqDZ2x8w==/com.google.android.webview-IXBUSDN_FaA29qOuKmE5ew==/base.apk!/lib/arm64-v8a/libwebviewchromium.so using ns clns-8 from class loader (caller=/data/app/~~83l8symif-QimyEqDZ2x8w==/com.google.android.webview-IXBUSDN_FaA29qOuKmE5ew==/base.apk): ok
+06-23 23:46:57.998  4950  4998 D nativeloader: Load /system/lib64/libwebviewchromium_plat_support.so using ns clns-8 from class loader (caller=/data/app/~~83l8symif-QimyEqDZ2x8w==/com.google.android.webview-IXBUSDN_FaA29qOuKmE5ew==/base.apk): ok
+06-23 23:46:57.999  4950  5009 I chromium: [0623/234657.999340:INFO:android_webview/browser/variations/variations_seed_loader.cc:67] Failed to open file for reading.: No such file or directory (2)
+06-23 23:46:57.999  4950  5009 I chromium: [0623/234657.999666:INFO:android_webview/browser/variations/variations_seed_loader.cc:67] Failed to open file for reading.: No such file or directory (2)
+06-23 23:46:58.006  4950  4998 I cr_LibraryLoader: Successfully loaded native library
+06-23 23:46:58.006  4950  4998 I cr_CachingUmaRecorder: Flushed 41 samples from 19 histograms, 0 samples were dropped.
+06-23 23:46:58.021   565   677 I ImeTracker: ph.reviewnatin.app:41356cbc: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+06-23 23:46:58.022   565   677 I ImeTracker: ph.reviewnatin.app:41356cbc: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-23 23:46:58.024  1230  1230 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3157 
+06-23 23:46:58.024   453  3604 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:46:58.025  1230  1230 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2248 repeatCheckTimes = 0, locked = false
+06-23 23:46:58.025  1230  1230 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1986 onStartInput(EditorInfo{EditorInfo{packageName=ph.reviewnatin.app, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+06-23 23:46:58.026  1230  1230 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2248 repeatCheckTimes = 1, locked = false
+06-23 23:46:58.027  1230  1230 I AndroidIME: InputBundleManager.loadActiveInputBundleId():450 loadActiveInputBundleId: und-Latn-x-password, password
+06-23 23:46:58.027   565  2046 W PackageConfigPersister: App-specific configuration not found for packageName: ph.reviewnatin.app and userId: 0
+06-23 23:46:58.030  4950  5004 D TrafficStats: tagSocket(148) with statsTag=0xffffffff, statsUid=-1
+06-23 23:46:58.036  4950  5005 D TrafficStats: tagSocket(143) with statsTag=0xffffffff, statsUid=-1
+06-23 23:46:58.038  4950  4998 D TrafficStats: tagSocket(147) with statsTag=0xffffffff, statsUid=-1
+06-23 23:46:58.043   799   865 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@5038a4a
+06-23 23:46:58.043   565  2046 D CoreBackPreview: Window{2e5b9c3 u0 Splash Screen ph.reviewnatin.app}: Setting back callback null
+06-23 23:46:58.044   565  2076 W InputManager-JNI: Input channel object '2e5b9c3 Splash Screen ph.reviewnatin.app (client)' was disposed without first being removed with the input manager!
+06-23 23:46:58.056  1021  1349 I FontLog : (REDACTED) Received query %s, URI %s
+06-23 23:46:58.057  1021  1349 I FontLog : (REDACTED) Query [%s] resolved to %s
+06-23 23:46:58.057  1021  1349 I FontLog : (REDACTED) Fetch %s end status %s
+06-23 23:46:58.059  1021  1349 I FontLog : (REDACTED) Pulling font file for id = %d, cache size = %d
+06-23 23:46:58.061  1021  1349 I FontLog : (REDACTED) Pulling font file for id = %d, cache size = %d
+06-23 23:46:58.404  1079  1402 D EGL_emulation: app_time_stats: avg=20.84ms min=0.76ms max=502.23ms count=40
+06-23 23:46:58.988  4950  4974 D EGL_emulation: app_time_stats: avg=9.79ms min=0.84ms max=18.58ms count=61
+06-23 23:46:59.472  4950  4963 W reviewnatin.app: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~83l8symif-QimyEqDZ2x8w==/com.google.android.webview-IXBUSDN_FaA29qOuKmE5ew==/base.apk' with 2 weak references
+06-23 23:46:59.472  4950  4963 W System  : A resource failed to call release. 
+06-23 23:46:59.988  4950  4974 D EGL_emulation: app_time_stats: avg=16.66ms min=15.72ms max=17.66ms count=60
+06-23 23:47:00.029  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:00.029  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:00.029  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:00.029  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:00.029  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:00.029  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:00.029  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:00.029  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:00.029  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:00.029  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:00.029  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:00.029  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:00.029  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+06-23 23:47:00.029  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+06-23 23:47:00.031  1079  1079 D SsBaseTemplateCard: No text view can be set up
+06-23 23:47:00.031  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:00.031  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:00.031  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:00.031  1079  1079 I SsBaseTemplateCard: Secondary card pane is null
+06-23 23:47:00.038   799   799 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+06-23 23:47:00.044   799   977 D EGL_emulation: app_time_stats: avg=6065.57ms min=6065.57ms max=6065.57ms count=1
+06-23 23:47:00.856   565  1384 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+06-23 23:47:00.988  4950  4974 D EGL_emulation: app_time_stats: avg=16.46ms min=10.11ms max=21.04ms count=60
+06-23 23:47:02.005  4950  4974 D EGL_emulation: app_time_stats: avg=15.94ms min=2.45ms max=29.54ms count=61
+06-23 23:47:02.270   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-23 23:47:02.270   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-23 23:47:02.271   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10146} in 2ms
+06-23 23:47:02.271   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-23 23:47:02.271   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-23 23:47:02.271   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={20146} in 0ms
+06-23 23:47:02.303   565  2076 D OomAdjuster: Not killing cached processes
+06-23 23:47:03.005  4950  4974 D EGL_emulation: app_time_stats: avg=2.70ms min=0.92ms max=3.97ms count=60
+06-23 23:47:03.102  4950  5030 D ProfileInstaller: Installing profile for ph.reviewnatin.app
+06-23 23:47:04.005  4950  4974 D EGL_emulation: app_time_stats: avg=2.77ms min=1.34ms max=3.68ms count=60
+06-23 23:47:05.021  4950  4974 D EGL_emulation: app_time_stats: avg=3.03ms min=2.25ms max=3.83ms count=61
+06-23 23:47:06.038  4950  4974 D EGL_emulation: app_time_stats: avg=2.77ms min=1.75ms max=3.51ms count=61
+06-23 23:47:07.038  4950  4974 D EGL_emulation: app_time_stats: avg=2.93ms min=1.82ms max=3.75ms count=60
+06-23 23:47:07.087   565   660 D ActivityManager: freezing 1567 com.google.android.apps.messaging
+06-23 23:47:07.244   565   660 D ActivityManager: freezing 3671 com.google.android.documentsui
+06-23 23:47:07.245   565   660 D ActivityManager: freezing 2950 com.android.chrome
+06-23 23:47:07.246   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-23 23:47:07.246   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-23 23:47:07.246   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10098} in 0ms
+06-23 23:47:07.246   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-23 23:47:07.246   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-23 23:47:07.246   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10146} in 0ms
+06-23 23:47:07.325   565   660 D ActivityManager: freezing 1213 com.google.android.permissioncontroller
+06-23 23:47:07.326   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-23 23:47:07.326   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-23 23:47:07.326   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10187} in 0ms
+06-23 23:47:07.347   565   660 D ActivityManager: freezing 3626 com.android.vending:background
+06-23 23:47:07.348   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-23 23:47:07.348   565   711 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-23 23:47:07.348   565   711 D InetDiagMessage: Destroyed live tcp sockets for uids={10141} in 0ms
+06-23 23:47:07.574   182  4908 I keystore2: system/security/keystore2/watchdog/src/lib.rs:319 - Watchdog thread idle -> terminating. Have a great day.
+06-23 23:47:07.998   565   660 D ActivityManager: freezing 1451 com.google.android.googlequicksearchbox:search
+06-23 23:47:08.055  4950  4974 D EGL_emulation: app_time_stats: avg=2.94ms min=1.73ms max=4.05ms count=61
+06-23 23:47:09.055  4950  4974 D EGL_emulation: app_time_stats: avg=2.96ms min=2.00ms max=3.74ms count=60
+06-23 23:47:10.071  4950  4974 D EGL_emulation: app_time_stats: avg=2.89ms min=1.07ms max=3.47ms count=61
+06-23 23:47:11.088  4950  4974 D EGL_emulation: app_time_stats: avg=3.17ms min=2.30ms max=3.95ms count=61
+06-23 23:47:12.104  4950  4974 D EGL_emulation: app_time_stats: avg=2.85ms min=1.81ms max=4.59ms count=61
+06-23 23:47:12.515   565  2076 D OomAdjuster: Not killing cached processes
+06-23 23:47:12.515  1513  1513 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.backup.GMS_MODULE_RESTORE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+06-23 23:47:13.122  4950  4974 D EGL_emulation: app_time_stats: avg=2.76ms min=1.43ms max=3.92ms count=61
+06-23 23:47:13.989   799   977 D EGL_emulation: app_time_stats: avg=13945.75ms min=13945.75ms max=13945.75ms count=1
+06-23 23:47:14.138  4950  4974 D EGL_emulation: app_time_stats: avg=2.81ms min=1.83ms max=3.62ms count=61
+06-23 23:47:15.138  4950  4974 D EGL_emulation: app_time_stats: avg=2.78ms min=1.86ms max=3.66ms count=60
+06-23 23:47:16.155  4950  4974 D EGL_emulation: app_time_stats: avg=2.84ms min=1.70ms max=3.56ms count=61
+06-23 23:47:16.177  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 512(10MB) LOS objects, 33% free, 48MB/72MB, paused 346us,586us total 102.939ms
+06-23 23:47:17.156  4950  4974 D EGL_emulation: app_time_stats: avg=2.96ms min=2.19ms max=5.29ms count=60
+06-23 23:47:17.189  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 516(10MB) LOS objects, 32% free, 50MB/74MB, paused 889us,670us total 120.889ms
+06-23 23:47:18.171  4950  4974 D EGL_emulation: app_time_stats: avg=3.04ms min=2.50ms max=3.72ms count=61
+06-23 23:47:19.171  4950  4974 D EGL_emulation: app_time_stats: avg=2.88ms min=2.02ms max=3.82ms count=60
+06-23 23:47:19.557  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 12MB AllocSpace bytes, 518(10MB) LOS objects, 30% free, 55MB/79MB, paused 510us,517us total 101.981ms
+06-23 23:47:20.188  4950  4974 D EGL_emulation: app_time_stats: avg=3.04ms min=1.71ms max=3.98ms count=61
+06-23 23:47:20.436  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 520(10MB) LOS objects, 29% free, 57MB/81MB, paused 503us,1.136ms total 106.124ms
+06-23 23:47:21.204  4950  4974 D EGL_emulation: app_time_stats: avg=2.95ms min=2.20ms max=3.77ms count=61
+06-23 23:47:21.306  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 526(10MB) LOS objects, 28% free, 59MB/83MB, paused 586us,516us total 114.424ms
+06-23 23:47:22.205  4950  4974 D EGL_emulation: app_time_stats: avg=3.08ms min=2.04ms max=3.87ms count=60
+06-23 23:47:22.232  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 518(10MB) LOS objects, 27% free, 61MB/85MB, paused 706us,392us total 107.803ms
+06-23 23:47:22.568   565   660 D ActivityManager: freezing 1513 com.google.android.gms
+06-23 23:47:23.131  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 520(10MB) LOS objects, 27% free, 64MB/88MB, paused 669us,443us total 136.243ms
+06-23 23:47:23.221  4950  4974 D EGL_emulation: app_time_stats: avg=3.01ms min=2.05ms max=4.23ms count=61
+06-23 23:47:24.102  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 528(10MB) LOS objects, 26% free, 66MB/90MB, paused 534us,502us total 123.804ms
+06-23 23:47:24.221  4950  4974 D EGL_emulation: app_time_stats: avg=2.92ms min=2.05ms max=3.82ms count=60
+06-23 23:47:25.177  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 516(10MB) LOS objects, 25% free, 68MB/92MB, paused 1.016ms,470us total 159.609ms
+06-23 23:47:25.222  4950  4974 D EGL_emulation: app_time_stats: avg=3.02ms min=1.82ms max=4.19ms count=60
+06-23 23:47:25.356  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 108MB AllocSpace bytes, 48(960KB) LOS objects, 26% free, 66MB/90MB, paused 398us,476us total 131.723ms
+06-23 23:47:26.238  4950  4974 D EGL_emulation: app_time_stats: avg=3.19ms min=1.99ms max=3.90ms count=61
+06-23 23:47:26.298  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 12MB AllocSpace bytes, 526(10MB) LOS objects, 25% free, 70MB/94MB, paused 889us,516us total 132.417ms
+06-23 23:47:27.255  4950  4974 D EGL_emulation: app_time_stats: avg=3.09ms min=2.41ms max=3.69ms count=61
+06-23 23:47:27.296  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 526(10MB) LOS objects, 24% free, 72MB/96MB, paused 482us,554us total 143.484ms
+06-23 23:47:28.272  4950  4974 D EGL_emulation: app_time_stats: avg=2.87ms min=1.11ms max=3.80ms count=61
+06-23 23:47:28.461  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 532(10MB) LOS objects, 24% free, 74MB/98MB, paused 758us,664us total 180.600ms
+06-23 23:47:29.288  4950  4974 D EGL_emulation: app_time_stats: avg=2.67ms min=1.57ms max=3.57ms count=61
+06-23 23:47:29.555  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 526(10MB) LOS objects, 23% free, 77MB/101MB, paused 480us,610us total 158.476ms
+06-23 23:47:30.305  4950  4974 D EGL_emulation: app_time_stats: avg=3.02ms min=1.49ms max=4.00ms count=61
+06-23 23:47:30.514  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 538(10MB) LOS objects, 23% free, 79MB/103MB, paused 694us,403us total 147.894ms
+06-23 23:47:31.321  4950  4974 D EGL_emulation: app_time_stats: avg=2.77ms min=1.31ms max=3.63ms count=61
+06-23 23:47:31.630  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 532(10MB) LOS objects, 22% free, 82MB/106MB, paused 538us,470us total 173.046ms
+06-23 23:47:32.322  4950  4974 D EGL_emulation: app_time_stats: avg=2.78ms min=1.68ms max=4.09ms count=60
+06-23 23:47:32.715  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 530(10MB) LOS objects, 22% free, 84MB/108MB, paused 480us,1.134ms total 153.900ms
+06-23 23:47:33.338  4950  4974 D EGL_emulation: app_time_stats: avg=2.73ms min=0.90ms max=3.70ms count=61
+06-23 23:47:33.508   867  2283 D ApfFilter: (wlan0): Adding RA fe80::2 -> ff02::1 1800s fec0::/64 86400s/14400s DNS 1200000s fec0::3 
+06-23 23:47:33.869  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 540(10MB) LOS objects, 21% free, 87MB/111MB, paused 916us,419us total 184.314ms
+06-23 23:47:34.355  4950  4974 D EGL_emulation: app_time_stats: avg=2.75ms min=1.02ms max=3.94ms count=61
+06-23 23:47:35.009  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 542(10MB) LOS objects, 21% free, 89MB/113MB, paused 1.384ms,941us total 210.268ms
+06-23 23:47:35.355  4950  4974 D EGL_emulation: app_time_stats: avg=2.96ms min=2.23ms max=4.63ms count=60
+06-23 23:47:35.363  4950  4981 I reviewnatin.app: Waiting for a blocking GC Alloc
+06-23 23:47:35.417  4950  4950 I reviewnatin.app: Waiting for a blocking GC Alloc
+06-23 23:47:35.435  4950  4974 I reviewnatin.app: Waiting for a blocking GC Alloc
+06-23 23:47:35.496  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 102MB AllocSpace bytes, 152(3040KB) LOS objects, 21% free, 86MB/110MB, paused 235us,435us total 160.912ms
+06-23 23:47:35.496  4950  4981 I reviewnatin.app: WaitForGcToComplete blocked Alloc on Background for 132.869ms
+06-23 23:47:35.496  4950  4981 I reviewnatin.app: Starting a blocking GC Alloc
+06-23 23:47:35.496  4950  4950 I reviewnatin.app: WaitForGcToComplete blocked Alloc on Background for 79.483ms
+06-23 23:47:35.496  4950  4950 I reviewnatin.app: Starting a blocking GC Alloc
+06-23 23:47:35.496  4950  4974 I reviewnatin.app: WaitForGcToComplete blocked Alloc on Background for 61.244ms
+06-23 23:47:35.496  4950  4974 I reviewnatin.app: Starting a blocking GC Alloc
+06-23 23:47:35.656  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 74MB AllocSpace bytes, 30(600KB) LOS objects, 21% free, 86MB/110MB, paused 635us,620us total 152.017ms
+06-23 23:47:36.371  4950  4974 D EGL_emulation: app_time_stats: avg=16.32ms min=2.18ms max=62.62ms count=58
+06-23 23:47:36.869  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 12MB AllocSpace bytes, 536(10MB) LOS objects, 21% free, 90MB/114MB, paused 668us,1.116ms total 246.154ms
+06-23 23:47:37.388  4950  4974 D EGL_emulation: app_time_stats: avg=16.62ms min=14.41ms max=18.15ms count=61
+06-23 23:47:37.990  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 536(10MB) LOS objects, 20% free, 92MB/116MB, paused 581us,386us total 182.326ms
+06-23 23:47:38.404  4950  4974 D EGL_emulation: app_time_stats: avg=16.65ms min=15.62ms max=17.79ms count=61
+06-23 23:47:39.136  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 540(10MB) LOS objects, 20% free, 95MB/119MB, paused 521us,426us total 204.534ms
+06-23 23:47:39.405  4950  4974 D EGL_emulation: app_time_stats: avg=16.66ms min=15.60ms max=17.48ms count=60
+06-23 23:47:40.182  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 13MB AllocSpace bytes, 544(10MB) LOS objects, 19% free, 97MB/121MB, paused 575us,502us total 193.475ms
+06-23 23:47:40.421  4950  4974 D EGL_emulation: app_time_stats: avg=16.66ms min=15.86ms max=17.97ms count=61
+06-23 23:47:41.356  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 14MB AllocSpace bytes, 552(10MB) LOS objects, 19% free, 99MB/123MB, paused 542us,450us total 194.041ms
+06-23 23:47:41.438  4950  4974 D EGL_emulation: app_time_stats: avg=16.65ms min=16.08ms max=17.23ms count=61
+06-23 23:47:42.415  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 14MB AllocSpace bytes, 550(10MB) LOS objects, 18% free, 102MB/126MB, paused 2.037ms,811us total 231.001ms
+06-23 23:47:42.438  4950  4974 D EGL_emulation: app_time_stats: avg=16.66ms min=16.00ms max=17.19ms count=60
+06-23 23:47:43.329  5038  5038 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+06-23 23:47:43.333  5038  5038 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+06-23 23:47:43.365   159   159 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+06-23 23:47:43.366  5038  5040 I Gralloc4: mapper 4.x is not supported
+06-23 23:47:43.439  4950  4974 D EGL_emulation: app_time_stats: avg=16.68ms min=15.85ms max=17.42ms count=60
+06-23 23:47:43.527  5043  5043 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+06-23 23:47:43.556  5043  5043 I AndroidRuntime: Using default boot image
+06-23 23:47:43.556  5043  5043 I AndroidRuntime: Leaving lock profiling enabled
+06-23 23:47:43.561  5043  5043 I app_process: Using CollectorTypeCMC GC.
+06-23 23:47:43.614  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 14MB AllocSpace bytes, 544(10MB) LOS objects, 18% free, 104MB/128MB, paused 666us,704us total 217.737ms
+06-23 23:47:43.722  5043  5043 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+06-23 23:47:43.744  5043  5043 D nativeloader: Load libicu_jni.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+06-23 23:47:43.746  5043  5043 D app_process: u_setTimeZoneFilesDirectory("/apex/com.android.tzdata/etc/tz/versioned/8/icu") succeeded. 
+06-23 23:47:43.746  5043  5043 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt75l.dat
+06-23 23:47:43.757  5043  5043 D nativeloader: Load libjavacore.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+06-23 23:47:43.761  5043  5043 D nativeloader: Load libopenjdk.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+06-23 23:47:43.782  5043  5043 W app_process: ClassLoaderContext shared library size mismatch. Expected=2, found=0 (PCL[]{PCL[/system/framework/android.test.base.jar*724373495]#PCL[/system/framework/android.test.mock.jar*1452759902]} | PCL[])
+06-23 23:47:43.786  5043  5043 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[]{PCL[/system/framework/android.test.runner.jar*2496447986]#PCL[/system/framework/android.test.base.jar*724373495]} | PCL[/system/framework/android.test.runner.jar*2496447986])
+06-23 23:47:43.886  5043  5043 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+06-23 23:47:43.886  5043  5043 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+06-23 23:47:43.897  5043  5043 D UiAutomationConnection: Created on user UserHandle{0}
+06-23 23:47:43.897  5043  5043 I UiAutomation: Initialized for user 0 on display 0
+06-23 23:47:43.897  5043  5043 W UiAutomation: Created with deprecatead constructor, assumes DEFAULT_DISPLAY
+06-23 23:47:43.911   565  2046 D AccessibilityManagerService: changeCurrentUserForTestAutomationIfNeededLocked(0): ignoring because device doesn't support visible background users
+06-23 23:47:43.924   565  2046 I UiAutomationManager: Registering UiTestAutomationService (id=com.android.server.accessibility/UiAutomation, flags=0x0) when called by user 0
+06-23 23:47:43.958   565  2046 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+06-23 23:47:43.976   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.976   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.976   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.976   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.976   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.976   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.976   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.976   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.977   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.977   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.977   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.977   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.978   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.978   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.978   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.978   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.979   565   931 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+06-23 23:47:43.980   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.981   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:43.987   565   565 D BatterySaverPolicy: accessibility changed to true, updating policy.
+06-23 23:47:43.991  1306  1808 I AiAiEcho: Settings changed for uri: content://settings/secure/accessibility_enabled
+06-23 23:47:44.020  1306  1808 I AiAiEcho: Settings changed for uri: content://settings/secure/accessibility_enabled
+06-23 23:47:44.026  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:44.026  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:44.026  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:44.026  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.027  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.029  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:44.031  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:44.031  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:44.035  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+06-23 23:47:44.037  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface media_data_manager with targets# 0 (types=[])
+06-23 23:47:44.037  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+06-23 23:47:44.039  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+06-23 23:47:44.039  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface media_data_manager with targets# 0 (types=[])
+06-23 23:47:44.039  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+06-23 23:47:44.040   799   799 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+06-23 23:47:44.040   799   799 D SsMediaDataProvider: Forwarding Smartspace updates []
+06-23 23:47:44.040   799   799 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+06-23 23:47:44.040   799   799 D SsMediaDataProvider: Forwarding Smartspace updates []
+06-23 23:47:44.049  1079  1079 D SsBaseTemplateCard: No text view can be set up
+06-23 23:47:44.049  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:44.049  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:44.049  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:44.049  1079  1079 I SsBaseTemplateCard: Secondary card pane is null
+06-23 23:47:44.052  1079  1079 D SsBaseTemplateCard: No text view can be set up
+06-23 23:47:44.052  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:44.052  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:44.052  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:44.052  1079  1079 I SsBaseTemplateCard: Secondary card pane is null
+06-23 23:47:44.446  4950  4974 D EGL_emulation: app_time_stats: avg=16.50ms min=2.29ms max=26.99ms count=60
+06-23 23:47:45.010  5043  5043 W AccessibilityNodeInfoDumper: Fetch time: 2ms
+06-23 23:47:45.014   565   899 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+06-23 23:47:45.014   565   899 D AccessibilityManagerService: restoreCurrentUserForTestAutomationIfNeededLocked(): ignoring because device doesn't support visible background users
+06-23 23:47:45.014   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.014   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.014   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.014   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.015  1306  1808 I AiAiEcho: Settings changed for uri: content://settings/secure/accessibility_enabled
+06-23 23:47:45.015   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.015   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.015   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.015   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.015   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.015   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.015   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.015   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 W IPCThreadState: Sending oneway calls to frozen process.
+06-23 23:47:45.017   565   565 D BatterySaverPolicy: accessibility changed to false, updating policy.
+06-23 23:47:45.019  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:45.019  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:45.019  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:45.019  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:45.019  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:45.019  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:45.020  5043  5043 D AndroidRuntime: Shutting down VM
+06-23 23:47:45.020  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:45.020  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:45.020  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:45.020  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:45.020  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:45.020  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:45.020  1306  1486 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-23 23:47:45.020  1306  1486 I AiAiEcho: EchoTargets: 
+06-23 23:47:45.020  1306  1486 I AiAiEcho: Filtered by AiAi flag check: 
+06-23 23:47:45.020  1306  1486 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:45.020  1306  1486 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:  [CONTEXT ratelimit_period="10 SECONDS" ]
+06-23 23:47:45.020  1306  1486 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-23 23:47:45.020  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+06-23 23:47:45.020  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface media_data_manager with targets# 0 (types=[])
+06-23 23:47:45.022   799   799 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+06-23 23:47:45.027  1306  1486 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+06-23 23:47:45.028   799   799 D SsMediaDataProvider: Forwarding Smartspace updates []
+06-23 23:47:45.028  1079  1079 D SsBaseTemplateCard: No text view can be set up
+06-23 23:47:45.028  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:45.028  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:45.028  1079  1079 D SsBaseTemplateCard: Passed-in item info is null
+06-23 23:47:45.028  1079  1079 I SsBaseTemplateCard: Secondary card pane is null
+06-23 23:47:45.063  4950  4961 I reviewnatin.app: Background concurrent mark compact GC freed 14MB AllocSpace bytes, 554(10MB) LOS objects, 18% free, 107MB/131MB, paused 711us,1.098ms total 246.230ms
+06-23 23:47:45.454  4950  4974 D EGL_emulation: app_time_stats: avg=2.92ms min=1.45ms max=4.36ms count=61

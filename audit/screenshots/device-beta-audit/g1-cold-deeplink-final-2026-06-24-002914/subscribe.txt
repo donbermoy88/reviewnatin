@@ -1,0 +1,8 @@
+=== subscribe reviewnatin://subscribe ===
+Starting: Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=reviewnatin://subscribe/... pkg=ph.reviewnatin.app }
+Status: ok
+LaunchState: COLD
+Activity: ph.reviewnatin.app/.MainActivity
+TotalTime: 437
+WaitTime: 438
+Complete

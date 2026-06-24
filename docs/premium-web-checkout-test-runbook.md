@@ -1,5 +1,7 @@
 # Premium Web Checkout — Beta Test Runbook (Build 36)
 
+> **Superseded for in-app purchases:** Build 37+ uses Google Play Billing only. See [play-billing-paywall-compliance.md](./play-billing-paywall-compliance.md). This runbook remains for **legacy web entitlements** and marketing checkout ops — not for selling Premium inside the mobile app.
+
 **Cohort:** Premium P1–P4  
 **APK:** [beta-distribution-build-36.md](./beta-distribution-build-36.md)
 
