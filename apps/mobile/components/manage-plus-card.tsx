@@ -12,6 +12,7 @@ import {
   openManageSubscription,
   plusPlanLabel,
 } from '../lib/iap/manage-subscription';
+import { PREMIUM_LOCK_CTA } from '../lib/subscription/paywall-copy';
 import { PrimaryButton } from './primary-button';
 
 type Props = {
@@ -24,9 +25,7 @@ type Props = {
 
 function sourceLabel(source?: string) {
   if (source === 'demo') return 'Demo access';
-  if (source === 'web_gcash') return 'GCash checkout';
-  if (source === 'web_maya') return 'Maya checkout';
-  if (source?.startsWith('web_')) return 'Web checkout';
+  if (source?.startsWith('web_')) return 'Prepaid Plus access';
   if (source === 'iap') return 'App Store / Google Play';
   return 'Store subscription';
 }
@@ -141,7 +140,7 @@ export function ManagePlusCard({
         ) : null}
         {!plus && onViewPlans ? (
           <PrimaryButton
-            label="View plans"
+            label={PREMIUM_LOCK_CTA}
             icon="flash-outline"
             onPress={onViewPlans}
             style={{ flex: compact ? undefined : 1 }}
@@ -162,7 +161,7 @@ export function ManagePlusCard({
       <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 11, color: colors.textLight, lineHeight: 16 }}>
         {isStoreSubscription
           ? 'ReviewNatin cannot silently cancel or charge subscriptions. Purchases, auto-renewal, cancellation, refunds, and billing issues are managed by Apple or Google Play.'
-          : 'Manual checkout access is prepaid and does not auto-renew inside the app.'}
+          : 'Prepaid Plus access does not auto-renew inside the app.'}
       </Text>
 
       {isDemo ? (

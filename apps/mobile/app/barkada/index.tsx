@@ -32,6 +32,7 @@ import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 import { toUserFacingError } from '../../lib/errors/user-facing';
+import { trackEvent } from '../../lib/analytics/events';
 
 export default function BarkadaScreen() {
   const router = useRouter();
@@ -59,6 +60,15 @@ export default function BarkadaScreen() {
   const [group, setGroup] = useState<BarkadaGroup | null>(null);
   const [joinCode, setJoinCode] = useState(params.code ?? '');
   const [groupName, setGroupName] = useState('');
+  const submittedCount = group?.challengeResults.length ?? 0;
+  const memberCount = group?.members.length ?? 0;
+  const socialProofText = group?.activeChallenge
+    ? submittedCount > 0
+      ? `${submittedCount}/${memberCount} members may score na — habol na!`
+      : 'Ikaw ang pwedeng mauna sa leaderboard ng Barkada.'
+    : memberCount >= 2
+      ? `${memberCount} reviewers ready — simulan ang friendly challenge.`
+      : 'Mas masaya at mas consistent ang review kapag may kasama.';
 
   const load = useCallback(async () => {
     if (!user) {
@@ -97,6 +107,7 @@ export default function BarkadaScreen() {
     setBusy(true);
     try {
       await createBarkadaGroup(examSlug, groupName || 'My Barkada');
+      trackEvent('barkada_group_created', { examSlug });
       await load();
     } catch (e) {
       Alert.alert('Hindi makagawa ng group', toUserFacingError(e, 'load'));
@@ -124,8 +135,13 @@ export default function BarkadaScreen() {
 
   const shareInvite = async () => {
     if (!group) return;
-    await Share.share({
+    const result = await Share.share({
       message: buildBarkadaInviteMessage(group.inviteCode, group.name),
+    });
+    trackEvent('barkada_invite_shared', {
+      examSlug,
+      memberCount: group.members.length,
+      completed: result.action === Share.sharedAction,
     });
   };
 
@@ -134,6 +150,11 @@ export default function BarkadaScreen() {
     setBusy(true);
     try {
       const challenge = await createBarkadaChallenge(group.groupId, 10);
+      trackEvent('barkada_challenge_started', {
+        examSlug: challenge.examSlug,
+        memberCount: group.members.length,
+        questionCount: challenge.questionCount,
+      });
       router.push({
         pathname: '/practice/quiz',
         params: {
@@ -152,11 +173,11 @@ export default function BarkadaScreen() {
 
   if (!user) {
     return (
-      <StackShell title="Barkada Mode" subtitle="Review together · compare scores · stronger as a team!">
+      <StackShell title="Barkada Mode" subtitle="Mag-review kasama ang friends · compare scores · sabay pumasa">
         <EmptyState
           icon={<Ionicons name="people-outline" size={32} color={colors.primary} />}
           title="Mag-log in muna"
-          description="Sa Barkada mode, maka-review ka kasama ang mga kaibigan mo at makukumpara n'yo ang scores."
+          description="Sa Barkada mode, makakapag-review ka kasama ang friends mo at makukumpara n'yo ang scores."
           actionLabel="Mag-log in"
           onAction={() => router.push('/(auth)/login')}
         />
@@ -193,13 +214,13 @@ export default function BarkadaScreen() {
             <Ionicons name="chevron-back" size={22} color="#fff" />
           </Pressable>
           <Text style={styles.headerTitle}>Barkada Mode</Text>
-          <Text style={styles.headerSub}>Review together · compare scores · stronger as a team!</Text>
+          <Text style={styles.headerSub}>Mag-review kasama ang friends · compare scores · sabay pumasa</Text>
         </LinearGradient>
 
         <View style={styles.body}>
           {!group ? (
             <>
-              <Text style={sectionStyle}>Start a group</Text>
+              <Text style={sectionStyle}>Gumawa ng group</Text>
               <TextInput
                 value={groupName}
                 onChangeText={setGroupName}
@@ -217,13 +238,13 @@ export default function BarkadaScreen() {
                 }}
               />
               <PrimaryButton
-                label={busy ? 'Creating…' : 'Create Barkada'}
+                label={busy ? 'Gumagawa…' : 'Create Barkada'}
                 icon="people"
                 onPress={() => void handleCreate()}
                 disabled={busy}
               />
 
-              <Text style={[sectionStyle, { marginTop: spacing.lg }]}>Or join with code</Text>
+              <Text style={[sectionStyle, { marginTop: spacing.lg }]}>O sumali gamit ang code</Text>
               <TextInput
                 value={joinCode}
                 onChangeText={setJoinCode}
@@ -242,7 +263,7 @@ export default function BarkadaScreen() {
                 }}
               />
               <PrimaryButton
-                label={busy ? 'Joining…' : 'Join Barkada'}
+                label={busy ? 'Sumasali…' : 'Join Barkada'}
                 variant="outline"
                 onPress={() => void handleJoin()}
                 disabled={busy}
@@ -256,6 +277,24 @@ export default function BarkadaScreen() {
                   <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 20, color: colors.text }}>{group.name}</Text>
                 </View>
                 <Pill color={colors.primary}>{group.inviteCode}</Pill>
+              </View>
+
+              <View
+                style={{
+                  backgroundColor: colors.primaryMuted,
+                  borderRadius: 16,
+                  padding: spacing.md,
+                  marginTop: spacing.md,
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                }}
+              >
+                <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 14, color: colors.text }}>
+                  {socialProofText}
+                </Text>
+                <Text style={[metaStyle, { marginTop: 3 }]}>
+                  Invite, challenge, then compare scores para may accountability loop kayo.
+                </Text>
               </View>
 
               <PrimaryButton
@@ -288,7 +327,7 @@ export default function BarkadaScreen() {
                     {new Date(group.activeChallenge.expiresAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </Text>
                   <PrimaryButton
-                    label={busy ? 'Starting…' : 'Take challenge quiz'}
+                    label={busy ? 'Nagsisimula…' : 'Take challenge quiz'}
                     icon="flash"
                     onPress={() => void startChallenge()}
                     disabled={busy}
@@ -307,18 +346,18 @@ export default function BarkadaScreen() {
                       ))}
                     </>
                   ) : (
-                    <Text style={metaStyle}>No submissions yet — be the first!</Text>
+                    <Text style={metaStyle}>Wala pang submissions — ikaw ang mauna!</Text>
                   )}
                 </>
               ) : (
                 <>
                   <Text style={metaStyle}>
                     {group.members.length < 2
-                      ? 'Invite at least one friend to start a challenge.'
-                      : 'Start a 10-question challenge for your Barkada.'}
+                      ? 'Mag-invite ng kahit isang friend para makapag-start ng challenge.'
+                      : 'Start ng 10-question challenge para sa Barkada mo.'}
                   </Text>
                   <PrimaryButton
-                    label={busy ? 'Creating…' : 'Start new challenge'}
+                    label={busy ? 'Gumagawa…' : 'Start new challenge'}
                     variant={group.members.length < 2 ? 'outline' : undefined}
                     icon="trophy-outline"
                     onPress={() => void startChallenge()}
