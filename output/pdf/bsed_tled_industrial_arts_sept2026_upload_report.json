@@ -1,0 +1,52 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_tled_industrial_arts_sept2026_extracted_questions.json",
+  "extracted_rows": 500,
+  "ready_rows": 495,
+  "source_duplicates_or_non_ready_skipped": 5,
+  "existing_tle_questions_before": 950,
+  "insertable": 495,
+  "updatable_by_source_key": 0,
+  "duplicate_existing_content": 0,
+  "inserted": 495,
+  "updated": 0,
+  "skipped_samples": [
+    {
+      "row": "120",
+      "source_pdf": "BSED TLEd-IA P2.pdf",
+      "original_no": "20",
+      "status": "Needs Answer",
+      "duplicate_of": ""
+    },
+    {
+      "row": "341",
+      "source_pdf": "BSED TLEd-IA P6.pdf",
+      "original_no": "41",
+      "status": "Duplicate",
+      "duplicate_of": "168"
+    },
+    {
+      "row": "450",
+      "source_pdf": "BSED TLEd-IA P8.pdf",
+      "original_no": "50",
+      "status": "Duplicate",
+      "duplicate_of": "249"
+    },
+    {
+      "row": "461",
+      "source_pdf": "BSED TLEd-IA P9.pdf",
+      "original_no": "11",
+      "status": "Duplicate",
+      "duplicate_of": "174"
+    },
+    {
+      "row": "476",
+      "source_pdf": "BSED TLEd-IA P9.pdf",
+      "original_no": "26",
+      "status": "Duplicate",
+      "duplicate_of": "76"
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": []
+}

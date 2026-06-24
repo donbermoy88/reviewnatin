@@ -1,0 +1,54 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Industrial Arts-",
+  "source_pdfs": 10,
+  "total_questions_found": 500,
+  "total_ready_for_upload": 495,
+  "total_needing_review": 0,
+  "total_without_answer_key": 1,
+  "total_duplicates_detected": 4,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 500,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 495,
+    "Needs Answer": 1,
+    "Duplicate": 4
+  },
+  "subject_category_breakdown": {
+    "Technology and Livelihood Education": 500
+  },
+  "topic_breakdown": {
+    "Workshop Safety and Organization": 61,
+    "Industrial Arts": 73,
+    "TLE Teaching and Assessment": 36,
+    "Metalwork and Welding": 63,
+    "Woodworking": 41,
+    "Production Technology": 9,
+    "Electrical and Electronics": 108,
+    "Automotive Technology": 45,
+    "Drafting and CAD": 64
+  },
+  "difficulty_breakdown": {
+    "3": 500
+  },
+  "source_counts": {
+    "BSED TLEd-IA P1.pdf": 50,
+    "BSED TLEd-IA P10.pdf": 50,
+    "BSED TLEd-IA P2.pdf": 50,
+    "BSED TLEd-IA P3.pdf": 50,
+    "BSED TLEd-IA P4.pdf": 50,
+    "BSED TLEd-IA P5.pdf": 50,
+    "BSED TLEd-IA P6.pdf": 50,
+    "BSED TLEd-IA P7.pdf": 50,
+    "BSED TLEd-IA P8.pdf": 50,
+    "BSED TLEd-IA P9.pdf": 50
+  },
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_tled_industrial_arts_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_tled_industrial_arts_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_tled_industrial_arts_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_tled_industrial_arts_sept2026_extracted_questions_summary.json"
+  }
+}
