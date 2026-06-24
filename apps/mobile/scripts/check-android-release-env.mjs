@@ -96,6 +96,15 @@ warnMissing('SENTRY_PROJECT', 'recommended for Sentry source map upload and rele
 warnMissing('EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID', 'ads will fall back to the Plus upsell instead of real banners');
 warnMissing('EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID', 'session interstitial ads will be disabled');
 
+// FCM (remote push). Not a hard blocker for the first store build, but without
+// it the comeback/streak push (push-reengage edge fn) cannot deliver remotely.
+const googleServicesPath = value('GOOGLE_SERVICES_JSON') || resolve(ROOT, 'google-services.json');
+if (!existsSync(googleServicesPath)) {
+  warnings.push(
+    'google-services.json: FCM credentials missing — remote push (streak/comeback) will not work. Provide via GOOGLE_SERVICES_JSON or apps/mobile/google-services.json'
+  );
+}
+
 const appJson = JSON.parse(readFileSync(resolve(ROOT, 'app.json'), 'utf8')).expo;
 if (appJson.android?.package !== ANDROID_PACKAGE) {
   failures.push(`app.json android.package: expected ${ANDROID_PACKAGE}`);

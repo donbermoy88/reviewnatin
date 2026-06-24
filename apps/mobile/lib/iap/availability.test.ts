@@ -12,24 +12,45 @@ vi.mock('react-native', () => ({
 }));
 
 vi.mock('expo-device', () => ({
-  isDevice: platformState.isDevice,
+  get isDevice() {
+    return platformState.isDevice;
+  },
 }));
 
-import { canUseStorePurchases, preferWebCheckout } from './availability';
+import { canUseStorePurchases } from './availability';
 
 describe('iap availability', () => {
-  it('prefers web checkout on Android APK beta', () => {
+  it('enables store purchases on production Android device builds', () => {
+    vi.stubGlobal('__DEV__', false);
     platformState.os = 'android';
-    expect(preferWebCheckout()).toBe(true);
+    platformState.isDevice = true;
+    expect(canUseStorePurchases()).toBe(true);
   });
 
-  it('does not prefer web checkout on iOS', () => {
+  it('enables store purchases on production iOS device builds', () => {
+    vi.stubGlobal('__DEV__', false);
     platformState.os = 'ios';
-    expect(preferWebCheckout()).toBe(false);
+    platformState.isDevice = true;
+    expect(canUseStorePurchases()).toBe(true);
+  });
+
+  it('disables store purchases in dev builds', () => {
+    vi.stubGlobal('__DEV__', true);
+    platformState.os = 'android';
+    platformState.isDevice = true;
+    expect(canUseStorePurchases()).toBe(false);
   });
 
   it('disables store purchases on web', () => {
+    vi.stubGlobal('__DEV__', false);
     platformState.os = 'web';
+    expect(canUseStorePurchases()).toBe(false);
+  });
+
+  it('disables store purchases on simulators', () => {
+    vi.stubGlobal('__DEV__', false);
+    platformState.os = 'android';
+    platformState.isDevice = false;
     expect(canUseStorePurchases()).toBe(false);
   });
 });

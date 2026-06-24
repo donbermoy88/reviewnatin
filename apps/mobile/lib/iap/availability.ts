@@ -11,11 +11,3 @@ export function canUseStorePurchases(): boolean {
   if (!Device.isDevice) return false;
   return true;
 }
-
-/**
- * Android APK beta (sideload) uses web checkout until Play Console billing is live.
- * iOS production builds continue to use App Store billing as the primary path.
- */
-export function preferWebCheckout(): boolean {
-  return Platform.OS === 'android';
-}

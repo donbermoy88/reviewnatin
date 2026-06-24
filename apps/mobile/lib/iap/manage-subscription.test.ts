@@ -60,7 +60,7 @@ describe('entitlement lifecycle labels', () => {
     expect(entitlementPeriodDescription(entitlement, true)).toContain('Renewal is cancelled');
   });
 
-  it('uses prepaid wording for web checkout access', () => {
+  it('uses prepaid wording for legacy prepaid Plus access', () => {
     const entitlement: UserEntitlement = {
       ...basePlus,
       source: 'web_gcash',

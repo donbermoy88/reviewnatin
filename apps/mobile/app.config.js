@@ -1,8 +1,24 @@
 /** @type {import('expo/config').ExpoConfig} */
 const base = require('./app.json').expo;
+const fs = require('fs');
 
 const BUNDLE_ID = 'ph.reviewnatin.app';
 const ANDROID_PACKAGE = 'ph.reviewnatin.app';
+
+/**
+ * FCM credentials for remote push. Prefer an explicit env path (CI/EAS secret
+ * file), else fall back to a committed-out local file if present. Only set when
+ * the file actually exists so prebuild never fails on a missing path.
+ */
+function resolveGoogleServicesFile() {
+  const fromEnv = process.env.GOOGLE_SERVICES_JSON;
+  const candidate = fromEnv || './google-services.json';
+  try {
+    return fs.existsSync(candidate) ? candidate : undefined;
+  } catch {
+    return undefined;
+  }
+}
 
 /** EAS_BUILD_PROFILE is set automatically on EAS Build; APP_VARIANT mirrors it locally. */
 const buildProfile = process.env.EAS_BUILD_PROFILE ?? process.env.APP_VARIANT ?? 'development';
@@ -29,6 +45,7 @@ module.exports = () => {
   };
   const easProjectId =
     process.env.EAS_PROJECT_ID ?? base.extra?.eas?.projectId ?? undefined;
+  const googleServicesFile = resolveGoogleServicesFile();
 
   // Native config (Sentry, AdMob) is injected at PREBUILD time from env. A
   // release build prebuilt without these silently ships with no crash
@@ -117,6 +134,7 @@ module.exports = () => {
       android: {
         ...base.android,
         package: ANDROID_PACKAGE,
+        ...(googleServicesFile ? { googleServicesFile } : {}),
         intentFilters: [
           {
             action: 'VIEW',
