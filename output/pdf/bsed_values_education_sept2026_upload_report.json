@@ -1,0 +1,241 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_values_education_sept2026_extracted_questions.json",
+  "extracted_rows": 500,
+  "ready_rows": 486,
+  "source_duplicates_or_non_ready_skipped": 14,
+  "existing_values_education_questions_before": 88,
+  "insertable": 402,
+  "updatable_by_source_key": 84,
+  "duplicate_existing_content": 0,
+  "inserted": 402,
+  "updated": 84,
+  "skipped_samples": [
+    {
+      "row": "108",
+      "source_pdf": "BSED Values Ed P2.pdf",
+      "original_no": "8",
+      "status": "Duplicate",
+      "duplicate_of": "89"
+    },
+    {
+      "row": "177",
+      "source_pdf": "BSED Values Ed P3.pdf",
+      "original_no": "27",
+      "status": "Duplicate",
+      "duplicate_of": "126"
+    },
+    {
+      "row": "188",
+      "source_pdf": "BSED Values Ed P3.pdf",
+      "original_no": "38",
+      "status": "Duplicate",
+      "duplicate_of": "147"
+    },
+    {
+      "row": "249",
+      "source_pdf": "BSED Values Ed P4.pdf",
+      "original_no": "49",
+      "status": "Duplicate",
+      "duplicate_of": "72"
+    },
+    {
+      "row": "282",
+      "source_pdf": "BSED Values Ed P5.pdf",
+      "original_no": "32",
+      "status": "Duplicate",
+      "duplicate_of": "223"
+    },
+    {
+      "row": "291",
+      "source_pdf": "BSED Values Ed P5.pdf",
+      "original_no": "41",
+      "status": "Duplicate",
+      "duplicate_of": "145"
+    },
+    {
+      "row": "293",
+      "source_pdf": "BSED Values Ed P5.pdf",
+      "original_no": "43",
+      "status": "Duplicate",
+      "duplicate_of": "148"
+    },
+    {
+      "row": "303",
+      "source_pdf": "BSED Values Ed P6.pdf",
+      "original_no": "3",
+      "status": "Duplicate",
+      "duplicate_of": "203"
+    },
+    {
+      "row": "353",
+      "source_pdf": "BSED Values Ed P7.pdf",
+      "original_no": "3",
+      "status": "Duplicate",
+      "duplicate_of": "86"
+    },
+    {
+      "row": "388",
+      "source_pdf": "BSED Values Ed P7.pdf",
+      "original_no": "38",
+      "status": "Duplicate",
+      "duplicate_of": "89"
+    },
+    {
+      "row": "400",
+      "source_pdf": "BSED Values Ed P7.pdf",
+      "original_no": "50",
+      "status": "Duplicate",
+      "duplicate_of": "300"
+    },
+    {
+      "row": "450",
+      "source_pdf": "BSED Values Ed P8.pdf",
+      "original_no": "50",
+      "status": "Duplicate",
+      "duplicate_of": "86"
+    },
+    {
+      "row": "481",
+      "source_pdf": "BSED Values Ed P9.pdf",
+      "original_no": "31",
+      "status": "Duplicate",
+      "duplicate_of": "84"
+    },
+    {
+      "row": "487",
+      "source_pdf": "BSED Values Ed P9.pdf",
+      "original_no": "37",
+      "status": "Duplicate",
+      "duplicate_of": "89"
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "076e40a9-e35d-46a8-b016-832c03bc66cc",
+      "source_key": "BSED Values Ed P1.pdf#1",
+      "stem": "The Golden Rule (“Do unto others what you want others to do unto you”) expresses:"
+    },
+    {
+      "id": "b71d9ec5-64a1-47e5-aab8-200db4337828",
+      "source_key": "BSED Values Ed P1.pdf#3",
+      "stem": "The UNESCO Universal Declaration on Ethical Principles promotes:"
+    },
+    {
+      "id": "1a23680f-acd0-4890-9316-d206772cdb81",
+      "source_key": "BSED Values Ed P10.pdf#3",
+      "stem": "The ethical debate on euthanasia centers on:"
+    },
+    {
+      "id": "d5354aa3-7665-470f-b539-d78634f6e8f6",
+      "source_key": "BSED Values Ed P10.pdf#5",
+      "stem": "Corruption in public service violates the value of:"
+    },
+    {
+      "id": "1d19122e-d54f-4e65-864a-0cd05379a836",
+      "source_key": "BSED Values Ed P10.pdf#8",
+      "stem": "The value undermined by fake news is:"
+    },
+    {
+      "id": "44ece132-66a8-4241-a1fe-7c25c7deaaf2",
+      "source_key": "BSED Values Ed P10.pdf#10",
+      "stem": "Gender equality in education promotes:"
+    },
+    {
+      "id": "69cf18e0-a71a-4e2c-8209-5562b21cd166",
+      "source_key": "BSED Values Ed P10.pdf#14",
+      "stem": "A just wage in employment reflects the principle of:"
+    },
+    {
+      "id": "cda7000e-6852-421a-999f-f4dcaad3ff56",
+      "source_key": "BSED Values Ed P10.pdf#17",
+      "stem": "A person who acts according to conscience shows:"
+    },
+    {
+      "id": "82a58a28-8d13-4cf3-b5f2-ecda4bc65eab",
+      "source_key": "BSED Values Ed P10.pdf#19",
+      "stem": "A teacher deciding to report cheating despite pressure shows:"
+    },
+    {
+      "id": "47452c99-57dd-4df8-b04d-1b69ce50ac4c",
+      "source_key": "BSED Values Ed P10.pdf#23",
+      "stem": "In moral judgment, “means justify the end” violates:"
+    },
+    {
+      "id": "2c105d3a-a42e-4fbd-b29e-e946abbe17de",
+      "source_key": "BSED Values Ed P10.pdf#25",
+      "stem": "The development of conscience is primarily influenced by:"
+    },
+    {
+      "id": "ad700fc0-cf39-48a7-b0d9-588fb23c8914",
+      "source_key": "BSED Values Ed P10.pdf#32",
+      "stem": "A teacher who provides role models and reflection activities applies:"
+    },
+    {
+      "id": "a9a87e21-9212-40d3-bd30-6386bfbd5db4",
+      "source_key": "BSED Values Ed P10.pdf#36",
+      "stem": "The ultimate goal of Values Education is:"
+    },
+    {
+      "id": "0b0fefae-655d-4817-9017-cddb5fa0c145",
+      "source_key": "BSED Values Ed P10.pdf#37",
+      "stem": "The integration of values across subjects is called:"
+    },
+    {
+      "id": "fc1875c9-605b-454d-b532-e94718c14e44",
+      "source_key": "BSED Values Ed P10.pdf#44",
+      "stem": "“Learning by serving” best describes:"
+    },
+    {
+      "id": "5d633a89-0236-4ba1-8a93-bc41b7a85996",
+      "source_key": "BSED Values Ed P10.pdf#45",
+      "stem": "The teacher’s credibility as a model depends on:"
+    },
+    {
+      "id": "54ab0b12-210d-480d-8014-51f25c1cb4de",
+      "source_key": "BSED Values Ed P2.pdf#7",
+      "stem": "A core value in the Philippine Values Education Framework is:"
+    },
+    {
+      "id": "c600eaca-985d-4bca-af72-bc5d17f48ec2",
+      "source_key": "BSED Values Ed P3.pdf#32",
+      "stem": "The teacher’s role in Values Education is primarily:"
+    },
+    {
+      "id": "a86bfb1d-8937-442f-a2c5-85b6121f2f4f",
+      "source_key": "BSED Values Ed P3.pdf#36",
+      "stem": "The best method to assess value internalization is:"
+    },
+    {
+      "id": "b1c5ada7-a562-40e3-a3f0-9242ade7fbcc",
+      "source_key": "BSED Values Ed P5.pdf#8",
+      "stem": "A person who acts out of universal human rights is at what stage?"
+    },
+    {
+      "id": "59edc104-c542-45be-a1db-719fc57cdbb2",
+      "source_key": "BSED Values Ed P6.pdf#2",
+      "stem": "Aristotle’s concept of the “Golden Mean” emphasizes:"
+    },
+    {
+      "id": "b63c65ef-ab05-4c85-a168-8a6260abc399",
+      "source_key": "BSED Values Ed P6.pdf#4",
+      "stem": "“The end justifies the means” best describes:"
+    },
+    {
+      "id": "7993a4ed-13b8-4384-9fe8-6f10a73f21fa",
+      "source_key": "BSED Values Ed P6.pdf#6",
+      "stem": "A teacher encourages critical reflection on moral issues. This approach is:"
+    },
+    {
+      "id": "e99e7a87-1797-45ee-a2a4-9098c595d71f",
+      "source_key": "BSED Values Ed P6.pdf#8",
+      "stem": "The belief that moral truth varies across cultures is called:"
+    },
+    {
+      "id": "59c997ae-5236-47ac-9a9c-d97bb2d7018a",
+      "source_key": "BSED Values Ed P6.pdf#11",
+      "stem": "A student who respects others regardless of beliefs demonstrates:"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-",
+  "source_pdfs": 10,
+  "total_questions_found": 500,
+  "total_ready_for_upload": 486,
+  "total_needing_review": 0,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 14,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 500,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 486,
+    "Duplicate": 14
+  },
+  "subject_category_breakdown": {
+    "Values Education": 500
+  },
+  "topic_breakdown": {
+    "Ethics": 255,
+    "Human Rights and Global Citizenship": 25,
+    "Environmental Ethics": 17,
+    "Values Education Pedagogy": 77,
+    "Peace Education and Conflict Resolution": 20,
+    "Applied Ethics": 13,
+    "Moral Development": 34,
+    "Filipino Values": 59
+  },
+  "difficulty_breakdown": {
+    "3": 500
+  },
+  "source_counts": {
+    "BSED Values Ed P1.pdf": 50,
+    "BSED Values Ed P10.pdf": 50,
+    "BSED Values Ed P2.pdf": 50,
+    "BSED Values Ed P3.pdf": 50,
+    "BSED Values Ed P4.pdf": 50,
+    "BSED Values Ed P5.pdf": 50,
+    "BSED Values Ed P6.pdf": 50,
+    "BSED Values Ed P7.pdf": 50,
+    "BSED Values Ed P8.pdf": 50,
+    "BSED Values Ed P9.pdf": 50
+  },
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_values_education_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_values_education_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_values_education_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_values_education_sept2026_extracted_questions_summary.json"
+  }
+}

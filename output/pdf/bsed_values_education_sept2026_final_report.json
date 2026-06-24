@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-06-24T00:59:11.778Z",
+  "source_folder": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Values Education-",
+  "source_pdfs": 10,
+  "extraction_summary": {
+    "total_questions_found": 500,
+    "ready_for_upload": 486,
+    "duplicates_detected": 14,
+    "needing_review": 0,
+    "without_answer_key": 0,
+    "with_images": 0,
+    "with_image_based_answer_choices": 0,
+    "status_counts": {
+      "Ready for Upload": 486,
+      "Duplicate": 14
+    },
+    "topic_breakdown": {
+      "Ethics": 255,
+      "Human Rights and Global Citizenship": 25,
+      "Environmental Ethics": 17,
+      "Values Education Pedagogy": 77,
+      "Peace Education and Conflict Resolution": 20,
+      "Applied Ethics": 13,
+      "Moral Development": 34,
+      "Filipino Values": 59
+    },
+    "difficulty_breakdown": {
+      "3": 500
+    }
+  },
+  "upload_summary": {
+    "inserted": 402,
+    "updated": 84,
+    "skipped_source_duplicates_or_non_ready": 14,
+    "duplicate_existing_content": 0,
+    "ready_rows": 486
+  },
+  "live_database_verification": {
+    "let_secondary_major_values_education_total": 490,
+    "let_secondary_major_values_education_published": 490,
+    "bsed_values_education_source_total": 486,
+    "bsed_values_education_source_published": 486,
+    "source_topic_breakdown": {
+      "Ethics": 250,
+      "Values Education Pedagogy": 71,
+      "Filipino Values": 58,
+      "Moral Development": 32,
+      "Human Rights and Global Citizenship": 25,
+      "Peace Education and Conflict Resolution": 20,
+      "Environmental Ethics": 17,
+      "Applied Ethics": 13
+    },
+    "sample_verified_question": {
+      "source_pdf": "BSED Values Ed P1.pdf",
+      "original_no": 2,
+      "stem": "Universal ethics means:",
+      "correct_choice_id": "a",
+      "explanation_en": "values for all humanity."
+    }
+  },
+  "supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Values Education",
+    "topic": "values-education",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "No additional upload action is needed for this folder. Review the 14 duplicate rows only if exact duplicate retention is required for audit display."
+}
