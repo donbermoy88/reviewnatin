@@ -23,6 +23,7 @@ import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { DEFAULT_EXAM_SLUG } from '@reviewnatin/shared';
 import { useAuth } from '../../providers/auth-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
+import { openBetaFeedback } from '../../lib/beta-feedback';
 
 function dailyQuestionTarget(dailyMinutes: number): number {
   const map: Record<number, number> = { 15: 5, 30: 15, 45: 30, 60: 60 };
@@ -243,7 +244,16 @@ function ProfileScreenContent() {
         </View>
 
         <View style={{ paddingHorizontal: spacing.lg }}>
-          <ProfileSettingsHint />
+          <ProfileSettingsHint
+            onOpenSettings={() => router.push('/(tabs)/settings')}
+            onReportProblem={() =>
+              void openBetaFeedback({
+                userId: user?.id,
+                cohortHint: !user ? 'guest' : 'free',
+                currentRoute: '/(tabs)/progress',
+              })
+            }
+          />
         </View>
 
         {user && weeklySummary ? (

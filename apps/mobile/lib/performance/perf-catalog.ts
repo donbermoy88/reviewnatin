@@ -14,3 +14,13 @@ export const VIRTUALIZED_LIST_SCREENS = [
 
 /** Dashboard sections deferred until after first interaction. */
 export const DEFERRED_DASHBOARD_FETCHES = ['fetchTopicAnalytics', 'fetchDailyStudyTrend'] as const;
+
+/** Guest dashboard work that must not block low-end first paint. */
+export const DEFERRED_GUEST_DASHBOARD_FETCHES = [
+  'fetchExamBySlug',
+  'fetchSubjectAreas',
+  'fetchTopicsBySubjectSlug',
+  'fetchTopicQuestionCounts',
+  'fetchContentGateStatus',
+  'fetchAppAnnouncements',
+] as const;

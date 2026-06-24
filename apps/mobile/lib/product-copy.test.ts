@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { DAILY_LIMIT, GUEST_NEXT_STEPS, GUEST_PROGRESS_NUDGE, PREMIUM_HEADLINE } from './product-copy';
+import {
+  DAILY_LIMIT,
+  GUEST_NEXT_STEPS,
+  GUEST_PROGRESS_NUDGE,
+  PREMIUM_HEADLINE,
+  SETTINGS_HINT,
+  SETTINGS_SUPPORT,
+} from './product-copy';
 
 describe('product-copy', () => {
   it('includes daily limit in Tagalog body', () => {
@@ -19,5 +26,11 @@ describe('product-copy', () => {
 
   it('includes PRC disclaimer on paywall', () => {
     expect(PREMIUM_HEADLINE.trust).toContain('PRC');
+  });
+
+  it('keeps G4 support and feedback copy obvious', () => {
+    expect(SETTINGS_HINT).toContain('Nalito');
+    expect(SETTINGS_SUPPORT.ctaReport).toBe('Report a problem');
+    expect(SETTINGS_SUPPORT.subtitle).toContain('cohort');
   });
 });

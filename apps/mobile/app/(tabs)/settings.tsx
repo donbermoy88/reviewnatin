@@ -37,6 +37,7 @@ import {
 import { formatEntitlementSummary } from '../../lib/entitlements/format';
 import { openBetaFeedback } from '../../lib/beta-feedback';
 import { resolveMonthlyPlusDisplay } from '../../lib/subscription/pricing-display';
+import { SETTINGS_SUPPORT } from '../../lib/product-copy';
 
 type SettingsStyles = ReturnType<typeof createSettingsStyles>;
 
@@ -252,6 +253,12 @@ function SettingsScreenContent() {
 
   const switchTrack = { false: colors.border, true: colors.primary };
   const monthlyPrice = resolveMonthlyPlusDisplay(products, storePrices);
+  const reportProblem = (currentRoute = '/settings') =>
+    openBetaFeedback({
+      userId: user?.id,
+      cohortHint: !user ? 'guest' : premiumActive ? 'premium' : 'free',
+      currentRoute,
+    });
 
   return (
     <View style={styles.root}>
@@ -332,6 +339,55 @@ function SettingsScreenContent() {
               Active: {entitlements.map((e) => e.sku).join(', ')}
             </Text>
           ) : null}
+
+          <Pressable
+            style={({ pressed }) => [
+              {
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: spacing.md,
+                backgroundColor: colors.primaryLight,
+                borderRadius: 18,
+                borderWidth: 1,
+                borderColor: 'rgba(30,79,217,0.16)',
+                padding: spacing.md,
+                marginBottom: spacing.lg,
+                opacity: pressed ? 0.9 : 1,
+              },
+            ]}
+            onPress={() => void reportProblem('/settings/support-card')}
+            accessibilityRole="button"
+            accessibilityLabel={SETTINGS_SUPPORT.ctaReport}
+          >
+            <View
+              style={{
+                width: 42,
+                height: 42,
+                borderRadius: 14,
+                backgroundColor: colors.primary,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Ionicons name="help-buoy-outline" size={21} color="#fff" />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.rowLabel, { color: colors.text }]}>{SETTINGS_SUPPORT.title}</Text>
+              <Text style={[styles.rowSub, { lineHeight: 18 }]}>{SETTINGS_SUPPORT.subtitle}</Text>
+            </View>
+            <View
+              style={{
+                paddingHorizontal: spacing.sm,
+                paddingVertical: spacing.xs,
+                borderRadius: 999,
+                backgroundColor: colors.surface,
+              }}
+            >
+              <Text style={{ fontFamily: theme.fonts.bodyBold, fontSize: 12, color: colors.primary }}>
+                {SETTINGS_SUPPORT.ctaReport}
+              </Text>
+            </View>
+          </Pressable>
 
           <Text style={styles.sectionLbl}>Preferences</Text>
           <SettingsGroup styles={styles}>
@@ -688,13 +744,7 @@ function SettingsScreenContent() {
               icon={<Ionicons name="bug-outline" size={18} color={colors.primary} />}
               label="Report a problem"
               sub="Beta feedback — pre-fills device & version info"
-              onPress={() =>
-                void openBetaFeedback({
-                  userId: user?.id,
-                  cohortHint: !user ? 'guest' : premiumActive ? 'premium' : 'free',
-                  currentRoute: '/settings',
-                })
-              }
+              onPress={() => void reportProblem('/settings')}
               right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
             />
             <SettingsRow

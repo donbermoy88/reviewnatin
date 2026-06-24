@@ -1,11 +1,10 @@
 import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 import { Linking, Platform } from 'react-native';
-
-const BETA_FEEDBACK_EMAIL = 'beta@reviewnatinph.com';
-
 import type { BetaCohort } from './beta-cohort';
 import { resolveBetaCohort } from './beta-cohort';
+
+const BETA_FEEDBACK_EMAIL = 'beta@reviewnatinph.com';
 
 export type { BetaCohort };
 

@@ -343,6 +343,54 @@ function DashboardScreenContent() {
         } catch {
           setStats((s) => ({ ...s, questionsTarget: target }));
         }
+        setLoading(false);
+        setRefreshing(false);
+
+        runAfterInteractions(async () => {
+          const exam = await fetchExamBySlug(slug).catch(() => null);
+          if (exam) {
+            setExamName(exam.name);
+            setExamTypeId(exam.id);
+            const areas = await fetchSubjectAreas(exam.id).catch(() => []);
+            setSubjectCount(areas.length);
+            const previewSubjects = areas.slice(0, 3);
+            const subjectCards = await Promise.all(
+              previewSubjects.map(async (subject) => {
+                const [topicRows, topicCounts] = await Promise.all([
+                  fetchTopicsBySubjectSlug(slug, subject.slug).catch(() => []),
+                  fetchTopicQuestionCounts(slug, subject.slug).catch(() => new Map<string, number>()),
+                ]);
+                const countsKnown = topicRows.length > 0 && topicRows.every((topic) => topicCounts.has(topic.slug));
+                const readyTopicCount = countsKnown
+                  ? topicRows.filter((topic) => (topicCounts.get(topic.slug) ?? 0) > 0).length
+                  : topicRows.length;
+                const questionCount = countsKnown
+                  ? topicRows.reduce((sum, topic) => sum + (topicCounts.get(topic.slug) ?? 0), 0)
+                  : null;
+                return {
+                  ...subject,
+                  topics: topicRows,
+                  readyTopicCount,
+                  questionCount,
+                  countsKnown,
+                };
+              })
+            );
+            setSubjects(subjectCards);
+          } else {
+            const found = EXAM_TYPES.find((e) => e.slug === slug);
+            if (found) setExamName(found.name);
+            setSubjectCount(0);
+          }
+
+          const [gate, appAnnouncements] = await Promise.all([
+            fetchContentGateStatus(slug).catch(() => null),
+            fetchAppAnnouncements(slug, 3).catch(() => []),
+          ]);
+          setContentGate(gate);
+          setAnnouncements(appAnnouncements);
+        });
+        return;
       }
 
       const exam = await fetchExamBySlug(slug).catch(() => null);
@@ -389,7 +437,7 @@ function DashboardScreenContent() {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [user, router]);
+  }, [user]);
 
   useEffect(() => {
     load();

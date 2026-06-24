@@ -53,7 +53,14 @@ export const EXAM_COUNTDOWN = {
   subtitle: 'Plus users get full mocks, weakness drills, at offline packs para sa final stretch.',
 } as const;
 
-export const SETTINGS_HINT = 'Tip: Buksan ang Settings dito para sa reminders, exam track, at beta feedback.';
+export const SETTINGS_HINT = 'Nalito ka ba? Settings has reminders, exam track, at beta feedback.';
+
+export const SETTINGS_SUPPORT = {
+  title: 'Need help or found a bug?',
+  subtitle: 'Send beta feedback anytime. We include your device, version, and guest/free/premium cohort automatically.',
+  ctaReport: 'Report a problem',
+  ctaSettings: 'Open settings',
+} as const;
 
 export const STREAK_RETURN = {
   welcomeBack: (name: string) => `Balik ka na, ${name}!`,
