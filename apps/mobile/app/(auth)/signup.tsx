@@ -31,6 +31,7 @@ import { TurnstileCaptcha } from '../../components/turnstile-captcha';
 import { trackEvent } from '../../lib/analytics/events';
 import { isTurnstileRequired } from '../../lib/auth/turnstile-config';
 import { toUserFacingError } from '../../lib/errors/user-facing';
+import { FREE_OAUTH_SIGNUP } from '../../lib/product-copy';
 import { useAuth } from '../../providers/auth-provider';
 
 type SignupField = 'name' | 'email' | 'password';
@@ -275,6 +276,14 @@ export default function SignUpScreen() {
             />
           ) : null}
 
+          <View style={styles.oauthHint} accessibilityLabel="OAuth sign-up guidance">
+            <Ionicons name="flash-outline" size={16} color={colors.primary} />
+            <View style={{ flex: 1 }}>
+              <Text style={styles.oauthHintTitle}>{FREE_OAUTH_SIGNUP.title}</Text>
+              <Text style={styles.oauthHintSub}>{FREE_OAUTH_SIGNUP.subtitle}</Text>
+            </View>
+          </View>
+
           <View style={styles.dividerRow}>
             <View style={styles.dividerLine} />
             <Text style={styles.dividerText}>o gamitin ang email</Text>
@@ -459,6 +468,29 @@ function createSignupStyles(theme: AppTheme) {
       width: '100%',
       height: 52,
       marginTop: spacing.sm,
+    },
+    oauthHint: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: spacing.sm,
+      borderRadius: radii.lg,
+      backgroundColor: colors.primaryLight,
+      borderWidth: 1,
+      borderColor: 'rgba(30,79,217,0.14)',
+      padding: spacing.sm,
+      marginTop: spacing.sm,
+    },
+    oauthHintTitle: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 12,
+      color: colors.primary,
+    },
+    oauthHintSub: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 12,
+      color: colors.textMuted,
+      lineHeight: 17,
+      marginTop: 2,
     },
     field: {
       marginBottom: spacing.md,

@@ -2,7 +2,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { memo } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useAppTheme } from '../../hooks/use-app-theme';
-import { FREE_DAILY_QUESTIONS, canStartPractice } from '../../lib/paywall';
+import { canStartPractice } from '../../lib/paywall';
+import { FREE_DAILY_STATUS } from '../../lib/product-copy';
 
 type Props = {
   questionsToday: number;
@@ -22,7 +23,7 @@ export const FreeDailyLimitStrip = memo(function FreeDailyLimitStrip({
     <Pressable
       onPress={onUpgrade}
       accessibilityRole="button"
-      accessibilityLabel={`${gate.remaining} libreng tanong natitira. Tingnan ang Plus.`}
+      accessibilityLabel={FREE_DAILY_STATUS.accessibilityLabel(gate.remaining)}
       style={({ pressed }) => ({
         flexDirection: 'row',
         alignItems: 'center',
@@ -38,12 +39,10 @@ export const FreeDailyLimitStrip = memo(function FreeDailyLimitStrip({
       <Ionicons name="hourglass-outline" size={18} color={colors.primary} />
       <View style={{ flex: 1 }}>
         <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.text }}>
-          {gate.remaining > 0
-            ? `${gate.remaining}/${FREE_DAILY_QUESTIONS} libreng tanong natitira ngayon`
-            : 'Naubos na ang libreng tanong ngayon'}
+          {FREE_DAILY_STATUS.title(gate.remaining)}
         </Text>
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 }}>
-          Unlimited practice sa Plus · walang ads
+          {FREE_DAILY_STATUS.subtitle(gate.remaining)}
         </Text>
       </View>
       <Ionicons name="chevron-forward" size={16} color={colors.primary} />

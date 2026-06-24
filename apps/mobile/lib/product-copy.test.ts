@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
   DAILY_LIMIT,
+  FREE_DAILY_STATUS,
+  FREE_OAUTH_SIGNUP,
   FREE_VERIFY_EMAIL,
   GUEST_NEXT_STEPS,
   GUEST_PROGRESS_NUDGE,
@@ -29,6 +31,19 @@ describe('product-copy', () => {
     expect(FREE_VERIFY_EMAIL.subtitle).toContain('CSE');
     expect(FREE_VERIFY_EMAIL.subtitle).toContain('Walang bayad');
     expect(FREE_VERIFY_EMAIL.checklist).toContain('Enter the 6-digit code');
+  });
+
+  it('clarifies OAuth signup for LET Secondary reviewers', () => {
+    expect(FREE_OAUTH_SIGNUP.subtitle).toContain('skips the email code');
+    expect(FREE_OAUTH_SIGNUP.subtitle).toContain('LET Secondary');
+    expect(FREE_OAUTH_SIGNUP.subtitle).toContain('major');
+  });
+
+  it('sets free daily limit expectations for casual learners', () => {
+    expect(FREE_DAILY_STATUS.title(8)).toContain('8/20');
+    expect(FREE_DAILY_STATUS.subtitle(8)).toContain('ad-supported');
+    expect(FREE_DAILY_STATUS.subtitle(0)).toContain('unlimited practice');
+    expect(FREE_DAILY_STATUS.accessibilityLabel(8)).toContain('Free review includes ads');
   });
 
   it('includes PRC disclaimer on paywall', () => {

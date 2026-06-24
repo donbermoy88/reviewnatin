@@ -36,6 +36,27 @@ export const FREE_VERIFY_EMAIL = {
   checklist: ['Check inbox or spam', 'Enter the 6-digit code', 'Continue to onboarding'],
 } as const;
 
+export const FREE_OAUTH_SIGNUP = {
+  title: 'Fast sign-up option',
+  subtitle:
+    'Google sign-in skips the email code. LET Secondary reviewers can still choose their major during onboarding.',
+} as const;
+
+export const FREE_DAILY_STATUS = {
+  title: (remaining: number) =>
+    remaining > 0
+      ? `${remaining}/${FREE_DAILY_QUESTIONS_COPY} libreng tanong natitira ngayon`
+      : 'Naubos na ang libreng tanong ngayon',
+  subtitle: (remaining: number) =>
+    remaining > 0
+      ? 'Quick set muna. Free review is ad-supported; Plus removes ads and limits.'
+      : 'Balik bukas for another free set, or go Plus for unlimited practice without ads.',
+  accessibilityLabel: (remaining: number) =>
+    remaining > 0
+      ? `${remaining} libreng tanong natitira ngayon. Free review includes ads. Tingnan ang Plus.`
+      : 'Naubos na ang libreng tanong ngayon. Tingnan ang Plus.',
+} as const;
+
 export const DAILY_LIMIT = {
   title: 'Abot na ang libreng tanong ngayon',
   body: (used = FREE_DAILY_QUESTIONS_COPY) =>

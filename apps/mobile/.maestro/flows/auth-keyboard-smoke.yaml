@@ -11,6 +11,9 @@ appId: ph.reviewnatin.app
 - extendedWaitUntil:
     visible: "Gumawa ng account"
     timeout: 20000
+- extendedWaitUntil:
+    visible: "Google sign-in skips the email code"
+    timeout: 10000
 - tapOn:
     text: "Name"
     optional: true
