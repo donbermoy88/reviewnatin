@@ -1,0 +1,591 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_social_studies_sept2026_extracted_questions.json",
+  "extracted_rows": 949,
+  "ready_rows": 893,
+  "source_duplicates_or_non_ready_skipped": 56,
+  "existing_social_studies_questions_before": 931,
+  "insertable": 0,
+  "updatable_by_source_key": 893,
+  "duplicate_existing_content": 0,
+  "inserted": 0,
+  "updated": 893,
+  "skipped_samples": [
+    {
+      "row": "2",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "2",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B."
+    },
+    {
+      "row": "4",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "4",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "17",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "17",
+      "status": "Duplicate",
+      "duplicate_of": "16",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 16."
+    },
+    {
+      "row": "28",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "28",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B."
+    },
+    {
+      "row": "31",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "31",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "35",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "35",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B."
+    },
+    {
+      "row": "38",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "38",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "39",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "39",
+      "status": "Duplicate",
+      "duplicate_of": "9",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 9."
+    },
+    {
+      "row": "41",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "41",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A."
+    },
+    {
+      "row": "45",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "45",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "48",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "48",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B."
+    },
+    {
+      "row": "51",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "51",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "99",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "99",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "103",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "103",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B, D."
+    },
+    {
+      "row": "107",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "107",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "125",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "125",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: D."
+    },
+    {
+      "row": "128",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "128",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "132",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "132",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: C."
+    },
+    {
+      "row": "136",
+      "source_pdf": "BSED Social Studies-Science P1.pdf",
+      "original_no": "136",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "165",
+      "source_pdf": "BSED Social Studies-Science P10.pdf",
+      "original_no": "15",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "210",
+      "source_pdf": "BSED Social Studies-Science P2.pdf",
+      "original_no": "30",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: D."
+    },
+    {
+      "row": "214",
+      "source_pdf": "BSED Social Studies-Science P2.pdf",
+      "original_no": "34",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "318",
+      "source_pdf": "BSED Social Studies-Science P2.pdf",
+      "original_no": "138",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B, C, D."
+    },
+    {
+      "row": "448",
+      "source_pdf": "BSED Social Studies-Science P3.pdf",
+      "original_no": "118",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: C."
+    },
+    {
+      "row": "453",
+      "source_pdf": "BSED Social Studies-Science P3.pdf",
+      "original_no": "123",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "511",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "31",
+      "status": "Duplicate",
+      "duplicate_of": "206",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 206."
+    },
+    {
+      "row": "512",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "32",
+      "status": "Duplicate",
+      "duplicate_of": "207",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 207."
+    },
+    {
+      "row": "513",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "33",
+      "status": "Duplicate",
+      "duplicate_of": "208",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A. Duplicate or near-duplicate of row 208."
+    },
+    {
+      "row": "514",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "34",
+      "status": "Duplicate",
+      "duplicate_of": "209",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 209."
+    },
+    {
+      "row": "518",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "38",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "533",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "53",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A."
+    },
+    {
+      "row": "567",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "87",
+      "status": "Duplicate",
+      "duplicate_of": "202",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 202."
+    },
+    {
+      "row": "568",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "88",
+      "status": "Duplicate",
+      "duplicate_of": "203",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 203."
+    },
+    {
+      "row": "570",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "90",
+      "status": "Duplicate",
+      "duplicate_of": "205",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 205."
+    },
+    {
+      "row": "596",
+      "source_pdf": "BSED Social Studies-Science P4.pdf",
+      "original_no": "116",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B."
+    },
+    {
+      "row": "601",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "1",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "624",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "24",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A."
+    },
+    {
+      "row": "629",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "29",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "714",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "114",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: C."
+    },
+    {
+      "row": "717",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "117",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "718",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "118",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "722",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "122",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B."
+    },
+    {
+      "row": "727",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "127",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "732",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "132",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A."
+    },
+    {
+      "row": "742",
+      "source_pdf": "BSED Social Studies-Science P5.pdf",
+      "original_no": "142",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: D."
+    },
+    {
+      "row": "825",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "25",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A."
+    },
+    {
+      "row": "831",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "31",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B, C, D."
+    },
+    {
+      "row": "837",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "38",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: D."
+    },
+    {
+      "row": "844",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "45",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "845",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "46",
+      "status": "Duplicate",
+      "duplicate_of": "801",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 801."
+    },
+    {
+      "row": "846",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "47",
+      "status": "Duplicate",
+      "duplicate_of": "802",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 802."
+    },
+    {
+      "row": "847",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "48",
+      "status": "Duplicate",
+      "duplicate_of": "803",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 803."
+    },
+    {
+      "row": "848",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "49",
+      "status": "Duplicate",
+      "duplicate_of": "804",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 804."
+    },
+    {
+      "row": "849",
+      "source_pdf": "BSED Social Studies-Science P7.pdf",
+      "original_no": "50",
+      "status": "Duplicate",
+      "duplicate_of": "805",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 805."
+    },
+    {
+      "row": "887",
+      "source_pdf": "BSED Social Studies-Science P8.pdf",
+      "original_no": "38",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: D."
+    },
+    {
+      "row": "892",
+      "source_pdf": "BSED Social Studies-Science P8.pdf",
+      "original_no": "43",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Social Studies major. Correct answer sourced from source PDF answer key."
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "7622ea52-0836-434e-83d0-ca0e411382d1",
+      "source_key": "BSED Social Studies-Science P1.pdf#1",
+      "stem": "Why didn't the United States and Australia sign the Kyoto Protocol to slash greenhouse gasses by 5.2 percent before 2012?"
+    },
+    {
+      "id": "f956e6d2-5f81-4ebf-bf49-8934ecfd4ff4",
+      "source_key": "BSED Social Studies-Science P1.pdf#3",
+      "stem": "Earthquake prediction at early and short time periods today is on a __________ basis."
+    },
+    {
+      "id": "52591a5a-5e50-458c-b6c2-cdc6c47bc853",
+      "source_key": "BSED Social Studies-Science P1.pdf#5",
+      "stem": "Why were the various regions of the country created as subdivisions of the nation?"
+    },
+    {
+      "id": "f722d80b-e2d7-436a-88eb-d4e45538d5cb",
+      "source_key": "BSED Social Studies-Science P1.pdf#6",
+      "stem": "When you judge by results regardless of your relations to the people involved, which Filipino trait do you counteract?"
+    },
+    {
+      "id": "69a19bfb-6c37-4ea7-b416-d66769f5c7b4",
+      "source_key": "BSED Social Studies-Science P1.pdf#7",
+      "stem": "if you keep seeing your way of doing things as the right way and everybody else's as the wrong way, you tend to have the attitude called __________."
+    },
+    {
+      "id": "04b07af8-983e-4b60-a1bc-da2591a13594",
+      "source_key": "BSED Social Studies-Science P1.pdf#8",
+      "stem": "On what basis is the caste system of social structure and stratification?"
+    },
+    {
+      "id": "cae362c4-608f-46d3-a641-d7d6ce3f23a0",
+      "source_key": "BSED Social Studies-Science P1.pdf#9",
+      "stem": "Which is considered as positive or favorable consequences of tough competition?"
+    },
+    {
+      "id": "ef04ca57-a2ab-4e61-8a25-34d6baabe79c",
+      "source_key": "BSED Social Studies-Science P1.pdf#10",
+      "stem": "The Chinese minority group in the Philippines adopts the language, history, and manners of mainstream Filipino culture as its own. What pattern of interaction occurs?"
+    },
+    {
+      "id": "2aa5f227-a71c-4abd-9867-fa81be70cef0",
+      "source_key": "BSED Social Studies-Science P1.pdf#11",
+      "stem": "Which illustrate horizontal mobility in the social ladder?"
+    },
+    {
+      "id": "73bb52ec-26c8-4baa-a8af-4d42d417968c",
+      "source_key": "BSED Social Studies-Science P1.pdf#12",
+      "stem": "Karl Marx divided industrial society into bourgeoisie and proletariat. What was one of his major bases of classification?"
+    },
+    {
+      "id": "162ecce1-22d8-4996-90f2-113ed660be56",
+      "source_key": "BSED Social Studies-Science P1.pdf#13",
+      "stem": "Which of the following may result at the departure country when Filipino professionals emigrate to other countries?"
+    },
+    {
+      "id": "75650b4a-4432-4a05-b8c5-4a8646454911",
+      "source_key": "BSED Social Studies-Science P1.pdf#14",
+      "stem": "If a Catholic researcher makes a study on polygamy as practiced in Islam, what influence will likely add subjectivity to his/her findings?"
+    },
+    {
+      "id": "56dddc6b-f5d8-425e-802e-b352735f8c1f",
+      "source_key": "BSED Social Studies-Science P1.pdf#15",
+      "stem": "If government sponsors a research on social poverty, what factor will likely influence the research?"
+    },
+    {
+      "id": "33fb300c-e661-4760-84df-c8ccd59e6302",
+      "source_key": "BSED Social Studies-Science P1.pdf#16",
+      "stem": "What attitude is needed before one engages in data-gathering for research?"
+    },
+    {
+      "id": "9040bab1-7978-4175-8a1f-2ef866a303a3",
+      "source_key": "BSED Social Studies-Science P1.pdf#18",
+      "stem": "When are laws said to be unscientific? When laws ________."
+    },
+    {
+      "id": "5c54aad0-9c8d-4933-b95e-96670cb71225",
+      "source_key": "BSED Social Studies-Science P1.pdf#19",
+      "stem": "How should social scientist view culture?"
+    },
+    {
+      "id": "4e1886a1-1a3d-4256-8a53-6e94b5e62fb0",
+      "source_key": "BSED Social Studies-Science P1.pdf#20",
+      "stem": "Color, emblem, gestures, designs, words are part of __________ language that makes man different from animals."
+    },
+    {
+      "id": "973c4bdf-d9aa-4674-b64f-d16da85b0ed4",
+      "source_key": "BSED Social Studies-Science P1.pdf#21",
+      "stem": "The value marker of ___________ is conveyed by the EDSA people power revolution."
+    },
+    {
+      "id": "f1763e23-ba8e-43c0-b832-57c7ef7c7b4e",
+      "source_key": "BSED Social Studies-Science P1.pdf#22",
+      "stem": "What issue is controversial for church people but is a need of secular society?"
+    },
+    {
+      "id": "24af3db9-690c-4796-8204-edc69e075780",
+      "source_key": "BSED Social Studies-Science P1.pdf#23",
+      "stem": "Which can explain the fact that we still observe the nod of respect (mano po) to our elders as our forebears?"
+    },
+    {
+      "id": "eb5304e1-5deb-4ca1-b8b3-26a4f38acc6d",
+      "source_key": "BSED Social Studies-Science P1.pdf#24",
+      "stem": "What constitutional reform did Filipino constitutionalists including those who framed the Malolos Constitution introduce to eliminate the dominance of the church over the state?"
+    },
+    {
+      "id": "fdfb30ce-c0d5-4a89-84ee-b31e21f01c01",
+      "source_key": "BSED Social Studies-Science P1.pdf#25",
+      "stem": "What could you accept as true from the varied propositions of Herbert Spencer?"
+    },
+    {
+      "id": "9f3b4853-c39f-4bd9-ac4a-7e32b0b60d06",
+      "source_key": "BSED Social Studies-Science P1.pdf#26",
+      "stem": "The following facts show Emile Durkheim has reason to assume that individuals are products, not creators of society EXCEPT __________."
+    },
+    {
+      "id": "c114bd70-5d8d-4081-aa20-f4984d1ef350",
+      "source_key": "BSED Social Studies-Science P1.pdf#27",
+      "stem": "Which explains Spencer's theory of progressive evolution of human societies?"
+    },
+    {
+      "id": "bdcc07fb-cba9-4984-8c33-754f9057dd86",
+      "source_key": "BSED Social Studies-Science P1.pdf#29",
+      "stem": "If there is anything positive in \"ningas-cogon\" Filipino trait, which one?"
+    }
+  ]
+}

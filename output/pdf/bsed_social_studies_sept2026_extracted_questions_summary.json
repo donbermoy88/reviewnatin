@@ -1,0 +1,81 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Social Science & Social Studies-",
+  "source_pdfs": 10,
+  "total_questions_found": 949,
+  "total_ready_for_upload": 893,
+  "total_needing_review": 42,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 14,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 949,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 893,
+    "Needs Review": 22,
+    "Incomplete": 20,
+    "Duplicate": 14
+  },
+  "subject_category_breakdown": {
+    "Social Studies": 949
+  },
+  "topic_breakdown": {
+    "Geography": 82,
+    "Social Studies / Araling Panlipunan": 393,
+    "Environmental Studies": 10,
+    "Sociology and Anthropology": 77,
+    "Research and Assessment": 97,
+    "Government and Constitution": 123,
+    "Philippine History and Nationalism": 36,
+    "Economics": 64,
+    "Social Studies Pedagogy": 29,
+    "World History": 18,
+    "ASEAN and International Relations": 20
+  },
+  "difficulty_breakdown": {
+    "3": 949
+  },
+  "source_counts": {
+    "BSED Social Studies-Science P1.pdf": 150,
+    "BSED Social Studies-Science P10.pdf": 30,
+    "BSED Social Studies-Science P2.pdf": 150,
+    "BSED Social Studies-Science P3.pdf": 150,
+    "BSED Social Studies-Science P4.pdf": 120,
+    "BSED Social Studies-Science P5.pdf": 150,
+    "BSED Social Studies-Science P6.pdf": 50,
+    "BSED Social Studies-Science P7.pdf": 49,
+    "BSED Social Studies-Science P8.pdf": 50,
+    "BSED Social Studies-Science P9.pdf": 50
+  },
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Social Studies",
+    "topic": "Social Studies / Araling Panlipunan",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "choice_e_text": "Choice E",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows to LET Secondary major/social-studies-araling-panlipunan, then verify live source counts and sub-tag breakdown.",
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_social_studies_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_social_studies_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_social_studies_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_social_studies_sept2026_extracted_questions_summary.json"
+  }
+}
