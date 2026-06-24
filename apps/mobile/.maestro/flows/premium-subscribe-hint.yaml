@@ -1,15 +1,46 @@
-# Premium cohort smoke: cold start → subscribe paywall shows Plus copy
+# Premium cohort smoke: subscribe paywall shows Play-compliant copy (guest)
 appId: ph.reviewnatin.app
 ---
 - launchApp:
-    clearState: true
+    clearState: false
 - extendedWaitUntil:
-    visible: "ReviewNatin"
-    timeout: 30000
+    visible: "ReviewNatin|Development Build|DEVELOPMENT SERVERS"
+    timeout: 45000
+- tapOn:
+    text: "Continue"
+    optional: true
+- tapOn:
+    text: "Connect"
+    optional: true
+- runFlow:
+    when:
+      visible: "DEVELOPMENT SERVERS"
+    commands:
+      - tapOn:
+          text: "Fetch development servers"
+      - extendedWaitUntil:
+          visible: "http://10.0.2.2:8081|http://192.168"
+          timeout: 30000
+      - tapOn:
+          text: "http://.*"
+- extendedWaitUntil:
+    visible: "ReviewNatin|Unlock ReviewNatin Premium|Get started"
+    timeout: 60000
+- tapOn:
+    text: "Continue"
+    optional: true
 - openLink: reviewnatin://subscribe
 - extendedWaitUntil:
-    visible: "Mag-log in para mag-subscribe"
-    timeout: 25000
-- extendedWaitUntil:
-    visible: "Mag-log in muna"
+    visible: "Unlock ReviewNatin Premium"
     timeout: 30000
+- tapOn:
+    text: "Continue"
+    optional: true
+- runFlow:
+    when:
+      visible: "Reload"
+    commands:
+      - back
+- assertVisible: "Sign in to subscribe"
+- assertVisible: "Free account needed for Premium"
+- assertVisible: "Maybe later"

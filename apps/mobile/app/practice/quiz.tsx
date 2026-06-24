@@ -41,6 +41,7 @@ import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { usePreferences } from '../../providers/preferences-provider';
 import { trackEvent } from '../../lib/analytics/events';
+import { FREE_MOCK_PREVIEW } from '../../lib/product-copy';
 
 function PracticeQuizScreenContent() {
   const router = useRouter();
@@ -90,10 +91,22 @@ function PracticeQuizScreenContent() {
   const [answers, setAnswers] = useState<QuizAnswerRecord[]>([]);
   const [navigatorOpen, setNavigatorOpen] = useState(false);
   const startedTracked = useRef(false);
+  const paywallTracked = useRef(false);
 
   useEffect(() => {
     setLang(prefs.explanationLocale ?? 'en');
   }, [prefs.explanationLocale]);
+
+  // Instrument the highest-intent upgrade moment: hitting the practice paywall
+  // (20-question daily wall or board-exam gate). Fires once per screen mount.
+  useEffect(() => {
+    if (!paywallBlocked || paywallTracked.current) return;
+    paywallTracked.current = true;
+    trackEvent('subscription_viewed', {
+      source: paywallReason === 'board' ? 'board_exam_gate' : 'daily_limit',
+      examSlug: slug,
+    });
+  }, [paywallBlocked, paywallReason, slug]);
 
   useEffect(() => {
     if (loading || questions.length === 0 || startedTracked.current) return;
@@ -379,7 +392,13 @@ function PracticeQuizScreenContent() {
       <View style={[styles.root, { paddingTop: insets.top }]}>
         <PremiumLimitPanel
           variant={paywallReason === 'board' ? 'board' : 'daily'}
-          onUpgrade={() => router.replace('/subscribe')}
+          onUpgrade={() => {
+            trackEvent('checkout_started', {
+              source: paywallReason === 'board' ? 'board_exam_gate' : 'daily_limit',
+              examSlug: slug,
+            });
+            router.replace('/subscribe');
+          }}
           onDismiss={() => router.replace('/(tabs)')}
         />
       </View>
@@ -545,7 +564,9 @@ function PracticeQuizScreenContent() {
         {isMock ? (
           <View style={styles.mockBanner}>
             <Text style={styles.mockBannerText}>
-              {mockTitle} · {mockPreviewActive ? `${questions.length}-item preview` : 'Mock exam'} · Strict timer · I-tap ang ▦ para mag-navigate
+              {mockPreviewActive
+                ? FREE_MOCK_PREVIEW.quizBanner(mockTitle, questions.length)
+                : `${mockTitle} · Mock exam · Strict timer · I-tap ang ▦ para mag-navigate`}
             </Text>
           </View>
         ) : null}

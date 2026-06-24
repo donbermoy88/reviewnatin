@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Alert, RefreshControl, ScrollView, Text, TextInput, View } from 'react-native';
+import { Alert, Pressable, RefreshControl, ScrollView, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Badge } from '../../components/badge';
 import { PrimaryButton } from '../../components/primary-button';
@@ -14,6 +14,7 @@ import { fetchExamBySlug, fetchExamQuestionCount, fetchSubjectAreas } from '../.
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchMockExams, type MockExam } from '../../lib/api/mock-exams';
 import { fetchTopicAnalytics, type SubjectAnalytics } from '../../lib/api/analytics';
+import { PREMIUM_LOCK_CTA, PREMIUM_LOCK_TITLE } from '../../lib/subscription/paywall-copy';
 import { fetchReviewMaterialsByExam, type ReviewMaterial } from '../../lib/api/review-materials';
 import { MasteryBar } from '../../components/mastery-bar';
 import {
@@ -27,6 +28,7 @@ import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
 import { DEFAULT_EXAM_SLUG, getExamCategoryLabel } from '@reviewnatin/shared';
 import { toUserFacingError } from '../../lib/errors/user-facing';
+import { FREE_MOCK_PREVIEW } from '../../lib/product-copy';
 import { AdBanner } from '../../components/ad-banner';
 import { ContentGateBanner } from '../../components/content-gate-banner';
 import { fetchContentGateStatus, type ContentGateStatus } from '../../lib/content-gate';
@@ -64,7 +66,7 @@ function StudyScreenContent() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, gradients, spacing } = theme;
+  const { colors, gradients, spacing, fonts, radii } = theme;
   const styles = useMemo(() => createStudyStyles(theme), [theme]);
   const subjectMeta = useMemo(
     () => [
@@ -145,9 +147,9 @@ function StudyScreenContent() {
 
   const launchBoardExam = () => {
     if (!isPremium(examTypeId)) {
-      Alert.alert('Board Exam Mode', 'Premium feature — strict timer, no hints, mixed subjects.', [
+      Alert.alert('Board Exam Mode', PREMIUM_LOCK_TITLE, [
         { text: 'Not now', style: 'cancel' },
-        { text: 'View plans', onPress: () => router.push('/subscribe') },
+        { text: PREMIUM_LOCK_CTA, onPress: () => router.push('/subscribe') },
       ]);
       return;
     }
@@ -160,8 +162,8 @@ function StudyScreenContent() {
   const launchMock = async (mock: MockExam) => {
     if (!user) {
       Alert.alert(
-        'Log in to start mocks',
-        'Create a free account to start mock exams, save results, and track your CSE readiness.',
+        FREE_MOCK_PREVIEW.loginAlertTitle,
+        FREE_MOCK_PREVIEW.loginAlertBody,
         [
           { text: 'Not now', style: 'cancel' },
           { text: 'Log in', onPress: () => router.push('/(auth)/login') },
@@ -175,11 +177,11 @@ function StudyScreenContent() {
 
     if (access === 'weekly_limit' && !(await isMiniMockAvailable(examSlug))) {
       Alert.alert(
-        'Weekly limit',
-        '1 mini-mock per week on the free tier. Upgrade for unlimited mocks.',
+        FREE_MOCK_PREVIEW.weeklyLimitTitle,
+        FREE_MOCK_PREVIEW.weeklyLimitBody,
         [
           { text: 'Not now', style: 'cancel' },
-          { text: 'View plans', onPress: () => router.push('/subscribe') },
+          { text: PREMIUM_LOCK_CTA, onPress: () => router.push('/subscribe') },
         ]
       );
       return;
@@ -187,12 +189,12 @@ function StudyScreenContent() {
 
     if (access === 'preview') {
       Alert.alert(
-        'Preview mode',
-        `Free tier: first ${FREE_MOCK_PREVIEW_ITEMS} items only. Upgrade for the full ${mock.itemCount}-item mock.`,
+        FREE_MOCK_PREVIEW.previewAlertTitle,
+        FREE_MOCK_PREVIEW.previewAlertBody(mock.itemCount, FREE_MOCK_PREVIEW_ITEMS),
         [
           { text: 'Cancel', style: 'cancel' },
           {
-            text: 'Start preview',
+            text: FREE_MOCK_PREVIEW.previewStartCta,
             onPress: () =>
               router.push({
                 pathname: '/practice/quiz',
@@ -205,7 +207,7 @@ function StudyScreenContent() {
                 },
               }),
           },
-          { text: 'Upgrade', onPress: () => router.push('/subscribe') },
+          { text: PREMIUM_LOCK_CTA, onPress: () => router.push('/subscribe') },
         ]
       );
       return;
@@ -326,11 +328,57 @@ function StudyScreenContent() {
       );
     }
 
+    const freeUser = Boolean(user && !isPremium(examTypeId));
+
     return (
       <SectionBlock
         title="Mock exams"
-        subtitle={user ? 'Practice under stricter timing and review your readiness.' : 'Log in to start mocks and save your results.'}
+        subtitle={
+          !user
+            ? FREE_MOCK_PREVIEW.guestMocksSubtitle
+            : freeUser
+              ? FREE_MOCK_PREVIEW.freeMocksSubtitle
+              : FREE_MOCK_PREVIEW.premiumMocksSubtitle
+        }
       >
+        {freeUser ? (
+          <Pressable
+            onPress={() => router.push('/subscribe')}
+            accessibilityRole="button"
+            accessibilityLabel="Learn about free mock previews and Plus upgrades"
+            style={({ pressed }) => ({
+              flexDirection: 'row',
+              alignItems: 'flex-start',
+              gap: spacing.sm,
+              borderRadius: radii.lg,
+              backgroundColor: colors.primaryLight,
+              borderWidth: 1,
+              borderColor: 'rgba(30,79,217,0.14)',
+              padding: spacing.sm,
+              marginBottom: spacing.md,
+              opacity: pressed ? 0.92 : 1,
+            })}
+          >
+            <Ionicons name="eye-outline" size={18} color={colors.primary} style={{ marginTop: 1 }} />
+            <View style={{ flex: 1 }}>
+              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.text }}>
+                {FREE_MOCK_PREVIEW.hintTitle}
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.bodyMedium,
+                  fontSize: 12,
+                  color: colors.textMuted,
+                  lineHeight: 17,
+                  marginTop: 2,
+                }}
+              >
+                {FREE_MOCK_PREVIEW.hintBody(FREE_MOCK_PREVIEW_ITEMS)}
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={16} color={colors.primary} />
+          </Pressable>
+        ) : null}
         <ActionCard
           title="Board Exam Mode"
           description="Full-length · Strict timer · No hints"
@@ -344,23 +392,27 @@ function StudyScreenContent() {
           const mini = isMiniMock(mock);
           const free = user ? !isPremium(examTypeId) : false;
           const preview = user && free && !mini && mock.itemCount > FREE_MOCK_PREVIEW_ITEMS;
+          const durationMin = Math.round(mock.durationSeconds / 60);
           const tierBadge = !user
             ? <Badge label="Log in" variant="accent" icon="lock-closed" />
             : mini && free
               ? <Badge label="1/week free" variant="success" />
               : preview
-                ? <Badge label={`Preview ${FREE_MOCK_PREVIEW_ITEMS}`} variant="accent" icon="eye-outline" />
+                ? <Badge label={FREE_MOCK_PREVIEW.badgeLabel(FREE_MOCK_PREVIEW_ITEMS)} variant="accent" icon="eye-outline" />
                 : free
                   ? <Badge label="Plus" variant="premium" icon="lock-closed" />
                   : null;
           const iconName: keyof typeof Ionicons.glyphMap = mini ? 'flash' : 'document-text';
           const iconBg = mini ? colors.accentLight : colors.primaryMuted;
           const iconColor = mini ? colors.accentDark : colors.primary;
+          const description = preview
+            ? FREE_MOCK_PREVIEW.previewCardDescription(mock.itemCount, durationMin, FREE_MOCK_PREVIEW_ITEMS)
+            : `${mock.itemCount} items · ${durationMin} min`;
           return (
             <ActionCard
               key={mock.id}
               title={cleanExamName(mock.title)}
-              description={`${mock.itemCount} items · ${Math.round(mock.durationSeconds / 60)} min`}
+              description={description}
               leading={<IconTile icon={iconName} color={iconColor} backgroundColor={iconBg} />}
               badge={tierBadge}
               onPress={() => launchMock(mock)}

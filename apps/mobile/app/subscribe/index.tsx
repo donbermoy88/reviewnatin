@@ -15,6 +15,7 @@ import { useEntitlements } from '../../providers/entitlements-provider';
 import { useIap } from '../../providers/iap-provider';
 import { captureAttributionFromQuery } from '../../lib/checkout-attribution';
 import { toUserFacingError } from '../../lib/errors/user-facing';
+import { PREMIUM_PROSPECT } from '../../lib/product-copy';
 import { trackEvent } from '../../lib/analytics/events';
 import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../../lib/monitoring/events';
 import { canUseStorePurchases } from '../../lib/iap/availability';
@@ -278,6 +279,14 @@ export default function SubscribeScreen() {
     });
   };
 
+  const dismissPaywall = () => {
+    if (router.canGoBack()) {
+      router.back();
+      return;
+    }
+    router.replace('/(tabs)');
+  };
+
   return (
     <View style={styles.root}>
       <LinearGradient
@@ -300,7 +309,7 @@ export default function SubscribeScreen() {
             <Text style={styles.plusBadgeText}>PREMIUM</Text>
           </View>
           <Pressable
-            onPress={() => router.back()}
+            onPress={dismissPaywall}
             style={({ pressed }) => [styles.closeBtn, pressed && { opacity: 0.7 }]}
             hitSlop={8}
             accessibilityRole="button"
@@ -362,7 +371,16 @@ export default function SubscribeScreen() {
         ) : loading ? (
           <ActivityIndicator color={colors.accent} style={{ marginTop: spacing.lg }} />
         ) : (
-          <View style={{ gap: spacing.sm, marginTop: spacing.lg }}>
+          <>
+            <View style={styles.prospectBanner}>
+              <Ionicons name="sparkles-outline" size={18} color={colors.accent} />
+              <View style={{ flex: 1 }}>
+                <Text style={styles.prospectBannerTitle}>{PREMIUM_PROSPECT.title}</Text>
+                <Text style={styles.prospectBannerSub}>{PREMIUM_PROSPECT.subtitle}</Text>
+                <Text style={styles.prospectBannerTrust}>{PREMIUM_PROSPECT.trustLine}</Text>
+              </View>
+            </View>
+            <View style={{ gap: spacing.sm, marginTop: spacing.lg }}>
             {sortedPlus.map((p) => {
               const selected = selectedPlanId === p.id;
               const meta = planDisplayMeta(p.sku);
@@ -400,7 +418,8 @@ export default function SubscribeScreen() {
                 </Pressable>
               );
             })}
-          </View>
+            </View>
+          </>
         )}
 
         {!hasAccess && user ? (
@@ -464,7 +483,7 @@ export default function SubscribeScreen() {
             <Text style={styles.bigCtaText}>{ctaLabel}</Text>
           </Pressable>
           <Pressable
-            onPress={() => router.back()}
+            onPress={dismissPaywall}
             hitSlop={8}
             style={{ alignItems: 'center', marginTop: spacing.sm }}
             accessibilityRole="button"
@@ -607,6 +626,32 @@ function createStyles(theme: AppTheme) {
       alignSelf: 'center',
     },
     guestBannerLinkText: { fontFamily: fonts.bodyBold, fontSize: 12, color: 'rgba(255,255,255,0.78)' },
+    prospectBanner: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: spacing.sm,
+      backgroundColor: 'rgba(255,255,255,0.08)',
+      borderRadius: radii.lg,
+      padding: spacing.md,
+      marginTop: spacing.lg,
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,0.12)',
+    },
+    prospectBannerTitle: { fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' },
+    prospectBannerSub: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 13,
+      color: 'rgba(255,255,255,0.78)',
+      lineHeight: 19,
+      marginTop: 4,
+    },
+    prospectBannerTrust: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 11,
+      color: 'rgba(255,255,255,0.55)',
+      lineHeight: 16,
+      marginTop: spacing.xs,
+    },
     planRow: {
       flexDirection: 'row',
       alignItems: 'center',

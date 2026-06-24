@@ -6,7 +6,7 @@ import { isEmailVerified } from '../lib/auth/email-verification';
 function isAllowedWithoutVerification(segments: string[]): boolean {
   const root = segments[0];
   if (!root || root === 'index') return true;
-  if (root === '(auth)' || root === 'auth') return true;
+  if (root === '(auth)' || root === 'auth' || root === 'subscribe') return true;
   return false;
 }
 

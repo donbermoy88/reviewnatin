@@ -42,6 +42,33 @@ export const FREE_OAUTH_SIGNUP = {
     'Google sign-in skips the email code. LET Secondary reviewers can still choose their major during onboarding.',
 } as const;
 
+export const FREE_MOCK_PREVIEW_ITEMS_COPY = 10;
+
+export const FREE_MOCK_PREVIEW = {
+  guestMocksSubtitle: 'Log in to start mocks and save your results.',
+  freeMocksSubtitle:
+    'Free account: try the first preview of each full mock. Plus unlocks the complete timed exam.',
+  premiumMocksSubtitle: 'Practice under stricter timing and review your readiness.',
+  hintTitle: 'How free mock previews work',
+  hintBody: (previewItems = FREE_MOCK_PREVIEW_ITEMS_COPY) =>
+    `Full mocks start with ${previewItems} free questions. Mini-mocks are 1/week. Plus removes limits, saves full results, and hides ads.`,
+  previewAlertTitle: 'Mock preview mode',
+  previewAlertBody: (totalItems: number, previewItems = FREE_MOCK_PREVIEW_ITEMS_COPY) =>
+    `Free tier: unang ${previewItems} tanong lang ng ${totalItems}-item mock. Plus gets the full timed exam and saved results.`,
+  previewStartCta: 'Start preview',
+  previewCardDescription: (totalItems: number, durationMin: number, previewItems = FREE_MOCK_PREVIEW_ITEMS_COPY) =>
+    `First ${previewItems} of ${totalItems} items · ${durationMin} min preview`,
+  weeklyLimitTitle: 'Mini-mock limit',
+  weeklyLimitBody:
+    'Free tier: 1 mini-mock bawat linggo. Plus gets unlimited full mocks and no ads.',
+  loginAlertTitle: 'Log in to start mocks',
+  loginAlertBody:
+    'Create a free account to try mock previews, save results, and track exam readiness.',
+  quizBanner: (mockTitle: string, questionCount: number) =>
+    `${mockTitle} · ${questionCount}-item preview · Strict timer · I-tap ang ▦ para mag-navigate`,
+  badgeLabel: (previewItems = FREE_MOCK_PREVIEW_ITEMS_COPY) => `Preview ${previewItems}`,
+} as const;
+
 export const FREE_DAILY_STATUS = {
   title: (remaining: number) =>
     remaining > 0
@@ -69,6 +96,13 @@ export const DAILY_LIMIT = {
     'Offline packs — review kahit walang data',
     'Walang ads habang nagre-review',
   ],
+} as const;
+
+export const PREMIUM_PROSPECT = {
+  title: 'Ready for unlimited review?',
+  subtitle:
+    'Your free streak, PasaPath, and daily progress stay on this account. Plus unlocks full mocks, offline packs, AI tutor, and ad-free study through Google Play.',
+  trustLine: 'Cancel anytime in Google Play. Payment is processed securely by Google Play.',
 } as const;
 
 export const PREMIUM_HEADLINE = {

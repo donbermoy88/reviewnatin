@@ -1,13 +1,13 @@
 appId: ph.reviewnatin.app
 ---
-# Premium cohort: subscribe screen + web checkout entry
+# Premium cohort: subscribe screen shows Play Billing paywall (no web checkout)
 - launchApp
 - runFlow:
     file: guest-smoke.yaml
     optional: true
-- tapOn:
-    text: ".*Plus.*|Subscribe.*|Mag-upgrade"
-    optional: true
-- assertVisible:
-    text: ".*GCash.*|checkout.*|Plus"
-    optional: true
+- openLink: reviewnatin://subscribe
+- extendedWaitUntil:
+    visible: "Unlock ReviewNatin Premium"
+    timeout: 25000
+- assertVisible: "Sign in to subscribe"
+- assertVisible: "Free account needed for Premium"
