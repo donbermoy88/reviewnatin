@@ -1,0 +1,953 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_general_science_sept2026_extracted_questions.json",
+  "extracted_rows": 419,
+  "ready_rows": 318,
+  "source_duplicates_or_non_ready_skipped": 101,
+  "existing_general_science_questions_before": 319,
+  "insertable": 0,
+  "updatable_by_source_key": 318,
+  "archivable_duplicate_sources": 1,
+  "duplicate_existing_content": 0,
+  "inserted": 0,
+  "updated": 318,
+  "archived_duplicate_sources": 1,
+  "skipped_samples": [
+    {
+      "row": "111",
+      "source_pdf": "BSED General Science C.pdf",
+      "original_no": "11",
+      "status": "Duplicate",
+      "duplicate_of": "66",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 66."
+    },
+    {
+      "row": "180",
+      "source_pdf": "BSED General Science P1.pdf",
+      "original_no": "30",
+      "status": "Duplicate",
+      "duplicate_of": "179",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 179."
+    },
+    {
+      "row": "321",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "51",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "322",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "52",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "323",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "53",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "324",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "54",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "325",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "55",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "326",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "56",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "327",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "57",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "328",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "58",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "329",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "59",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "330",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "60",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "331",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "61",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "332",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "62",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "333",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "63",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "334",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "64",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "335",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "65",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "336",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "66",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "337",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "67",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "338",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "68",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "339",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "69",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "340",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "70",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "341",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "71",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "342",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "72",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "343",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "73",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "344",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "74",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "345",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "75",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "346",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "76",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "347",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "77",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "348",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "78",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "349",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "79",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "350",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "80",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "351",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "81",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "352",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "82",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "353",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "83",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "354",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "84",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "355",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "85",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "356",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "86",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "357",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "87",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "358",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "88",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "359",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "89",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "360",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "90",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "361",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "91",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "362",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "92",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "363",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "93",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "364",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "94",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "365",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "95",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "366",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "96",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "367",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "97",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "368",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "98",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "369",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "99",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "370",
+      "source_pdf": "BSED General Science P7.pdf",
+      "original_no": "100",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "371",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "1",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "372",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "2",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "373",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "3",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "374",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "4",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "375",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "5",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "376",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "6",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "377",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "7",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "378",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "8",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "379",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "9",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "380",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "10",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "381",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "11",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "382",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "12",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "383",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "13",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "384",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "14",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "385",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "15",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "386",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "16",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "387",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "17",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "388",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "18",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "389",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "19",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "390",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "20",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "391",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "21",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "392",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "22",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "393",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "23",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "394",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "25",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "395",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "26",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "396",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "27",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "397",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "28",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "398",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "29",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "399",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "30",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "400",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "31",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "401",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "32",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "402",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "33",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "403",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "34",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "404",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "35",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "405",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "36",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "406",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "37",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "407",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "38",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "408",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "39",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "409",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "40",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "410",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "41",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "411",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "42",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "412",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "43",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "413",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "44",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "414",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "45",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "415",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "46",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "416",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "47",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "417",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "48",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    },
+    {
+      "row": "418",
+      "source_pdf": "BSED General Science P8.pdf",
+      "original_no": "49",
+      "status": "Needs Answer",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary General Science major. No answer key or inline answer was found in the source PDF."
+    }
+  ],
+  "duplicate_samples": [],
+  "archived_duplicate_samples": [
+    {
+      "id": "6825858f-a0b3-4de2-b9bc-ab2c851e26b9",
+      "source_key": "BSED General Science P1.pdf#30",
+      "duplicate_of": "179",
+      "stem": "Which one of the following is correctly matched?"
+    }
+  ],
+  "update_samples": [
+    {
+      "id": "326ced6d-4bbd-448b-9c23-0972865f7b06",
+      "source_key": "BSED General Science A.pdf#1",
+      "stem": "The rate of change of velocity is known as:"
+    },
+    {
+      "id": "8be4f821-09f0-4936-abed-5473c367bf0e",
+      "source_key": "BSED General Science A.pdf#2",
+      "stem": "Which of the following quantities is a vector?"
+    },
+    {
+      "id": "3dc5d3fc-d3fc-4442-bdf2-53bf6904b300",
+      "source_key": "BSED General Science A.pdf#3",
+      "stem": "The area under a velocity-time graph represents:"
+    },
+    {
+      "id": "7d8d3fff-f5c0-429d-8b4c-4f1a9159fa39",
+      "source_key": "BSED General Science A.pdf#4",
+      "stem": "The law of conservation of energy states that:"
+    },
+    {
+      "id": "fca6cca5-3429-4cbd-a32b-8948097af164",
+      "source_key": "BSED General Science A.pdf#5",
+      "stem": "The wavelength of a wave is the distance between:"
+    },
+    {
+      "id": "de12a487-1f07-48a2-a49c-4c3a0184e020",
+      "source_key": "BSED General Science A.pdf#6",
+      "stem": "The number of valence electrons in carbon is:"
+    },
+    {
+      "id": "7dee4a17-bc89-44c7-97ce-b5cdf25e59f5",
+      "source_key": "BSED General Science A.pdf#7",
+      "stem": "Which of the following is a noble gas?"
+    },
+    {
+      "id": "3716ce12-2742-4a07-b9cd-db838f784652",
+      "source_key": "BSED General Science A.pdf#8",
+      "stem": "Acids have a pH range of:"
+    },
+    {
+      "id": "d8a0cbf1-63d3-4946-bf9b-b891ecdbacb7",
+      "source_key": "BSED General Science A.pdf#9",
+      "stem": "The bond formed by sharing of electrons is called:"
+    },
+    {
+      "id": "43bef5a9-fc4d-4a3e-89a6-5f5205a81264",
+      "source_key": "BSED General Science A.pdf#10",
+      "stem": "In a chemical reaction, the substances formed are called:"
+    },
+    {
+      "id": "13b22fd4-8ec1-4f94-97f8-77aa32efaed8",
+      "source_key": "BSED General Science A.pdf#11",
+      "stem": "The Earth's inner core is composed mostly of:"
+    },
+    {
+      "id": "e10b82a1-7585-498d-b30c-e9208cb6ef52",
+      "source_key": "BSED General Science A.pdf#12",
+      "stem": "Rocks formed by cooling of magma are called:"
+    },
+    {
+      "id": "4bc4bf52-0ec8-4a80-ae29-e25cc5028560",
+      "source_key": "BSED General Science A.pdf#13",
+      "stem": "Fossils are mostly found in which type of rock?"
+    },
+    {
+      "id": "9f9743e1-ce16-4465-ba0b-0822dc91b4a5",
+      "source_key": "BSED General Science A.pdf#14",
+      "stem": "The theory that explains the movement of continents is:"
+    },
+    {
+      "id": "f2f7b198-b7cc-4044-afc5-1eeab64c80b1",
+      "source_key": "BSED General Science A.pdf#15",
+      "stem": "Which natural phenomenon is measured using a seismograph?"
+    },
+    {
+      "id": "073c3b35-5185-46e4-9c46-3a9ec518b31b",
+      "source_key": "BSED General Science A.pdf#16",
+      "stem": "Which planet has the most moons?"
+    },
+    {
+      "id": "7b871e25-083a-473a-80a5-46090f88cde7",
+      "source_key": "BSED General Science A.pdf#17",
+      "stem": "A group of stars forming a pattern in the sky is called:"
+    },
+    {
+      "id": "5ab609f0-1986-4401-9881-c4233ea9e884",
+      "source_key": "BSED General Science A.pdf#18",
+      "stem": "The length of one year on Earth is based on its:"
+    },
+    {
+      "id": "489a1e2e-43ce-45a8-802a-03e316857da9",
+      "source_key": "BSED General Science A.pdf#19",
+      "stem": "What causes lunar eclipses?"
+    },
+    {
+      "id": "0b507f5f-04b6-456c-92e6-4d02c6761296",
+      "source_key": "BSED General Science A.pdf#20",
+      "stem": "The planet with the fastest rotation is:"
+    },
+    {
+      "id": "78f2241f-8b05-408e-9ca9-de0bebd96d09",
+      "source_key": "BSED General Science A.pdf#21",
+      "stem": "The process by which cells divide to form two identical cells is:"
+    },
+    {
+      "id": "0987fd04-4e4a-46dd-b2d7-8501ae70e855",
+      "source_key": "BSED General Science A.pdf#22",
+      "stem": "Which part of the plant is responsible for photosynthesis?"
+    },
+    {
+      "id": "5bcb14e4-b1f2-44c1-80d9-9ebef25c9b32",
+      "source_key": "BSED General Science A.pdf#23",
+      "stem": "The hereditary material in cells is:"
+    },
+    {
+      "id": "3ec1c9c1-114b-4d21-acdd-73a0ceaaa558",
+      "source_key": "BSED General Science A.pdf#24",
+      "stem": "Which organ removes waste from the blood?"
+    },
+    {
+      "id": "a2d5be51-c409-4f7c-8b99-83e947467721",
+      "source_key": "BSED General Science A.pdf#25",
+      "stem": "An organism that makes its own food is called a:"
+    }
+  ]
+}

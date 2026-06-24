@@ -1,0 +1,81 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - General Science-",
+  "source_pdfs": 10,
+  "total_questions_found": 419,
+  "total_ready_for_upload": 318,
+  "total_needing_review": 0,
+  "total_without_answer_key": 99,
+  "total_duplicates_detected": 2,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 419,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 318,
+    "Duplicate": 2,
+    "Needs Answer": 99
+  },
+  "subject_category_breakdown": {
+    "General Science": 419
+  },
+  "topic_breakdown": {
+    "Mechanics": 21,
+    "Chemistry": 55,
+    "General Science": 217,
+    "Waves and Optics": 14,
+    "Atomic and Nuclear Physics": 15,
+    "Earth and Space Science": 51,
+    "Environmental Science": 15,
+    "Electricity and Magnetism": 13,
+    "Science Pedagogy and Research": 12,
+    "Thermodynamics": 6
+  },
+  "difficulty_breakdown": {
+    "3": 419
+  },
+  "source_counts": {
+    "BSED General Science A.pdf": 50,
+    "BSED General Science B.pdf": 50,
+    "BSED General Science C.pdf": 50,
+    "BSED General Science P1.pdf": 40,
+    "BSED General Science P2.pdf": 40,
+    "BSED General Science P3.pdf": 40,
+    "BSED General Science P4.pdf": 50,
+    "BSED General Science P7.pdf": 50,
+    "BSED General Science P8.pdf": 49
+  },
+  "skipped_sources": {
+    "BSED General Science P5.pdf": "Reviewed visually and by OCR/text extraction. File contains notes/lists, not multiple-choice LET questions, so no upload-ready questions were extracted."
+  },
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "General Science",
+    "topic": "General Science",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "choice_e_text": "Choice E",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows to LET Secondary major/general-science, then verify live source counts and sub-tag breakdown.",
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_general_science_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_general_science_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_general_science_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_general_science_sept2026_extracted_questions_summary.json"
+  }
+}
