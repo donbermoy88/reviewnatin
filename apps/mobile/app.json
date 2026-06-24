@@ -28,7 +28,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "softwareKeyboardLayoutMode": "resize",
-      "versionCode": 37
+      "versionCode": 38
     },
     "web": {
       "favicon": "./assets/favicon.png"
