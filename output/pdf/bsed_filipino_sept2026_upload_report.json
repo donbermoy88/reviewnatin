@@ -1,0 +1,368 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_filipino_sept2026_extracted_questions.json",
+  "extracted_rows": 720,
+  "ready_rows": 643,
+  "source_duplicates_or_non_ready_skipped": 77,
+  "existing_filipino_questions_before": 499,
+  "insertable": 211,
+  "updatable_by_source_key": 432,
+  "duplicate_existing_content": 0,
+  "inserted": 211,
+  "updated": 432,
+  "skipped_samples": [
+    {
+      "row": "17",
+      "source_pdf": "BSED Filipino Part1.pdf",
+      "original_no": "17",
+      "status": "Needs Image Extraction",
+      "duplicate_of": "",
+      "image_reference": "question_image_page_03_q17 (/Users/lyndon/reviewnatin/output/pdf/images/bsed_filipino_sept2026/question_image_page_03_q17.png)",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Source item has a connected visual: Table of language learning styles and teaching strategies."
+    },
+    {
+      "row": "66",
+      "source_pdf": "BSED Filipino Part1.pdf",
+      "original_no": "66",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "103",
+      "source_pdf": "BSED Filipino Part2.pdf",
+      "original_no": "3",
+      "status": "Needs Image Extraction",
+      "duplicate_of": "",
+      "image_reference": "question_image_page_01_q03 (/Users/lyndon/reviewnatin/output/pdf/images/bsed_filipino_sept2026/question_image_page_01_q03.png)",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Source item has a connected visual: Table of Asian literary works, country, author, and translator."
+    },
+    {
+      "row": "140",
+      "source_pdf": "BSED Filipino Part2.pdf",
+      "original_no": "40",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "197",
+      "source_pdf": "BSED Filipino Part2.pdf",
+      "original_no": "97",
+      "status": "Needs Image Extraction",
+      "duplicate_of": "",
+      "image_reference": "question_image_page_12_q97 (/Users/lyndon/reviewnatin/output/pdf/images/bsed_filipino_sept2026/question_image_page_12_q97.png)",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Source item has a connected visual: Comparison table of balita, editoryal, and lathalain."
+    },
+    {
+      "row": "202",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "2",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: D."
+    },
+    {
+      "row": "209",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "9",
+      "status": "Needs Image Extraction",
+      "duplicate_of": "",
+      "image_reference": "question_image_page_02_q09 (/Users/lyndon/reviewnatin/output/pdf/images/bsed_filipino_sept2026/question_image_page_02_q09.png)",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Source item has a connected visual: Dialogue box used as stimulus for listening-teaching question."
+    },
+    {
+      "row": "219",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "19",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "231",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "31",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "234",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "34",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A."
+    },
+    {
+      "row": "255",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "55",
+      "status": "Duplicate",
+      "duplicate_of": "85",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 85."
+    },
+    {
+      "row": "267",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "67",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "268",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "68",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B, C, D."
+    },
+    {
+      "row": "269",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "69",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: A, B, C, D."
+    },
+    {
+      "row": "283",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "83",
+      "status": "Needs Image Extraction",
+      "duplicate_of": "",
+      "image_reference": "question_image_page_16_q83 (/Users/lyndon/reviewnatin/output/pdf/images/bsed_filipino_sept2026/question_image_page_16_q83.png)",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Source item has a connected visual: Table of survey items and percentages."
+    },
+    {
+      "row": "294",
+      "source_pdf": "BSED Filipino Part3.pdf",
+      "original_no": "94",
+      "status": "Needs Image Extraction",
+      "duplicate_of": "",
+      "image_reference": "question_image_page_18_q94 (/Users/lyndon/reviewnatin/output/pdf/images/bsed_filipino_sept2026/question_image_page_18_q94.png)",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Source item has a connected visual: Table of learning styles and instructional materials."
+    },
+    {
+      "row": "514",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "64",
+      "status": "Duplicate",
+      "duplicate_of": "457",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 457."
+    },
+    {
+      "row": "528",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "78",
+      "status": "Duplicate",
+      "duplicate_of": "466",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 466."
+    },
+    {
+      "row": "534",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "84",
+      "status": "Needs Review",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate choice labels in source/OCR: B, D."
+    },
+    {
+      "row": "539",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "89",
+      "status": "Duplicate",
+      "duplicate_of": "468",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 468."
+    },
+    {
+      "row": "540",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "90",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "543",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "93",
+      "status": "Duplicate",
+      "duplicate_of": "470",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 470."
+    },
+    {
+      "row": "554",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "104",
+      "status": "Duplicate",
+      "duplicate_of": "492",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 492."
+    },
+    {
+      "row": "557",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "107",
+      "status": "Duplicate",
+      "duplicate_of": "513",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 513."
+    },
+    {
+      "row": "570",
+      "source_pdf": "BSED Filipino Part7.pdf",
+      "original_no": "120",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "image_reference": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Filipino. Correct answer sourced from source PDF answer key."
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "1f1def41-86af-47a5-9c6b-a3edfeb35cb2",
+      "source_key": "BSED Filipino Part1.pdf#1",
+      "stem": "Ano ang kadalasang iminunkahing paraan sa pagbibigay-kahulugan sa mga termino sa isang pananalisik pangwika?"
+    },
+    {
+      "id": "e1243db7-1feb-478e-b470-b86f28d346d8",
+      "source_key": "BSED Filipino Part1.pdf#2",
+      "stem": "Ano ang pagakakaiba ng malaya at di malayang baryabol ng isang pananalisik?"
+    },
+    {
+      "id": "48c70c73-5b66-4ac8-9c32-77b7ea2e1551",
+      "source_key": "BSED Filipino Part1.pdf#3",
+      "stem": "Kung nais na pag-aralan ang kauganayan ng kakayahang komukatibo ng mga mag-aaral sa kanilang propayl tulad ng eksposyur sa midya ay edukasyong natapos ng magulang anong desisyon pampananaliksik ang naangkop gamitin."
+    },
+    {
+      "id": "249e9beb-d4e2-4d4b-bc49-00d18fbd4207",
+      "source_key": "BSED Filipino Part1.pdf#4",
+      "stem": "Uri ng panaliksik na itinuturing na may mas tumpak na tgalay na resulta bagaman may kaakibat na isyu hinggil sa relayabili nito. Kaya naman, kinakailanagan ang maingat na pagproseso lalo na sa pagpili at pagbuo ng pangkat na lalahok sa naturang gagawing pag-aaral upang matugunan at masolusyunan ang mga balakid o sagabal."
+    },
+    {
+      "id": "c3c2ad86-1f38-4d5b-b741-91628db95a7a",
+      "source_key": "BSED Filipino Part1.pdf#5",
+      "stem": "Kung nais mong pag-aralan ang natamanog akademik performance ng mga mag-aaral sa balarila, anong instrument ang pinakaangkop mong gamitin tungo sa mas makabuluhang resuta o kalabasan?"
+    },
+    {
+      "id": "a983b4b7-926d-44b6-afe7-8da53a69a55a",
+      "source_key": "BSED Filipino Part1.pdf#6",
+      "stem": "Tukuyin ang estrathiyang pangkatang pampagkatuto ng natatampok batay sa mga sumusunod na hakbang ng ginagawa ng guro."
+    },
+    {
+      "id": "99abc2a9-8ba9-414e-b06e-a3f108f48d3f",
+      "source_key": "BSED Filipino Part1.pdf#7",
+      "stem": "Ayon sa mga teorya ng kakayahang komunikatibo, ito ay lawak ng kasanayang na mapanatili ang komunikasyon o mabigyang lunas ang mga gap."
+    },
+    {
+      "id": "358193b1-9bde-4bde-afda-fa3c32c71aff",
+      "source_key": "BSED Filipino Part1.pdf#8",
+      "stem": "Uri ng role play na maaring gamitin sa pagtuturo ng wika na kung sann hinid mahuhulaan ang sasambitin at itutugon ng mga kalahok hanggat hindi binibitawang ng bawat isa ang kanilang kataga sa dayalogong sasabihn."
+    },
+    {
+      "id": "b6d085c4-f8bf-4a78-a708-85827b39ef36",
+      "source_key": "BSED Filipino Part1.pdf#9",
+      "stem": "Bahagi ng semantic web na kinapapalooban ng mga tunay na pangyayari, konklusyon o paglalahat ng nakuha ng mga mag-aaral mula sa kwentong binasa upang mabigyang kalinawan at katotohanan ang hibla at malaman ang kaibahan ng bawat isa/"
+    },
+    {
+      "id": "1ad148a5-ae6b-44e5-89b8-11961fc5d638",
+      "source_key": "BSED Filipino Part1.pdf#10",
+      "stem": "Ang pangkat ng mag-aaral ng bahagi ng fishbowl teknik sa pagtuturo ng wika na silang nagtalakay sa aralin kaya’t kadalasa’y binibigyan ng guro ng mga patnubay na taong ang pangkat na ito."
+    },
+    {
+      "id": "263269f7-9abd-40e6-afff-3878a1d01be4",
+      "source_key": "BSED Filipino Part1.pdf#12",
+      "stem": "Bilang guro ng wika, madalas pinapahayag ng Gng. Austria ang kanyang mga mag-aaral batay sa kanilang saloobin, persepsyon o pananaw. Sa tuwing makakarining siya ng ilang pagkakamali hingil sa wastong pagamit ng balarila, hindi niya agad agad na itinatama ang mga ito nag hayaan upang hinid mabalam ang pagkatuto ng wika ang isinasaad nito?"
+    },
+    {
+      "id": "fe70d407-65d5-49ee-97e7-585210826035",
+      "source_key": "BSED Filipino Part1.pdf#19",
+      "stem": "Ang unang yugto ng pagkatuto ng wika na nabubuo sa malikhaing tunog na bunga ng vocalizing, cooing, guggling, at bubbling ng mga bata."
+    },
+    {
+      "id": "77c731f9-5eee-4868-b5ed-bc0c16e8ed60",
+      "source_key": "BSED Filipino Part1.pdf#20",
+      "stem": "Ang mga sumusunod na pahayag ay mga panuntunan at pananaw ayon sa simulating otomatisiti sa pagtuturo ng wika. I. Natural o di namamalayang pagkatuto ng wikang sa pamamagitan ng makabuluhang paggamit nito II. Mabisa at mabilis na paglayo sa pagpukos sa anyo ng wika sa pamamagitan ng makabuluhang paggamit ng wika ang sentro nito III. Epiktibo at mabisang pagkontrol ng ilang aspekto ng wikang pagtungo sa walang Limitasyon pagproseso ng anyo ng wika. IV. Lubos na sinusuri ang maliliit na detalye ng anyo wika"
+    },
+    {
+      "id": "d824883b-a121-4acf-838b-638e5305c4ec",
+      "source_key": "BSED Filipino Part1.pdf#21",
+      "stem": "Ayon sa simulang makabuluhang pagkatuto, higit na mahalaga ang pagmatagalang pagkatuto kaysa sa pagsasaulo lamang o rote learning. Alin sa mga sumusunod ang maituturing na negatibong bunga nito? 1. Labis na pagpaliwanang ng gramatika 2. labis na dril 3. Mga gawaing malayo sa pagtamo ng mga di tiya na layunin 4. Mga teknik na mekanikal na nakapokus ang interes ng mga mag-aaral sa mensahe at kahulugan ng wika kaysa kayarian nito."
+    },
+    {
+      "id": "160f4311-72d0-4e33-809a-731a9bf02315",
+      "source_key": "BSED Filipino Part1.pdf#24",
+      "stem": "Basahin at suriin ang mga sumusunod na itinakdang layunin ng guro para sa isang aralin. Pagkatapos ay tukuyin ang bahaging nakasalunguhit na may nakabilog na tambilang. Ang mag-aral ay nakasusulat ng talatang anyong pagpahayag na. Binubuo ng hindi kukulangin sa limang pangungusap"
+    },
+    {
+      "id": "8802c60f-5eb3-4c44-aa9c-b232c755920c",
+      "source_key": "BSED Filipino Part1.pdf#26",
+      "stem": "Itoay tumutukoy sa kakayahang bigyang interpretasyon ang isang serye ng mga napakinggang pangungusap upang makagawa ng isang makabuluhang kahulugan."
+    },
+    {
+      "id": "184a22e7-6f5e-479f-89c5-648a63aaa398",
+      "source_key": "BSED Filipino Part1.pdf#27",
+      "stem": "Basahin at unawaing mabuti ang kalagayang pangwika na nagaganap sa klase at tukuyin ang pamaraang kaakibat nito sa pagtuturo ng wika. Sa silid 104, na kung saan ang mga mag aaral dito ay nagtataglay ng istilong authority oriented na pagkatuto at kadalasan ang lahat ng gawaing pangklase ay nakasalalay o nakasalig sa guro bilang tagapag-utos tagapagpaganap ng mag gawaing pampakatuto at kadalasan ang lahat ng gawaing pangklase ay nakasalalay o nakasalig guro bilang tagapag-utos o tagapagpaganap ng mga gawaing pamgpagkatuto."
+    },
+    {
+      "id": "66a97f82-0eb1-4b7d-8479-73b426da1afa",
+      "source_key": "BSED Filipino Part1.pdf#29",
+      "stem": "Kapag ang mga guro ay nag-uusap hinggil sa larangan ng pagtuturo at pagkatuto ng mga mag-aaral. Anong wika ang kanilang ginagamit sa usapan?"
+    },
+    {
+      "id": "1b6db392-3166-45ab-997c-03e481ce0fca",
+      "source_key": "BSED Filipino Part1.pdf#30",
+      "stem": "Ang salitang atlanghap ay karaniwang gamitinna sa Filipino natumutkoy sa almusal tangahalian at hapunan. Anong katangian ng wikaang nagpapaloob sa naturang gamiting salita?"
+    },
+    {
+      "id": "d14be1d2-f0b4-4967-9f90-a49736094dd3",
+      "source_key": "BSED Filipino Part1.pdf#33",
+      "stem": "Ibigay ang pahambing na pagkakatulad at pagkakaiba ng ponema at morpema."
+    },
+    {
+      "id": "46b465c0-c1d4-4369-8e3d-e6dedc8601a4",
+      "source_key": "BSED Filipino Part1.pdf#35",
+      "stem": "Ibigay angpahiwatig ng sumusunod na pahayagg sa tuong ng hinto o antala hindi/ ako ang kumuha."
+    },
+    {
+      "id": "cf20ddae-f644-4a48-a81d-76945647bd77",
+      "source_key": "BSED Filipino Part1.pdf#38",
+      "stem": "Ang proseso ng pagsasalita ay nagmula sa mga mekanismo na siyang nagkokoordineyt upang makalikha ng isang makabuluhang tunog nasiyang bumubuo ng wika. Ang wika naturang pahayag ay tumutukoy sa anong daynesyong pangwika?"
+    },
+    {
+      "id": "e914203c-1cdd-481b-836d-cbe76c75407d",
+      "source_key": "BSED Filipino Part1.pdf#39",
+      "stem": "Alin sa mga sumusunod ang may tamang pormasyon ng pantig?"
+    },
+    {
+      "id": "0213c6bc-d6a2-49f4-b009-da7e6cdd9a37",
+      "source_key": "BSED Filipino Part1.pdf#40",
+      "stem": "Ilang panlapi mayroon ang salitang MAGDINUGUAN?"
+    },
+    {
+      "id": "db337f20-97a4-4398-b7a2-21037fd4cc63",
+      "source_key": "BSED Filipino Part1.pdf#42",
+      "stem": "Ano dapat isaalang-alang sa paggamit ng TGTT sa pagaaral ng istrukturang gramatikal sa kurikulum pangwika 1. Paglalapat 2. Pagsasaul ng mga tuntunin at pamantayan maging mga anyo teksto 3. Pagsusuring pangnilalaman na kung saan bumubuo ang mga mag-aaral ng pansariling palagay 4. Pagkilala sa tiyak na uri ng teksto"
+    }
+  ]
+}

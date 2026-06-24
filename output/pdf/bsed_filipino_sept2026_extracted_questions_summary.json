@@ -1,0 +1,80 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Filipino-",
+  "source_pdfs": 10,
+  "total_questions_found": 720,
+  "total_ready_for_upload": 643,
+  "total_needing_review": 21,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 56,
+  "total_questions_with_images": 6,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 720,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 643,
+    "Needs Image Extraction": 6,
+    "Incomplete": 8,
+    "Needs Review": 7,
+    "Duplicate": 56
+  },
+  "subject_category_breakdown": {
+    "Filipino": 720
+  },
+  "topic_breakdown": {
+    "Wika at Gramatika": 83,
+    "Pananaliksik": 18,
+    "Filipino": 281,
+    "Pagtuturo ng Filipino": 137,
+    "Panitikan": 166,
+    "Pagbasa at Pagsulat": 24,
+    "Kultura at Pagpapahalaga": 11
+  },
+  "difficulty_breakdown": {
+    "3": 720
+  },
+  "source_counts": {
+    "BSED Filipino Part1.pdf": 100,
+    "BSED Filipino Part2.pdf": 100,
+    "BSED Filipino Part3.pdf": 100,
+    "BSED Filipino Part4.pdf": 50,
+    "BSED Filipino Part5.pdf": 50,
+    "BSED Filipino Part6.pdf": 50,
+    "BSED Filipino Part7.pdf": 150,
+    "BSED Filipino Part8.pdf": 50,
+    "BSED Filipino Part9.pdf": 50,
+    "BSED Filipino Part10.pdf": 20
+  },
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Filipino",
+    "topic": "Filipino",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "question_image_url": "Question Image Reference",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "choice_e_text": "Choice E",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows to LET Secondary major/filipino. Review Needs Image Extraction rows and attach image URLs before publishing them.",
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_filipino_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_filipino_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_filipino_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_filipino_sept2026_extracted_questions_summary.json",
+    "images": "/Users/lyndon/reviewnatin/output/pdf/images/bsed_filipino_sept2026"
+  }
+}
