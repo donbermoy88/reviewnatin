@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Pressable, Text, View } from 'react-native';
 import { useAppTheme } from '../hooks/use-app-theme';
 import { DAILY_LIMIT } from '../lib/product-copy';
+import { PREMIUM_LOCK_BODY, PREMIUM_LOCK_CTA, PREMIUM_LOCK_TITLE } from '../lib/subscription/paywall-copy';
 
 type Props = {
   onUpgrade: () => void;
@@ -13,11 +14,8 @@ type Props = {
 export function PremiumLimitPanel({ onUpgrade, onDismiss, variant = 'daily' }: Props) {
   const { colors, spacing, radii, fonts } = useAppTheme();
 
-  const title = variant === 'board' ? 'Board Exam Mode — Plus lang' : DAILY_LIMIT.title;
-  const body =
-    variant === 'board'
-      ? 'Maranasan ang totoong exam pressure — strict timer, walang hint, full-length mock.'
-      : DAILY_LIMIT.body();
+  const title = variant === 'board' ? PREMIUM_LOCK_TITLE : DAILY_LIMIT.title;
+  const body = variant === 'board' ? PREMIUM_LOCK_BODY : DAILY_LIMIT.body();
 
   return (
     <View style={{ paddingHorizontal: spacing.lg, paddingTop: spacing.lg, gap: spacing.md }}>

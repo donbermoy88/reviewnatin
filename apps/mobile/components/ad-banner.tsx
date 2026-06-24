@@ -3,7 +3,7 @@ import { Pressable, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAppTheme } from '../hooks/use-app-theme';
 import { getAdMobConfig } from '../lib/ads/config';
-import { resolveMonthlyPlusDisplay } from '../lib/subscription/pricing-display';
+import { PREMIUM_LOCK_BODY, PREMIUM_LOCK_CTA } from '../lib/subscription/paywall-copy';
 import { useEntitlements } from '../providers/entitlements-provider';
 
 type Props = {
@@ -13,11 +13,9 @@ type Props = {
 function GoogleBannerAd({
   unitId,
   onFallback,
-  monthlyPrice,
 }: {
   unitId: string;
   onFallback: () => void;
-  monthlyPrice: string;
 }) {
   const theme = useAppTheme();
   const { spacing } = theme;
@@ -34,7 +32,7 @@ function GoogleBannerAd({
       .catch(() => setFailed(true));
   }, []);
 
-  if (failed) return <UpgradePrompt onPress={onFallback} monthlyPrice={monthlyPrice} />;
+  if (failed) return <UpgradePrompt onPress={onFallback} />;
   if (!BannerAd || !bannerSize) return null;
 
   return (
@@ -48,7 +46,7 @@ function GoogleBannerAd({
   );
 }
 
-function UpgradePrompt({ onPress, monthlyPrice }: { onPress: () => void; monthlyPrice: string }) {
+function UpgradePrompt({ onPress }: { onPress: () => void }) {
   const theme = useAppTheme();
   const { colors, spacing, fonts } = theme;
   const adConfig = getAdMobConfig();
@@ -57,7 +55,7 @@ function UpgradePrompt({ onPress, monthlyPrice }: { onPress: () => void; monthly
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel="View ReviewNatin Plus plans — no ads"
+      accessibilityLabel={`${PREMIUM_LOCK_CTA} — no ads`}
       style={{
         marginHorizontal: spacing.lg,
         marginBottom: spacing.md,
@@ -86,10 +84,10 @@ function UpgradePrompt({ onPress, monthlyPrice }: { onPress: () => void; monthly
           {adConfig.enabled ? 'Sponsored · Go ad-free with Plus' : 'Go ad-free with Plus'}
         </Text>
         <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 }}>
-          From {monthlyPrice}/mo · best value 6 months
+          {PREMIUM_LOCK_BODY}
         </Text>
       </View>
-      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: colors.primary }}>View →</Text>
+      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: colors.primary }}>{PREMIUM_LOCK_CTA}</Text>
     </Pressable>
   );
 }
@@ -98,8 +96,7 @@ function UpgradePrompt({ onPress, monthlyPrice }: { onPress: () => void; monthly
 export function AdBanner({ onPress }: Props) {
   const router = useRouter();
   const adConfig = getAdMobConfig();
-  const { isPremium, products, storePrices } = useEntitlements();
-  const monthlyPrice = resolveMonthlyPlusDisplay(products, storePrices);
+  const { isPremium } = useEntitlements();
 
   // Defense-in-depth: never render a banner (ad or upgrade CTA) for a Plus
   // member, even if a call site forgets to gate on entitlement. Exam-pass
@@ -115,8 +112,8 @@ export function AdBanner({ onPress }: Props) {
   };
 
   if (adConfig.bannerUnitId) {
-    return <GoogleBannerAd unitId={adConfig.bannerUnitId} onFallback={openSubscribe} monthlyPrice={monthlyPrice} />;
+    return <GoogleBannerAd unitId={adConfig.bannerUnitId} onFallback={openSubscribe} />;
   }
 
-  return <UpgradePrompt onPress={openSubscribe} monthlyPrice={monthlyPrice} />;
+  return <UpgradePrompt onPress={openSubscribe} />;
 }

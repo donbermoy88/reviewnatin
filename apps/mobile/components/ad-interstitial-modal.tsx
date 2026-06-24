@@ -1,4 +1,5 @@
 import { Modal, Pressable, Text } from 'react-native';
+import { PREMIUM_LOCK_CTA } from '../lib/subscription/paywall-copy';
 import { useAppTheme } from '../hooks/use-app-theme';
 
 type Props = {
@@ -7,7 +8,12 @@ type Props = {
   onUpgrade?: () => void;
 };
 
-/** Placeholder interstitial — swap body for AdMob interstitial when unit IDs are set. */
+/**
+ * In-app promo shown as the FALLBACK when a real Google AdMob interstitial is
+ * unavailable (no `EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID`, load failure, or
+ * ads disabled). The real interstitial path lives in lib/ads/google-interstitial.ts
+ * and is tried first via tryShowSessionInterstitial().
+ */
 export function AdInterstitialModal({ visible, onClose, onUpgrade }: Props) {
   const theme = useAppTheme();
   const { colors, spacing, fonts } = theme;
@@ -38,13 +44,13 @@ export function AdInterstitialModal({ visible, onClose, onUpgrade }: Props) {
             Unlock unlimited review
           </Text>
           <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.textMuted, marginTop: spacing.sm, lineHeight: 20 }}>
-            Free tier has a daily limit. ReviewNatin Plus removes ads and unlocks full mocks + AI tutor.
+            Unlock ReviewNatin Premium through secure Google Play payment for unlimited review, full mocks, and AI tutor.
           </Text>
           {onUpgrade ? (
             <Pressable
               onPress={onUpgrade}
               accessibilityRole="button"
-              accessibilityLabel="View plans"
+              accessibilityLabel={PREMIUM_LOCK_CTA}
               style={{
                 marginTop: spacing.lg,
                 backgroundColor: colors.primary,
@@ -53,7 +59,7 @@ export function AdInterstitialModal({ visible, onClose, onUpgrade }: Props) {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' }}>View plans</Text>
+              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' }}>{PREMIUM_LOCK_CTA}</Text>
             </Pressable>
           ) : null}
           <Pressable onPress={onClose} style={{ marginTop: spacing.md, alignItems: 'center' }} accessibilityRole="button" accessibilityLabel="Continue">

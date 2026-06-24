@@ -21,6 +21,9 @@ export type AnalyticsEventName =
   | 'daily_active'
   | 'dashboard_charts_viewed'
   | 'analytics_screen_opened'
+  | 'barkada_group_created'
+  | 'barkada_invite_shared'
+  | 'barkada_challenge_started'
   | 'ui_tap';
 
 export type AnalyticsProperties = Record<string, string | number | boolean | null | undefined>;
