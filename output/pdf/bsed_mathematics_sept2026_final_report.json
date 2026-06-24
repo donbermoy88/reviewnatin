@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T23:32:57.042Z",
+  "generated_at": "2026-06-24T05:11:45.569Z",
   "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Mathematics-",
   "source_pdfs": 10,
   "extraction_summary": {
@@ -20,21 +20,22 @@
     }
   },
   "upload_summary": {
-    "inserted": 470,
-    "updated": 14,
+    "inserted": 0,
+    "updated": 484,
     "skipped_duplicates": 16,
-    "duplicate_existing_content": 0
+    "duplicate_existing_content": 0,
+    "update_only_reaudit": true
   },
   "live_counts": [
     {
-      "published": 515,
       "section": "math_total",
-      "total": 515
+      "total": 515,
+      "published": 515
     },
     {
-      "published": 484,
       "section": "bsed_math_source",
-      "total": 484
+      "total": 484,
+      "published": 484
     }
   ],
   "live_bsed_mathematics_sub_tag_breakdown": [
@@ -70,5 +71,13 @@
       "sub_tag": "Mathematics Pedagogy",
       "total": 6
     }
-  ]
+  ],
+  "sample_checked": {
+    "source_pdf": "BSED Mathematics P1.pdf",
+    "original_no": 1,
+    "stem": "Evaluate the limit: lim (x→0) (sin x)/x.",
+    "correct_choice_id": "b",
+    "explanation_en": "Fundamental trigonometric limit."
+  },
+  "recommended_next_action": "No new Mathematics rows were needed; continue to the next LET Secondary major folder."
 }

@@ -4,12 +4,12 @@
   "extracted_rows": 500,
   "ready_rows": 484,
   "source_duplicates_or_non_ready_skipped": 16,
-  "existing_math_questions_before": 45,
-  "insertable": 470,
-  "updatable_by_source_key": 14,
+  "existing_math_questions_before": 515,
+  "insertable": 0,
+  "updatable_by_source_key": 484,
   "duplicate_existing_content": 0,
-  "inserted": 470,
-  "updated": 14,
+  "inserted": 0,
+  "updated": 484,
   "skipped_samples": [
     {
       "row": "106",
@@ -127,6 +127,31 @@
   "duplicate_samples": [],
   "update_samples": [
     {
+      "id": "d903c384-300d-48b0-af9f-8472d5660f07",
+      "source_key": "BSED Mathematics P1.pdf#1",
+      "stem": "Evaluate the limit: lim (x→0) (sin x)/x."
+    },
+    {
+      "id": "52559805-7b91-4507-aae5-c1314b501987",
+      "source_key": "BSED Mathematics P1.pdf#2",
+      "stem": "Evaluate lim (x→2) (x² − 4)/(x − 2)."
+    },
+    {
+      "id": "c6b57754-67ce-42fe-837f-6b8f21d151e1",
+      "source_key": "BSED Mathematics P1.pdf#3",
+      "stem": "If f(x) = 3x² − 2x + 1, find f′(x)."
+    },
+    {
+      "id": "1617d8ba-0133-4744-a896-37353cd8b0da",
+      "source_key": "BSED Mathematics P1.pdf#4",
+      "stem": "Find dy/dx if y = sin(3x)."
+    },
+    {
+      "id": "1b436683-af9d-4444-b1d1-99717960a995",
+      "source_key": "BSED Mathematics P1.pdf#5",
+      "stem": "Find dy/dx if y = ln(x² + 1)."
+    },
+    {
       "id": "43f8212f-63b6-44ec-865a-02e7fea59442",
       "source_key": "BSED Mathematics P1.pdf#6",
       "stem": "Differentiate y = e^(2x)."
@@ -137,64 +162,94 @@
       "stem": "If y = tan(x), find dy/dx."
     },
     {
-      "id": "042d0958-8d55-438b-93cf-bfa981228ac7",
-      "source_key": "BSED Mathematics P10.pdf#1",
-      "stem": "What is the inverse of the function f(x) = 3x + 5?"
+      "id": "652d3c32-7919-4947-9a5f-aa04ad5d5efc",
+      "source_key": "BSED Mathematics P1.pdf#8",
+      "stem": "If y = ln(5x), find dy/dx."
     },
     {
-      "id": "2bd88d5c-f3c2-449d-9b90-4ac5d462ecc1",
-      "source_key": "BSED Mathematics P2.pdf#1",
-      "stem": "Simplify (2x³y²)(3x²y³)."
+      "id": "205531c5-ab7f-4e3a-9b5a-4f976c9b1bee",
+      "source_key": "BSED Mathematics P1.pdf#9",
+      "stem": "∫x² dx = ?"
     },
     {
-      "id": "b6ca0de5-6e01-4796-a16d-916115215ed5",
-      "source_key": "BSED Mathematics P2.pdf#2",
-      "stem": "Simplify (4x²y⁻³) / (2x⁻¹y²)."
+      "id": "b42ff1e6-c3e2-4a0d-8932-4fbb2fab921f",
+      "source_key": "BSED Mathematics P1.pdf#10",
+      "stem": "∫(3x² + 2x) dx = ?"
     },
     {
-      "id": "aacd99d2-3e92-4b73-9d10-aebf35c32540",
-      "source_key": "BSED Mathematics P3.pdf#4",
-      "stem": "Find the length of the diagonal of a rectangle with sides 9 cm and 12 cm."
+      "id": "f3fc60ef-0787-4188-a260-6d874a1e008c",
+      "source_key": "BSED Mathematics P1.pdf#11",
+      "stem": "Evaluate ∫cos(2x) dx."
     },
     {
-      "id": "1a01d339-3ecb-43f9-8879-17b6a7f13d2b",
-      "source_key": "BSED Mathematics P4.pdf#2",
-      "stem": "Find the slope of the line passing through (1, 2) and (4, 8)."
+      "id": "70223a2a-b309-4f42-9595-303f9f0e9c4b",
+      "source_key": "BSED Mathematics P1.pdf#12",
+      "stem": "Evaluate ∫e^(3x) dx."
     },
     {
-      "id": "09040382-be14-49c3-a0c4-98ecd13b3178",
-      "source_key": "BSED Mathematics P6.pdf#2",
-      "stem": "Simplify: (x³)²"
+      "id": "ea6e7f7d-982b-42b7-a3de-2defcf5fd95e",
+      "source_key": "BSED Mathematics P1.pdf#13",
+      "stem": "Evaluate ∫1/x dx."
     },
     {
-      "id": "08219045-9a6b-41da-9f70-264b871c4de7",
-      "source_key": "BSED Mathematics P8.pdf#2",
-      "stem": "The perimeter of a square is 48 cm. Find its area."
+      "id": "7aa81408-5810-47d5-9d2a-bf92e4f34f45",
+      "source_key": "BSED Mathematics P1.pdf#14",
+      "stem": "The second derivative of y = x³ is:"
     },
     {
-      "id": "c58ad1a9-b604-4799-9565-c2ac5a3bee66",
-      "source_key": "BSED Mathematics P8.pdf#3",
-      "stem": "The volume of a cube with side 5 cm is:"
+      "id": "8bf38936-5687-49c6-8292-f02cb15a7654",
+      "source_key": "BSED Mathematics P1.pdf#15",
+      "stem": "If f(x) = x³ − 3x² + 2, find f′′(x)."
     },
     {
-      "id": "e660b97f-3f73-4b3d-a317-22336d0436f1",
-      "source_key": "BSED Mathematics P8.pdf#4",
-      "stem": "Find the circumference of a circle with radius 7 cm (use π = 3.14)."
+      "id": "f4dc3790-9abb-42d5-8638-f576374c7239",
+      "source_key": "BSED Mathematics P1.pdf#16",
+      "stem": "The indefinite integral of cos x is:"
     },
     {
-      "id": "55ef274d-1ebe-418d-9d13-2ab8dabf591f",
-      "source_key": "BSED Mathematics P8.pdf#5",
-      "stem": "Find the area of a circle with radius 6 cm."
+      "id": "0f9dca53-0721-439b-aa0c-81ecb1f705ec",
+      "source_key": "BSED Mathematics P1.pdf#17",
+      "stem": "∫x⁵ dx = ?"
     },
     {
-      "id": "6474cafb-aaff-48aa-a3b7-edca4d336d8d",
-      "source_key": "BSED Mathematics P8.pdf#6",
-      "stem": "The diagonal of a square is 10 cm. Find the side."
+      "id": "c8ee14bd-2ce8-41fc-9401-15ce21571f6b",
+      "source_key": "BSED Mathematics P1.pdf#18",
+      "stem": "The derivative of ln(e^x) is:"
     },
     {
-      "id": "d3fbaeeb-3016-4347-870f-96e595614ba5",
-      "source_key": "BSED Mathematics P9.pdf#1",
-      "stem": "What is the remainder when 7^100 is divided by 6?"
+      "id": "42653cb6-e058-4aaa-807c-f4f8dff557ae",
+      "source_key": "BSED Mathematics P1.pdf#19",
+      "stem": "If f(x) = x⁴, find f′(2)."
+    },
+    {
+      "id": "f2078079-9869-4bd8-975f-17c7c676d2da",
+      "source_key": "BSED Mathematics P1.pdf#20",
+      "stem": "The area under y = x from x = 0 to x = 2."
+    },
+    {
+      "id": "b9b07ed2-f9da-402a-b91f-e8743666e353",
+      "source_key": "BSED Mathematics P1.pdf#21",
+      "stem": "Simplify: (3 + 2i) + (1 − 5i)."
+    },
+    {
+      "id": "32d48666-259a-463c-bd9f-a711af6e808b",
+      "source_key": "BSED Mathematics P1.pdf#22",
+      "stem": "Simplify: (2 + 3i)(1 − 4i)."
+    },
+    {
+      "id": "2ef4f257-6c5e-4b1a-9437-2f658719ee8d",
+      "source_key": "BSED Mathematics P1.pdf#23",
+      "stem": "Find the modulus of 3 + 4i."
+    },
+    {
+      "id": "81be597f-4a04-463f-bd2a-5c2ff1dd0bc2",
+      "source_key": "BSED Mathematics P1.pdf#24",
+      "stem": "The conjugate of 5 − 2i is:"
+    },
+    {
+      "id": "f54b0bc0-d980-4d43-be26-8aedf7913dff",
+      "source_key": "BSED Mathematics P1.pdf#25",
+      "stem": "Simplify: (1 + i)²."
     }
   ]
 }
