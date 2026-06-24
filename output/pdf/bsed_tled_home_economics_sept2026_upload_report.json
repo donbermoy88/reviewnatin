@@ -1,0 +1,178 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_tled_home_economics_sept2026_extracted_questions.json",
+  "extracted_rows": 500,
+  "ready_rows": 495,
+  "source_duplicates_or_non_ready_skipped": 5,
+  "existing_tle_questions_before": 1445,
+  "insertable": 121,
+  "updatable_by_source_key": 374,
+  "duplicate_existing_content": 0,
+  "inserted": 121,
+  "updated": 374,
+  "skipped_samples": [
+    {
+      "row": "250",
+      "source_pdf": "BSED TLEd-HE P4.pdf",
+      "original_no": "50",
+      "status": "Duplicate",
+      "duplicate_of": "150"
+    },
+    {
+      "row": "266",
+      "source_pdf": "BSED TLEd-HE P5.pdf",
+      "original_no": "16",
+      "status": "Duplicate",
+      "duplicate_of": "68"
+    },
+    {
+      "row": "354",
+      "source_pdf": "BSED TLEd-HE P7.pdf",
+      "original_no": "4",
+      "status": "Duplicate",
+      "duplicate_of": "217"
+    },
+    {
+      "row": "364",
+      "source_pdf": "BSED TLEd-HE P7.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "224"
+    },
+    {
+      "row": "463",
+      "source_pdf": "BSED TLEd-HE P9.pdf",
+      "original_no": "13",
+      "status": "Duplicate",
+      "duplicate_of": "217"
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "9640e3f5-2ed6-433f-ab48-e8aa952f98ba",
+      "source_key": "BSED TLEd-HE P1.pdf#1",
+      "stem": "The first step in developing a small business idea is to:"
+    },
+    {
+      "id": "4ba31a3b-f21e-480f-bcb7-c27850b2e7f9",
+      "source_key": "BSED TLEd-HE P1.pdf#6",
+      "stem": "The total cost of producing goods or services is known as:"
+    },
+    {
+      "id": "9ae8e0ce-ce5c-4c67-9016-1ab77af5bd10",
+      "source_key": "BSED TLEd-HE P1.pdf#8",
+      "stem": "Which refers to the legal responsibility of repaying business debts?"
+    },
+    {
+      "id": "a6eb4a5d-86af-4f47-b340-1e52d778a147",
+      "source_key": "BSED TLEd-HE P1.pdf#9",
+      "stem": "The purpose of bookkeeping is to:"
+    },
+    {
+      "id": "bdbf94da-6167-4563-bbc3-2b22f315f13c",
+      "source_key": "BSED TLEd-HE P1.pdf#10",
+      "stem": "The part of the business plan that discusses competition is:"
+    },
+    {
+      "id": "dc12a2d2-cfea-423e-bcee-bdc4a38d4dba",
+      "source_key": "BSED TLEd-HE P1.pdf#11",
+      "stem": "The act of buying and selling goods for profit is called:"
+    },
+    {
+      "id": "b6f7605c-fc23-423a-82d3-6e83d46de652",
+      "source_key": "BSED TLEd-HE P1.pdf#12",
+      "stem": "“SWOT analysis” stands for:"
+    },
+    {
+      "id": "71119f23-b3dc-4f62-816b-0ff360d352ce",
+      "source_key": "BSED TLEd-HE P1.pdf#14",
+      "stem": "Which is NOT a fixed expense?"
+    },
+    {
+      "id": "f58034c7-8495-430b-afc7-d6eb2a308d21",
+      "source_key": "BSED TLEd-HE P1.pdf#15",
+      "stem": "Which of the following best describes a cooperative?"
+    },
+    {
+      "id": "70a890f7-2a7f-4946-bc62-abfdef0df0fe",
+      "source_key": "BSED TLEd-HE P1.pdf#18",
+      "stem": "The difference between income and expenses is:"
+    },
+    {
+      "id": "fe34562c-3c6f-4e17-a009-1688f146af8b",
+      "source_key": "BSED TLEd-HE P1.pdf#19",
+      "stem": "Which type of business organization has unlimited liability?"
+    },
+    {
+      "id": "34679b34-cf3e-4706-bf09-0e304d83134e",
+      "source_key": "BSED TLEd-HE P1.pdf#20",
+      "stem": "What does ROI stand for in business?"
+    },
+    {
+      "id": "f8582fc1-7dbc-4bec-bf22-586d2fe8b9a6",
+      "source_key": "BSED TLEd-HE P1.pdf#21",
+      "stem": "The ability to make sound financial decisions is:"
+    },
+    {
+      "id": "1f4185e5-87ae-4223-822f-8e08b4cc0396",
+      "source_key": "BSED TLEd-HE P1.pdf#23",
+      "stem": "The act of identifying new ways to solve customer needs is:"
+    },
+    {
+      "id": "111289d0-4f76-4d37-97e9-29c6965780f8",
+      "source_key": "BSED TLEd-HE P1.pdf#24",
+      "stem": "What factor affects business success the most?"
+    },
+    {
+      "id": "10c96332-91ed-4bfd-9a11-afdf0cefa997",
+      "source_key": "BSED TLEd-HE P1.pdf#25",
+      "stem": "The process of deciding the selling price based on costs and profit margin is:"
+    },
+    {
+      "id": "df5b836d-2589-49b2-8c86-5b622052c112",
+      "source_key": "BSED TLEd-HE P1.pdf#26",
+      "stem": "The process of measuring body parts for accurate garment fit:"
+    },
+    {
+      "id": "25d362b8-4baa-4400-834b-7a1a24dc1557",
+      "source_key": "BSED TLEd-HE P1.pdf#27",
+      "stem": "Which fiber comes from silkworm cocoons?"
+    },
+    {
+      "id": "11b43d3a-eca6-4333-9a98-cc273240aaa5",
+      "source_key": "BSED TLEd-HE P1.pdf#29",
+      "stem": "The part of a sewing machine that regulates thread tension:"
+    },
+    {
+      "id": "d3b7d058-f6ff-4ae1-b71c-bc1029c5fd53",
+      "source_key": "BSED TLEd-HE P1.pdf#32",
+      "stem": "The French term for preparing ingredients before cooking:"
+    },
+    {
+      "id": "bfa1b725-25c1-4e92-9ffd-0ea6fe722ef2",
+      "source_key": "BSED TLEd-HE P1.pdf#33",
+      "stem": "The correct temperature for freezing food:"
+    },
+    {
+      "id": "8bf9cf98-eb5b-42d6-bbaf-6416e5303cfc",
+      "source_key": "BSED TLEd-HE P1.pdf#35",
+      "stem": "Which cooking method uses dry heat in an oven?"
+    },
+    {
+      "id": "def69d8a-230d-49ad-832a-fba8c8ceae6d",
+      "source_key": "BSED TLEd-HE P1.pdf#37",
+      "stem": "The correct way to store perishable food:"
+    },
+    {
+      "id": "6b49482c-a75c-441d-a255-21aaa59f7441",
+      "source_key": "BSED TLEd-HE P1.pdf#42",
+      "stem": "Proper fabric layout ensures:"
+    },
+    {
+      "id": "4b1840ce-ec4f-41fe-acbb-6d625499bc99",
+      "source_key": "BSED TLEd-HE P10.pdf#2",
+      "stem": "The preservation method using sugar as a preservative is called:"
+    }
+  ]
+}

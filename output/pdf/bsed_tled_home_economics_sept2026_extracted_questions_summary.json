@@ -1,0 +1,52 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - TLEd Home Economics-",
+  "source_pdfs": 10,
+  "total_questions_found": 500,
+  "total_ready_for_upload": 495,
+  "total_needing_review": 0,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 5,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 500,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 495,
+    "Duplicate": 5
+  },
+  "subject_category_breakdown": {
+    "Technology and Livelihood Education": 500
+  },
+  "topic_breakdown": {
+    "Entrepreneurship and Business Management": 89,
+    "Home Economics": 73,
+    "Clothing and Textiles": 84,
+    "Food and Nutrition": 127,
+    "Consumer Education": 16,
+    "Home Management and Family Living": 74,
+    "Hospitality and Food Service": 14,
+    "TLE Teaching and Assessment": 23
+  },
+  "difficulty_breakdown": {
+    "3": 500
+  },
+  "source_counts": {
+    "BSED TLEd-HE P1.pdf": 50,
+    "BSED TLEd-HE P10.pdf": 50,
+    "BSED TLEd-HE P2.pdf": 50,
+    "BSED TLEd-HE P3.pdf": 50,
+    "BSED TLEd-HE P4.pdf": 50,
+    "BSED TLEd-HE P5.pdf": 50,
+    "BSED TLEd-HE P6.pdf": 50,
+    "BSED TLEd-HE P7.pdf": 50,
+    "BSED TLEd-HE P8.pdf": 50,
+    "BSED TLEd-HE P9.pdf": 50
+  },
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_tled_home_economics_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_tled_home_economics_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_tled_home_economics_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_tled_home_economics_sept2026_extracted_questions_summary.json"
+  }
+}
