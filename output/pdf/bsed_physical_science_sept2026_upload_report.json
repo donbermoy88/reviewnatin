@@ -1,0 +1,295 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_physical_science_sept2026_extracted_questions.json",
+  "extracted_rows": 400,
+  "ready_rows": 381,
+  "source_duplicates_or_non_ready_skipped": 19,
+  "existing_physical_science_questions_before": 430,
+  "insertable": 92,
+  "updatable_by_source_key": 289,
+  "duplicate_existing_content": 0,
+  "inserted": 92,
+  "updated": 289,
+  "skipped_samples": [
+    {
+      "row": "155",
+      "source_pdf": "BSED Physical Science P2.pdf",
+      "original_no": "15",
+      "status": "Incomplete",
+      "duplicate_of": "",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key."
+    },
+    {
+      "row": "193",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "13",
+      "status": "Duplicate",
+      "duplicate_of": "136",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 136."
+    },
+    {
+      "row": "194",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "137",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 137."
+    },
+    {
+      "row": "195",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "15",
+      "status": "Duplicate",
+      "duplicate_of": "138",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 138."
+    },
+    {
+      "row": "197",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "17",
+      "status": "Duplicate",
+      "duplicate_of": "140",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 140."
+    },
+    {
+      "row": "200",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "20",
+      "status": "Duplicate",
+      "duplicate_of": "106",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 106."
+    },
+    {
+      "row": "213",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "33",
+      "status": "Duplicate",
+      "duplicate_of": "52",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 52."
+    },
+    {
+      "row": "243",
+      "source_pdf": "BSED Physical Science P4.pdf",
+      "original_no": "23",
+      "status": "Duplicate",
+      "duplicate_of": "164",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 164."
+    },
+    {
+      "row": "244",
+      "source_pdf": "BSED Physical Science P4.pdf",
+      "original_no": "24",
+      "status": "Duplicate",
+      "duplicate_of": "165",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 165."
+    },
+    {
+      "row": "266",
+      "source_pdf": "BSED Physical Science P5.pdf",
+      "original_no": "6",
+      "status": "Duplicate",
+      "duplicate_of": "145",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Source marker appears on the same line after item 5 choice D; normalized to preserve sequence and answer-key alignment. Duplicate or near-duplicate of row 145."
+    },
+    {
+      "row": "267",
+      "source_pdf": "BSED Physical Science P5.pdf",
+      "original_no": "7",
+      "status": "Duplicate",
+      "duplicate_of": "216",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 216."
+    },
+    {
+      "row": "297",
+      "source_pdf": "BSED Physical Science P5.pdf",
+      "original_no": "37",
+      "status": "Duplicate",
+      "duplicate_of": "221",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 221."
+    },
+    {
+      "row": "319",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "19",
+      "status": "Duplicate",
+      "duplicate_of": "192",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 192."
+    },
+    {
+      "row": "327",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "27",
+      "status": "Duplicate",
+      "duplicate_of": "110",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 110."
+    },
+    {
+      "row": "329",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "29",
+      "status": "Duplicate",
+      "duplicate_of": "171",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 171."
+    },
+    {
+      "row": "330",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "30",
+      "status": "Duplicate",
+      "duplicate_of": "172",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 172."
+    },
+    {
+      "row": "331",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "31",
+      "status": "Duplicate",
+      "duplicate_of": "173",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 173."
+    },
+    {
+      "row": "351",
+      "source_pdf": "BSED Physical Science P7.pdf",
+      "original_no": "11",
+      "status": "Duplicate",
+      "duplicate_of": "350",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 350."
+    },
+    {
+      "row": "385",
+      "source_pdf": "BSED Physical Science P8.pdf",
+      "original_no": "5",
+      "status": "Duplicate",
+      "duplicate_of": "110",
+      "notes": "Path and PDF header indicate BSED/Secondary Physical Science major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 110."
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "693ed0b6-c1eb-4a3f-9f0f-4ef8509a02cb",
+      "source_key": "BSED Physical Science A.pdf#1",
+      "stem": "What is the momentum of a 2 kg object moving at 5 m/s?"
+    },
+    {
+      "id": "ad257c43-65d8-4632-84e7-6deb73660211",
+      "source_key": "BSED Physical Science A.pdf#2",
+      "stem": "A car accelerates from rest to 20 m/s in 5 seconds. What is its acceleration?"
+    },
+    {
+      "id": "f616bdae-e3df-430a-88a9-e31284c70be8",
+      "source_key": "BSED Physical Science A.pdf#4",
+      "stem": "Which of the following describes projectile motion?"
+    },
+    {
+      "id": "35431933-e02c-4f93-816e-a8c7bb3c786c",
+      "source_key": "BSED Physical Science A.pdf#8",
+      "stem": "A 10-kg object is lifted 2 meters high. What is its potential energy? (g = 9.8 m/s²)"
+    },
+    {
+      "id": "34b3e688-1f6c-4a31-b6ed-a4cc9732f3a8",
+      "source_key": "BSED Physical Science A.pdf#9",
+      "stem": "The efficiency of a machine is always less than 100% due to:"
+    },
+    {
+      "id": "f827cde8-9898-40e4-858f-172ac5a09cc3",
+      "source_key": "BSED Physical Science A.pdf#10",
+      "stem": "A force of 50 N moves an object 4 meters. Work done is:"
+    },
+    {
+      "id": "b8aad91b-3f38-47a8-9eec-faffb12c21fd",
+      "source_key": "BSED Physical Science A.pdf#11",
+      "stem": "Which law of thermodynamics introduces the concept of entropy?"
+    },
+    {
+      "id": "8475cc34-9a0f-4774-962f-b50684aceabb",
+      "source_key": "BSED Physical Science A.pdf#12",
+      "stem": "When ice melts into water, the process is called:"
+    },
+    {
+      "id": "1df57b0f-23c8-4e40-a494-2e15de9c0b28",
+      "source_key": "BSED Physical Science A.pdf#13",
+      "stem": "Heat transfer through electromagnetic waves is called:"
+    },
+    {
+      "id": "ff323bc7-7381-444c-8f12-d4cfc7255fa0",
+      "source_key": "BSED Physical Science A.pdf#14",
+      "stem": "What happens to gas pressure when volume decreases at constant temperature?"
+    },
+    {
+      "id": "7d883f7c-965a-4afc-9f60-375ffedaa35c",
+      "source_key": "BSED Physical Science A.pdf#15",
+      "stem": "Which of the following is an endothermic process?"
+    },
+    {
+      "id": "72a93e7b-33da-4b86-bd15-075d1d6e2099",
+      "source_key": "BSED Physical Science A.pdf#16",
+      "stem": "The SI unit of resistance is:"
+    },
+    {
+      "id": "9b154e7e-1633-4107-8b27-e911a12b01de",
+      "source_key": "BSED Physical Science A.pdf#17",
+      "stem": "What happens to the current in a circuit if resistance is doubled and voltage remains constant?"
+    },
+    {
+      "id": "a1264a8e-c910-46f2-b255-4075cfc43ac9",
+      "source_key": "BSED Physical Science A.pdf#19",
+      "stem": "The energy used by a 60-W light bulb in 2 hours is:"
+    },
+    {
+      "id": "06325c44-e022-4da4-a907-da65524e5eed",
+      "source_key": "BSED Physical Science A.pdf#21",
+      "stem": "The frequency of a wave is inversely proportional to its:"
+    },
+    {
+      "id": "66b2a932-333c-4450-b542-156fd5bf411c",
+      "source_key": "BSED Physical Science A.pdf#22",
+      "stem": "A sound wave is a type of:"
+    },
+    {
+      "id": "11a6fec9-11ae-494a-8488-d9ef68c182af",
+      "source_key": "BSED Physical Science A.pdf#24",
+      "stem": "The instrument that splits light into its spectrum is called a:"
+    },
+    {
+      "id": "88ad65f6-43f2-410d-a0c0-787352215126",
+      "source_key": "BSED Physical Science A.pdf#27",
+      "stem": "The mass of one mole of a substance is called:"
+    },
+    {
+      "id": "91fefa27-7f0b-4256-937b-c5c3ac40311a",
+      "source_key": "BSED Physical Science A.pdf#28",
+      "stem": "The chemical symbol Na represents:"
+    },
+    {
+      "id": "1c7ee22b-389b-4eb3-b86f-55bbe3039844",
+      "source_key": "BSED Physical Science A.pdf#30",
+      "stem": "The process of separating a solid from a liquid using a filter is:"
+    },
+    {
+      "id": "8a530192-f62a-4cff-b639-2c64bc17f039",
+      "source_key": "BSED Physical Science A.pdf#32",
+      "stem": "Earthquakes are primarily caused by:"
+    },
+    {
+      "id": "afd32621-af3c-4f9b-a08e-20bc13dd542c",
+      "source_key": "BSED Physical Science A.pdf#33",
+      "stem": "The most abundant gas in Earth’s atmosphere is:"
+    },
+    {
+      "id": "90b3813d-3e8e-45bc-9e7a-62ea5142669a",
+      "source_key": "BSED Physical Science A.pdf#34",
+      "stem": "The Earth’s revolution around the Sun causes:"
+    },
+    {
+      "id": "87b28745-c7a4-4722-8772-a79d999ef54c",
+      "source_key": "BSED Physical Science A.pdf#35",
+      "stem": "Which celestial body is a natural satellite?"
+    },
+    {
+      "id": "d3b74591-1e87-4473-80a2-1425d6d14ac8",
+      "source_key": "BSED Physical Science A.pdf#38",
+      "stem": "Renewable energy includes:"
+    }
+  ]
+}

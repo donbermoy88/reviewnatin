@@ -1,0 +1,79 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Science-",
+  "source_pdfs": 10,
+  "total_questions_found": 400,
+  "total_ready_for_upload": 381,
+  "total_needing_review": 1,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 18,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 400,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 381,
+    "Incomplete": 1,
+    "Duplicate": 18
+  },
+  "subject_category_breakdown": {
+    "Physical Science": 400
+  },
+  "topic_breakdown": {
+    "Mechanics": 35,
+    "Electricity and Magnetism": 39,
+    "Physical Science": 79,
+    "Thermodynamics": 21,
+    "Waves and Optics": 27,
+    "Atomic and Nuclear Physics": 37,
+    "Chemistry": 62,
+    "Earth and Space Science": 50,
+    "Environmental Science": 26,
+    "Science Pedagogy and Research": 24
+  },
+  "difficulty_breakdown": {
+    "3": 400
+  },
+  "source_counts": {
+    "BSED Physical Science A.pdf": 50,
+    "BSED Physical Science B.pdf": 50,
+    "BSED Physical Science P1.pdf": 40,
+    "BSED Physical Science P2.pdf": 40,
+    "BSED Physical Science P3.pdf": 40,
+    "BSED Physical Science P4.pdf": 40,
+    "BSED Physical Science P5.pdf": 40,
+    "BSED Physical Science P6.pdf": 40,
+    "BSED Physical Science P7.pdf": 40,
+    "BSED Physical Science P8.pdf": 20
+  },
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Physical Science",
+    "topic": "Physical Science",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "choice_e_text": "Choice E",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows to LET Secondary major/physical-science, then verify live source counts and sub-tag breakdown.",
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_physical_science_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_physical_science_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_physical_science_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_physical_science_sept2026_extracted_questions_summary.json"
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "source_folder": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Physical Science-",
+  "source_pdfs": {
+    "BSED Physical Science A.pdf": 50,
+    "BSED Physical Science B.pdf": 50,
+    "BSED Physical Science P1.pdf": 40,
+    "BSED Physical Science P2.pdf": 40,
+    "BSED Physical Science P3.pdf": 40,
+    "BSED Physical Science P4.pdf": 40,
+    "BSED Physical Science P5.pdf": 40,
+    "BSED Physical Science P6.pdf": 40,
+    "BSED Physical Science P7.pdf": 40,
+    "BSED Physical Science P8.pdf": 20
+  },
+  "extraction_summary": {
+    "total_questions_found": 400,
+    "ready_for_upload": 381,
+    "needing_review": 1,
+    "without_answer_key": 0,
+    "duplicates_detected": 18,
+    "with_images": 0,
+    "image_based_answer_choices": 0,
+    "elementary": 0,
+    "secondary": 400,
+    "both_or_cannot_determine": 0,
+    "status_counts": {
+      "Ready for Upload": 381,
+      "Incomplete": 1,
+      "Duplicate": 18
+    },
+    "subject_category_breakdown": {
+      "Physical Science": 400
+    },
+    "topic_breakdown": {
+      "Mechanics": 35,
+      "Electricity and Magnetism": 39,
+      "Physical Science": 79,
+      "Thermodynamics": 21,
+      "Waves and Optics": 27,
+      "Atomic and Nuclear Physics": 37,
+      "Chemistry": 62,
+      "Earth and Space Science": 50,
+      "Environmental Science": 26,
+      "Science Pedagogy and Research": 24
+    },
+    "difficulty_breakdown": {
+      "3": 400
+    }
+  },
+  "upload_summary": {
+    "inserted": 92,
+    "updated": 289,
+    "ready_uploaded": 381,
+    "skipped_source_duplicates_or_non_ready": 19,
+    "duplicate_existing_content": 0
+  },
+  "skipped_summary": {
+    "incomplete": 1,
+    "duplicate": 18,
+    "notes": "Skipped rows were not uploaded. The incomplete row is BSED Physical Science P2.pdf original no. 15, where the extracted source text lacks usable answer choices."
+  },
+  "duplicate_rows": [
+    {
+      "row": "193",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "13",
+      "duplicate_of": "136",
+      "question": "Which refers to the recorded observations and measurements in an explanation?",
+      "correct_answer": "B"
+    },
+    {
+      "row": "194",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "14",
+      "duplicate_of": "137",
+      "question": "How is hypothesis tested?",
+      "correct_answer": "C"
+    },
+    {
+      "row": "195",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "15",
+      "duplicate_of": "138",
+      "question": "Which summarizes a natural occurrence that may be constantly observed given the same conditions which may be expressed in words or in mathematical form?",
+      "correct_answer": "C"
+    },
+    {
+      "row": "197",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "17",
+      "duplicate_of": "140",
+      "question": "Which of the following is NOT true about scientific method?",
+      "correct_answer": "D"
+    },
+    {
+      "row": "200",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "20",
+      "duplicate_of": "106",
+      "question": "Which apparatus will you use to measure the mass of an irregular solid correctly?",
+      "correct_answer": "C"
+    },
+    {
+      "row": "213",
+      "source_pdf": "BSED Physical Science P3.pdf",
+      "original_no": "33",
+      "duplicate_of": "52",
+      "question": "Which of the following is a scalar quantity?",
+      "correct_answer": "B"
+    },
+    {
+      "row": "243",
+      "source_pdf": "BSED Physical Science P4.pdf",
+      "original_no": "23",
+      "duplicate_of": "164",
+      "question": "What is the closed, continuous path through which electrons can flow?",
+      "correct_answer": "B"
+    },
+    {
+      "row": "244",
+      "source_pdf": "BSED Physical Science P4.pdf",
+      "original_no": "24",
+      "duplicate_of": "165",
+      "question": "What will be your charge if you scrape electrons from your feet while scuffing across the rug?",
+      "correct_answer": "C"
+    },
+    {
+      "row": "266",
+      "source_pdf": "BSED Physical Science P5.pdf",
+      "original_no": "6",
+      "duplicate_of": "145",
+      "question": "Which of the following involves adsorption?",
+      "correct_answer": "D"
+    },
+    {
+      "row": "267",
+      "source_pdf": "BSED Physical Science P5.pdf",
+      "original_no": "7",
+      "duplicate_of": "216",
+      "question": "Which of the following BEST describes temperature?",
+      "correct_answer": "D"
+    },
+    {
+      "row": "297",
+      "source_pdf": "BSED Physical Science P5.pdf",
+      "original_no": "37",
+      "duplicate_of": "221",
+      "question": "An iron nail can be turned into a temporary magnet if it is held in a strong magnet field. Which method of magnetization is this?",
+      "correct_answer": "C"
+    },
+    {
+      "row": "319",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "19",
+      "duplicate_of": "192",
+      "question": "Which of the following observation is NOT true whenever a system is in chemical equilibrium?",
+      "correct_answer": "C"
+    },
+    {
+      "row": "327",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "27",
+      "duplicate_of": "110",
+      "question": "What human activity has added the most carbon in the atmosphere?",
+      "correct_answer": "A"
+    },
+    {
+      "row": "329",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "29",
+      "duplicate_of": "171",
+      "question": "Acid rain is formed when sulfur oxides react with water in air. It causes lakes and streams decrease in pH which makes it unable to support fish and plant life. Which is the LEAST means of solving this problem?",
+      "correct_answer": "D"
+    },
+    {
+      "row": "330",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "30",
+      "duplicate_of": "172",
+      "question": "Which of the following would decrease the rate in which a solid dissolves in a liquid?",
+      "correct_answer": "D"
+    },
+    {
+      "row": "331",
+      "source_pdf": "BSED Physical Science P6.pdf",
+      "original_no": "31",
+      "duplicate_of": "173",
+      "question": "Which factors affects the rate of dissolution when powdered sugar dissolves more rapidly than granulated sugar?",
+      "correct_answer": "C"
+    },
+    {
+      "row": "351",
+      "source_pdf": "BSED Physical Science P7.pdf",
+      "original_no": "11",
+      "duplicate_of": "350",
+      "question": "Fresh water is an integral part of hydrologic cycle. How is it produced?",
+      "correct_answer": "B"
+    },
+    {
+      "row": "385",
+      "source_pdf": "BSED Physical Science P8.pdf",
+      "original_no": "5",
+      "duplicate_of": "110",
+      "question": "What human activity has added the most carbon in the atmosphere?",
+      "correct_answer": "A"
+    }
+  ],
+  "live_verification": {
+    "physical_science_major_total_published_after_upload": 522,
+    "bsed_physical_science_batch_published_after_upload": 381,
+    "sub_tag_breakdown_for_batch": {
+      "Physical Science": 74,
+      "Chemistry": 60,
+      "Earth and Space Science": 48,
+      "Electricity and Magnetism": 38,
+      "Atomic and Nuclear Physics": 35,
+      "Mechanics": 34,
+      "Waves and Optics": 27,
+      "Environmental Science": 25,
+      "Science Pedagogy and Research": 20,
+      "Thermodynamics": 20
+    },
+    "sample_checked": {
+      "source_pdf": "BSED Physical Science A.pdf",
+      "original_no": "1",
+      "stem": "What is the momentum of a 2 kg object moving at 5 m/s?",
+      "correct_choice_id": "c",
+      "explanation_en": "p = m × v"
+    }
+  },
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Physical Science",
+    "topic": "Physical Science",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "choice_e_text": "Choice E",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Review the one incomplete OCR-damaged row manually if you want to recover it; the 381 ready rows are uploaded and verified.",
+  "output_files": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_physical_science_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_physical_science_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_physical_science_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_physical_science_sept2026_extracted_questions_summary.json"
+  }
+}
