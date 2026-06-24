@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   DAILY_LIMIT,
+  FREE_VERIFY_EMAIL,
   GUEST_NEXT_STEPS,
   GUEST_PROGRESS_NUDGE,
   PREMIUM_HEADLINE,
@@ -22,6 +23,12 @@ describe('product-copy', () => {
   it('reassures guests that quiz progress is preserved locally', () => {
     expect(GUEST_PROGRESS_NUDGE.subtitle).toContain('guest score');
     expect(GUEST_PROGRESS_NUDGE.ctaContinue).toContain('guest');
+  });
+
+  it('sets free-user email verification expectations', () => {
+    expect(FREE_VERIFY_EMAIL.subtitle).toContain('CSE');
+    expect(FREE_VERIFY_EMAIL.subtitle).toContain('Walang bayad');
+    expect(FREE_VERIFY_EMAIL.checklist).toContain('Enter the 6-digit code');
   });
 
   it('includes PRC disclaimer on paywall', () => {

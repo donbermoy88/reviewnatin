@@ -28,6 +28,14 @@ export const GUEST_PROGRESS_NUDGE = {
   ctaContinue: 'Continue as guest',
 } as const;
 
+export const FREE_VERIFY_EMAIL = {
+  title: 'Free account setup',
+  subtitle:
+    'I-verify ang email para ma-sync ang CSE plan, streak, at Mistake Bank sa cloud. Walang bayad ito.',
+  emailPrefix: 'Code sent to',
+  checklist: ['Check inbox or spam', 'Enter the 6-digit code', 'Continue to onboarding'],
+} as const;
+
 export const DAILY_LIMIT = {
   title: 'Abot na ang libreng tanong ngayon',
   body: (used = FREE_DAILY_QUESTIONS_COPY) =>

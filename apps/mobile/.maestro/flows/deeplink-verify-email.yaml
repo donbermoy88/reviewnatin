@@ -10,3 +10,9 @@ appId: ph.reviewnatin.app
 - extendedWaitUntil:
     visible: "I-verify ang email"
     timeout: 25000
+- extendedWaitUntil:
+    visible: "Free account setup"
+    timeout: 10000
+- extendedWaitUntil:
+    visible: "f1.agent@reviewnatinph.com"
+    timeout: 10000

@@ -10,6 +10,9 @@ appId: ph.reviewnatin.app
 - extendedWaitUntil:
     visible: "I-verify ang email"
     timeout: 25000
+- extendedWaitUntil:
+    visible: "Free account setup"
+    timeout: 10000
 - openLink: reviewnatin://signup
 - extendedWaitUntil:
     visible: "Gumawa ng account"

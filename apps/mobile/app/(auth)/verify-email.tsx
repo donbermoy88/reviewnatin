@@ -1,5 +1,4 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import * as Linking from 'expo-linking';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -23,8 +22,9 @@ import { updateUserDisplayName } from '../../lib/api/profile';
 import { getAppEntryHref } from '../../lib/onboarding-nav';
 import { toUserFacingError } from '../../lib/errors/user-facing';
 import { verifyEmailParamsFromUrl } from '../../lib/deep-link-routes';
-import { consumeInitialUrl } from '../../lib/initial-url';
+import { consumeInitialUrl, peekInitialUrl } from '../../lib/initial-url';
 import { trackEvent } from '../../lib/analytics/events';
+import { FREE_VERIFY_EMAIL } from '../../lib/product-copy';
 import { useAuth } from '../../providers/auth-provider';
 
 const OTP_LENGTH = 6;
@@ -58,7 +58,15 @@ export default function VerifyEmailScreen() {
   const [bootReady, setBootReady] = useState(false);
   const [fallbackEmail, setFallbackEmail] = useState('');
   const [fallbackDisplayName, setFallbackDisplayName] = useState('');
+  const [manualEmail, setManualEmail] = useState('');
   const inputRefs = useRef<(TextInput | null)[]>([]);
+
+  useEffect(() => {
+    const fromRoute = normalizeParam(emailParam).trim().toLowerCase();
+    const fromName = normalizeParam(displayNameParam).trim();
+    if (fromRoute) setFallbackEmail((current) => current || fromRoute);
+    if (fromName) setFallbackDisplayName((current) => current || fromName);
+  }, [displayNameParam, emailParam]);
 
   useEffect(() => {
     let cancelled = false;
@@ -72,6 +80,7 @@ export default function VerifyEmailScreen() {
         nameFromLink = nameFromLink || params.displayName || '';
       };
 
+      applyParams(verifyEmailParamsFromUrl(peekInitialUrl() ?? ''));
       try {
         applyParams(verifyEmailParamsFromUrl((await consumeInitialUrl()) ?? ''));
       } catch {
@@ -97,15 +106,21 @@ export default function VerifyEmailScreen() {
   ).trim().toLowerCase();
   const displayName = normalizeParam(displayNameParam).trim() || fallbackDisplayName.trim();
 
+  // Cold-start deep links can land here before the email param resolves. Rather
+  // than bouncing the user to /signup (the previously audited cold-deeplink
+  // bug), we keep them on the verify screen and offer a manual email entry
+  // fallback (see render below) so a code can always be requested.
   useEffect(() => {
     if (!bootReady || email) return;
-    const timer = setTimeout(() => {
-      const routeEmail = normalizeParam(emailParam).trim().toLowerCase();
-      if (routeEmail || fallbackEmail || user?.email) return;
-      router.replace('/(auth)/signup');
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, [bootReady, email, emailParam, fallbackEmail, router, user?.email]);
+    void (async () => {
+      const initialUrl = peekInitialUrl() ?? (await consumeInitialUrl());
+      const params = verifyEmailParamsFromUrl(initialUrl ?? '');
+      if (params?.email) {
+        setFallbackEmail(params.email);
+        if (params.displayName) setFallbackDisplayName(params.displayName);
+      }
+    })();
+  }, [bootReady, email]);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -211,16 +226,33 @@ export default function VerifyEmailScreen() {
     inputRefs.current[0]?.focus();
   };
 
+  const sendToManualEmail = async () => {
+    const normalized = manualEmail.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
+      setError('Ilagay ang valid na email address mo.');
+      return;
+    }
+    setError(null);
+    setInfo(null);
+    setLoading(true);
+    const result = await resendEmailOtp(normalized);
+    setLoading(false);
+    if (result.error) {
+      setError(toUserFacingError(result.error, 'auth'));
+      return;
+    }
+    setFallbackEmail(normalized);
+    setCooldown(RESEND_COOLDOWN_SEC);
+    setInfo('Na-send na ang code sa email mo. Valid for 10 minutes.');
+    trackEvent('otp_sent', { trigger: 'manual_entry' });
+  };
+
   if (!bootReady) {
     return (
       <View style={[styles.flex, styles.centered, { backgroundColor: colors.background }]}>
         <ActivityIndicator color={colors.primary} />
       </View>
     );
-  }
-
-  if (!email) {
-    return null;
   }
 
   return (
@@ -235,13 +267,65 @@ export default function VerifyEmailScreen() {
         <LogoMark size={56} />
         <Text style={styles.heroTitle}>I-verify ang email</Text>
         <Text style={styles.heroSub}>
-          Nag-send kami ng 6-digit code sa{'\n'}
-          <Text style={styles.emailHighlight}>{email || '…'}</Text>
+          {email ? (
+            <>
+              Nag-send kami ng 6-digit code sa{'\n'}
+              <Text style={styles.emailHighlight}>{email}</Text>
+            </>
+          ) : (
+            'Ilagay ang email mo para makakuha ng 6-digit verification code.'
+          )}
         </Text>
       </LinearGradient>
 
       <View style={[styles.body, { paddingBottom: insets.bottom + spacing.xl }]}>
-        {verified ? (
+        {!email ? (
+          <>
+            <Text style={styles.label}>Email address</Text>
+            <TextInput
+              style={styles.emailInput}
+              value={manualEmail}
+              onChangeText={(v) => {
+                setManualEmail(v);
+                setError(null);
+              }}
+              placeholder="juan@email.com"
+              placeholderTextColor={colors.textMuted}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
+              editable={!loading}
+              accessibilityLabel="Email address"
+            />
+            <Text style={styles.hint}>
+              Ipapadala namin ang verification code dito. Check spam folder kung wala sa inbox.
+            </Text>
+
+            {error ? <Text style={styles.error}>{error}</Text> : null}
+            {info ? <Text style={styles.info}>{info}</Text> : null}
+
+            {loading ? (
+              <ActivityIndicator color={colors.primary} style={{ marginVertical: spacing.md }} />
+            ) : (
+              <PrimaryButton
+                label="Magpadala ng code"
+                size="lg"
+                icon="mail-outline"
+                onPress={sendToManualEmail}
+                accessibilityLabel="Magpadala ng verification code"
+              />
+            )}
+
+            <Pressable
+              onPress={() => router.replace('/(auth)/login')}
+              style={styles.backLink}
+              accessibilityRole="button"
+              accessibilityLabel="Bumalik sa login"
+            >
+              <Text style={styles.backLinkText}>Bumalik sa login</Text>
+            </Pressable>
+          </>
+        ) : verified ? (
           <Animated.View entering={ZoomIn.duration(400)} style={styles.successBox}>
             <Animated.View entering={FadeIn.delay(200)}>
               <Text style={styles.successEmoji}>✓</Text>
@@ -251,7 +335,25 @@ export default function VerifyEmailScreen() {
           </Animated.View>
         ) : (
           <>
+        <View style={styles.freeAccountCard} accessibilityLabel="Free account email verification guidance">
+          <View style={styles.freeAccountBadge}>
+            <Text style={styles.freeAccountBadgeText}>{FREE_VERIFY_EMAIL.title}</Text>
+          </View>
+          <Text style={styles.freeAccountText}>{FREE_VERIFY_EMAIL.subtitle}</Text>
+          <View style={styles.checklist}>
+            {FREE_VERIFY_EMAIL.checklist.map((item) => (
+              <View key={item} style={styles.checkItem}>
+                <Text style={styles.checkIcon}>✓</Text>
+                <Text style={styles.checkText}>{item}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
         <Text style={styles.label}>Verification code</Text>
+        <Text style={styles.emailContext} accessibilityLabel={`Verification email sent to ${email}`}>
+          {FREE_VERIFY_EMAIL.emailPrefix} {email}
+        </Text>
         <View style={styles.otpRow} accessibilityLabel="Enter 6-digit verification code">
           {digits.map((digit, index) => (
             <TextInput
@@ -362,6 +464,59 @@ function createStyles(theme: AppTheme) {
       ...type.label,
       marginBottom: spacing.sm,
     },
+    freeAccountCard: {
+      borderRadius: radii.xl,
+      backgroundColor: colors.primaryLight,
+      borderWidth: 1,
+      borderColor: 'rgba(30,79,217,0.16)',
+      padding: spacing.md,
+      marginBottom: spacing.lg,
+      gap: spacing.sm,
+    },
+    freeAccountBadge: {
+      alignSelf: 'flex-start',
+      borderRadius: radii.full,
+      backgroundColor: colors.primary,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 5,
+    },
+    freeAccountBadgeText: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 11,
+      color: '#fff',
+      letterSpacing: 0.2,
+    },
+    freeAccountText: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 13,
+      color: colors.text,
+      lineHeight: 19,
+    },
+    checklist: {
+      gap: 6,
+    },
+    checkItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+    },
+    checkIcon: {
+      fontFamily: fonts.bodyBold,
+      color: colors.primary,
+      fontSize: 13,
+    },
+    checkText: {
+      fontFamily: fonts.bodyMedium,
+      color: colors.textMuted,
+      fontSize: 12,
+    },
+    emailContext: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: 13,
+      color: colors.primary,
+      marginTop: -spacing.xs,
+      marginBottom: spacing.sm,
+    },
     otpRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -383,6 +538,18 @@ function createStyles(theme: AppTheme) {
     },
     otpBoxFilled: {
       borderColor: colors.primary,
+    },
+    emailInput: {
+      height: 52,
+      borderWidth: 1.5,
+      borderColor: colors.border,
+      borderRadius: radii.lg,
+      backgroundColor: colors.surface,
+      paddingHorizontal: spacing.md,
+      fontSize: 16,
+      fontFamily: fonts.body,
+      color: colors.text,
+      marginBottom: spacing.sm,
     },
     hint: {
       ...type.caption,
