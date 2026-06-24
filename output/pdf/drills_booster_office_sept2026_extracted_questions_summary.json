@@ -1,0 +1,276 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-",
+  "generated_at": "2026-06-25",
+  "total_office_files_seen": 22,
+  "total_office_files_processed": 20,
+  "format_counts": {
+    ".docx": 16,
+    ".doc": 6
+  },
+  "total_questions_found": 993,
+  "total_ready_for_upload": 259,
+  "total_needing_review": 109,
+  "total_without_answer_key": 427,
+  "total_duplicates_detected": 198,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 0,
+  "total_both_or_cannot_determine_questions": 993,
+  "status_counts": {
+    "Ready for Upload": 259,
+    "Needs Answer": 427,
+    "Needs Review": 62,
+    "Duplicate": 198,
+    "Incomplete": 47
+  },
+  "exam_type_counts": {
+    "Both": 993
+  },
+  "subject_category_breakdown": {
+    "Professional Education": 338,
+    "General Education": 624,
+    "Curriculum Development": 2,
+    "Health": 3,
+    "English": 11,
+    "Filipino": 6,
+    "Assessment of Learning": 3,
+    "Child and Adolescent Development": 1,
+    "Social Studies": 1,
+    "Values Education": 1,
+    "Music": 2,
+    "Mathematics": 1
+  },
+  "difficulty_breakdown": {
+    "Cannot Determine": 993
+  },
+  "source_counts_top_75": {
+    "Z. 200-İtems-Prof-Ed-Preboard-With-Answers.doc": 201,
+    "Let-Review-Questions-With-Answers.doc": 197,
+    "A. Gen-Ed-Set-A-A-Questionaire.docx": 115,
+    "Let-Professional-With-Ans-Key.docx": 101,
+    "B-Professıonaleducatıonset-.docx": 87,
+    "Let-Review.docx": 77,
+    "Z. 200-Items-Gen.Ed-Revıewer.docx": 59,
+    "Gen-Ed-Prof-Ed-Reviewer.docx": 34,
+    "Let-Reviewer-General-Education-Gened.docx": 34,
+    "A. Gen-Ed-And-Profed-From-Prc-Website.docx": 29,
+    "-Let-Revıewer-Profed.docx": 27,
+    "A-PROFESSIONALEDUCATIONSET (1)x.docx": 13,
+    "A. Professıonal-Educatıon-Test-Questions-And-Answers (1)-.docx": 6,
+    "A. PROFESSIONAL-EDUCATION-PRACTICE-DRILLS-1 (10).docx": 4,
+    "900.Gen_.Ed_.doc": 2,
+    "General-Educatıon-Fınal-Coachıng-March-2019.docx": 2,
+    "Let-Intensive-Reviewer-General-Education-900-Items.docx": 2,
+    "Gen-Ed-W-Answer-Key.doc": 1,
+    "Gen-Edpre-Board-With-Answer.doc": 1,
+    "gen-Edpre-Board-Wıth-Answer-Copy.doc": 1
+  },
+  "sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/-Let-Revıewer-Profed.docx",
+      "status": "processed",
+      "rows": 27,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 36,
+      "text_chars": 157563
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/900.Gen_.Ed_.doc",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 30,
+      "text_chars": 195679
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/A-PROFESSIONALEDUCATIONSET (1)x.docx",
+      "status": "processed",
+      "rows": 13,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 7,
+      "text_chars": 26628
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/A. Gen-Ed-And-Profed-From-Prc-Website.docx",
+      "status": "processed",
+      "rows": 29,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 71,
+      "text_chars": 207635
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/A. Gen-Ed-Set-A-A-Questionaire.docx",
+      "status": "processed",
+      "rows": 115,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 48706
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/A. PROFESSIONAL-EDUCATION-PRACTICE-DRILLS-1 (10).docx",
+      "status": "processed",
+      "rows": 4,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 53,
+      "text_chars": 536015
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/A. Pre-Board-Prof.-Ed.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 66231
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/A. Pre-Board-Professional-Education.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 37474
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/A. Professıonal-Educatıon-Test-Questions-And-Answers (1)-.docx",
+      "status": "processed",
+      "rows": 6,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 52,
+      "text_chars": 1097243
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/B-Professıonaleducatıonset-.docx",
+      "status": "processed",
+      "rows": 87,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 26192
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Gen-Ed-Prof-Ed-Reviewer.docx",
+      "status": "processed",
+      "rows": 34,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 5,
+      "text_chars": 75463
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Gen-Ed-W-Answer-Key.doc",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 32,
+      "text_chars": 38973
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Gen-Edpre-Board-With-Answer.doc",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 31,
+      "text_chars": 69602
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/General-Educatıon-Fınal-Coachıng-March-2019.docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 27205
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Let-Intensive-Reviewer-General-Education-900-Items.docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 26,
+      "text_chars": 192879
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Let-Professional-With-Ans-Key.docx",
+      "status": "processed",
+      "rows": 101,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 20,
+      "text_chars": 62147
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Let-Review-Questions-With-Answers.doc",
+      "status": "processed",
+      "rows": 197,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 0,
+      "text_chars": 73557
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Let-Review.docx",
+      "status": "processed",
+      "rows": 77,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 4,
+      "text_chars": 266430
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Let-Reviewer-General-Education-Gened.docx",
+      "status": "processed",
+      "rows": 34,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 36315
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Z. 200-Items-Gen.Ed-Revıewer.docx",
+      "status": "processed",
+      "rows": 59,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 54,
+      "text_chars": 43606
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/Z. 200-İtems-Prof-Ed-Preboard-With-Answers.doc",
+      "status": "processed",
+      "rows": 201,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 195,
+      "text_chars": 256172
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/B. BEED&BSED LET DRILLS & BOOSTER-/gen-Edpre-Board-Wıth-Answer-Copy.doc",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 31,
+      "text_chars": 69603
+    }
+  ],
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/drills_booster_office_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/drills_booster_office_sept2026_extracted_questions.json",
+    "md": "/Users/lyndon/reviewnatin/output/pdf/drills_booster_office_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/drills_booster_office_sept2026_extracted_questions_summary.json"
+  },
+  "recommended_next_action_before_uploading": "Upload only Ready for Upload rows. Office rows marked Needs Answer usually lack a reliably parsed answer key. Rows marked Incomplete often came from unlabelled multiple-choice blocks and need manual review."
+}

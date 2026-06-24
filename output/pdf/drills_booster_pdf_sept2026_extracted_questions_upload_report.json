@@ -1,0 +1,487 @@
+{
+  "batch_id": "34cf14a5-e6bf-4d09-bd4a-099ec722f013",
+  "dry_run": true,
+  "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 383,
+  "ready_rows": 31,
+  "candidate_targets": 58,
+  "insertable": 0,
+  "inserted": 0,
+  "skipped": 2,
+  "duplicates": 58,
+  "source_stats": {
+    "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json": {
+      "readyRows": 31,
+      "candidateTargets": 58,
+      "skipped": 2
+    }
+  },
+  "skipped_by_reason": {
+    "missing_required_choice_a_to_d": 2
+  },
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "231",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0e08fadb-f093-4753-ba5b-9f1ffcc3f122"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "231",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "93437d70-86aa-405b-81ed-f7079ebcdfec"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "232",
+      "page": "1-2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "bf3fa7bb-060f-46fd-ae1e-a7d3dd92bf19"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "232",
+      "page": "1-2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fa113cde-6aa1-45c5-90fb-f4ec4aedfe37"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "233",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e4fb1984-c30b-4c5d-9904-1a9028489a27"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "233",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fb4130a7-c239-4e9d-930c-35b5db801a63"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "235",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3bbeef4c-23fe-4b6b-b23d-767b30d50bae"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "235",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0b110bed-b061-4ee2-936b-d48154f35dca"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "357",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4b0892c8-5fdb-41df-a628-79f48423ab5a"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "357",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cdfe0ec9-99d8-468e-8e52-2c1a3b88c479"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "358",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "03963a07-c610-4d63-bc4d-996c8a71dbc0"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "358",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6ed62b38-f055-4631-b96d-f70d7f1d5ba6"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "359",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "26ccda90-6f29-45cc-894b-13bd40e978a1"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "359",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "eceffc3d-61a6-427c-97e8-9d0967707185"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "360",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d793ad19-4c3b-4fcf-a9d1-dcb4ddc32ef0"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "360",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1f65fd24-e405-4bea-acfb-85c7a8d04fca"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "361",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "52dc0e7d-066d-4af2-adf7-f111bb239e4b"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "361",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8b9be1b6-412d-44a6-a52d-a0301e140a5d"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "362",
+      "page": "1-2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e954e1e2-0490-4a4e-953f-2dd99e25b456"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "362",
+      "page": "1-2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "850ea026-89d4-4d06-b026-130050e00dad"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "363",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c6608980-de9a-40a0-a0a8-43d657679112"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "363",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cfc81aa2-1bb9-4fce-8d58-10d934047d26"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "364",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e19373ba-4c36-47d6-ade3-b7ac2bed8e36"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "364",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ae685033-f8d6-47f7-a199-31f200304cc5"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "366",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2d0200f8-4d68-4246-b7a0-4121f2d428f8"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "366",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f71720d6-7162-44d0-adbf-734f50a561bd"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "367",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "297eb4e2-35ff-4cc5-a0cc-536945f259b2"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "367",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "357fcb64-e1eb-4c01-953d-173b20be2991"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "368",
+      "page": "2-3",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e9b363d0-9dca-4708-98e2-02988256652c"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "368",
+      "page": "2-3",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5008cd50-85d3-436e-9694-078b540b4c05"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "369",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dc4403e3-287e-4b8a-8765-844b516a7631"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "369",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c0317677-5b63-4d3b-a545-6b61d01ce9bf"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "370",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8f309ed3-ff2b-4830-874c-116f53f6bca9"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "370",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9fb6baea-99f8-43b1-97cc-3c076f3f12a7"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "371",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fabcd046-4bc0-4588-804b-c9d927e1f459"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "371",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "54bba1ba-5d2a-49f2-b4d3-ece8e4b3fa39"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "373",
+      "page": "3-4",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "bb939be8-a7ba-4872-8d35-12b9d8482ddc"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "373",
+      "page": "3-4",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "73764c88-0be5-4ff3-9201-67f5c896d1e7"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "374",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ec10954c-df35-40fd-9f8f-a57b30ba409d"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "374",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ace1ebe6-b55f-4271-827f-00bcbffbcbcc"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "375",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7ae875a7-965b-4936-97d5-54e963df2f2f"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "375",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "44caf0aa-105e-4a14-98ad-60e212893a40"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "376",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "prof-ed/classroom-management",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a50485a7-1a03-4482-9536-41b76cd7cd9c"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "376",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "prof-ed/classroom-management",
+      "reason": "duplicate_existing_content",
+      "existing_id": "796be04c-4852-4f7b-a089-c6a2a02bfb28"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "377",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e20357e1-4a5c-41b3-9a87-094024442a32"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "377",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3f130818-6ba1-468b-a301-94b8e5622313"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "378",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "50380c45-96d9-46cd-991f-687402be5c23"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "378",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fea3045a-3f3e-4cd9-a0a4-8a2eede36263"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "379",
+      "page": "4-5",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0fe44124-5317-4459-b32d-7d6e30f2cc6f"
+    },
+    {
+      "source": "output/pdf/drills_booster_pdf_sept2026_extracted_questions.json",
+      "row": "379",
+      "page": "4-5",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "bfa70911-aa8b-4226-899a-1f5fca4fabc4"
+    }
+  ],
+  "skipped_samples": [
+    {
+      "row": "365",
+      "page": "2",
+      "reason": "missing_required_choice_a_to_d"
+    },
+    {
+      "row": "372",
+      "page": "3",
+      "reason": "missing_required_choice_a_to_d"
+    }
+  ]
+}

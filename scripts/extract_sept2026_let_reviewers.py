@@ -266,17 +266,33 @@ def infer_exam_type(path):
     return "Cannot Determine", "No clear Elementary/Secondary indicator in source path."
 
 
+def source_relative_path(path, source_root):
+    try:
+        return path.relative_to(source_root.parent)
+    except ValueError:
+        try:
+            return path.relative_to(source_root)
+        except ValueError:
+            return path
+
+
 def infer_subject_area(path, question_text):
     path_text = str(path).lower()
     filename = Path(path).name.lower()
     parent_text = " ".join(Path(path).parts[-3:]).lower()
     text = f"{parent_text} {filename} {question_text}".lower()
-    if re.search(r"gened|gen ed|general education", filename):
+    compact_filename = re.sub(r"[^a-z0-9]+", "", filename)
+    compact_text = re.sub(r"[^a-z0-9]+", "", text)
+    if re.search(r"gened|gen ed|general education", filename) or "gened" in compact_filename or "generaleducation" in compact_filename:
         return "General Education"
-    if re.search(r"profed|prof ed|professional education", filename):
-        if re.search(r"caad|child and adolescent", filename):
+    if (
+        re.search(r"profed|prof ed|professional education", filename)
+        or "profed" in compact_filename
+        or "professionaleducation" in compact_filename
+    ):
+        if re.search(r"caad|child and adolescent", filename) or "childandadolescent" in compact_filename:
             return "Child and Adolescent Development"
-        if re.search(r"\bfl\b|facilitating learning", filename):
+        if re.search(r"\bfl\b|facilitating learning", filename) or "facilitatinglearning" in compact_filename:
             return "Facilitating Learning"
         return "Professional Education"
     ordered = [
@@ -307,7 +323,7 @@ def infer_subject_area(path, question_text):
     for subject, patterns in ordered:
         if any(re.search(pattern, text) for pattern in patterns):
             return subject
-    if "beed&bsed gened & profed" in path_text:
+    if "beed&bsed gened & profed" in path_text or "beedbsedletdrillsbooster" in compact_text:
         if re.search(r"\b(teacher|learner|classroom|curriculum|assessment|instruction|learning|school)\b", question_text, re.I):
             return "Professional Education"
         return "General Education"
@@ -378,7 +394,8 @@ def extract_pdf(path, source_root):
     text, offsets = page_offsets(pages)
     answer_key, answer_note, answer_key_idx = parse_answer_key(text)
     page_images = page_image_counts(path, len(pages))
-    exam_type, exam_note = infer_exam_type(path.relative_to(source_root))
+    relative_path = source_relative_path(path, source_root)
+    exam_type, exam_note = infer_exam_type(relative_path)
     rows = []
     question_text = text[:answer_key_idx] if answer_key_idx >= 0 and len(answer_key) >= 3 else text
 
@@ -389,7 +406,7 @@ def extract_pdf(path, source_root):
         page = page_range_for_offsets(offsets, start, end)
         answer = answer_key.get(qnum, "") or inline_answer(block)
         answer_source = answer_note if answer_key.get(qnum, "") else ("Correct answer embedded inline." if answer else "")
-        subject = infer_subject_area(path.relative_to(source_root), question)
+        subject = infer_subject_area(relative_path, question)
         topic = infer_topic(subject, question)
         passage_ref = detect_passage(question, qnum, page)
         image_count = page_images.get(int(str(page).split("-")[0]), 0)

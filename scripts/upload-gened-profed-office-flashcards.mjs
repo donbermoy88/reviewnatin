@@ -4,8 +4,12 @@ import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 
 const dryRun = process.argv.includes('--dry-run');
-const sourceToken = 'gened_profed_office_sept2026';
-const reportPath = 'output/pdf/gened_profed_office_flashcards_upload_report.json';
+const sourceToken =
+  process.argv.find((arg) => arg.startsWith('--source-token='))?.split('=').slice(1).join('=') ||
+  'gened_profed_office_sept2026';
+const reportPath =
+  process.argv.find((arg) => arg.startsWith('--report='))?.split('=').slice(1).join('=') ||
+  `output/pdf/${sourceToken}_flashcards_upload_report.json`;
 
 function loadEnv(file) {
   return Object.fromEntries(

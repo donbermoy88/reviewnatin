@@ -1,0 +1,29 @@
+{
+  "dry_run": false,
+  "source_token": "drills_booster_pdf_sept2026",
+  "source_questions": 22,
+  "insertable_flashcards": 18,
+  "inserted": 18,
+  "skipped": 4,
+  "skipped_by_reason": {
+    "duplicate_flashcard_front": 4
+  },
+  "skipped_samples": [
+    {
+      "question_id": "4b0892c8-5fdb-41df-a628-79f48423ab5a",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "cdfe0ec9-99d8-468e-8e52-2c1a3b88c479",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "26ccda90-6f29-45cc-894b-13bd40e978a1",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "eceffc3d-61a6-427c-97e8-9d0967707185",
+      "reason": "duplicate_flashcard_front"
+    }
+  ]
+}
