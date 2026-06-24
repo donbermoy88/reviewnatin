@@ -61,7 +61,14 @@ class MainActivity : ReactActivity() {
       startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
         setPackage(packageName)
       })
-    }, 2500)
+    }, 4500)
+  }
+
+  override fun onNewIntent(intent: Intent?) {
+    super.onNewIntent(intent)
+    if (intent != null) {
+      setIntent(intent)
+    }
   }
 
   /**

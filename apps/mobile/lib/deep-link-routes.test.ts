@@ -61,6 +61,9 @@ describe('routeFromNativeIntentPath', () => {
     expect(routeFromNativeIntentPath('reviewnatin://signup')).toBe('/(auth)/signup');
     expect(routeFromNativeIntentPath('reviewnatin://login')).toBe('/(auth)/login');
     expect(routeFromNativeIntentPath('reviewnatin://practice')).toBe('/practice/quiz');
+    expect(routeFromNativeIntentPath('reviewnatin://verify-email?email=f1.agent@reviewnatinph.com')).toBe(
+      '/(auth)/verify-email?email=f1.agent%40reviewnatinph.com'
+    );
   });
 
   it('normalizes bare native paths', () => {

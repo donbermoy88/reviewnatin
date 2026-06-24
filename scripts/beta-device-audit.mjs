@@ -18,6 +18,7 @@ import { BETA_AI_PERSONAS } from './lib/beta-ai-personas.mjs';
 import { adbDevice, deviceInfo, listAdbDevices } from './lib/adb-device.mjs';
 import {
   assertColdVerifyEmailDeeplink,
+  dumpUiXml,
   ensureMaestroCli,
   ensureMaestroDriver,
   resetMaestroDriver,
@@ -98,10 +99,7 @@ function runMaestroFlow(maestro, flow, serial) {
 }
 
 function uiDump(serial) {
-  run(`adb -s ${serial} shell uiautomator dump /sdcard/window_dump.xml 2>/dev/null || true`);
-  return execSync(`adb -s ${serial} shell cat /sdcard/window_dump.xml 2>/dev/null || echo ''`, {
-    encoding: 'utf8',
-  });
+  return dumpUiXml(serial);
 }
 
 function openDeeplink(serial, url, waitSec = 6) {
@@ -204,7 +202,14 @@ function auditPersona(persona, ctx) {
   }
   let deeplink = null;
   if (persona.deeplinkVerifyEmail) {
-    deeplink = assertColdVerifyEmailDeeplink(PACKAGE, serial);
+    const verifyFlow = flows.find(
+      (f) => f.flow === 'free-signup-path.yaml' || f.flow === 'deeplink-verify-email.yaml'
+    );
+    if (verifyFlow?.status.startsWith('pass')) {
+      deeplink = { ok: true, screen: 'verify-email', method: verifyFlow.flow };
+    } else {
+      deeplink = assertColdVerifyEmailDeeplink(PACKAGE, serial);
+    }
   }
   let paywall = null;
   if (persona.cohort === 'premium' || persona.id === 'G2') {

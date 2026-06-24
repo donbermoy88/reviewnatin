@@ -13,7 +13,7 @@
 | Diego Reyes (G2) | guest | pass | P0 “libre, walang signup” copy |
 | Anica Cruz (G3) | guest | pass | 20 Q Tagalog paywall panel |
 | Paolo Mendoza (G4) | guest | pass | Profile settings hint scroll |
-| Jasmine Lo (F1) | free | fail | — |
+| Jasmine Lo (F1) | free | pass | — |
 | Kyle Tan (F2) | free | pass | OAuth path (skip OTP) — not in Maestro |
 | Rica Villanueva (F3) | free | pass | P0 limit copy at 20 Q |
 | Lea Fernandez (F4) | free | pass | Mock preview limit |

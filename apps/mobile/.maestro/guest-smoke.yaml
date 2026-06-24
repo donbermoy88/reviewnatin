@@ -1,16 +1,39 @@
 appId: ph.reviewnatin.app
 ---
 # Guest cohort: skip login, complete onboarding, start practice
-- launchApp
-- tapOn:
-    text: ".*guest.*"
-    optional: true
-- tapOn:
-    text: "Get started"
-    optional: true
-- tapOn:
-    text: ".*Dashboard.*|Pumunta sa Dashboard"
-    optional: true
-- assertVisible:
-    text: ".*Home.*|PasaPath.*"
-    optional: true
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "Get started — it's free"
+    timeout: 45000
+- tapOn: "Get started — it's free"
+- extendedWaitUntil:
+    visible: "Anong exam ang nire-review mo?"
+    timeout: 15000
+- extendedWaitUntil:
+    visible: "Continue →"
+    timeout: 10000
+- tapOn: "Continue →"
+- extendedWaitUntil:
+    visible: "Ano ang level mo ngayon?"
+    timeout: 10000
+- tapOn: "Continue →"
+- extendedWaitUntil:
+    visible: "Itakda ang daily goal mo"
+    timeout: 10000
+- tapOn: "I'm committed →"
+- extendedWaitUntil:
+    visible: "I-save ang progress mo"
+    timeout: 15000
+- scrollUntilVisible:
+    element: "Skip muna (guest)"
+    direction: DOWN
+    timeout: 20000
+- tapOn: "Skip muna (guest)"
+- extendedWaitUntil:
+    visible: "Pumunta sa Dashboard"
+    timeout: 15000
+- tapOn: "Pumunta sa Dashboard"
+- extendedWaitUntil:
+    visible: "Home"
+    timeout: 20000

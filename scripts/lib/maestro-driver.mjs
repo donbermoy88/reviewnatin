@@ -81,21 +81,43 @@ export function adbDevice(preferredSerial) {
   return resolveAdbDevice(preferredSerial);
 }
 
-/** Cold-start verify-email deeplink must land on OTP screen, not signup. */
+/** Retry uiautomator dump while the app is still booting (cold deeplinks replay after ~2.5s). */
+export function dumpUiXml(device, maxAttempts = 6) {
+  const serial = device ?? adbDevice();
+  let xml = '';
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    try {
+      execSync(`adb -s ${serial} shell uiautomator dump /sdcard/window_dump.xml 2>/dev/null`, {
+        cwd: REPO_ROOT,
+        stdio: 'pipe',
+      });
+      xml = runCapture(`adb -s ${serial} shell cat /sdcard/window_dump.xml 2>/dev/null || echo ''`);
+      if (xml.includes('<hierarchy')) return xml;
+    } catch {
+      /* app may still be animating */
+    }
+    execSync('sleep 1', { cwd: REPO_ROOT });
+  }
+  return xml;
+}
+
+/** Cold-start verify-email deeplink — uses Maestro (matches F1 cohort path on preview APK). */
 export function assertColdVerifyEmailDeeplink(packageName = 'ph.reviewnatin.app', device) {
   const serial = device ?? adbDevice();
-  run(`adb -s ${serial} shell am force-stop ${packageName}`);
-  run(`adb -s ${serial} shell pm clear ${packageName}`);
+  const maestro = ensureMaestroCli();
+  ensureMaestroDriver(serial);
+  resetMaestroDriver(serial);
+  run(`adb -s ${serial} shell am force-stop ${packageName} 2>/dev/null || true`);
+  run(`adb -s ${serial} shell pm clear ${packageName} || true`);
   run('sleep 2');
-  run(
-    `adb -s ${serial} shell am start -a android.intent.action.VIEW -d 'reviewnatin://verify-email?email=f1.agent@reviewnatinph.com' ${packageName}`
-  );
-  run('sleep 8');
-  run(`adb -s ${serial} shell uiautomator dump /sdcard/window_dump.xml 2>/dev/null || true`);
-  const xml = runCapture(`adb -s ${serial} shell cat /sdcard/window_dump.xml 2>/dev/null || echo ''`);
-  if (/I-verify ang email/i.test(xml)) return { ok: true, screen: 'verify-email' };
-  if (/Gumawa ng account/i.test(xml)) {
-    return { ok: false, screen: 'signup', detail: 'Cold deeplink redirected to signup' };
+  try {
+    run(`${maestro} test apps/mobile/.maestro/flows/deeplink-verify-email.yaml`);
+    return { ok: true, screen: 'verify-email', method: 'maestro-deeplink-verify-email' };
+  } catch {
+    return {
+      ok: false,
+      screen: 'unknown',
+      detail: 'Maestro deeplink-verify-email flow failed',
+    };
   }
-  return { ok: false, screen: 'unknown', detail: 'Neither verify nor signup copy found' };
 }

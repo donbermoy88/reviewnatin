@@ -3,7 +3,7 @@ import * as Linking from 'expo-linking';
 /** Single read of Linking.getInitialURL — shared by deeplink handler and auth screens. */
 let cachedInitialUrl: string | null | undefined;
 let initialUrlPromise: Promise<string | null> | null = null;
-const INITIAL_URL_TIMEOUT_MS = 1500;
+const INITIAL_URL_TIMEOUT_MS = 5000;
 
 function withTimeout<T>(promise: Promise<T>, fallback: T, ms: number): Promise<T> {
   return Promise.race([
