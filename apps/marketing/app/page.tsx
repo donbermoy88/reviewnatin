@@ -414,7 +414,7 @@ function Hero() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginTop: 36 }}>
             <div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: RN.ink, letterSpacing: '-0.02em' }}>1,600+</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: RN.ink, letterSpacing: '-0.02em' }}>20,000+</div>
               <div style={{ fontSize: 12, color: RN.inkSub, fontWeight: 600 }}>practice questions</div>
             </div>
             <div style={{ width: 1, height: 40, background: RN.line }} />
@@ -472,7 +472,7 @@ const FIcons = {
 
 function Features() {
   const items = [
-    { icon: FIcons.Books,  color: '#E8F0FF', title: 'Built for CSE, PNLE & LET',   body: 'Civil Service, Nursing, and Teacher board exams — 1,600+ vetted questions and counting, with more exams on the way.' },
+    { icon: FIcons.Books,  color: '#E8F0FF', title: 'Built for CSE, PNLE & LET',   body: 'Civil Service, Nursing, and Teacher board exams — 20,000+ vetted questions and counting, with more exams on the way.' },
     { icon: FIcons.AI,     color: '#E8F0FF', title: 'Ask Kuya AI',                body: 'Stuck on an item? Tap to get a step-by-step Filipino explanation in seconds.' },
     { icon: FIcons.Flame,  color: '#FFEEE4', title: 'Streaks that stick',          body: 'Daily goals, gentle reminders, and milestone celebrations — habit muna, pass na.' },
     { icon: FIcons.Trophy, color: '#FFF4DC', title: 'Compete with friends',        body: 'Region, friends, and global leaderboards. Sino ang #1 sa LET ngayong week?' },
@@ -551,7 +551,7 @@ function Showcase() {
 // ── STATS ──────────────────────────────────────────────────
 function Stats() {
   const items = [
-    { n: '1,600+', l: 'Practice questions' },
+    { n: '20,000+', l: 'Practice questions' },
     { n: '5',      l: 'Exam tracks (CSE, PNLE, LET)' },
     { n: 'EN + TL', l: 'Bilingual explanations' },
     { n: '₱0',     l: 'Free to start' },
