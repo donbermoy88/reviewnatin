@@ -1,0 +1,192 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_tvted_sept2026_extracted_questions.json",
+  "extracted_rows": 500,
+  "ready_rows": 493,
+  "source_duplicates_or_non_ready_skipped": 7,
+  "existing_tle_questions_before": 2061,
+  "insertable": 409,
+  "updatable_by_source_key": 84,
+  "duplicate_existing_content": 0,
+  "inserted": 409,
+  "updated": 84,
+  "skipped_samples": [
+    {
+      "row": "213",
+      "source_pdf": "BSED TVTED P4.pdf",
+      "original_no": "13",
+      "status": "Duplicate",
+      "duplicate_of": "116"
+    },
+    {
+      "row": "259",
+      "source_pdf": "BSED TVTED P5.pdf",
+      "original_no": "9",
+      "status": "Duplicate",
+      "duplicate_of": "106"
+    },
+    {
+      "row": "268",
+      "source_pdf": "BSED TVTED P5.pdf",
+      "original_no": "18",
+      "status": "Duplicate",
+      "duplicate_of": "60"
+    },
+    {
+      "row": "339",
+      "source_pdf": "BSED TVTED P6.pdf",
+      "original_no": "39",
+      "status": "Duplicate",
+      "duplicate_of": "44"
+    },
+    {
+      "row": "414",
+      "source_pdf": "BSED TVTED P8.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "60"
+    },
+    {
+      "row": "464",
+      "source_pdf": "BSED TVTED P9.pdf",
+      "original_no": "14",
+      "status": "Duplicate",
+      "duplicate_of": "215"
+    },
+    {
+      "row": "470",
+      "source_pdf": "BSED TVTED P9.pdf",
+      "original_no": "20",
+      "status": "Duplicate",
+      "duplicate_of": "325"
+    }
+  ],
+  "duplicate_samples": [],
+  "update_samples": [
+    {
+      "id": "9950ab72-64f8-4b8d-8dab-4879051af09f",
+      "source_key": "BSED TVTED P1.pdf#1",
+      "stem": "The most accurate tool for measuring electrical resistance is:"
+    },
+    {
+      "id": "22f207c9-87a5-4b89-a993-f3fa6854a7ab",
+      "source_key": "BSED TVTED P1.pdf#2",
+      "stem": "The standard unit of electrical power is:"
+    },
+    {
+      "id": "c3ce3aae-6351-4f62-8cbd-c0782aa84192",
+      "source_key": "BSED TVTED P1.pdf#3",
+      "stem": "The symbol “⊥” in technical drawing indicates:"
+    },
+    {
+      "id": "490a1bf8-8fdd-4ae9-9309-60733570da8a",
+      "source_key": "BSED TVTED P1.pdf#4",
+      "stem": "A type of projection that shows an object as it appears to the eye:"
+    },
+    {
+      "id": "cac6ac9b-9927-4705-8f6b-bb18dbbd291a",
+      "source_key": "BSED TVTED P1.pdf#5",
+      "stem": "The process of removing burrs after cutting metal is:"
+    },
+    {
+      "id": "f1e8c339-5f92-4824-950a-be0a4a7d82fa",
+      "source_key": "BSED TVTED P1.pdf#6",
+      "stem": "The tool used to draw parallel lines in drafting is:"
+    },
+    {
+      "id": "03d138ec-d482-440f-bf49-760fb1aa663d",
+      "source_key": "BSED TVTED P1.pdf#7",
+      "stem": "The total resistance of three 6-ohm resistors in series is:"
+    },
+    {
+      "id": "d697ea00-8ca0-422f-9d29-6607273f79b8",
+      "source_key": "BSED TVTED P1.pdf#8",
+      "stem": "The component that stores electrical energy in a circuit:"
+    },
+    {
+      "id": "0921f718-5d57-4b25-97f8-f3a173ec6752",
+      "source_key": "BSED TVTED P1.pdf#9",
+      "stem": "The formula for calculating voltage is:"
+    },
+    {
+      "id": "2b244a51-49c5-4a2c-8ba3-8659f0dafed8",
+      "source_key": "BSED TVTED P10.pdf#2",
+      "stem": "In technical drafting, a pictorial drawing that shows three dimensions is called:"
+    },
+    {
+      "id": "3963ceb0-8413-4b0d-9052-ac612b2de435",
+      "source_key": "BSED TVTED P10.pdf#3",
+      "stem": "When sharpening a chisel, the correct angle to maintain is approximately:"
+    },
+    {
+      "id": "1085e0f0-7421-425b-acdb-dac88eb02c8e",
+      "source_key": "BSED TVTED P10.pdf#4",
+      "stem": "The tool used for measuring the internal diameter of a pipe is:"
+    },
+    {
+      "id": "fe39ef14-61b5-408e-a31c-97db15215611",
+      "source_key": "BSED TVTED P10.pdf#5",
+      "stem": "The safety device that automatically cuts off power during overload is the:"
+    },
+    {
+      "id": "3ddf4c28-850d-4b26-a33f-816d63367ffd",
+      "source_key": "BSED TVTED P10.pdf#6",
+      "stem": "In mechanical systems, the advantage of a lever is expressed as:"
+    },
+    {
+      "id": "b3dd8dc4-379e-4c43-8ca2-aa69a65906d4",
+      "source_key": "BSED TVTED P10.pdf#7",
+      "stem": "The process of joining metals by using heat and filler metal is called:"
+    },
+    {
+      "id": "ecff5040-209d-48d4-a055-7e25ea0e5a61",
+      "source_key": "BSED TVTED P10.pdf#8",
+      "stem": "The most suitable material for electrical wiring insulation is:"
+    },
+    {
+      "id": "8239fff7-a431-4c88-a1d3-38e65009ca92",
+      "source_key": "BSED TVTED P10.pdf#9",
+      "stem": "A drawing that provides full information for manufacturing a part is a:"
+    },
+    {
+      "id": "b57e1b63-f2d3-4476-8859-6ba4d74af2be",
+      "source_key": "BSED TVTED P2.pdf#1",
+      "stem": "The graphical representation of an electrical circuit is called:"
+    },
+    {
+      "id": "a4d32f12-1ddf-4ae9-ad3e-c85190832c9a",
+      "source_key": "BSED TVTED P2.pdf#2",
+      "stem": "The process of joining metals using heat and filler metal is:"
+    },
+    {
+      "id": "62a180d6-654e-4573-ae59-f1bddb35ec20",
+      "source_key": "BSED TVTED P2.pdf#3",
+      "stem": "A safety device that automatically interrupts excessive current flow:"
+    },
+    {
+      "id": "b546eb8a-4cf1-4cae-b5f8-0718cbdfcf0e",
+      "source_key": "BSED TVTED P2.pdf#4",
+      "stem": "The tool used to cut metal sheets accurately is the:"
+    },
+    {
+      "id": "5541dde2-ef2d-4934-bcf5-868262913c20",
+      "source_key": "BSED TVTED P2.pdf#5",
+      "stem": "A resistor has color bands of brown, black, orange. Its resistance is:"
+    },
+    {
+      "id": "a630c1a8-60e0-48f6-824c-52aee3546dc6",
+      "source_key": "BSED TVTED P2.pdf#6",
+      "stem": "The part of an engine that converts reciprocating motion to rotary motion:"
+    },
+    {
+      "id": "cd924bf1-b871-40f2-970a-bf5d8097b9c5",
+      "source_key": "BSED TVTED P2.pdf#7",
+      "stem": "The law that states energy cannot be created nor destroyed:"
+    },
+    {
+      "id": "5e2012c0-63aa-4356-a62b-d6d3026b14df",
+      "source_key": "BSED TVTED P2.pdf#8",
+      "stem": "The measurement tool that gives the most precise linear measurement:"
+    }
+  ]
+}

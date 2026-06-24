@@ -1,0 +1,78 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Technology-Vocational Teacher Education-",
+  "source_pdfs": 10,
+  "total_questions_found": 500,
+  "total_ready_for_upload": 493,
+  "total_needing_review": 0,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 7,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 500,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 493,
+    "Duplicate": 7
+  },
+  "subject_category_breakdown": {
+    "Technology and Livelihood Education": 500
+  },
+  "topic_breakdown": {
+    "Electrical and Electronics": 62,
+    "Technology-Vocational Teacher Education": 132,
+    "Industrial Arts and Drafting": 46,
+    "Safety and Work Values": 22,
+    "Welding and Metalwork": 17,
+    "Automotive and Mechanical Technology": 29,
+    "Home Economics and Food Technology": 74,
+    "Agriculture and Fishery": 11,
+    "ICT and Digital Literacy": 31,
+    "Entrepreneurship and Business": 54,
+    "TVET Pedagogy and Professional Development": 22
+  },
+  "difficulty_breakdown": {
+    "3": 500
+  },
+  "source_counts": {
+    "BSED TVTED P1.pdf": 50,
+    "BSED TVTED P10.pdf": 50,
+    "BSED TVTED P2.pdf": 50,
+    "BSED TVTED P3.pdf": 50,
+    "BSED TVTED P4.pdf": 50,
+    "BSED TVTED P5.pdf": 50,
+    "BSED TVTED P6.pdf": 50,
+    "BSED TVTED P7.pdf": 50,
+    "BSED TVTED P8.pdf": 50,
+    "BSED TVTED P9.pdf": 50
+  },
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Technology and Livelihood Education",
+    "topic": "TLE",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows to the LET Secondary major/tle topic, then verify live source counts and sub-tag breakdown.",
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_tvted_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_tvted_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_tvted_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_tvted_sept2026_extracted_questions_summary.json"
+  }
+}

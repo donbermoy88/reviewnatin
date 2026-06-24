@@ -1,0 +1,169 @@
+{
+  "source_folder": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Technology-Vocational Teacher Education-",
+  "source_pdfs": {
+    "BSED TVTED P1.pdf": 50,
+    "BSED TVTED P10.pdf": 50,
+    "BSED TVTED P2.pdf": 50,
+    "BSED TVTED P3.pdf": 50,
+    "BSED TVTED P4.pdf": 50,
+    "BSED TVTED P5.pdf": 50,
+    "BSED TVTED P6.pdf": 50,
+    "BSED TVTED P7.pdf": 50,
+    "BSED TVTED P8.pdf": 50,
+    "BSED TVTED P9.pdf": 50
+  },
+  "extraction_summary": {
+    "total_questions_found": 500,
+    "ready_for_upload": 493,
+    "needing_review": 0,
+    "without_answer_key": 0,
+    "duplicates_detected": 7,
+    "with_images": 0,
+    "image_based_answer_choices": 0,
+    "elementary": 0,
+    "secondary": 500,
+    "both_or_cannot_determine": 0,
+    "status_counts": {
+      "Ready for Upload": 493,
+      "Duplicate": 7
+    },
+    "subject_category_breakdown": {
+      "Technology and Livelihood Education": 500
+    },
+    "topic_breakdown": {
+      "Electrical and Electronics": 62,
+      "Technology-Vocational Teacher Education": 132,
+      "Industrial Arts and Drafting": 46,
+      "Safety and Work Values": 22,
+      "Welding and Metalwork": 17,
+      "Automotive and Mechanical Technology": 29,
+      "Home Economics and Food Technology": 74,
+      "Agriculture and Fishery": 11,
+      "ICT and Digital Literacy": 31,
+      "Entrepreneurship and Business": 54,
+      "TVET Pedagogy and Professional Development": 22
+    },
+    "difficulty_breakdown": {
+      "3": 500
+    }
+  },
+  "upload_summary": {
+    "inserted": 409,
+    "updated": 84,
+    "skipped_source_duplicates_or_non_ready": 7,
+    "duplicate_existing_content": 0,
+    "ready_rows": 493,
+    "extracted_rows": 500
+  },
+  "duplicate_rows": [
+    {
+      "row": "213",
+      "source_pdf": "BSED TVTED P4.pdf",
+      "original_no": "13",
+      "duplicate_of": "116",
+      "question": "In an electrical circuit, resistance increases when:",
+      "correct_answer": "B"
+    },
+    {
+      "row": "259",
+      "source_pdf": "BSED TVTED P5.pdf",
+      "original_no": "9",
+      "duplicate_of": "106",
+      "question": "The part of an engine that converts reciprocating motion to rotary motion:",
+      "correct_answer": "B"
+    },
+    {
+      "row": "268",
+      "source_pdf": "BSED TVTED P5.pdf",
+      "original_no": "18",
+      "duplicate_of": "60",
+      "question": "The formula for Ohm’s Law is:",
+      "correct_answer": "B"
+    },
+    {
+      "row": "339",
+      "source_pdf": "BSED TVTED P6.pdf",
+      "original_no": "39",
+      "duplicate_of": "44",
+      "question": "The acronym ICT stands for:",
+      "correct_answer": "B"
+    },
+    {
+      "row": "414",
+      "source_pdf": "BSED TVTED P8.pdf",
+      "original_no": "14",
+      "duplicate_of": "60",
+      "question": "The formula for Ohm’s Law is:",
+      "correct_answer": "A"
+    },
+    {
+      "row": "464",
+      "source_pdf": "BSED TVTED P9.pdf",
+      "original_no": "14",
+      "duplicate_of": "215",
+      "question": "The unit of electrical resistance is:",
+      "correct_answer": "C"
+    },
+    {
+      "row": "470",
+      "source_pdf": "BSED TVTED P9.pdf",
+      "original_no": "20",
+      "duplicate_of": "325",
+      "question": "The formula for electrical power is:",
+      "correct_answer": "A"
+    }
+  ],
+  "live_verification": {
+    "tle_total_published_after_upload": 2470,
+    "bsed_tvted_source_published_after_upload": 493,
+    "sub_tag_breakdown": {
+      "Technology-Vocational Teacher Education": 131,
+      "Home Economics and Food Technology": 74,
+      "Electrical and Electronics": 58,
+      "Entrepreneurship and Business": 54,
+      "Industrial Arts and Drafting": 46,
+      "ICT and Digital Literacy": 30,
+      "Automotive and Mechanical Technology": 28,
+      "Safety and Work Values": 22,
+      "TVET Pedagogy and Professional Development": 22,
+      "Welding and Metalwork": 17,
+      "Agriculture and Fishery": 11
+    },
+    "sample_checked": {
+      "source_pdf": "BSED TVTED P1.pdf",
+      "original_no": "1",
+      "stem": "The most accurate tool for measuring electrical resistance is:",
+      "correct_choice_id": "b",
+      "explanation_en": "Ohmmeter. Measures resistance."
+    }
+  },
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Technology and Livelihood Education",
+    "topic": "TLE",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Continue with the next unprocessed reviewer folder; TVTED ready rows are uploaded and verified.",
+  "output_files": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_tvted_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_tvted_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_tvted_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_tvted_sept2026_extracted_questions_summary.json"
+  }
+}
