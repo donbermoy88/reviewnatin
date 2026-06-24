@@ -1,0 +1,116 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/bsed_caed_sept2026_extracted_questions.json",
+  "extracted_rows": 450,
+  "ready_rows": 438,
+  "source_duplicates_or_non_ready_skipped": 12,
+  "existing_culture_and_arts_education_questions_before": 0,
+  "insertable": 438,
+  "updatable_by_source_key": 0,
+  "archivable_duplicate_sources": 0,
+  "duplicate_existing_content": 0,
+  "inserted": 438,
+  "updated": 0,
+  "archived_duplicate_sources": 0,
+  "skipped_samples": [
+    {
+      "row": "152",
+      "source_pdf": "BSED CAEd P3.pdf",
+      "original_no": "27",
+      "status": "Duplicate",
+      "duplicate_of": "41",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 41."
+    },
+    {
+      "row": "157",
+      "source_pdf": "BSED CAEd P3.pdf",
+      "original_no": "32",
+      "status": "Duplicate",
+      "duplicate_of": "32",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 32."
+    },
+    {
+      "row": "160",
+      "source_pdf": "BSED CAEd P3.pdf",
+      "original_no": "35",
+      "status": "Duplicate",
+      "duplicate_of": "49",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 49."
+    },
+    {
+      "row": "179",
+      "source_pdf": "BSED CAEd P4.pdf",
+      "original_no": "4",
+      "status": "Duplicate",
+      "duplicate_of": "18",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 18."
+    },
+    {
+      "row": "346",
+      "source_pdf": "BSED CAEd P7.pdf",
+      "original_no": "21",
+      "status": "Duplicate",
+      "duplicate_of": "54",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 54."
+    },
+    {
+      "row": "363",
+      "source_pdf": "BSED CAEd P7.pdf",
+      "original_no": "38",
+      "status": "Duplicate",
+      "duplicate_of": "18",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 18."
+    },
+    {
+      "row": "364",
+      "source_pdf": "BSED CAEd P7.pdf",
+      "original_no": "39",
+      "status": "Duplicate",
+      "duplicate_of": "164",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 164."
+    },
+    {
+      "row": "368",
+      "source_pdf": "BSED CAEd P7.pdf",
+      "original_no": "43",
+      "status": "Duplicate",
+      "duplicate_of": "165",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 165."
+    },
+    {
+      "row": "387",
+      "source_pdf": "BSED CAEd P8.pdf",
+      "original_no": "12",
+      "status": "Duplicate",
+      "duplicate_of": "15",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 15."
+    },
+    {
+      "row": "394",
+      "source_pdf": "BSED CAEd P8.pdf",
+      "original_no": "19",
+      "status": "Duplicate",
+      "duplicate_of": "350",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 350."
+    },
+    {
+      "row": "440",
+      "source_pdf": "BSED CAEd P9.pdf",
+      "original_no": "15",
+      "status": "Duplicate",
+      "duplicate_of": "121",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 121."
+    },
+    {
+      "row": "441",
+      "source_pdf": "BSED CAEd P9.pdf",
+      "original_no": "16",
+      "status": "Duplicate",
+      "duplicate_of": "96",
+      "notes": "Path and PDF header indicate BSED/Secondary Culture and Arts Education major. Correct answer sourced from source PDF answer key. Duplicate or near-duplicate of row 96."
+    }
+  ],
+  "duplicate_samples": [],
+  "archived_duplicate_samples": [],
+  "update_samples": []
+}

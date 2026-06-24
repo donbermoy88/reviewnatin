@@ -1,0 +1,79 @@
+{
+  "source_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/L. BSED - Culture and Arts Education-",
+  "source_pdfs": 10,
+  "total_questions_found": 450,
+  "total_ready_for_upload": 438,
+  "total_needing_review": 0,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 12,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 450,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 438,
+    "Duplicate": 12
+  },
+  "subject_category_breakdown": {
+    "Culture and Arts Education": 450
+  },
+  "topic_breakdown": {
+    "Contemporary and Digital Arts": 10,
+    "Visual Arts and Design Principles": 108,
+    "Indigenous and Regional Arts": 30,
+    "Cultural Heritage and Preservation": 32,
+    "Culture and Arts Education": 144,
+    "Philippine Festivals": 24,
+    "Arts Education Pedagogy": 58,
+    "Performing Arts": 33,
+    "Art Appreciation and Criticism": 11
+  },
+  "difficulty_breakdown": {
+    "3": 450
+  },
+  "source_counts": {
+    "BSED CAEd P1.pdf": 50,
+    "BSED CAEd P10.pdf": 25,
+    "BSED CAEd P2.pdf": 50,
+    "BSED CAEd P3.pdf": 50,
+    "BSED CAEd P4.pdf": 50,
+    "BSED CAEd P5.pdf": 50,
+    "BSED CAEd P6.pdf": 50,
+    "BSED CAEd P7.pdf": 50,
+    "BSED CAEd P8.pdf": 50,
+    "BSED CAEd P9.pdf": 25
+  },
+  "processed_pdfs": 10,
+  "skipped_sources": {},
+  "suggested_supabase_mapping": {
+    "exam_type": "LET Secondary",
+    "exam_level": "LET Secondary",
+    "subject_area": "Culture and Arts Education",
+    "topic": "Culture and Arts Education",
+    "sub_tag": "Topic",
+    "question_text": "Question",
+    "choice_a_text": "Choice A",
+    "choice_b_text": "Choice B",
+    "choice_c_text": "Choice C",
+    "choice_d_text": "Choice D",
+    "choice_e_text": "Choice E",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows to LET Secondary major/culture-and-arts-education, then verify live source counts and sub-tag breakdown.",
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/bsed_caed_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/bsed_caed_sept2026_extracted_questions.json",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/bsed_caed_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/bsed_caed_sept2026_extracted_questions_summary.json"
+  }
+}
