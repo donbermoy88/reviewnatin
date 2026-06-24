@@ -5,6 +5,8 @@ import { useIapFeedbackOptional } from './iap-feedback-provider';
 import { useAuth } from './auth-provider';
 import { useEntitlements } from './entitlements-provider';
 import { addAppBreadcrumb, captureAppException, captureAppMessage } from '../lib/monitoring/events';
+import { trackEvent } from '../lib/analytics/events';
+import { PREMIUM_PURCHASE } from '../lib/subscription/paywall-copy';
 
 type IapContextValue = {
   purchasingSku: string | null;
@@ -62,8 +64,9 @@ export function IapProvider({ children }: { children: React.ReactNode }) {
             });
             if (result.ok) {
               await refresh();
+              trackEvent('subscription_active', { method: 'store', sku: purchase.productId });
               captureAppMessage('store purchase verified', { area: 'iap', action: 'purchase_verified' }, { sku: purchase.productId });
-              notify('Purchase complete', 'Premium access unlocked!');
+              notify(PREMIUM_PURCHASE.successTitle, PREMIUM_PURCHASE.successSubtitle);
             } else {
               captureAppMessage(
                 'store purchase verification failed',
@@ -71,10 +74,7 @@ export function IapProvider({ children }: { children: React.ReactNode }) {
                 { sku: purchase.productId, error: result.error },
                 'warning'
               );
-              notify(
-                'Purchase not verified',
-                result.error ?? 'Please try again or restore your purchases.'
-              );
+              notify('Purchase not verified', PREMIUM_PURCHASE.verifyFailedSubtitle);
             }
           } catch (error) {
             captureAppException(error, { area: 'iap', action: 'purchase_listener' }, { sku: purchase.productId });

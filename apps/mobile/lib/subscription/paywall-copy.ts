@@ -54,6 +54,23 @@ export const PREMIUM_LOCK_BODY =
 
 export const PREMIUM_LOCK_CTA = 'View Premium Plans';
 
+export const PREMIUM_PURCHASE = {
+  purchasingLabel: 'Opening Google Play…',
+  successTitle: 'Payment confirmed — Plus is active',
+  successSubtitle:
+    'Unlimited practice, full mocks, offline packs, and no ads should unlock now. Pull to refresh in Settings if access does not appear within a minute.',
+  restoreHint: 'Already subscribed on this Google account? Restore purchases before buying again.',
+  verifyFailedSubtitle: 'Payment received but verification failed. Tap Restore purchases or try again in a minute.',
+} as const;
+
+export const PREMIUM_ACTIVE = {
+  title: 'Plus is active on this account',
+  subtitle: 'No ads, unlimited daily practice, full mocks, offline packs, and AI tutor are unlocked.',
+  accessibilityLabel: 'Plus is active. No ads and unlimited review are unlocked. Open Settings to manage Plus.',
+  settingsSubtitle: 'Manage renewal, cancellation, and restore purchases below.',
+  syncHint: 'If Plus just activated, pull to refresh here or restart the app to sync entitlements.',
+} as const;
+
 export const EXAM_COUNTDOWN_PLUS_CTA = {
   title: (days: number) => ` ${days} araw na lang — i-unlock ang full mocks`,
   subtitle: 'Plus: unlimited practice, offline packs, AI tutor, walang ads.',

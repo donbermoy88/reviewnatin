@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { AppState } from 'react-native';
 import {
   fetchSubscriptionProducts,
   fetchUserEntitlements,
@@ -17,6 +18,9 @@ type EntitlementsContextValue = {
   entitlements: UserEntitlement[];
   /** Live store-reported localized prices, keyed by canonical SKU. Empty off-store. */
   storePrices: Record<string, StorePrice>;
+  storePricesReady: boolean;
+  storePricesError: boolean;
+  reloadStorePrices: () => Promise<void>;
   loading: boolean;
   isPremium: (examTypeId?: string | null) => boolean;
   refresh: () => Promise<void>;
@@ -32,7 +36,33 @@ export function EntitlementsProvider({ children }: { children: React.ReactNode }
   const [products, setProducts] = useState<SubscriptionProduct[]>([]);
   const [entitlements, setEntitlements] = useState<UserEntitlement[]>([]);
   const [storePrices, setStorePrices] = useState<Record<string, StorePrice>>({});
+  const [storePricesReady, setStorePricesReady] = useState(!canUseStorePurchases());
+  const [storePricesError, setStorePricesError] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const reloadStorePrices = useCallback(async () => {
+    if (!canUseStorePurchases()) {
+      setStorePricesReady(true);
+      setStorePricesError(false);
+      return;
+    }
+    setStorePricesReady(false);
+    setStorePricesError(false);
+    try {
+      const { fetchStoreProductPricing } = await import('../lib/iap/store');
+      const prices = await fetchStoreProductPricing();
+      if (Object.keys(prices).length > 0) {
+        setStorePrices(prices);
+        setStorePricesError(false);
+      } else {
+        setStorePricesError(true);
+      }
+    } catch {
+      setStorePricesError(true);
+    } finally {
+      setStorePricesReady(true);
+    }
+  }, []);
 
   const refresh = useCallback(async () => {
     try {
@@ -55,21 +85,17 @@ export function EntitlementsProvider({ children }: { children: React.ReactNode }
     refresh();
   }, [refresh]);
 
-  // Resolve live store-reported localized prices once on store-capable builds.
-  // The display layer must show what the store actually charges; this never
-  // runs in dev/simulator/guest builds, where the DB price stays the fallback.
   useEffect(() => {
-    if (!canUseStorePurchases()) return;
-    let active = true;
-    void (async () => {
-      const { fetchStoreProductPricing } = await import('../lib/iap/store');
-      const prices = await fetchStoreProductPricing();
-      if (active && Object.keys(prices).length > 0) setStorePrices(prices);
-    })();
-    return () => {
-      active = false;
-    };
-  }, []);
+    if (!userId) return;
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state === 'active') void refresh();
+    });
+    return () => sub.remove();
+  }, [userId, refresh]);
+
+  useEffect(() => {
+    void reloadStorePrices();
+  }, [reloadStorePrices]);
 
   const isPremium = useCallback(
     (examTypeId?: string | null) => hasPremiumAccess(entitlements, examTypeId),
@@ -96,13 +122,16 @@ export function EntitlementsProvider({ children }: { children: React.ReactNode }
       products,
       entitlements,
       storePrices,
+      storePricesReady,
+      storePricesError,
+      reloadStorePrices,
       loading,
       isPremium,
       refresh,
       activateDemoPass,
       restoreStorePurchases,
     }),
-    [products, entitlements, storePrices, loading, isPremium, refresh, activateDemoPass, restoreStorePurchases]
+    [products, entitlements, storePrices, storePricesReady, storePricesError, reloadStorePrices, loading, isPremium, refresh, activateDemoPass, restoreStorePurchases]
   );
 
   return <EntitlementsContext.Provider value={value}>{children}</EntitlementsContext.Provider>;

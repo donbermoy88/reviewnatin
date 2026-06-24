@@ -8,6 +8,8 @@ import {
   PAYWALL_HEADLINE,
   PAYWALL_PAYMENT_EXPLANATION,
   PREMIUM_LOCK_CTA,
+  PREMIUM_ACTIVE,
+  PREMIUM_PURCHASE,
 } from './paywall-copy';
 
 const FORBIDDEN = [
@@ -42,6 +44,18 @@ describe('paywall-copy', () => {
     expect(PAYWALL_GUEST_BODY).toContain('Google Play');
   });
 
+  it('guides power users through Google Play purchase and restore', () => {
+    expect(PREMIUM_PURCHASE.purchasingLabel).toContain('Google Play');
+    expect(PREMIUM_PURCHASE.successTitle).toContain('Plus is active');
+    expect(PREMIUM_PURCHASE.restoreHint).toContain('Restore purchases');
+  });
+
+  it('confirms Plus entitlements for paying subscribers', () => {
+    expect(PREMIUM_ACTIVE.subtitle).toContain('No ads');
+    expect(PREMIUM_ACTIVE.subtitle).toContain('unlimited daily practice');
+    expect(PREMIUM_ACTIVE.syncHint).toContain('sync entitlements');
+  });
+
   it('does not include forbidden external payment strings', () => {
     const corpus = [
       PAYWALL_HEADLINE,
@@ -50,6 +64,9 @@ describe('paywall-copy', () => {
       PAYWALL_GUEST_BODY,
       PREMIUM_LOCK_CTA,
       PAYWALL_PAYMENT_EXPLANATION,
+      PREMIUM_PURCHASE.successSubtitle,
+      PREMIUM_PURCHASE.restoreHint,
+      PREMIUM_ACTIVE.subtitle,
       ...HOW_TO_PAY_STEPS,
       EXAM_COUNTDOWN_PLUS_CTA.button,
     ].join('\n');

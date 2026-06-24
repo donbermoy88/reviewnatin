@@ -37,6 +37,7 @@ import {
   PAYWALL_POLICY_FOOTER,
   PAYWALL_SUBHEADING,
   PLAN_DISPLAY,
+  PREMIUM_PURCHASE,
   STORE_LOAD_ERROR,
   STORE_LOAD_TRY_AGAIN,
 } from '../../lib/subscription/paywall-copy';
@@ -211,9 +212,6 @@ export default function SubscribeScreen() {
     addAppBreadcrumb('paywall', 'store purchase button pressed', { sku });
     trackEvent('checkout_started', { method: 'store', sku });
     const result = await purchaseProduct(sku);
-    if (result.ok) {
-      trackEvent('subscription_active', { method: 'store', sku });
-    }
     if (!result.ok && result.error && !result.error.includes('cancel')) {
       captureAppMessage(
         'store purchase request failed',
@@ -253,9 +251,11 @@ export default function SubscribeScreen() {
     ? 'Premium active'
     : !user
       ? 'Sign in to subscribe'
-      : busy || purchasingSku
+      : busy
         ? 'Processing…'
-        : isDevBuild
+        : purchasingSku
+          ? PREMIUM_PURCHASE.purchasingLabel
+          : isDevBuild
           ? `Demo: ${planDisplayMeta(selectedProduct?.sku ?? '').name}`
           : PAYWALL_CTA_PRIMARY;
 
@@ -492,16 +492,19 @@ export default function SubscribeScreen() {
             <Text style={styles.ctaLinkText}>{PAYWALL_CTA_SECONDARY}</Text>
           </Pressable>
           {storeEnabled ? (
-            <Pressable
-              onPress={() => (user ? void handleRestore() : requireLogin())}
-              hitSlop={8}
-              disabled={restoring}
-              style={{ alignItems: 'center', marginTop: spacing.xs }}
-              accessibilityRole="button"
-              accessibilityLabel="Restore purchases"
-            >
-              <Text style={styles.ctaLinkText}>{restoring ? 'Restoring…' : 'Restore purchases'}</Text>
-            </Pressable>
+            <>
+              <Text style={styles.restoreHint}>{PREMIUM_PURCHASE.restoreHint}</Text>
+              <Pressable
+                onPress={() => (user ? void handleRestore() : requireLogin())}
+                hitSlop={8}
+                disabled={restoring}
+                style={{ alignItems: 'center', marginTop: spacing.xs }}
+                accessibilityRole="button"
+                accessibilityLabel="Restore purchases"
+              >
+                <Text style={styles.ctaLinkText}>{restoring ? 'Restoring…' : 'Restore purchases'}</Text>
+              </Pressable>
+            </>
           ) : null}
           <Text style={styles.footnoteDark}>
             {PAYWALL_POLICY_FOOTER} {DISCLAIMERS.short}
@@ -766,6 +769,14 @@ function createStyles(theme: AppTheme) {
     },
     bigCtaText: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.primaryDark },
     ctaLinkText: { fontFamily: fonts.bodySemiBold, fontSize: 13, color: 'rgba(255,255,255,0.65)' },
+    restoreHint: {
+      fontFamily: fonts.bodyMedium,
+      fontSize: 11,
+      color: 'rgba(255,255,255,0.55)',
+      lineHeight: 16,
+      marginTop: spacing.sm,
+      textAlign: 'center',
+    },
     footnoteDark: {
       fontFamily: fonts.bodyMedium,
       fontSize: 10,

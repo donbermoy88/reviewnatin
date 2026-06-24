@@ -8,6 +8,7 @@ import { AppSheet } from '../../components/app-sheet';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { GuestNextStepCard } from '../../components/guest-next-step-card';
 import { FreeDailyLimitStrip } from '../../components/dashboard/free-daily-limit-strip';
+import { PremiumActiveStrip } from '../../components/dashboard/premium-active-strip';
 import { HomeStudyInsights } from '../../components/dashboard/home-study-insights';
 import { GoalRing } from '../../components/goal-ring';
 import { PrimaryButton } from '../../components/primary-button';
@@ -807,6 +808,10 @@ function DashboardScreenContent() {
               questionsToday={stats.questionsToday}
               onUpgrade={() => router.push('/subscribe')}
             />
+          ) : null}
+
+          {user && premium ? (
+            <PremiumActiveStrip onManage={() => router.push('/(tabs)/settings')} />
           ) : null}
 
           <View style={styles.planRow}>

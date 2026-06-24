@@ -15,7 +15,7 @@ export const ANALYTICS_FUNNEL_EVENTS = [
   { event: 'ai_tutor_message', files: ['app/tutor/index.tsx'] },
   { event: 'subscription_viewed', files: ['app/subscribe/index.tsx'] },
   { event: 'checkout_started', files: ['app/subscribe/index.tsx'] },
-  { event: 'subscription_active', files: ['app/subscribe/index.tsx'] },
+  { event: 'subscription_active', files: ['providers/iap-provider.tsx'] },
   { event: 'daily_active', files: ['providers/analytics-provider.tsx'] },
   { event: 'dashboard_charts_viewed', files: ['app/(tabs)/index.tsx'] },
   { event: 'analytics_screen_opened', files: ['app/analytics/index.tsx'] },

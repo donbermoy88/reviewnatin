@@ -36,7 +36,7 @@ import {
 } from '../../lib/offline/sync-status';
 import { formatEntitlementSummary } from '../../lib/entitlements/format';
 import { openBetaFeedback } from '../../lib/beta-feedback';
-import { resolveMonthlyPlusDisplay } from '../../lib/subscription/pricing-display';
+import { PREMIUM_ACTIVE, PREMIUM_LOCK_CTA } from '../../lib/subscription/paywall-copy';
 import { SETTINGS_SUPPORT } from '../../lib/product-copy';
 
 type SettingsStyles = ReturnType<typeof createSettingsStyles>;
@@ -86,7 +86,7 @@ function SettingsScreenContent() {
   const styles = useMemo(() => createSettingsStyles(theme), [theme]);
   const { user, signOut } = useAuth();
   const { prefs, setDarkMode, setNotificationsEnabled, setExplanationLocale, setExamRemindersEnabled } = usePreferences();
-  const { isPremium, entitlements, products, storePrices, restoreStorePurchases } = useEntitlements();
+  const { isPremium, entitlements, restoreStorePurchases } = useEntitlements();
   const { refresh: refreshOnboarding } = useOnboardingGate();
   const { displayName, initials } = useUserProfile('Guest');
   const { isOnline, hasProbed } = useNetworkStatus();
@@ -252,7 +252,6 @@ function SettingsScreenContent() {
   };
 
   const switchTrack = { false: colors.border, true: colors.primary };
-  const monthlyPrice = resolveMonthlyPlusDisplay(products, storePrices);
   const reportProblem = (currentRoute = '/settings') =>
     openBetaFeedback({
       userId: user?.id,
@@ -317,7 +316,7 @@ function SettingsScreenContent() {
               <View style={{ flex: 1 }}>
                 <Text style={styles.premiumTitle}>{premiumActive ? 'ReviewNatin Plus active' : 'Upgrade to Premium'}</Text>
                 <Text style={styles.premiumSub}>
-                  {premiumActive ? 'Manage plan, renewal, and cancellation below' : `From ${monthlyPrice}/mo · best value 6 months`}
+                  {premiumActive ? PREMIUM_ACTIVE.settingsSubtitle : 'Subscribe through secure Google Play payment'}
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#fff" />
@@ -332,7 +331,9 @@ function SettingsScreenContent() {
             onViewPlans={() => router.push('/subscribe')}
             compact
           />
-          {entitlementSummary ? (
+          {premiumActive ? (
+            <Text style={styles.entitlementNote}>{PREMIUM_ACTIVE.syncHint}</Text>
+          ) : entitlementSummary ? (
             <Text style={styles.entitlementNote}>{entitlementSummary}</Text>
           ) : entitlements.length > 0 ? (
             <Text style={styles.entitlementNote}>
@@ -780,7 +781,7 @@ function SettingsScreenContent() {
         subtitle="Offline packs are available for premium subscribers only."
         onClose={() => setSheet(null)}
         actions={[
-          { label: 'View plans', onPress: () => { setSheet(null); router.push('/subscribe'); } },
+          { label: PREMIUM_LOCK_CTA, onPress: () => { setSheet(null); router.push('/subscribe'); } },
           { label: 'Not now', onPress: () => setSheet(null), variant: 'outline' },
         ]}
       />
