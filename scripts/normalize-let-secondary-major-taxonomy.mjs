@@ -18,6 +18,7 @@ const FINAL_MAJOR_SLUGS = [
   'mathematics',
   'filipino',
   'social-studies-araling-panlipunan',
+  'general-science',
   'biological-science',
   'physical-science',
   'values-education',
@@ -186,6 +187,9 @@ function classifyScience(row) {
             ? 'agriculture-fishery-arts'
             : 'tle';
     return classifyTle(row, tleSlug);
+  }
+  if (tags.includes('general-science') || /bsed general science/.test(source)) {
+    return { targetSlug: 'general-science', subTag: null, confidence: 'high', reason: 'source_or_tag_general_science' };
   }
   if (tags.includes('biological-science') || /bsed biological science|biological-science-review/.test(source)) {
     return { targetSlug: 'biological-science', subTag: null, confidence: 'high', reason: 'source_or_tag_biological_science' };
@@ -357,8 +361,9 @@ function buildSql({ rows, topics }) {
   lines.push('SELECT major_sa.id, seed.slug, seed.name, seed.sort_order');
   lines.push('FROM major_sa');
   lines.push('CROSS JOIN (VALUES');
-  lines.push("  ('biological-science', 'Biological Science', 5),");
-  lines.push("  ('physical-science', 'Physical Science', 6),");
+  lines.push("  ('general-science', 'General Science', 5),");
+  lines.push("  ('biological-science', 'Biological Science', 6),");
+  lines.push("  ('physical-science', 'Physical Science', 7),");
   lines.push("  ('science-review-needed', 'Science Review Needed', 100)");
   lines.push(') AS seed(slug, name, sort_order)');
   lines.push('ON CONFLICT (subject_area_id, slug) DO UPDATE SET');
@@ -413,7 +418,7 @@ function buildSql({ rows, topics }) {
   lines.push("    WHEN 'industrial-arts' THEN 'Industrial Arts (Legacy - use TLE)'");
   lines.push("    WHEN 'agriculture-fishery-arts' THEN 'Agriculture & Fishery Arts (Legacy - use TLE)'");
   lines.push("    WHEN 'tvted' THEN 'Technical-Vocational Education (Legacy - use TLE)'");
-  lines.push("    WHEN 'science' THEN 'Science (Legacy - split into Biological/Physical)'");
+  lines.push("    WHEN 'science' THEN 'Science (Legacy - split into General/Biological/Physical)'");
   lines.push('    ELSE t.name');
   lines.push('  END');
   lines.push('FROM major_sa');

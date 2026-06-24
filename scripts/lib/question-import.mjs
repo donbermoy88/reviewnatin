@@ -93,6 +93,7 @@ const APPROVED_LET_SECONDARY_MAJOR_TOPICS = new Set([
   'mathematics',
   'filipino',
   'social-studies-araling-panlipunan',
+  'general-science',
   'biological-science',
   'physical-science',
   'values-education',
@@ -145,7 +146,7 @@ export function validateQuestionImportRows(rows, catalog, existingStemKeysByTopi
         rowNumber: row.rowNumber,
         field: 'topic_slug',
         message:
-          'LET Secondary major must be one of the approved 2026 major slugs. Use biological-science or physical-science instead of science, and tle instead of Home Economics/ICT/TVTEd sub-areas.',
+          'LET Secondary major must be one of the approved 2026 major slugs. Use general-science, biological-science, or physical-science instead of science, and tle instead of Home Economics/ICT/TVTEd sub-areas.',
       });
     }
 

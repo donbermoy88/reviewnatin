@@ -105,6 +105,7 @@ export const LET_SECONDARY_MAJORS = [
   { slug: 'mathematics', name: 'Mathematics' },
   { slug: 'filipino', name: 'Filipino' },
   { slug: 'social-studies-araling-panlipunan', name: 'Social Studies / Araling Panlipunan' },
+  { slug: 'general-science', name: 'General Science' },
   { slug: 'biological-science', name: 'Biological Science' },
   { slug: 'physical-science', name: 'Physical Science' },
   { slug: 'values-education', name: 'Values Education' },

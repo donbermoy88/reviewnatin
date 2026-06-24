@@ -13,6 +13,7 @@ const LET_SECONDARY_MAJOR_SLUGS = new Set([
   'mathematics',
   'filipino',
   'social-studies-araling-panlipunan',
+  'general-science',
   'biological-science',
   'physical-science',
   'values-education',

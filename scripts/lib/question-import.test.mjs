@@ -27,6 +27,7 @@ function catalog() {
           'major',
           new Map([
             ['science', { topicId: 'topic-science-legacy', examActive: true }],
+            ['general-science', { topicId: 'topic-general-science', examActive: true }],
             ['biological-science', { topicId: 'topic-biological-science', examActive: true }],
           ]),
         ],
@@ -112,13 +113,20 @@ describe('question import validation', () => {
         rowNumber: 3,
         exam_type_slug: 'let-secondary',
         subject_slug: 'major',
+        topic_slug: 'general-science',
+      }),
+      row({
+        rowNumber: 4,
+        exam_type_slug: 'let-secondary',
+        subject_slug: 'major',
         topic_slug: 'biological-science',
       }),
     ], catalog());
 
     assert.ok(result.errors.some((error) => error.field === 'topic_slug' && error.message.includes('approved 2026 major slugs')));
-    assert.equal(result.valid.length, 1);
-    assert.equal(result.valid[0].topicId, 'topic-biological-science');
+    assert.equal(result.valid.length, 2);
+    assert.equal(result.valid[0].topicId, 'topic-general-science');
+    assert.equal(result.valid[1].topicId, 'topic-biological-science');
   });
 
   it('builds admin import error reports for author correction', () => {
