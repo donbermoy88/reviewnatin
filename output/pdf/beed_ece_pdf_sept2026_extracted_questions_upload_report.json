@@ -1,0 +1,474 @@
+{
+  "batch_id": "01549f86-a638-49ee-bfb8-501a7388ac70",
+  "dry_run": true,
+  "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 425,
+  "ready_rows": 420,
+  "candidate_targets": 420,
+  "insertable": 0,
+  "inserted": 0,
+  "skipped": 0,
+  "duplicates": 420,
+  "source_stats": {
+    "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json": {
+      "readyRows": 420,
+      "candidateTargets": 420,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "1",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d201aed6-4bbe-4eb5-860f-55ee30d7bb2d"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "2",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "76ee49f9-8155-40f5-a626-2f719632b0ae"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "3",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c03972d6-d01d-483e-89f2-0cbab6d8baa8"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "4",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "be3c22a3-420a-476f-a304-aff14ecc5de9"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "5",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7810b51b-0220-401f-85da-07fba9907cff"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "6",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "619605b7-8ec7-4d08-9888-1caaef0c4129"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "7",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f8252269-81d8-4e6b-8ff9-ba307fcde384"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "8",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "44a923f3-05f3-4ee4-9f0e-237e4aacd8a8"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "9",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "76a2f3d7-d5b5-4071-a840-876097f00f36"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "10",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6c49e1d7-c1ac-4b59-b40f-10c1fb35101a"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "11",
+      "page": "1-2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a1656713-3177-4a1f-b20b-86b126e0f39f"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "12",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "52f0a61f-8cea-467c-a08c-3c07d1ea325d"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "13",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e6b667f2-5db0-426f-8e72-035f45b89908"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "14",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "093c54fc-2955-48b8-ad60-53bad3fe77ea"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "15",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "68d0ce3a-3f8e-4bd4-9367-06b839fe3348"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "16",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c4ac1047-45f5-4ee8-b0ed-982ade0c1c9b"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "17",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "baba62aa-9c72-4917-b631-2efb5d308602"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "18",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dcec95ba-6299-451a-8b16-e6eb613f968e"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "19",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "60cf8370-da4f-41c5-8f13-1f58aae7f940"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "20",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a247fa21-b0a9-48bb-8206-7b8456fb0f8d"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "21",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "89d21784-e1b4-4184-a5d0-4360e77fa969"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "22",
+      "page": "2-3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2ab51293-b506-44c1-8963-e367c18d5a38"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "23",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dfb5caae-697d-4f7b-8db0-d325fc9218be"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "24",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3b17132e-3477-4045-bd6c-4c49f1df1844"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "25",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b96d598d-9ac4-4cbe-8d4f-34dbd58d8e1f"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "26",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2aeac8db-ed98-449c-bb4d-dba2ec98c893"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "27",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "00e4e151-e84c-4aed-8a7d-6839aa6615d1"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "28",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "31db3e37-f906-4784-b5da-247d95d15312"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "29",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "61b12dae-9731-4509-821f-d75fed30a7f5"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "30",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "20886c9b-f6a1-4ca1-ab54-6aa9bcb396be"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "31",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "649b95a4-2940-4a15-9779-4b71c0fcf913"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "32",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1d6cf5c1-dc4b-44cf-a85a-5a43ccebdf47"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "33",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "72296071-e204-4e61-8dce-74d060b2fd82"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "34",
+      "page": "3-4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8982dee1-3ec3-48b5-91d1-3a2d1f507c20"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "35",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b431238c-18b4-4ab0-a97d-187c07816a4b"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "36",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "008dfb07-320c-4fff-8e71-2a163467cad3"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "37",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0c64c6a6-0ba2-45b7-bb4e-3b6dfe3f6855"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "38",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "eaed6888-9eb4-43e4-ba6c-d1f828c76ea5"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "39",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e3a18180-fa6c-4ef8-a3d5-dc356995bbc5"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "40",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "86f8c45b-502f-428a-a0ef-319cec19e0bf"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "41",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3ddd048a-2a57-48fb-b963-02b135b702dd"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "42",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "04523532-dcac-4f00-b69b-f91cd813cc3f"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "43",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dc9750f5-83d6-4344-b10c-654ba429bce2"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "44",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a5eb2add-d509-41d8-887c-0dc55afc079d"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "45",
+      "page": "4-5",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "960872e4-55e7-4f21-a282-f790b80cbb5f"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "46",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "835c2edb-62e5-439e-956b-da24e19b6ea0"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "47",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8c57aec9-0c29-4036-a42e-2da8372249db"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "48",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e6c5ad95-e9a1-46c5-8846-1e51802d0349"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "49",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "84e3291d-df0c-416b-8767-21828d46cd06"
+    },
+    {
+      "source": "output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+      "row": "50",
+      "page": "5-6",
+      "exam": "elementary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "05f3017d-906e-4989-8ed9-82aba4b809b8"
+    }
+  ],
+  "skipped_samples": []
+}

@@ -58,6 +58,7 @@ INSERT INTO subject_areas (exam_type_id, slug, name, weight_percent, sort_order)
   ('b0000001-0001-4000-8000-000000000002', 'general-info', 'General Information', 20, 4),
   ('b0000001-0001-4000-8000-000000000003', 'gen-ed', 'General Education', 40, 1),
   ('b0000001-0001-4000-8000-000000000003', 'prof-ed', 'Professional Education', 60, 2),
+  ('b0000001-0001-4000-8000-000000000003', 'major', 'Area of Specialization', 0, 3),
   ('b0000001-0001-4000-8000-000000000004', 'gen-ed', 'General Education', 20, 1),
   ('b0000001-0001-4000-8000-000000000004', 'prof-ed', 'Professional Education', 40, 2),
   ('b0000001-0001-4000-8000-000000000004', 'major', 'Area of Specialization', 40, 3),
@@ -67,6 +68,18 @@ INSERT INTO subject_areas (exam_type_id, slug, name, weight_percent, sort_order)
   ('b0000001-0001-4000-8000-000000000005', 'np4-alterations-b', 'Nursing Practice IV — Alterations B', 21, 4),
   ('b0000001-0001-4000-8000-000000000005', 'np5-alterations-c', 'Nursing Practice V — Alterations C', 22, 5)
 ON CONFLICT (exam_type_id, slug) DO NOTHING;
+
+-- LET Elementary specialization topics
+INSERT INTO topics (subject_area_id, slug, name, sort_order)
+SELECT sa.id, t.slug, t.name, t.ord
+FROM subject_areas sa
+JOIN exam_types et ON et.id = sa.exam_type_id AND et.slug = 'let-elementary' AND sa.slug = 'major'
+CROSS JOIN (VALUES
+  ('early-childhood-education', 'Early Childhood Education', 1)
+) AS t(slug, name, ord)
+ON CONFLICT (subject_area_id, slug) DO UPDATE SET
+  name = EXCLUDED.name,
+  sort_order = EXCLUDED.sort_order;
 
 -- Sample topics (CSE Pro verbal)
 INSERT INTO topics (subject_area_id, slug, name, sort_order)

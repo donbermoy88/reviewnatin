@@ -168,6 +168,7 @@ function majorLabel(slug) {
   if (slug === 'biological-science') return 'Biological Science';
   if (slug === 'physical-science') return 'Physical Science';
   if (slug === 'values-education') return 'Values Education';
+  if (slug === 'early-childhood-education') return 'Early Childhood Education';
   if (slug === 'mapeh') return 'MAPEH';
   if (slug === 'tle') return 'Technology and Livelihood Education (TLE)';
   return slug.split('-').map((part) => part[0]?.toUpperCase() + part.slice(1)).join(' ');
@@ -228,6 +229,7 @@ function secondaryMajorTopic(row) {
 
 function mappedTopic(row, examKind) {
   const subject = row['Subject Area'] ?? '';
+  if (subject === 'Early Childhood Education') return ['major', 'early-childhood-education', null];
   if (subject === 'General Education') return generalEducationTopic(row);
   if (['Professional Education', 'Child and Adolescent Development', 'Facilitating Learning', 'Curriculum Development', 'Assessment of Learning', 'Educational Technology'].includes(subject)) {
     return professionalEducationTopic(row);
@@ -367,7 +369,7 @@ for (const candidate of candidates) {
   const keyStem = candidateContentKey(candidate);
   const map = existingByTopic.get(candidate.topicId) ?? new Map();
   const existing = map.get(keyStem);
-  const isSecondaryMajor = candidate.examKind === 'secondary' && candidate.subjectSlug === 'major';
+  const isSpecialization = candidate.subjectSlug === 'major';
   const subTagSlug = candidate.subTag ? slugify(candidate.subTag) : null;
   if (existing) {
     duplicates.push({
@@ -410,20 +412,22 @@ for (const candidate of candidates) {
       candidate.examKind === 'elementary' ? 'let-elementary' : 'let-secondary',
       sourceSlug(sourceFile),
       candidate.row['Subject Area']?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
-      isSecondaryMajor ? `major:${candidate.topicSlug}` : '',
+      isSpecialization ? `major:${candidate.topicSlug}` : '',
       subTagSlug ? `subtag:${subTagSlug}` : '',
     ].filter(Boolean),
     needs_review: false,
     review_reason: null,
-    ...(isSecondaryMajor
+    ...(isSpecialization
       ? {
           major: majorLabel(candidate.topicSlug),
           major_slug: candidate.topicSlug,
           sub_tag: candidate.subTag ?? null,
           sub_tag_slug: subTagSlug,
-          exam_level: 'LET Secondary',
+          exam_level: candidate.examKind === 'elementary' ? 'LET Elementary' : 'LET Secondary',
           exam_area: 'Area of Specialization',
-          taxonomy_version: 'LET_SECONDARY_MAJOR_TAXONOMY_2026',
+          taxonomy_version: candidate.examKind === 'elementary'
+            ? 'LET_ELEMENTARY_SPECIALIZATION_TAXONOMY_2026'
+            : 'LET_SECONDARY_MAJOR_TAXONOMY_2026',
         }
       : {}),
   });

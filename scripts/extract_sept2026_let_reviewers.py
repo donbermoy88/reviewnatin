@@ -66,7 +66,7 @@ VISUAL_CUE_RE = re.compile(
 
 OPTION_RE = re.compile(r"(?<![A-Za-z0-9])(?:\(([A-Ea-e])\)|([A-Ea-e])[\.\)]\s+)")
 QUESTION_MARKER_RE = re.compile(
-    r"(?<!\d)(?:^|\n|\s)(?:Question\s+|Item\s+|No\.\s*)?(\d{1,4})[\.\)]\s+",
+    r"(?m)^\s*(?:Question\s+|Item\s+|No\.\s*)?(\d{1,4})[\.\)]\s*",
     re.I,
 )
 INLINE_ANSWER_RE = re.compile(
@@ -94,6 +94,7 @@ SUBJECT_TOPICS = [
     ("Curriculum Models", [r"\bcurriculum\b", r"\bk-12\b", r"\btyler\b", r"\bubd\b", r"\bspiral\b"]),
     ("Teaching Strategies", [r"\bteaching strategy\b", r"\binstruction\b", r"\blesson\b", r"\bmethod\b", r"\bdiscussion\b"]),
     ("Classroom Management", [r"\bclassroom management\b", r"\bdiscipline\b", r"\bmisbehavior\b", r"\broutine\b"]),
+    ("Early Childhood Education", [r"\bearly childhood\b", r"\bpreschool\b", r"\bkindergarten\b", r"\bplay-based\b"]),
     ("Child Development", [r"\bchild\b", r"\badolescent\b", r"\bdevelopment\b", r"\bgrowth\b", r"\bpuberty\b"]),
     ("Ethics", [r"\bethics\b", r"\bcode of ethics\b", r"\bmoral\b", r"\bvalues\b", r"\bprofessional oath\b"]),
     ("ICT in Education", [r"\bcomputer\b", r"\bict\b", r"\binternet\b", r"\bsoftware\b", r"\bhardware\b", r"\beducational technology\b"]),
@@ -245,7 +246,7 @@ def parse_answer_key(text):
     if not key_text:
         return answers, "", -1
 
-    for qnum, letter in re.findall(r"(?<!\d)(\d{1,4})\s*[\.\)\-:]?\s*([A-Ea-e])(?:\b|[\s,;\|])", key_text):
+    for qnum, letter in re.findall(r"(?<!\d)(\d{1,4})\s*[\.\)\-:–—]?\s*([A-Ea-e])(?:\b|[\s,;\|])", key_text):
         answers[int(qnum)] = letter.upper()
     return answers, "Correct answer sourced from detected answer key section.", key_idx
 
@@ -295,6 +296,8 @@ def infer_subject_area(path, question_text):
         if re.search(r"\bfl\b|facilitating learning", filename) or "facilitatinglearning" in compact_filename:
             return "Facilitating Learning"
         return "Professional Education"
+    if re.search(r"early childhood|\bece\b|preschool|kindergarten", path_text) or "earlychildhood" in compact_text:
+        return "Early Childhood Education"
     ordered = [
         ("Child and Adolescent Development", [r"caad", r"child and adolescent"]),
         ("Facilitating Learning", [r"facilitating learning", r"\bfl\b"]),
@@ -316,7 +319,8 @@ def infer_subject_area(path, question_text):
         ("Technology and Livelihood Education", [r"tled", r"\btle\b", r"technology-vocational", r"home economics", r"industrial arts"]),
         ("Agriculture and Fishery Arts", [r"agriculture", r"fishery"]),
         ("Information and Communication Technology", [r"\bict\b", r"information and communication"]),
-        ("Elementary / Cannot Determine", [r"early childhood", r"special needs"]),
+        ("Early Childhood Education", [r"early childhood", r"\bece\b", r"preschool", r"kindergarten"]),
+        ("Elementary / Cannot Determine", [r"special needs"]),
         ("General Education", [r"gened", r"gen ed", r"general education"]),
         ("Professional Education", [r"profed", r"prof ed", r"professional education", r"teaching profession"]),
     ]
@@ -336,6 +340,8 @@ def infer_subject_area(path, question_text):
 
 
 def infer_topic(subject, question_text):
+    if subject == "Early Childhood Education":
+        return "Early Childhood Education"
     text = f"{subject} {question_text}".lower()
     for topic, patterns in SUBJECT_TOPICS:
         if any(re.search(pattern, text) for pattern in patterns):

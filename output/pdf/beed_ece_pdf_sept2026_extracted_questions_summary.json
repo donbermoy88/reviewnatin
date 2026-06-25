@@ -1,0 +1,179 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-",
+  "generated_at": "2026-06-23",
+  "total_pdfs_seen": 10,
+  "total_pdfs_processed": 10,
+  "total_questions_found": 425,
+  "total_ready_for_upload": 420,
+  "total_needing_review": 3,
+  "total_without_answer_key": 0,
+  "total_duplicates_detected": 2,
+  "total_questions_with_images": 3,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 425,
+  "total_secondary_questions": 0,
+  "total_both_or_cannot_determine_questions": 0,
+  "status_counts": {
+    "Ready for Upload": 420,
+    "Duplicate": 2,
+    "Needs Image Extraction": 3
+  },
+  "exam_type_counts": {
+    "LET Elementary": 425
+  },
+  "subject_category_breakdown": {
+    "Early Childhood Education": 425
+  },
+  "difficulty_breakdown": {
+    "Cannot Determine": 425
+  },
+  "source_counts_top_50": {
+    "Set1 Early Childhood Ed.pdf": 50,
+    "Set10 Early Childhood Ed.pdf": 50,
+    "Set3 Early Childhood Ed.pdf": 50,
+    "Set5Early Childhood Ed.pdf": 50,
+    "Set6Early Childhood Ed.pdf": 50,
+    "Set8Early Childhood Ed.pdf": 50,
+    "Set9 Early Childhood Ed.pdf": 50,
+    "Set2 Early Childhood Ed.pdf": 25,
+    "Set4 Early Childhood Ed.pdf": 25,
+    "Set7 Early Childhood Ed.pdf": 25
+  },
+  "batches": [],
+  "sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set1 Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 50,
+      "pages": 6,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set10 Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 50,
+      "pages": 7,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set2 Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 25,
+      "pages": 4,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set3 Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 50,
+      "pages": 6,
+      "images_by_page": {
+        "1": 11,
+        "2": 11,
+        "3": 11,
+        "4": 12,
+        "5": 5
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set4 Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 25,
+      "pages": 4,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set5Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 50,
+      "pages": 7,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set6Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 50,
+      "pages": 8,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set7 Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 25,
+      "pages": 4,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set8Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 50,
+      "pages": 6,
+      "images_by_page": {
+        "1": 10,
+        "2": 11,
+        "3": 12,
+        "4": 11,
+        "5": 6
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/I. BEED- Early Childhood Education-/Set9 Early Childhood Ed.pdf",
+      "status": "processed",
+      "rows": 50,
+      "pages": 6,
+      "images_by_page": {}
+    }
+  ],
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/beed_ece_pdf_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/beed_ece_pdf_sept2026_extracted_questions.json",
+    "md": "/Users/lyndon/reviewnatin/output/pdf/beed_ece_pdf_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/beed_ece_pdf_sept2026_extracted_questions_summary.json"
+  },
+  "folder_reaudit": {
+    "file_counts": {
+      ".jpg": 12,
+      ".pdf": 10
+    },
+    "pdfs_total": 10,
+    "pdfs_with_existing_rows_before_ocr": 10,
+    "pdfs_ocr_attempted": 0,
+    "ocr_rows_appended": 0,
+    "ocr_ready_for_upload": 0,
+    "ocr_needs_answer": 0,
+    "ocr_needs_review_or_incomplete": 0,
+    "ocr_duplicates": 0,
+    "ocr_sources": [],
+    "non_pdf_files_not_imported": 12
+  },
+  "suggested_supabase_table_mapping": {
+    "exam_type": "LET Exam Type",
+    "exam_level": "LET Exam Type",
+    "subject_area": "Subject Area",
+    "topic": "Topic",
+    "question_text": "Question",
+    "passage_text": "Passage Reference (resolve/review manually when populated)",
+    "question_image_url": "Question Image Reference",
+    "choice_a_text": "Choice A",
+    "choice_a_image_url": "Choice A Image Reference",
+    "choice_b_text": "Choice B",
+    "choice_b_image_url": "Choice B Image Reference",
+    "choice_c_text": "Choice C",
+    "choice_c_image_url": "Choice C Image Reference",
+    "choice_d_text": "Choice D",
+    "choice_d_image_url": "Choice D Image Reference",
+    "choice_e_text": "Choice E",
+    "choice_e_image_url": "Choice E Image Reference",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action_before_uploading": "Upload only Ready for Upload rows. Non-PDF reviewer files remain outside the original PDF extraction scope and should be parsed by a separate DOC/DOCX/PPT extraction pass before import."
+}
