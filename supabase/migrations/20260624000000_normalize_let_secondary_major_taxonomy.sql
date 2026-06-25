@@ -3,6 +3,30 @@
 -- Rollback: restore question topic_id/status/content columns from public.let_secondary_major_taxonomy_2026_backup, then restore topic slugs/names from the same backup snapshots if needed.
 BEGIN;
 
+-- Capture the pre-migration LET Secondary "major" totals as the guardrail
+-- baseline instead of a hardcoded literal. This migration was authored when
+-- the total was 3375, but unrelated content-import migrations (applied
+-- separately, after this file was written but before it was pushed) have
+-- since grown that count — a hardcoded check would false-positive on that
+-- legitimate growth. The guardrail's actual intent (this migration must not
+-- itself change membership of the "major" subject area) is preserved by
+-- comparing against a live "before" snapshot taken in this same transaction.
+DO $$
+DECLARE
+  v_total_before int;
+  v_published_before int;
+BEGIN
+  SELECT count(*), count(*) FILTER (WHERE q.status = 'published')
+    INTO v_total_before, v_published_before
+  FROM public.questions q
+  JOIN public.topics t ON t.id = q.topic_id
+  JOIN public.subject_areas sa ON sa.id = t.subject_area_id
+  JOIN public.exam_types et ON et.id = sa.exam_type_id
+  WHERE et.slug = 'let-secondary' AND sa.slug = 'major';
+  PERFORM set_config('app.let_secondary_major_total_before', v_total_before::text, true);
+  PERFORM set_config('app.let_secondary_major_published_before', v_published_before::text, true);
+END $$;
+
 ALTER TABLE public.questions ADD COLUMN IF NOT EXISTS major text;
 ALTER TABLE public.questions ADD COLUMN IF NOT EXISTS major_slug text;
 ALTER TABLE public.questions ADD COLUMN IF NOT EXISTS sub_tag text;
@@ -475,8 +499,12 @@ BEGIN
   JOIN public.subject_areas sa ON sa.id = t.subject_area_id
   JOIN public.exam_types et ON et.id = sa.exam_type_id
   WHERE et.slug = 'let-secondary' AND sa.slug = 'major';
-  IF v_total <> 3375 THEN RAISE EXCEPTION 'LET Secondary major total changed: %', v_total; END IF;
-  IF v_published <> 3375 THEN RAISE EXCEPTION 'LET Secondary major published count changed: %', v_published; END IF;
+  IF v_total <> current_setting('app.let_secondary_major_total_before')::int THEN
+    RAISE EXCEPTION 'LET Secondary major total changed: % (was %)', v_total, current_setting('app.let_secondary_major_total_before');
+  END IF;
+  IF v_published <> current_setting('app.let_secondary_major_published_before')::int THEN
+    RAISE EXCEPTION 'LET Secondary major published count changed: % (was %)', v_published, current_setting('app.let_secondary_major_published_before');
+  END IF;
   SELECT count(*) INTO v_deleted FROM public.let_secondary_major_taxonomy_2026_backup b LEFT JOIN public.questions q ON q.id = b.question_id WHERE q.id IS NULL;
   IF v_deleted <> 0 THEN RAISE EXCEPTION 'Question IDs missing after migration: %', v_deleted; END IF;
 END $$;
