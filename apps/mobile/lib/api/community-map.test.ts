@@ -13,7 +13,9 @@ describe('mapPost', () => {
     comment_count: 1,
     created_at: '2026-06-25T00:00:00Z',
     liked_by_me: true,
+    saved_by_me: true,
     is_own: false,
+    moderation_status: 'visible',
   };
 
   it('maps a full row correctly', () => {
@@ -29,15 +31,23 @@ describe('mapPost', () => {
       commentCount: 1,
       createdAt: '2026-06-25T00:00:00Z',
       likedByMe: true,
+      savedByMe: true,
       isOwn: false,
       examSlug: 'cse-professional',
       examName: 'CSE Professional',
+      moderationStatus: 'visible',
     });
   });
 
-  it('coerces missing liked_by_me/is_own to false rather than undefined', () => {
-    const post = mapPost({ ...baseRow, liked_by_me: undefined, is_own: undefined });
+  it('defaults moderationStatus to visible when the row has none', () => {
+    const post = mapPost({ ...baseRow, moderation_status: undefined });
+    expect(post.moderationStatus).toBe('visible');
+  });
+
+  it('coerces missing liked_by_me/saved_by_me/is_own to false rather than undefined', () => {
+    const post = mapPost({ ...baseRow, liked_by_me: undefined, saved_by_me: undefined, is_own: undefined });
     expect(post.likedByMe).toBe(false);
+    expect(post.savedByMe).toBe(false);
     expect(post.isOwn).toBe(false);
   });
 
@@ -72,6 +82,7 @@ describe('mapComment', () => {
       author_avatar_url: 'https://example.com/a.png',
       body: 'Nice post!',
       created_at: '2026-06-25T01:00:00Z',
+      moderation_status: 'under_review',
     });
     expect(comment).toEqual({
       id: 'comment-1',
@@ -80,31 +91,53 @@ describe('mapComment', () => {
       authorAvatarUrl: 'https://example.com/a.png',
       body: 'Nice post!',
       createdAt: '2026-06-25T01:00:00Z',
+      moderationStatus: 'under_review',
     });
+  });
+
+  it('defaults moderationStatus to visible when the row has none', () => {
+    const comment = mapComment({
+      id: 'comment-2',
+      author_id: 'user-3',
+      author_display_name: 'Pedro',
+      author_avatar_url: null,
+      body: 'Hi',
+      created_at: '2026-06-25T01:00:00Z',
+    });
+    expect(comment.moderationStatus).toBe('visible');
   });
 });
 
 describe('mapCursor', () => {
   it('returns null for null/undefined input', () => {
-    expect(mapCursor(null)).toBeNull();
-    expect(mapCursor(undefined)).toBeNull();
+    expect(mapCursor(null, null)).toBeNull();
+    expect(mapCursor(undefined, null)).toBeNull();
   });
 
   it('returns null for a non-object input', () => {
-    expect(mapCursor('not-an-object')).toBeNull();
-    expect(mapCursor(42)).toBeNull();
+    expect(mapCursor('not-an-object', null)).toBeNull();
+    expect(mapCursor(42, null)).toBeNull();
   });
 
   it('returns null when created_at or id is missing (end of pagination)', () => {
-    expect(mapCursor({})).toBeNull();
-    expect(mapCursor({ created_at: '2026-06-25T00:00:00Z' })).toBeNull();
-    expect(mapCursor({ id: 'abc' })).toBeNull();
+    expect(mapCursor({}, null)).toBeNull();
+    expect(mapCursor({ created_at: '2026-06-25T00:00:00Z' }, null)).toBeNull();
+    expect(mapCursor({ id: 'abc' }, null)).toBeNull();
   });
 
-  it('maps a valid cursor object', () => {
-    expect(mapCursor({ created_at: '2026-06-25T00:00:00Z', id: 'post-9' })).toEqual({
+  it('maps a valid keyset cursor object', () => {
+    expect(mapCursor({ created_at: '2026-06-25T00:00:00Z', id: 'post-9' }, null)).toEqual({
+      kind: 'keyset',
       createdAt: '2026-06-25T00:00:00Z',
       id: 'post-9',
+    });
+  });
+
+  it('maps an offset cursor, taking precedence over next_cursor when both are present', () => {
+    expect(mapCursor(null, 20)).toEqual({ kind: 'offset', offset: 20 });
+    expect(mapCursor({ created_at: '2026-06-25T00:00:00Z', id: 'post-9' }, 20)).toEqual({
+      kind: 'offset',
+      offset: 20,
     });
   });
 });

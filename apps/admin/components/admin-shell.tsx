@@ -52,6 +52,10 @@ const navGroups = [
       { href: '/content/waitlist', label: 'Waitlist', detail: 'Beta signups' },
     ],
   },
+  {
+    label: 'Moderation',
+    items: [{ href: '/content/community', label: 'Community Reports', detail: 'Posts, comments, users' }],
+  },
 ];
 
 const mobileNavItems = navGroups.flatMap((group) => group.items);

@@ -78,6 +78,8 @@ function ThemedStack() {
         <Stack.Screen name="mock-review/[sessionId]" options={{ headerShown: false }} />
         <Stack.Screen name="community/[postId]" options={{ headerShown: false }} />
         <Stack.Screen name="community/profile/[userId]" options={{ headerShown: false }} />
+        <Stack.Screen name="community/guidelines/index" options={{ headerShown: false }} />
+        <Stack.Screen name="community/safety/index" options={{ headerShown: false }} />
       </Stack>
     </>
   );

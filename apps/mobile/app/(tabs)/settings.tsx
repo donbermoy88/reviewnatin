@@ -717,6 +717,27 @@ function SettingsScreenContent() {
             )}
           </SettingsGroup>
 
+          <Text style={styles.sectionLbl}>Community</Text>
+          <SettingsGroup styles={styles}>
+            <SettingsRow
+              styles={styles}
+              colors={colors}
+              icon={<Ionicons name="people-circle-outline" size={18} color={colors.primary} />}
+              label="Community Guidelines"
+              onPress={() => router.push('/community/guidelines')}
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+            />
+            <SettingsRow
+              styles={styles}
+              colors={colors}
+              icon={<Ionicons name="shield-outline" size={18} color={colors.primary} />}
+              label="Blocked Users"
+              onPress={() => router.push('/community/safety')}
+              right={<Ionicons name="chevron-forward" size={16} color={colors.textLight} />}
+              last
+            />
+          </SettingsGroup>
+
           <Text style={styles.sectionLbl}>Legal</Text>
           <SettingsGroup styles={styles}>
             <SettingsRow

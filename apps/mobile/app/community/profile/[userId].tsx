@@ -1,8 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Avatar } from '../../../components/community/avatar';
+import { BlockUserConfirmModal } from '../../../components/community/block-user-confirm-modal';
+import { ReportContentModal } from '../../../components/community/report-content-modal';
 import { ErrorState } from '../../../components/error-state';
 import { PrimaryButton } from '../../../components/primary-button';
 import { useAppTheme } from '../../../hooks/use-app-theme';
@@ -18,25 +21,6 @@ import { stackScrollPadding } from '../../../lib/layout/content-padding';
 import { formatRelativeTimeAgo } from '../../../lib/format/relative-time';
 import { useAuth } from '../../../providers/auth-provider';
 
-function Avatar({ url, name, size = 72 }: { url: string | null; name: string; size?: number }) {
-  const { colors, fonts } = useAppTheme();
-  if (url) {
-    return <Image source={{ uri: url }} style={{ width: size, height: size, borderRadius: size / 2 }} />;
-  }
-  return (
-    <View
-      style={{
-        width: size, height: size, borderRadius: size / 2,
-        backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center',
-      }}
-    >
-      <Text style={{ fontFamily: fonts.displayBold, fontSize: size * 0.36, color: '#fff' }}>
-        {name[0]?.toUpperCase() ?? '?'}
-      </Text>
-    </View>
-  );
-}
-
 export default function CommunityProfileScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -49,6 +33,8 @@ export default function CommunityProfileScreen() {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [followBusy, setFollowBusy] = useState(false);
+  const [reportVisible, setReportVisible] = useState(false);
+  const [blockVisible, setBlockVisible] = useState(false);
 
   const load = useCallback(async () => {
     if (!userId) {
@@ -104,6 +90,15 @@ export default function CommunityProfileScreen() {
     }
   };
 
+  const onOverflow = () => {
+    if (!profile) return;
+    Alert.alert('Profile options', undefined, [
+      { text: 'Report user', onPress: () => setReportVisible(true) },
+      { text: `Block ${profile.displayName}`, style: 'destructive', onPress: () => setBlockVisible(true) },
+      { text: 'Cancel', style: 'cancel' },
+    ]);
+  };
+
   if (loading) {
     return (
       <View style={{ flex: 1, backgroundColor: colors.background, alignItems: 'center', justifyContent: 'center' }}>
@@ -122,18 +117,19 @@ export default function CommunityProfileScreen() {
 
   const Header = (
     <View style={{ paddingHorizontal: spacing.md, paddingTop: insets.top + spacing.sm }}>
-      <Pressable
-        onPress={() => router.back()}
-        hitSlop={8}
-        accessibilityRole="button"
-        accessibilityLabel="Go back"
-        style={{ marginBottom: spacing.md }}
-      >
-        <Ionicons name="chevron-back" size={22} color={colors.text} />
-      </Pressable>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.md }}>
+        <Pressable onPress={() => router.back()} hitSlop={8} accessibilityRole="button" accessibilityLabel="Go back">
+          <Ionicons name="chevron-back" size={22} color={colors.text} />
+        </Pressable>
+        {!profile.isSelf ? (
+          <Pressable onPress={onOverflow} hitSlop={8} accessibilityLabel="Profile options">
+            <Ionicons name="ellipsis-horizontal" size={22} color={colors.textLight} />
+          </Pressable>
+        ) : null}
+      </View>
 
       <View style={{ alignItems: 'center', gap: spacing.sm, marginBottom: spacing.lg }}>
-        <Avatar url={profile.avatarUrl} name={profile.displayName} />
+        <Avatar url={profile.avatarUrl} name={profile.displayName} size={72} />
         <Text style={{ fontFamily: fonts.displayBold, fontSize: 20, color: colors.text }}>
           {profile.displayName}
         </Text>
@@ -172,6 +168,7 @@ export default function CommunityProfileScreen() {
   );
 
   return (
+    <>
     <FlatList
       data={posts}
       keyExtractor={(p) => p.id}
@@ -222,5 +219,23 @@ export default function CommunityProfileScreen() {
         </Pressable>
       )}
     />
+    {profile ? (
+      <>
+        <ReportContentModal
+          visible={reportVisible}
+          targetType="user"
+          targetId={profile.userId}
+          onClose={() => setReportVisible(false)}
+        />
+        <BlockUserConfirmModal
+          visible={blockVisible}
+          userId={profile.userId}
+          displayName={profile.displayName}
+          onClose={() => setBlockVisible(false)}
+          onBlocked={() => router.back()}
+        />
+      </>
+    ) : null}
+    </>
   );
 }
