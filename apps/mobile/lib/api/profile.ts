@@ -4,6 +4,7 @@ import { isSupabaseConfigured, supabase } from '../supabase';
 export type UserProfile = {
   displayName: string | null;
   email: string | null;
+  avatarUrl: string | null;
 };
 
 export function fallbackDisplayName(user: User | null | undefined, guestLabel = 'Guest'): string {
@@ -15,17 +16,17 @@ export function fallbackDisplayName(user: User | null | undefined, guestLabel = 
 
 export async function fetchUserProfile(userId: string): Promise<UserProfile> {
   if (!isSupabaseConfigured) {
-    return { displayName: null, email: null };
+    return { displayName: null, email: null, avatarUrl: null };
   }
 
   const { data, error } = await supabase
     .from('users')
-    .select('display_name, email')
+    .select('display_name, email, avatar_url')
     .eq('id', userId)
     .single();
 
   if (error) throw error;
-  return { displayName: data.display_name, email: data.email };
+  return { displayName: data.display_name, email: data.email, avatarUrl: data.avatar_url };
 }
 
 export async function updateUserDisplayName(

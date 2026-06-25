@@ -106,6 +106,11 @@ export default function TabsLayout() {
         />
       ))}
       <Tabs.Screen name="settings" options={{ href: null, headerShown: false }} />
+      {/* Community feature is built and device-verified (guest read-only state,
+          composer login-gate, feed/post/comment/like/follow flows) but not yet
+          surfaced as a primary tab — Phase 4 (nav restructure) promotes this and
+          demotes study/leaderboard. */}
+      <Tabs.Screen name="community" options={{ href: null, headerShown: false }} />
     </Tabs>
   );
 }

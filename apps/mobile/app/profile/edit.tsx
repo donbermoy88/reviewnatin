@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
+  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -15,6 +16,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { useUserProfile } from '../../hooks/use-user-profile';
+import { pickAndUploadAvatar } from '../../lib/api/avatar';
 import { fallbackDisplayName } from '../../lib/api/profile';
 import { createSettingsStyles } from '../../lib/themed-styles';
 import { useAuth } from '../../providers/auth-provider';
@@ -26,10 +28,11 @@ export default function EditProfileScreen() {
   const { colors, spacing, fonts, radii } = theme;
   const styles = useMemo(() => createSettingsStyles(theme), [theme]);
   const { user, updateDisplayName, isConfigured } = useAuth();
-  const { displayName, refresh, loading: profileLoading } = useUserProfile('Guest');
+  const { displayName, avatarUrl, refresh, loading: profileLoading } = useUserProfile('Guest');
   const [name, setName] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const didSync = useRef(false);
 
   useEffect(() => {
@@ -44,6 +47,20 @@ export default function EditProfileScreen() {
   }, [user, displayName, profileLoading, router]);
 
   const initials = (name.trim() || displayName).slice(0, 2).toUpperCase();
+
+  const changeAvatar = async () => {
+    if (!user || uploadingAvatar) return;
+    setError(null);
+    setUploadingAvatar(true);
+    const result = await pickAndUploadAvatar(user.id);
+    setUploadingAvatar(false);
+
+    if (!result.ok) {
+      if (result.error !== 'cancelled') setError(result.error);
+      return;
+    }
+    await refresh();
+  };
 
   const save = async () => {
     setError(null);
@@ -88,9 +105,42 @@ export default function EditProfileScreen() {
 
         <View style={styles.body}>
           <View style={[styles.userCard, { justifyContent: 'center' }]}>
-            <View style={styles.userAvatar}>
-              <Text style={styles.userInitial}>{initials}</Text>
-            </View>
+            <Pressable
+              onPress={changeAvatar}
+              disabled={uploadingAvatar}
+              accessibilityRole="button"
+              accessibilityLabel="Change profile photo"
+              style={{ position: 'relative' }}
+            >
+              {avatarUrl ? (
+                <Image source={{ uri: avatarUrl }} style={styles.userAvatar} />
+              ) : (
+                <View style={styles.userAvatar}>
+                  <Text style={styles.userInitial}>{initials}</Text>
+                </View>
+              )}
+              <View
+                style={{
+                  position: 'absolute',
+                  bottom: -2,
+                  right: -2,
+                  width: 22,
+                  height: 22,
+                  borderRadius: 11,
+                  backgroundColor: colors.primary,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderWidth: 2,
+                  borderColor: colors.surface,
+                }}
+              >
+                {uploadingAvatar ? (
+                  <ActivityIndicator size="small" color="#fff" />
+                ) : (
+                  <Ionicons name="camera" size={12} color="#fff" />
+                )}
+              </View>
+            </Pressable>
             <View style={{ flex: 1 }}>
               <Text style={styles.userName}>{name.trim() || displayName}</Text>
               <Text style={styles.userEmail}>{user.email}</Text>

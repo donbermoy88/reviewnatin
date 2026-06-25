@@ -76,6 +76,8 @@ function ThemedStack() {
         <Stack.Screen name="practice/quiz" options={{ headerShown: false }} />
         <Stack.Screen name="practice/result" options={{ headerShown: false, headerBackVisible: false }} />
         <Stack.Screen name="mock-review/[sessionId]" options={{ headerShown: false }} />
+        <Stack.Screen name="community/[postId]" options={{ headerShown: false }} />
+        <Stack.Screen name="community/profile/[userId]" options={{ headerShown: false }} />
       </Stack>
     </>
   );

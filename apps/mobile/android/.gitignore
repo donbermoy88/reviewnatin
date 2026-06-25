@@ -1,3 +1,8 @@
+# Release signing (never commit the real upload keystore or its credentials)
+keystore.properties
+*.jks
+release.keystore
+
 # OSX
 #
 .DS_Store
