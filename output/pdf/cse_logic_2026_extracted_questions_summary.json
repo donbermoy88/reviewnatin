@@ -1,0 +1,628 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Civil Service Exam/Civil Service Exam Reviewer 2026/LOGIC 2026",
+  "generated_at": "2026-06-25",
+  "total_questions_found": 528,
+  "total_ready_for_upload": 334,
+  "total_needing_review": 194,
+  "total_without_answer_key": 118,
+  "status_counts": {
+    "Ready for Upload": 334,
+    "Needs Review": 76,
+    "Needs Answer": 118
+  },
+  "ready_topic_counts": {
+    "number-series": 70,
+    "series-completion": 11,
+    "logic": 214,
+    "word-association": 39
+  },
+  "rejected_samples": [
+    {
+      "original_no": 20,
+      "page": 13,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 34,
+      "page": 15,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 38,
+      "page": 15,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 39,
+      "page": 15,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 44,
+      "page": 16,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 69,
+      "page": 18,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 87,
+      "page": 20,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 88,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 89,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 90,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 91,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 92,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 93,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 94,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 95,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 96,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 97,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 98,
+      "page": 21,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 99,
+      "page": 22,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 100,
+      "page": 22,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 101,
+      "page": 22,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 137,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 138,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 139,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 140,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 141,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 142,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 143,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 144,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 145,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 146,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 147,
+      "page": 27,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 148,
+      "page": 28,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 149,
+      "page": 28,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 150,
+      "page": 28,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 151,
+      "page": 28,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 152,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 153,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 154,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 155,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 156,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 157,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 158,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 159,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 160,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 161,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 162,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 163,
+      "page": 29,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 164,
+      "page": 30,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 165,
+      "page": 30,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 166,
+      "page": 30,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 167,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 168,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 169,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 170,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 171,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 172,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 173,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 174,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 175,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 176,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 177,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 178,
+      "page": 31,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 179,
+      "page": 32,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 180,
+      "page": 32,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 181,
+      "page": 32,
+      "status": "Needs Review",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item."
+    },
+    {
+      "original_no": 202,
+      "page": 35,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 203,
+      "page": 35,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 204,
+      "page": 35,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 205,
+      "page": 36,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 206,
+      "page": 36,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 207,
+      "page": 36,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 208,
+      "page": 36,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 209,
+      "page": 37,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 210,
+      "page": 37,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 211,
+      "page": 37,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 212,
+      "page": 37,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 213,
+      "page": 38,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 214,
+      "page": 38,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 215,
+      "page": 38,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 216,
+      "page": 38,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 217,
+      "page": 39,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 218,
+      "page": 39,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 219,
+      "page": 39,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 220,
+      "page": 39,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 221,
+      "page": 40,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 222,
+      "page": 41,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 223,
+      "page": 41,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 224,
+      "page": 41,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 225,
+      "page": 42,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 226,
+      "page": 42,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 227,
+      "page": 42,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 228,
+      "page": 42,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 229,
+      "page": 43,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 230,
+      "page": 43,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 231,
+      "page": 43,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 232,
+      "page": 43,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 233,
+      "page": 44,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 234,
+      "page": 44,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    },
+    {
+      "original_no": 235,
+      "page": 44,
+      "status": "Needs Answer",
+      "notes": "Logic 2026. Visual, symbolic, or malformed text item. Answer key was missing or did not match parsed choices."
+    }
+  ],
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/cse_logic_2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/cse_logic_2026_extracted_questions.json",
+    "md": "/Users/lyndon/reviewnatin/output/pdf/cse_logic_2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/cse_logic_2026_extracted_questions_summary.json"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows only. Visual/symbolic items need separate image extraction."
+}
