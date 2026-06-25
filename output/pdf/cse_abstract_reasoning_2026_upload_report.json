@@ -1,0 +1,29 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/cse_abstract_reasoning_2026_extracted_questions.json",
+  "extracted_rows": 115,
+  "ready_rows": 115,
+  "skipped_non_ready": 0,
+  "invalid_ready_rows": 0,
+  "existing_abstract_questions_before": 205,
+  "insertable": 230,
+  "updatable_by_source_key": 0,
+  "duplicate_existing_content": 0,
+  "inserted": 230,
+  "updated": 0,
+  "images_uploaded": 115,
+  "insertable_by_exam": {
+    "cse-professional": 115,
+    "cse-subprofessional": 115
+  },
+  "insertable_by_topic": {
+    "series-completion": 98,
+    "analogies": 40,
+    "odd-one-out": 72,
+    "pattern-completion": 20
+  },
+  "skipped_samples": [],
+  "invalid_samples": [],
+  "duplicate_samples": [],
+  "update_samples": []
+}

@@ -1,0 +1,72 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Civil Service Exam/Civil Service Exam Reviewer 2026/ABSTRACT REASONING 2026",
+  "generated_at": "2026-06-25",
+  "pdfs_seen": 6,
+  "total_questions_found": 115,
+  "total_ready_for_upload": 115,
+  "total_needing_review": 0,
+  "total_without_answer_key": 0,
+  "total_questions_with_images": 115,
+  "status_counts": {
+    "Ready for Upload": 115
+  },
+  "source_counts": {
+    "Abstract Reasoning 1.pdf": 25,
+    "Abstract Reasoning 2.pdf": 25,
+    "Abstract Reasoning 3.pdf": 25,
+    "Abstract Reasoning 4.pdf": 25,
+    "Abstract Reasoning 5.pdf": 15
+  },
+  "topic_counts": {
+    "series-completion": 49,
+    "analogies": 20,
+    "odd-one-out": 36,
+    "pattern-completion": 10
+  },
+  "sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Civil Service Exam/Civil Service Exam Reviewer 2026/ABSTRACT REASONING 2026/Abstract Reasoning - With Explanation.pdf",
+      "status": "needs_review",
+      "rows": 0,
+      "answers_detected": 0,
+      "notes": "Contains explained abstract reasoning visuals, but answer choices are not consistently letter-labeled. Detected possible item numbers: [5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Civil Service Exam/Civil Service Exam Reviewer 2026/ABSTRACT REASONING 2026/Abstract Reasoning 1.pdf",
+      "status": "processed",
+      "rows": 25,
+      "answers_detected": 25
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Civil Service Exam/Civil Service Exam Reviewer 2026/ABSTRACT REASONING 2026/Abstract Reasoning 2.pdf",
+      "status": "processed",
+      "rows": 25,
+      "answers_detected": 25
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Civil Service Exam/Civil Service Exam Reviewer 2026/ABSTRACT REASONING 2026/Abstract Reasoning 3.pdf",
+      "status": "processed",
+      "rows": 25,
+      "answers_detected": 25
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Civil Service Exam/Civil Service Exam Reviewer 2026/ABSTRACT REASONING 2026/Abstract Reasoning 4.pdf",
+      "status": "processed",
+      "rows": 25,
+      "answers_detected": 25
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Civil Service Exam/Civil Service Exam Reviewer 2026/ABSTRACT REASONING 2026/Abstract Reasoning 5.pdf",
+      "status": "processed",
+      "rows": 15,
+      "answers_detected": 15
+    }
+  ],
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/cse_abstract_reasoning_2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/cse_abstract_reasoning_2026_extracted_questions.json",
+    "md": "/Users/lyndon/reviewnatin/output/pdf/cse_abstract_reasoning_2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/cse_abstract_reasoning_2026_extracted_questions_summary.json"
+  },
+  "recommended_next_action": "Upload Ready for Upload rows only. Review the explanation-only PDF manually before import because choices are not consistently labeled."
+}
