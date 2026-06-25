@@ -1,0 +1,182 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-",
+  "generated_at": "2026-06-23",
+  "total_pdfs_seen": 5,
+  "total_pdfs_processed": 5,
+  "total_questions_found": 736,
+  "total_ready_for_upload": 128,
+  "total_needing_review": 317,
+  "total_without_answer_key": 282,
+  "total_duplicates_detected": 9,
+  "total_questions_with_images": 10,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 0,
+  "total_both_or_cannot_determine_questions": 736,
+  "status_counts": {
+    "Ready for Upload": 128,
+    "Incomplete": 90,
+    "Needs Review": 219,
+    "Duplicate": 9,
+    "Needs Answer": 282,
+    "Needs Image Extraction": 8
+  },
+  "exam_type_counts": {
+    "Both": 736
+  },
+  "subject_category_breakdown": {
+    "Professional Education": 321,
+    "General Education": 344,
+    "Social Studies": 1,
+    "English": 9,
+    "Assessment of Learning": 13,
+    "Elementary / Cannot Determine": 3,
+    "Filipino": 6,
+    "Music": 2,
+    "Child and Adolescent Development": 2,
+    "Curriculum Development": 25,
+    "Mathematics": 3,
+    "Values Education": 2,
+    "Science": 2,
+    "Technology and Livelihood Education": 1,
+    "Educational Technology": 1,
+    "Information and Communication Technology": 1
+  },
+  "difficulty_breakdown": {
+    "Cannot Determine": 736
+  },
+  "source_counts_top_50": {
+    "A. Comprehensive LET Reviewer pdfbooksforum.com.pdf": 321,
+    "A. 100_LET Reviewer 2025 with answer 125 problems.pdf": 199,
+    "A. TOPNOTCHER LET REVER PDFBOOKSFORUM.COM.pdf": 125,
+    "A. LET REVIEWER PROF ED 2025 90percent pdfbooksforum.com.pdf": 90,
+    "A. LET Exam Reviewer.pdf": 1
+  },
+  "batches": [],
+  "sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. 100_LET Reviewer 2025 with answer 125 problems.pdf",
+      "status": "processed",
+      "rows": 199,
+      "pages": 139,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. Comprehensive LET Reviewer pdfbooksforum.com.pdf",
+      "status": "processed",
+      "rows": 321,
+      "pages": 196,
+      "method": "ocr",
+      "answer_keys_detected": 156,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. LET Exam Reviewer.pdf",
+      "status": "processed",
+      "rows": 1,
+      "pages": 616,
+      "images_by_page": {
+        "1": 1,
+        "423": 1
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. LET REVIEWER PROF ED 2025 90percent pdfbooksforum.com.pdf",
+      "status": "processed",
+      "rows": 90,
+      "pages": 11,
+      "images_by_page": {
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3,
+        "5": 3,
+        "6": 3,
+        "7": 3,
+        "8": 3,
+        "9": 3,
+        "10": 3,
+        "11": 3
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. TOPNOTCHER LET REVER PDFBOOKSFORUM.COM.pdf",
+      "status": "processed",
+      "rows": 125,
+      "pages": 42,
+      "method": "ocr",
+      "answer_keys_detected": 93,
+      "previous_status": "no_questions_found"
+    }
+  ],
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/reviewer_books_pdf_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+    "md": "/Users/lyndon/reviewnatin/output/pdf/reviewer_books_pdf_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/reviewer_books_pdf_sept2026_extracted_questions_summary.json"
+  },
+  "folder_reaudit": {
+    "file_counts": {
+      ".pdf": 5
+    },
+    "pdfs_total": 5,
+    "pdfs_with_existing_rows_before_ocr": 3,
+    "pdfs_ocr_attempted": 2,
+    "ocr_rows_appended": 446,
+    "ocr_ready_for_upload": 0,
+    "ocr_needs_answer": 213,
+    "ocr_needs_review_or_incomplete": 233,
+    "ocr_duplicates": 0,
+    "ocr_sources": [
+      {
+        "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. Comprehensive LET Reviewer pdfbooksforum.com.pdf",
+        "status": "processed",
+        "rows": 321,
+        "pages": 196,
+        "method": "ocr",
+        "answer_keys_detected": 156,
+        "previous_status": "no_questions_found"
+      },
+      {
+        "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/C. BEED&BSED REVIEWER BOOKS-/A. TOPNOTCHER LET REVER PDFBOOKSFORUM.COM.pdf",
+        "status": "processed",
+        "rows": 125,
+        "pages": 42,
+        "method": "ocr",
+        "answer_keys_detected": 93,
+        "previous_status": "no_questions_found"
+      }
+    ],
+    "non_pdf_files_not_imported": 0
+  },
+  "suggested_supabase_table_mapping": {
+    "exam_type": "LET Exam Type",
+    "exam_level": "LET Exam Type",
+    "subject_area": "Subject Area",
+    "topic": "Topic",
+    "question_text": "Question",
+    "passage_text": "Passage Reference (resolve/review manually when populated)",
+    "question_image_url": "Question Image Reference",
+    "choice_a_text": "Choice A",
+    "choice_a_image_url": "Choice A Image Reference",
+    "choice_b_text": "Choice B",
+    "choice_b_image_url": "Choice B Image Reference",
+    "choice_c_text": "Choice C",
+    "choice_c_image_url": "Choice C Image Reference",
+    "choice_d_text": "Choice D",
+    "choice_d_image_url": "Choice D Image Reference",
+    "choice_e_text": "Choice E",
+    "choice_e_image_url": "Choice E Image Reference",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action_before_uploading": "Upload only Ready for Upload rows. Non-PDF reviewer files remain outside the original PDF extraction scope and should be parsed by a separate DOC/DOCX/PPT extraction pass before import."
+}

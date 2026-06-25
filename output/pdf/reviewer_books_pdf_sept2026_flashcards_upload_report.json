@@ -1,0 +1,21 @@
+{
+  "dry_run": false,
+  "source_token": "reviewer_books_pdf_sept2026",
+  "source_questions": 244,
+  "insertable_flashcards": 242,
+  "inserted": 242,
+  "skipped": 2,
+  "skipped_by_reason": {
+    "duplicate_flashcard_front": 2
+  },
+  "skipped_samples": [
+    {
+      "question_id": "4b4a1ea1-e47c-4082-94f8-f02a2be33436",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "cd729707-72a9-45ac-8121-b5c4ea540a2a",
+      "reason": "duplicate_flashcard_front"
+    }
+  ]
+}

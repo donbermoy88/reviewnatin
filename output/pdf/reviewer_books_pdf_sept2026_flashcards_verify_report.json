@@ -1,0 +1,213 @@
+{
+  "dry_run": true,
+  "source_token": "reviewer_books_pdf_sept2026",
+  "source_questions": 244,
+  "insertable_flashcards": 0,
+  "inserted": 0,
+  "skipped": 244,
+  "skipped_by_reason": {
+    "duplicate_flashcard_front": 244
+  },
+  "skipped_samples": [
+    {
+      "question_id": "bb52ff99-a25f-4c38-910c-a3486f6b7585",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "70478800-0705-4863-93f8-26fa76de8a32",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "3c84e6a4-11cf-438c-8759-a98579b2e5f2",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "748e215e-9b4e-4488-8d06-14e0e0b9c7ea",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "7bed196b-1d37-4182-9e03-daff950876f6",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "60afede6-12fb-49f9-8f02-cc2ccdf25d8e",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "44f04906-b6f6-4e9d-84d7-6dbb0e84dd60",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "4a1f613b-5237-4434-9035-0e9d157bfe78",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "14ce6776-de30-4cb9-8f07-d85386ee7704",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "0e0baf4e-41f0-4dda-9400-dbd62257c7c1",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "c15b48c2-b21a-4607-be4b-e51d7deae2da",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "216abce8-9938-4ede-93b4-86df5de4dbb6",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "5a490995-6f39-4f8a-b8c7-e727a897b773",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "3e7977c3-ca6c-4193-8a8b-2a30be1d3ba7",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "e570f07b-a18d-4e7e-934c-597b6503ba61",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "4559e5f7-8bc3-40ad-a823-481851afff09",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "76a0ac55-70bf-43b9-b8a4-283c9ccb4877",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "eabceb9a-3b55-48b0-8a49-723d3a615fb1",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "1e154896-f654-4fb2-9da0-3649c36edd42",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "0b5fac52-ed05-4aaa-b636-c61c4bae5248",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "7fc9e507-da6d-4e35-93ee-addb3b402963",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "d9a333da-a9cd-45a3-94ad-d1f04262385c",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "dc783716-26b8-41bf-97ba-758c937e02bd",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "0e13244f-3fa2-4dc6-9bc1-d8724fd50ab8",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "0068471e-8286-442b-8848-164ed838dca1",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "5d36e72c-65e1-474a-b87b-afb310e967e9",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "7d5fce6e-4240-4af5-8a9b-589d75316674",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "c3facaaa-484c-4daa-93d9-979716872f67",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "e93875fc-569d-4e05-b745-b6179b95f9ec",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "de9e7c4c-84e5-415b-b7a2-6837e376e0e6",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "60720f54-d36f-44e8-bd9d-ca6be59a095e",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "9ec3516e-3ca4-4916-883f-ae2753e66462",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "b16fb9ff-ba9c-43b1-9615-6916caed0e9d",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "d16641df-1bf4-43bd-8da7-141bd13d4fd1",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "6f3ab749-6b11-4516-a469-efe93cd7f14f",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "065fc59d-00f2-4d02-b3ab-91024486ede6",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "c8246408-3f5e-4db1-8504-c87c69356212",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "b0a28ab5-7919-41da-8735-53492288b930",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "d3a66b86-0e3a-4364-87b5-50d4a6f14c42",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "2782940b-424e-4a9e-9e5c-0b977a74cbfb",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "75561fa9-33e4-4fae-b2a0-49ceede7bac5",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "1f91777e-880e-4d83-ba2a-d1a44e86b927",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "58c21017-ed5f-4842-a31b-ef64f85fa303",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "2a500ba1-d815-49f8-b7af-7ca8ae907f52",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "ddfcd3f8-1a5a-45b5-b7ab-a85f4bf06918",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "11c4e12e-f419-43b5-b736-1247f4995d8e",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "5cebe64e-20e7-43a3-a559-5a9bdfc36234",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "682bde18-611b-41be-8643-1ec3e4b3d598",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "e553a91e-ec3d-403b-87ab-953e168870a0",
+      "reason": "duplicate_flashcard_front"
+    },
+    {
+      "question_id": "bb7dc3e3-5129-4209-a81a-4ffdb33dbe41",
+      "reason": "duplicate_flashcard_front"
+    }
+  ]
+}

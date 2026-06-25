@@ -323,7 +323,11 @@ def infer_subject_area(path, question_text):
     for subject, patterns in ordered:
         if any(re.search(pattern, text) for pattern in patterns):
             return subject
-    if "beed&bsed gened & profed" in path_text or "beedbsedletdrillsbooster" in compact_text:
+    if (
+        "beed&bsed gened & profed" in path_text
+        or "beedbsedletdrillsbooster" in compact_text
+        or "beedbsedreviewerbooks" in compact_text
+    ):
         if re.search(r"\b(teacher|learner|classroom|curriculum|assessment|instruction|learning|school)\b", question_text, re.I):
             return "Professional Education"
         return "General Education"
@@ -365,16 +369,22 @@ def status_for(row, image_counts_for_page):
     if row["Duplicate Of"]:
         return "Duplicate"
     choices = [row[f"Choice {letter}"] for letter in "ABCD"]
-    if not row["Question"] or sum(1 for value in choices if value) < 2:
+    if not row["Question"] or any(not value for value in choices):
         return "Incomplete"
     if row["Question Image Reference"] or any(row[f"Choice {letter} Image Reference"] for letter in "ABCDE"):
         return "Needs Image Extraction"
-    if row["LET Exam Type"] == "Cannot Determine" or row["Subject Area"] == "Cannot Determine":
+    if (
+        row["LET Exam Type"] == "Cannot Determine"
+        or row["Subject Area"] == "Cannot Determine"
+        or "Cannot Determine" in row["Subject Area"]
+    ):
         return "Needs Review"
     if re.search(r"[�□]{1,}|_{3,}", row["Question"]):
         return "Needs Review"
     if not row["Correct Answer"]:
         return "Needs Answer"
+    if row["Correct Answer"].upper() not in {letter for letter in "ABCDE" if row.get(f"Choice {letter}")}:
+        return "Needs Review"
     if image_counts_for_page > 0 and VISUAL_CUE_RE.search(row["Question"]):
         return "Needs Image Extraction"
     return "Ready for Upload"

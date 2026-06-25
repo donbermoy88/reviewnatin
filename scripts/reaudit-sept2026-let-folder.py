@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import hashlib
+import argparse
 import json
 import re
 import subprocess
@@ -27,6 +28,7 @@ from extract_sept2026_let_reviewers import (
     pdf_page_count,
     split_numbered_blocks,
     split_question_and_choices,
+    source_relative_path,
     status_for,
     write_outputs,
 )
@@ -101,7 +103,8 @@ def extract_ocr_pdf(path, source_root, existing_questions, start_no):
     answer_key, answer_note, answer_key_idx = parse_answer_key(text)
     question_text = text[:answer_key_idx] if answer_key_idx >= 0 and len(answer_key) >= 3 else text
     page_images = page_image_counts(path, len(pages))
-    exam_type, exam_note = infer_exam_type(path.relative_to(source_root))
+    relative_path = source_relative_path(path, source_root)
+    exam_type, exam_note = infer_exam_type(relative_path)
     rows = []
     next_no = start_no
 
@@ -113,7 +116,7 @@ def extract_ocr_pdf(path, source_root, existing_questions, start_no):
         page = page_range_for_offsets(offsets, start, end)
         answer = answer_key.get(qnum, "")
         answer_source = answer_note if answer else ""
-        subject = infer_subject_area(path.relative_to(source_root), question)
+        subject = infer_subject_area(relative_path, question)
         topic = infer_topic(subject, question)
         passage_ref = detect_passage(question, qnum, page)
         first_page = int(str(page).split("-")[0])
@@ -266,9 +269,16 @@ def build_summary(rows, sources, output_paths, input_dir, audit):
 
 
 def main():
-    input_dir = DEFAULT_INPUT
-    rows_path = OUT_DIR / f"{BASE}.json"
-    summary_path = OUT_DIR / f"{BASE}_summary.json"
+    parser = argparse.ArgumentParser(description="Reaudit Sept 2026 LET extraction and OCR PDFs with no extracted rows.")
+    parser.add_argument("--input", default=str(DEFAULT_INPUT), help="Folder containing LET reviewer PDFs.")
+    parser.add_argument("--output-base", default=BASE, help="Existing output filename base under output/pdf.")
+    args = parser.parse_args()
+
+    input_dir = Path(args.input)
+    output_base = args.output_base
+    rows_path = OUT_DIR / f"{output_base}.json"
+    summary_path = OUT_DIR / f"{output_base}_summary.json"
+    audit_report = OUT_DIR / f"{output_base}_reaudit_report.json"
     loaded_rows = json.loads(rows_path.read_text(encoding="utf-8"))
     rows = [row for row in loaded_rows if "Text extracted by OCR" not in row.get("Notes", "")]
     previous_summary = json.loads(summary_path.read_text(encoding="utf-8"))
@@ -315,12 +325,12 @@ def main():
         ),
     }
 
-    output_paths = write_outputs(rows, {"pending": True}, BASE)
+    output_paths = write_outputs(rows, {"pending": True}, output_base)
     summary = build_summary(rows, sources, output_paths, input_dir, audit)
-    output_paths = write_outputs(rows, summary, BASE)
+    output_paths = write_outputs(rows, summary, output_base)
     summary["outputs"] = output_paths
     summary_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
-    AUDIT_REPORT.write_text(json.dumps(audit, indent=2, ensure_ascii=False), encoding="utf-8")
+    audit_report.write_text(json.dumps(audit, indent=2, ensure_ascii=False), encoding="utf-8")
     print(json.dumps(audit, indent=2, ensure_ascii=False))
 
 

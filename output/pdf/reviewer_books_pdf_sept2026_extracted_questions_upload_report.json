@@ -1,0 +1,474 @@
+{
+  "batch_id": "d1de6ca3-0e43-4c18-810d-73898cf57cc3",
+  "dry_run": true,
+  "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 736,
+  "ready_rows": 128,
+  "candidate_targets": 256,
+  "insertable": 0,
+  "inserted": 0,
+  "skipped": 0,
+  "duplicates": 256,
+  "source_stats": {
+    "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json": {
+      "readyRows": 128,
+      "candidateTargets": 256,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "1",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1e154896-f654-4fb2-9da0-3649c36edd42"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "1",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0b5fac52-ed05-4aaa-b636-c61c4bae5248"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "2",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7fc9e507-da6d-4e35-93ee-addb3b402963"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "2",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d9a333da-a9cd-45a3-94ad-d1f04262385c"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "3",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/educational-technology",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dc783716-26b8-41bf-97ba-758c937e02bd"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "3",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/educational-technology",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7d5fce6e-4240-4af5-8a9b-589d75316674"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "4",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "de9e7c4c-84e5-415b-b7a2-6837e376e0e6"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "4",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "065fc59d-00f2-4d02-b3ab-91024486ede6"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "6",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/values-humanities",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b0a28ab5-7919-41da-8735-53492288b930"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "6",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/values-humanities",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d3a66b86-0e3a-4364-87b5-50d4a6f14c42"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "8",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2782940b-424e-4a9e-9e5c-0b977a74cbfb"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "8",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "75561fa9-33e4-4fae-b2a0-49ceede7bac5"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "9",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1f91777e-880e-4d83-ba2a-d1a44e86b927"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "9",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "58c21017-ed5f-4842-a31b-ef64f85fa303"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "10",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2a500ba1-d815-49f8-b7af-7ca8ae907f52"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "10",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ddfcd3f8-1a5a-45b5-b7ab-a85f4bf06918"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "11",
+      "page": "1-2",
+      "exam": "elementary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "11c4e12e-f419-43b5-b736-1247f4995d8e"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "11",
+      "page": "1-2",
+      "exam": "secondary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5cebe64e-20e7-43a3-a559-5a9bdfc36234"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "12",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/values-humanities",
+      "reason": "duplicate_existing_content",
+      "existing_id": "682bde18-611b-41be-8643-1ec3e4b3d598"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "12",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/values-humanities",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e553a91e-ec3d-403b-87ab-953e168870a0"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "14",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "bb7dc3e3-5129-4209-a81a-4ffdb33dbe41"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "14",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e3fdd2fd-3927-48dd-8235-31896666e978"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "15",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cb0643fc-4995-4b5c-a0ab-017c7580b61b"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "15",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c311ded4-e066-4a75-9738-5cd395c08e4e"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "17",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "aacfafe6-604b-415c-b478-230841fd07f0"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "17",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1d96a9e6-e669-4322-b481-0119059e548e"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "18",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/facilitating-learning",
+      "reason": "duplicate_existing_content",
+      "existing_id": "44ef38a5-7599-4d57-9dd4-7e6614823eaa"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "18",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/facilitating-learning",
+      "reason": "duplicate_existing_content",
+      "existing_id": "248a5ec7-6e70-42c8-81fb-fac6173bb4d1"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "19",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9b9425a8-ee4a-4af8-8fb6-7ebd72be6dcf"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "19",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "32e8c28a-0369-49f3-b30d-0e11c0e61778"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "20",
+      "page": "2-3",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c32c7d0e-2bec-493c-90fb-6b4be8f5b580"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "20",
+      "page": "2-3",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5951f8b2-6dfb-4532-9a21-724497277a73"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "23",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "65215944-3090-4220-971d-f7408a0ea89f"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "23",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2247f75a-8657-4578-bc3c-5a62e99b7a88"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "24",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b2c1173d-3e54-4065-8417-c637eba3ca66"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "24",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "536a0dc6-16b2-429a-ac6f-a4da074bee13"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "25",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0d3edf4e-63ea-45ab-9f64-c55020896f2f"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "25",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f185eb06-cef3-41d2-a38d-2f96451048c8"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "27",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "569b90ad-1762-4495-9668-1fdc430dd71f"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "27",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ba71ff30-32b4-4156-a847-aa2ee578e045"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "29",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "32d16caf-b17b-4834-8db7-91c97d3ae65b"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "29",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fe3fc630-dfe4-48fa-889e-cfceb6ec3b32"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "31",
+      "page": "3-4",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "eff52271-3e15-418a-9657-8f473935dc71"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "31",
+      "page": "3-4",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e57db3cb-5d01-4083-bfbe-10ca35900c68"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "32",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "prof-ed/assessment-of-learning",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e26c95af-9e14-4a7b-83f6-b1d43fe3b68c"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "32",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "prof-ed/assessment-of-learning",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1f8f2fd0-0ec2-4320-8f59-519791ea7b8f"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "34",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ada5852f-0eba-464d-b4e8-a6c19126bde1"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "34",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "db291571-6f5a-4f78-a288-d339c584e6c9"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "37",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "40a2c64e-7c44-481b-b971-9a63af054c5c"
+    },
+    {
+      "source": "output/pdf/reviewer_books_pdf_sept2026_extracted_questions.json",
+      "row": "37",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3821f713-89f7-4393-add1-51f6ad3e95fe"
+    }
+  ],
+  "skipped_samples": []
+}
