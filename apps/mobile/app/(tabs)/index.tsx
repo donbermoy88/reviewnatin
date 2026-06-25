@@ -772,15 +772,15 @@ function DashboardScreenContent() {
             </View>
             <Pressable
               style={({ pressed }) => [styles.homeBell, pressed && styles.pressedSoft]}
-              onPress={() => setNotificationSheetOpen(true)}
+              onPress={() => announcements.length > 0 ? setUpdatesSheetOpen(true) : setNotificationSheetOpen(true)}
               accessibilityRole="button"
               accessibilityLabel={
                 announcements.length > 0
-                  ? `${announcements.length} update${announcements.length === 1 ? '' : 's'} and daily reminders`
-                  : 'Daily reminders'
+                  ? `${announcements.length} notification${announcements.length === 1 ? '' : 's'}`
+                  : 'Notification settings'
               }
             >
-              <Ionicons name="notifications-outline" size={22} color="#fff" />
+              <Ionicons name="notifications" size={22} color="#fff" />
               {announcements.length > 0 ? (
                 <View style={styles.homeBellBadge}>
                   <Text style={styles.homeBellBadgeText}>{Math.min(announcements.length, 9)}</Text>
@@ -1202,7 +1202,7 @@ function DashboardScreenContent() {
           ) : null}
 
           <View style={styles.lowerSection}>
-            {!user || (contentGate && !contentGate.meetsMinimum) || !premium || announcements.length > 0 ? (
+            {!user || (contentGate && !contentGate.meetsMinimum) || !premium ? (
               <View style={styles.sectionHead}>
                 <View style={styles.sectionHeadCopy}>
                   <Text style={styles.sectionTitle}>Updates</Text>
@@ -1229,27 +1229,6 @@ function DashboardScreenContent() {
 
             {!premium ? <AdBanner onPress={() => router.push('/subscribe')} /> : null}
 
-            {announcements.length > 0 ? (
-              <Pressable
-                style={styles.updatesChip}
-                onPress={() => setUpdatesSheetOpen(true)}
-                accessibilityRole="button"
-                accessibilityLabel={`${announcements.length} updates`}
-              >
-                <View style={styles.updatesIcon}>
-                  <Ionicons name="megaphone-outline" size={18} color={colors.primary} />
-                </View>
-                <View style={styles.updatesCopy}>
-                  <Text style={styles.updatesChipText} numberOfLines={1}>
-                    {announcements.length} update{announcements.length === 1 ? '' : 's'}
-                  </Text>
-                  <Text style={styles.updatesChipSub} numberOfLines={1}>
-                    {announcements[0].title}
-                  </Text>
-                </View>
-                <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
-              </Pressable>
-            ) : null}
           </View>
         </Animated.View>
       </ScrollView>
@@ -1304,10 +1283,20 @@ function DashboardScreenContent() {
 
       <AppSheet
         visible={updatesSheetOpen}
-        title="Updates"
-        subtitle="News and tips from the ReviewNatin team"
+        title="Notifications"
+        subtitle="News and updates from the ReviewNatin team"
         onClose={() => setUpdatesSheetOpen(false)}
-        actions={[{ label: 'OK', onPress: () => setUpdatesSheetOpen(false), variant: 'outline' }]}
+        actions={[
+          { label: 'OK', onPress: () => setUpdatesSheetOpen(false) },
+          {
+            label: 'Manage reminders',
+            onPress: () => {
+              setUpdatesSheetOpen(false);
+              setNotificationSheetOpen(true);
+            },
+            variant: 'outline',
+          },
+        ]}
       >
         {announcements.map((announcement) => (
           <View key={announcement.id} style={{ marginBottom: spacing.md }}>
