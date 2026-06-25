@@ -52,7 +52,10 @@ export const HomeStudyInsights = memo(function HomeStudyInsights({
           studyTrend.length > 0
             ? studyTrend
             : Array.from({ length: 7 }, (_, i) => ({
-                date: '',
+                // Unique per index — the chart only uses `date` as a React key
+                // (dayLabel is what's displayed), and dayLabel itself repeats
+                // ('T' and 'S' appear twice), so it can't double as the key.
+                date: `placeholder-day-${i}`,
                 dayLabel: ['M', 'T', 'W', 'T', 'F', 'S', 'S'][i],
                 questions: 0,
                 sessions: 0,

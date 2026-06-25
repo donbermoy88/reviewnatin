@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatRelativeTime } from './relative-time';
+import { formatRelativeTime, formatRelativeTimeAgo } from './relative-time';
 
 const NOW = new Date('2026-06-25T12:00:00Z').getTime();
 
@@ -39,5 +39,17 @@ describe('formatRelativeTime', () => {
   it('never returns a negative duration for a future timestamp (clock skew)', () => {
     const iso = new Date(NOW + 60 * 1000).toISOString();
     expect(formatRelativeTime(iso, NOW)).toBe('now');
+  });
+});
+
+describe('formatRelativeTimeAgo', () => {
+  it('does not append "ago" to "now" (avoids rendering "now ago")', () => {
+    const iso = new Date(NOW - 10 * 1000).toISOString();
+    expect(formatRelativeTimeAgo(iso, NOW)).toBe('now');
+  });
+
+  it('appends "ago" to every other duration', () => {
+    const iso = new Date(NOW - 5 * 60 * 1000).toISOString();
+    expect(formatRelativeTimeAgo(iso, NOW)).toBe('5m ago');
   });
 });

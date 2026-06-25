@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -19,6 +19,7 @@ import { CommunityReportButton } from '../../components/community-report-button'
 import { ErrorState } from '../../components/error-state';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
+import { useUserProfile } from '../../hooks/use-user-profile';
 import {
   createCommunityComment,
   deleteCommunityComment,
@@ -34,7 +35,7 @@ import {
 } from '../../lib/api/community';
 import { toUserFacingError } from '../../lib/errors/user-facing';
 import { stackScrollPadding } from '../../lib/layout/content-padding';
-import { formatRelativeTime } from '../../lib/format/relative-time';
+import { formatRelativeTimeAgo } from '../../lib/format/relative-time';
 import { useAuth } from '../../providers/auth-provider';
 
 function Avatar({ url, name, size = 36 }: { url: string | null; name: string; size?: number }) {
@@ -61,6 +62,7 @@ export default function PostDetailScreen() {
   const insets = useSafeAreaInsets();
   const { colors, fonts, spacing, radii } = useAppTheme();
   const { user } = useAuth();
+  const { displayName, avatarUrl } = useUserProfile('Guest');
   const { postId } = useLocalSearchParams<{ postId: string }>();
 
   const [post, setPost] = useState<CommunityPost | null>(null);
@@ -80,7 +82,14 @@ export default function PostDetailScreen() {
   const [savingCommentEdit, setSavingCommentEdit] = useState(false);
 
   const load = useCallback(async () => {
-    if (!postId) return;
+    if (!postId) {
+      // Without this, a missing/not-yet-resolved postId param (e.g. after a
+      // cold JS reload restores this route before params are ready) leaves
+      // `loading` stuck at true forever — no error, no escape but back.
+      setLoadError('Post not found.');
+      setLoading(false);
+      return;
+    }
     try {
       setLoadError(null);
       const [p, page] = await Promise.all([
@@ -98,9 +107,14 @@ export default function PostDetailScreen() {
     }
   }, [postId]);
 
-  useEffect(() => {
-    void load();
-  }, [load]);
+  // Refetch on focus, not just on mount — e.g. returning here after viewing
+  // the author's profile (and possibly following/unfollowing) should show
+  // current data, not the snapshot from the last time this screen mounted.
+  useFocusEffect(
+    useCallback(() => {
+      void load();
+    }, [load])
+  );
 
   const loadMore = useCallback(async () => {
     if (!postId || loadingMore || !hasMore) return;
@@ -229,8 +243,8 @@ export default function PostDetailScreen() {
       const optimistic: CommunityComment = {
         id: result.id,
         authorId: user.id,
-        authorDisplayName: 'You',
-        authorAvatarUrl: null,
+        authorDisplayName: displayName,
+        authorAvatarUrl: avatarUrl,
         body,
         createdAt: result.createdAt,
       };
@@ -274,7 +288,7 @@ export default function PostDetailScreen() {
               </Text>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
                 <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted }}>
-                  {formatRelativeTime(post.createdAt)} ago
+                  {formatRelativeTimeAgo(post.createdAt)}
                 </Text>
                 {post.examName ? (
                   <View
@@ -427,7 +441,7 @@ export default function PostDetailScreen() {
                   </View>
                   <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginTop: 4, marginLeft: 4 }}>
                     <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 11, color: colors.textLight }}>
-                      {formatRelativeTime(item.createdAt)} ago
+                      {formatRelativeTimeAgo(item.createdAt)}
                     </Text>
                     {item.authorId === user?.id ? (
                       <>

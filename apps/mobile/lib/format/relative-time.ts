@@ -13,3 +13,9 @@ export function formatRelativeTime(iso: string, now = Date.now()): string {
   if (diffWeeks < 4) return `${diffWeeks}w`;
   return new Date(iso).toLocaleDateString('en-PH', { month: 'short', day: 'numeric' });
 }
+
+/** Like formatRelativeTime, but for "X ago" phrasing — avoids rendering "now ago". */
+export function formatRelativeTimeAgo(iso: string, now = Date.now()): string {
+  const relative = formatRelativeTime(iso, now);
+  return relative === 'now' ? relative : `${relative} ago`;
+}

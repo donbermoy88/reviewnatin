@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { ProfileSettingsHint } from '../../components/profile-settings-hint';
@@ -88,7 +88,7 @@ function ProfileScreenContent() {
   const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createProfileStyles(theme), [theme]);
   const { user } = useAuth();
-  const { displayName, initials } = useUserProfile('Guest');
+  const { displayName, initials, avatarUrl } = useUserProfile('Guest');
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [stats, setStats] = useState({
@@ -214,9 +214,13 @@ function ProfileScreenContent() {
             onPress={user ? () => router.push('/profile/edit') : undefined}
             disabled={!user}
           >
-            <View style={styles.avatar}>
-              <Text style={styles.avatarText}>{initials}</Text>
-            </View>
+            {avatarUrl ? (
+              <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+            ) : (
+              <View style={styles.avatar}>
+                <Text style={styles.avatarText}>{initials}</Text>
+              </View>
+            )}
             <View style={{ flex: 1 }}>
               <Text style={styles.userName}>{displayName}</Text>
               <Text style={styles.userSub}>

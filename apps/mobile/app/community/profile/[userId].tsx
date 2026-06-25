@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ErrorState } from '../../../components/error-state';
@@ -15,7 +15,7 @@ import {
 } from '../../../lib/api/community';
 import { toUserFacingError } from '../../../lib/errors/user-facing';
 import { stackScrollPadding } from '../../../lib/layout/content-padding';
-import { formatRelativeTime } from '../../../lib/format/relative-time';
+import { formatRelativeTimeAgo } from '../../../lib/format/relative-time';
 import { useAuth } from '../../../providers/auth-provider';
 
 function Avatar({ url, name, size = 72 }: { url: string | null; name: string; size?: number }) {
@@ -51,7 +51,13 @@ export default function CommunityProfileScreen() {
   const [followBusy, setFollowBusy] = useState(false);
 
   const load = useCallback(async () => {
-    if (!userId) return;
+    if (!userId) {
+      // Without this, a missing/not-yet-resolved userId param leaves
+      // `loading` stuck at true forever — no error, no escape but back.
+      setLoadError('Profile not found.');
+      setLoading(false);
+      return;
+    }
     try {
       setLoadError(null);
       const [p, userPosts] = await Promise.all([
@@ -67,9 +73,14 @@ export default function CommunityProfileScreen() {
     }
   }, [userId]);
 
-  useEffect(() => {
-    void load();
-  }, [load]);
+  // Refetch on focus, not just on mount — e.g. returning here after opening
+  // one of this user's posts should reflect any like/follow changes made
+  // along the way, not the stale snapshot from the last mount.
+  useFocusEffect(
+    useCallback(() => {
+      void load();
+    }, [load])
+  );
 
   const onToggleFollow = async () => {
     if (!user) {
@@ -192,7 +203,7 @@ export default function CommunityProfileScreen() {
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginTop: spacing.sm }}>
             <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textLight }}>
-              {formatRelativeTime(item.createdAt)} ago
+              {formatRelativeTimeAgo(item.createdAt)}
             </Text>
             {item.examName ? (
               <View style={{ paddingHorizontal: 6, paddingVertical: 1, borderRadius: 999, backgroundColor: colors.primaryMuted }}>

@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Animated, Easing, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Animated, Easing, Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
 import { ErrorBoundary } from '../../components/error-boundary';
@@ -205,7 +205,7 @@ function DashboardScreenContent() {
   const styles = useMemo(() => createDashboardStyles(theme), [theme]);
   const { user } = useAuth();
   const { isPremium } = useEntitlements();
-  const { displayName } = useUserProfile('Guest');
+  const { displayName, avatarUrl } = useUserProfile('Guest');
   const { prefs, setNotificationsEnabled } = usePreferences();
   const [introAnim] = useState(() => new Animated.Value(0));
   const [goal, setGoal] = useState<OnboardingData | null>(null);
@@ -759,9 +759,13 @@ function DashboardScreenContent() {
             style={[styles.homeHeroCard, { marginTop: insets.top + spacing.sm }]}
           >
           <View style={styles.homeHeroHeader}>
-            <View style={styles.homeAvatar}>
-              <Text style={styles.homeAvatarText}>{(firstName[0] ?? 'R').toUpperCase()}</Text>
-            </View>
+            {avatarUrl ? (
+              <Image source={{ uri: avatarUrl }} style={styles.homeAvatar} />
+            ) : (
+              <View style={styles.homeAvatar}>
+                <Text style={styles.homeAvatarText}>{(firstName[0] ?? 'R').toUpperCase()}</Text>
+              </View>
+            )}
             <View style={styles.homeGreetCol}>
               <Text style={styles.homeGreetTop} numberOfLines={1}>{timeGreeting()}</Text>
               <Text style={styles.homeGreetName} numberOfLines={1}>{firstName} 👋</Text>

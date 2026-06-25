@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { DEFAULT_EXAM_SLUG, getExamCatalogItem } from '@reviewnatin/shared';
-import { useRouter } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -35,7 +35,7 @@ import {
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { toUserFacingError } from '../../lib/errors/user-facing';
 import { tabScrollPadding } from '../../lib/layout/content-padding';
-import { formatRelativeTime } from '../../lib/format/relative-time';
+import { formatRelativeTimeAgo } from '../../lib/format/relative-time';
 import { useAuth } from '../../providers/auth-provider';
 
 function Avatar({ url, name, size = 40 }: { url: string | null; name: string; size?: number }) {
@@ -98,7 +98,7 @@ function PostCard({
             {post.authorDisplayName}
           </Text>
           <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted }}>
-            {formatRelativeTime(post.createdAt)} ago
+            {formatRelativeTimeAgo(post.createdAt)}
           </Text>
         </Pressable>
         {post.isOwn ? (
@@ -213,9 +213,14 @@ function CommunityScreenContent() {
     }
   }, [user]);
 
-  useEffect(() => {
-    void load();
-  }, [load]);
+  // Refetch whenever this tab regains focus — e.g. after posting a comment or
+  // liking a post in the detail screen, returning here should show the
+  // updated counts instead of the stale snapshot from the last visit.
+  useFocusEffect(
+    useCallback(() => {
+      void load();
+    }, [load])
+  );
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
