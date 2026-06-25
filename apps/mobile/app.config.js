@@ -113,6 +113,10 @@ module.exports = () => {
   return {
     expo: {
       ...base,
+      updates: {
+        url: 'https://u.expo.dev/5c2c6c87-1a89-4f8a-a5d3-c0f8372a34ec',
+      },
+      runtimeVersion: '1.0.0',
       scheme: ['reviewnatin', ANDROID_PACKAGE],
       ios: {
         ...base.ios,
