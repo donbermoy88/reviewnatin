@@ -64,7 +64,7 @@ VISUAL_CUE_RE = re.compile(
     re.I,
 )
 
-OPTION_RE = re.compile(r"(?<![A-Za-z0-9])(?:\(([A-Ea-e])\)|([A-Ea-e])[\.\)]\s+)")
+OPTION_RE = re.compile(r"(?<![A-Za-z0-9.])(?:\(([A-Ea-e])\)|([A-Ea-e])[\.\)]\s+)")
 QUESTION_MARKER_RE = re.compile(
     r"(?m)^\s*(?:Question\s+|Item\s+|No\.\s*)?(\d{1,4})[\.\)]\s*",
     re.I,
@@ -95,6 +95,7 @@ SUBJECT_TOPICS = [
     ("Teaching Strategies", [r"\bteaching strategy\b", r"\binstruction\b", r"\blesson\b", r"\bmethod\b", r"\bdiscussion\b"]),
     ("Classroom Management", [r"\bclassroom management\b", r"\bdiscipline\b", r"\bmisbehavior\b", r"\broutine\b"]),
     ("Early Childhood Education", [r"\bearly childhood\b", r"\bpreschool\b", r"\bkindergarten\b", r"\bplay-based\b"]),
+    ("Special Needs Education", [r"\bspecial needs\b", r"\bspecial education\b", r"\bsped\b", r"\binclusive education\b", r"\bexceptional learner\b"]),
     ("Child Development", [r"\bchild\b", r"\badolescent\b", r"\bdevelopment\b", r"\bgrowth\b", r"\bpuberty\b"]),
     ("Ethics", [r"\bethics\b", r"\bcode of ethics\b", r"\bmoral\b", r"\bvalues\b", r"\bprofessional oath\b"]),
     ("ICT in Education", [r"\bcomputer\b", r"\bict\b", r"\binternet\b", r"\bsoftware\b", r"\bhardware\b", r"\beducational technology\b"]),
@@ -298,6 +299,8 @@ def infer_subject_area(path, question_text):
         return "Professional Education"
     if re.search(r"early childhood|\bece\b|preschool|kindergarten", path_text) or "earlychildhood" in compact_text:
         return "Early Childhood Education"
+    if re.search(r"special needs|special education|\bsped\b", path_text) or "specialneeds" in compact_text or "specialeducation" in compact_text:
+        return "Special Needs Education"
     ordered = [
         ("Child and Adolescent Development", [r"caad", r"child and adolescent"]),
         ("Facilitating Learning", [r"facilitating learning", r"\bfl\b"]),
@@ -320,7 +323,7 @@ def infer_subject_area(path, question_text):
         ("Agriculture and Fishery Arts", [r"agriculture", r"fishery"]),
         ("Information and Communication Technology", [r"\bict\b", r"information and communication"]),
         ("Early Childhood Education", [r"early childhood", r"\bece\b", r"preschool", r"kindergarten"]),
-        ("Elementary / Cannot Determine", [r"special needs"]),
+        ("Special Needs Education", [r"special needs", r"special education", r"\bsped\b", r"exceptional learner"]),
         ("General Education", [r"gened", r"gen ed", r"general education"]),
         ("Professional Education", [r"profed", r"prof ed", r"professional education", r"teaching profession"]),
     ]
@@ -342,6 +345,8 @@ def infer_subject_area(path, question_text):
 def infer_topic(subject, question_text):
     if subject == "Early Childhood Education":
         return "Early Childhood Education"
+    if subject == "Special Needs Education":
+        return "Special Needs Education"
     text = f"{subject} {question_text}".lower()
     for topic, patterns in SUBJECT_TOPICS:
         if any(re.search(pattern, text) for pattern in patterns):

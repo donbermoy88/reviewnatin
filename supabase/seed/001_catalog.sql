@@ -78,7 +78,8 @@ SELECT sa.id, t.slug, t.name, t.ord
 FROM subject_areas sa
 JOIN exam_types et ON et.id = sa.exam_type_id AND et.slug = 'let-elementary' AND sa.slug = 'major'
 CROSS JOIN (VALUES
-  ('early-childhood-education', 'Early Childhood Education', 1)
+  ('early-childhood-education', 'Early Childhood Education', 1),
+  ('special-needs-education', 'Special Needs Education', 2)
 ) AS t(slug, name, ord)
 ON CONFLICT (subject_area_id, slug) DO UPDATE SET
   name = EXCLUDED.name,

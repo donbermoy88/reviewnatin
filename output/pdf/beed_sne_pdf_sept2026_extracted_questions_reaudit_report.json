@@ -1,0 +1,15 @@
+{
+  "file_counts": {
+    ".pdf": 10
+  },
+  "pdfs_total": 10,
+  "pdfs_with_existing_rows_before_ocr": 10,
+  "pdfs_ocr_attempted": 0,
+  "ocr_rows_appended": 0,
+  "ocr_ready_for_upload": 0,
+  "ocr_needs_answer": 0,
+  "ocr_needs_review_or_incomplete": 0,
+  "ocr_duplicates": 0,
+  "ocr_sources": [],
+  "non_pdf_files_not_imported": 0
+}

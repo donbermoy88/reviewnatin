@@ -169,6 +169,7 @@ function majorLabel(slug) {
   if (slug === 'physical-science') return 'Physical Science';
   if (slug === 'values-education') return 'Values Education';
   if (slug === 'early-childhood-education') return 'Early Childhood Education';
+  if (slug === 'special-needs-education') return 'Special Needs Education';
   if (slug === 'mapeh') return 'MAPEH';
   if (slug === 'tle') return 'Technology and Livelihood Education (TLE)';
   return slug.split('-').map((part) => part[0]?.toUpperCase() + part.slice(1)).join(' ');
@@ -230,6 +231,7 @@ function secondaryMajorTopic(row) {
 function mappedTopic(row, examKind) {
   const subject = row['Subject Area'] ?? '';
   if (subject === 'Early Childhood Education') return ['major', 'early-childhood-education', null];
+  if (subject === 'Special Needs Education') return ['major', 'special-needs-education', null];
   if (subject === 'General Education') return generalEducationTopic(row);
   if (['Professional Education', 'Child and Adolescent Development', 'Facilitating Learning', 'Curriculum Development', 'Assessment of Learning', 'Educational Technology'].includes(subject)) {
     return professionalEducationTopic(row);

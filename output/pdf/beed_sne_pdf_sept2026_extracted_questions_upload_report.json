@@ -1,0 +1,474 @@
+{
+  "batch_id": "d23ee761-3ad8-48ae-abe4-dd307799a2dc",
+  "dry_run": true,
+  "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 425,
+  "ready_rows": 419,
+  "candidate_targets": 419,
+  "insertable": 0,
+  "inserted": 0,
+  "skipped": 0,
+  "duplicates": 419,
+  "source_stats": {
+    "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json": {
+      "readyRows": 419,
+      "candidateTargets": 419,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "1",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0e1ce914-2474-4583-8b23-16192dd32d31"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "2",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3f8ecdc1-949d-49b7-8904-f238a2bd4fe8"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "3",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d286f48e-828a-4d6e-8a1e-a7eed4ba3f3f"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "4",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e5d0f50c-8c5e-410a-932a-b96998508898"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "5",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "08760ca0-fba1-4ce0-9538-95ff7c8460f6"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "6",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c2414463-e1c8-443f-9a32-8a5002c1ea94"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "7",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0cbf30c6-89f0-4311-ab00-d8ede17bc64d"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "8",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fa57485f-f7ea-48a0-b756-9205a57b885e"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "9",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "757d138f-2b18-4ef8-ac3c-c81c2bed8d61"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "10",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "83e0497c-0223-4670-b3e1-72b64465363c"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "11",
+      "page": "1-2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2da94b06-e556-4523-9252-34c55ac78cff"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "12",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9a378a40-ed01-47c5-ace2-df6bcfbe9351"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "13",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c4ff2513-1d53-4e48-9aa2-7bc7db49984f"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "14",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "77f1f5c7-b0e1-4b05-b254-0cfe7407a907"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "15",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "45fc031f-755c-4298-a338-fef95329ac21"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "16",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4de4966c-0d1f-42df-b93d-6dba6eeff275"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "17",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5053b3da-0357-4452-ba15-7b10dcd8364f"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "18",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "961af499-76a4-4698-afbc-6381811f755c"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "19",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6f7e5953-d69a-42a2-8296-2f074c03f57a"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "20",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6843b656-c13f-4cee-ae87-55529c7ed0bd"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "21",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2db19c52-35c5-49c2-8ae6-713940ceb10f"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "22",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "efb69afe-f2b2-4a2c-ad32-6c6cd5db5f23"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "23",
+      "page": "2-3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f831df31-0191-4fc6-af3a-6e0f49e5ff49"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "24",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a9a5614b-a44a-49b2-b319-ab7329be2ec8"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "25",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fb018690-f425-459b-92e6-0167d8a777d7"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "26",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "aaed7432-f638-4c05-85ea-19a33624c5c4"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "27",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e70a17a7-9e6f-4023-a701-14f3e5d5ee69"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "28",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "59ef991c-9370-4de0-9061-19d8b44514af"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "29",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "84249846-65da-40fe-a7a7-ff00d564f3c1"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "30",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6c066efb-5f0a-4dd7-b5ec-8c04e907da12"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "31",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d8289541-012f-412d-96be-4dc428261c56"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "32",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9192027a-52ef-4f10-a74b-22010974360f"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "33",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "21d2e56d-0064-4f49-bdd9-c4f4afe51aaa"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "34",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b6224d84-afde-4f27-9f32-e493a3c5d271"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "35",
+      "page": "3-4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d9ada055-3468-4807-ba4f-20b513614789"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "36",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "33c4ad84-2e9b-4c8e-82a8-023c0dfb2b88"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "37",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2458f82b-cd62-4ae0-899b-ab9c88371f08"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "38",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "28248926-1552-4ba3-899b-a93d09446d77"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "39",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "03ff443b-2107-49ea-ac70-41e4c835c2cd"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "40",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4767ad3f-2e6e-45a2-9a86-bf635167d4e6"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "41",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2c2558d6-f5ff-41de-ad5c-0f88692a29c5"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "42",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f3b45c0a-313b-43cc-8fdc-354db0103da8"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "43",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "02ffb998-deae-42c6-ad65-371a1c090f54"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "44",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "adc7ad0c-56c8-4977-93fb-18d0019f078c"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "45",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3009103a-90db-44e9-8906-a83a601f68df"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "46",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "99c4829e-9620-47d5-ae64-2394d8efba6d"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "47",
+      "page": "4-5",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0ceed602-93e5-45b8-b79e-9d02c29e9d99"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "48",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0f3cbe2a-a1aa-482d-837f-82737111253f"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "49",
+      "page": "5",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8ee0d101-b608-4668-a34d-bc27f7e10ad6"
+    },
+    {
+      "source": "output/pdf/beed_sne_pdf_sept2026_extracted_questions.json",
+      "row": "50",
+      "page": "5-6",
+      "exam": "elementary",
+      "topic": "major/special-needs-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0ec2a719-c9d6-4c64-bc05-875abda4e879"
+    }
+  ],
+  "skipped_samples": []
+}
