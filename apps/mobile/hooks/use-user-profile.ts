@@ -23,7 +23,8 @@ export function useUserProfile(guestLabel = 'Guest') {
         profile.displayName?.trim() || fallbackDisplayName(user, guestLabel);
       setDisplayName(resolved);
       setAvatarUrl(profile.avatarUrl);
-    } catch {
+    } catch (err) {
+      console.warn('[use-user-profile] fetchUserProfile failed, using fallback', err);
       setDisplayName(fallbackDisplayName(user, guestLabel));
       setAvatarUrl(null);
     } finally {

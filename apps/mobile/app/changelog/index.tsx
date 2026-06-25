@@ -21,6 +21,19 @@ function formatDate(iso: string): string {
   });
 }
 
+const SEPT2026_LET_NONPDF_UPDATE: ChangelogEntry = {
+  id: 'local-sept2026-let-nonpdf-import',
+  title: 'Sept2026 LET non-PDF reviewers added',
+  body:
+    'Added 350 ready LET questions and 330 flashcards from Word and PowerPoint reviewer files. Image-based reviewer screenshots were OCR-audited and held for manual review before upload.',
+  examSlug: 'let-secondary',
+  publishedAt: '2026-06-25T00:00:00.000Z',
+};
+
+function localUpdatesForExam(examSlug: string): ChangelogEntry[] {
+  return examSlug === 'let-elementary' || examSlug === 'let-secondary' ? [SEPT2026_LET_NONPDF_UPDATE] : [];
+}
+
 export default function ChangelogScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -55,6 +68,12 @@ export default function ChangelogScreen() {
     void load();
   }, [load]);
 
+  const visibleEntries = useMemo(() => {
+    const localEntries = localUpdatesForExam(examSlug);
+    const remoteIds = new Set(entries.map((entry) => entry.id));
+    return [...localEntries.filter((entry) => !remoteIds.has(entry.id)), ...entries];
+  }, [entries, examSlug]);
+
   return (
     <View style={styles.root}>
       <ScrollView
@@ -85,14 +104,14 @@ export default function ChangelogScreen() {
         <View style={styles.body}>
           {loading ? (
             <ActivityIndicator color={colors.primary} style={{ marginTop: spacing.xl }} />
-          ) : entries.length === 0 ? (
+          ) : visibleEntries.length === 0 ? (
             <EmptyState
               icon={<Ionicons name="newspaper-outline" size={32} color={colors.primary} />}
               title="No updates yet"
               description="Content changelog entries will appear here as we publish new material."
             />
           ) : (
-            entries.map((entry) => (
+            visibleEntries.map((entry) => (
               <View
                 key={entry.id}
                 style={{

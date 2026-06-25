@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import { AppSheet } from '../../components/app-sheet';
-import { ActivityIndicator, Alert, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { ManagePlusCard } from '../../components/manage-plus-card';
@@ -88,7 +88,7 @@ function SettingsScreenContent() {
   const { prefs, setDarkMode, setNotificationsEnabled, setExplanationLocale, setExamRemindersEnabled } = usePreferences();
   const { isPremium, entitlements, restoreStorePurchases } = useEntitlements();
   const { refresh: refreshOnboarding } = useOnboardingGate();
-  const { displayName, initials } = useUserProfile('Guest');
+  const { displayName, initials, avatarUrl } = useUserProfile('Guest');
   const { isOnline, hasProbed } = useNetworkStatus();
   const premiumActive = isPremium();
   const entitlementSummary = formatEntitlementSummary(entitlements);
@@ -295,9 +295,13 @@ function SettingsScreenContent() {
             onPress={user ? () => router.push('/profile/edit') : undefined}
             disabled={!user}
           >
-            <View style={styles.userAvatar}>
-              <Text style={styles.userInitial}>{initials}</Text>
-            </View>
+            {avatarUrl ? (
+              <Image source={{ uri: avatarUrl }} style={styles.userAvatar} />
+            ) : (
+              <View style={styles.userAvatar}>
+                <Text style={styles.userInitial}>{initials}</Text>
+              </View>
+            )}
             <View style={{ flex: 1 }}>
               <Text style={styles.userName}>{displayName}</Text>
               <Text style={styles.userEmail}>{user?.email ?? 'Not signed in'}</Text>
