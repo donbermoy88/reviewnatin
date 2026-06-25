@@ -1,0 +1,23 @@
+{
+  "batch_id": "b0942074-091a-456c-b84b-2f43f124ae3a",
+  "dry_run": true,
+  "source": "output/pdf/sept2026_nonpdf_image_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 108,
+  "ready_rows": 0,
+  "candidate_targets": 0,
+  "insertable": 0,
+  "inserted": 0,
+  "skipped": 0,
+  "duplicates": 0,
+  "source_stats": {
+    "output/pdf/sept2026_nonpdf_image_extracted_questions.json": {
+      "readyRows": 0,
+      "candidateTargets": 0,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [],
+  "skipped_samples": []
+}

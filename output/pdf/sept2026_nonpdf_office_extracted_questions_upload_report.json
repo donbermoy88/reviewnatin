@@ -1,0 +1,512 @@
+{
+  "batch_id": "05d35417-81f6-4712-8f3d-899901083b44",
+  "dry_run": true,
+  "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 5596,
+  "ready_rows": 979,
+  "candidate_targets": 1948,
+  "insertable": 0,
+  "inserted": 0,
+  "skipped": 6,
+  "duplicates": 1948,
+  "source_stats": {
+    "output/pdf/sept2026_nonpdf_office_extracted_questions.json": {
+      "readyRows": 979,
+      "candidateTargets": 1948,
+      "skipped": 6
+    }
+  },
+  "skipped_by_reason": {
+    "question_too_short": 4,
+    "topic_mapping_missing": 2
+  },
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "36",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a4be0235-bc83-48c9-85a4-5b9f9cb28d71"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "36",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "61886e6b-1e25-4482-a8ef-fc90008550a0"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "38",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e84e3549-0637-4597-88ba-f4849d753884"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "38",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "22b67ab7-d395-4c47-b7f1-6e35a8e57ac7"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "41",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "804b0e2e-6f0d-4d24-9868-291a153ef799"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "41",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7f640bfd-6483-4fab-9afb-fcfc06bfc6af"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "44",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "aa33b4ab-9da0-4f65-9969-cead761b3338"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "44",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c704a53f-c898-488c-b544-1aecc0927599"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "45",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "668d4562-bfc3-4880-9946-75c469c28d47"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "45",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b854962f-e0b2-4eb9-9976-631cc0aeee9e"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "46",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6f17b3e7-3aca-424d-9ddf-2323e0e0710f"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "46",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "de31051e-e8f9-4fa8-a116-5a8d1e4f978b"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "47",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c94d415a-24d2-407c-a253-9809dce38ba6"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "47",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "32642d54-d562-46e9-8303-13bc7ddfaf17"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "48",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6e8d5f3d-0692-4178-b461-78828c3e1a27"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "48",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dd056833-a182-498b-b4e3-40743ada072b"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "49",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dd84d82a-fada-45d6-a985-03a74d4c39a2"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "49",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e831bb76-4d4d-436c-a09c-95c7605630e3"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "50",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f582d064-7288-49c2-a134-7931d4c473f3"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "50",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4f0eb810-bf76-4465-b7cf-e59bbf250750"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "53",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "931b8d99-ccca-4168-b426-7dd5d406d82f"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "53",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "da08c050-15f1-4439-9c4d-ea38a57dc6c2"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "54",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "db73c2c6-bb39-4261-800b-ed033bf453c7"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "54",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "382c9368-dd5a-4215-865d-9b983090f1ef"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "57",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "54d08bb4-6c73-4b27-b1cc-b98d38c3afb6"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "57",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "778ff963-7035-454b-9283-8b9f5b227679"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "58",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "67b364ad-ab9b-4d21-9385-e05d573f59d2"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "58",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "625c59b9-2b5a-4a59-9eb6-ea31cab7be67"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "60",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c59a0792-bee2-49b5-83c8-5f359fccd81c"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "60",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3f39d7eb-f4ba-4911-8109-ee9eced6c434"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "62",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c8c2b7f6-5bb3-4ff9-8bb8-394329e72afa"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "62",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "83b260bc-1243-4553-ab34-2ec44b0f3dde"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "65",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/ict-current-trends",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e47e7f35-619b-4034-b46a-7906a23e191f"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "65",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/ict-current-trends",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2abd1c30-af41-4220-a683-927435b69433"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "66",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8920bf31-e857-4ea8-b557-9ca9bb8167b2"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "66",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "edecb26b-a92d-4478-8ab6-dc0f0bfff903"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "69",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "690af892-464d-49d4-9e74-d1cab0b9a7f4"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "69",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "37a0a08e-bac9-4ef7-afca-29bdb1f8df92"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "70",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5ddabf27-22a6-4ebb-91f7-11b2f0b70356"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "70",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "830d0ab0-8f7d-43cc-84d0-6ce57177f83d"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "71",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2fd3125e-ba05-4770-ab42-6e5e4f6f94a6"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "71",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e34fcade-10db-40d1-9aa3-98f9876ceaf2"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "72",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "77798524-c686-4a4d-9e34-1876576f236c"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "72",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f973f4ba-6bd5-47af-846e-8cf296856b96"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "73",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d5a37ca3-ffdc-4ac6-b5c5-6b56a1b68b4d"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "73",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5695779d-210d-489b-a952-cfa13321d998"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "74",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/ict-current-trends",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dfb9b441-b973-428c-ad79-7a24077cfda3"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "74",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/ict-current-trends",
+      "reason": "duplicate_existing_content",
+      "existing_id": "63842d66-6e9f-4e3f-ad94-2f95591180e3"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "75",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "gen-ed/ict-current-trends",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dcb52563-041a-482c-b239-bcb3bfee7074"
+    },
+    {
+      "source": "output/pdf/sept2026_nonpdf_office_extracted_questions.json",
+      "row": "75",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "gen-ed/ict-current-trends",
+      "reason": "duplicate_existing_content",
+      "existing_id": "29039529-ad8f-4bab-b706-f8be8dbd55f9"
+    }
+  ],
+  "skipped_samples": [
+    {
+      "row": "145",
+      "page": "Office",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "181",
+      "page": "Office",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "3309",
+      "page": "Office",
+      "exam": "elementary",
+      "subject": "Biological Science",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "3351",
+      "page": "Office",
+      "exam": "elementary",
+      "subject": "Technology and Livelihood Education",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "3946",
+      "page": "Office",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "3948",
+      "page": "Office",
+      "reason": "question_too_short"
+    }
+  ]
+}
