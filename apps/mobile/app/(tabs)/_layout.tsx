@@ -36,8 +36,9 @@ const TABS: {
   activeIcon: keyof typeof Ionicons.glyphMap;
 }[] = [
   { name: 'index', label: 'Home', icon: 'home-outline', activeIcon: 'home' },
-  { name: 'study', label: 'Review', icon: 'layers-outline', activeIcon: 'layers' },
-  { name: 'leaderboard', label: 'Ranks', icon: 'trophy-outline', activeIcon: 'trophy' },
+  { name: 'practice', label: 'Practice', icon: 'flash-outline', activeIcon: 'flash' },
+  { name: 'mock-exam', label: 'Mock Exam', icon: 'timer-outline', activeIcon: 'timer' },
+  { name: 'community', label: 'Community', icon: 'people-outline', activeIcon: 'people' },
   { name: 'progress', label: 'Profile', icon: 'person-outline', activeIcon: 'person' },
 ];
 
@@ -106,11 +107,12 @@ export default function TabsLayout() {
         />
       ))}
       <Tabs.Screen name="settings" options={{ href: null, headerShown: false }} />
-      {/* Community feature is built and device-verified (guest read-only state,
-          composer login-gate, feed/post/comment/like/follow flows) but not yet
-          surfaced as a primary tab — Phase 4 (nav restructure) promotes this and
-          demotes study/leaderboard. */}
-      <Tabs.Screen name="community" options={{ href: null, headerShown: false }} />
+      {/* Demoted from primary tabs in favor of Practice/Mock Exam/Community — still
+          fully working routes, reachable via the "Browse all subjects / Notes" and
+          "Leaderboard" entry points on Home/Profile, and via existing router.push
+          callers (deep-link-routes.ts, etc.) which are unaffected by this change. */}
+      <Tabs.Screen name="study" options={{ href: null, headerShown: false }} />
+      <Tabs.Screen name="leaderboard" options={{ href: null, headerShown: false }} />
     </Tabs>
   );
 }

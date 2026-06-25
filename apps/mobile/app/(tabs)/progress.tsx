@@ -290,6 +290,15 @@ function ProfileScreenContent() {
             size="lg"
             onPress={() => router.push('/analytics')}
           />
+          <PrimaryButton
+            label="Leaderboard"
+            variant="outline"
+            icon="trophy-outline"
+            iconPosition="left"
+            size="lg"
+            style={{ marginTop: spacing.sm }}
+            onPress={() => router.push('/(tabs)/leaderboard')}
+          />
         </View>
 
         {user && badges.length > 0 ? (
