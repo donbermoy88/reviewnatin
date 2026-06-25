@@ -1,0 +1,245 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-",
+  "source_files_seen": 34,
+  "source_files_processed": 33,
+  "materials_generated": 319,
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Assessment_of_Learning.docx",
+      "status": "processed",
+      "text_chars": 55881,
+      "chunks": 11,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Assessment_of_Learning.pdf",
+      "status": "processed",
+      "text_chars": 8075,
+      "chunks": 2,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/BLEPT_PE-Philosophy-in-Education.pdf",
+      "status": "processed",
+      "text_chars": 3339,
+      "chunks": 1,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/BLEPT_ProfEd_Assessment_of_Learning_-_M_Balagtas.pdf",
+      "status": "processed",
+      "text_chars": 47401,
+      "chunks": 8,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/CHILD_AND_ADOLESCENT_DEVT_pdfbooksforum.com.pdf",
+      "status": "processed",
+      "text_chars": 25764,
+      "chunks": 6,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Educational_Philosophers.pdf",
+      "status": "processed",
+      "text_chars": 15620,
+      "chunks": 3,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Essentialism-Perennialism.pdf",
+      "status": "processed",
+      "text_chars": 27766,
+      "chunks": 6,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_PROF_ED_FILE_2.pdf",
+      "status": "processed",
+      "text_chars": 340401,
+      "chunks": 58,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_Reviewer_-_Pillars_of_Learning_1.pdf",
+      "status": "processed",
+      "text_chars": 120051,
+      "chunks": 20,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_Reviewer_Notes.pdf",
+      "status": "processed",
+      "text_chars": 196989,
+      "chunks": 35,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-1-Foundations-of-Education.docx",
+      "status": "processed",
+      "text_chars": 43136,
+      "chunks": 9,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-11-Social-Dimensions-in-Education.docx",
+      "status": "processed",
+      "text_chars": 53227,
+      "chunks": 10,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-2-Child-and-Adolescent-Development.docx",
+      "status": "processed",
+      "text_chars": 45243,
+      "chunks": 10,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-5-Curriculum-Development.docx",
+      "status": "processed",
+      "text_chars": 43968,
+      "chunks": 9,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-6-Developmental-Reading.docx",
+      "status": "processed",
+      "text_chars": 56020,
+      "chunks": 10,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-7-Educational-Technology.docx",
+      "status": "processed",
+      "text_chars": 53520,
+      "chunks": 10,
+      "topic": "prof-ed/educational-technology"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-8-Assessment-and-Evaluation-of-Learning-1.docx",
+      "status": "processed",
+      "text_chars": 45712,
+      "chunks": 9,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-9-Assessment-and-Evaluation-of-Learning-2.docx",
+      "status": "processed",
+      "text_chars": 45576,
+      "chunks": 11,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Notes-CHILD-and-ADOLESCENT-DEVELOPMENT.pdf",
+      "status": "processed",
+      "text_chars": 30594,
+      "chunks": 6,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PRINCIPLES_OF_TEACHING.pdf",
+      "status": "processed",
+      "text_chars": 57594,
+      "chunks": 9,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PRINCIPLE_OF_TEACHING_DISCUSSIONS (1).pdf",
+      "status": "processed",
+      "text_chars": 73889,
+      "chunks": 12,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PRINCIPLE_OF_TEACHING_DISCUSSIONS.pdf",
+      "status": "duplicate_text",
+      "text_chars": 73889
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_1.pdf",
+      "status": "processed",
+      "text_chars": 18025,
+      "chunks": 3,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_2.pdf",
+      "status": "processed",
+      "text_chars": 22251,
+      "chunks": 4,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_5.docx",
+      "status": "processed",
+      "text_chars": 36890,
+      "chunks": 7,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_6.docx",
+      "status": "processed",
+      "text_chars": 13411,
+      "chunks": 3,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_7.doc",
+      "status": "processed",
+      "text_chars": 73917,
+      "chunks": 13,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_8.docx",
+      "status": "processed",
+      "text_chars": 17650,
+      "chunks": 4,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Philosophical_Foundation_of_Education.pdf",
+      "status": "processed",
+      "text_chars": 10220,
+      "chunks": 2,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/unesco_5_pillars_for_esd.pdf",
+      "status": "processed",
+      "text_chars": 7736,
+      "chunks": 2,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/G. Topnotcher_s Notes 2026/Note 1- Topnotccher.DOCX",
+      "status": "processed",
+      "text_chars": 2329,
+      "chunks": 1,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/G. Topnotcher_s Notes 2026/Note 2- Topnotccher.DOCX",
+      "status": "processed",
+      "text_chars": 2249,
+      "chunks": 1,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/G. Topnotcher_s Notes 2026/Note 3- Topnotccher.DOCX",
+      "status": "processed",
+      "text_chars": 2492,
+      "chunks": 1,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/G. Topnotcher_s Notes 2026/TOPNOTCHERS_NOTES_FOR_PROF_ED.docx",
+      "status": "processed",
+      "text_chars": 109208,
+      "chunks": 23,
+      "topic": "prof-ed/principles-of-teaching"
+    }
+  ],
+  "output": "/Users/lyndon/reviewnatin/output/pdf/freebies_review_materials.json"
+}

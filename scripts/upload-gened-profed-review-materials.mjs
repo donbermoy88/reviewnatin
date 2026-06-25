@@ -3,8 +3,12 @@ import { createClient } from '@supabase/supabase-js';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 
-const sourceFile = 'output/pdf/gened_profed_review_materials.json';
-const reportFile = 'output/pdf/gened_profed_review_materials_upload_report.json';
+const sourceFile =
+  process.argv.find((arg) => arg.startsWith('--source-file='))?.split('=').slice(1).join('=') ||
+  'output/pdf/gened_profed_review_materials.json';
+const reportFile =
+  process.argv.find((arg) => arg.startsWith('--report='))?.split('=').slice(1).join('=') ||
+  sourceFile.replace(/\.json$/, '_upload_report.json');
 const dryRun = process.argv.includes('--dry-run');
 
 function loadEnv(file) {

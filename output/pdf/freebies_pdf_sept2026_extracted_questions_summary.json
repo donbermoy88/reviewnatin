@@ -1,0 +1,593 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-",
+  "generated_at": "2026-06-23",
+  "total_pdfs_seen": 30,
+  "total_pdfs_processed": 28,
+  "total_questions_found": 2339,
+  "total_ready_for_upload": 95,
+  "total_needing_review": 1297,
+  "total_without_answer_key": 692,
+  "total_duplicates_detected": 255,
+  "total_questions_with_images": 7,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 0,
+  "total_both_or_cannot_determine_questions": 2339,
+  "status_counts": {
+    "Needs Answer": 692,
+    "Duplicate": 255,
+    "Incomplete": 1270,
+    "Needs Review": 24,
+    "Ready for Upload": 95,
+    "Needs Image Extraction": 3
+  },
+  "exam_type_counts": {
+    "Both": 2339
+  },
+  "subject_category_breakdown": {
+    "Professional Education": 876,
+    "General Education": 1258,
+    "Curriculum Development": 73,
+    "Mathematics": 12,
+    "English": 17,
+    "Assessment of Learning": 35,
+    "Values Education": 5,
+    "Science": 16,
+    "Elementary / Cannot Determine": 8,
+    "Music": 3,
+    "Educational Technology": 8,
+    "Information and Communication Technology": 2,
+    "Arts": 1,
+    "Facilitating Learning": 2,
+    "Social Studies": 1,
+    "Health": 2,
+    "Filipino": 19,
+    "Biological Science": 1
+  },
+  "difficulty_breakdown": {
+    "Cannot Determine": 2339
+  },
+  "source_counts_top_50": {
+    "Yellowbook.pdf": 969,
+    "B. Final Coaching 2025.pdf": 297,
+    "A. Profed Final Coaching 2025.pdf": 200,
+    "SIMULATED_TEST-EDUCATIONAL_TEACHNOLOGY.pdf": 100,
+    "SIMULATED_TEST_PRINCIPLES_AND_STRATEGIES_OF_TEACHING.pdf": 100,
+    "CHILD_AND_ADOLESCENT_DEVT_pdfbooksforum.com.pdf": 98,
+    "Extra JUNELET P1.pdf": 97,
+    "LET_PROF_ED_FILE_2.pdf": 74,
+    "PROF_ED_Keyword_1.pdf": 61,
+    "YELLOW BOOK 4.0_102420.pdf": 60,
+    "SIMULATED_TEST-CURRICULUM_DEVELOPMENT_AND_DEVELOPMENTAL_READING.pdf": 40,
+    "PROFED12_ans.pdf": 38,
+    "Yellow Book 3.0 Edition Part 2 Prof Ed.pdf": 35,
+    "PRINCIPLE_OF_TEACHING_DISCUSSIONS (1).pdf": 26,
+    "PRINCIPLE_OF_TEACHING_DISCUSSIONS.pdf": 26,
+    "PRINCIPLES_OF_TEACHING.pdf": 21,
+    "Extra JUNELET P2.pdf": 19,
+    "LET_Reviewer_-_Pillars_of_Learning_1.pdf": 18,
+    "BLEPT_ProfEd_Assessment_of_Learning_-_M_Balagtas.pdf": 16,
+    "Notes-CHILD-and-ADOLESCENT-DEVELOPMENT.pdf": 11,
+    "C. Gen Ed Final Coaching 2024.pdf": 8,
+    "LET_Reviewer_Notes.pdf": 7,
+    "Assessment_of_Learning.pdf": 6,
+    "unesco_5_pillars_for_esd.pdf": 5,
+    "PROF_ED_Keyword_2.pdf": 3,
+    "C. Gen Ed Final Coaching 2025.pdf": 2,
+    "Educational_Philosophers.pdf": 1,
+    "Essentialism-Perennialism.pdf": 1
+  },
+  "batches": [],
+  "sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/D. FINAL COACHING 2026/A. Profed Final Coaching 2025.pdf",
+      "status": "processed",
+      "rows": 200,
+      "pages": 25,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/D. FINAL COACHING 2026/B. Final Coaching 2025.pdf",
+      "status": "processed",
+      "rows": 297,
+      "pages": 181,
+      "images_by_page": {
+        "35": 1,
+        "45": 1,
+        "54": 1,
+        "123": 1,
+        "133": 1,
+        "172": 1
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/D. FINAL COACHING 2026/C. Gen Ed Final Coaching 2024.pdf",
+      "status": "processed",
+      "rows": 8,
+      "pages": 135,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/D. FINAL COACHING 2026/C. Gen Ed Final Coaching 2025.pdf",
+      "status": "processed",
+      "rows": 2,
+      "pages": 10,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Assessment_of_Learning.pdf",
+      "status": "processed",
+      "rows": 6,
+      "pages": 2,
+      "images_by_page": {
+        "1": 2
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/BLEPT_PE-Philosophy-in-Education.pdf",
+      "status": "no_questions_found_after_ocr",
+      "rows": 0,
+      "pages": 1,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/BLEPT_ProfEd_Assessment_of_Learning_-_M_Balagtas.pdf",
+      "status": "processed",
+      "rows": 16,
+      "pages": 20,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/CHILD_AND_ADOLESCENT_DEVT_pdfbooksforum.com.pdf",
+      "status": "processed",
+      "rows": 98,
+      "pages": 9,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Educational_Philosophers.pdf",
+      "status": "processed",
+      "rows": 1,
+      "pages": 4,
+      "images_by_page": {
+        "1": 5,
+        "2": 4,
+        "3": 5,
+        "4": 2
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Essentialism-Perennialism.pdf",
+      "status": "processed",
+      "rows": 1,
+      "pages": 7,
+      "images_by_page": {
+        "7": 1
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_PROF_ED_FILE_2.pdf",
+      "status": "processed",
+      "rows": 74,
+      "pages": 136,
+      "images_by_page": {
+        "1": 2,
+        "21": 2,
+        "39": 1,
+        "71": 1,
+        "74": 2,
+        "81": 2,
+        "101": 1,
+        "104": 2,
+        "111": 2,
+        "119": 1,
+        "120": 1,
+        "124": 1,
+        "125": 1
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_Reviewer_-_Pillars_of_Learning_1.pdf",
+      "status": "processed",
+      "rows": 18,
+      "pages": 119,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/LET_Reviewer_Notes.pdf",
+      "status": "processed",
+      "rows": 7,
+      "pages": 65,
+      "images_by_page": {
+        "5": 1,
+        "15": 1,
+        "39": 2,
+        "64": 1
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Notes-CHILD-and-ADOLESCENT-DEVELOPMENT.pdf",
+      "status": "processed",
+      "rows": 11,
+      "pages": 9,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PRINCIPLES_OF_TEACHING.pdf",
+      "status": "processed",
+      "rows": 21,
+      "pages": 228,
+      "images_by_page": {
+        "1": 6,
+        "2": 2,
+        "3": 2,
+        "4": 2,
+        "5": 2,
+        "6": 2,
+        "7": 2,
+        "8": 2,
+        "9": 1,
+        "16": 2,
+        "17": 2,
+        "18": 2,
+        "19": 3,
+        "20": 4,
+        "21": 4,
+        "22": 4,
+        "23": 4,
+        "24": 3,
+        "25": 3,
+        "26": 2,
+        "27": 2,
+        "28": 2,
+        "93": 2,
+        "94": 2,
+        "95": 2,
+        "96": 2,
+        "97": 2,
+        "98": 2,
+        "99": 2,
+        "106": 2,
+        "119": 2,
+        "123": 2,
+        "124": 5,
+        "125": 6,
+        "126": 16,
+        "127": 26,
+        "128": 4,
+        "129": 16,
+        "130": 16,
+        "131": 5,
+        "132": 8,
+        "133": 8,
+        "134": 8,
+        "135": 8,
+        "136": 8,
+        "137": 8,
+        "138": 4,
+        "139": 4,
+        "140": 4,
+        "141": 4,
+        "142": 4,
+        "143": 2,
+        "144": 4,
+        "145": 4,
+        "146": 4,
+        "147": 4,
+        "148": 4,
+        "149": 2,
+        "150": 8,
+        "151": 4,
+        "152": 4,
+        "153": 4,
+        "154": 4,
+        "155": 4,
+        "156": 4,
+        "157": 4,
+        "158": 4,
+        "159": 4,
+        "160": 4,
+        "161": 4,
+        "162": 1,
+        "164": 2,
+        "165": 2,
+        "166": 2,
+        "167": 2,
+        "168": 2,
+        "169": 2,
+        "170": 2,
+        "171": 2,
+        "172": 2,
+        "173": 2,
+        "174": 2,
+        "175": 2,
+        "176": 2,
+        "177": 2,
+        "178": 2,
+        "179": 2,
+        "180": 2,
+        "181": 2,
+        "182": 2,
+        "183": 2,
+        "184": 2,
+        "185": 2,
+        "186": 2,
+        "187": 2,
+        "188": 2,
+        "189": 2,
+        "190": 2,
+        "191": 2,
+        "192": 2,
+        "193": 2,
+        "194": 2,
+        "195": 2,
+        "196": 2,
+        "197": 2,
+        "198": 2,
+        "199": 2,
+        "200": 2,
+        "201": 2,
+        "202": 2,
+        "203": 2,
+        "204": 2,
+        "205": 2,
+        "206": 2,
+        "207": 2,
+        "208": 2,
+        "209": 2,
+        "210": 2,
+        "211": 2,
+        "212": 2,
+        "213": 2,
+        "214": 2,
+        "215": 2,
+        "216": 2,
+        "217": 2,
+        "218": 2,
+        "219": 2,
+        "220": 2,
+        "222": 2,
+        "223": 2,
+        "224": 2,
+        "225": 2,
+        "226": 2,
+        "227": 2,
+        "228": 2
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PRINCIPLE_OF_TEACHING_DISCUSSIONS (1).pdf",
+      "status": "processed",
+      "rows": 26,
+      "pages": 142,
+      "images_by_page": {
+        "102": 2
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PRINCIPLE_OF_TEACHING_DISCUSSIONS.pdf",
+      "status": "processed",
+      "rows": 26,
+      "pages": 142,
+      "images_by_page": {
+        "102": 2
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROFED12_ans.pdf",
+      "status": "processed",
+      "rows": 38,
+      "pages": 4,
+      "images_by_page": {
+        "1": 2
+      }
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_1.pdf",
+      "status": "processed",
+      "rows": 61,
+      "pages": 10,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_2.pdf",
+      "status": "processed",
+      "rows": 3,
+      "pages": 9,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Philosophical_Foundation_of_Education.pdf",
+      "status": "no_questions_found_after_ocr",
+      "rows": 0,
+      "pages": 9,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/SIMULATED_TEST-CURRICULUM_DEVELOPMENT_AND_DEVELOPMENTAL_READING.pdf",
+      "status": "processed",
+      "rows": 40,
+      "pages": 5,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/SIMULATED_TEST-EDUCATIONAL_TEACHNOLOGY.pdf",
+      "status": "processed",
+      "rows": 100,
+      "pages": 8,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/SIMULATED_TEST_PRINCIPLES_AND_STRATEGIES_OF_TEACHING.pdf",
+      "status": "processed",
+      "rows": 100,
+      "pages": 7,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/unesco_5_pillars_for_esd.pdf",
+      "status": "processed",
+      "rows": 5,
+      "pages": 6,
+      "images_by_page": {}
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/F. JUNE LET EXAMS 2026/Extra JUNELET P1.pdf",
+      "status": "processed",
+      "rows": 97,
+      "pages": 16,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/F. JUNE LET EXAMS 2026/Extra JUNELET P2.pdf",
+      "status": "processed",
+      "rows": 19,
+      "pages": 13,
+      "method": "ocr",
+      "answer_keys_detected": 7,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/YELLOW BOOK 4.0_102420.pdf",
+      "status": "processed",
+      "rows": 60,
+      "pages": 107,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/Yellow Book 3.0 Edition Part 2 Prof Ed.pdf",
+      "status": "processed",
+      "rows": 35,
+      "pages": 55,
+      "method": "ocr",
+      "answer_keys_detected": 22,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/Yellowbook.pdf",
+      "status": "processed",
+      "rows": 969,
+      "pages": 145,
+      "images_by_page": {
+        "1": 2
+      }
+    }
+  ],
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/freebies_pdf_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/freebies_pdf_sept2026_extracted_questions.json",
+    "md": "/Users/lyndon/reviewnatin/output/pdf/freebies_pdf_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/freebies_pdf_sept2026_extracted_questions_summary.json"
+  },
+  "folder_reaudit": {
+    "file_counts": {
+      ".doc": 2,
+      ".docx": 17,
+      ".pdf": 30,
+      "<none>": 1
+    },
+    "pdfs_total": 30,
+    "pdfs_with_existing_rows_before_ocr": 24,
+    "pdfs_ocr_attempted": 6,
+    "ocr_rows_appended": 211,
+    "ocr_ready_for_upload": 0,
+    "ocr_needs_answer": 18,
+    "ocr_needs_review_or_incomplete": 192,
+    "ocr_duplicates": 1,
+    "ocr_sources": [
+      {
+        "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/BLEPT_PE-Philosophy-in-Education.pdf",
+        "status": "no_questions_found_after_ocr",
+        "rows": 0,
+        "pages": 1,
+        "method": "ocr",
+        "answer_keys_detected": 0,
+        "previous_status": "no_questions_found"
+      },
+      {
+        "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Philosophical_Foundation_of_Education.pdf",
+        "status": "no_questions_found_after_ocr",
+        "rows": 0,
+        "pages": 9,
+        "method": "ocr",
+        "answer_keys_detected": 0,
+        "previous_status": "no_questions_found"
+      },
+      {
+        "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/F. JUNE LET EXAMS 2026/Extra JUNELET P1.pdf",
+        "status": "processed",
+        "rows": 97,
+        "pages": 16,
+        "method": "ocr",
+        "answer_keys_detected": 0,
+        "previous_status": "no_questions_found"
+      },
+      {
+        "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/F. JUNE LET EXAMS 2026/Extra JUNELET P2.pdf",
+        "status": "processed",
+        "rows": 19,
+        "pages": 13,
+        "method": "ocr",
+        "answer_keys_detected": 7,
+        "previous_status": "no_questions_found"
+      },
+      {
+        "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/YELLOW BOOK 4.0_102420.pdf",
+        "status": "processed",
+        "rows": 60,
+        "pages": 107,
+        "method": "ocr",
+        "answer_keys_detected": 0,
+        "previous_status": "no_questions_found"
+      },
+      {
+        "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/Yellow Book 3.0 Edition Part 2 Prof Ed.pdf",
+        "status": "processed",
+        "rows": 35,
+        "pages": 55,
+        "method": "ocr",
+        "answer_keys_detected": 22,
+        "previous_status": "no_questions_found"
+      }
+    ],
+    "non_pdf_files_not_imported": 20
+  },
+  "suggested_supabase_table_mapping": {
+    "exam_type": "LET Exam Type",
+    "exam_level": "LET Exam Type",
+    "subject_area": "Subject Area",
+    "topic": "Topic",
+    "question_text": "Question",
+    "passage_text": "Passage Reference (resolve/review manually when populated)",
+    "question_image_url": "Question Image Reference",
+    "choice_a_text": "Choice A",
+    "choice_a_image_url": "Choice A Image Reference",
+    "choice_b_text": "Choice B",
+    "choice_b_image_url": "Choice B Image Reference",
+    "choice_c_text": "Choice C",
+    "choice_c_image_url": "Choice C Image Reference",
+    "choice_d_text": "Choice D",
+    "choice_d_image_url": "Choice D Image Reference",
+    "choice_e_text": "Choice E",
+    "choice_e_image_url": "Choice E Image Reference",
+    "correct_answer": "Correct Answer",
+    "explanation": "Explanation",
+    "difficulty": "Difficulty",
+    "source_pdf": "Source PDF",
+    "source_page": "Page",
+    "original_question_number": "Original No.",
+    "duplicate_of": "Duplicate Of",
+    "confidence_score": "Confidence",
+    "status": "Status",
+    "notes": "Notes"
+  },
+  "recommended_next_action_before_uploading": "Upload only Ready for Upload rows. Non-PDF reviewer files remain outside the original PDF extraction scope and should be parsed by a separate DOC/DOCX/PPT extraction pass before import."
+}

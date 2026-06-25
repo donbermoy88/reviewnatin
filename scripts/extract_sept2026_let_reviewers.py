@@ -327,6 +327,7 @@ def infer_subject_area(path, question_text):
         "beed&bsed gened & profed" in path_text
         or "beedbsedletdrillsbooster" in compact_text
         or "beedbsedreviewerbooks" in compact_text
+        or "freebiesbeedbsed" in compact_text
     ):
         if re.search(r"\b(teacher|learner|classroom|curriculum|assessment|instruction|learning|school)\b", question_text, re.I):
             return "Professional Education"
@@ -378,6 +379,8 @@ def status_for(row, image_counts_for_page):
         or row["Subject Area"] == "Cannot Determine"
         or "Cannot Determine" in row["Subject Area"]
     ):
+        return "Needs Review"
+    if row["LET Exam Type"] == "Both" and row["Subject Area"] in {"Arts", "Music", "Physical Education", "Health"}:
         return "Needs Review"
     if re.search(r"[�□]{1,}|_{3,}", row["Question"]):
         return "Needs Review"

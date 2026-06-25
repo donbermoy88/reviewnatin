@@ -1,0 +1,54 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/freebies_review_materials.json",
+  "source_rows": 319,
+  "insertable_materials": 630,
+  "inserted": 630,
+  "skipped": 8,
+  "skipped_by_reason": {
+    "thin_material": 4,
+    "duplicate_title": 4
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 11) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 11) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: TOPNOTCHERS NOTES FOR PROF ED (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Freebies Notes: TOPNOTCHERS NOTES FOR PROF ED (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    }
+  ]
+}

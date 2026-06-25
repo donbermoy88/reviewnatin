@@ -1,0 +1,73 @@
+{
+  "file_counts": {
+    ".doc": 2,
+    ".docx": 17,
+    ".pdf": 30,
+    "<none>": 1
+  },
+  "pdfs_total": 30,
+  "pdfs_with_existing_rows_before_ocr": 24,
+  "pdfs_ocr_attempted": 6,
+  "ocr_rows_appended": 211,
+  "ocr_ready_for_upload": 0,
+  "ocr_needs_answer": 18,
+  "ocr_needs_review_or_incomplete": 192,
+  "ocr_duplicates": 1,
+  "ocr_sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/BLEPT_PE-Philosophy-in-Education.pdf",
+      "status": "no_questions_found_after_ocr",
+      "rows": 0,
+      "pages": 1,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Philosophical_Foundation_of_Education.pdf",
+      "status": "no_questions_found_after_ocr",
+      "rows": 0,
+      "pages": 9,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/F. JUNE LET EXAMS 2026/Extra JUNELET P1.pdf",
+      "status": "processed",
+      "rows": 97,
+      "pages": 16,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/F. JUNE LET EXAMS 2026/Extra JUNELET P2.pdf",
+      "status": "processed",
+      "rows": 19,
+      "pages": 13,
+      "method": "ocr",
+      "answer_keys_detected": 7,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/YELLOW BOOK 4.0_102420.pdf",
+      "status": "processed",
+      "rows": 60,
+      "pages": 107,
+      "method": "ocr",
+      "answer_keys_detected": 0,
+      "previous_status": "no_questions_found"
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/Yellow Book 3.0 Edition Part 2 Prof Ed.pdf",
+      "status": "processed",
+      "rows": 35,
+      "pages": 55,
+      "method": "ocr",
+      "answer_keys_detected": 22,
+      "previous_status": "no_questions_found"
+    }
+  ],
+  "non_pdf_files_not_imported": 20
+}

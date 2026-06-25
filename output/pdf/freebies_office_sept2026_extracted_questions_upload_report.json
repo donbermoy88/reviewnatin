@@ -1,0 +1,42 @@
+{
+  "batch_id": "0a7fb511-5998-48e6-bb0a-44f5f60ff462",
+  "dry_run": true,
+  "source": "output/pdf/freebies_office_sept2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 500,
+  "ready_rows": 1,
+  "candidate_targets": 2,
+  "insertable": 0,
+  "inserted": 0,
+  "skipped": 0,
+  "duplicates": 2,
+  "source_stats": {
+    "output/pdf/freebies_office_sept2026_extracted_questions.json": {
+      "readyRows": 1,
+      "candidateTargets": 2,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/freebies_office_sept2026_extracted_questions.json",
+      "row": "160",
+      "page": "Office",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "efaa2216-a582-4e24-904b-2a79e5f6c7df"
+    },
+    {
+      "source": "output/pdf/freebies_office_sept2026_extracted_questions.json",
+      "row": "160",
+      "page": "Office",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "225534af-3002-4757-b09b-29c20509ae5d"
+    }
+  ],
+  "skipped_samples": []
+}

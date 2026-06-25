@@ -1,0 +1,236 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-",
+  "generated_at": "2026-06-25",
+  "total_office_files_seen": 19,
+  "total_office_files_processed": 12,
+  "format_counts": {
+    ".docx": 17,
+    ".doc": 2
+  },
+  "total_questions_found": 500,
+  "total_ready_for_upload": 1,
+  "total_needing_review": 497,
+  "total_without_answer_key": 2,
+  "total_duplicates_detected": 0,
+  "total_questions_with_images": 0,
+  "total_questions_with_image_based_answer_choices": 0,
+  "total_elementary_questions": 0,
+  "total_secondary_questions": 0,
+  "total_both_or_cannot_determine_questions": 500,
+  "status_counts": {
+    "Incomplete": 496,
+    "Needs Review": 1,
+    "Needs Answer": 2,
+    "Ready for Upload": 1
+  },
+  "exam_type_counts": {
+    "Both": 500
+  },
+  "subject_category_breakdown": {
+    "Assessment of Learning": 5,
+    "Science": 1,
+    "Curriculum Development": 15,
+    "General Education": 14,
+    "Professional Education": 461,
+    "Elementary / Cannot Determine": 1,
+    "Health": 1,
+    "Educational Technology": 2
+  },
+  "difficulty_breakdown": {
+    "Cannot Determine": 500
+  },
+  "source_counts_top_75": {
+    "Yellow Book 3.0 Edition Part 2 Prof Ed.docx": 338,
+    "PROF_ED_Keyword_5.docx": 102,
+    "Module-5-Curriculum-Development.docx": 14,
+    "PROF_ED_Keyword_7.doc": 11,
+    "Module-11-Social-Dimensions-in-Education.docx": 10,
+    "Module-2-Child-and-Adolescent-Development.docx": 9,
+    "TOPNOTCHERS_NOTES_FOR_PROF_ED.docx": 6,
+    "Module-7-Educational-Technology.docx": 5,
+    "Module-8-Assessment-and-Evaluation-of-Learning-1.docx": 2,
+    "Assessment_of_Learning.docx": 1,
+    "Module-6-Developmental-Reading.docx": 1,
+    "PROF_ED_Keyword_8.docx": 1
+  },
+  "sources": [
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Assessment_of_Learning.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 3,
+      "text_chars": 55909
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-1-Foundations-of-Education.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 43139
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-11-Social-Dimensions-in-Education.docx",
+      "status": "processed",
+      "rows": 10,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 53238
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-2-Child-and-Adolescent-Development.docx",
+      "status": "processed",
+      "rows": 9,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 45244
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-5-Curriculum-Development.docx",
+      "status": "processed",
+      "rows": 14,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 43979
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-6-Developmental-Reading.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 56032
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-7-Educational-Technology.docx",
+      "status": "processed",
+      "rows": 5,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 53541
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-8-Assessment-and-Evaluation-of-Learning-1.docx",
+      "status": "processed",
+      "rows": 2,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 45685
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/Module-9-Assessment-and-Evaluation-of-Learning-2.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 15,
+      "text_chars": 45565
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_5.docx",
+      "status": "processed",
+      "rows": 102,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 36890
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_6.docx",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 13423
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_7.doc",
+      "status": "processed",
+      "rows": 11,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 0,
+      "text_chars": 74121
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/PROF_ED_Keyword_8.docx",
+      "status": "processed",
+      "rows": 1,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 17690
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/E. Study Notes 2026/human-growth-new-post-test.doc",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".doc",
+      "answer_keys_detected": 0,
+      "text_chars": 24464
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/G. Topnotcher_s Notes 2026/Note 1- Topnotccher.DOCX",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 2329
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/G. Topnotcher_s Notes 2026/Note 2- Topnotccher.DOCX",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 2249
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/G. Topnotcher_s Notes 2026/Note 3- Topnotccher.DOCX",
+      "status": "no_questions_found",
+      "rows": 0,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 2492
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/G. Topnotcher_s Notes 2026/TOPNOTCHERS_NOTES_FOR_PROF_ED.docx",
+      "status": "processed",
+      "rows": 6,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 109240
+    },
+    {
+      "path": "/Users/lyndon/All reviewers/Sept2026_LET Reviewer Files/D. FREEBIES -BEED&BSED-/H. YELLOW BOOK 2026/Yellow Book 3.0 Edition Part 2 Prof Ed.docx",
+      "status": "processed",
+      "rows": 338,
+      "pages": 0,
+      "format": ".docx",
+      "answer_keys_detected": 0,
+      "text_chars": 130131
+    }
+  ],
+  "outputs": {
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/freebies_office_sept2026_extracted_questions.csv",
+    "json": "/Users/lyndon/reviewnatin/output/pdf/freebies_office_sept2026_extracted_questions.json",
+    "md": "/Users/lyndon/reviewnatin/output/pdf/freebies_office_sept2026_extracted_questions.md",
+    "summary": "/Users/lyndon/reviewnatin/output/pdf/freebies_office_sept2026_extracted_questions_summary.json"
+  },
+  "recommended_next_action_before_uploading": "Upload only Ready for Upload rows. Office rows marked Needs Answer usually lack a reliably parsed answer key. Rows marked Incomplete often came from unlabelled multiple-choice blocks and need manual review."
+}

@@ -1,0 +1,264 @@
+{
+  "dry_run": true,
+  "source": "output/pdf/freebies_review_materials.json",
+  "source_rows": 319,
+  "insertable_materials": 0,
+  "inserted": 0,
+  "skipped": 638,
+  "skipped_by_reason": {
+    "duplicate_title": 634,
+    "thin_material": 4
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 5) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 5) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 6) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 6) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 7) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 7) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 8) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 8) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 9) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 9) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 10) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 10) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 11) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 11) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: Assessment of Learning (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT PE Philosophy in Education - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT PE Philosophy in Education - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 5) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 5) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 6) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 6) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 7) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 7) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 8) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: BLEPT ProfEd Assessment of Learning M Balagtas (Part 8) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: CHILD AND ADOLESCENT DEVT pdfbooksforum.com (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: CHILD AND ADOLESCENT DEVT pdfbooksforum.com (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: CHILD AND ADOLESCENT DEVT pdfbooksforum.com (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: CHILD AND ADOLESCENT DEVT pdfbooksforum.com (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: CHILD AND ADOLESCENT DEVT pdfbooksforum.com (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Freebies Notes: CHILD AND ADOLESCENT DEVT pdfbooksforum.com (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    }
+  ]
+}
