@@ -1,0 +1,795 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/cse_exams_reviewer_2026_extracted_questions.json",
+  "extracted_rows": 506,
+  "ready_rows": 353,
+  "skipped_non_ready": 153,
+  "invalid_ready_rows": 0,
+  "missing_targets": 0,
+  "existing_questions_before": 2984,
+  "insertable": 279,
+  "updatable_by_source_key": 0,
+  "duplicate_existing_content": 354,
+  "inserted": 279,
+  "updated": 0,
+  "insertable_by_exam": {
+    "cse-professional": 166,
+    "cse-subprofessional": 113
+  },
+  "insertable_by_topic": {
+    "cse-professional:word-problems": 10,
+    "cse-subprofessional:word-problems-sub": 9,
+    "cse-professional:data-interpretation": 20,
+    "cse-professional:vocabulary": 1,
+    "cse-subprofessional:vocabulary": 1,
+    "cse-professional:verbal-comprehension": 31,
+    "cse-professional:word-association": 1,
+    "cse-professional:grammar": 32,
+    "cse-subprofessional:grammar": 32,
+    "cse-professional:vocabulary-fil": 17,
+    "cse-subprofessional:vocabulary-fil": 17,
+    "cse-professional:grammar-fil": 3,
+    "cse-subprofessional:grammar-fil": 3,
+    "cse-professional:constitution": 2,
+    "cse-subprofessional:phil-government": 2,
+    "cse-professional:number-series": 49,
+    "cse-subprofessional:number-series-sub": 49
+  },
+  "skipped_samples": [
+    {
+      "row": 6,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "6",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. 1,055 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 7,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "7",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Missing one or more A-D choices. Could not uniquely map red answer text: a. 0 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 11,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "11",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. 9 208 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 20,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "20",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. 25% b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 21,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "21",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. 13.653 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 24,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "24",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Duplicate answer-choice text detected. Could not uniquely map red answer text: a. 7 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 25,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "25",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Missing one or more A-D choices. No red answer text detected. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 26,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "26",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: c. The product of two odd integers d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 30,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "30",
+      "status": "Incomplete",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not parse four answer choices. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 31,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "5",
+      "status": "Needs Review",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Question stem is too short or unclear. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 32,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "31",
+      "status": "Incomplete",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not parse four answer choices. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 34,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "33",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Duplicate answer-choice text detected. Could not uniquely map red answer text: a. -6 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 35,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "34",
+      "status": "Incomplete",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Missing one or more A-D choices. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 36,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "35",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. 496 m b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 37,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "36",
+      "status": "Incomplete",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not parse four answer choices. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 39,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "38",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Missing one or more A-D choices. Could not uniquely map red answer text: a. Php 5.6M b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 47,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "46",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. 32% b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 52,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "51",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. PHp 742.50 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 58,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "57",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. 918 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 63,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "62",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. Php237 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 64,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "63",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. weekly: Php340 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 65,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "64",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. Php 1.20 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 66,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "65",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. Php 830 b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 72,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "71",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. No red answer text detected. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 75,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "74",
+      "status": "Needs Answer",
+      "topic_slug": "word-problems",
+      "notes": "Word Problems and Operations. Could not uniquely map red answer text: a. 20 cm b. c. d. sub_topic:word-problems-sub"
+    },
+    {
+      "row": 90,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "14",
+      "status": "Needs Answer",
+      "topic_slug": "data-interpretation",
+      "notes": "Data Sufficiency. Could not parse explicit Answer marker."
+    },
+    {
+      "row": 102,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "5",
+      "status": "Needs Review",
+      "topic_slug": "filing-coding",
+      "notes": "Clerical Operations (Alphabetizing). Duplicate answer-choice text detected. sub_topic:filing-coding"
+    },
+    {
+      "row": 116,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "19",
+      "status": "Incomplete",
+      "topic_slug": "filing-coding",
+      "notes": "Clerical Operations (Alphabetizing). Could not parse four answer choices. sub_topic:filing-coding"
+    },
+    {
+      "row": 117,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "1",
+      "status": "Incomplete",
+      "topic_slug": "filing-coding",
+      "notes": "Clerical Operations (Alphabetizing). Could not parse four answer choices. sub_topic:filing-coding"
+    },
+    {
+      "row": 118,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "2",
+      "status": "Incomplete",
+      "topic_slug": "filing-coding",
+      "notes": "Clerical Operations (Alphabetizing). Could not parse four answer choices. sub_topic:filing-coding"
+    },
+    {
+      "row": 119,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "3",
+      "status": "Incomplete",
+      "topic_slug": "filing-coding",
+      "notes": "Clerical Operations (Alphabetizing). Could not parse four answer choices. sub_topic:filing-coding"
+    },
+    {
+      "row": 120,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "4",
+      "status": "Incomplete",
+      "topic_slug": "filing-coding",
+      "notes": "Clerical Operations (Alphabetizing). Could not parse four answer choices. sub_topic:filing-coding"
+    },
+    {
+      "row": 122,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "1",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. i ndi ffere nt b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 123,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "2",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. aware b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 128,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "7",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. arrogant b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 134,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "13",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. careful b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 138,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "17",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. all-knowing b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 140,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "19",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. reasonable b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 145,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "24",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. endurance b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 147,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "26",
+      "status": "Incomplete",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Missing one or more A-D choices. sub_topic:vocabulary"
+    },
+    {
+      "row": 148,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "27",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. well-mannered b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 150,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "29",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Missing one or more A-D choices. Could not uniquely map red answer text: a. accuracy b. redundancy c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 154,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "33",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. disorderly b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 156,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "35",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. searched thourgh b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 157,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "36",
+      "status": "Incomplete",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not parse four answer choices. sub_topic:vocabulary"
+    },
+    {
+      "row": 158,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "37",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Synonyms. Could not uniquely map red answer text: a. increase b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 163,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "2",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Antonyms. Could not uniquely map red answer text: a. alley b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 166,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "5",
+      "status": "Incomplete",
+      "topic_slug": "vocabulary",
+      "notes": "Antonyms. Could not parse four answer choices. sub_topic:vocabulary"
+    },
+    {
+      "row": 167,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "6",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Antonyms. Could not uniquely map red answer text: a. melancholic b. c. d. sub_topic:vocabulary"
+    },
+    {
+      "row": 168,
+      "source_pdf": "Done - Civil Service Exam Reviewer for 2026.pdf",
+      "original_no": "7",
+      "status": "Needs Answer",
+      "topic_slug": "vocabulary",
+      "notes": "Antonyms. Could not uniquely map red answer text: a. b. c. painless d. sub_topic:vocabulary"
+    }
+  ],
+  "invalid_samples": [],
+  "missing_target_samples": [],
+  "duplicate_samples": [
+    {
+      "row": 1,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2dd2ce79-e8a3-4877-ac7a-8979132dbb99"
+    },
+    {
+      "row": 1,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dbca01fd-6187-4a87-9002-8d3c5da7e37f"
+    },
+    {
+      "row": 3,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f84d7b2d-3d7e-4b2b-9e6d-5b034a4a50e5"
+    },
+    {
+      "row": 3,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b98d182d-68c4-4c30-9911-886b5ffb74a3"
+    },
+    {
+      "row": 5,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "27543896-5aed-4a14-be72-40b3737a1107"
+    },
+    {
+      "row": 5,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4ae5b683-58de-42db-822f-68dd0669e3cf"
+    },
+    {
+      "row": 8,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6c4a74c0-5ecc-4194-aa8e-1cbd3b1c2705"
+    },
+    {
+      "row": 8,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "55b98eae-1e10-4cf7-9791-e66bc0a0d2f1"
+    },
+    {
+      "row": 9,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a13cfbda-7cca-42b8-8675-e4b05016c073"
+    },
+    {
+      "row": 9,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6fe9de61-5e33-4f5c-8aff-6793ad892821"
+    },
+    {
+      "row": 10,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f84f9748-1e4f-48d2-9af6-c2d4dd8f8e20"
+    },
+    {
+      "row": 10,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "49969e86-a0a6-4479-bdc3-48003bcc62c8"
+    },
+    {
+      "row": 13,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cd52ce01-e13d-4130-b044-155d35f86536"
+    },
+    {
+      "row": 13,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d9a0ed28-b149-432b-a483-687563822427"
+    },
+    {
+      "row": 14,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0f2f5780-556c-48fe-99e5-b1404df24751"
+    },
+    {
+      "row": 14,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4f3d39ca-2345-46f0-9382-90be4f8b1dcf"
+    },
+    {
+      "row": 15,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3a497fbb-b226-44e0-9bd3-a986de3339fe"
+    },
+    {
+      "row": 15,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "db19d883-2917-4cac-8b31-d63674d06df3"
+    },
+    {
+      "row": 18,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2413c860-6ea4-4fcb-8c56-57926c0465db"
+    },
+    {
+      "row": 18,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fd3403d4-2340-4cea-958a-481200ad866b"
+    },
+    {
+      "row": 19,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f8d047a4-ec46-454f-95ba-319345acca15"
+    },
+    {
+      "row": 19,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c6da5352-b410-4fb5-b581-d30ebdb338a8"
+    },
+    {
+      "row": 22,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "72e20692-c919-478e-8471-bfc64368af1b"
+    },
+    {
+      "row": 22,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3be6948e-50dc-4b41-b22e-f9e6b51ac1f6"
+    },
+    {
+      "row": 23,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7c32077d-fa97-4b11-affc-42777c892a71"
+    },
+    {
+      "row": 23,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "412e1860-aa46-482b-a85a-95aa8bd878ce"
+    },
+    {
+      "row": 27,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "74310a88-40ce-4090-ab12-3f35dcd69448"
+    },
+    {
+      "row": 27,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "43fe9e0f-2b8d-4a7f-be3f-7a5b4feaa558"
+    },
+    {
+      "row": 28,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a3bdef97-e4df-4495-8292-0818647cd2a4"
+    },
+    {
+      "row": 28,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ab08ea31-6540-4962-b9dc-e05f92592e2e"
+    },
+    {
+      "row": 29,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7f0b0f08-76a5-4c6a-a646-08d903e46e27"
+    },
+    {
+      "row": 29,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1b4d9ad9-b4e4-4ec9-96c9-149d6a3c0340"
+    },
+    {
+      "row": 33,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7283c079-6624-4f6a-b762-1ef6f3ab7bc2"
+    },
+    {
+      "row": 33,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a9e7f99d-bcb9-4d97-a1d1-cd84bb0913d7"
+    },
+    {
+      "row": 38,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e591926e-607a-48b6-b72b-2f05a3df5509"
+    },
+    {
+      "row": 38,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c497903b-6933-4f40-ae06-cb225e30dd69"
+    },
+    {
+      "row": 40,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6565c0f3-4162-47d0-951f-2ae1cc72ceb4"
+    },
+    {
+      "row": 40,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d200c0fc-bc79-4f24-8ec4-92eb48c7dd58"
+    },
+    {
+      "row": 41,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c254f6ef-cc56-454e-b88d-54988b86e669"
+    },
+    {
+      "row": 41,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7081b1f2-15c0-4d19-97ac-d406faf20886"
+    },
+    {
+      "row": 43,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0d1b176c-107f-4960-8765-3d1d25479a57"
+    },
+    {
+      "row": 43,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1ce00b9c-59fc-46d2-b8f4-83b1eeb2b35f"
+    },
+    {
+      "row": 44,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f2678dff-66e1-42b6-916b-b2b7e6d4f6a7"
+    },
+    {
+      "row": 44,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "30fdc637-ad57-412f-92e1-f19b77c15c66"
+    },
+    {
+      "row": 45,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "02b92f58-55ad-4671-bf1d-f19f13ac395c"
+    },
+    {
+      "row": 46,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "08fd5d03-dbca-4937-ae3d-bacee72c34d9"
+    },
+    {
+      "row": 46,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3c5d3393-53f9-4d53-ab3e-f96293cd52f2"
+    },
+    {
+      "row": 49,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "63f593cd-e0b9-48ba-bb9a-cb81476ead0f"
+    },
+    {
+      "row": 49,
+      "exam_slug": "cse-subprofessional",
+      "topic_slug": "word-problems-sub",
+      "reason": "duplicate_existing_content",
+      "existing_id": "117757da-f7ac-4df8-a858-7b2fd809acc7"
+    },
+    {
+      "row": 50,
+      "exam_slug": "cse-professional",
+      "topic_slug": "word-problems",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c7412bbb-e451-4e3d-b0ff-7221ca3c7dcd"
+    }
+  ],
+  "update_samples": []
+}
