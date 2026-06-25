@@ -1,7 +1,8 @@
 # Release signing (never commit the real upload keystore or its credentials)
 keystore.properties
 *.jks
-release.keystore
+*.keystore
+!debug.keystore
 
 # OSX
 #
