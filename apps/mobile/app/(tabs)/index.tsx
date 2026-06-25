@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Animated, Easing, Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Animated, Easing, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
 import { ErrorBoundary } from '../../components/error-boundary';
@@ -56,7 +56,6 @@ import type { OnboardingData } from '../../lib/onboarding-store';
 import type { SubjectArea } from '../../lib/types';
 import { useAuth } from '../../providers/auth-provider';
 import { useEntitlements } from '../../providers/entitlements-provider';
-import { resolveMonthlyPlusDisplay } from '../../lib/subscription/pricing-display';
 import {
   downloadOfflinePack,
   getOfflinePackMeta,
@@ -66,8 +65,6 @@ import { usePreferences } from '../../providers/preferences-provider';
 import { useUserProfile } from '../../hooks/use-user-profile';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StreakMilestoneModal, isStreakMilestone } from '../../components/streak-milestone-modal';
-
-const APP_ICON = require('../../assets/icon.png');
 
 function timeGreeting(): string {
   const h = new Date().getHours();
@@ -200,42 +197,6 @@ function ReadinessStageProgress({
   );
 }
 
-function PremiumStudyPackArt({
-  styles,
-  colors,
-  floatAnim,
-}: {
-  styles: ReturnType<typeof createDashboardStyles>;
-  colors: ReturnType<typeof useAppTheme>['colors'];
-  floatAnim: Animated.Value;
-}) {
-  const floatStyle = {
-    transform: [
-      {
-        translateY: floatAnim.interpolate({
-          inputRange: [0, 1],
-          outputRange: [0, -5],
-        }),
-      },
-      { rotate: '-7deg' },
-    ],
-  };
-
-  return (
-    <Animated.View style={[styles.plusArtScene, floatStyle]} pointerEvents="none">
-      <View style={styles.plusArtGlow} />
-      <View style={styles.plusArtBase}>
-        <Image source={APP_ICON} style={styles.plusArtIcon} resizeMode="cover" />
-      </View>
-      <View style={styles.plusArtCrown}>
-        <Ionicons name="sparkles" size={23} color={colors.primaryDark} />
-      </View>
-      <Ionicons name="star" size={10} color={colors.accent} style={styles.plusArtSparkleA} />
-      <Ionicons name="sparkles" size={12} color="rgba(255,255,255,0.72)" style={styles.plusArtSparkleB} />
-    </Animated.View>
-  );
-}
-
 function DashboardScreenContent() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -243,11 +204,10 @@ function DashboardScreenContent() {
   const { colors, fonts, gradients, spacing } = theme;
   const styles = useMemo(() => createDashboardStyles(theme), [theme]);
   const { user } = useAuth();
-  const { isPremium, products, storePrices } = useEntitlements();
+  const { isPremium } = useEntitlements();
   const { displayName } = useUserProfile('Guest');
   const { prefs, setNotificationsEnabled } = usePreferences();
   const [introAnim] = useState(() => new Animated.Value(0));
-  const [floatAnim] = useState(() => new Animated.Value(0));
   const [goal, setGoal] = useState<OnboardingData | null>(null);
   const [examName, setExamName] = useState('');
   const [examTypeId, setExamTypeId] = useState<string | null>(null);
@@ -286,26 +246,7 @@ function DashboardScreenContent() {
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
-
-    const floating = Animated.loop(
-      Animated.sequence([
-        Animated.timing(floatAnim, {
-          toValue: 1,
-          duration: 1400,
-          easing: Easing.inOut(Easing.quad),
-          useNativeDriver: true,
-        }),
-        Animated.timing(floatAnim, {
-          toValue: 0,
-          duration: 1400,
-          easing: Easing.inOut(Easing.quad),
-          useNativeDriver: true,
-        }),
-      ])
-    );
-    floating.start();
-    return () => floating.stop();
-  }, [floatAnim, introAnim]);
+  }, [introAnim]);
 
   const load = useCallback(async () => {
     try {
@@ -556,7 +497,6 @@ function DashboardScreenContent() {
   const questionsTarget = stats.questionsTarget;
   const questionsDone = stats.questionsToday;
   const dailyGoalPct = questionsTarget > 0 ? Math.min(100, Math.round((questionsDone / questionsTarget) * 100)) : 0;
-  const hasActivity = stats.sessionCount > 0;
   const visiblePasapathTasks = pasapath ? filterVisiblePasapathTasks(pasapath.tasks) : [];
   const nextTask = pasapath ? primaryPasapathTask(pasapath.tasks) : null;
 
@@ -629,18 +569,11 @@ function DashboardScreenContent() {
 
   const firstName = user ? displayName.split(/\s+/)[0] ?? displayName : 'Guest';
   const remainingQuestions = Math.max(questionsTarget - questionsDone, 0);
-  const monthlyPlusPriceText = resolveMonthlyPlusDisplay(products, storePrices);
   const displayExamName = formatExamDisplayName(examSlug, examName);
   const dailyGoalText =
     questionsDone >= questionsTarget
       ? 'Goal complete today'
       : `${remainingQuestions} question${remainingQuestions === 1 ? '' : 's'} left`;
-  const completedQuizText =
-    stats.sessionCount > 0
-      ? `${stats.sessionCount} quiz${stats.sessionCount === 1 ? '' : 'zes'} completed`
-      : user
-        ? 'Start your first quiz'
-        : 'Log in to save progress';
   const planStatusText = pasapathComplete
     ? 'Plan complete. Use Mock or Mistakes for extra reps.'
     : nextTask
@@ -951,6 +884,9 @@ function DashboardScreenContent() {
             </Pressable>
           ) : null}
 
+          {/* Daily-goal ring only — the redundant "Continue" card was removed:
+              its resume/start action is already the primary CTA inside the
+              "Today's task" card (PasaPath card) right below. */}
           <View style={styles.planRow}>
             <View style={styles.planGoalCard}>
               <GoalRing
@@ -968,24 +904,6 @@ function DashboardScreenContent() {
                 </Text>
               </View>
             </View>
-            <Pressable
-              style={({ pressed }) => [styles.planContinueCard, pressed && styles.cardPressed]}
-              onPress={() => void startPractice()}
-              accessibilityRole="button"
-              accessibilityLabel={`${hasActivity ? 'Continue review' : 'Start review'} for ${displayExamName}`}
-            >
-              <View>
-                <Text style={styles.planContinueLbl}>Continue</Text>
-                <Text style={styles.planContinueTitle} numberOfLines={2}>{displayExamName}</Text>
-                <Text style={styles.planContinueMeta}>
-                  {completedQuizText}
-                </Text>
-              </View>
-              <View style={styles.planResumeBtn}>
-                <Text style={styles.planResumeBtnText}>{hasActivity ? 'Resume' : 'Start'}</Text>
-                <Ionicons name="play" size={13} color={colors.primary} />
-              </View>
-            </Pressable>
           </View>
 
           {examCountdown ? (
@@ -1057,6 +975,38 @@ function DashboardScreenContent() {
             })}
           </View>
 
+          <Pressable
+            style={({ pressed }) => [styles.quickAllSubjectsRow, pressed && styles.cardPressed]}
+            onPress={() => router.push('/(tabs)/mock-exam')}
+            accessibilityRole="button"
+            accessibilityLabel="Open Mock Exam tab"
+          >
+            <View style={styles.quickAllSubjectsIcon}>
+              <Ionicons name="timer-outline" size={18} color={colors.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.quickAllSubjectsTitle}>Mock exams</Text>
+              <Text style={styles.quickAllSubjectsMeta}>Timed, full-length practice exams</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+          </Pressable>
+
+          <Pressable
+            style={({ pressed }) => [styles.quickAllSubjectsRow, pressed && styles.cardPressed]}
+            onPress={() => router.push('/(tabs)/community')}
+            accessibilityRole="button"
+            accessibilityLabel="Open Community tab"
+          >
+            <View style={styles.quickAllSubjectsIcon}>
+              <Ionicons name="people-outline" size={18} color={colors.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.quickAllSubjectsTitle}>Community</Text>
+              <Text style={styles.quickAllSubjectsMeta}>See what {displayExamName} reviewers are saying</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+          </Pressable>
+
           {user ? (
             <HomeStudyInsights
               studyTrend={studyTrend}
@@ -1066,34 +1016,14 @@ function DashboardScreenContent() {
             />
           ) : null}
 
-          {!premium ? (
-            <Pressable
-              onPress={() => router.push('/subscribe')}
-              accessibilityRole="button"
-              accessibilityLabel="See ReviewNatin Plus plans"
-              style={({ pressed }) => pressed && styles.cardPressed}
-            >
-              <LinearGradient
-                colors={[...gradients.hero]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.plusUpsell}
-              >
-                <View style={styles.plusUpsellBadge}>
-                  <Ionicons name="star" size={11} color={colors.primaryDark} />
-                  <Text style={styles.plusUpsellBadgeText}>PLUS</Text>
-                </View>
-                <Text style={styles.plusUpsellTitle}>Full mocks & offline packs{'\n'}No ads while you study</Text>
-                <Text style={styles.plusUpsellSub}>From {monthlyPlusPriceText}/mo · cancel anytime</Text>
-                <PremiumStudyPackArt styles={styles} colors={colors} floatAnim={floatAnim} />
-              </LinearGradient>
-            </Pressable>
-          ) : null}
+          {/* The standalone Plus-upsell gradient banner was removed here — it
+              duplicated the FreeDailyLimitStrip upgrade nudge shown higher up.
+              One conditional upgrade banner per screen, not two. */}
 
           {user && pasapath ? (
             <View style={styles.pasapathCard}>
               <View style={styles.pasapathHead}>
-                <Text style={styles.pasapathLbl}>{"Today's PasaPath"}</Text>
+                <Text style={styles.pasapathLbl}>{"Today's Task"}</Text>
                 <Pressable
                   onPress={() => router.push('/pasapath/week')}
                   hitSlop={8}
@@ -1188,7 +1118,7 @@ function DashboardScreenContent() {
             </View>
           ) : user ? (
             <View style={[styles.pasapathCard, { marginBottom: spacing.md }]}>
-              <Text style={styles.pasapathLbl}>{"Today's PasaPath"}</Text>
+              <Text style={styles.pasapathLbl}>{"Today's Task"}</Text>
               <Text style={[styles.pasapathMeta, { marginBottom: spacing.md }]}>
                 Finish one quiz to build your daily study plan.
               </Text>
