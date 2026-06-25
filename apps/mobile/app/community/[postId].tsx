@@ -281,8 +281,17 @@ export default function PostDetailScreen() {
           }}
         >
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
-            <Avatar url={post.authorAvatarUrl} name={post.authorDisplayName} />
-            <View style={{ flex: 1 }}>
+            <Pressable
+              onPress={() => router.push({ pathname: '/community/profile/[userId]', params: { userId: post.authorId } })}
+              hitSlop={4}
+            >
+              <Avatar url={post.authorAvatarUrl} name={post.authorDisplayName} />
+            </Pressable>
+            <Pressable
+              style={{ flex: 1 }}
+              onPress={() => router.push({ pathname: '/community/profile/[userId]', params: { userId: post.authorId } })}
+              hitSlop={4}
+            >
               <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text }}>
                 {post.authorDisplayName}
               </Text>
@@ -305,7 +314,7 @@ export default function PostDetailScreen() {
                   </View>
                 ) : null}
               </View>
-            </View>
+            </Pressable>
             {post.isOwn ? (
               <Pressable onPress={onManagePost} hitSlop={8} accessibilityLabel="Manage post">
                 <Ionicons name="ellipsis-horizontal" size={18} color={colors.textLight} />
@@ -389,7 +398,12 @@ export default function PostDetailScreen() {
               marginBottom: spacing.sm,
             }}
           >
-            <Avatar url={item.authorAvatarUrl} name={item.authorDisplayName} size={30} />
+            <Pressable
+              onPress={() => router.push({ pathname: '/community/profile/[userId]', params: { userId: item.authorId } })}
+              hitSlop={4}
+            >
+              <Avatar url={item.authorAvatarUrl} name={item.authorDisplayName} size={30} />
+            </Pressable>
             <View style={{ flex: 1 }}>
               {editingCommentId === item.id ? (
                 <View style={{ gap: spacing.xs }}>
@@ -432,9 +446,14 @@ export default function PostDetailScreen() {
                       padding: spacing.sm,
                     }}
                   >
-                    <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.text }}>
-                      {item.authorDisplayName}
-                    </Text>
+                    <Pressable
+                      onPress={() => router.push({ pathname: '/community/profile/[userId]', params: { userId: item.authorId } })}
+                      hitSlop={4}
+                    >
+                      <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.text }}>
+                        {item.authorDisplayName}
+                      </Text>
+                    </Pressable>
                     <Text style={{ fontFamily: fonts.body, fontSize: 14, color: colors.text, marginTop: 2 }}>
                       {item.body}
                     </Text>
