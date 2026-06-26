@@ -57,6 +57,7 @@ function buildPalette(isDark: boolean): ThemePalette {
 
 function buildType(colors: ThemePalette, isDark: boolean): Record<string, TypeStyle> {
   return {
+    // Display / Hero — 32px 800 weight
     display: {
       fontFamily: fonts.display,
       fontSize: typography.sizes.display,
@@ -64,10 +65,11 @@ function buildType(colors: ThemePalette, isDark: boolean): Record<string, TypeSt
       color: colors.text,
       letterSpacing: -0.5,
     },
+    // Screen headline — 24px 800 weight
     headline: {
       fontFamily: fonts.display,
       fontSize: typography.sizes.headline,
-      lineHeight: typography.sizes.headline * typography.lineHeights.tight,
+      lineHeight: typography.sizes.headline * typography.lineHeights.snug,
       color: colors.text,
       letterSpacing: -0.4,
     },
@@ -78,13 +80,38 @@ function buildType(colors: ThemePalette, isDark: boolean): Record<string, TypeSt
       color: isDark ? colors.text : colors.primaryDark,
       letterSpacing: -0.5,
     },
-    title: {
-      fontFamily: fonts.bodyBold,
+    // Section title — 20px 800 weight
+    sectionTitle: {
+      fontFamily: fonts.display,
       fontSize: typography.sizes.title,
-      lineHeight: typography.sizes.title * typography.lineHeights.normal,
+      lineHeight: typography.sizes.title * typography.lineHeights.compact,
+      color: colors.text,
+      letterSpacing: -0.3,
+    },
+    // Card title — 18px 700 weight
+    cardTitle: {
+      fontFamily: fonts.bodyBold,
+      fontSize: typography.sizes.cardTitle,
+      lineHeight: typography.sizes.cardTitle * typography.lineHeights.compact,
       color: colors.text,
       letterSpacing: -0.2,
     },
+    // Backward-compat alias for sectionTitle
+    title: {
+      fontFamily: fonts.display,
+      fontSize: typography.sizes.title,
+      lineHeight: typography.sizes.title * typography.lineHeights.compact,
+      color: colors.text,
+      letterSpacing: -0.3,
+    },
+    // Question text — 16px 600 weight
+    questionText: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: typography.sizes.bodyLg,
+      lineHeight: typography.sizes.bodyLg * typography.lineHeights.normal,
+      color: colors.text,
+    },
+    // Body — 15px 400 weight
     body: {
       fontFamily: fonts.body,
       fontSize: typography.sizes.body,
@@ -97,21 +124,54 @@ function buildType(colors: ThemePalette, isDark: boolean): Record<string, TypeSt
       lineHeight: typography.sizes.body * typography.lineHeights.relaxed,
       color: colors.textMuted,
     },
+    // Subtitle / metadata — 14px 600 weight
     subtitle: {
       fontFamily: fonts.bodySemiBold,
       fontSize: typography.sizes.subtitle,
       lineHeight: typography.sizes.subtitle * typography.lineHeights.normal,
       color: colors.textMuted,
     },
+    // Small text — 13px 600 weight
+    small: {
+      fontFamily: fonts.bodySemiBold,
+      fontSize: typography.sizes.small,
+      lineHeight: typography.sizes.small * typography.lineHeights.normal,
+      color: colors.textMuted,
+    },
+    // Caption / badge — 11px (badge uses 800, caption uses 600)
     caption: {
       fontFamily: fonts.bodySemiBold,
       fontSize: typography.sizes.caption,
       lineHeight: typography.sizes.caption * typography.lineHeights.normal,
       color: colors.textLight,
-      letterSpacing: 0.4,
+      letterSpacing: 0.5,
     },
+    badge: {
+      fontFamily: fonts.display,
+      fontSize: typography.sizes.caption,
+      lineHeight: typography.sizes.caption * typography.lineHeights.normal,
+      color: colors.textLight,
+      letterSpacing: 0.8,
+    },
+    // Button text — 15px 800 weight
+    button: {
+      fontFamily: fonts.display,
+      fontSize: typography.sizes.body,
+      lineHeight: typography.sizes.body * typography.lineHeights.normal,
+      color: '#fff',
+      letterSpacing: 0,
+    },
+    // Button large — 16px 800 weight
+    buttonLg: {
+      fontFamily: fonts.display,
+      fontSize: typography.sizes.bodyLg,
+      lineHeight: typography.sizes.bodyLg * typography.lineHeights.normal,
+      color: '#fff',
+      letterSpacing: 0,
+    },
+    // Label (used for button text, bold links) — 16px 800 weight
     label: {
-      fontFamily: fonts.bodyBold,
+      fontFamily: fonts.display,
       fontSize: typography.sizes.bodyLg,
       lineHeight: typography.sizes.bodyLg * typography.lineHeights.normal,
       color: colors.text,
@@ -128,6 +188,14 @@ function buildType(colors: ThemePalette, isDark: boolean): Record<string, TypeSt
       fontSize: typography.sizes.subtitle,
       lineHeight: typography.sizes.subtitle * typography.lineHeights.normal,
       color: colors.text,
+    },
+    // Tab label — 12px 700 weight
+    tabLabel: {
+      fontFamily: fonts.bodyBold,
+      fontSize: 12,
+      lineHeight: 16,
+      color: colors.textMuted,
+      letterSpacing: 0.1,
     },
   };
 }

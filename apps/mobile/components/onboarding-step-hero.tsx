@@ -78,8 +78,8 @@ export function OnboardingStepHero({ step }: Props) {
         <Ionicons name={meta.icon} size={26} color={meta.tint} />
       </View>
       <View style={{ flex: 1 }}>
-        <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text }}>{meta.title}</Text>
-        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 2 }}>
+        <Text style={{ fontFamily: fonts.bodyBold, fontSize: 16, lineHeight: 22, color: colors.text }}>{meta.title}</Text>
+        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, lineHeight: 20, color: colors.textMuted, marginTop: 2 }}>
           {meta.subtitle}
         </Text>
       </View>

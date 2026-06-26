@@ -35,7 +35,7 @@ export function InfoTile({ label, value, icon, style }: Props) {
     >
       {icon}
       <Text style={[type.caption, { color: 'rgba(255,255,255,0.72)' }]}>{label}</Text>
-      <Text style={[type.label, { color: '#fff', fontSize: 15 }]} numberOfLines={1}>
+      <Text style={[type.cardTitle, { fontSize: 16, color: '#fff' }]} numberOfLines={1}>
         {value}
       </Text>
       <View style={{ height: 1, backgroundColor: colors.footerFade }} />

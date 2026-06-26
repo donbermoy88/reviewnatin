@@ -15,7 +15,7 @@ export function SectionBlock({ title, subtitle, children, style }: Props) {
   return (
     <View style={[{ gap: spacing.sm }, style]}>
       <View style={{ gap: spacing.xs, marginBottom: spacing.xs }}>
-        <Text style={type.title}>{title}</Text>
+        <Text style={type.sectionTitle}>{title}</Text>
         {subtitle ? <Text style={type.subtitle}>{subtitle}</Text> : null}
       </View>
       {children}

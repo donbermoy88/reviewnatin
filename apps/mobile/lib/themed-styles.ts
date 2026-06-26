@@ -29,9 +29,14 @@ export function createChoiceOptionStyles(theme: AppTheme) {
     },
     badgeFilled: { backgroundColor: 'rgba(255,255,255,0.18)' },
     badgeCorrect: { backgroundColor: colors.success },
-    letter: { ...type.label, fontSize: 14, color: colors.textMuted },
+    letter: {
+      fontFamily: type.small.fontFamily,
+      fontSize: 13,
+      lineHeight: 18,
+      color: colors.textMuted,
+    },
     letterLight: { color: '#fff' },
-    text: { ...type.label, fontSize: 15, flex: 1, letterSpacing: -0.1 },
+    text: { ...type.questionText, flex: 1 },
     textFilled: { color: '#fff' },
     textCorrect: { color: colors.text },
     checkWrap: {
@@ -76,11 +81,11 @@ export function createPrimaryButtonStyles(theme: AppTheme) {
     pressed: { opacity: 0.92, transform: [{ scale: 0.98 }] },
     pressedReducedMotion: { opacity: 0.88 },
     disabled: { opacity: 0.5 },
-    text: { ...type.label, color: '#fff' },
-    textLg: { fontSize: 16 },
-    textAccent: { ...type.label, color: colors.text },
-    textOutline: { ...type.label, color: colors.primary },
-    textWhite: { ...type.label, color: colors.primary },
+    text: { ...type.button, color: '#fff' },
+    textLg: { ...type.buttonLg, color: '#fff' },
+    textAccent: { ...type.button, color: colors.text },
+    textOutline: { ...type.button, color: colors.primary },
+    textWhite: { ...type.button, color: colors.primary },
     iconLeft: { marginRight: spacing.sm },
     iconRight: { marginLeft: spacing.sm },
   });
@@ -141,7 +146,7 @@ export function createSettingsStyles(theme: AppTheme) {
       borderBottomColor: colors.border,
     },
     backBtn: { width: 28, height: 28, justifyContent: 'center' },
-    headerTitle: { fontFamily: type.headline.fontFamily, fontSize: 17, color: colors.text, letterSpacing: -0.3 },
+    headerTitle: { fontFamily: type.headline.fontFamily, fontSize: 18, color: colors.text, letterSpacing: -0.3 },
     body: { padding: spacing.md },
     userCard: {
       flexDirection: 'row',
@@ -161,7 +166,7 @@ export function createSettingsStyles(theme: AppTheme) {
       justifyContent: 'center',
     },
     userInitial: { fontFamily: type.display.fontFamily, fontSize: 18, color: colors.primaryDark },
-    userName: { ...type.label, fontSize: 15 },
+    userName: { ...type.subtitle, color: colors.text, fontSize: 15 },
     userEmail: { ...type.caption, textTransform: 'none', marginTop: 1 },
     premiumCard: {
       flexDirection: 'row',
@@ -206,8 +211,8 @@ export function createSettingsStyles(theme: AppTheme) {
       justifyContent: 'center',
     },
     rowText: { flex: 1 },
-    rowLabel: { ...type.label, fontSize: 14 },
-    rowSub: { ...type.caption, textTransform: 'none', marginTop: 2 },
+    rowLabel: { ...type.subtitle, color: colors.text },
+    rowSub: { ...type.small, textTransform: 'none', marginTop: 2 },
     rowValue: { ...type.subtitle, marginRight: 4 },
     disclaimerBox: {
       flexDirection: 'row',
@@ -235,7 +240,8 @@ export function createTabLayoutStyles(theme: AppTheme) {
     tabItem: { paddingTop: 4, paddingBottom: 2, minHeight: 58 },
     tabLabel: {
       fontFamily: fonts.bodyBold,
-      fontSize: 11,
+      fontSize: 12,
+      lineHeight: 16,
       letterSpacing: 0.1,
       marginTop: 4,
       includeFontPadding: false,
@@ -270,7 +276,7 @@ export function createTabLayoutStyles(theme: AppTheme) {
 }
 
 export function createScreenShellStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii } = theme;
+  const { colors, fonts, spacing, radii, type } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
@@ -281,14 +287,14 @@ export function createScreenShellStyles(theme: AppTheme) {
       borderWidth: 1,
       borderColor: colors.border,
     },
-    cardTitle: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text, letterSpacing: -0.15 },
-    cardMeta: { fontFamily: fonts.bodySemiBold, fontSize: 12, color: colors.textMuted, marginTop: 2 },
-    sectionTitle: { fontFamily: fonts.bodyBold, fontSize: 17, color: colors.text, letterSpacing: -0.15 },
+    cardTitle: { ...type.cardTitle },
+    cardMeta: { ...type.small, marginTop: 2 },
+    sectionTitle: { ...type.sectionTitle },
   });
 }
 
 export function createDashboardStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii, shadows } = theme;
+  const { colors, fonts, spacing, radii, shadows, type } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     hero: {
@@ -310,13 +316,14 @@ export function createDashboardStyles(theme: AppTheme) {
     heroGreet: {
       fontFamily: fonts.bodySemiBold,
       fontSize: 13,
+      lineHeight: 18,
       color: 'rgba(255,255,255,0.72)',
       letterSpacing: 0.2,
       textTransform: 'none',
     },
     heroName: {
       fontFamily: fonts.display,
-      fontSize: 21,
+      fontSize: 24,
       color: '#fff',
       marginTop: 4,
       letterSpacing: -0.5,
@@ -416,8 +423,8 @@ export function createDashboardStyles(theme: AppTheme) {
       letterSpacing: 0.4,
       textTransform: 'uppercase',
     },
-    continueTitle: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, marginTop: 2, letterSpacing: -0.15 },
-    continueMeta: { fontFamily: fonts.bodySemiBold, fontSize: 13, color: colors.textMuted },
+    continueTitle: { ...type.cardTitle, marginTop: 2 },
+    continueMeta: { ...type.small },
     pasapathCard: {
       backgroundColor: colors.surface,
       borderRadius: radii.xl,
@@ -444,8 +451,8 @@ export function createDashboardStyles(theme: AppTheme) {
       borderTopWidth: 1,
       borderTopColor: colors.border,
     },
-    pasapathTaskTitle: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text },
-    pasapathTaskSub: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 2 },
+    pasapathTaskTitle: { ...type.subtitle, color: colors.text },
+    pasapathTaskSub: { ...type.small, marginTop: 2 },
     quickActions: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, marginBottom: spacing.md },
     quickAction: {
       width: '48%',
@@ -476,10 +483,10 @@ export function createDashboardStyles(theme: AppTheme) {
       letterSpacing: 0.6,
       textTransform: 'uppercase',
     },
-    goalTitle: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, marginTop: 2, letterSpacing: -0.15 },
-    goalHint: { fontFamily: fonts.bodySemiBold, fontSize: 12, color: colors.textMuted, marginTop: 3 },
+    goalTitle: { ...type.cardTitle, marginTop: 2 },
+    goalHint: { ...type.small, marginTop: 3 },
     sectionHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: spacing.sm },
-    sectionTitle: { fontFamily: fonts.bodyBold, fontSize: 17, color: colors.text, letterSpacing: -0.15 },
+    sectionTitle: { ...type.sectionTitle },
     quickRow: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -494,8 +501,8 @@ export function createDashboardStyles(theme: AppTheme) {
       ...shadows.card,
     },
     quickIcon: { width: 44, height: 44, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center' },
-    quickName: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text, letterSpacing: -0.15 },
-    quickMeta: { fontFamily: fonts.bodySemiBold, fontSize: 12, color: colors.textMuted, marginTop: 2 },
+    quickName: { ...type.subtitle, color: colors.text },
+    quickMeta: { ...type.small, marginTop: 2 },
     playBtn: { width: 36, height: 36, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center' },
     challengeCard: { borderRadius: radii.xl, padding: spacing.lg, marginTop: spacing.md, marginBottom: spacing.lg },
     challengeTitle: { fontFamily: fonts.display, fontSize: 18, color: '#fff', marginTop: spacing.sm, lineHeight: 24, letterSpacing: -0.2 },
@@ -859,13 +866,14 @@ export function createDashboardStyles(theme: AppTheme) {
     },
     homeAvatarText: { fontFamily: fonts.display, fontSize: 21, color: colors.primaryDark },
     homeGreetCol: { flex: 1, minWidth: 0 },
-    homeGreetTop: { fontFamily: fonts.bodySemiBold, fontSize: 14, color: 'rgba(255,255,255,0.92)' },
+    homeGreetTop: { fontFamily: fonts.bodySemiBold, fontSize: 14, lineHeight: 19, color: 'rgba(255,255,255,0.92)' },
     homeGreetName: {
       fontFamily: fonts.display,
-      fontSize: 22,
+      fontSize: 24,
       color: '#fff',
       marginTop: 2,
       letterSpacing: -0.4,
+      lineHeight: 28,
     },
     homeFlameChip: {
       flexDirection: 'row',
@@ -1075,12 +1083,12 @@ export function createStudyStyles(theme: AppTheme) {
     },
     headerTitle: {
       fontFamily: fonts.display,
-      fontSize: 28,
+      fontSize: 24,
       color: '#fff',
-      lineHeight: 32,
-      letterSpacing: -0.7,
+      lineHeight: 28,
+      letterSpacing: -0.5,
     },
-    headerSub: { fontFamily: fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.75)', marginTop: 6 },
+    headerSub: { fontFamily: fonts.bodyMedium, fontSize: 14, color: 'rgba(255,255,255,0.75)', marginTop: 6, lineHeight: 20 },
     heroStats: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, marginTop: spacing.md },
     noticeCard: {
       marginTop: spacing.md,
@@ -1091,7 +1099,7 @@ export function createStudyStyles(theme: AppTheme) {
     noticeText: { fontFamily: fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 18 },
     tabs: { marginHorizontal: spacing.lg, marginTop: spacing.lg, marginBottom: spacing.xs },
     body: { padding: spacing.lg, gap: spacing.lg },
-    subjectName: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text, letterSpacing: -0.15 },
+    subjectName: { fontFamily: fonts.bodyBold, fontSize: 16, lineHeight: 22, color: colors.text, letterSpacing: -0.15 },
     footer: {
       position: 'absolute',
       left: 0,
@@ -1104,7 +1112,7 @@ export function createStudyStyles(theme: AppTheme) {
 }
 
 export function createProfileStyles(theme: AppTheme) {
-  const { colors, fonts, spacing, radii, shadows } = theme;
+  const { colors, fonts, spacing, radii, shadows, type } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     header: {
@@ -1114,7 +1122,7 @@ export function createProfileStyles(theme: AppTheme) {
     },
     sparkle: { position: 'absolute', right: -30, top: 20 },
     headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacing.lg },
-    headerTitle: { fontFamily: fonts.display, fontSize: 22, color: '#fff', letterSpacing: -0.4 },
+    headerTitle: { fontFamily: fonts.display, fontSize: 24, color: '#fff', letterSpacing: -0.4, lineHeight: 28 },
     settingsBtn: {
       width: 40,
       height: 40,
@@ -1159,7 +1167,7 @@ export function createProfileStyles(theme: AppTheme) {
       textTransform: 'uppercase',
     },
     section: { paddingHorizontal: spacing.lg, marginTop: spacing.lg },
-    sectionTitle: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, letterSpacing: -0.15, marginBottom: spacing.sm },
+    sectionTitle: { ...type.sectionTitle, marginBottom: spacing.sm },
     sessionCard: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -1187,8 +1195,8 @@ export function createLeaderboardStyles(theme: AppTheme) {
       borderBottomLeftRadius: radii.xxl,
       borderBottomRightRadius: radii.xxl,
     },
-    headerTitle: { fontFamily: fonts.display, fontSize: 22, color: '#fff', letterSpacing: -0.4 },
-    headerSub: { fontFamily: fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.75)', marginTop: 6 },
+    headerTitle: { fontFamily: fonts.display, fontSize: 24, color: '#fff', letterSpacing: -0.4, lineHeight: 28 },
+    headerSub: { fontFamily: fonts.bodyMedium, fontSize: 14, color: 'rgba(255,255,255,0.75)', marginTop: 6, lineHeight: 20 },
     body: { padding: spacing.lg },
     podium: { flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end', gap: spacing.sm, marginBottom: spacing.lg },
     podiumSlot: { alignItems: 'center', flex: 1, backgroundColor: colors.surface, borderRadius: radii.xl, padding: spacing.md },
@@ -1270,7 +1278,7 @@ export function createQuizStyles(theme: AppTheme) {
       overflow: 'hidden',
     },
     progressFill: { height: '100%', borderRadius: radii.full, backgroundColor: colors.primary },
-    progressCounter: { ...type.label, fontSize: 13, color: colors.text },
+    progressCounter: { ...type.small, color: colors.text },
     progressCounterMute: { color: colors.textMuted },
     timer: {
       flexDirection: 'row',
@@ -1281,7 +1289,7 @@ export function createQuizStyles(theme: AppTheme) {
       paddingVertical: 6,
       borderRadius: radii.full,
     },
-    timerText: { fontFamily: type.label.fontFamily, fontSize: 12, color: colors.accentDark },
+    timerText: { fontFamily: type.small.fontFamily, fontSize: 12, lineHeight: 16, color: colors.accentDark },
     mockBanner: {
       marginHorizontal: spacing.lg,
       marginBottom: spacing.sm,
@@ -1312,7 +1320,13 @@ export function createQuizStyles(theme: AppTheme) {
       borderColor: colors.border,
       ...shadows.card,
     },
-    stem: { ...type.label, fontSize: 19, lineHeight: 26, letterSpacing: -0.2 },
+    stem: {
+      fontFamily: type.questionText.fontFamily,
+      fontSize: 17,
+      lineHeight: Math.round(17 * 1.45),
+      color: type.questionText.color,
+      letterSpacing: -0.1,
+    },
     options: { paddingHorizontal: spacing.lg, paddingTop: spacing.md },
     explanation: {
       marginHorizontal: spacing.lg,
@@ -1330,7 +1344,7 @@ export function createQuizStyles(theme: AppTheme) {
     langBtnActive: { backgroundColor: colors.primary },
     langText: { ...type.caption, textTransform: 'none' },
     langTextActive: { color: '#fff' },
-    explanationBody: { ...type.body, fontSize: 14 },
+    explanationBody: { ...type.body },
     hintRow: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -1342,8 +1356,8 @@ export function createQuizStyles(theme: AppTheme) {
       padding: spacing.md,
       marginBottom: spacing.sm,
     },
-    hintText: { flex: 1, fontFamily: type.bodySemiBold.fontFamily, fontSize: 12, color: theme.isDark ? colors.text : colors.primaryDark },
-    hintXp: { fontFamily: type.label.fontFamily, color: colors.accentDark },
+    hintText: { flex: 1, fontFamily: type.small.fontFamily, fontSize: 13, lineHeight: 18, color: theme.isDark ? colors.text : colors.primaryDark },
+    hintXp: { fontFamily: type.bodySemiBold.fontFamily, fontSize: 13, color: colors.accentDark },
     footer: {
       position: 'absolute',
       left: 0,
@@ -1369,8 +1383,8 @@ export function createListScreenStyles(theme: AppTheme) {
       paddingBottom: spacing.md,
     },
     backBtn: { width: 28, height: 28, justifyContent: 'center' },
-    title: { fontFamily: fonts.display, fontSize: 24, color: colors.text, marginTop: spacing.sm },
-    sub: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted, marginTop: 4 },
+    title: { fontFamily: fonts.display, fontSize: 24, lineHeight: 28, color: colors.text, marginTop: spacing.sm, letterSpacing: -0.4 },
+    sub: { fontFamily: fonts.bodyMedium, fontSize: 14, lineHeight: 20, color: colors.textMuted, marginTop: 4 },
     card: {
       marginHorizontal: spacing.lg,
       marginBottom: spacing.sm,
@@ -1472,11 +1486,12 @@ export function createResultStyles(theme: AppTheme) {
     },
     heroTitle: {
       fontFamily: fonts.display,
-      fontSize: 28,
+      fontSize: 24,
+      lineHeight: 28,
       color: '#fff',
       textAlign: 'center',
       marginTop: spacing.sm,
-      letterSpacing: -0.5,
+      letterSpacing: -0.4,
     },
     statsRow: { flexDirection: 'row', gap: spacing.sm, padding: spacing.lg, marginTop: -30 },
     statCard: {
@@ -1495,8 +1510,8 @@ export function createResultStyles(theme: AppTheme) {
       padding: spacing.lg,
       marginBottom: spacing.md,
     },
-    reviewTitle: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, marginBottom: spacing.sm },
-    reviewEmpty: { fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.textMuted },
+    reviewTitle: { fontFamily: fonts.display, fontSize: 17, color: colors.text, marginBottom: spacing.sm, letterSpacing: -0.2 },
+    reviewEmpty: { fontFamily: fonts.bodyMedium, fontSize: 15, lineHeight: 22, color: colors.textMuted },
     reviewItem: { borderTopWidth: 1, borderTopColor: colors.border, paddingVertical: spacing.sm },
     reviewHead: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.sm },
     reviewQ: { flex: 1, fontFamily: fonts.bodySemiBold, fontSize: 14, color: colors.text },
@@ -1531,9 +1546,10 @@ export function createAnalyticsStyles(theme: AppTheme) {
     },
     headerTitle: {
       fontFamily: fonts.display,
-      fontSize: 26,
+      fontSize: 24,
       color: headlineBlue,
       letterSpacing: -0.4,
+      lineHeight: 28,
     },
     body: { paddingHorizontal: spacing.md, paddingTop: spacing.xs },
     summaryCard: {
@@ -1560,18 +1576,19 @@ export function createAnalyticsStyles(theme: AppTheme) {
       zIndex: 1,
     },
     summaryTitle: {
-      fontFamily: fonts.bodyBold,
-      fontSize: 17,
+      fontFamily: fonts.display,
+      fontSize: 20,
       color: headlineBlue,
       paddingRight: 44,
-      letterSpacing: -0.2,
+      letterSpacing: -0.3,
+      lineHeight: 25,
     },
     summarySub: {
       fontFamily: fonts.bodyMedium,
-      fontSize: 14,
+      fontSize: 15,
       color: colors.textMuted,
       marginTop: 4,
-      lineHeight: 20,
+      lineHeight: 22,
     },
     summarySegments: { marginTop: spacing.md },
     weakBox: {

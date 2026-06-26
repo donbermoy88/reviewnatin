@@ -26,7 +26,7 @@ export function ContentGateBanner({ theme, status, compact = false }: Props) {
         }}
       >
         <Ionicons name="construct-outline" size={14} color={colors.accentDark} />
-        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, flex: 1 }}>
+        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, lineHeight: 18, color: colors.textMuted, flex: 1 }}>
           Content loading — {Math.min(status.counts.questions, status.minimum.questions)}/
           {status.minimum.questions} questions · {Math.min(status.counts.mockExams, status.minimum.mockExams)}/
           {status.minimum.mockExams} mocks
@@ -50,13 +50,13 @@ export function ContentGateBanner({ theme, status, compact = false }: Props) {
     >
       <Ionicons name="construct-outline" size={20} color={colors.accentDark} />
       <View style={{ flex: 1 }}>
-        <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text }}>
+        <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, lineHeight: 21, color: colors.text }}>
           Dagdag na tanong — paparating na
         </Text>
-        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 4 }}>
+        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, lineHeight: 19, color: colors.textMuted, marginTop: 4 }}>
           {status.counts.questions} tanong available · {status.questionPct}% ng target bank
         </Text>
-        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted, marginTop: 4 }}>
+        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, lineHeight: 19, color: colors.textMuted, marginTop: 4 }}>
           Mag-practice muna sa available content — regular ang bagong tanong.
         </Text>
       </View>

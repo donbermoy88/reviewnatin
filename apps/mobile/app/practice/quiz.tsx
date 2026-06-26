@@ -629,7 +629,7 @@ function PracticeQuizScreenContent() {
         <View style={styles.questionCard}>
           <RichText
             content={current.stem}
-            fontSize={19}
+            fontSize={17}
             color={colors.text}
           />
         </View>
@@ -690,7 +690,7 @@ function PracticeQuizScreenContent() {
             </View>
             <RichText
               content={explanation}
-              fontSize={14}
+              fontSize={15}
               color={colors.text}
             />
           </View>

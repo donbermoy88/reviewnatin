@@ -84,9 +84,9 @@ export function QuestionNavigator({
           }}
         >
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.xs }}>
-            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 18, color: '#fff' }}>Exam Progress</Text>
+            <Text style={{ fontFamily: fonts.display, fontSize: 18, lineHeight: 23, color: '#fff', letterSpacing: -0.2 }}>Exam Progress</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
-              <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>
+              <Text style={{ fontFamily: fonts.bodySemiBold, fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>
                 {answeredCount}/{questions.length}
               </Text>
               <Pressable onPress={onClose} hitSlop={8} accessibilityRole="button" accessibilityLabel="Close navigator">

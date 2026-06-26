@@ -59,7 +59,7 @@ export function ActionCard({
         {leading}
         <View style={{ flex: 1, minWidth: 0 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs, flexWrap: 'wrap' }}>
-            <Text style={[type.label, { fontSize: 15, flexShrink: 1 }]} numberOfLines={2}>
+            <Text style={[type.cardTitle, { fontSize: 16, flexShrink: 1 }]} numberOfLines={2}>
               {title}
             </Text>
             {badge}

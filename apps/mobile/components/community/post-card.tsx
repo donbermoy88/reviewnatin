@@ -53,17 +53,17 @@ export function PostCard({ post, onLike, onSave, onManage, onOpenPost, onOpenPro
           <Avatar url={post.authorAvatarUrl} name={post.authorDisplayName} />
         </Pressable>
         <Pressable style={{ flex: 1 }} onPress={() => onOpenProfile(post.authorId)} hitSlop={4}>
-          <Text style={{ fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text }}>
+          <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: colors.text, letterSpacing: -0.1 }}>
             {post.authorDisplayName}
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted }}>
+            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, lineHeight: 18, color: colors.textMuted }}>
               {formatRelativeTimeAgo(post.createdAt)}
             </Text>
             {post.examName ? (
               <>
-                <Text style={{ fontSize: 12, color: colors.textLight }}>·</Text>
-                <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textMuted }}>
+                <Text style={{ fontSize: 13, color: colors.textLight }}>·</Text>
+                <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted }}>
                   {post.examName}
                 </Text>
               </>
@@ -86,7 +86,7 @@ export function PostCard({ post, onLike, onSave, onManage, onOpenPost, onOpenPro
       ) : (
         <>
           <Pressable onPress={() => onOpenPost(post)}>
-            <Text style={{ fontFamily: fonts.body, fontSize: 14, color: colors.text, lineHeight: 20 }}>
+            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 15, color: colors.text, lineHeight: 22 }}>
               {post.body}
             </Text>
           </Pressable>
@@ -108,7 +108,7 @@ export function PostCard({ post, onLike, onSave, onManage, onOpenPost, onOpenPro
               size={18}
               color={post.likedByMe ? colors.error : colors.textMuted}
             />
-            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted }}>
+            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.textMuted }}>
               {post.likeCount}
             </Text>
           </Pressable>
@@ -121,7 +121,7 @@ export function PostCard({ post, onLike, onSave, onManage, onOpenPost, onOpenPro
             hitSlop={8}
           >
             <Ionicons name="chatbubble-outline" size={17} color={colors.textMuted} />
-            <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.textMuted }}>
+            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.textMuted }}>
               {post.commentCount}
             </Text>
           </Pressable>

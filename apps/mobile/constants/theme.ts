@@ -30,7 +30,7 @@ export const type: Record<string, TypeStyle> = {
   headline: {
     fontFamily: fonts.display,
     fontSize: typography.sizes.headline,
-    lineHeight: typography.sizes.headline * typography.lineHeights.tight,
+    lineHeight: typography.sizes.headline * typography.lineHeights.snug,
     color: colors.text,
     letterSpacing: -0.4,
   },
@@ -41,12 +41,32 @@ export const type: Record<string, TypeStyle> = {
     color: colors.primaryDark,
     letterSpacing: -0.5,
   },
-  title: {
-    fontFamily: fonts.bodyBold,
+  sectionTitle: {
+    fontFamily: fonts.display,
     fontSize: typography.sizes.title,
-    lineHeight: typography.sizes.title * typography.lineHeights.normal,
+    lineHeight: typography.sizes.title * typography.lineHeights.compact,
+    color: colors.text,
+    letterSpacing: -0.3,
+  },
+  cardTitle: {
+    fontFamily: fonts.bodyBold,
+    fontSize: typography.sizes.cardTitle,
+    lineHeight: typography.sizes.cardTitle * typography.lineHeights.compact,
     color: colors.text,
     letterSpacing: -0.2,
+  },
+  title: {
+    fontFamily: fonts.display,
+    fontSize: typography.sizes.title,
+    lineHeight: typography.sizes.title * typography.lineHeights.compact,
+    color: colors.text,
+    letterSpacing: -0.3,
+  },
+  questionText: {
+    fontFamily: fonts.bodySemiBold,
+    fontSize: typography.sizes.bodyLg,
+    lineHeight: typography.sizes.bodyLg * typography.lineHeights.normal,
+    color: colors.text,
   },
   body: {
     fontFamily: fonts.body,
@@ -66,15 +86,42 @@ export const type: Record<string, TypeStyle> = {
     lineHeight: typography.sizes.subtitle * typography.lineHeights.normal,
     color: colors.textMuted,
   },
+  small: {
+    fontFamily: fonts.bodySemiBold,
+    fontSize: typography.sizes.small,
+    lineHeight: typography.sizes.small * typography.lineHeights.normal,
+    color: colors.textMuted,
+  },
   caption: {
     fontFamily: fonts.bodySemiBold,
     fontSize: typography.sizes.caption,
     lineHeight: typography.sizes.caption * typography.lineHeights.normal,
     color: colors.textLight,
-    letterSpacing: 0.4,
+    letterSpacing: 0.5,
+  },
+  badge: {
+    fontFamily: fonts.display,
+    fontSize: typography.sizes.caption,
+    lineHeight: typography.sizes.caption * typography.lineHeights.normal,
+    color: colors.textLight,
+    letterSpacing: 0.8,
+  },
+  button: {
+    fontFamily: fonts.display,
+    fontSize: typography.sizes.body,
+    lineHeight: typography.sizes.body * typography.lineHeights.normal,
+    color: '#fff',
+    letterSpacing: 0,
+  },
+  buttonLg: {
+    fontFamily: fonts.display,
+    fontSize: typography.sizes.bodyLg,
+    lineHeight: typography.sizes.bodyLg * typography.lineHeights.normal,
+    color: '#fff',
+    letterSpacing: 0,
   },
   label: {
-    fontFamily: fonts.bodyBold,
+    fontFamily: fonts.display,
     fontSize: typography.sizes.bodyLg,
     lineHeight: typography.sizes.bodyLg * typography.lineHeights.normal,
     color: colors.text,
@@ -91,6 +138,13 @@ export const type: Record<string, TypeStyle> = {
     fontSize: typography.sizes.subtitle,
     lineHeight: typography.sizes.subtitle * typography.lineHeights.normal,
     color: colors.text,
+  },
+  tabLabel: {
+    fontFamily: fonts.bodyBold,
+    fontSize: 12,
+    lineHeight: 16,
+    color: colors.textMuted,
+    letterSpacing: 0.1,
   },
 };
 

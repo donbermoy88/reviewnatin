@@ -103,7 +103,7 @@ export default function MockReviewScreen() {
             {item.isCorrect ? 'Correct' : 'Wrong'}
           </Pill>
         </View>
-        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.text, lineHeight: 20 }}>
+        <Text style={{ fontFamily: fonts.bodySemiBold, fontSize: 16, color: colors.text, lineHeight: 23 }}>
           {item.stem}
         </Text>
         {expanded ? (
@@ -124,10 +124,10 @@ export default function MockReviewScreen() {
               <Text
                 style={{
                   fontFamily: fonts.bodyMedium,
-                  fontSize: 13,
+                  fontSize: 15,
                   color: colors.textMuted,
                   marginTop: spacing.sm,
-                  lineHeight: 18,
+                  lineHeight: 22,
                 }}
               >
                 {explanation}
@@ -165,7 +165,7 @@ export default function MockReviewScreen() {
           marginTop: spacing.sm,
         }}
       >
-        <Text style={{ fontFamily: fonts.displayBold, fontSize: 28, color: passed ? colors.success : colors.flame }}>
+        <Text style={{ fontFamily: fonts.display, fontSize: 32, lineHeight: 38, letterSpacing: -0.5, color: passed ? colors.success : colors.flame }}>
           {Math.round(scoreNum)}%
         </Text>
         <Pill color={passed ? colors.success : colors.flame}>{passed ? 'PASS' : 'REVIEW'}</Pill>

@@ -50,8 +50,10 @@ export function AuthShell({ title, subtitle, hero, children }: Props) {
             <Text
               style={{
                 fontFamily: fonts.display,
-                fontSize: 26,
+                fontSize: 24,
+                lineHeight: 28,
                 color: '#fff',
+                letterSpacing: -0.4,
                 textAlign: hero ? 'center' : undefined,
               }}
             >
@@ -62,10 +64,10 @@ export function AuthShell({ title, subtitle, hero, children }: Props) {
             <Text
               style={{
                 fontFamily: fonts.bodyMedium,
-                fontSize: 14,
-                color: 'rgba(255,255,255,0.75)',
+                fontSize: 15,
+                color: 'rgba(255,255,255,0.78)',
                 marginTop: 8,
-                lineHeight: 20,
+                lineHeight: 22,
                 textAlign: hero ? 'center' : undefined,
               }}
             >
@@ -86,10 +88,10 @@ export function authFieldStyles(theme: ReturnType<typeof useAppTheme>) {
   const { colors, fonts, spacing, radii } = theme;
   return StyleSheet.create({
     field: { marginBottom: spacing.md },
-    fieldLabel: { fontFamily: fonts.bodyBold, fontSize: 13, color: colors.text, marginBottom: 6 },
+    fieldLabel: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.text, marginBottom: 6 },
     input: {
       fontSize: 16,
-      fontFamily: fonts.body,
+      fontFamily: fonts.bodySemiBold,
       color: colors.text,
       borderWidth: 1.5,
       borderColor: colors.border,
@@ -99,8 +101,8 @@ export function authFieldStyles(theme: ReturnType<typeof useAppTheme>) {
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm,
     },
-    error: { fontFamily: fonts.body, fontSize: 14, color: colors.error, marginBottom: spacing.md },
-    info: { fontFamily: fonts.body, fontSize: 14, color: colors.primary, marginBottom: spacing.md },
-    backLink: { fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.primary, textAlign: 'center' },
+    error: { fontFamily: fonts.bodyMedium, fontSize: 14, lineHeight: 20, color: colors.error, marginBottom: spacing.md },
+    info: { fontFamily: fonts.bodyMedium, fontSize: 14, lineHeight: 20, color: colors.primary, marginBottom: spacing.md },
+    backLink: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.primary, textAlign: 'center' },
   });
 }

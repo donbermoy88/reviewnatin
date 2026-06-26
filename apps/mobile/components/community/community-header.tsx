@@ -28,7 +28,7 @@ export function CommunityHeader({ examName, insetsTop }: Props) {
       </View>
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Text style={{ fontFamily: fonts.display, fontSize: 22, color: '#fff', letterSpacing: -0.4 }}>
+        <Text style={{ fontFamily: fonts.display, fontSize: 24, lineHeight: 28, color: '#fff', letterSpacing: -0.4 }}>
           Community
         </Text>
         <Pressable
@@ -49,7 +49,7 @@ export function CommunityHeader({ examName, insetsTop }: Props) {
 
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: spacing.sm }}>
         <Ionicons name="shield-checkmark" size={14} color="#fff" />
-        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 13, color: 'rgba(255,255,255,0.8)' }}>
+        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, lineHeight: 20, color: 'rgba(255,255,255,0.8)' }}>
           {examName} reviewers
         </Text>
       </View>

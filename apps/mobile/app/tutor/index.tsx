@@ -187,8 +187,8 @@ export default function AiTutorScreen() {
             <Text
               style={{
                 fontFamily: fonts.bodyMedium,
-                fontSize: 14,
-                lineHeight: 20,
+                fontSize: 15,
+                lineHeight: 22,
                 color: m.role === 'user' ? '#fff' : colors.text,
               }}
             >
@@ -251,7 +251,8 @@ export default function AiTutorScreen() {
             paddingHorizontal: spacing.md,
             paddingVertical: spacing.sm,
             fontFamily: fonts.bodyMedium,
-            fontSize: 14,
+            fontSize: 15,
+            lineHeight: 22,
             color: colors.text,
           }}
         />
