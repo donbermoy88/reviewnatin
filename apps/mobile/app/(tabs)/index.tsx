@@ -225,6 +225,7 @@ function DashboardScreenContent() {
   const [pasapath, setPasapath] = useState<PasaPathPlan | null>(null);
   const [contentGate, setContentGate] = useState<ContentGateStatus | null>(null);
   const [announcements, setAnnouncements] = useState<AppAnnouncement[]>([]);
+  const [unreadBadge, setUnreadBadge] = useState(0);
   const [weakTopic, setWeakTopic] = useState<TopicAnalyticsRow | null>(null);
   const [subjectAnalytics, setSubjectAnalytics] = useState<SubjectAnalytics[]>([]);
   const [studyTrend, setStudyTrend] = useState<DailyStudyPoint[]>([]);
@@ -347,6 +348,7 @@ function DashboardScreenContent() {
           ]);
           setContentGate(gate);
           setAnnouncements(appAnnouncements);
+          setUnreadBadge(appAnnouncements.length);
         });
         return;
       }
@@ -390,7 +392,9 @@ function DashboardScreenContent() {
       if (!user) {
         setContentGate(await fetchContentGateStatus(slug).catch(() => null));
       }
-      setAnnouncements(await fetchAppAnnouncements(slug, 3).catch(() => []));
+      const fetched = await fetchAppAnnouncements(slug, 3).catch(() => []);
+      setAnnouncements(fetched);
+      setUnreadBadge(fetched.length);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -772,18 +776,25 @@ function DashboardScreenContent() {
             </View>
             <Pressable
               style={({ pressed }) => [styles.homeBell, pressed && styles.pressedSoft]}
-              onPress={() => announcements.length > 0 ? setUpdatesSheetOpen(true) : setNotificationSheetOpen(true)}
+              onPress={() => {
+                if (announcements.length > 0) {
+                  setUnreadBadge(0);
+                  setUpdatesSheetOpen(true);
+                } else {
+                  setNotificationSheetOpen(true);
+                }
+              }}
               accessibilityRole="button"
               accessibilityLabel={
-                announcements.length > 0
-                  ? `${announcements.length} notification${announcements.length === 1 ? '' : 's'}`
+                unreadBadge > 0
+                  ? `${unreadBadge} notification${unreadBadge === 1 ? '' : 's'}`
                   : 'Notification settings'
               }
             >
               <Ionicons name="notifications" size={22} color="#fff" />
-              {announcements.length > 0 ? (
+              {unreadBadge > 0 ? (
                 <View style={styles.homeBellBadge}>
-                  <Text style={styles.homeBellBadgeText}>{Math.min(announcements.length, 9)}</Text>
+                  <Text style={styles.homeBellBadgeText}>{Math.min(unreadBadge, 9)}</Text>
                 </View>
               ) : null}
             </Pressable>
