@@ -5,7 +5,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
-  Pressable,
   RefreshControl,
   ScrollView,
   Share,
@@ -14,6 +13,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { IconButton } from '../../components/icon-button';
 import { InputField } from '../../components/input-field';
 import { Pill } from '../../components/pill';
 import { StackShell } from '../../components/stack-shell';
@@ -210,9 +210,17 @@ export default function BarkadaScreen() {
           colors={[...gradients.hero]}
           style={[styles.header, { paddingTop: insets.top + spacing.sm }]}
         >
-          <Pressable onPress={() => router.back()} hitSlop={8} style={{ marginBottom: spacing.sm }}>
-            <Ionicons name="chevron-back" size={22} color="#fff" />
-          </Pressable>
+          <IconButton
+            variant="plain"
+            buttonSize={28}
+            size={22}
+            icon="chevron-back"
+            color="#fff"
+            hitSlop={8}
+            accessibilityLabel="Go back"
+            style={{ marginBottom: spacing.sm }}
+            onPress={() => router.back()}
+          />
           <Text style={styles.headerTitle}>Barkada Mode</Text>
           <Text style={styles.headerSub}>Mag-review kasama ang friends · compare scores · sabay pumasa</Text>
         </LinearGradient>
