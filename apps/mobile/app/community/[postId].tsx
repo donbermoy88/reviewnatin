@@ -658,9 +658,10 @@ export default function PostDetailScreen() {
           }}
         />
         <PrimaryButton
-          label={sending ? '…' : 'Send'}
+          label="Send"
+          loading={sending}
           size="md"
-          disabled={sending || !commentText.trim()}
+          disabled={!commentText.trim()}
           onPress={() => void sendComment()}
         />
       </View>

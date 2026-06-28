@@ -753,9 +753,11 @@ function PracticeQuizScreenContent() {
           />
         ) : (
           <PrimaryButton
-            label={checking ? 'Chini-check…' : 'I-check ang sagot'}
+            label="I-check ang sagot"
+            loadingLabel="Chini-check…"
+            loading={checking}
             size="lg"
-            disabled={!selected || checking}
+            disabled={!selected}
             onPress={checkAnswer}
           />
         )}

@@ -134,10 +134,11 @@ export function ReportContentModal({ visible, targetType, targetId, onClose }: P
       />
 
       <PrimaryButton
-        label={submitting ? 'Submitting…' : 'Submit report'}
+        label="Submit report"
+        loadingLabel="Submitting…"
+        loading={submitting}
         icon="flag-outline"
         size="lg"
-        disabled={submitting}
         onPress={() => void submit()}
       />
       <PrimaryButton label="Cancel" variant="ghost" disabled={submitting} onPress={close} />

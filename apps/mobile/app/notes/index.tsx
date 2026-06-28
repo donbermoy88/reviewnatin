@@ -154,7 +154,7 @@ export default function NotesScreen() {
               minHeight: 220,
             }}
           />
-          <PrimaryButton label={saving ? 'Sina-save…' : 'I-save ang note'} size="lg" disabled={saving} onPress={() => void save()} />
+          <PrimaryButton label="I-save ang note" loadingLabel="Sina-save…" loading={saving} size="lg" onPress={() => void save()} />
           <View style={{ flexDirection: 'row', gap: spacing.sm }}>
             <PrimaryButton label="Kanselahin" variant="outline" style={{ flex: 1 }} onPress={() => setEditing(null)} />
             {editing.id ? (
