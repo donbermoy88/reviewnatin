@@ -5,6 +5,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  Animated,
+  Easing,
   Platform,
   Pressable,
   ScrollView,
@@ -14,6 +16,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
 import { IconButton } from '../../components/icon-button';
+import { useReducedMotion } from '../../hooks/use-reduced-motion';
 import { PremiumLimitPanel } from '../../components/premium-limit-panel';
 import { EmptyState } from '../../components/empty-state';
 import { ErrorBoundary } from '../../components/error-boundary';
@@ -154,6 +157,25 @@ function PracticeQuizScreenContent() {
   );
   const answeredCount = answeredIndices.size;
 
+  // Smoothly fill the HUD progress bar as the learner advances (game feel).
+  const reduceMotion = useReducedMotion();
+  const [progressAnim] = useState(() => new Animated.Value(0));
+  const progressPct = questions.length ? ((index + 1) / questions.length) * 100 : 0;
+  useEffect(() => {
+    if (reduceMotion) {
+      progressAnim.setValue(progressPct);
+      return;
+    }
+    const animation = Animated.timing(progressAnim, {
+      toValue: progressPct,
+      duration: theme.motion.duration.slow,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      useNativeDriver: false,
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [progressPct, reduceMotion, progressAnim, theme.motion]);
+
   const pickChoice = useCallback(
     (choiceId: string) => {
       if (!current || revealed) return;
@@ -266,6 +288,12 @@ function PracticeQuizScreenContent() {
       if (!isStrictExam) {
         setRevealResult(result);
         setRevealed(true);
+        // Tactile confirmation of the result — satisfying, no visual noise.
+        void Haptics.notificationAsync(
+          result.isCorrect
+            ? Haptics.NotificationFeedbackType.Success
+            : Haptics.NotificationFeedbackType.Error
+        );
       }
       setAnswers((prev) => [
         ...prev,
@@ -505,10 +533,16 @@ function PracticeQuizScreenContent() {
           ) : (
             <View style={styles.progressWrap}>
               <View style={styles.progressTrack}>
-                <View
+                <Animated.View
                   style={[
                     styles.progressFill,
-                    { width: `${((index + 1) / questions.length) * 100}%` },
+                    {
+                      width: progressAnim.interpolate({
+                        inputRange: [0, 100],
+                        outputRange: ['0%', '100%'],
+                        extrapolate: 'clamp',
+                      }),
+                    },
                   ]}
                 />
               </View>
