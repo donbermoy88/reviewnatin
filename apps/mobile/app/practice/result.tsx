@@ -325,11 +325,20 @@ export default function PracticeResultScreen() {
 
         <View style={styles.statsRow}>
           {[
-            { v: `${correctNum}/${totalNum}`, l: 'Tama', c: colors.primary },
-            { v: formatDuration(duration ?? '0'), l: 'Oras', c: colors.accentDark },
-            { v: `${scoreNum}%`, l: 'Score', c: scoreNum >= 75 ? colors.success : scoreNum >= 50 ? colors.flame : colors.error },
+            { v: `${correctNum}/${totalNum}`, l: 'Tama', c: colors.primary, icon: 'checkmark-circle' as const, bg: colors.primaryMuted },
+            { v: formatDuration(duration ?? '0'), l: 'Oras', c: colors.accentDark, icon: 'time-outline' as const, bg: colors.accentLight },
+            {
+              v: `${scoreNum}%`,
+              l: 'Score',
+              c: scoreNum >= 75 ? colors.success : scoreNum >= 50 ? colors.flame : colors.error,
+              icon: 'ribbon-outline' as const,
+              bg: scoreNum >= 75 ? colors.successBg : scoreNum >= 50 ? colors.warnBg : colors.errorBg,
+            },
           ].map((s) => (
             <View key={s.l} style={styles.statCard}>
+              <View style={[styles.statIconWrap, { backgroundColor: s.bg }]}>
+                <Ionicons name={s.icon} size={16} color={s.c} />
+              </View>
               <Text style={styles.statLbl}>{s.l.toUpperCase()}</Text>
               <Text style={[styles.statVal, { color: s.c }]}>{s.v}</Text>
             </View>
@@ -627,42 +636,16 @@ export default function PracticeResultScreen() {
               </View>
             </View>
           ) : null}
-          <PrimaryButton
-            label="I-share ang score"
-            loadingLabel="Hinahanda…"
-            loading={sharing}
-            variant="outline"
-            icon="share-outline"
-            size="lg"
-            onPress={shareScore}
-            style={{ marginBottom: spacing.sm }}
-          />
-          {wrongCount > 0 && user ? (
-            <PrimaryButton
-              label="I-review ang mga mali"
-              size="lg"
-              onPress={() => router.push('/mistakes')}
-              style={{ marginBottom: spacing.sm }}
-            />
-          ) : null}
-          <PrimaryButton
-            label={mode === 'mock' || mode === 'diagnostic' || mode === 'board' ? 'Tapos' : 'Balik sa Home'}
-            variant={wrongCount > 0 && user ? 'outline' : undefined}
-            size="lg"
-            onPress={() => router.replace('/(tabs)')}
-          />
+          {/* Primary forward action — keep the momentum going. */}
           {mode === 'diagnostic' ? (
             <PrimaryButton
               label="Tingnan ang PasaPath mo →"
-              variant="outline"
               size="lg"
               onPress={() => router.replace('/pasapath/week')}
-              style={{ marginTop: spacing.sm }}
             />
           ) : (
             <PrimaryButton
               label={mode === 'mock' || mode === 'board' ? 'Bagong mock →' : mode === 'weak_area' ? 'Isa pang Quick 10 →' : 'Susunod na quiz →'}
-              variant="outline"
               size="lg"
               onPress={() => {
                 if (mode === 'mock' || mode === 'board') {
@@ -673,9 +656,43 @@ export default function PracticeResultScreen() {
                   router.replace({ pathname: '/practice/quiz', params: { examSlug } });
                 }
               }}
-              style={{ marginTop: spacing.sm }}
             />
           )}
+
+          {/* Review mistakes — prominent secondary when there are any. */}
+          {wrongCount > 0 && user ? (
+            <PrimaryButton
+              label="I-review ang mga mali"
+              variant="outline"
+              icon="alert-circle-outline"
+              iconPosition="left"
+              size="lg"
+              onPress={() => router.push('/mistakes')}
+              style={{ marginTop: spacing.sm }}
+            />
+          ) : null}
+
+          {/* Tertiary row: finish + share. */}
+          <View style={styles.actionRow}>
+            <PrimaryButton
+              label={mode === 'mock' || mode === 'diagnostic' || mode === 'board' ? 'Tapos' : 'Home'}
+              variant="ghost"
+              size="lg"
+              onPress={() => router.replace('/(tabs)')}
+              style={{ flex: 1 }}
+            />
+            <PrimaryButton
+              label="I-share"
+              loadingLabel="…"
+              loading={sharing}
+              variant="ghost"
+              icon="share-outline"
+              iconPosition="left"
+              size="lg"
+              onPress={shareScore}
+              style={{ flex: 1 }}
+            />
+          </View>
         </View>
       </ScrollView>
 

@@ -661,9 +661,16 @@ function PracticeQuizScreenContent() {
 
         {revealed && !isStrictExam && !explanation ? (
           <View style={[styles.explanation, { borderColor: revealResult?.isCorrect ? colors.success : colors.error, backgroundColor: revealResult?.isCorrect ? colors.successBg : colors.errorBg }]}>
-            <Text style={[styles.explanationTitle, { color: revealResult?.isCorrect ? colors.success : colors.error }]}>
-              {revealResult?.isCorrect ? '✓ Correct!' : '✗ Incorrect'}
-            </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
+              <Ionicons
+                name={revealResult?.isCorrect ? 'checkmark-circle' : 'close-circle'}
+                size={22}
+                color={revealResult?.isCorrect ? colors.success : colors.error}
+              />
+              <Text style={[styles.explanationTitle, { color: revealResult?.isCorrect ? colors.success : colors.error, fontSize: 16 }]}>
+                {revealResult?.isCorrect ? 'Tama!' : 'Mali'}
+              </Text>
+            </View>
             {!revealResult?.isCorrect && revealResult?.correctChoiceId ? (
               <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 13, color: colors.text, marginTop: 4 }}>
                 Naka-highlight sa green sa itaas ang tamang sagot.

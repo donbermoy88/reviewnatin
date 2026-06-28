@@ -1472,7 +1472,7 @@ export function createFlashcardStyles(theme: AppTheme) {
 }
 
 export function createResultStyles(theme: AppTheme) {
-  const { colors, fonts, spacing } = theme;
+  const { colors, fonts, spacing, shadows } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     hero: {
@@ -1504,11 +1504,24 @@ export function createResultStyles(theme: AppTheme) {
       flex: 1,
       backgroundColor: colors.surface,
       borderRadius: 16,
-      padding: spacing.md,
+      paddingVertical: spacing.md,
+      paddingHorizontal: spacing.sm,
       alignItems: 'center',
+      borderWidth: 1,
+      borderColor: colors.border,
+      ...shadows.card,
+    },
+    statIconWrap: {
+      width: 30,
+      height: 30,
+      borderRadius: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: spacing.xs,
     },
     statLbl: { fontFamily: fonts.bodyBold, fontSize: 10, color: colors.textLight, letterSpacing: 0.5 },
-    statVal: { fontFamily: fonts.display, fontSize: 22, marginTop: 4, letterSpacing: -0.4 },
+    statVal: { fontFamily: fonts.display, fontSize: 22, marginTop: 2, letterSpacing: -0.4 },
+    actionRow: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm },
     reviewBox: {
       marginHorizontal: spacing.lg,
       backgroundColor: colors.surface,
