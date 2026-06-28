@@ -5,6 +5,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  Animated,
+  Easing,
   Platform,
   Pressable,
   ScrollView,
@@ -14,6 +16,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
 import { IconButton } from '../../components/icon-button';
+import { useReducedMotion } from '../../hooks/use-reduced-motion';
 import { PremiumLimitPanel } from '../../components/premium-limit-panel';
 import { EmptyState } from '../../components/empty-state';
 import { ErrorBoundary } from '../../components/error-boundary';
@@ -154,6 +157,25 @@ function PracticeQuizScreenContent() {
   );
   const answeredCount = answeredIndices.size;
 
+  // Smoothly fill the HUD progress bar as the learner advances (game feel).
+  const reduceMotion = useReducedMotion();
+  const [progressAnim] = useState(() => new Animated.Value(0));
+  const progressPct = questions.length ? ((index + 1) / questions.length) * 100 : 0;
+  useEffect(() => {
+    if (reduceMotion) {
+      progressAnim.setValue(progressPct);
+      return;
+    }
+    const animation = Animated.timing(progressAnim, {
+      toValue: progressPct,
+      duration: theme.motion.duration.slow,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      useNativeDriver: false,
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [progressPct, reduceMotion, progressAnim, theme.motion]);
+
   const pickChoice = useCallback(
     (choiceId: string) => {
       if (!current || revealed) return;
@@ -266,6 +288,12 @@ function PracticeQuizScreenContent() {
       if (!isStrictExam) {
         setRevealResult(result);
         setRevealed(true);
+        // Tactile confirmation of the result — satisfying, no visual noise.
+        void Haptics.notificationAsync(
+          result.isCorrect
+            ? Haptics.NotificationFeedbackType.Success
+            : Haptics.NotificationFeedbackType.Error
+        );
       }
       setAnswers((prev) => [
         ...prev,
@@ -437,8 +465,14 @@ function PracticeQuizScreenContent() {
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 140 }}>
         <View style={[styles.topBar, { paddingTop: insets.top + spacing.sm }]}>
           {!isStrictExam ? (
-            <Pressable
+            <IconButton
+              variant="plain"
+              buttonSize={36}
+              size={18}
+              icon="close"
+              color={colors.text}
               style={styles.closeBtn}
+              accessibilityLabel={isDiagnostic ? 'Leave diagnostic quiz' : 'Close quiz'}
               onPress={() => {
                 const hasProgress = answers.length > 0 || !!selected;
                 if (isDiagnostic && user) {
@@ -472,11 +506,7 @@ function PracticeQuizScreenContent() {
                 }
                 router.back();
               }}
-              accessibilityRole="button"
-              accessibilityLabel={isDiagnostic ? 'Leave diagnostic quiz' : 'Close quiz'}
-            >
-              <Ionicons name="close" size={18} color={colors.text} />
-            </Pressable>
+            />
           ) : (
             <IconButton
               variant="surface"
@@ -503,10 +533,16 @@ function PracticeQuizScreenContent() {
           ) : (
             <View style={styles.progressWrap}>
               <View style={styles.progressTrack}>
-                <View
+                <Animated.View
                   style={[
                     styles.progressFill,
-                    { width: `${((index + 1) / questions.length) * 100}%` },
+                    {
+                      width: progressAnim.interpolate({
+                        inputRange: [0, 100],
+                        outputRange: ['0%', '100%'],
+                        extrapolate: 'clamp',
+                      }),
+                    },
                   ]}
                 />
               </View>
@@ -582,12 +618,10 @@ function PracticeQuizScreenContent() {
         ) : null}
 
         <View style={styles.meta}>
-          <Text style={styles.metaText}>
-            Question {index + 1} of {questions.length}
-          </Text>
           {current.topic?.subject?.name ? (
             <Pill color={colors.primary}>{current.topic.subject.name.toUpperCase()}</Pill>
           ) : null}
+          <View style={{ flex: 1 }} />
           {user ? (
             <Pressable
               onPress={toggleBookmarkCurrent}
@@ -661,9 +695,16 @@ function PracticeQuizScreenContent() {
 
         {revealed && !isStrictExam && !explanation ? (
           <View style={[styles.explanation, { borderColor: revealResult?.isCorrect ? colors.success : colors.error, backgroundColor: revealResult?.isCorrect ? colors.successBg : colors.errorBg }]}>
-            <Text style={[styles.explanationTitle, { color: revealResult?.isCorrect ? colors.success : colors.error }]}>
-              {revealResult?.isCorrect ? '✓ Correct!' : '✗ Incorrect'}
-            </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
+              <Ionicons
+                name={revealResult?.isCorrect ? 'checkmark-circle' : 'close-circle'}
+                size={22}
+                color={revealResult?.isCorrect ? colors.success : colors.error}
+              />
+              <Text style={[styles.explanationTitle, { color: revealResult?.isCorrect ? colors.success : colors.error, fontSize: 16 }]}>
+                {revealResult?.isCorrect ? 'Tama!' : 'Mali'}
+              </Text>
+            </View>
             {!revealResult?.isCorrect && revealResult?.correctChoiceId ? (
               <Text style={{ fontFamily: theme.fonts.bodyMedium, fontSize: 13, color: colors.text, marginTop: 4 }}>
                 Naka-highlight sa green sa itaas ang tamang sagot.

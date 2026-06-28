@@ -5,6 +5,7 @@ import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } fr
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
 import { EmptyState } from '../../components/empty-state';
+import { IconButton } from '../../components/icon-button';
 import { ErrorState } from '../../components/error-state';
 import { Pill } from '../../components/pill';
 import { ReportContentButton } from '../../components/report-content-button';
@@ -96,6 +97,11 @@ export default function MockReviewScreen() {
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginBottom: 8 }}>
+          <Ionicons
+            name={item.isCorrect ? 'checkmark-circle' : 'close-circle'}
+            size={18}
+            color={item.isCorrect ? colors.success : colors.error}
+          />
           <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.textMuted }}>
             Q{i + 1}
           </Text>
@@ -152,9 +158,16 @@ export default function MockReviewScreen() {
 
   const ListHeader = (
     <View style={[styles.header, { paddingTop: insets.top + spacing.sm }]}>
-      <Pressable onPress={() => router.back()} hitSlop={8} accessibilityRole="button" accessibilityLabel="Go back">
-        <Ionicons name="chevron-back" size={22} color={colors.text} />
-      </Pressable>
+      <IconButton
+        variant="plain"
+        buttonSize={28}
+        size={22}
+        icon="chevron-back"
+        color={colors.text}
+        hitSlop={8}
+        accessibilityLabel="Go back"
+        onPress={() => router.back()}
+      />
       <Text style={styles.title} numberOfLines={2}>{title ?? 'Mock review'}</Text>
       <View
         style={{

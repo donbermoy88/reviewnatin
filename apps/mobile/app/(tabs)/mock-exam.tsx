@@ -13,6 +13,7 @@ import { tabScrollPaddingWithFooter } from '../../lib/layout/content-padding';
 import { fetchExamBySlug } from '../../lib/api/catalog';
 import { resolveOnboardingGoal } from '../../lib/api/goals';
 import { fetchMockExams, type MockExam } from '../../lib/api/mock-exams';
+import { MOCK_PASS_THRESHOLD } from '../../lib/api/mock-history';
 import { PREMIUM_LOCK_CTA, PREMIUM_LOCK_TITLE } from '../../lib/subscription/paywall-copy';
 import {
   FREE_MOCK_PREVIEW_ITEMS,
@@ -244,6 +245,7 @@ function MockExamScreenContent() {
           </Text>
           <View style={styles.heroStats}>
             <InfoTile label="Mocks" value={String(mockExams.length)} />
+            <InfoTile label="Pasang marka" value={`${MOCK_PASS_THRESHOLD}%`} />
             <InfoTile label="Access" value={isPremium(examTypeId) ? 'Plus' : 'Free'} />
           </View>
         </LinearGradient>
