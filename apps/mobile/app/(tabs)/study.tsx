@@ -2,9 +2,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Alert, Pressable, RefreshControl, ScrollView, Text, TextInput, View } from 'react-native';
+import { Alert, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Badge } from '../../components/badge';
+import { SearchBar } from '../../components/search-bar';
 import { PrimaryButton } from '../../components/primary-button';
 import { SparkleStar } from '../../components/sparkle-star';
 import { useAppTheme } from '../../hooks/use-app-theme';
@@ -445,27 +446,12 @@ function StudyScreenContent() {
         title="Subjects"
         subtitle="Choose a subject to review topics, practice questions, and improve weak areas."
       >
-        <TextInput
-          style={{
-            borderWidth: 1.5,
-            borderColor: colors.border,
-            borderRadius: 14,
-            paddingHorizontal: spacing.md,
-            paddingVertical: spacing.sm,
-            minHeight: 48,
-            fontFamily: theme.fonts.body,
-            fontSize: 16,
-            color: colors.text,
-            backgroundColor: colors.surface,
-            marginBottom: spacing.md,
-          }}
-          placeholder="Search subjects…"
-          placeholderTextColor={colors.textLight}
+        <SearchBar
           value={subjectQuery}
           onChangeText={setSubjectQuery}
+          placeholder="Search subjects…"
           accessibilityLabel="Search subjects"
-          accessibilityRole="search"
-          clearButtonMode="while-editing"
+          containerStyle={{ marginBottom: spacing.md }}
         />
         {filteredSubjects.length === 0 ? (
           <ScreenState
