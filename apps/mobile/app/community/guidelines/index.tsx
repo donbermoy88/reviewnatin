@@ -92,9 +92,10 @@ export default function CommunityGuidelinesScreen() {
       </View>
 
       <PrimaryButton
-        label={accepting ? 'Saving…' : 'I Understand'}
+        label="I Understand"
+        loadingLabel="Saving…"
+        loading={accepting}
         size="lg"
-        disabled={accepting}
         onPress={() => void onAccept()}
         style={styles.acceptButton}
       />

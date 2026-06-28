@@ -691,9 +691,11 @@ export default function PostDetailScreen() {
           }}
         />
         <PrimaryButton
-          label={savingPostEdit ? 'Saving…' : 'Save changes'}
+          label="Save changes"
+          loadingLabel="Saving…"
+          loading={savingPostEdit}
           size="lg"
-          disabled={savingPostEdit || !editPostText.trim()}
+          disabled={!editPostText.trim()}
           onPress={() => void saveEditedPost()}
         />
         <PrimaryButton
