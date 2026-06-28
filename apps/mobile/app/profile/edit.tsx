@@ -9,11 +9,11 @@ import {
   Pressable,
   ScrollView,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton } from '../../components/icon-button';
+import { InputField } from '../../components/input-field';
 import { PrimaryButton } from '../../components/primary-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { useUserProfile } from '../../hooks/use-user-profile';
@@ -26,7 +26,7 @@ export default function EditProfileScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
-  const { colors, spacing, fonts, radii } = theme;
+  const { colors, spacing } = theme;
   const styles = useMemo(() => createSettingsStyles(theme), [theme]);
   const { user, updateDisplayName, isConfigured } = useAuth();
   const { displayName, avatarUrl, refresh, loading: profileLoading } = useUserProfile('Guest');
@@ -156,39 +156,21 @@ export default function EditProfileScreen() {
           </View>
 
           <Text style={styles.sectionLbl}>Display name</Text>
-          <View
-            style={{
-              backgroundColor: colors.surface,
-              borderRadius: radii.xl,
-              borderWidth: 1.5,
-              borderColor: colors.border,
-              paddingHorizontal: spacing.md,
-              minHeight: 52,
-              justifyContent: 'center',
-              marginBottom: spacing.sm,
-            }}
-          >
-            <TextInput
-              style={{ fontSize: 16, fontFamily: fonts.body, color: colors.text }}
-              placeholder={fallbackDisplayName(user)}
-              placeholderTextColor={colors.textLight}
-              value={name}
-              onChangeText={setName}
-              autoCapitalize="words"
-              autoCorrect={false}
-              maxLength={40}
-              editable={!saving}
-            />
-          </View>
+          <InputField
+            placeholder={fallbackDisplayName(user)}
+            value={name}
+            onChangeText={setName}
+            autoCapitalize="words"
+            autoCorrect={false}
+            maxLength={40}
+            editable={!saving}
+            error={error}
+            accessibilityLabel="Display name"
+            containerStyle={{ marginBottom: spacing.sm }}
+          />
           <Text style={[styles.entitlementNote, { marginBottom: spacing.lg }]}>
             Visible on your Profile, Home screen, and Leaderboard.
           </Text>
-
-          {error ? (
-            <Text style={{ fontFamily: fonts.body, color: colors.error, marginBottom: spacing.md }}>
-              {error}
-            </Text>
-          ) : null}
 
           {saving ? (
             <ActivityIndicator color={colors.primary} />

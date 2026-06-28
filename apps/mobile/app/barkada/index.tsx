@@ -10,11 +10,11 @@ import {
   ScrollView,
   Share,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { InputField } from '../../components/input-field';
 import { Pill } from '../../components/pill';
 import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
@@ -221,21 +221,12 @@ export default function BarkadaScreen() {
           {!group ? (
             <>
               <Text style={sectionStyle}>Gumawa ng group</Text>
-              <TextInput
+              <InputField
                 value={groupName}
                 onChangeText={setGroupName}
                 placeholder="Group name (optional)"
-                placeholderTextColor={colors.textMuted}
-                style={{
-                  backgroundColor: colors.surface,
-                  borderRadius: 12,
-                  padding: spacing.md,
-                  marginBottom: spacing.sm,
-                  fontFamily: theme.fonts.bodyMedium,
-                  color: colors.text,
-                  borderWidth: 1,
-                  borderColor: colors.border,
-                }}
+                accessibilityLabel="Barkada group name"
+                containerStyle={{ marginBottom: spacing.sm }}
               />
               <PrimaryButton
                 label="Create Barkada"
@@ -246,22 +237,13 @@ export default function BarkadaScreen() {
               />
 
               <Text style={[sectionStyle, { marginTop: spacing.lg }]}>O sumali gamit ang code</Text>
-              <TextInput
+              <InputField
                 value={joinCode}
                 onChangeText={setJoinCode}
                 placeholder="BARK-XXXXXX"
                 autoCapitalize="characters"
-                placeholderTextColor={colors.textMuted}
-                style={{
-                  backgroundColor: colors.surface,
-                  borderRadius: 12,
-                  padding: spacing.md,
-                  marginBottom: spacing.sm,
-                  fontFamily: theme.fonts.bodyMedium,
-                  color: colors.text,
-                  borderWidth: 1,
-                  borderColor: colors.border,
-                }}
+                accessibilityLabel="Barkada join code"
+                containerStyle={{ marginBottom: spacing.sm }}
               />
               <PrimaryButton
                 label="Join Barkada"
