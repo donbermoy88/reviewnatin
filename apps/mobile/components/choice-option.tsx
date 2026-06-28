@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppTheme } from '../hooks/use-app-theme';
+import { useReducedMotion } from '../hooks/use-reduced-motion';
 import { createChoiceOptionStyles } from '../lib/themed-styles';
 
 type Props = {
@@ -18,6 +19,7 @@ type Props = {
 
 export function ChoiceOption({ letter, label, selected, correct, wrong, disabled, eliminated, onPress }: Props) {
   const theme = useAppTheme();
+  const reduceMotion = useReducedMotion();
   const styles = useMemo(() => createChoiceOptionStyles(theme), [theme]);
   const filled = selected && !correct && !wrong;
 
@@ -29,13 +31,14 @@ export function ChoiceOption({ letter, label, selected, correct, wrong, disabled
 
   return (
     <Pressable
-      style={[
+      style={({ pressed }) => [
         styles.option,
         filled && styles.filled,
         correct && styles.correct,
         wrong && styles.wrong,
         (disabled && !filled) && styles.disabled,
         eliminated && eliminatedOptionStyle,
+        pressed && !disabled && (reduceMotion ? styles.pressedReducedMotion : styles.pressed),
       ]}
       onPress={onPress}
       disabled={disabled}

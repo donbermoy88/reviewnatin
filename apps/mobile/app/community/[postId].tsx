@@ -658,9 +658,10 @@ export default function PostDetailScreen() {
           }}
         />
         <PrimaryButton
-          label={sending ? '…' : 'Send'}
+          label="Send"
+          loading={sending}
           size="md"
-          disabled={sending || !commentText.trim()}
+          disabled={!commentText.trim()}
           onPress={() => void sendComment()}
         />
       </View>
@@ -691,9 +692,11 @@ export default function PostDetailScreen() {
           }}
         />
         <PrimaryButton
-          label={savingPostEdit ? 'Saving…' : 'Save changes'}
+          label="Save changes"
+          loadingLabel="Saving…"
+          loading={savingPostEdit}
           size="lg"
-          disabled={savingPostEdit || !editPostText.trim()}
+          disabled={!editPostText.trim()}
           onPress={() => void saveEditedPost()}
         />
         <PrimaryButton

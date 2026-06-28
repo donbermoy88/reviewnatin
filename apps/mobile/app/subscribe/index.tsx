@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppSheet } from '../../components/app-sheet';
+import { IconButton } from '../../components/icon-button';
 import { ManagePlusCard } from '../../components/manage-plus-card';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { fetchExamBySlug } from '../../lib/api/catalog';
@@ -308,15 +309,17 @@ export default function SubscribeScreen() {
             <Ionicons name="star" size={12} color={colors.primaryDark} />
             <Text style={styles.plusBadgeText}>PREMIUM</Text>
           </View>
-          <Pressable
-            onPress={dismissPaywall}
-            style={({ pressed }) => [styles.closeBtn, pressed && { opacity: 0.7 }]}
+          <IconButton
+            variant="plain"
+            buttonSize={36}
+            size={20}
+            icon="close"
+            color="#fff"
             hitSlop={8}
-            accessibilityRole="button"
             accessibilityLabel="Close"
-          >
-            <Ionicons name="close" size={20} color="#fff" />
-          </Pressable>
+            style={styles.closeBtn}
+            onPress={dismissPaywall}
+          />
         </View>
 
         <Text style={styles.headlineDark}>{PAYWALL_HEADLINE}</Text>

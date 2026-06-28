@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { IconButton } from '../../components/icon-button';
 import { MasteryBar } from '../../components/mastery-bar';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
 import { fetchTopicAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
@@ -111,14 +112,16 @@ export default function TopicListScreen() {
         colors={[...gradients.hero]}
         style={[styles.header, { paddingTop: insets.top + spacing.sm }]}
       >
-        <Pressable
+        <IconButton
+          variant="plain"
+          buttonSize={36}
+          size={20}
+          icon="chevron-back"
+          color="#fff"
+          accessibilityLabel="Go back"
           style={styles.backBtn}
           onPress={() => router.back()}
-          accessibilityRole="button"
-          accessibilityLabel="Go back"
-        >
-          <Ionicons name="chevron-back" size={20} color="#fff" />
-        </Pressable>
+        />
         <Text style={styles.headerTag}>SUBJECT</Text>
         <Text style={styles.headerTitle}>{subjectName}</Text>
         <Text style={styles.headerSub}>{headerSub}</Text>

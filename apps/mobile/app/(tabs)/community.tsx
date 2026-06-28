@@ -418,9 +418,11 @@ function CommunityScreenContent() {
           }}
         />
         <PrimaryButton
-          label={savingEdit ? 'Saving…' : 'Save changes'}
+          label="Save changes"
+          loadingLabel="Saving…"
+          loading={savingEdit}
           size="lg"
-          disabled={savingEdit || !editText.trim()}
+          disabled={!editText.trim()}
           onPress={() => void saveEdit()}
         />
         <PrimaryButton label="Cancel" variant="ghost" disabled={savingEdit} onPress={closeEditSheet} />

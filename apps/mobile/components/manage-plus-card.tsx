@@ -130,10 +130,11 @@ export function ManagePlusCard({
       <View style={{ flexDirection: compact ? 'column' : 'row', gap: spacing.sm }}>
         {plus && !isDemo && isStoreSubscription ? (
           <PrimaryButton
-            label={opening ? 'Opening…' : 'Manage / cancel'}
+            label="Manage / cancel"
+            loadingLabel="Opening…"
+            loading={opening}
             icon="open-outline"
             variant="outline"
-            disabled={opening}
             onPress={() => void manage()}
             style={{ flex: compact ? undefined : 1 }}
           />
@@ -148,10 +149,11 @@ export function ManagePlusCard({
         ) : null}
         {onRestore ? (
           <PrimaryButton
-            label={restoring ? 'Restoring…' : 'Restore purchases'}
+            label="Restore purchases"
+            loadingLabel="Restoring…"
+            loading={restoring}
             icon="refresh-outline"
             variant={plus ? 'ghost' : 'outline'}
-            disabled={restoring}
             onPress={onRestore}
             style={{ flex: compact ? undefined : 1 }}
           />

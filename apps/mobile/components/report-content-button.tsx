@@ -217,10 +217,11 @@ export function ReportContentButton({
         />
 
         <PrimaryButton
-          label={submitting ? 'Submitting…' : 'Submit report'}
+          label="Submit report"
+          loadingLabel="Submitting…"
+          loading={submitting}
           icon="flag-outline"
           size="lg"
-          disabled={submitting}
           onPress={() => void submit()}
         />
         <PrimaryButton

@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import { AppSheet } from '../../components/app-sheet';
+import { IconButton } from '../../components/icon-button';
 import { ActivityIndicator, Alert, Image, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ErrorBoundary } from '../../components/error-boundary';
@@ -263,9 +264,16 @@ function SettingsScreenContent() {
     <View style={styles.root}>
       <ScrollView contentContainerStyle={tabScrollPadding(insets)}>
         <View style={[styles.header, { paddingTop: insets.top + spacing.sm }]}>
-          <Pressable onPress={() => router.back()} style={styles.backBtn} hitSlop={8}>
-            <Ionicons name="chevron-back" size={22} color={colors.text} />
-          </Pressable>
+          <IconButton
+            variant="plain"
+            buttonSize={28}
+            size={22}
+            icon="chevron-back"
+            color={colors.text}
+            hitSlop={8}
+            accessibilityLabel="Go back"
+            onPress={() => router.back()}
+          />
           <Text style={styles.headerTitle}>Settings</Text>
         </View>
 

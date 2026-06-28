@@ -70,9 +70,11 @@ export function CreatePostSheet({ visible, examName, posting, onClose, onSubmit 
         </Text>
       </Pressable>
       <PrimaryButton
-        label={posting ? 'Posting…' : 'Post'}
+        label="Post"
+        loadingLabel="Posting…"
+        loading={posting}
         size="lg"
-        disabled={posting || !text.trim()}
+        disabled={!text.trim()}
         onPress={() => void submit()}
       />
     </AppSheet>

@@ -628,7 +628,9 @@ export default function PracticeResultScreen() {
             </View>
           ) : null}
           <PrimaryButton
-            label={sharing ? 'Hinahanda…' : 'I-share ang score'}
+            label="I-share ang score"
+            loadingLabel="Hinahanda…"
+            loading={sharing}
             variant="outline"
             icon="share-outline"
             size="lg"

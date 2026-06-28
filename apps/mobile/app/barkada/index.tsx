@@ -10,11 +10,11 @@ import {
   ScrollView,
   Share,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { InputField } from '../../components/input-field';
 import { Pill } from '../../components/pill';
 import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
@@ -221,52 +221,36 @@ export default function BarkadaScreen() {
           {!group ? (
             <>
               <Text style={sectionStyle}>Gumawa ng group</Text>
-              <TextInput
+              <InputField
                 value={groupName}
                 onChangeText={setGroupName}
                 placeholder="Group name (optional)"
-                placeholderTextColor={colors.textMuted}
-                style={{
-                  backgroundColor: colors.surface,
-                  borderRadius: 12,
-                  padding: spacing.md,
-                  marginBottom: spacing.sm,
-                  fontFamily: theme.fonts.bodyMedium,
-                  color: colors.text,
-                  borderWidth: 1,
-                  borderColor: colors.border,
-                }}
+                accessibilityLabel="Barkada group name"
+                containerStyle={{ marginBottom: spacing.sm }}
               />
               <PrimaryButton
-                label={busy ? 'Gumagawa…' : 'Create Barkada'}
+                label="Create Barkada"
+                loadingLabel="Gumagawa…"
+                loading={busy}
                 icon="people"
                 onPress={() => void handleCreate()}
-                disabled={busy}
               />
 
               <Text style={[sectionStyle, { marginTop: spacing.lg }]}>O sumali gamit ang code</Text>
-              <TextInput
+              <InputField
                 value={joinCode}
                 onChangeText={setJoinCode}
                 placeholder="BARK-XXXXXX"
                 autoCapitalize="characters"
-                placeholderTextColor={colors.textMuted}
-                style={{
-                  backgroundColor: colors.surface,
-                  borderRadius: 12,
-                  padding: spacing.md,
-                  marginBottom: spacing.sm,
-                  fontFamily: theme.fonts.bodyMedium,
-                  color: colors.text,
-                  borderWidth: 1,
-                  borderColor: colors.border,
-                }}
+                accessibilityLabel="Barkada join code"
+                containerStyle={{ marginBottom: spacing.sm }}
               />
               <PrimaryButton
-                label={busy ? 'Sumasali…' : 'Join Barkada'}
+                label="Join Barkada"
+                loadingLabel="Sumasali…"
+                loading={busy}
                 variant="outline"
                 onPress={() => void handleJoin()}
-                disabled={busy}
               />
             </>
           ) : (
@@ -327,10 +311,11 @@ export default function BarkadaScreen() {
                     {new Date(group.activeChallenge.expiresAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </Text>
                   <PrimaryButton
-                    label={busy ? 'Nagsisimula…' : 'Take challenge quiz'}
+                    label="Take challenge quiz"
+                    loadingLabel="Nagsisimula…"
+                    loading={busy}
                     icon="flash"
                     onPress={() => void startChallenge()}
-                    disabled={busy}
                     style={{ marginTop: spacing.sm }}
                   />
                   {group.challengeResults.length > 0 ? (
@@ -357,11 +342,13 @@ export default function BarkadaScreen() {
                       : 'Start ng 10-question challenge para sa Barkada mo.'}
                   </Text>
                   <PrimaryButton
-                    label={busy ? 'Gumagawa…' : 'Start new challenge'}
+                    label="Start new challenge"
+                    loadingLabel="Gumagawa…"
+                    loading={busy}
                     variant={group.members.length < 2 ? 'outline' : undefined}
                     icon="trophy-outline"
                     onPress={() => void startChallenge()}
-                    disabled={busy || group.members.length < 2}
+                    disabled={group.members.length < 2}
                     style={{ marginTop: spacing.sm }}
                   />
                 </>

@@ -26,9 +26,14 @@ ON CONFLICT (subject_area_id, slug) DO UPDATE
 SET name = EXCLUDED.name,
     sort_order = EXCLUDED.sort_order;
 
+-- Integrity check. Gated on the exam-type catalog being present so this is a
+-- safe no-op on catalog-less builds (e.g. CI `db reset --no-seed`); on a real
+-- catalog it still catches a silently-failed topic insert.
 DO $$
 BEGIN
-  IF NOT EXISTS (
+  IF EXISTS (
+    SELECT 1 FROM public.exam_types WHERE slug = 'let-elementary'
+  ) AND NOT EXISTS (
     SELECT 1
     FROM public.topics t
     JOIN public.subject_areas sa ON sa.id = t.subject_area_id

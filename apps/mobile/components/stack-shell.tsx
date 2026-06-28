@@ -1,9 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import type { ReactNode } from 'react';
-import { Pressable, ScrollView, Text, View, type ScrollViewProps } from 'react-native';
+import { ScrollView, Text, View, type ScrollViewProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { IconButton } from './icon-button';
 import { useAppTheme } from '../hooks/use-app-theme';
 import { stackScrollPadding } from '../lib/layout/content-padding';
 
@@ -48,14 +48,17 @@ export function StackShell({
             gap: spacing.sm,
           }}
         >
-          <Pressable
-            onPress={() => router.back()}
+          <IconButton
+            variant="plain"
+            buttonSize={36}
+            size={22}
+            icon="chevron-back"
+            color="#fff"
             hitSlop={8}
-            accessibilityRole="button"
             accessibilityLabel="Go back"
-          >
-            <Ionicons name="chevron-back" size={22} color="#fff" />
-          </Pressable>
+            style={{ marginLeft: -8 }}
+            onPress={() => router.back()}
+          />
           {headerExtra}
           <Text style={{ fontFamily: fonts.display, fontSize: 24, color: '#fff', lineHeight: 28 }}>{title}</Text>
           {subtitle ? (

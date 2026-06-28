@@ -18,6 +18,8 @@ export function createChoiceOptionStyles(theme: AppTheme) {
     filled: { backgroundColor: colors.primary, ...shadows.button },
     correct: { backgroundColor: colors.successBg, borderWidth: 2, borderColor: colors.success },
     wrong: { backgroundColor: colors.errorBg, borderWidth: 2, borderColor: colors.error },
+    pressed: { transform: [{ scale: theme.motion.scale.cardPress }], opacity: 0.97 },
+    pressedReducedMotion: { opacity: 0.9 },
     disabled: { opacity: 0.95 },
     badge: {
       width: 36,
@@ -57,7 +59,7 @@ export function createChoiceOptionStyles(theme: AppTheme) {
 }
 
 export function createPrimaryButtonStyles(theme: AppTheme) {
-  const { colors, type, radii, spacing, shadows } = theme;
+  const { colors, type, radii, spacing, shadows, motion } = theme;
   return StyleSheet.create({
     base: {
       paddingVertical: 0,
@@ -78,7 +80,9 @@ export function createPrimaryButtonStyles(theme: AppTheme) {
     white: { backgroundColor: colors.surface },
     ghost: { backgroundColor: 'transparent', borderColor: colors.border },
     success: { backgroundColor: colors.success },
-    pressed: { opacity: 0.92, transform: [{ scale: 0.98 }] },
+    danger: { backgroundColor: colors.error, ...shadows.soft },
+    premium: { backgroundColor: colors.accent, ...shadows.soft },
+    pressed: { opacity: 0.92, transform: [{ scale: motion.scale.press }] },
     pressedReducedMotion: { opacity: 0.88 },
     disabled: { opacity: 0.5 },
     text: { ...type.button, color: '#fff' },
@@ -86,8 +90,10 @@ export function createPrimaryButtonStyles(theme: AppTheme) {
     textAccent: { ...type.button, color: colors.text },
     textOutline: { ...type.button, color: colors.primary },
     textWhite: { ...type.button, color: colors.primary },
+    textPremium: { ...type.button, color: colors.primaryDark },
     iconLeft: { marginRight: spacing.sm },
     iconRight: { marginLeft: spacing.sm },
+    spinner: { marginRight: spacing.sm },
   });
 }
 

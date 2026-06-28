@@ -1,5 +1,7 @@
-import { Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Animated, Easing, Text, View } from 'react-native';
 import { useAppTheme } from '../hooks/use-app-theme';
+import { useReducedMotion } from '../hooks/use-reduced-motion';
 
 type Props = {
   progress: number;
@@ -10,9 +12,33 @@ type Props = {
 };
 
 export function ProgressBar({ progress, color, height = 6, label, showPct = false }: Props) {
-  const { colors, radii, type } = useAppTheme();
+  const { colors, radii, type, motion } = useAppTheme();
+  const reduceMotion = useReducedMotion();
   const pct = Math.min(100, Math.max(0, progress));
   const fillColor = color ?? colors.primary;
+  const [anim] = useState(() => new Animated.Value(pct));
+
+  useEffect(() => {
+    if (reduceMotion) {
+      anim.setValue(pct);
+      return;
+    }
+    const animation = Animated.timing(anim, {
+      toValue: pct,
+      duration: motion.duration.slow,
+      easing: Easing.bezier(...motion.easing.standard),
+      // width is a layout prop, so it cannot run on the native driver.
+      useNativeDriver: false,
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [pct, reduceMotion, anim, motion]);
+
+  const widthInterpolation = anim.interpolate({
+    inputRange: [0, 100],
+    outputRange: ['0%', '100%'],
+    extrapolate: 'clamp',
+  });
 
   return (
     <View>
@@ -33,7 +59,7 @@ export function ProgressBar({ progress, color, height = 6, label, showPct = fals
         </View>
       )}
       <View style={{ width: '100%', height, backgroundColor: colors.border, borderRadius: radii.full, overflow: 'hidden' }}>
-        <View style={{ width: `${pct}%`, height, backgroundColor: fillColor, borderRadius: radii.full }} />
+        <Animated.View style={{ width: widthInterpolation, height, backgroundColor: fillColor, borderRadius: radii.full }} />
       </View>
     </View>
   );

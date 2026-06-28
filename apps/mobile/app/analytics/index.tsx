@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AnalyticsInsightCards, SubjectStrengthChart } from '../../components/analytics/subject-strength-chart';
+import { IconButton } from '../../components/icon-button';
 import { StudyTrendChart } from '../../components/analytics/study-trend-chart';
 import { EmptyState } from '../../components/empty-state';
 import { ErrorState } from '../../components/error-state';
@@ -190,15 +191,17 @@ export default function AnalyticsScreen() {
         }
       >
         <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
-          <Pressable
-            onPress={() => router.back()}
-            style={styles.backBtn}
+          <IconButton
+            variant="plain"
+            buttonSize={40}
+            size={24}
+            icon="chevron-back"
+            color={colors.primaryDark}
             hitSlop={8}
-            accessibilityRole="button"
             accessibilityLabel="Go back"
-          >
-            <Ionicons name="chevron-back" size={24} color={colors.primaryDark} />
-          </Pressable>
+            style={styles.backBtn}
+            onPress={() => router.back()}
+          />
           <Text style={styles.headerTitle}>Analytics</Text>
         </View>
 
