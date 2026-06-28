@@ -8,6 +8,7 @@ import { EmptyState } from '../../components/empty-state';
 import { IconButton } from '../../components/icon-button';
 import { MasteryBar } from '../../components/mastery-bar';
 import { useAppTheme, type AppTheme } from '../../hooks/use-app-theme';
+import { useReducedMotion } from '../../hooks/use-reduced-motion';
 import { fetchTopicAnalytics, type TopicAnalyticsRow } from '../../lib/api/analytics';
 import { fetchTopicsBySubjectSlug, fetchTopicQuestionCounts } from '../../lib/api/topics';
 import type { TopicRow } from '../../lib/api/topics';
@@ -25,6 +26,8 @@ export default function TopicListScreen() {
   const theme = useAppTheme();
   const { colors, gradients, spacing } = theme;
   const styles = useMemo(() => createSubjectTopicStyles(theme), [theme]);
+  const reduceMotion = useReducedMotion();
+  const pressFeedback = reduceMotion ? styles.cardPressedReduced : styles.cardPressed;
   const { user } = useAuth();
   const { subjectSlug, examSlug, subjectName: paramSubjectName } = useLocalSearchParams<{ subjectSlug: string; examSlug: string; subjectName?: string }>();
   const slug = examSlug ?? DEFAULT_EXAM_SLUG;
@@ -144,7 +147,7 @@ export default function TopicListScreen() {
         showsVerticalScrollIndicator={false}
       >
         <Pressable
-          style={[styles.flashcardRow, flashcardsDisabled && styles.disabledCard]}
+          style={({ pressed }) => [styles.flashcardRow, flashcardsDisabled && styles.disabledCard, pressed && !flashcardsDisabled && pressFeedback]}
           disabled={flashcardsDisabled}
           onPress={() => {
             if (flashcardsDisabled) return;
@@ -179,7 +182,7 @@ export default function TopicListScreen() {
               description="Topics for this subject are being added. Check back soon or practice with available questions below."
             />
             <Pressable
-              style={styles.topicCard}
+              style={({ pressed }) => [styles.topicCard, pressed && pressFeedback]}
               onPress={() =>
                 router.push({
                   pathname: '/practice/quiz',
@@ -218,7 +221,7 @@ export default function TopicListScreen() {
             return (
               <Pressable
                 key={t.id}
-                style={[styles.topicCard, isEmpty && styles.topicCardEmpty]}
+                style={({ pressed }) => [styles.topicCard, isEmpty && styles.topicCardEmpty, pressed && !isEmpty && pressFeedback]}
                 disabled={isEmpty}
                 onPress={() => {
                   if (isEmpty) return;
@@ -258,9 +261,11 @@ export default function TopicListScreen() {
 }
 
 function createSubjectTopicStyles(theme: AppTheme) {
-  const { colors, fonts, radii, spacing } = theme;
+  const { colors, fonts, radii, spacing, motion } = theme;
   return StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
+    cardPressed: { transform: [{ scale: motion.scale.cardPress }], opacity: 0.97 },
+    cardPressedReduced: { opacity: 0.9 },
     center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background },
     header: {
       paddingHorizontal: spacing.lg,
