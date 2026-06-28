@@ -40,9 +40,14 @@ WHERE t.subject_area_id = major_sa.id
     'tle'
   );
 
+-- Integrity check. Gated on the exam-type catalog being present so this is a
+-- safe no-op on catalog-less builds (e.g. CI `db reset --no-seed`); on a real
+-- catalog it still catches a silently-failed topic insert.
 DO $$
 BEGIN
-  IF NOT EXISTS (
+  IF EXISTS (
+    SELECT 1 FROM public.exam_types WHERE slug = 'let-secondary'
+  ) AND NOT EXISTS (
     SELECT 1
     FROM public.topics t
     JOIN public.subject_areas sa ON sa.id = t.subject_area_id
