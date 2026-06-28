@@ -437,8 +437,14 @@ function PracticeQuizScreenContent() {
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 140 }}>
         <View style={[styles.topBar, { paddingTop: insets.top + spacing.sm }]}>
           {!isStrictExam ? (
-            <Pressable
+            <IconButton
+              variant="plain"
+              buttonSize={36}
+              size={18}
+              icon="close"
+              color={colors.text}
               style={styles.closeBtn}
+              accessibilityLabel={isDiagnostic ? 'Leave diagnostic quiz' : 'Close quiz'}
               onPress={() => {
                 const hasProgress = answers.length > 0 || !!selected;
                 if (isDiagnostic && user) {
@@ -472,11 +478,7 @@ function PracticeQuizScreenContent() {
                 }
                 router.back();
               }}
-              accessibilityRole="button"
-              accessibilityLabel={isDiagnostic ? 'Leave diagnostic quiz' : 'Close quiz'}
-            >
-              <Ionicons name="close" size={18} color={colors.text} />
-            </Pressable>
+            />
           ) : (
             <IconButton
               variant="surface"
@@ -582,12 +584,10 @@ function PracticeQuizScreenContent() {
         ) : null}
 
         <View style={styles.meta}>
-          <Text style={styles.metaText}>
-            Question {index + 1} of {questions.length}
-          </Text>
           {current.topic?.subject?.name ? (
             <Pill color={colors.primary}>{current.topic.subject.name.toUpperCase()}</Pill>
           ) : null}
+          <View style={{ flex: 1 }} />
           {user ? (
             <Pressable
               onPress={toggleBookmarkCurrent}
