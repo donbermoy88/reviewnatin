@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { colors as lightColors, spacing, radii, touchTarget, typography, shadows } from '@reviewnatin/shared';
+import { colors as lightColors, spacing, radii, touchTarget, typography, shadows, motion } from '@reviewnatin/shared';
 import { darkColors } from '../constants/dark-theme';
 import { usePreferences } from '../providers/preferences-provider';
 
@@ -36,6 +36,7 @@ export type AppTheme = {
   radii: typeof radii;
   touchTarget: typeof touchTarget;
   shadows: typeof shadows;
+  motion: typeof motion;
   type: Record<string, TypeStyle>;
   gradients: {
     hero: readonly [string, string];
@@ -224,6 +225,7 @@ export function useAppTheme(): AppTheme {
       radii,
       touchTarget,
       shadows,
+      motion,
       type: buildType(colors, isDark),
       gradients: buildGradients(colors, isDark),
     };

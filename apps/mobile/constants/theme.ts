@@ -1,6 +1,6 @@
-import { colors, spacing, radii, touchTarget, typography, shadows } from '@reviewnatin/shared';
+import { colors, spacing, radii, touchTarget, typography, shadows, motion } from '@reviewnatin/shared';
 
-export { colors, spacing, radii, touchTarget, typography, shadows };
+export { colors, spacing, radii, touchTarget, typography, shadows, motion };
 
 export const fonts = {
   display: typography.fontDisplay,

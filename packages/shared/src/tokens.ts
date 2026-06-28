@@ -97,3 +97,39 @@ export const shadows = {
     elevation: 6,
   },
 } as const;
+
+/**
+ * Motion tokens — keep animations subtle, fast, and native-friendly.
+ * Durations follow the 120–250ms band; press scale stays in the 0.97–0.98 range.
+ * Components should fall back to the reduced-motion variants when the system
+ * "reduce motion" accessibility setting is enabled.
+ */
+export const motion = {
+  duration: {
+    /** Instant feedback — tab/press states. */
+    fast: 120,
+    /** Default — most transitions, fades, progress fills. */
+    base: 180,
+    /** Deliberate — modals / bottom sheets sliding in. */
+    slow: 250,
+  },
+  /** Press feedback scale for buttons and tappable cards. */
+  scale: {
+    press: 0.97,
+    cardPress: 0.98,
+  },
+  /** Ms to ignore repeat taps on important / destructive actions. */
+  doubleTapGuard: 700,
+  /**
+   * react-native Easing-compatible bezier control points (ease-out family).
+   * Consume via Easing.bezier(...motion.easing.standard).
+   */
+  easing: {
+    /** General ease-out — decelerate into rest. */
+    standard: [0.2, 0, 0, 1] as const,
+    /** Entrances — quick start, soft landing. */
+    decelerate: [0, 0, 0.2, 1] as const,
+    /** Exits — soft start, quick finish. */
+    accelerate: [0.4, 0, 1, 1] as const,
+  },
+} as const;
