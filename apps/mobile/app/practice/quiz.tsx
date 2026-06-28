@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChoiceOption } from '../../components/choice-option';
+import { IconButton } from '../../components/icon-button';
 import { PremiumLimitPanel } from '../../components/premium-limit-panel';
 import { EmptyState } from '../../components/empty-state';
 import { ErrorBoundary } from '../../components/error-boundary';
@@ -477,14 +478,15 @@ function PracticeQuizScreenContent() {
               <Ionicons name="close" size={18} color={colors.text} />
             </Pressable>
           ) : (
-            <Pressable
-              style={styles.closeBtn}
-              onPress={() => setNavigatorOpen(true)}
-              accessibilityRole="button"
+            <IconButton
+              variant="surface"
+              buttonSize={36}
+              size={16}
+              icon="grid-outline"
+              color={colors.primary}
               accessibilityLabel="Open question navigator"
-            >
-              <Ionicons name="grid-outline" size={16} color={colors.primary} />
-            </Pressable>
+              onPress={() => setNavigatorOpen(true)}
+            />
           )}
           {isStrictExam ? (
             <Pressable
