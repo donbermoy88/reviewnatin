@@ -1,0 +1,10 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_gened_source_materials_flashcards.json",
+  "source_rows": 208,
+  "insertable_flashcards": 416,
+  "inserted": 416,
+  "skipped": 0,
+  "skipped_by_reason": {},
+  "skipped_samples": []
+}

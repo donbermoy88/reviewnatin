@@ -73,6 +73,9 @@ export function useQuizQuestions(
             setQuestions(result.questions);
             if (isMock) trackEvent('mock_exam_started', { slug });
             else trackEvent('practice_started', { slug, mode: resumeKey });
+            if (result.insufficientNotice) {
+              Alert.alert('Heads up', result.insufficientNotice);
+            }
             setOfflineMode(result.offlineMode);
             if (result.mockTitle !== undefined) setMockTitle(result.mockTitle);
             setMockPreviewActive(result.mockPreviewActive);

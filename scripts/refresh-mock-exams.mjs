@@ -40,40 +40,9 @@ if (!url || !key) {
 const sb = createClient(url, key);
 const focusSlug = process.argv[2] ?? 'cse-professional';
 
-async function publishedQuestionIds(examTypeId, limit) {
-  const { data: subjects, error: subErr } = await sb
-    .from('subject_areas')
-    .select('id')
-    .eq('exam_type_id', examTypeId);
-
-  if (subErr) throw subErr;
-  const subjectIds = (subjects ?? []).map((s) => s.id);
-  if (!subjectIds.length) return [];
-
-  const { data: topics, error: topErr } = await sb
-    .from('topics')
-    .select('id')
-    .in('subject_area_id', subjectIds);
-
-  if (topErr) throw topErr;
-  const topicIds = (topics ?? []).map((t) => t.id);
-  if (!topicIds.length) return [];
-
-  const { data: questions, error: qErr } = await sb
-    .from('questions')
-    .select('id')
-    .in('topic_id', topicIds)
-    .eq('status', 'published')
-    .order('created_at', { ascending: true })
-    .limit(limit);
-
-  if (qErr) throw qErr;
-  return (questions ?? []).map((q) => q.id);
-}
-
 // Subject-balanced selection: round-robin one published question per subject
-// per pass, so a long mock spans all subjects instead of clustering on whatever
-// was imported first (which `publishedQuestionIds` returns by created_at).
+// per pass, so a mock spans all subjects instead of clustering on whatever
+// was imported first.
 async function balancedQuestionIds(examTypeId, limit) {
   const { data: subjects, error: subErr } = await sb
     .from('subject_areas')
@@ -173,7 +142,7 @@ for (const exam of exams ?? []) {
   if (focusSlug !== 'all' && exam.slug !== focusSlug) continue;
 
   const miniCount = 5;
-  const miniIds = await publishedQuestionIds(exam.id, miniCount);
+  const miniIds = await balancedQuestionIds(exam.id, miniCount);
   const miniTitle = `${exam.name} — Mini Mock`;
   const miniMockId = await ensureMockExam(exam.id, miniTitle, Math.min(miniCount, miniIds.length), 600);
   await replaceMockQuestions(miniMockId, miniIds.slice(0, miniCount));
@@ -181,7 +150,7 @@ for (const exam of exams ?? []) {
 
   if (exam.slug === 'cse-professional') {
     const practiceCount = 20;
-    const practiceIds = await publishedQuestionIds(exam.id, practiceCount);
+    const practiceIds = await balancedQuestionIds(exam.id, practiceCount);
     if (practiceIds.length >= 10) {
       const count = Math.min(practiceCount, practiceIds.length);
       const practiceTitle = 'CSE Professional — Practice Mock';

@@ -49,7 +49,43 @@ export type LoadQuizResult =
       mockPreviewActive: boolean;
       timeLeft?: number;
       strict?: StrictAttempt;
+      insufficientNotice?: string;
     };
+
+/** Groups questions by subject name — used for audit logging and breakdown summaries. */
+function summarizeBySubject(questions: Question[]): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const q of questions) {
+    const subject = q.topic?.subject?.name ?? 'Unknown';
+    counts[subject] = (counts[subject] ?? 0) + 1;
+  }
+  return counts;
+}
+
+/**
+ * For balanced ("All Subjects" / board) selections, logs requested-vs-actual
+ * subject breakdown in dev, and returns a user-facing notice when the pool
+ * couldn't fill the requested count.
+ */
+function auditBalancedSelection(
+  label: string,
+  slug: string,
+  requested: number,
+  questions: Question[]
+): string | undefined {
+  if (__DEV__) {
+    console.info('[quiz-selection]', label, {
+      slug,
+      requested,
+      actual: questions.length,
+      bySubject: summarizeBySubject(questions),
+    });
+  }
+  if (questions.length < requested) {
+    return 'Some subjects have fewer available questions, so the test was adjusted.';
+  }
+  return undefined;
+}
 
 /**
  * Strict exams (mock/board) restore an interrupted attempt (same question
@@ -161,6 +197,7 @@ export async function loadQuizAttempt(input: LoadQuizInput): Promise<LoadQuizRes
       return { kind: 'paywall', reason: 'board' };
     }
     const result = await fetchPracticeQuestions(slug, BOARD_ITEM_COUNT, topicSlug);
+    const insufficientNotice = auditBalancedSelection('board', slug, BOARD_ITEM_COUNT, result.questions);
     const { questions, strict } = await resolveStrictAttempt(
       resumeKey,
       result.questions.slice(0, BOARD_ITEM_COUNT),
@@ -174,6 +211,7 @@ export async function loadQuizAttempt(input: LoadQuizInput): Promise<LoadQuizRes
       // Unconditional in the original (set before the resumed-snapshot override).
       timeLeft: strict.timeLeft,
       strict,
+      insufficientNotice,
     };
   }
 
@@ -231,7 +269,14 @@ export async function loadQuizAttempt(input: LoadQuizInput): Promise<LoadQuizRes
   }
   const result = await fetchPracticeQuestions(slug, 12, topicSlug);
   if (result.error === 'daily_limit') return { kind: 'paywall', reason: 'daily' };
-  return { kind: 'ready', questions: randomizeQuestionSet(result.questions), offlineMode: false, mockPreviewActive: false };
+  const insufficientNotice = auditBalancedSelection('practice', slug, 12, result.questions);
+  return {
+    kind: 'ready',
+    questions: randomizeQuestionSet(result.questions),
+    offlineMode: false,
+    mockPreviewActive: false,
+    insufficientNotice,
+  };
 }
 
 export async function loadQuizUserExtras(userId: string): Promise<{ bookmarkedIds: Set<string>; hintCredits: number }> {

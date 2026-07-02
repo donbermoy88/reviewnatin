@@ -1,0 +1,214 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_gened_source_materials.json",
+  "source_rows": 1229,
+  "insertable_materials": 2418,
+  "inserted": 2418,
+  "skipped": 40,
+  "skipped_by_reason": {
+    "thin_material": 16,
+    "duplicate_title": 24
+  },
+  "skipped_samples": [
+    {
+      "title": "LET General Education: ENGLISH MAJOR 1300+ Q&A DRILLS WITH ANSWER KEYS (COLOR HIGHLIGHTED) (Part 59) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: ENGLISH MAJOR 1300+ Q&A DRILLS WITH ANSWER KEYS (COLOR HIGHLIGHTED) (Part 59) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: ENGLISH (1) (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: ENGLISH (1) (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: ENGLISH (7) (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: ENGLISH (7) (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: FILIPINO NOTES (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: FILIPINO NOTES (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: GENERAL SCIENCE A (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL SCIENCE A (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL SCIENCE A (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL SCIENCE A (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GEN. SCIENCE PART 3 (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: GEN. SCIENCE PART 3 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: MATHEMATICS REVIEWER B - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: MATHEMATICS REVIEWER B - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION SOC. SCIENCE (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION SOC. SCIENCE (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION SOC. SCIENCE (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION SOC. SCIENCE (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION SOCIAL STUDIES (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION SOCIAL STUDIES (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION A (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION A (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION A (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION A (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION A (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION A (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION A (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION A (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 5) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET General Education: GENERAL EDUCATION B (Part 5) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    }
+  ]
+}

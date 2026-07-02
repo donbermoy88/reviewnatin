@@ -1,0 +1,492 @@
+{
+  "batch_id": "ba6408e1-086e-4b67-b2ce-1d195118c675",
+  "dry_run": false,
+  "source": "output/pdf/let_gened_all_files_extracted.json",
+  "source_prefix": null,
+  "source_rows": 13454,
+  "ready_rows": 1578,
+  "candidate_targets": 3150,
+  "insertable": 2106,
+  "inserted": 2106,
+  "skipped": 3,
+  "duplicates": 1044,
+  "source_stats": {
+    "output/pdf/let_gened_all_files_extracted.json": {
+      "readyRows": 1578,
+      "candidateTargets": 3150,
+      "skipped": 3
+    }
+  },
+  "skipped_by_reason": {
+    "question_too_short": 3
+  },
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "153",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/ict-current-trends",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d8eaa4e3-00ad-41b4-a1f4-521e3d20116b"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "153",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/ict-current-trends",
+      "reason": "duplicate_existing_content",
+      "existing_id": "878a60a7-c5c9-4682-a094-9693733df771"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "157",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b8dd4dce-f807-4883-8f4a-c1daf45d724c"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "157",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "851b378a-91dd-4e7d-97bf-bb5dcfe3d703"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "158",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0c4be914-564a-4f22-a6c6-01b58e009bf5"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "158",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/social-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7bcb283a-8fc9-4ea9-b849-505823a733e7"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "161",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5b7be0ea-01ff-4406-b576-ce22748b7a9b"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "161",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5b9ad1a8-68a3-496d-ab44-42521951cc29"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "163",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "692219a9-3ed0-4b97-8c2d-8bb48750459c"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "163",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "377fdece-13cb-4bd4-9629-e04bcde6ce28"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "164",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "25cce4b0-8036-4cf8-95a6-0e134749d30c"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "164",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e4bf0ac7-30fc-465a-b45a-e72626dfc43c"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "167",
+      "page": "2-3",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2ff7d96f-ac3e-4910-9f75-45556df76139"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "167",
+      "page": "2-3",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1fece0a9-4cc1-4156-986e-f5b9586b1836"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "168",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "de1f37cb-b7a9-4ed8-983f-e7ca691a9898"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "168",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e07bf823-807f-4b4e-ad5a-33d65ffafb4f"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "170",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "498ca082-39bc-43f6-a2b7-ce4eb8935ba3"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "170",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ba72ba19-c1e2-4dea-b5f6-7ab75209b638"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "173",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a50da65d-f94b-4c84-89bf-c9753eb61e8e"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "173",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "94242010-e1c2-45b7-b342-d34a0d2281af"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "174",
+      "page": "3-4",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c98c466f-75df-4ce6-a0e2-4b47e8012b34"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "174",
+      "page": "3-4",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a5a6f459-7fea-4ebb-9883-10fb8c926de8"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "175",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d180bc8c-1074-484a-81ed-d0870b9e4aac"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "175",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c07556b0-9f3f-4cd5-88a4-2a9345cc0cf0"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "176",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9384d6ca-fbfd-4fbf-88da-5f339e4dec48"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "176",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "gen-ed/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9f750c6c-6710-4599-9542-24f6a810978e"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "177",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6a0ea800-c3d8-4054-9461-49b09bf8ae1f"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "177",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "41963c6c-72b8-4c81-8dc7-d1e785c2c9e2"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "178",
+      "page": "4",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "48361d0b-1828-42d0-9690-c364c845f020"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "178",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "51efae76-beda-489c-9c26-b9abe450aeb1"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "180",
+      "page": "4-5",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "20af5abf-a817-479e-b0a8-845c3aab5b97"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "180",
+      "page": "4-5",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7ab5a581-c759-4f69-ad41-dd0ebe66a94f"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "1949",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4c65ae17-d2ad-4482-9223-a4ed1d2fef3c"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "1949",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1d671c3c-617c-49d7-b060-ad6e1e081903"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2368",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c92f4b0e-a9c4-4122-94bf-f4c3fad2a388"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2368",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4bff0245-67a5-47dd-8858-2e5408ef2ebf"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2369",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2be56b79-5657-4ac1-8c82-08cfaf1c488c"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2369",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "76ce3e91-4601-4dc7-8bd8-e618b01d29e3"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2370",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a08e52cf-3c0b-4665-823d-4011208dedea"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2370",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ce7210e2-dadf-496f-9e6f-7f5b02fa8b9f"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2371",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "082b05f0-bd21-4f57-962e-62e09da25b43"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2371",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b25c9615-4e73-40fd-998c-f39d23d56bc3"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2372",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8321f817-ae68-46be-9e82-6ac79d75d145"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2372",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "df760ea3-c8bf-413e-8083-30b8e094ebd2"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2373",
+      "page": "1-2",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a2c2d44f-53ed-4d1a-a468-86d6363564d7"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2373",
+      "page": "1-2",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b873c2bc-42ee-479c-8a38-3e80c1c0d930"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2374",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8380254b-bf5f-405e-adb1-66eb0cef4c58"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2374",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a1ef0c2e-d7d8-49d8-9dea-131e5e208e33"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2376",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "23c1295c-a3a2-4f17-976d-e3c3aa4cc1ac"
+    },
+    {
+      "source": "output/pdf/let_gened_all_files_extracted.json",
+      "row": "2376",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "gen-ed/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "28432903-bae9-4015-b1ed-165fc89c816c"
+    }
+  ],
+  "skipped_samples": [
+    {
+      "row": "2295",
+      "page": "4",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "7641",
+      "page": "7",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "7677",
+      "page": "9",
+      "reason": "question_too_short"
+    }
+  ]
+}

@@ -1,0 +1,1952 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION",
+  "source_files_seen": 217,
+  "source_files_processed": 211,
+  "materials_generated": 1229,
+  "flashcards_generated": 208,
+  "source_type_counts": {
+    "doc": 1,
+    "image": 5,
+    "pdf": 209,
+    "pptx": 2
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/01. ENGLISH - LET REVIEWER .pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 28681,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/02. ENGLISH ADVANCED VOCABULARY AND STRUCTURE PRACTICE ( PDFDRIVE ).pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/03. ENGLISH PPT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 645,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/04. ENGLISH PROFICIENCY TEST  FOR TEACHERS PART 1 - STRUCTURE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3752,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/05. ENGLISH PROFICIENCY TEST  FOR TEACHERS PART 2 - WRITTEN EXPRESSION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1664,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/06. ENGLISH PROFICIENCY TEST  FOR TEACHERS PART 3 - READING COMPREHENSION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13583,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/07. ENGLISH PROFICIENCY TEST 20 ITEMS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2263,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/08. FIGURATIVE LANGUAGE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1440,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/09. GENED ENGLISH.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/10. GENERAL EDUCATION ENGLISH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6917,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/11. GENERAL EDUCATION- ENGLISH PRACTICE TEST WITH ANSWER KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7883,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/12. LET-ENG-ENGLISH 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19761,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/13. LITERATURE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1965,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/14. MET REVIEW ENGLISH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 244531,
+      "materials": 38,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/15. NOTES  (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1094,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/16. PRACTICAL EVERYDAY ENGLISH_ ADVANCED VOCABULARY, PHRASAL VERBS, IDIOMS AND EXPRESSIONS ( PDFDRIVE ).pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/17. SUBJECT VERB AGREEMENT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2773,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/18. LET GEN ED. - ENGLISH Comprehensive Reviewer NCBTS & TOS Based.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 316332,
+      "materials": 53,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/18. VOCABULARY 1 .pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 585,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/ENGLISH MAJOR 1300+ Q&A DRILLS WITH ANSWER KEYS (COLOR HIGHLIGHTED).doc",
+      "source_type": "doc",
+      "status": "processed",
+      "text_chars": 349457,
+      "materials": 59,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12839,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (10).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6809,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9084,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (3).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10315,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (4).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10353,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7791,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (6).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7670,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (7).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6548,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (8).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7667,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/1. ENGLISH/Version 1/ENGLISH (9).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6953,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/2. FILIPINO/1. Reviewer/1. FILIPINO NOTE A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23348,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/2. FILIPINO/1. Reviewer/2. FILIPINO REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12396,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/2. FILIPINO/1. Reviewer/3. FILIPINO REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4214,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/2. FILIPINO/1. Reviewer/4. GENERAL EDUCATION FILIPINO.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6146,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/2. FILIPINO/2. Others/1. FILIPINO - MAHAHALAGANG TAO.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 919,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/2. FILIPINO/2. Others/2. FILIPINO NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6625,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/2. FILIPINO/2. Others/3. GENED FILIPINO.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/2. FILIPINO/2. Others/4. GENERAL-EDUCATION-FILIPINO-5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5236,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/1. GEN ED FINAL COACHING 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23711,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/2. GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 164967,
+      "materials": 32,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/3. GENERAL EDUCATION PRACTICE TEST-BASED ON PREVIOUS LET.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27556,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/4. GENERAL EDUCATION ULTIMATE REVIEWER (ENGLISH, MATH, SCIENCE, FILIPINO, SOCIAL SCIENCE).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 316332,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/01. 150 GEN ED. Q&A DRILLS FINAL COACHING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27516,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/02. 900-GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 197059,
+      "materials": 37,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/03. COLLEGE OF EDUCATION PRE-BOARD EXAMINATION IN GENERAL EDUCATION (1).PDF",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34973,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/04. EXAM-APPEARS-IN-GEN-ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9022,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/05. GEN ED 1001 BULLETS WITH ANSWERS PDFBOOKSFORUM.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1587,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/06. GEN ED RANDOM QUESTIONS - 40 ITEMS .pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6927,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/07. GEN-ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 33907,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/08. GENERAL EDUCATION (900 ITEMS).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 179792,
+      "materials": 31,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/09. GENERAL EDUCATION (ST. LOUIS REVIEW CENTER).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 45336,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/10. GENERAL EDUCATION INFORMATION AND COMMUNICATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2448,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/11. GENERAL EDUCATION KEY FOR MARCH 2020.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27405,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/12. GENERAL EDUCATION MODULE 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 30641,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/13. GENERAL EDUCATION SET 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19799,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/14. GENERAL EDUCATION SET 150 ITEMS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20097,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/15. LET-GEN-ED-GEN ED 1-35.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8162,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/ict-current-trends"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/16. MET - GENERAL EDUCATION REVIEWER SET .pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 244531,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/17. MET-EXAM-APPEARS-IN-GEN-ED. (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8356,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/18. QUIZIZ - IDENTIFICATION (50 ITEMS).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4824,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/19. QUIZIZ - MULTIPLE CHOICE (115 ITEMS).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23079,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/20. SHARE PRC GENERAL-EDUCATION-NEW.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 206310,
+      "materials": 35,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/A. REVIEWER SETS/21. STUDY LINK (200 ITEMS FOR BEED WITH ANSWER KEY).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34486,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/B. GenEd - Old Files/1. 2013 MARCH LET PROF ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 40377,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/B. GenEd - Old Files/2. 2016 PNU LET GEN ED REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 21353,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/ict-current-trends"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/B. GenEd - Old Files/3. 2017 LET GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 588832,
+      "materials": 100,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/B. GenEd - Old Files/4. 2017 MET GEN ED AND PROF ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23025,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/B. GenEd - Old Files/5. 2019 MARCH GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3455,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/B. GenEd - Old Files/6. 2019 SEPTEMBER GEN ED ( LET EXAM WITH RATIONALIZATION).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 81583,
+      "materials": 15,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/B. GenEd - Old Files/7. 2019 SEPTEMBER GEN ED (LET EXAM) .pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19426,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/B. GenEd - Old Files/8. 2019 SEPTEMBER GEN ED KEY WORDS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17914,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/C. CBRC/Done 1. CBRC ANALYTICAL FC - GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34653,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/C. CBRC/Done 2. CBRC LET GEN ED PREDICTION EXAM 2020.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9746,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/C. CBRC/Done 3. CBRC-ENGLISH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5710,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/C. CBRC/Done 4. CBRC-GENED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12174,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/D. InfiniThink/4. LET-GEN-ED-GENERAL EDUCATION ENGLISH 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6124,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/D. InfiniThink/5. LET-GEN-ED-GENERAL EDUCATION ENGLISH 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7152,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/D. InfiniThink/6. LET-GEN-ED-GENERAL EDUCATION SET 18.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8566,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/D. InfiniThink/Done 1. GENERAL EDUCATION ENGLISH 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9542,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/D. InfiniThink/Done 2. LET-GEN-ED-GENERAL EDUCATION ENGLISH 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13091,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/D. InfiniThink/Done 3. LET-GEN-ED-GENERAL EDUCATION ENGLISH 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9453,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/01. GENERAL EDUCATION A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35997,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/02. GENERAL EDUCATION B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 185366,
+      "materials": 34,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/03. GENERAL EDUCATION C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35930,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/ict-current-trends"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/04. GENERAL EDUCATION D.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3413,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/05. GENERAL EDUCATION E.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13876,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/06. GENERAL EDUCATION F.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8396,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/07. GENERAL EDUCATION G.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8324,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/08. GENERAL EDUCATION H.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7080,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/09. GENERAL EDUCATION I.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7529,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/10. GENERAL EDUCATION J.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8769,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/11. GENERAL EDUCATION K.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8816,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/E. LET REVIEW UNIVERSITY/12. GENERAL EDUCATION L.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4794,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/01. MINDGYM_ENGLISH COMMONLY CONFUSED WORDS_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9949,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/02. MINDGYM_ENGLISH COMMONLY USED AFFIXES_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5892,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/03. MINDGYM_ENGLISH GEN ED_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 25324,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/04. MINDGYM_ENGLISH PHRASAL VERBS_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14202,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/05. MINDGYM_FILIPINO KAKAYAHANG KOMUNIKATIBO_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14812,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/06. MINDGYM_FILIPINO KAKAYAHANG LINGGWISTIKA_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 42450,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/07. MINDGYM_FILIPINO PANITIKAN_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35017,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/08. MINDGYM_FILIPINO WIKANG FILIPINO_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14890,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/09. MINDGYM_MATHEMATICS-ALGEBRA_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8642,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/10. MINDGYM_MATHEMATICS-FUNDAMENTALS OF MATHEMATICS_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7211,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/11. MINDGYM_MATHEMATICS-GEOMETRY_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3318,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/12. MINDGYM_MATHEMATICS-SOME TIPS IN DOING MATH_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1223,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/13. MINDGYM_MATHEMATICS-STATISTICS, PROBABILITY _ NUMBER SERIES_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4575,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/14. MINDGYM_SOCIAL STUDIES-FALLACIES_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10115,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/15. MINDGYM_SOCIAL STUDIES-HUMAN RIGHTS_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 18842,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/16. MINDGYM_SOCIAL STUDIES-MAJOR FORMS OF GOVERNMENT_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17117,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/17. MINDGYM_SOCIAL STUDIES-PHILIPPINE HISTORY_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26733,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/18. MINDGYM_SOCIAL STUDIES-RIZAL AND OTHER HEROES_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13447,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/19. MINDGYM_SOCIAL STUDIES-SOCIETY AND CULTURE_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19502,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/F. MindGym/20. MINDGYM_SOCIAL STUDIES-TAXATION LAND REFORM COOPERATIVES AND ECONOMICS_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 30399,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/G. Others/1. GEN. ED REVIEWER 50 ITEMS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11058,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/G. Others/2. GEN. ED. REVIEWER 100 ITEMS WITH ANSWER KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20447,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/G. Others/3. GENERAL-EDUCATION-SECONDARY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 55014,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/H. Teach Pinas/1. GENERAL EDUCATION (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 31217,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/H. Teach Pinas/2. GENERAL EDUCATION (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8129,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/H. Teach Pinas/3. GENERAL EDUCATION (3).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14627,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/H. Teach Pinas/4. GENERAL EDUCATION (4).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 22408,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/H. Teach Pinas/5. GENERAL EDUCATION (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 36242,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/H. Teach Pinas/6. GENERAL EDUCATION (6).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32900,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/H. Teach Pinas/7. GENERAL EDUCATION (7).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5757,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/3. GENERAL EDUCATION/H. Teach Pinas/8. GENERAL EDUCATION (8).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 40405,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE DRILLS I/GENERAL SCIENCE A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11468,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE DRILLS I/GENERAL SCIENCE B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5276,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE DRILLS II/GENERAL SCIENCE 100 ITEMS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 15916,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE DRILLS II/GENERAL SCIENCE A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9162,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE DRILLS II/GENERAL SCIENCE B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9068,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6843,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7633,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6547,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7983,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 659,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8002,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8084,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE SET A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8370,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE SET B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8510,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GEN. SCIENCE LATEST/GEN. SCIENCE SET C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8862,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/4. GENERAL SCIENCE/GENERAL SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/5. INFORMATION AND COMMUNICATION/1. GENERAL EDUCATION INFORMATION AND COMMUNICATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2448,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/6. MATH/1. 112_GEN ED MATH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8712,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/6. MATH/2. GENED MATH.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/6. MATH/3. GENERAL EDUCATION MATHEMATICS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5277,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/6. MATH/4. MATH - LET REVIEWER ).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9156,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/6. MATH/5. MATHEMATICS NOTES A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 69069,
+      "materials": 12,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/6. MATH/6. MATHEMATICS REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8072,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/6. MATH/7. MATHEMATICS REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 214,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/01. GENERAL EDUCATION SOC. SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6550,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/02. GENERAL EDUCATION SOC. SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 28972,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/03. GENERAL EDUCATION SOCIAL STUDIES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6582,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/04. SOCIAL SCIENCE REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8219,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/05. SOCIAL SCIENCE REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7523,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/06. SOCIAL SCIENCE REVIEWER C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6900,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/07. SOCIAL SCIENCE REVIEWER D.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10308,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/08. SOCIAL SCIENCE REVIEWER E.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5069,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/09. SOCIAL SCIENCE REVIEWER F.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6257,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/10. SOCIAL SCIENCE REVIEWER G.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5500,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/11. SOCIAL SCIENCE REVIEWER H.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10444,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/12. SOCIAL SCIENCE REVIEWER I.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7634,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/13. SOCIAL SCIENCE REVIEWER J.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7102,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/14. SOCIAL SCIENCE REVIEWER K.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6597,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/15. SOCIAL SCIENCE REVIEWER L.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7114,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/16. SOCIAL SCIENCE REVIEWER M.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10345,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/17. SOCIAL SCIENCE REVIEWER N.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9891,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/7. SOCIAL SCIENCE/18. SOCIAL SCIENCE REVIEWER O.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4795,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/8. SCIENCE, TECHNOLOGY & SOCIETY/SCIENCE, TECHNOLOGY & SOCIETY MODULE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 401891,
+      "materials": 67,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/8. SCIENCE, TECHNOLOGY & SOCIETY/STS NOTES 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 53015,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/8. SCIENCE, TECHNOLOGY & SOCIETY/STS NOTES 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10938,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/10 9. GEN. ED FINAL COACHING 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27549,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/10. GEN ED & PROF ED Q&A DRILLS 2000 ITEMS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 178778,
+      "materials": 28,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/11. GENERAL-EDUCATION-WITH-ANSWERS.docx.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6850,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/12. General-Education-2015-2019Answer-Key (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 276698,
+      "materials": 46,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/13. LET-GENERAL-EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 30641,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/14. GEN-ED-PRC.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11307,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/15. GENERAL-EDUC.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 29521,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/16. General-Education-March-1.docx.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3628,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/3. GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14627,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/7. ACTUAL-BOARD-EXAM-QUESTIONS-GENERAL-EDUCATION-80-RATING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10754,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/8. GEN. ED FINAL COACHING 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23711,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/ACTUAL BOARD/GENERAL EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 18112,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/ACTUAL BOARD/GENERAL-EDUCATION-A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 22892,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/ACTUAL BOARD/GENERAL-EDUCATION-B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 24055,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/ACTUAL BOARD/GENERAL-EDUCATION-C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26942,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/ACTUAL BOARD/General-Education with Answer-Keys.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 276698,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/Done 1. GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 31217,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/Done 2 GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8129,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/Done 4. GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 22408,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/Done 5. GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 36242,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED DRILLS/Done 6. GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32900,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/01. ART APPRECIATION - GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14824,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/02. ETHICS - GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 15134,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/03. READINGS IN PHILIPPINE HISTORY AND SOCIETY - GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11610,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/04. THE CONTEMPORARY WORLD - GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27288,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/05. UNDERSTADING THE SELF - GEN ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9026,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/07. ENGLISH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13209,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/08. FILIPINO.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32478,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/09. HANDOUT-SA-FIL.-LET-GEN.ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 41296,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/10. LET-REVIEW_GENERAL-EDUCATION-MATH-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 33069,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/11. MATHEMATHICS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11763,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/12. SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 28072,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "gen-ed/science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/13. SOCIAL SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 22345,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/14. SOCIAL SCIENCE (SLU).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 40019,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/15. TCW-HANDOUTS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 43870,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/16. UNDERSTANDING THE SELF.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 66686,
+      "materials": 13,
+      "flashcards": 0,
+      "topic": "gen-ed/values-humanities"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/17. CONTENT AND PEDAGOGY IN THE MOTHER TONGUE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 33776,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/18. FLASHCARDS GEN ED BOOSTER AUTHORS AND LIT.pptx",
+      "source_type": "pptx",
+      "status": "processed",
+      "text_chars": 5022,
+      "materials": 1,
+      "flashcards": 109,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/19. FLASHCARDS GEN ED BOOSTER SOCIAL.pptx",
+      "source_type": "pptx",
+      "status": "processed",
+      "text_chars": 4965,
+      "materials": 1,
+      "flashcards": 99,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/6. READINGS IN PHILIPPINE HISTORY (MODULE).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 280097,
+      "materials": 52,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/IMPORTANT NOTES/F1.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1030,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/IMPORTANT NOTES/F2.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 940,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/IMPORTANT NOTES/F3.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1089,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/IMPORTANT NOTES/F4.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1127,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/IMPORTANT NOTES/F5.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1124,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "gen-ed/social-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/PURPOSIVE COMMUNICATION/Purposive Communication (Essential Notes).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 38818,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/PURPOSIVE COMMUNICATION/Purposive Communication Full Module.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 259506,
+      "materials": 45,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/A. GENERAL EDUCATION/GEN. ED NOTES/PURPOSIVE COMMUNICATION/Purposive Communication Review Notes.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9650,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "gen-ed/english"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_gened_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_gened_source_materials_flashcards.json"
+}
