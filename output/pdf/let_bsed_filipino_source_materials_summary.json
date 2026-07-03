@@ -1,0 +1,258 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO",
+  "source_files_seen": 27,
+  "source_files_processed": 27,
+  "materials_generated": 105,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "doc": 1,
+    "pdf": 26
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/1. FILIPINO MAJOR LET REVIEWER SLIDES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17340,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/2. FILIPINO MAJOR LET REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8959,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/3. FILIPINO MOCK TEST.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13275,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/4. FILIPINO NOTES 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6538,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/5. TEORYA NG PINAGMULAN NG WIKA.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4586,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/6. FILIPINO CBRC HANDOUT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 24907,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/7. FILIPINO LET NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26811,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/8. LECTURE NOTES - FILIPINO.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5616,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/FILIPINO KEY WORDS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 102413,
+      "materials": 18,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/OTHER RESOURCES/Filipino - Mga Batayang Kaalaman sa Pagtuturo ng Filipino.doc",
+      "source_type": "doc",
+      "status": "processed",
+      "text_chars": 27886,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 37559,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10203,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32618,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32244,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4698,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12509,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12673,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 25317,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9479,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS I/FILIPINO PART 9.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10405,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS II/FILIPINO PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 24831,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS II/FILIPINO PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12108,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS II/FILIPINO PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11818,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS II/FILIPINO PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4458,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS II/FILIPINO PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 31373,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS II/FILIPINO PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 33471,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/B. FILIPINO/Q&A DRILLS II/FILIPINO PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 37962,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "major/filipino"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_filipino_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_filipino_source_materials_flashcards.json"
+}

@@ -1,0 +1,104 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_filipino_source_materials.json",
+  "source_rows": 105,
+  "insertable_materials": 87,
+  "inserted": 87,
+  "skipped": 18,
+  "skipped_by_reason": {
+    "thin_material": 1,
+    "duplicate_title": 17
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Filipino Major: FILIPINO MOCK TEST (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 1 (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 1 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 1 (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 1 (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 2 (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 2 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 3 (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 3 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 4 - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 5 (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 5 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 6 (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 6 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 7 (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 7 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 7 (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Filipino Major: FILIPINO PART 7 (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    }
+  ]
+}

@@ -110,6 +110,8 @@ def slug_context(path, text):
     if re.search(r"\bmajor subjects?\b|\barea of specialization\b", path_source):
         if re.search(r"\b(english|literature|vocabulary|grammar|linguistics|composition|reading comprehension|esl|efl)\b", path_source):
             return "major", "english"
+        if re.search(r"\b(filipino|panitikan|wika|tagalog|pagtuturo ng filipino)\b", path_source):
+            return "major", "filipino"
 
     is_prof_ed = re.search(r"\b(professional education|prof ed|profed)\b", path_source)
     if is_prof_ed:
@@ -252,6 +254,8 @@ def main():
             title_scope = "Professional Education"
         elif subject_slug == "major" and topic_slug == "english":
             title_scope = "English Major"
+        elif subject_slug == "major" and topic_slug == "filipino":
+            title_scope = "Filipino Major"
         else:
             title_scope = "General Education"
         exam_scope = "secondary" if subject_slug == "major" else "both"

@@ -1,0 +1,474 @@
+{
+  "batch_id": "6d982685-f673-498f-94b6-75240a44ee9d",
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+  "source_prefix": null,
+  "source_rows": 1621,
+  "ready_rows": 480,
+  "candidate_targets": 480,
+  "insertable": 135,
+  "inserted": 135,
+  "skipped": 0,
+  "duplicates": 345,
+  "source_stats": {
+    "output/pdf/let_bsed_filipino_all_files_extracted.json": {
+      "readyRows": 480,
+      "candidateTargets": 480,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "367",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "42922824-1735-4b0e-b8cf-993af2143725"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "368",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "faeef202-7779-4fa6-9f68-72bad624f276"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "369",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8a06bf6e-a83c-49f1-bc3d-9eb0d5f02b61"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "370",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "117a4846-fa2d-4e7e-b27a-2a899a4fd27b"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "374",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b109e328-c39e-41ce-852b-faeb966b88df"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "375",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "96d70c1e-4434-45d6-b6ac-fe8b6e6dd1aa"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "377",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e3d1ab00-8bbe-4863-89d2-5e586676932c"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "378",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7ed7b6ad-e361-41ae-9007-003c43097ee4"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "379",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a195c4b5-6605-4ed6-b1cc-80e62c377126"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "380",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fdcbe7a2-5c36-47b8-be64-809c96be957a"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "383",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "35e91454-b062-4989-ba5a-10c206fbeb0c"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "385",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a64a4020-b496-4a59-b4c8-65e8e22b9ccf"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "389",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f3f464f0-748b-4b2d-8dfc-90cd8f36b7db"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "390",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c35e12a3-3634-4b27-93db-ed28c425d388"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "394",
+      "page": "6",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0719dd38-ef5b-47e3-9244-069865b7b4e4"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "395",
+      "page": "6",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "94bb6290-5b2b-49d9-a50a-4d5a38463e33"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "397",
+      "page": "6",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "20a96784-706b-4c52-b62e-8c962ae3bc1f"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "399",
+      "page": "7",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "26fb5200-abb9-41c4-9d8d-3d050a7d1861"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "400",
+      "page": "7",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7a2c212e-6583-4c67-a7ec-64c355cceb27"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "401",
+      "page": "7",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "239dd940-b3f7-424b-8b7d-96b50e61ba6a"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "402",
+      "page": "7",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4636581f-05c1-4423-b889-ed6d8b607bed"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "403",
+      "page": "7",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a49aed79-8f08-45d9-8089-844ef376d53a"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "405",
+      "page": "8",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "96e4061a-b112-4069-bd92-0699cc62f08c"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "406",
+      "page": "8",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "880d58b2-03e4-46fc-884f-099543c1d96e"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "408",
+      "page": "8",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c403bb64-773c-4741-9fec-2ec7c98206ef"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "409",
+      "page": "8",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "509df662-009d-4173-93e0-0d60fabd2663"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "411",
+      "page": "9",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e00da3cf-38e9-4c12-b4c3-ded5421945a5"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "412",
+      "page": "9",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9a3dc921-81c6-402b-91f0-9bd5e467fe82"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "413",
+      "page": "9",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c038a62e-0bf2-4016-b24e-721260e736e4"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "414",
+      "page": "9",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "12cfe05e-5149-4a5d-9af8-e8c9adc3861c"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "415",
+      "page": "9",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1126bae6-cf1c-4327-a51a-a6f2b8251267"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "417",
+      "page": "10",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d86d8a4d-702c-47b8-9761-57e6bf2bc957"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "418",
+      "page": "10",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "757f6a57-9c8c-4056-a549-f29c6d20897c"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "419",
+      "page": "10",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "81f80df3-a0c6-4ac6-9e67-35bd26b05d3c"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "420",
+      "page": "10",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "78db9a88-a7e3-4d32-bb24-f9a89cb4fa9d"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "421",
+      "page": "10",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "828d66e2-3764-4cd2-ba58-902298fba86a"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "425",
+      "page": "11",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8aced6cf-46a2-4746-b96a-d95dc6955b97"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "426",
+      "page": "11",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "365cc332-ea1e-4ef3-8725-273b9120ac1d"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "427",
+      "page": "11",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "01dec218-6063-4a49-86b5-9c025edc3ab0"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "428",
+      "page": "11",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d0ff077b-b1ef-46c5-a820-ccd4de79381f"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "430",
+      "page": "12",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "638a4fa8-01e6-44d1-893c-a021dab4d583"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "434",
+      "page": "12-13",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "04426608-5465-4957-ac5e-6665830636fc"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "435",
+      "page": "13",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "00878ba7-5f42-4381-baa0-a200c045f74b"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "436",
+      "page": "13",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ebefcc64-32d0-4f12-a66a-e744984a9f6d"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "437",
+      "page": "13",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c8314b34-9e6c-4858-b3a4-0c07e8e8e5a0"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "438",
+      "page": "13",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "855d77a9-577a-4e51-9c41-c44ed4089908"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "440",
+      "page": "14",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f78c17f6-6df8-453c-9f11-7ae42ce70254"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "441",
+      "page": "14",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2e559b16-e2b4-4d2c-bc9a-fb661b15738f"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "444",
+      "page": "14",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c9ad2ddd-6f80-4dcc-925a-987fb6ea9b72"
+    },
+    {
+      "source": "output/pdf/let_bsed_filipino_all_files_extracted.json",
+      "row": "447",
+      "page": "15",
+      "exam": "secondary",
+      "topic": "major/filipino",
+      "reason": "duplicate_existing_content",
+      "existing_id": "533bd4d5-c1ea-4351-9e78-e3b5f5be1b7f"
+    }
+  ],
+  "skipped_samples": []
+}
