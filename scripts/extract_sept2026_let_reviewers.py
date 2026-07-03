@@ -371,6 +371,10 @@ def infer_exam_type(path):
         return "Both", "Path identifies LET General Education, which applies to both Elementary and Secondary LET tracks."
     if re.search(r"\b(prof ed|profed|professional education)\b", text):
         return "Both", "Path identifies LET Professional Education, which applies to both Elementary and Secondary LET tracks."
+    if re.search(r"\bmajor subjects?\b|\barea of specialization\b", text):
+        return "LET Secondary", "Path identifies a LET Secondary major/specialization source."
+    if re.search(r"(?:^|[/\\])a\.\s*english(?:[/\\]|$)|english booster drill|english q\s*&\s*a drills|english major", text):
+        return "LET Secondary", "Path identifies a LET Secondary English major source."
     if "beed" in text or "elementary" in text:
         return "LET Elementary", "Path indicates BEED/Elementary."
     if "bsed" in text or "secondary" in text:

@@ -1,0 +1,23 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_english_source_materials.json",
+  "source_rows": 937,
+  "insertable_materials": 935,
+  "inserted": 935,
+  "skipped": 2,
+  "skipped_by_reason": {
+    "thin_material": 2
+  },
+  "skipped_samples": [
+    {
+      "title": "LET English Major: ENGLISH SE PART 5 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET English Major: ENGLISH MAJOR 1319 ITEMS PART 4 (Part 59) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    }
+  ]
+}

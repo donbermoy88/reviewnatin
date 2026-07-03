@@ -232,12 +232,15 @@ function mappedTopic(row, examKind) {
   const subject = row['Subject Area'] ?? '';
   const sourcePath = `${row['Source Path'] ?? ''} ${row['Source PDF'] ?? ''}`.toLowerCase();
   const isGeneralEducationSource = /(?:^|[/\\])a\.\s*general education(?:[/\\]|$)|gen\.?\s*ed|gened|general education/.test(sourcePath);
+  const isEnglishMajorSource =
+    /(?:^|[/\\])a\.\s*english(?:[/\\]|$)|english booster drill|english q\s*&\s*a drills|english major|english specialization/.test(sourcePath);
   if (
     isGeneralEducationSource &&
     ['General Education', 'English', 'Filipino', 'Mathematics', 'Science', 'Social Studies', 'Values Education', 'Information and Communication Technology'].includes(subject)
   ) {
     return generalEducationTopic(row);
   }
+  if (examKind === 'secondary' && isEnglishMajorSource) return ['major', 'english', null];
   if (subject === 'Early Childhood Education') return ['major', 'early-childhood-education', null];
   if (subject === 'Special Needs Education') return ['major', 'special-needs-education', null];
   if (subject === 'General Education') return generalEducationTopic(row);

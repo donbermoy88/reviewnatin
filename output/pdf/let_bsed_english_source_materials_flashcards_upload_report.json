@@ -1,0 +1,38 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_english_source_materials_flashcards.json",
+  "source_rows": 6,
+  "insertable_flashcards": 1,
+  "inserted": 1,
+  "skipped": 5,
+  "skipped_by_reason": {
+    "duplicate_front": 5
+  },
+  "skipped_samples": [
+    {
+      "source_file": "ENGLISH BOOSTER DRILL PART 2.pdf",
+      "exam": "secondary",
+      "reason": "duplicate_front"
+    },
+    {
+      "source_file": "ENGLISH BOOSTER DRILL PART 3.pdf",
+      "exam": "secondary",
+      "reason": "duplicate_front"
+    },
+    {
+      "source_file": "ENGLISH BOOSTER DRILL PART 4.pdf",
+      "exam": "secondary",
+      "reason": "duplicate_front"
+    },
+    {
+      "source_file": "ENGLISH BOOSTER DRILL PART 5.pdf",
+      "exam": "secondary",
+      "reason": "duplicate_front"
+    },
+    {
+      "source_file": "ENGLISH BOOSTER DRILL PART 6.pdf",
+      "exam": "secondary",
+      "reason": "duplicate_front"
+    }
+  ]
+}

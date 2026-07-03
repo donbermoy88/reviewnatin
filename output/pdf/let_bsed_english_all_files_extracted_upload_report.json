@@ -1,0 +1,577 @@
+{
+  "batch_id": "c1c56227-9836-45e4-a931-513cffe065bb",
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+  "source_prefix": null,
+  "source_rows": 5723,
+  "ready_rows": 1321,
+  "candidate_targets": 1301,
+  "insertable": 1070,
+  "inserted": 1070,
+  "skipped": 20,
+  "duplicates": 231,
+  "source_stats": {
+    "output/pdf/let_bsed_english_all_files_extracted.json": {
+      "readyRows": 1321,
+      "candidateTargets": 1301,
+      "skipped": 20
+    }
+  },
+  "skipped_by_reason": {
+    "question_too_short": 20
+  },
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "117",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "022d86cf-c623-421d-8ef6-ba3d5b54a51f"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "119",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e4780c4f-2a83-434a-8601-497ccc055040"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "124",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0b64efd9-37b0-4ce4-af5c-50b5ac91ab5b"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "125",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d6bd07b9-1bc6-4f1a-a59c-e9db711bd8e6"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "127",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fcd20be3-8e0e-475a-865d-5ee44add22f3"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "134",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9bc52739-b7b2-45b8-b1f4-da09df78d40f"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "135",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "93af1ee8-df57-418c-a2db-56b2c6524b4a"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "137",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e44da2f3-db32-46ab-aef9-eb4d4657cf89"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "138",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7c2e0bff-8a3f-4029-af14-432fe3684364"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "149",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d6abfd00-22d8-42cf-91e1-e95789877a4e"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "151",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fa930f4d-42fb-493f-9051-aad8792fdbcf"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "160",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7a41467a-2bfe-4275-8aa7-cc042ae70473"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "161",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "56b83f53-4020-4c23-82f6-89b5b9b6aa6b"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "162",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a3e092b4-6c66-4ed3-92ac-607d9c9cfc4d"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "163",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "350bcd93-15ab-4ad8-ae70-60c564a466b1"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "166",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8b630e0a-da00-4b2e-a79a-dfcdf785a89c"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "168",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cc196af6-e6de-4b31-abbd-5f9ce1195031"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "169",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fe1a0a87-f212-4acb-908c-4e6d2dd04aa0"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "170",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8055286d-7917-4a22-a963-7fd085f8513a"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "171",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3535ad94-e707-43dd-9a0c-fd741d358555"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "172",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1d2d4d12-fdea-4208-8a39-b2b90c6ea6ba"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "173",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6acdaa12-67f0-4d5e-bbef-3d35316909b2"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "174",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8efc0aaa-0c3f-4fa7-b634-37272890ea09"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "175",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "93f86d83-8fc7-4cfd-8f54-b8fceda84d15"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "176",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3f40f92e-e76b-4936-a839-4cf03f1296ba"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "199",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6e23215f-f715-425d-9e64-4b667c6d7d22"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "200",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a96656d7-062f-4db1-af0f-5ffe8aa3821e"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "202",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "59f86b76-5f66-452b-bdf9-9cd29064a6d8"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "203",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b1ee4d06-6a31-4629-9a5d-1d25c4a3c717"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "204",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dbb23ccc-0ad7-496a-9a5e-f3eefc604eb5"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "205",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cd70c42a-a0c8-4bd6-a098-d032a0e022a3"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "208",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "59d93762-6cef-46d8-8a47-723bf0f9082f"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "209",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0bec080a-c58b-45f0-a9fd-c5229291fdf4"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "210",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "801a0c93-7b48-4aae-8b5d-72c31443ff13"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "211",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "831407bd-c8d1-4a8a-a206-9ef16f32184e"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "214",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2da76c4b-1d88-4828-a147-0ff4facb389d"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "215",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3f150e39-b509-401b-8001-13ee21d7fb92"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "220",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e9ffcbd6-a9a3-4b6c-aa73-9fdfe96c328f"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "221",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "33a193f8-39b2-4f49-8bfd-5818365a3938"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "222",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f6883efa-2dd4-4ea1-8d64-df0f45220eba"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "223",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "35a958b5-837d-45db-a2bd-72b722bb0162"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "224",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c8303956-1105-4216-b432-11240cfeb068"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "225",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "177135cc-bea7-461b-a2b5-85d8f9defaa7"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "226",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "aca70d84-1c7e-4126-99ac-9afdc4186914"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "279",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f66f683f-46c0-4dc6-9ff1-ae07f535afb0"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "280",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a07f4c11-99d5-4e06-a8f0-f14843c4a564"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "281",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a68221be-70b8-4b1e-bad2-861ff158dc25"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "282",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c69731be-c6cc-42b4-8f78-ae3624bd2ad6"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "283",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "932dde6b-0508-4876-9085-7f9eddadcb85"
+    },
+    {
+      "source": "output/pdf/let_bsed_english_all_files_extracted.json",
+      "row": "284",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/english",
+      "reason": "duplicate_existing_content",
+      "existing_id": "21e081b4-8889-473d-9757-bbdaaf6325a4"
+    }
+  ],
+  "skipped_samples": [
+    {
+      "row": "611",
+      "page": "7",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "612",
+      "page": "7",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "614",
+      "page": "7",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "615",
+      "page": "7-8",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "616",
+      "page": "8",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "617",
+      "page": "8",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "618",
+      "page": "8",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "619",
+      "page": "8",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "621",
+      "page": "8",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "622",
+      "page": "8",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "623",
+      "page": "8-9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "624",
+      "page": "9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "625",
+      "page": "9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "626",
+      "page": "9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "627",
+      "page": "9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "628",
+      "page": "9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "629",
+      "page": "9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "630",
+      "page": "9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "631",
+      "page": "9",
+      "reason": "question_too_short"
+    },
+    {
+      "row": "633",
+      "page": "10",
+      "reason": "question_too_short"
+    }
+  ]
+}

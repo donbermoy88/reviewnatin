@@ -107,6 +107,10 @@ def read_source(path):
 def slug_context(path, text):
     path_source = " ".join(part.lower() for part in path.parts[-5:]).replace("_", " ").replace("-", " ")
     source = f"{path_source} {text[:4000].lower()}".replace("_", " ").replace("-", " ")
+    if re.search(r"\bmajor subjects?\b|\barea of specialization\b", path_source):
+        if re.search(r"\b(english|literature|vocabulary|grammar|linguistics|composition|reading comprehension|esl|efl)\b", path_source):
+            return "major", "english"
+
     is_prof_ed = re.search(r"\b(professional education|prof ed|profed)\b", path_source)
     if is_prof_ed:
         if re.search(r"\b(child|adolescent|early childhood|sped|special education|inclusive|exceptional learner)\b", path_source):
@@ -244,7 +248,13 @@ def main():
             continue
 
         subject_slug, topic_slug = slug_context(path, full_text)
-        title_scope = "Professional Education" if subject_slug == "prof-ed" else "General Education"
+        if subject_slug == "prof-ed":
+            title_scope = "Professional Education"
+        elif subject_slug == "major" and topic_slug == "english":
+            title_scope = "English Major"
+        else:
+            title_scope = "General Education"
+        exam_scope = "secondary" if subject_slug == "major" else "both"
         title_base = compact_title(path)
         text_key = re.sub(r"\s+", " ", full_text[:30000]).lower()
         material_count = 0
@@ -256,7 +266,7 @@ def main():
                         "source_file": path.name,
                         "source_type": source_type,
                         "source_path": str(path),
-                        "exam_scope": "both",
+                        "exam_scope": exam_scope,
                         "subject_slug": subject_slug,
                         "topic_slug": topic_slug,
                         "title": f"LET {title_scope}: {title_base}" + (f" (Part {index})" if len(chunks_for(full_text)) > 1 else ""),
@@ -283,7 +293,7 @@ def main():
                         "source_file": path.name,
                         "source_type": source_type,
                         "source_path": str(path),
-                        "exam_scope": "both",
+                        "exam_scope": exam_scope,
                         "subject_slug": subject_slug,
                         "topic_slug": topic_slug,
                         "front": front,

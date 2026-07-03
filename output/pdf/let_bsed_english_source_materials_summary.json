@@ -1,0 +1,490 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH",
+  "source_files_seen": 53,
+  "source_files_processed": 52,
+  "materials_generated": 937,
+  "flashcards_generated": 6,
+  "source_type_counts": {
+    "doc": 2,
+    "docx": 2,
+    "pdf": 49
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH  SUMMARY NOTES/ENGLISH  SUMMARY NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 29041,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH BOOSTER DRILL/ENGLISH BOOSTER DRILL PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20422,
+      "materials": 4,
+      "flashcards": 1,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH BOOSTER DRILL/ENGLISH BOOSTER DRILL PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6834,
+      "materials": 2,
+      "flashcards": 1,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH BOOSTER DRILL/ENGLISH BOOSTER DRILL PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6698,
+      "materials": 2,
+      "flashcards": 1,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH BOOSTER DRILL/ENGLISH BOOSTER DRILL PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6898,
+      "materials": 2,
+      "flashcards": 1,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH BOOSTER DRILL/ENGLISH BOOSTER DRILL PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6972,
+      "materials": 2,
+      "flashcards": 1,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH BOOSTER DRILL/ENGLISH BOOSTER DRILL PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12002,
+      "materials": 2,
+      "flashcards": 1,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH NOTE CHARTS/ENGLISH COMPOSITION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 40005,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH NOTE CHARTS/ENGLISH FUNDAMENTALS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 21660,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH NOTE CHARTS/ENGLISH GRAMMAR.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 29122,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH NOTE CHARTS/ESL AND EFL (GRAMMAR).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34743,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH Q & A DRILLS + ANSWER KEYS/ENGLISH SE PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10378,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH Q & A DRILLS + ANSWER KEYS/ENGLISH SE PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12887,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH Q & A DRILLS + ANSWER KEYS/ENGLISH SE PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9182,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH Q & A DRILLS + ANSWER KEYS/ENGLISH SE PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10404,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH Q & A DRILLS + ANSWER KEYS/ENGLISH SE PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6620,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH Q & A DRILLS + ANSWER KEYS/ENGLISH SE PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7678,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH Q & A DRILLS + ANSWER KEYS/ENGLISH SE PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7915,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ENGLISH Q & A DRILLS + ANSWER KEYS/ENGLISH SE PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7679,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/1. ENGLISH MAJOR NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 675635,
+      "materials": 123,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/2. ENGLISH MAJOR.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/3. LORIMAR - ENGLISH SPECIALIZATION (BOOK 1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 134077,
+      "materials": 25,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/4. LORIMAR - ENGLISH SPECIALIZATION (BOOK 2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 103711,
+      "materials": 20,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/5. ENGLISH MAJOR Q&A DRILL 450 ITEMS WITH ANSWER KEYS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 96300,
+      "materials": 18,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/6. ENGLISH MAJOR 1319 ITEMS PART 4.doc",
+      "source_type": "doc",
+      "status": "processed",
+      "text_chars": 349457,
+      "materials": 59,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/7. ENGLISH MAJORSHIP.docx",
+      "source_type": "docx",
+      "status": "processed",
+      "text_chars": 82967,
+      "materials": 15,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/8. ENGLISH SPECIALIZATION.docx",
+      "source_type": "docx",
+      "status": "processed",
+      "text_chars": 61939,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/ESSENTIAL NOTES & DRILLS/9. ENGLISH Comprehensive Reviewer NCBTS & TOS Based.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 316332,
+      "materials": 53,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/GRAMMAR TEST 9000+ ITEMS/LET English Grammar Test (9000+ Questions).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2017382,
+      "materials": 315,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/LET ENG REGULAR VERB LIST/LET ENG REGULAR VERB LIST.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5711,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/LITERATURE/1. A BRIEF HISTORY OF ENGLISH LITERATURE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23506,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/LITERATURE/2.  HISTORY OF ENGLISH LITERATURE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11536,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/LITERATURE/3. HISTORY OF ENGLISH LITERATURE (SYLLABUS).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 793956,
+      "materials": 139,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/LITERATURE/4. ENGLISH & PHILIPPINE LITERATURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9692,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/LITERATURE/5. LITERARY TERMS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 60913,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/01 ENGLISH REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 22301,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/02 ENGLISH REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3987,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/03 ENGLISH REVIEWER C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6461,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/04 ENGLISH REVIEWER D.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4659,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/05 ENGLISH REVIEWER E.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19570,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/06 ENGLISH REVIEWER F.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20068,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/07 ENGLISH REVIEWER G.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14405,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/08 ENGLISH REVIEWER H.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12491,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/09 ENGLISH REVIEWER I.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10512,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/10. LECTURE NOTES - ENGLISH GRAMMAR.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 15785,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/11. LECTURE NOTES - ENGLISH READING COMPREHENSION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9722,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/12. LECTURE NOTES - ENGLISH VOCABULARY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8677,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/13. LET REVIEW UNIVERSITY ENGLISH NOTES PART  (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 16609,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/MORE REVIEWERS/14. ENGLISH MAJOR 1300+ Q&A DRILLS WITH ANSWER KEYS (COLOR HIGHLIGHTED).doc",
+      "source_type": "doc",
+      "status": "processed",
+      "text_chars": 349457,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/OTHER ESSENTIALS/1. ENGLISH MAJOR REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 28918,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/OTHER ESSENTIALS/2. ENGLISH STRUCTURE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 675635,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/OTHER ESSENTIALS/3. Q&A DRILLS WITH ANSWER KEYS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 61781,
+      "materials": 12,
+      "flashcards": 0,
+      "topic": "major/english"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/A. ENGLISH/OTHER ESSENTIALS/4. STRUCTURES OF ENGLISH LANGUAGE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 139906,
+      "materials": 28,
+      "flashcards": 0,
+      "topic": "major/english"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_english_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_english_source_materials_flashcards.json"
+}
