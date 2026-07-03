@@ -107,6 +107,42 @@ def read_source(path):
 def slug_context(path, text):
     path_source = " ".join(part.lower() for part in path.parts[-5:]).replace("_", " ").replace("-", " ")
     source = f"{path_source} {text[:4000].lower()}".replace("_", " ").replace("-", " ")
+    is_prof_ed = re.search(r"\b(professional education|prof ed|profed)\b", path_source)
+    if is_prof_ed:
+        if re.search(r"\b(child|adolescent|early childhood|sped|special education|inclusive|exceptional learner)\b", path_source):
+            return "prof-ed", "child-development"
+        if re.search(r"\b(facilitating learning|learning and motivation|motivation|learning theor|human learning)\b", path_source):
+            return "prof-ed", "facilitating-learning"
+        if re.search(r"\b(assessment|evaluation|test|testing|quiziz|quizizz|tos|table of specification)\b", path_source):
+            return "prof-ed", "assessment-of-learning"
+        if re.search(r"\b(curriculum|ubd|k to 12|k-12)\b", path_source):
+            return "prof-ed", "curriculum-development"
+        if re.search(r"\b(educational technology|ed tech|ict|information and communication|computer|media)\b", path_source):
+            return "prof-ed", "educational-technology"
+        if re.search(r"\b(field study|classroom management|learning environment|teaching aid|bulletin board)\b", path_source):
+            return "prof-ed", "classroom-management"
+        if re.search(r"\b(teaching profession|professional teacher|ppst|professional standards|code of ethics|faculty manual|legal bases|license|licensure|ncbts)\b", path_source):
+            return "prof-ed", "teaching-profession"
+        if re.search(r"\b(social dimension|social dimensions|community|society|multicultural|school community)\b", path_source):
+            return "prof-ed", "social-dimensions"
+        if re.search(r"\b(principles|strategies|methods|teaching|instruction|pedagogy)\b", path_source):
+            return "prof-ed", "principles-of-teaching"
+        if re.search(r"\b(assessment|evaluation|validity|reliability|rubric|item analysis|tos|table of specification)\b", source):
+            return "prof-ed", "assessment-of-learning"
+        if re.search(r"\b(curriculum|k to 12|k-12|spiral|ubd|tyler|syllabus)\b", source):
+            return "prof-ed", "curriculum-development"
+        if re.search(r"\b(piaget|erikson|freud|vygotsky|bandura|bruner|constructivist|behaviorism|scaffold|zpd|conditioning)\b", source):
+            return "prof-ed", "facilitating-learning"
+        if re.search(r"\b(code of ethics|professional teacher|professional standards|ppst|ncbts|ra 7836|licensure|prc)\b", source):
+            return "prof-ed", "teaching-profession"
+        if re.search(r"\b(social dimension|community|society|social justice|human rights|peace education|multicultural)\b", source):
+            return "prof-ed", "social-dimensions"
+        if re.search(r"\b(special education|inclusive|disability|indigenous|exceptional learner|mainstream)\b", source):
+            return "prof-ed", "inclusive-education"
+        if re.search(r"\b(educational technology|instructional material|audiovisual|cone of experience|computer assisted|media)\b", source):
+            return "prof-ed", "educational-technology"
+        return "prof-ed", "principles-of-teaching"
+
     if re.search(r"\b(english|literature|vocabulary|grammar|communication|purposive communication)\b", path_source):
         return "gen-ed", "english"
     if re.search(r"\b(filipino|fil\.|panitikan|wika|tagalog|mother tongue)\b", path_source):
@@ -183,8 +219,8 @@ def is_flashcard_source(path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Extract LET General Education mixed source files into review-material and flashcard JSON.")
-    parser.add_argument("--input", default=str(DEFAULT_INPUT), help="LET General Education source folder.")
+    parser = argparse.ArgumentParser(description="Extract LET mixed source files into review-material and flashcard JSON.")
+    parser.add_argument("--input", default=str(DEFAULT_INPUT), help="LET source folder.")
     parser.add_argument("--output-base", default="let_gened_source_materials", help="Output filename base under output/pdf.")
     args = parser.parse_args()
 
@@ -208,6 +244,7 @@ def main():
             continue
 
         subject_slug, topic_slug = slug_context(path, full_text)
+        title_scope = "Professional Education" if subject_slug == "prof-ed" else "General Education"
         title_base = compact_title(path)
         text_key = re.sub(r"\s+", " ", full_text[:30000]).lower()
         material_count = 0
@@ -222,7 +259,7 @@ def main():
                         "exam_scope": "both",
                         "subject_slug": subject_slug,
                         "topic_slug": topic_slug,
-                        "title": f"LET General Education: {title_base}" + (f" (Part {index})" if len(chunks_for(full_text)) > 1 else ""),
+                        "title": f"LET {title_scope}: {title_base}" + (f" (Part {index})" if len(chunks_for(full_text)) > 1 else ""),
                         "body": f"Source: {path.name}\nSource type: {source_type}\n\n{body}",
                         "material_type": "notes",
                         "is_premium": False,

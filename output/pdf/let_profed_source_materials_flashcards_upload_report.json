@@ -1,0 +1,10 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_profed_source_materials_flashcards.json",
+  "source_rows": 1,
+  "insertable_flashcards": 2,
+  "inserted": 2,
+  "skipped": 0,
+  "skipped_by_reason": {},
+  "skipped_samples": []
+}

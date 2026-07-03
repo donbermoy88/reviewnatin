@@ -1,0 +1,526 @@
+{
+  "batch_id": "b2926c9f-5b29-4c7f-b39e-0c1f431d49da",
+  "dry_run": false,
+  "source": "output/pdf/let_profed_all_files_extracted.json",
+  "source_prefix": null,
+  "source_rows": 9939,
+  "ready_rows": 1652,
+  "candidate_targets": 3297,
+  "insertable": 2450,
+  "inserted": 2450,
+  "skipped": 7,
+  "duplicates": 847,
+  "source_stats": {
+    "output/pdf/let_profed_all_files_extracted.json": {
+      "readyRows": 1652,
+      "candidateTargets": 3297,
+      "skipped": 7
+    }
+  },
+  "skipped_by_reason": {
+    "topic_mapping_missing": 7
+  },
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "389",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "acf0af23-a622-4987-a8f1-461b7adc8288"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "389",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b12d0a65-c4a7-4f52-ad4f-daa913e20bef"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "390",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "624445d3-0138-4a78-93b0-d7ad61b77ed2"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "390",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4a0cdf21-0ddd-4660-a385-c81ab80dc87f"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "391",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7a77a608-fd20-4c97-9f83-9da912c6b3c5"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "391",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "890028dd-d5ee-4cd8-8c2f-2585f94d6bb4"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "392",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cdfcbe8c-52ad-408e-9313-9d62db9620e7"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "392",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "10a4524c-4007-4cc1-a70d-1dbb7ff07f88"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "393",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "03d312ce-041f-4358-82df-c035e0379c66"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "393",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ff73190b-ea5d-4b9a-b969-d8392ba12150"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "395",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4d385629-9f7d-4963-a11e-0f6b644fda06"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "395",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "34af58e3-761f-482e-911b-43071a2c2bab"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "396",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "84c094b3-fff0-4abf-bf40-613046ee7011"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "396",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "44458800-0b89-487f-9ca3-82f74584f7ec"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "397",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "433c6d5d-ad9f-4f4f-9aec-ea0a9dba3bfa"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "397",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e6fd16cf-f76c-4111-8ac1-e0728332324a"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "399",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "65bbc410-398b-4cfb-ba82-c002a9e9beb1"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "399",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2f7f0f52-c830-4023-a8ff-fb2ccacdbefd"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "400",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a81717c5-e205-4762-b4aa-ed57ec3cd041"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "400",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6abceed5-bf5d-4414-859e-3d58e40bcece"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "401",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1f772ca0-2cf0-4d45-89c2-87159bff35ff"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "401",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9cfc5189-d90f-4099-bbec-21ccf697e92f"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "402",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2a9c7c0a-113d-4b31-a89f-d294d39b3e43"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "402",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5483bd47-ffc2-4632-98ca-b334e38a3a5f"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "407",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d58edbed-ccb3-4740-9771-e60bf78dcff7"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "407",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1848b668-f075-4d41-818e-3dbfbd0f8ec2"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "409",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a0fdeac6-041c-4590-8410-12ceb8b00435"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "409",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6429a5e8-eb14-437c-8e4e-25e04e88dc84"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "410",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "edd39353-ef67-4a53-82b5-28d8e99d7748"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "410",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "de11553a-208d-4668-8a17-24aabac82579"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "412",
+      "page": "3",
+      "exam": "elementary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "77e5f385-962d-4957-864a-aeec34fe6708"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "412",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "bf11bff0-eb91-4836-b688-6d6e04c38b7d"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "416",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "73b33418-d26b-4a09-9f9b-bee8d235f144"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "416",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e958a292-60aa-4774-b8d3-4c63c3962a0e"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "419",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "61c7010a-09f4-460a-b3b9-be0e0ad70977"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "419",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4e5836d5-a038-4f50-96d2-5c0c3710bdcc"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "420",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "bb91ab3d-d8ab-4b7c-8436-08e457c1d91b"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "420",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "62a3ada1-6d78-493d-b93e-50277d87ef76"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "421",
+      "page": "1",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a85e0a1c-bdba-4795-92ed-b6780dc3b30c"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "421",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e30b7658-e3b8-4a66-bbf2-178fa78ec5cc"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "424",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3b9e6536-84eb-48fd-bd79-522fb7b53f4a"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "424",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/child-development",
+      "reason": "duplicate_existing_content",
+      "existing_id": "eb265340-c2e2-4f35-8930-0eca42492fba"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "426",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "70bf0eae-d056-40cf-8262-b31adeb460bc"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "426",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8cab9694-a1bf-4b6e-8eff-e5c1e555059d"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "427",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "452f9acf-9021-4b8c-b9f9-fcf97bdeecbc"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "427",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "94dde6b6-37e1-4b0c-b8ff-a6bbf40f04a7"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "428",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "72cd47ee-b6b6-4618-8838-d91f09f0f20a"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "428",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/social-dimensions",
+      "reason": "duplicate_existing_content",
+      "existing_id": "31e52730-dd7b-4c8b-8992-3d44f846d460"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "429",
+      "page": "2",
+      "exam": "elementary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3ef7a9ce-7b7d-495c-869c-e16e4b18c308"
+    },
+    {
+      "source": "output/pdf/let_profed_all_files_extracted.json",
+      "row": "429",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "prof-ed/principles-of-teaching",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c59476b3-b44e-4eff-b435-1b910b2c772d"
+    }
+  ],
+  "skipped_samples": [
+    {
+      "row": "541",
+      "page": "26-27",
+      "exam": "secondary",
+      "subject": "Science",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "574",
+      "page": "2",
+      "exam": "elementary",
+      "subject": "Technology and Livelihood Education",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "577",
+      "page": "2",
+      "exam": "elementary",
+      "subject": "Technology and Livelihood Education",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "579",
+      "page": "2",
+      "exam": "elementary",
+      "subject": "Technology and Livelihood Education",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "595",
+      "page": "2",
+      "exam": "secondary",
+      "subject": "Science",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "597",
+      "page": "2",
+      "exam": "secondary",
+      "subject": "Science",
+      "reason": "topic_mapping_missing"
+    },
+    {
+      "row": "697",
+      "page": "2",
+      "exam": "elementary",
+      "subject": "Technology and Livelihood Education",
+      "reason": "topic_mapping_missing"
+    }
+  ]
+}

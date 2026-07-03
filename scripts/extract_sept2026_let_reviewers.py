@@ -369,6 +369,8 @@ def infer_exam_type(path):
         return "Both", "Path explicitly groups BEED and BSED."
     if re.search(r"\b(gen ed|gened|general education)\b", text):
         return "Both", "Path identifies LET General Education, which applies to both Elementary and Secondary LET tracks."
+    if re.search(r"\b(prof ed|profed|professional education)\b", text):
+        return "Both", "Path identifies LET Professional Education, which applies to both Elementary and Secondary LET tracks."
     if "beed" in text or "elementary" in text:
         return "LET Elementary", "Path indicates BEED/Elementary."
     if "bsed" in text or "secondary" in text:

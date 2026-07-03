@@ -1,0 +1,1687 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION",
+  "source_files_seen": 191,
+  "source_files_processed": 175,
+  "materials_generated": 1889,
+  "flashcards_generated": 1,
+  "source_type_counts": {
+    "image": 2,
+    "pdf": 185,
+    "pptx": 4
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/CHARACTERISTICS OF A PROFESSIONAL TEACHER.pptx",
+      "source_type": "pptx",
+      "status": "processed",
+      "text_chars": 25500,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/DepEd Order No.8 S2015.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 69483,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 57679,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-11.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 50913,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-12.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 49206,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-13.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 73561,
+      "materials": 14,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-14.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 60742,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-15.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 53878,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-16.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 44049,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-17.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 56591,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-18.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 41265,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-19.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 61927,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 44477,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-20.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 42991,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-21.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 44025,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-22.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 47671,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-23.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 52661,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-24.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 53082,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 43577,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 48936,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 56222,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 41456,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 47098,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 51263,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/PPST COMPLETE MODULES 1-24/PPST.RP_Module-9.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 60626,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/1. PHILIPPINE PROFESSIONAL STANDARDS FOR TEACHERS/Philippine-Professional-Standards-for-Teachers.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 63638,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/10. SOCIAL DIMENSIONS OF EDUCATION/1. Social Dimensions of Education - Reviewers for Teachers LET.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23289,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/10. SOCIAL DIMENSIONS OF EDUCATION/2. Social Dimensions of Education (Slide).pptx",
+      "source_type": "pptx",
+      "status": "processed",
+      "text_chars": 10334,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/10. SOCIAL DIMENSIONS OF EDUCATION/3. SOCIAL DIMENSIONS OF EDUCATION PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12151,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/10. SOCIAL DIMENSIONS OF EDUCATION/4. SOCIAL DIMENSIONS OF EDUCATION PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8909,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/10. SOCIAL DIMENSIONS OF EDUCATION/5. Social Dimensions of Education Q&A Drills.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 55672,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/10. SOCIAL DIMENSIONS OF EDUCATION/6. LECTURE NOTES - SOCIAL DIMENSIONS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13357,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/10. SOCIAL DIMENSIONS OF EDUCATION/7. SOCIAL DIMENSION  & TEACHING PROFESSION.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/11. TEACHING PROFESSION/1. CARL E. BALITA 1001 BULLETS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 157400,
+      "materials": 25,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/11. TEACHING PROFESSION/2. TEACHING PROFESSION PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7804,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/11. TEACHING PROFESSION/3. TEACHING PROFESSION PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8559,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/12. PRINCIPLES AND STRATEGIES OF TEACHING/DRILLS/DRILLS 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7613,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/12. PRINCIPLES AND STRATEGIES OF TEACHING/DRILLS/DRILLS 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5981,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/12. PRINCIPLES AND STRATEGIES OF TEACHING/DRILLS/DRILLS 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5440,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/12. PRINCIPLES AND STRATEGIES OF TEACHING/PRINCIPLES, METHODS & STRATEGIES OF TEACHING/PRINCIPLES,  METHODS & STRATEGIES OF TEACHING.pptx",
+      "source_type": "pptx",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/13. PRINCIPLES OF LEARNING AND MOTIVATION/1. PRINCIPLES OF LEARNING AND MOTIVATION PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6900,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/13. PRINCIPLES OF LEARNING AND MOTIVATION/2. PROF ED NOTES - PRINCIPLES _ THEORIES OF LEARNING _ MOTIVATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1652,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/14. Professional Education - Old Files/1. PROF ED Q&A 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9255,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/14. Professional Education - Old Files/2. PROF. ED Q&A 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 40377,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/14. Professional Education - Old Files/3. 2019 SEPTEMBER PROF ED NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5010,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/2. CHILD AND ADOLESCENT DEVELOPMENT/1. CHILD AND ADOLESCENT AND FACILITATING LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/2. CHILD AND ADOLESCENT DEVELOPMENT/2. CHILD AND ADOLESCENT DEV_T PDFBOOKSFORUM.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 25765,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/2. CHILD AND ADOLESCENT DEVELOPMENT/3. CHILD AND ADOLESCENT DEVELOPMENT PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7132,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/2. CHILD AND ADOLESCENT DEVELOPMENT/4. CHILD AND ADOLESCENT DEVELOPMENT PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7132,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/2. CHILD AND ADOLESCENT DEVELOPMENT/5. CHILD-AND-ADOLESCENT-DEVELOPMENT-FACILITATING-LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 68329,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/2. CHILD AND ADOLESCENT DEVELOPMENT/6. CHILD-AND-ADOLESCENT-DEVELOPMENT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14298,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/2. CHILD AND ADOLESCENT DEVELOPMENT/7. EARLY CHILDHOOD EDUCATION _ SPED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7118,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/2. CHILD AND ADOLESCENT DEVELOPMENT/8. LECTURE NOTES - CHILD AND ADOLESCENT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10040,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/child-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/250 items Prof Ed-RB with Comprehensive Rationalization.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 144730,
+      "materials": 28,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/3. EDUCATIONAL TECHNOLOGY/1. EDUCATIONAL TECHNOLOGY PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8278,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/educational-technology"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/3. EDUCATIONAL TECHNOLOGY/2. EDUCATIONAL TECHNOLOGY PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7895,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/educational-technology"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/01. CPRC FS QUESTIONS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 55179,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/02. FS 1 EPISODE 1 THE SCHOOL AS A LEARNING ENVIRONMENT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14248,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/03. FS 1 EPISODE 2 THE LEARNERS_ CHARACTERISTICS AND NEEDS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11422,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/04. FS 1 EPISODE 3 CLASSROOM MANAGEMENT AND LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14101,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/05. FS 1 EPISODE 4 FOCUSING ON DIFFERENT GENDER, RACIAL, RELIGIOUS BACKGROUND.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 15776,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/06. FS 1 EPISODE 5 FOCUSING ON DIFFERENT LEVEL OF ABILITIES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 15545,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/07. FS 1 EPISODE 6 HOME SCHOOL LINK.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 15884,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/08. FS 1.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/09. FS 2.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/10. FS 3 EPISODE 1 THE SCHOOL_S LEARNING RESOURCE CENTER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19243,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/11. FS 3 EPISODE 2 BULLETIN BOARD DISPLAYS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12581,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/12. FS 3 EPISODE 3 SLIDESHOW (SLIDE PRESENTATION).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9309,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/13. FS 3 EPISODE 4 TOOLS OF THE TRADE (TEACHING AID BANK).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12046,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/classroom-management"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/14. FS 3.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/15. FS 4.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/16. FS 5.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/17. FS 6.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/4. FIELD STUDY/18. FS-4 EXPLORING THE CURRICULUM.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 56350,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/5. FACILITATING LEARNING/1. FACILITATING.LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/5. FACILITATING LEARNING/2. GENERATED PDF FROM IMAGE FILES.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/5. FACILITATING LEARNING/3. LECTURE NOTES - FACILITATING LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8322,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/5. FACILITATING LEARNING/4. PROFESSIONAL-EDUCATION-FACILITATING-LEARNING-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9756,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/5. FACILITATING LEARNING/5. PROFESSIONAL-EDUCATION-FACILITATING-LEARNING-2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10718,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/6. FOUNDATION OF EDUCATION/1. FOUNDATION OF EDUCATION PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7700,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/6. FOUNDATION OF EDUCATION/2. FOUNDATION OF EDUCATION PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7198,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/6. FOUNDATION OF EDUCATION/3. PROF ED NOTES - FOUNDATIONS OF EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1704,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/6. FOUNDATION OF EDUCATION/4. PROF ED REVIEWER - 136 PAGES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 340401,
+      "materials": 58,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/01. ASSESSMENT AND EVALUATION OF LEARNING PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9321,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/02. ASSESSMENT AND EVALUATION OF LEARNING PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9840,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/03. ASSESSMENT AND EVALUATION OF LEARNING PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5930,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/04. ASSESSMENT AND EVALUATION OF LEARNING PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5931,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/05. ASSESSMENT OF LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/06. ASSESSMENT-OF-FOR-AS-LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8058,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/07. ASSESSMENT-OF-LEARN-¦NG-EVAL-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 21525,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/08. ASSESSMENT-OF-LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 74157,
+      "materials": 13,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/09. CBRC NOTES - ASSESSMENT OF LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8075,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/7. ASSESSMENT AND EVALUATION/10. QUIZIZ - ASSESSMENT OF AS FOR LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7909,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/8. PRINCIPLES AND STRATEGIES OF TEACHING/1. LECTURE NOTES - PRINCIPLES OF TEACHING (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6871,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/8. PRINCIPLES AND STRATEGIES OF TEACHING/2. LECTURE NOTES - PRINCIPLES OF TEACHING (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6812,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/8. PRINCIPLES AND STRATEGIES OF TEACHING/3. PRINCIPLES AND STRATEGIES OF TEACHING PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7613,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/8. PRINCIPLES AND STRATEGIES OF TEACHING/4. PRINCIPLES AND STRATEGIES OF TEACHING PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5981,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/8. PRINCIPLES AND STRATEGIES OF TEACHING/5. PRINCIPLES AND STRATEGIES OF TEACHING PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5440,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/9. ICT/1. ICT - ED TECH REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9432,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/educational-technology"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/9. ICT/2. ICT - ED TECH REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9327,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/educational-technology"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/9. ICT/3. ICT - ED TECH REVIEWER C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8821,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/educational-technology"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/1. PROF ED PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 43893,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/10. Professional-Education-2015-2019Answer-Key (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 667035,
+      "materials": 112,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/11. PROFESSIONAL-EDUCATION-QUESTIONS.docx.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4703,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/12. PROFESSIONAL-EDUCATION.docx.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 155774,
+      "materials": 31,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/13 Proffesional Education Final Coaching.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 48212,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/14. LET PROF. ED. Comprehensive Reviewer NCBTS & TOS Based.pptx",
+      "source_type": "pptx",
+      "status": "processed",
+      "text_chars": 174067,
+      "materials": 28,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/15. LET PROF. ED. DRILLS 150 ITEMS NCBTS & TOS BASED.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/16. 200-ITEMS-BEED-WITH-ANSWER-KEY-1_1.jpg",
+      "source_type": "image",
+      "status": "too_short",
+      "text_chars": 23
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/16. 200-ITEMS-BEED-WITH-ANSWER-KEY-1_2.jpg",
+      "source_type": "image",
+      "status": "too_short",
+      "text_chars": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/16. 200-ITEMS-BEED-WITH-ANSWER-KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34486,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/17. 1800-ULTIMATE-PROF.ED-REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1082125,
+      "materials": 203,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/18. 148127942-LET-REVIEWER-PROF-ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 51882,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/19. CBRC ANALYTICAL FC - PROF ED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 53966,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/2. PROD ED PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27589,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/20. LET-PROF-ED-B_PROFESSIONALEDUCATIONSET (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26475,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/21. PROFED FINAL COACHING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 48212,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/22. PROFESIONAL-EDUCATION-150-ITEMS-WITH-ANSWERS-KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 43812,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/23. PROFESSIONAL EDUCATION PRACTICE TEST+.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14935,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/24. THE ULTIMATE PROFESSIONAL EDUCATION LET REVIEWER 2019 EDITION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1129673,
+      "materials": 210,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/3. PROF ED PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13126,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/4. PROF ED PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35810,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/5. PROF ED PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34938,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/6. PROF ED PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20966,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/7. 100 LET Reviewer 2019 with answer 125 problems.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 318351,
+      "materials": 51,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/8. LET REVIEWER PROF ED 2020 90percent pdfbooksforum.com.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27680,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/9. LET-Prof Ed- Q&A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 51882,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/01. LET-PROF-ED-CODE OF ETHICS FOR PROFESSIONAL TEACHERS.PDF",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17548,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/02. LET-PROF-ED-LET PROFED REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 146629,
+      "materials": 27,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/03. LET-PROF-ED-NCBTS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14759,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/04. LET-PROF-ED-PHILOSOPHICAL FOUNDATION OF EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10220,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/05. LET-PROF-ED-PHILOSOPHIES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 15090,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/06. LET-PROF-ED-PHILOSOPHY-OF-EDUCATION W ANS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27671,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/07. LET-PROF-ED-PNU PROFESSIONAL EDUCATION REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 579092,
+      "materials": 97,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/08. LET-PROF-ED-PRINCIPLESOFTEACHING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 73889,
+      "materials": 12,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/09. LET-PROF-ED-PROF ED TEST WITH RATIONAL ANSWERS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14728,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/10. LET-PROF-ED-PROFESSIONAL EDUCATION_175 ITEMS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 51997,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/11. LET-PROF-ED-PSYCHOSEXUAL-DEVELOPMENT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8387,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/12. LET-PROF-ED-SOME-LEGAL-BASES-OF-PHILIPPINE-EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5723,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/A. Faculty Manual/13. LET-PROF-ED-THE-ENHANCED-BASIC-EDUCATION-CURRICULUM.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9224,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/1. LET REVIEWER - PROFESSIONAL EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27814,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/2. LET REVIEWER -PROFESSIONAL EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 48696,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/3. LET REVIEWER -PROFESSIONAL EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 30875,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/4. PROF. ED - HULING BULONG.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 58500,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/5. PROF. ED - SET A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34440,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/6. PROF. ED - SET B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 33121,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/7. PROF. ED - SET C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32958,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/8. PROFESSIONAL EDUCATION (170 ITEMS).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 667035,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/ACTUAL BOARD/9. PROFFESIONAL EDUCATION FINAL COACHING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 48210,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/01. POWERHOUSE PROF ED MASTERY A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14208,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/02. POWERHOUSE PROF ED MASTERY B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14106,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/03. POWERHOUSE PROF ED MASTERY C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35994,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/04. PROFESSIONAL EDUCATION A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 54916,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/05. PROFESSIONAL EDUCATION B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 44126,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/06. PROFESSIONAL EDUCATION C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8496,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/07. PROFESSIONAL EDUCATION D.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11682,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/08. PROFESSIONAL EDUCATION E.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27059,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/09. PROFESSIONAL EDUCATION F.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 29522,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/10. PROFESSIONAL EDUCATION G.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26335,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/11. PROFESSIONAL EDUCATION H.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 29920,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/12. PROFESSIONAL EDUCATION I.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 28111,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/13. PROFESSIONAL EDUCATION J.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 24230,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/14. PROFESSIONAL EDUCATION K.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26297,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/15. PROFESSIONAL EDUCATION L.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 29322,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/16. PROFESSIONAL EDUCATION M.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 24731,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/17. PROFESSIONAL EDUCATION O.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8715,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/18. PROFESSIONAL EDUCATION P.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4401,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/19. PROFESSIONAL EDUCATION R.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8380,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/20. PROFESSIONAL EDUCATION SPECIAL NOTES A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 30521,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/B. LET University/21. PROFESSIONAL EDUCATION SPECIAL NOTES B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 59572,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/C. License Sure/1. 2019 LET REVIEW ACADEMY - PROF. ED VOLUME 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 68872,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/C. License Sure/2. COMPLETE LICENSE SURE PROF. ED. REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1159975,
+      "materials": 217,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/1. MINDGYM SAMPLE DRILL WITH SOME RATIONALIZATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27951,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/2. MINDGYM_ASSESSMENT OF LEARNING_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 70284,
+      "materials": 12,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/3. MINDGYM_CURRICULUM DEVELOPMENT_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11496,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/4. MINDGYM_ED-TECH_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10586,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "prof-ed/educational-technology"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/5. MINDGYM_TEACHING PROFESSION _ SOCIAL DIMENSION_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 25140,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/6. MINDGYM_UBD CUR-DEV_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5567,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/7. MINDGYM-50 CONFIDENCE BOOSTERS FOR PROFESSIONAL EDUCATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7489,
+      "materials": 2,
+      "flashcards": 1,
+      "topic": "prof-ed/facilitating-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/8. MINDGYM-PROF ED MODULE DRILL SET B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 49724,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/D. MindGym/9. MINDGYM-PROFED ADVANCED-GRAPHIC ORGANIZERS-LECUE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5792,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "prof-ed/principles-of-teaching"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/E. TEACH PINAS/1. PROFESSIONAL EDUCATION (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 43940,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/E. TEACH PINAS/2. PROFESSIONAL EDUCATION (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27636,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/E. TEACH PINAS/3. PROFESSIONAL EDUCATION (3).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13173,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/E. TEACH PINAS/4. PROFESSIONAL EDUCATION (4).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35860,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/E. TEACH PINAS/5. PROFESSIONAL EDUCATION (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34938,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/E. TEACH PINAS/6. PROFESSIONAL EDUCATION (6).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20966,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "prof-ed/social-dimensions"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/E. TEACH PINAS/7. PROFESSIONAL EDUCATION (7).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14827,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "prof-ed/curriculum-development"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/PROF ED DRILLS & NOTES/E. TEACH PINAS/8. PROFESSIONAL EDUCATION (8).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 43487,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "prof-ed/assessment-of-learning"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/B. PROFESSIONAL EDUCATION/Philippine Professional Standards for Teachers.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 63453,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "prof-ed/teaching-profession"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_profed_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_profed_source_materials_flashcards.json"
+}

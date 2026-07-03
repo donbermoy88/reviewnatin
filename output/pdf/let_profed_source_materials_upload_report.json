@@ -1,0 +1,144 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_profed_source_materials.json",
+  "source_rows": 1889,
+  "insertable_materials": 3752,
+  "inserted": 3752,
+  "skipped": 26,
+  "skipped_by_reason": {
+    "thin_material": 4,
+    "duplicate_title": 22
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Professional Education: PPST.RP Module 21 (Part 8) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Professional Education: PPST.RP Module 21 (Part 8) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Professional Education: MINDGYM ASSESSMENT OF LEARNING LECTURE NOTES (Part 12) - LET Elementary",
+      "exam": "elementary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Professional Education: MINDGYM ASSESSMENT OF LEARNING LECTURE NOTES (Part 12) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 1) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 2) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 3) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 3) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 4) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 4) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 5) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 5) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 6) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 6) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 7) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 7) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 8) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 8) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 9) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 9) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 10) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 10) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 11) - LET Elementary",
+      "exam": "elementary",
+      "reason": "duplicate_title"
+    },
+    {
+      "title": "LET Professional Education: Philippine Professional Standards for Teachers (Part 11) - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    }
+  ]
+}
