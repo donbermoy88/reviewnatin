@@ -377,6 +377,8 @@ def infer_exam_type(path):
         return "LET Secondary", "Path identifies a LET Secondary English major source."
     if re.search(r"(?:^|[/\\])b\.\s*filipino(?:[/\\]|$)|filipino major|filipino part|filipino mock test", text):
         return "LET Secondary", "Path identifies a LET Secondary Filipino major source."
+    if re.search(r"(?:^|[/\\])c\.\s*bped\s*&\s*mapeh(?:[/\\]|$)|\bbped\b|\bmapeh\b|\bphysical education\b|\bcaed\b|culture\s*&\s*arts", text):
+        return "LET Secondary", "Path identifies a LET Secondary BPED/MAPEH major source."
     if "beed" in text or "elementary" in text:
         return "LET Elementary", "Path indicates BEED/Elementary."
     if "bsed" in text or "secondary" in text:

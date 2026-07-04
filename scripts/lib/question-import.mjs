@@ -94,6 +94,7 @@ const APPROVED_LET_SECONDARY_MAJOR_TOPICS = new Set([
   'filipino',
   'social-studies-araling-panlipunan',
   'general-science',
+  'culture-and-arts-education',
   'biological-science',
   'physical-science',
   'values-education',

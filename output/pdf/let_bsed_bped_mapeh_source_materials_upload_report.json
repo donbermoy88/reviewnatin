@@ -1,0 +1,18 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_bped_mapeh_source_materials.json",
+  "source_rows": 231,
+  "insertable_materials": 230,
+  "inserted": 230,
+  "skipped": 1,
+  "skipped_by_reason": {
+    "thin_material": 1
+  },
+  "skipped_samples": [
+    {
+      "title": "LET MAPEH Major: 3 - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    }
+  ]
+}

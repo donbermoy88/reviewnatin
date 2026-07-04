@@ -112,6 +112,10 @@ def slug_context(path, text):
             return "major", "english"
         if re.search(r"\b(filipino|panitikan|wika|tagalog|pagtuturo ng filipino)\b", path_source):
             return "major", "filipino"
+        if re.search(r"\b(caed|culture\s+arts|culture and arts|culture\s*&\s*arts)\b", path_source):
+            return "major", "culture-and-arts-education"
+        if re.search(r"\b(bped|mapeh|physical education|music|arts|health|gymnastics|athletics)\b", path_source):
+            return "major", "mapeh"
 
     is_prof_ed = re.search(r"\b(professional education|prof ed|profed)\b", path_source)
     if is_prof_ed:
@@ -256,6 +260,10 @@ def main():
             title_scope = "English Major"
         elif subject_slug == "major" and topic_slug == "filipino":
             title_scope = "Filipino Major"
+        elif subject_slug == "major" and topic_slug == "culture-and-arts-education":
+            title_scope = "Culture and Arts Education Major"
+        elif subject_slug == "major" and topic_slug == "mapeh":
+            title_scope = "MAPEH Major"
         else:
             title_scope = "General Education"
         exam_scope = "secondary" if subject_slug == "major" else "both"

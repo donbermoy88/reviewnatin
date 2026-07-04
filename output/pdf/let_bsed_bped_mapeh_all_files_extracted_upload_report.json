@@ -1,0 +1,474 @@
+{
+  "batch_id": "a6f8e913-6182-40b4-9337-5b5774aaa6e7",
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+  "source_prefix": null,
+  "source_rows": 1615,
+  "ready_rows": 245,
+  "candidate_targets": 245,
+  "insertable": 58,
+  "inserted": 58,
+  "skipped": 0,
+  "duplicates": 187,
+  "source_stats": {
+    "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json": {
+      "readyRows": 245,
+      "candidateTargets": 245,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "1",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "468ffb2a-d4d7-408d-bd77-58448495d9ca"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "2",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b2919396-cdb5-46dd-a3e3-332876189a9f"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "3",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "618c369b-af7d-48cd-b44f-9f2bc5aac551"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "4",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f496aac6-9197-4610-b2af-4b61448f8f2d"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "5",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b104365d-fc0b-4de9-a2f1-f56d71259c91"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "6",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5376ed1c-9a73-4cee-a37c-1e094369d62b"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "8",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9d7e1ac5-5233-458a-b791-ba5d3c33c05b"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "9",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c244265a-792b-4013-903a-eea6c9c705cb"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "10",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b420cbc2-32c2-495b-9978-4b6e4cae8f69"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "12",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8b5a55da-5e91-4985-bcfa-cca13975f7b4"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "13",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f82a8bb3-fe59-439a-b61b-71235fbb8972"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "14",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fa6dc57b-7eef-463b-99d0-8377c508bfeb"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "15",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f373cec6-58f1-43dd-bdc9-775339b2a4e2"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "16",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "22b87d81-eb8d-4745-b468-3cfb3e5f9db4"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "17",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c8bff084-8047-45dd-b765-0561586d5fd2"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "18",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7d159aa8-d95f-4699-9c2a-302908f8ea86"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "19",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cf51ab6d-201b-4dce-bc2e-df1e26fe6a1e"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "20",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "bca1ef03-ad76-42c9-8ad6-c50c89dcfa07"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "21",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "789ef462-15db-49ca-8baa-566a9788794e"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "23",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ad93284e-a551-4322-bf02-322c67706157"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "24",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ab85e0c1-680c-4ba5-81b2-00f728068f8f"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "25",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "00547d61-10a8-47f2-ae76-4345e5fbd216"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "27",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9ae93a86-4b0a-45b8-bd1b-800a3d02140e"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "28",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4ab1eb03-28c4-42a0-8c5d-026e5f0e104a"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "29",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c6f24bb1-caf9-4590-bc50-205d65040300"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "30",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a286ee6e-bc05-4d95-a262-228f179f033e"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "31",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1bb091f9-2d49-49d4-97de-69478614b872"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "32",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9fa8128a-db5b-41ad-81ed-9500a870b4b1"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "34",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8b32142a-a251-4522-af0f-f34d1346951d"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "35",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "81c3743a-9bec-4fc8-93e1-c0690e2883a2"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "36",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e3036a7b-f4fd-441a-8417-70274f50b09b"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "37",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "58bf73d4-99a3-401c-a6cb-b2e274fa27b4"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "38",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cce652d6-f81e-4148-ac7d-33867e6b297f"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "39",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "27c8cc3a-bbe0-4ae5-ba11-c3fabd755a72"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "40",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fabe6721-9092-4fa1-b5a4-6a180b7b5478"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "41",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ce3b5750-5808-42e6-a7b8-5ee6e418b29b"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "42",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f44ade93-1d21-4e4c-a80d-441bbfb55bbe"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "43",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f250e206-953b-40ed-938c-7fe5d5b2b3d1"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "45",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c6345910-212a-45ac-85d1-d41e4db534f8"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "46",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5a20aa2e-7f25-4a1e-942c-f90670919dcb"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "47",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dfd62978-4205-48af-b6e7-889cd3255481"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "48",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "561aa576-e980-4a90-9491-09daf508af8e"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "49",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f80bef32-b35b-4a64-9786-34e770869b9f"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "76",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5595202d-cda5-4187-908c-61c915fedf11"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "77",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f45ab5aa-40b0-4c5b-b5c2-acb2851a0def"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "79",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f3eb3256-6cc4-46eb-b936-363cfed79b2a"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "80",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4a91e885-7d8a-47b8-bb0c-1939c8710e30"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "81",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "97bdb06a-3585-487f-b534-449d726a1695"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "82",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "470c3913-67ba-426a-9808-61476f2d9c17"
+    },
+    {
+      "source": "output/pdf/let_bsed_bped_mapeh_all_files_extracted.json",
+      "row": "83",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/culture-and-arts-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "39acdb4e-f6d6-48ea-aeed-4b89fccd1c69"
+    }
+  ],
+  "skipped_samples": []
+}

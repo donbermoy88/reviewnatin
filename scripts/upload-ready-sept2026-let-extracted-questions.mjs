@@ -236,6 +236,10 @@ function mappedTopic(row, examKind) {
     /(?:^|[/\\])a\.\s*english(?:[/\\]|$)|english booster drill|english q\s*&\s*a drills|english major|english specialization/.test(sourcePath);
   const isFilipinoMajorSource =
     /(?:^|[/\\])b\.\s*filipino(?:[/\\]|$)|filipino major|filipino part|filipino mock test|pagtuturo ng filipino/.test(sourcePath);
+  const isCultureArtsMajorSource =
+    /\bcaed\b|culture\s*&\s*arts|culture and arts|culture arts education/.test(sourcePath);
+  const isMapehMajorSource =
+    /(?:^|[/\\])c\.\s*bped\s*&\s*mapeh(?:[/\\]|$)|\bbped\b|\bmapeh\b|physical education|gymnastics|athletics/.test(sourcePath);
   if (
     isGeneralEducationSource &&
     ['General Education', 'English', 'Filipino', 'Mathematics', 'Science', 'Social Studies', 'Values Education', 'Information and Communication Technology'].includes(subject)
@@ -244,6 +248,8 @@ function mappedTopic(row, examKind) {
   }
   if (examKind === 'secondary' && isEnglishMajorSource) return ['major', 'english', null];
   if (examKind === 'secondary' && isFilipinoMajorSource) return ['major', 'filipino', null];
+  if (examKind === 'secondary' && isCultureArtsMajorSource) return ['major', 'culture-and-arts-education', null];
+  if (examKind === 'secondary' && isMapehMajorSource) return ['major', 'mapeh', mapehSubTag(row)];
   if (subject === 'Early Childhood Education') return ['major', 'early-childhood-education', null];
   if (subject === 'Special Needs Education') return ['major', 'special-needs-education', null];
   if (subject === 'General Education') return generalEducationTopic(row);

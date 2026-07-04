@@ -1,0 +1,417 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH",
+  "source_files_seen": 45,
+  "source_files_processed": 44,
+  "materials_generated": 231,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "image": 10,
+    "pdf": 35
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11380,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6195,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9081,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8274,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8656,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8575,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8469,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10171,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9391,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/MAPEH CULTURE & ARTS EDUCATION/CAED PART 9.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5114,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/culture-and-arts-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10837,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13924,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10194,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9742,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9931,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11012,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11611,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11599,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10287,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/PHYSICAL EDUCATION PART 9.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10498,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/1.jpg",
+      "source_type": "image",
+      "status": "too_short",
+      "text_chars": 64
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/10.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1077,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/2.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 804,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/3.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 248,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/4.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 3059,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/5.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 738,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/6.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1161,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/7.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 821,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/8.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 694,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/PHYSICAL EDUCATION/TOS for Physical Education/9.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 975,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/1. ATHLETICS FULL NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 29695,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/2. LECTURE NOTES - MAPEH (ARTS).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1697,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/3. LECTURE NOTES - MAPEH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4817,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/4. MAPEH REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9671,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/5. MAPEH REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9004,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/6. MAPEH REVIEWER C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10262,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/7. PNU LET REVIEWER FOR MAPEH MAJOR.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 875966,
+      "materials": 143,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/8. LET REVIEWER BPED - GYMNASTICS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14052,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Reviewers/9. CBRC ANALYTICAL FINAL COACHING - MAPEH (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35593,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Version 1/MAPEH PART 1 .pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10220,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Version 1/MAPEH PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14685,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Version 1/MAPEH PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 16486,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Version 1/MAPEH PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14393,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Version 1/MAPEH PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12012,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/C. BPED & MAPEH/Version 1/MAPEH PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12691,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mapeh"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_bped_mapeh_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_bped_mapeh_source_materials_flashcards.json"
+}
