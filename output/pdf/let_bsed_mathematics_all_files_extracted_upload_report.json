@@ -1,0 +1,69 @@
+{
+  "batch_id": "c3e6c01c-2007-479f-acbb-44d2ec044141",
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_mathematics_all_files_extracted.json",
+  "source_prefix": null,
+  "source_rows": 2608,
+  "ready_rows": 133,
+  "candidate_targets": 133,
+  "insertable": 128,
+  "inserted": 128,
+  "skipped": 0,
+  "duplicates": 5,
+  "source_stats": {
+    "output/pdf/let_bsed_mathematics_all_files_extracted.json": {
+      "readyRows": 133,
+      "candidateTargets": 133,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_bsed_mathematics_all_files_extracted.json",
+      "row": "161",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b6ca0de5-6e01-4796-a16d-916115215ed5"
+    },
+    {
+      "source": "output/pdf/let_bsed_mathematics_all_files_extracted.json",
+      "row": "313",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "08219045-9a6b-41da-9f70-264b871c4de7"
+    },
+    {
+      "source": "output/pdf/let_bsed_mathematics_all_files_extracted.json",
+      "row": "325",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "64d5813c-6b59-4ea4-a76a-07e7f346f09f"
+    },
+    {
+      "source": "output/pdf/let_bsed_mathematics_all_files_extracted.json",
+      "row": "438",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "857ef868-d159-43cc-a7c9-76dfbc6d147c"
+    },
+    {
+      "source": "output/pdf/let_bsed_mathematics_all_files_extracted.json",
+      "row": "517",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/mathematics",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1a01d339-3ecb-43f9-8879-17b6a7f13d2b"
+    }
+  ],
+  "skipped_samples": []
+}

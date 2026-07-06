@@ -1,0 +1,24 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_mathematics_source_materials.json",
+  "source_rows": 1717,
+  "insertable_materials": 1715,
+  "inserted": 1715,
+  "skipped": 2,
+  "skipped_by_reason": {
+    "thin_material": 1,
+    "duplicate_title": 1
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Mathematics Major: MATHEMATICS REVIEWER B - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Mathematics Major: MATHEMATICS Part 2 - LET Secondary",
+      "exam": "secondary",
+      "reason": "duplicate_title"
+    }
+  ]
+}

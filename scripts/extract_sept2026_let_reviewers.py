@@ -22,6 +22,7 @@ SUPPORTED_SUFFIXES = {
     ".docx",
     ".ppt",
     ".pptx",
+    ".ppsx",
     ".txt",
     ".md",
     ".rtf",
@@ -229,7 +230,7 @@ def read_source_pages(path):
     if suffix == ".docx":
         text = clean_extracted_text(ooxml_text(path, ["word/document"]))
         return ([text] if text else []), "docx", 1 if text else 0
-    if suffix == ".pptx":
+    if suffix in {".pptx", ".ppsx"}:
         slides = []
         with zipfile.ZipFile(path) as archive:
             names = sorted(
@@ -240,7 +241,7 @@ def read_source_pages(path):
         for prefix in names:
             text = clean_extracted_text(ooxml_text(path, [prefix]))
             slides.append(text)
-        return [slide for slide in slides if slide], "pptx", len(slides)
+        return [slide for slide in slides if slide], suffix.lstrip("."), len(slides)
     if suffix in {".doc", ".ppt", ".rtf"}:
         text = clean_extracted_text(textutil_text(path))
         return ([text] if text else []), suffix.lstrip("."), 1 if text else 0
@@ -379,6 +380,8 @@ def infer_exam_type(path):
         return "LET Secondary", "Path identifies a LET Secondary Filipino major source."
     if re.search(r"(?:^|[/\\])c\.\s*bped\s*&\s*mapeh(?:[/\\]|$)|\bbped\b|\bmapeh\b|\bphysical education\b|\bcaed\b|culture\s*&\s*arts", text):
         return "LET Secondary", "Path identifies a LET Secondary BPED/MAPEH major source."
+    if re.search(r"(?:^|[/\\])d\.\s*mathematics(?:[/\\]|$)|math(?:ematics)?\s+specialization|mathematics\s+q\s*&\s*a|mathematics\s+part", text):
+        return "LET Secondary", "Path identifies a LET Secondary Mathematics major source."
     if "beed" in text or "elementary" in text:
         return "LET Elementary", "Path indicates BEED/Elementary."
     if "bsed" in text or "secondary" in text:

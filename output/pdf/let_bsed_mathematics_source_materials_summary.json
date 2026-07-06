@@ -1,0 +1,384 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS",
+  "source_files_seen": 41,
+  "source_files_processed": 41,
+  "materials_generated": 1717,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "pdf": 40,
+    "ppsx": 1
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/BASIC MATH REVIEW CARD.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 43152,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/HISTORY OF MATHEMATICS/1. A HISTORY OF MATHEMATICS 3rd Edition.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1693226,
+      "materials": 307,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/HISTORY OF MATHEMATICS/2. A HISTORY OF MATHEMATICS by Florian Cajori.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1317018,
+      "materials": 238,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/HISTORY OF MATHEMATICS/3. HISTORY OF MATH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 16788,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/HISTORY OF MATHEMATICS/4. HISTORYMATH-BURTON.85.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2411859,
+      "materials": 445,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/HISTORY OF MATHEMATICS/5. VICTOR J. KATZ - A HISTORY OF MATHEMATICS-PEARSON (2008).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3035766,
+      "materials": 530,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8282,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5569,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6089,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6701,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6791,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5698,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6272,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6029,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5441,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/MATHEMATICS Q&A DRILLS WITH ANSWER KEYS/MATHEMATICS PART 9.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6164,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/REVIEW OF BASIC MATHEMATICAL RULES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4128,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/01. 1000 MATH ITEMS WITH ANSWER KEYS BY-SIR-VICTOR-TONDO-JR-LPT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 452316,
+      "materials": 73,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/02. MATH SPECIALIZATION - REVIEWER FOR LET.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 21703,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/03. GENERAL_EDUCATION_MATH LET_REVIEWER_.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 61816,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/04. GENERAL-EDUCATION-MATH-100-ITEMS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 25349,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/05. LECTURE NOTES - MATH (ALGEBRA AND ARITHMETIC).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12643,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/06. LECTURE NOTES - MATH (GEOMETRY).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8081,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/07. MATH-REVIEWER-ANSWERS-KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20883,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/08. MATHEMATICS NOTES A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 69069,
+      "materials": 12,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/09. MATHEMATICS REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8072,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/10. MATHEMATICS REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 214,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/11. MATHEMATICS-ALL-IN-SPECIALIZATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 39808,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/12. MATHEMATICS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19355,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/13. COLLEGE AND ADVANCED ALGEBRA.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 171432,
+      "materials": 28,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/14. CBRC ANALYTICAL FINAL COACHING - MATHEMATICS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 22317,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer l/15. GEN ED MATH POWERPOINT.ppsx",
+      "source_type": "ppsx",
+      "status": "processed",
+      "text_chars": 20817,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/MATHEMATICS (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4269,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/MATHEMATICS (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4137,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/MATHEMATICS (3).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5336,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/MATHEMATICS (4).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5724,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/MATHEMATICS (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5477,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/MATHEMATICS Part 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5317,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/MATHEMATICS Part 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3148,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/Mathematics A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9156,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/D. MATHEMATICS/Reviewer ll/Mathematics B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4427,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/mathematics"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_mathematics_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_mathematics_source_materials_flashcards.json"
+}

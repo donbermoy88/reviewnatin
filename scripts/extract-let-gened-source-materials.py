@@ -19,6 +19,7 @@ SUPPORTED_SUFFIXES = {
     ".docx",
     ".ppt",
     ".pptx",
+    ".ppsx",
     ".txt",
     ".md",
     ".rtf",
@@ -92,9 +93,9 @@ def read_source(path):
         return [clean_text(run(["pdftotext", str(path), "-"], timeout=240))], "pdf"
     if suffix == ".docx":
         return [clean_text("\n\n".join(ooxml_parts(path, ["word/document"])))], "docx"
-    if suffix == ".pptx":
+    if suffix in {".pptx", ".ppsx"}:
         slides = ooxml_parts(path, ["ppt/slides/"])
-        return slides, "pptx"
+        return slides, suffix.lstrip(".")
     if suffix in {".doc", ".ppt", ".rtf"}:
         return [clean_text(run(["textutil", "-convert", "txt", "-stdout", str(path)], timeout=180))], suffix.lstrip(".")
     if suffix in {".txt", ".md"}:
@@ -116,6 +117,8 @@ def slug_context(path, text):
             return "major", "culture-and-arts-education"
         if re.search(r"\b(bped|mapeh|physical education|music|arts|health|gymnastics|athletics)\b", path_source):
             return "major", "mapeh"
+        if re.search(r"\b(math|mathematics|algebra|geometry|statistics|calculus|trigonometry)\b", path_source):
+            return "major", "mathematics"
 
     is_prof_ed = re.search(r"\b(professional education|prof ed|profed)\b", path_source)
     if is_prof_ed:
@@ -264,6 +267,8 @@ def main():
             title_scope = "Culture and Arts Education Major"
         elif subject_slug == "major" and topic_slug == "mapeh":
             title_scope = "MAPEH Major"
+        elif subject_slug == "major" and topic_slug == "mathematics":
+            title_scope = "Mathematics Major"
         else:
             title_scope = "General Education"
         exam_scope = "secondary" if subject_slug == "major" else "both"
