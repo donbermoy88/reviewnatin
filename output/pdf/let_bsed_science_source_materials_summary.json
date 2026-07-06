@@ -1,0 +1,671 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE",
+  "source_files_seen": 73,
+  "source_files_processed": 73,
+  "materials_generated": 1025,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "pdf": 73
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/1. ECOLOGY REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9969,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/2. ECOLOGY REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 16397,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/3. ECOLOGY REVIEWER C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10906,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/01. ANATOMY AND PHYSIOLOGY (BOOK).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3856013,
+      "materials": 674,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/02. AP-BIOLOGY-EXAM-REVIEW.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 62855,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/03. APBASICS_KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6249,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/04. BIOLOGICAL SCIENCE (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8008,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/05. BIOLOGICAL SCIENCE (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8504,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/06. BIOLOGICAL SCIENCE (3).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7996,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/07. BIOLOGICAL SCIENCE (4).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7861,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/08. BIOLOGICAL SCIENCE (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7936,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/09. BIOLOGICAL SCIENCE (6).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8451,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/10. BIOLOGICAL SCIENCE (7).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8847,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/11. BIOLOGICAL SCIENCE (8).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10512,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/12. BIOLOGICAL SCIENCE LET REVIEWER WITH ANSWER SHEET.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 15959,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/13. BIOLOGICAL SCIENCE Q_A AND NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 262556,
+      "materials": 44,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/14. BIOLOGY NOTE A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 21003,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/15. BIOLOGY REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 55376,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/16. BIOLOGY REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5205,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/17. BIOLOGY REVIEWER C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7511,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/18. BIOLOGY REVIEWER D.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7913,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/19. BIOLOGY REVIEWER E.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5279,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/20. BIOLOGY REVIEWER F.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9969,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 01.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9183,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11021,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 03.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8778,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 04.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8185,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 05.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8248,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 06.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8295,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 07.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9061,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 08.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8560,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 09.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9706,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/2026 BIOLOGICAL SCIENCE/BIOLOGICAL SCIENCE PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9623,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/21. BIOLOGY REVIEWER G.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10906,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/22. BIOLOGY REVIEWER H.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 16397,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/23. BIOLOGY REVIEWER I.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8586,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/24. BIOLOGY REVIEWER J.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9652,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/25. BONE_KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3695,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/26. LECTURE NOTES - BIO SCIENCE (BOTANY) .pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2259,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/27. LECTURE NOTES - BIO SCIENCE (CELLS).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9927,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/28. LECTURE NOTES - BIO SCIENCE (ECOLOGY).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2527,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/29. LECTURE NOTES - BIO SCIENCE (GENETICS).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2589,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/30. LECTURE NOTES - BIO SCIENCE (HUMAN ANATOMY).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7421,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/31. LECTURE NOTES - BIO SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7155,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/32. LECTURE NOTES - EARTH SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9694,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/33. LET-GEN-ED-BIOLOGICAL-SCIENCE-REVIEW.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 21872,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/34. NERVOUS_KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12421,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/BIOLOGICAL SCIENCE/35. REPROUCTIVE QUESTIONS _ KEY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19782,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/biological-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6069,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9090,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10622,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10806,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10725,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9588,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9064,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9310,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE SET A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8849,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/2026 PHYSICAL SCIENCE/PHYSICAL SCIENCE SET B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9153,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/A. LECTURE NOTES - CHEM (MATTER).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5623,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/B. LECTURE NOTES - CHEM (PERIODIC TABLE).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5801,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/C. LET REVIEW UNIVERSITY GENERAL SCIENCE PART (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5276,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/D. PHYSICAL_SCIENCE_MAJORSHIP_REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 55558,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/E. PNU-LET-REVIEWER-MAJORSHIP-PHYSICAL-SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 866977,
+      "materials": 149,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/F. REVIEWER_IN_PHYSICAL_SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13945,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/G. CBRC ANALYTICAL FINAL COACHING - PHYSICAL SCIENCE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 30505,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/Physical Science Drills Part 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9204,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/Physical Science Drills Part 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8915,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/Physical Science Drills Part 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9449,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/Physical Science Drills Part 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10573,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/Physical Science Drills Part 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10720,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/Physical Science Drills Part 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10537,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/Physical Science Drills Part 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8938,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/E. SCIENCE/PHYSICAL SCIENCE/Physical Science Drills Part 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6023,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/physical-science"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_science_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_science_source_materials_flashcards.json"
+}

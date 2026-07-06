@@ -1,0 +1,10 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_science_source_materials.json",
+  "source_rows": 1025,
+  "insertable_materials": 1025,
+  "inserted": 1025,
+  "skipped": 0,
+  "skipped_by_reason": {},
+  "skipped_samples": []
+}

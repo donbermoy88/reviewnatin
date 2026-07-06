@@ -382,6 +382,8 @@ def infer_exam_type(path):
         return "LET Secondary", "Path identifies a LET Secondary BPED/MAPEH major source."
     if re.search(r"(?:^|[/\\])d\.\s*mathematics(?:[/\\]|$)|math(?:ematics)?\s+specialization|mathematics\s+q\s*&\s*a|mathematics\s+part", text):
         return "LET Secondary", "Path identifies a LET Secondary Mathematics major source."
+    if re.search(r"(?:^|[/\\])e\.\s*science(?:[/\\]|$)|biological science|physical science|ecology reviewer|science major", text):
+        return "LET Secondary", "Path identifies a LET Secondary Science major source."
     if "beed" in text or "elementary" in text:
         return "LET Elementary", "Path indicates BEED/Elementary."
     if "bsed" in text or "secondary" in text:

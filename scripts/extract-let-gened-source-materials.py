@@ -119,6 +119,12 @@ def slug_context(path, text):
             return "major", "mapeh"
         if re.search(r"\b(math|mathematics|algebra|geometry|statistics|calculus|trigonometry)\b", path_source):
             return "major", "mathematics"
+        if re.search(r"\b(biological science|biology|botany|zoology|anatomy|physiology|ecology|genetics|microbiology|reproductive|nervous|bone)\b", path_source):
+            return "major", "biological-science"
+        if re.search(r"\b(physical science|chemistry|chem|physics|matter|periodic table|earth science|astronomy)\b", path_source):
+            return "major", "physical-science"
+        if re.search(r"\b(general science|science major|e\.\s*science)\b", path_source):
+            return "major", "general-science"
 
     is_prof_ed = re.search(r"\b(professional education|prof ed|profed)\b", path_source)
     if is_prof_ed:
@@ -269,6 +275,12 @@ def main():
             title_scope = "MAPEH Major"
         elif subject_slug == "major" and topic_slug == "mathematics":
             title_scope = "Mathematics Major"
+        elif subject_slug == "major" and topic_slug == "biological-science":
+            title_scope = "Biological Science Major"
+        elif subject_slug == "major" and topic_slug == "physical-science":
+            title_scope = "Physical Science Major"
+        elif subject_slug == "major" and topic_slug == "general-science":
+            title_scope = "General Science Major"
         else:
             title_scope = "General Education"
         exam_scope = "secondary" if subject_slug == "major" else "both"

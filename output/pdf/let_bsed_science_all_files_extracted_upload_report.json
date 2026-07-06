@@ -1,0 +1,474 @@
+{
+  "batch_id": "c56642a4-074d-4b51-803d-89d544a03b11",
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+  "source_prefix": null,
+  "source_rows": 3242,
+  "ready_rows": 587,
+  "candidate_targets": 587,
+  "insertable": 139,
+  "inserted": 139,
+  "skipped": 0,
+  "duplicates": 448,
+  "source_stats": {
+    "output/pdf/let_bsed_science_all_files_extracted.json": {
+      "readyRows": 587,
+      "candidateTargets": 587,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "413",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b3527069-5e42-406b-91e2-e933246f5a02"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "414",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e11d7f12-625c-4521-aff1-4fabab362948"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "415",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d7d81951-0ade-4446-a0cd-92fc7c5d5271"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "416",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d8297c59-6e99-497a-b26a-cb75fb0f1ee0"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "418",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e89c5d1b-1a0c-4f52-b298-b3e5dc5625d5"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "419",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b1bee8d6-861f-4ef9-bd56-d272249c8583"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "420",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b37e9e8d-10bd-46a6-b064-5337ca7d86e6"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "421",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "78fce94b-ac6b-4aab-a331-ea7686fe46fb"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "422",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f972e567-d6ac-49f4-8926-392d7faed005"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "423",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fe376e81-5587-402e-9ac6-85bb49b85c24"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "424",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4cfafcfd-b4b4-46f1-b708-959de7744692"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "425",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "142e9c3e-c778-4e6c-b9cd-f4ec0226a026"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "427",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3fde4cc3-5aa7-4827-95a3-ba5529f7e48d"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "428",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "afed9b9f-4a25-4f35-ab8f-9e918659f8df"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "430",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4a68bdbe-a8e7-4642-a00b-45eed699e49c"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "431",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "62798e37-e0dd-4218-a77c-757282a0e03d"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "432",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "534c88f8-7dad-407c-b696-ebfd10f42bd9"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "434",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "02b42800-47b8-4ab3-9e26-8d953fe67ee2"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "436",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0cbc5863-f68e-4965-8c72-2f34a3b6540d"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "438",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "bf5ed576-76ea-4a57-9e84-65eb31321304"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "441",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "693d60f6-d62a-4f22-ae49-b65a2679b54f"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "442",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ca978600-707e-4fbf-bcef-bac926f1bd75"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "443",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7259e7a6-8874-4ff0-8d61-4362d8d22630"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "444",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7f4f9dec-a425-4965-8f04-292679a3255a"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "445",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ebcf477d-7d84-4768-8aec-bfcf623fff80"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "446",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "29aaffdd-87df-4631-9c82-05feb1c14708"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "447",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "56d38ac2-2d29-45af-864e-1b9d59196557"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "448",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9684ed41-123a-4b5e-98cc-83153c95ce97"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "449",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "66838ccd-4016-43fb-9133-705494d4a34a"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "450",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d4848789-fcb0-4bdd-8570-aee14560fc31"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "451",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fa1f6cdd-0446-4dfe-8819-064d36dc0be9"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "452",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f822bb48-3f93-4463-bfa9-846e6b724762"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "453",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fd66c9bf-1b54-46bd-bdfb-601a59d90f6e"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "454",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1f7c7879-ae67-4b99-9098-c7bf652d5000"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "456",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "17bd06dc-b2c1-419b-a3ef-e7086f4603b5"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "457",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a4e2cfeb-a8a7-4b23-8607-317d7992bd35"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "458",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d64efa36-162f-4310-8471-4f2aee977d8b"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "459",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c68fbcb0-418f-4257-af41-64e35e7746f5"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "460",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d0da3117-91ff-499d-9f4a-052980d67be6"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "461",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ab240aa3-9455-4375-b60b-33ebd6ba9c00"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "463",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "49d4a13b-b345-4524-92cd-6b19456b2df1"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "464",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e1a1f953-8224-413a-a45c-d1665f9d3abb"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "465",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "79a35728-d474-4471-873b-1dc9ff0282c3"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "466",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b1370fe2-ea30-4539-8c10-932aff6adff4"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "468",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f6783447-4f88-469a-a809-33e6242c38a2"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "469",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "aaf9917d-37e7-458e-96df-7e5e3360b8c8"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "470",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6f266c15-7275-4104-b313-e8ce3a043ce0"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "471",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1a2d84c5-63cb-415c-8992-941e7b89708d"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "472",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4f32d96a-9bbf-4ee0-a7db-f663dbced62a"
+    },
+    {
+      "source": "output/pdf/let_bsed_science_all_files_extracted.json",
+      "row": "473",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/biological-science",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6d4497be-6b8a-4953-9d97-56bd2a3cdb7d"
+    }
+  ],
+  "skipped_samples": []
+}

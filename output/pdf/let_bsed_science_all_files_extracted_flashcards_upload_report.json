@@ -1,0 +1,10 @@
+{
+  "dry_run": false,
+  "source_token": "let_bsed_science_all_files_extracted",
+  "source_questions": 139,
+  "insertable_flashcards": 139,
+  "inserted": 139,
+  "skipped": 0,
+  "skipped_by_reason": {},
+  "skipped_samples": []
+}

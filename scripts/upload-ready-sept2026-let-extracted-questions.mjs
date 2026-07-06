@@ -177,7 +177,7 @@ function majorLabel(slug) {
 
 function classifySecondaryScience(row) {
   const text = `${row.Question ?? ''} ${row['Choice A'] ?? ''} ${row['Choice B'] ?? ''} ${row['Choice C'] ?? ''} ${row['Choice D'] ?? ''} ${row['Source Path'] ?? ''} ${row['Source PDF'] ?? ''}`.toLowerCase();
-  if (/biological science|biology|botany|zoology|cell|gene|genetic|dna|rna|plant|animal|ecosystem|photosynthesis|anatomy|physiology|microbiology/.test(text)) {
+  if (/biological science|biology|botany|zoology|cell|gene|genetic|dna|rna|plant|animal|ecology|ecosystem|photosynthesis|anatomy|physiology|microbiology/.test(text)) {
     return 'biological-science';
   }
   if (/physical science|chemistry|physics|atom|molecule|electron|chemical|periodic|bond|acid|base|solution|force|motion|energy|electric|magnet|wave|light|earth science|astronomy|weather|climate|volcano|rock|planet/.test(text)) {
@@ -242,6 +242,12 @@ function mappedTopic(row, examKind) {
     /(?:^|[/\\])c\.\s*bped\s*&\s*mapeh(?:[/\\]|$)|\bbped\b|\bmapeh\b|physical education|gymnastics|athletics/.test(sourcePath);
   const isMathematicsMajorSource =
     /(?:^|[/\\])d\.\s*mathematics(?:[/\\]|$)|math(?:ematics)?\s+specialization|mathematics\s+q\s*&\s*a|mathematics\s+part|mathematics-all-in-specialization/.test(sourcePath);
+  const isBiologicalScienceSource =
+    /biological science|biology|botany|zoology|anatomy|physiology|ecology|genetics|microbiology|reproductive|nervous|bone/.test(sourcePath);
+  const isPhysicalScienceSource =
+    /physical science|chemistry|\bchem\b|physics|matter|periodic table|earth science|astronomy/.test(sourcePath);
+  const isGeneralScienceSource =
+    /(?:^|[/\\])e\.\s*science(?:[/\\]|$)|general science|science major/.test(sourcePath);
   if (
     isGeneralEducationSource &&
     ['General Education', 'English', 'Filipino', 'Mathematics', 'Science', 'Social Studies', 'Values Education', 'Information and Communication Technology'].includes(subject)
@@ -253,6 +259,9 @@ function mappedTopic(row, examKind) {
   if (examKind === 'secondary' && isCultureArtsMajorSource) return ['major', 'culture-and-arts-education', null];
   if (examKind === 'secondary' && isMapehMajorSource) return ['major', 'mapeh', mapehSubTag(row)];
   if (examKind === 'secondary' && isMathematicsMajorSource) return ['major', 'mathematics', null];
+  if (examKind === 'secondary' && isBiologicalScienceSource) return ['major', 'biological-science', null];
+  if (examKind === 'secondary' && isPhysicalScienceSource) return ['major', 'physical-science', null];
+  if (examKind === 'secondary' && isGeneralScienceSource) return ['major', classifySecondaryScience(row) ?? 'general-science', null];
   if (subject === 'Early Childhood Education') return ['major', 'early-childhood-education', null];
   if (subject === 'Special Needs Education') return ['major', 'special-needs-education', null];
   if (subject === 'General Education') return generalEducationTopic(row);
