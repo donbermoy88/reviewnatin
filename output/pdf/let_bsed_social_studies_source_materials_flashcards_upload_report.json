@@ -1,0 +1,10 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_social_studies_source_materials_flashcards.json",
+  "source_rows": 0,
+  "insertable_flashcards": 0,
+  "inserted": 0,
+  "skipped": 0,
+  "skipped_by_reason": {},
+  "skipped_samples": []
+}

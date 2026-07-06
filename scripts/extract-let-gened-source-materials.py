@@ -125,6 +125,8 @@ def slug_context(path, text):
             return "major", "physical-science"
         if re.search(r"\b(general science|science major|e\.\s*science)\b", path_source):
             return "major", "general-science"
+        if re.search(r"\b(social science|social studies|soc sci|history|rizal|constitution|economics|government|human rights|current events)\b", path_source):
+            return "major", "social-studies-araling-panlipunan"
 
     is_prof_ed = re.search(r"\b(professional education|prof ed|profed)\b", path_source)
     if is_prof_ed:
@@ -281,6 +283,8 @@ def main():
             title_scope = "Physical Science Major"
         elif subject_slug == "major" and topic_slug == "general-science":
             title_scope = "General Science Major"
+        elif subject_slug == "major" and topic_slug == "social-studies-araling-panlipunan":
+            title_scope = "Social Studies Major"
         else:
             title_scope = "General Education"
         exam_scope = "secondary" if subject_slug == "major" else "both"

@@ -384,6 +384,8 @@ def infer_exam_type(path):
         return "LET Secondary", "Path identifies a LET Secondary Mathematics major source."
     if re.search(r"(?:^|[/\\])e\.\s*science(?:[/\\]|$)|biological science|physical science|ecology reviewer|science major", text):
         return "LET Secondary", "Path identifies a LET Secondary Science major source."
+    if re.search(r"(?:^|[/\\])f\.\s*social science\s*-\s*social studies(?:[/\\]|$)|social science|social studies|soc sci", text):
+        return "LET Secondary", "Path identifies a LET Secondary Social Studies major source."
     if "beed" in text or "elementary" in text:
         return "LET Elementary", "Path indicates BEED/Elementary."
     if "bsed" in text or "secondary" in text:
@@ -435,8 +437,8 @@ def infer_subject_area(path, question_text):
         ("Mathematics", [r"\bmathematics\b", r"\bmath\b"]),
         ("Biological Science", [r"biological science", r"\bbiology\b"]),
         ("Physical Science", [r"physical science"]),
-        ("Science", [r"general science", r"\bscience\b"]),
         ("Social Studies", [r"social science", r"social studies"]),
+        ("Science", [r"general science", r"\bscience\b"]),
         ("Values Education", [r"values education", r"values ed"]),
         ("Music", [r"\bmusic\b"]),
         ("Arts", [r"\barts\b", r"culture and arts"]),
@@ -542,7 +544,7 @@ def extract_source(path, source_root):
     answer_key, answer_note, answer_key_idx = parse_answer_key(text)
     page_images = page_image_counts(path, len(pages))
     relative_path = source_relative_path(path, source_root)
-    exam_type, exam_note = infer_exam_type(relative_path)
+    exam_type, exam_note = infer_exam_type(path)
     rows = []
     question_text = text[:answer_key_idx] if answer_key_idx >= 0 and len(answer_key) >= 3 else text
 
@@ -553,7 +555,7 @@ def extract_source(path, source_root):
         page = page_range_for_offsets(offsets, start, end)
         answer = answer_key.get(qnum, "") or inline_answer(block)
         answer_source = answer_note if answer_key.get(qnum, "") else ("Correct answer embedded inline." if answer else "")
-        subject = infer_subject_area(relative_path, question)
+        subject = infer_subject_area(path, question)
         topic = infer_topic(subject, question)
         passage_ref = detect_passage(question, qnum, page)
         image_count = page_images.get(int(str(page).split("-")[0]), 0)

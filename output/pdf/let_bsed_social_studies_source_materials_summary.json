@@ -1,0 +1,654 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES",
+  "source_files_seen": 72,
+  "source_files_processed": 69,
+  "materials_generated": 806,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "pdf": 71,
+    "pptx": 1
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8219,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7523,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6900,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER D.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10308,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER E.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5069,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER F.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6257,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER G.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5500,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER H.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10444,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER I.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7634,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER J.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7102,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER K.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6597,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/1. Drills A/SOCIAL SCIENCE REVIEWER L.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7114,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/2. Drills B/SOCIAL SCIENCE (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8902,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/2. Drills B/SOCIAL SCIENCE (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10796,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/2. Drills B/SOCIAL SCIENCE (3).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6640,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/2. Drills B/SOCIAL SCIENCE (4).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35732,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/2. Drills B/SOCIAL SCIENCE (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 25439,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/2. Drills B/SOCIAL SCIENCE (6).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34103,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/2. Drills B/SOCIAL SCIENCE (7).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32594,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/2. Drills B/SOCIAL SCIENCE (8).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 31465,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/01. SOCIAL STUDIES - Taxation Land Reform Cooperatives and Economics Lecture Notes.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 30399,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/02. BLUE BOOK COVID-19 (VIRUS) 3500  MCQ.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/03. CURRENT EVENTS 2019-2020.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32256,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/04. CURRENT EVENTS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7435,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/05. IMPORTANT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 907,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/06. LARGEST AND SMALLEST.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3707,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/07. LECTURE NOTES - SOC SCI (GEN INFO).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20927,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/08. LECTURE NOTES - SOC SCI (GOV HISTORY).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5716,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/09. LECTURE NOTES - SOC SCI (STATE AND GOV).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9883,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/10. LIFE AND WORKS OF DR. JOSE P. RIZAL 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20893,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/11. LIFE AND WORKS OF DR. JOSE P. RIZAL.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 136362,
+      "materials": 27,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/12. MAJOR IN SOC SCI 850 ITEMS PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 330641,
+      "materials": 61,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/13. PHILIPPHINE HISTORY WITH EXPLANATION PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8569,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/14. PHILIPPINE CONSTITUTION II.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1187,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/15. PHILIPPINE CONSTITUTION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2015,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/16. PHILIPPINE HISTORY WITH EXPLANATION PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4452,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/17. PROPONENTS AND THEIR THEORIES.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/18. SOCIAL SCIENCE - CURRENT EVENTS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 16198,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/19. SOCIAL SCIENCE REVIEWER M.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10345,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/20. SOCIAL SCIENCE REVIEWER N.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9891,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/21. TEACH PINAS SOCIAL SCIENCE (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 25439,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/22. TEACH PINAS SOCIAL SCIENCE (6).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34103,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/23. THE PHILIPPINE CONSTITUTION PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7331,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/24. THE PHILIPPINE CONSTITUTION PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7230,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/A. Philippine Government Directory of Agencies and Officials.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 399782,
+      "materials": 62,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Essential Reviewers/B. CURRENT EVENTS - 2025 IN THE PHILIPPINES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 60289,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/History/European Histroy.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 86203,
+      "materials": 14,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/History/Timelines of History-The Ultimate Visual Guide by Smithsonian.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2691723,
+      "materials": 438,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/History/World History.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 64287,
+      "materials": 12,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/MindGym Review Materials/1. MINDGYM_SOCIAL STUDIES-FALLACIES_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10115,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/MindGym Review Materials/2. MINDGYM_SOCIAL STUDIES-HUMAN RIGHTS_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 18842,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/MindGym Review Materials/3. MINDGYM_SOCIAL STUDIES-MAJOR FORMS OF GOVERNMENT_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17117,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/MindGym Review Materials/4. MINDGYM_SOCIAL STUDIES-PHILIPPINE HISTORY_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26733,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/MindGym Review Materials/5. MINDGYM_SOCIAL STUDIES-RIZAL AND OTHER HEROES_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13447,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/MindGym Review Materials/6. MINDGYM_SOCIAL STUDIES-SOCIETY AND CULTURE_LECTURE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 19502,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Dimensions of Education/1. Social Dimensions of Education - Reviewers for Teachers LET.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23289,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Dimensions of Education/2. Social Dimensions of Education (Slide).pptx",
+      "source_type": "pptx",
+      "status": "processed",
+      "text_chars": 10334,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Dimensions of Education/3. SOCIAL DIMENSIONS OF EDUCATION PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12151,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Dimensions of Education/4. SOCIAL DIMENSIONS OF EDUCATION PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8909,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Dimensions of Education/5. Social Dimensions of Education Q&A Drills.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 55672,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Dimensions of Education/6. LECTURE NOTES - SOCIAL DIMENSIONS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13357,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Dimensions of Education/7. SOCIAL DIMENSION  & TEACHING PROFESSION.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 32758,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10207,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34098,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 34933,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26581,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 37237,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6817,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11269,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9049,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/F. SOCIAL SCIENCE - SOCIAL STUDIES/Social Science/SOCIAL SCIENCE PART 9.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9621,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/social-studies-araling-panlipunan"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_social_studies_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_bsed_social_studies_source_materials_flashcards.json"
+}

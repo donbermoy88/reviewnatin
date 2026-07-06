@@ -1,0 +1,18 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_social_studies_source_materials.json",
+  "source_rows": 806,
+  "insertable_materials": 805,
+  "inserted": 805,
+  "skipped": 1,
+  "skipped_by_reason": {
+    "thin_material": 1
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Social Studies Major: SOCIAL SCIENCE (3) (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    }
+  ]
+}

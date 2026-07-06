@@ -1,0 +1,474 @@
+{
+  "batch_id": "69836d95-2033-45f2-b6a9-13ef623191c5",
+  "dry_run": false,
+  "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+  "source_prefix": null,
+  "source_rows": 3576,
+  "ready_rows": 745,
+  "candidate_targets": 745,
+  "insertable": 317,
+  "inserted": 317,
+  "skipped": 0,
+  "duplicates": 428,
+  "source_stats": {
+    "output/pdf/let_bsed_social_studies_all_files_extracted.json": {
+      "readyRows": 745,
+      "candidateTargets": 745,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "444",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ec8bfda4-f3af-434e-9287-154825ba5808"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "445",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0b1ab66e-7d20-4967-a79a-b7ff010ce278"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "446",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "feebe947-aaf0-4b9a-ae4d-e5f803e825e0"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "449",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1ef56f28-350a-4654-84ad-dde4843163b3"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "450",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e243e94d-f2e3-4e0b-85b3-93e71b914e98"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "454",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a5e5349b-cf90-4b5f-91b5-fd14f2793175"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "455",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "36c3d55d-de1e-4c49-9872-9b16c34c49c6"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "456",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e2ea78fb-dbd1-4f5e-8711-eb79296726b0"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "457",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1d40a6ae-f2c0-4cd1-81ea-7d1d6fe8c3d6"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "458",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "49dd6068-8b73-4fea-a2a6-06724f20490b"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "459",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8f0d51d9-5c98-4c44-8e4c-7569934d4648"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "460",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fff0e4cb-535b-4fea-bbb6-572420384eec"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "461",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "964076e3-489e-4ad0-b41f-e5cc4ed6b491"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "462",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "755a752b-2f27-4a58-b298-1febae6494b9"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "464",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "72a8dc1e-4a4f-446e-abc9-506e7e8d0d5e"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "466",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0404068f-b831-4501-af8a-877899387793"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "471",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "540355c3-c7a4-4c8e-88cc-af9c02b1a8fc"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "472",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6ae0bfe2-96fe-48c8-b864-5abdf924d97b"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "473",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a8b2b87e-04a3-463a-99d0-2d5b63b4cd6b"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "474",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f9b2e03d-b1c3-40df-90d9-6f94cb702c3a"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "475",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5791caf3-27e0-4b44-b094-18f814ed6fe8"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "477",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3eefad1a-3fc1-4831-b82a-8fff38c9cfeb"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "478",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "86ad64c1-64c6-41ae-84ba-36b5044fa9b0"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "479",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3084cdec-6ee8-4b23-b971-92cf74414b3a"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "480",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ff5afb4e-6afa-41f9-9e75-bacdf6ead5dc"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "481",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6a07b106-fe6b-4930-8b61-553233060a22"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "482",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3d2e934f-0e32-4a71-afa6-75fe7bffbe9e"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "484",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "629d98a2-956a-4c22-8fa4-29ab35653db3"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "485",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "27654ee0-f7e9-4824-b8f3-c3a86fb90e46"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "486",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f8ed081a-d93e-4b32-8196-4bc4d94f9db6"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "489",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "478da5e9-9458-40b8-a2bd-e31e1ecd95bc"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "490",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f50801bb-8097-4355-9ab1-158bbeb266bc"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "491",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a8cb2c62-f01f-4b36-9826-2c2a384f338d"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "492",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "408c79f9-b183-45ef-ac2c-ee63dc725f4d"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "493",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6c797850-aab4-496e-adcd-7cc8d9a89e80"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "494",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ecf12824-dcfd-4c0b-9afb-e6509e64d811"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "496",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "36072a55-3dc7-4d5c-a505-bf77608b9184"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "497",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "74035dea-3f05-4503-a14a-96444eb50ac8"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "499",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4e99449a-0235-43b3-857a-01dcb8ea4072"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "500",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "73cc82a8-ce90-4d62-8a64-d02488b1c4c5"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "502",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4ec75a64-6331-4df0-a2c0-e4ec9b8d937e"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "503",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ba84ecf5-e18c-4772-9675-d35b29033c87"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "504",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f82c5a9a-7676-4917-95f1-f8b3171b897d"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "505",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "10fa6c16-1fe9-4cee-9857-a2e2c574a1ce"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "508",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d7d6e1d3-acf3-4362-9b2f-d3b477195b99"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "509",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "19b0d874-d628-489b-b8c4-a21ec937e275"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "511",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7defb71e-3f1d-45b5-a9f0-3f3bf25a1b6c"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "512",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dd58e780-0dcc-447f-aada-1599204e2d24"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "513",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "83fdf486-ebc1-4825-8c14-9b739911f126"
+    },
+    {
+      "source": "output/pdf/let_bsed_social_studies_all_files_extracted.json",
+      "row": "514",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/social-studies-araling-panlipunan",
+      "reason": "duplicate_existing_content",
+      "existing_id": "911bc153-ef4b-47ae-b946-24af54c0636e"
+    }
+  ],
+  "skipped_samples": []
+}

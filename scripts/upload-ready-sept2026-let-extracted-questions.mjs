@@ -248,6 +248,8 @@ function mappedTopic(row, examKind) {
     /physical science|chemistry|\bchem\b|physics|matter|periodic table|earth science|astronomy/.test(sourcePath);
   const isGeneralScienceSource =
     /(?:^|[/\\])e\.\s*science(?:[/\\]|$)|general science|science major/.test(sourcePath);
+  const isSocialStudiesMajorSource =
+    /(?:^|[/\\])f\.\s*social science\s*-\s*social studies(?:[/\\]|$)|social science|social studies|soc sci|philippine history|philippine constitution|rizal|government|economics|human rights|current events/.test(sourcePath);
   if (
     isGeneralEducationSource &&
     ['General Education', 'English', 'Filipino', 'Mathematics', 'Science', 'Social Studies', 'Values Education', 'Information and Communication Technology'].includes(subject)
@@ -262,6 +264,7 @@ function mappedTopic(row, examKind) {
   if (examKind === 'secondary' && isBiologicalScienceSource) return ['major', 'biological-science', null];
   if (examKind === 'secondary' && isPhysicalScienceSource) return ['major', 'physical-science', null];
   if (examKind === 'secondary' && isGeneralScienceSource) return ['major', classifySecondaryScience(row) ?? 'general-science', null];
+  if (examKind === 'secondary' && isSocialStudiesMajorSource) return ['major', 'social-studies-araling-panlipunan', null];
   if (subject === 'Early Childhood Education') return ['major', 'early-childhood-education', null];
   if (subject === 'Special Needs Education') return ['major', 'special-needs-education', null];
   if (subject === 'General Education') return generalEducationTopic(row);

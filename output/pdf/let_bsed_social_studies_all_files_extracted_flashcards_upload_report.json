@@ -1,0 +1,10 @@
+{
+  "dry_run": false,
+  "source_token": "let_bsed_social_studies_all_files_extracted",
+  "source_questions": 317,
+  "insertable_flashcards": 317,
+  "inserted": 317,
+  "skipped": 0,
+  "skipped_by_reason": {},
+  "skipped_samples": []
+}
