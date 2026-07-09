@@ -66,6 +66,18 @@ async function main() {
   if (isProd) {
     console.log('\n✓ Verified: mailer_autoconfirm OFF — OTP required before access.');
     console.log('Production mode: users must verify email via 6-digit OTP before access.');
+    try {
+      const hibp = await patchAuthConfig(REF, TOKEN, { password_hibp_enabled: true });
+      if (hibp.password_hibp_enabled) {
+        console.log('✓ Leaked-password protection ON.');
+      }
+    } catch (e) {
+      console.warn(
+        '\nLeaked-password protection was not enabled:',
+        e instanceof Error ? e.message : e,
+      );
+      console.warn('Supabase requires a Pro plan or higher for password_hibp_enabled.');
+    }
     if (!skipSmtp) {
       try {
         execSync('node scripts/configure-supabase-smtp.mjs', {

@@ -83,6 +83,12 @@ async function main() {
       warn('password_min_length', `${minLen} — recommend 8 (run npm run supabase:auth:prod)`);
     }
 
+    if (auth.password_hibp_enabled) {
+      ok('password_hibp_enabled', 'ON');
+    } else {
+      fail('password_hibp_enabled', 'OFF — leaked passwords are not blocked');
+    }
+
     if (auth.security_captcha_enabled) {
       ok('security_captcha', auth.security_captcha_provider ?? 'enabled');
     } else if (env.TURNSTILE_SECRET_KEY) {
