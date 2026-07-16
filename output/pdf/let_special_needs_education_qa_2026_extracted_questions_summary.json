@@ -1,0 +1,88 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION",
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 1.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 10.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 2.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 3.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 4.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 5.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 6.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 7.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 8.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 9.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    }
+  ],
+  "extracted_rows": 425,
+  "status_counts": {
+    "Ready for Upload": 419,
+    "Duplicate": 6
+  },
+  "topic_counts": {
+    "Special Needs Education": 425
+  },
+  "outputs": {
+    "json": "/Users/lyndon/reviewnatin/output/pdf/let_special_needs_education_qa_2026_extracted_questions.json",
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/let_special_needs_education_qa_2026_extracted_questions.csv",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/let_special_needs_education_qa_2026_extracted_questions.md"
+  }
+}

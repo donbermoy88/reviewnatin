@@ -1,0 +1,10 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_special_needs_education_source_materials.json",
+  "source_rows": 17,
+  "insertable_materials": 17,
+  "inserted": 17,
+  "skipped": 0,
+  "skipped_by_reason": {},
+  "skipped_samples": []
+}

@@ -1,0 +1,23 @@
+{
+  "batch_id": "48b93dd0-bf52-42e1-8fa7-e9dc1dd5e620",
+  "dry_run": false,
+  "source": "output/pdf/let_special_needs_education_qa_2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 425,
+  "ready_rows": 419,
+  "candidate_targets": 419,
+  "insertable": 419,
+  "inserted": 419,
+  "skipped": 0,
+  "duplicates": 0,
+  "source_stats": {
+    "output/pdf/let_special_needs_education_qa_2026_extracted_questions.json": {
+      "readyRows": 419,
+      "candidateTargets": 419,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [],
+  "skipped_samples": []
+}

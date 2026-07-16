@@ -109,6 +109,8 @@ def slug_context(path, text):
     path_source = " ".join(part.lower() for part in path.parts[-5:]).replace("_", " ").replace("-", " ")
     source = f"{path_source} {text[:4000].lower()}".replace("_", " ").replace("-", " ")
     if re.search(r"\bmajor subjects?\b|\barea of specialization\b", path_source):
+        if re.search(r"\b(j\.\s*special needs education|special needs education|special needs ed|sped|special education|inclusive education)\b", path_source):
+            return "major", "special-needs-education"
         if re.search(r"\b(i\.\s*early childhood education|early childhood education|early childhood ed|ece|kindergarten)\b", path_source):
             return "major", "early-childhood-education"
         if re.search(r"\b(h\.\s*values education|values education|val\.?\s*ed|values major|esp)\b", path_source):
@@ -297,6 +299,8 @@ def main():
             title_scope = "Values Education Major"
         elif subject_slug == "major" and topic_slug == "early-childhood-education":
             title_scope = "Early Childhood Education Major"
+        elif subject_slug == "major" and topic_slug == "special-needs-education":
+            title_scope = "Special Needs Education Major"
         else:
             title_scope = "General Education"
         exam_scope = "secondary" if subject_slug == "major" else "both"

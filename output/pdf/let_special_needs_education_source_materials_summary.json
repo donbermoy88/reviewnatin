@@ -1,0 +1,104 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION",
+  "source_files_seen": 10,
+  "source_files_processed": 10,
+  "materials_generated": 17,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "pdf": 10
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9411,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5235,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9610,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9715,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9746,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9673,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9839,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9235,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4914,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/J. SPECIAL NEEDS EDUCATION/SPECIAL NEEDS ED. PART 9.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5695,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/special-needs-education"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_special_needs_education_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_special_needs_education_source_materials_flashcards.json"
+}
