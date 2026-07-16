@@ -1,0 +1,474 @@
+{
+  "batch_id": "0a4aa439-7fe7-4894-8cdc-1224ab3c39cf",
+  "dry_run": false,
+  "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 744,
+  "ready_rows": 420,
+  "candidate_targets": 420,
+  "insertable": 146,
+  "inserted": 146,
+  "skipped": 0,
+  "duplicates": 274,
+  "source_stats": {
+    "output/pdf/let_values_education_qa_2026_extracted_questions.json": {
+      "readyRows": 420,
+      "candidateTargets": 420,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "51",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "595942f2-99d1-4ff0-8bce-d2211fc12a93"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "52",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5a5538c9-eb8d-43e1-91c2-c9eeb3f047d9"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "54",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "4132488b-a451-4d88-9e88-ba2089722190"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "55",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "632689ef-96d9-4d4c-8233-6b7750ee9ec2"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "56",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d9f80185-ae75-4d49-8138-fd87cc5f78a1"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "57",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cc2b6c9f-efc5-4334-8c68-40d82d1e4bcd"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "58",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7e22c019-e422-4c25-b76c-74e9d16a49df"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "59",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5fdcfea4-d5e5-4ae9-bdbe-1f6d66b1ca0a"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "62",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "d9b5ce1e-390d-483d-983e-1bf812dade5e"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "63",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2bbb07b2-2c35-4d93-831d-c28daae500ae"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "64",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "3cb44304-944b-4b4d-be2e-09e07915ddca"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "66",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "6cf7be31-bd05-4417-bfad-6ed9082b7ec4"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "67",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2ae7297f-a48b-4e2a-9f91-852464d1a197"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "68",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0f4a6c19-e1e7-4fdb-a005-86d8e679dfa6"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "69",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "07a7dadf-5b4a-4f88-9048-45d280689e68"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "71",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c63b75b7-c694-4ac4-8b04-b2ebfa45bcb0"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "72",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "61a09579-25c9-45da-bb52-9134423255fa"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "73",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "81510d4d-3e0e-47d7-9cff-57748aae1d7d"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "74",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "f89bb72e-8d55-49a4-89e9-7c6eed6379ea"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "75",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "70906e5f-5285-4416-8542-e17c9aa6e792"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "76",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "0f6f08b7-d101-4cb6-bc4f-e9b37220a584"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "77",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "04718865-ee96-49e4-b47a-fc50b065d0c3"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "78",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7f51f166-29db-4c41-b2ec-a52a3cd69a48"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "79",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "36ba5f51-f368-4163-9802-fad7bfeedeb3"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "81",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "77cc6764-b119-427f-b290-dc6f0f0bc3da"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "82",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dabd426a-62eb-4e0b-b814-74d26d6f1036"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "83",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "890acc7a-d8ab-49ba-9768-9559c18e565a"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "85",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b2cd341d-e8d7-4a8b-8cfa-5758cf3f5548"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "87",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "ac7eed02-4443-4bba-a698-aaaeff25098d"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "89",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "34a39e38-dd31-4b09-8293-13f6037a037a"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "90",
+      "page": "4",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "1afaf9b5-00cc-4207-8e0a-c3fb8739451c"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "92",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "30f38162-8f35-492e-ab34-e6c5d9b15415"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "93",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e3c054bb-5509-418d-ab9d-409eefa4c497"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "94",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "5ba076a7-f45d-4faa-960d-70f265e26c0a"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "95",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "25d3c861-0b4d-44ca-ade5-86ae14809def"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "96",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "90985cee-92fc-4728-9414-acc9c37c6291"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "97",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "2181fdcc-72f9-40dc-9120-b317d55e98a2"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "99",
+      "page": "5",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "cb6908a3-8650-46a3-b928-3087df7ce36a"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "101",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "a304e051-1895-4c86-80f8-ab6305e4bc69"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "102",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "59edc104-c542-45be-a1db-719fc57cdbb2"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "104",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "b63c65ef-ab05-4c85-a168-8a6260abc399"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "105",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "9fa59ecb-b6f8-4e36-bc6e-396265d8caf0"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "106",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "7993a4ed-13b8-4384-9fe8-6f10a73f21fa"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "107",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "086dc416-aa93-4aab-9aba-d029f3a4ab15"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "108",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "e99e7a87-1797-45ee-a2a4-9098c595d71f"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "109",
+      "page": "1",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "fd081757-564a-48ac-9584-5601c6315296"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "111",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "59c997ae-5236-47ac-9a9c-d97bb2d7018a"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "113",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "c28c11d8-0f58-49c9-baba-06318db28953"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "114",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "dd888b5f-808a-44df-8fd3-2cdba336c6f9"
+    },
+    {
+      "source": "output/pdf/let_values_education_qa_2026_extracted_questions.json",
+      "row": "116",
+      "page": "2",
+      "exam": "secondary",
+      "topic": "major/values-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "eccec7ae-b1b1-4fff-a190-df20dce01cdc"
+    }
+  ],
+  "skipped_samples": []
+}

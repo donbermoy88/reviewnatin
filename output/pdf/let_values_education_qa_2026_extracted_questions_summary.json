@@ -1,0 +1,203 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION",
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/1. COMPREHENSIVE VALUES EDUCATION LET REVIEWER.pdf",
+      "status": "no_answer_key",
+      "text_chars": 143312
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2. VALUES EDUCATION LET.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50,
+      "answer_style": "inline"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 01.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 46,
+      "answers": 46,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 02.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 45,
+      "answers": 45,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 03.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 43,
+      "answers": 43,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 04.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 42,
+      "answers": 42,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 05.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 23,
+      "answers": 23,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 06.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 29,
+      "answers": 29,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 07.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 21,
+      "answers": 21,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 08.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 22,
+      "answers": 22,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 09.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 29,
+      "answers": 29,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 10.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 23,
+      "answers": 23,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/3. VALUES EDUCATION REVIEW SLIDES .pdf",
+      "status": "no_answer_key",
+      "text_chars": 3409
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 1.pdf",
+      "status": "no_answer_key",
+      "text_chars": 6628
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 100 items.pdf",
+      "status": "processed",
+      "rows": 94,
+      "ready": 83,
+      "answers": 100,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 2.pdf",
+      "status": "no_answer_key",
+      "text_chars": 4813
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 3.pdf",
+      "status": "no_answer_key",
+      "text_chars": 6135
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 4.pdf",
+      "status": "no_answer_key",
+      "text_chars": 7304
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 5.pdf",
+      "status": "no_answer_key",
+      "text_chars": 7947
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION NOTES 1.pdf",
+      "status": "no_answer_key",
+      "text_chars": 25016
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION NOTES 2.pdf",
+      "status": "no_answer_key",
+      "text_chars": 5325
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION NOTES 3.pdf",
+      "status": "no_answer_key",
+      "text_chars": 35405
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION NOTES 4.pdf",
+      "status": "no_answer_key",
+      "text_chars": 23458
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Version 1/Values Education Part 1.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Version 1/Values Education Part 2.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Version 1/Values Education Part 3.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25,
+      "answer_style": "trailing_or_mixed"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Version 1/Values Education Part 4.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25,
+      "answer_style": "trailing_or_mixed"
+    }
+  ],
+  "extracted_rows": 744,
+  "status_counts": {
+    "Ready for Upload": 420,
+    "Needs Answer": 168,
+    "Duplicate": 147,
+    "Incomplete": 9
+  },
+  "topic_counts": {
+    "Values Education": 744
+  },
+  "outputs": {
+    "json": "/Users/lyndon/reviewnatin/output/pdf/let_values_education_qa_2026_extracted_questions.json",
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/let_values_education_qa_2026_extracted_questions.csv",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/let_values_education_qa_2026_extracted_questions.md"
+  }
+}

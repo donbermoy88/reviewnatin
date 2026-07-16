@@ -1,0 +1,257 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION",
+  "source_files_seen": 27,
+  "source_files_processed": 27,
+  "materials_generated": 86,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "pdf": 27
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/1. COMPREHENSIVE VALUES EDUCATION LET REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 143981,
+      "materials": 24,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2. VALUES EDUCATION LET.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 16718,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 01.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10389,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10024,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 03.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9694,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 04.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9787,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 05.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9619,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 06.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10377,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 07.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9607,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 08.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9529,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 09.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10265,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/2026 VALUES EDUCATION/VAL.ED. PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10319,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/3. VALUES EDUCATION REVIEW SLIDES .pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3456,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6638,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 100 items.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26311,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4833,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6153,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7324,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7966,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION NOTES 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 24995,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION NOTES 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5318,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION NOTES 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 35424,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Reviewers/VALUES EDUCATION NOTES 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 23457,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Version 1/Values Education Part 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6719,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Version 1/Values Education Part 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6791,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Version 1/Values Education Part 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6550,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/H. VALUES EDUCATION/Version 1/Values Education Part 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7010,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/values-education"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_values_education_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_values_education_source_materials_flashcards.json"
+}

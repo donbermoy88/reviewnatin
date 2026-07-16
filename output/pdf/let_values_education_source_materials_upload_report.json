@@ -1,0 +1,18 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_values_education_source_materials.json",
+  "source_rows": 86,
+  "insertable_materials": 85,
+  "inserted": 85,
+  "skipped": 1,
+  "skipped_by_reason": {
+    "thin_material": 1
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Values Education Major: Values Education Part 3 (Part 2) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    }
+  ]
+}
