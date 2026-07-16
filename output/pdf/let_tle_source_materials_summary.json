@@ -1,0 +1,1316 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E",
+  "source_files_seen": 145,
+  "source_files_processed": 143,
+  "materials_generated": 479,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "doc": 2,
+    "docx": 4,
+    "pdf": 136,
+    "pptx": 3
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 01.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9774,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9329,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 03.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9999,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 04.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10502,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 05.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9637,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 06.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9942,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 07.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10947,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 08.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10786,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 09.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9263,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS I/TLED-AFA PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9293,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS II/1. AFA REVIEWER A.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 86561,
+      "materials": 16,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS II/2. AFA REVIEWER B.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14848,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS II/3. AFA REVIEWER C.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11098,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS II/4. AFA REVIEWER D.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10971,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS II/5. AFA REVIEWER E.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9625,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS II/6. AFA REVIEWER F.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17841,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS III/1. AGRICULTURE (FISHERIES) (1).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4803,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS III/2. AGRICULTURE (FISHERIES) (2).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5100,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS III/3. AGRICULTURE (FISHERIES) (3).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4431,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS III/4. AGRICULTURE (FISHERIES) (4).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4518,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS III/5. AGRICULTURE (FISHERIES) (5).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4277,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS III/6. AGRICULTURE (FISHERIES) (6).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4349,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS III/7. AGRICULTURE (FISHERIES) (7).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9803,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 AGRICULTURE AND FISHERY ARTS/REVIEWERS III/8. AGRICULTURE (FISHERIES) (8).pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11677,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 01.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9358,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9374,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 03.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9205,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 04.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10689,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 05.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9169,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 06.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9391,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 07.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8805,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 08.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10381,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 09.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9651,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 HOME ECONOMICS/TLED-HE PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9609,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 01.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9070,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9362,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 03.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9073,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 04.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9543,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 05.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9860,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 06.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10007,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 07.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9240,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 08.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9409,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 09.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8805,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INDUSTRIAL ARTS/TLED-IA PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9088,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 01.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10403,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9944,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 03.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10037,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 04.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10389,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 05.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10603,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 06.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8943,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 07.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9898,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 08.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10032,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 09.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8651,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 INFORMATION AND COMMUNICATION TECHNOLOGY/TLED-ICT PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10353,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 01.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10461,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9275,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 03.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9413,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 04.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9238,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 05.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9437,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 06.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8606,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 07.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9076,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 08.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9215,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 09.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9011,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/2026 TECHNOLOGY VOCATIONAL TEACHER EDUCATION/TVTED PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11176,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4465,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10729,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17127,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20276,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 21329,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 30096,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/TLE Practice Test.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8051,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/TLE Specialization 150 Items Drill 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 29750,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/TLE Specialization 150 Items Drill 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 27651,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 101563,
+      "materials": 20,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 01.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 26601,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12831,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 03.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7322,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 04.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9288,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 05.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9233,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 06.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7129,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 07.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11348,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 08.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6423,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 09.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10463,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9098,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 11.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9422,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 12.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9447,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 13.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9866,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 14.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11292,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 15.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10582,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 16.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10416,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/B. Reviewers/TLE REVIEWER 17.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17848,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/01. ACTUAL TLE REVIEWER 150 ITEMS WITH ANSWERS PDFBOOKSFORUM.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 117394,
+      "materials": 21,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/02. CBRC TLE PDF.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/03. COMPUTER-HARDWARE-SERVICING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 138988,
+      "materials": 23,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/04. COSMETOLOGY.pptx",
+      "source_type": "pptx",
+      "status": "processed",
+      "text_chars": 34254,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/05. DRAFTING-LET-.docx",
+      "source_type": "docx",
+      "status": "processed",
+      "text_chars": 47285,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/06. DRAW-BASICDRAFTING-180119085703.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8581,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/07. ELECTRICITYPPT-120307204317-PHPAPP02.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10939,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/08. FISHERY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1413,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/09. PNU TLE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 245737,
+      "materials": 49,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/10. SHARE TLE_LET REVIEWER.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 20682,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/11. SOCIAL_STUDIES_7_-_RIZAL_AND_OTHER_HEROES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13447,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/12. SOCIAL_STUDIES_8_-_FALLACIES_SEPT_2011_.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10115,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/13. SOCIETY AND CULTURE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9734,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/14. TLE ENTREPRENEURSHIP.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 77286,
+      "materials": 14,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/15. SOME TIPS IN DOING MATH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 1234,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/16. SPECIAL DIODES.pptx",
+      "source_type": "pptx",
+      "status": "too_short",
+      "text_chars": 26
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/17. SPEECH AND ORAL COMMUNICATION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5017,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/18. STATISTICS_PROBABILITY_AND_NUMBER_SERIES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4575,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/19. STATISTICS, PROBABILITY AND NUMBER SERIES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6005,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/20. STATISTICS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4600,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/21. SUMMATIVE TEST IN GENED ENGLISH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17216,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/22. TAXATION, LAND REFORM, COOPERATIVES, AND ECONOMICS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 11095,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/23. TECHNOLOGY-AND-HOME-ECONOMICS.doc",
+      "source_type": "doc",
+      "status": "processed",
+      "text_chars": 28379,
+      "materials": 7,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/24. THE DIGEST.docx",
+      "source_type": "docx",
+      "status": "processed",
+      "text_chars": 8134,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/25. THE.doc",
+      "source_type": "doc",
+      "status": "processed",
+      "text_chars": 20561,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/26. TLE REVIEW OUTLINE.docx",
+      "source_type": "docx",
+      "status": "processed",
+      "text_chars": 2136,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/27. TLE_-_5S_OF_GOOD_HOUSEKEEPING-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5906,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/28. TLE_-_5S_OF_GOOD_HOUSEKEEPING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5906,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/29. TLE_-_BAKING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12007,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/30. TLE_-_BASIC_DRAFTING_1_US_CAREER_AND_TECHNICAL_EDUCATION_-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2203,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/31. TLE_-_BASIC_DRAFTING_1_US_CAREER_AND_TECHNICAL_EDUCATION_.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2203,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/32. TLE_-_BASIC_DRAFTING_2_UNIVERSITY_OF_JORDAN_-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14213,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/33. TLE_-_BASIC_DRAFTING_2_UNIVERSITY_OF_JORDAN_.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14213,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/34. TLE_-_BASIC_ELECTRICITY_ELECTRONICS_-_NOTES-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5162,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/35. TLE_-_BASIC_ELECTRICITY_ELECTRONICS_-_NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5162,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/36. TLE_-_BASIC_ELECTRICITY-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13443,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/37. TLE_-_BASIC_ELECTRICITY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 13443,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/38. TLE_-_BASIC_PLUMBING_NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6347,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/39. TLE_-_BUSINESS_MATH-1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3055,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/40. TLE_-_BUSINESS_MATH.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3055,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/41. TLE_-_CARPENTRY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5671,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/42. TLE_-_COSMETOLOGY_REVISION_.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 33444,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/43. TLE_-_ENTREPRENEURSHIP-MINDGYM.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 3294,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/44. TLE - BREAD & PASTRY PRODUCTION K-12 MODULE.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 149912,
+      "materials": 25,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/45. TLE_-_FOOD_SELECTION_PREPARATION_AND_COOKING_1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6120,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/46. TLE - AGRICULTURAL CROP PRODUCTION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 12453,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/47. TLE HOME ECONOMICS NOTES.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 39302,
+      "materials": 8,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/48. TLE - MASONRY.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 6842,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/49. TLE - MEALS.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 2618,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/50. TLE - MENU PLANNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5410,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/51. TLE - NUTRITION.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14074,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/52. TLE-MAJOR-TEST-SET-015.docx",
+      "source_type": "docx",
+      "status": "processed",
+      "text_chars": 24289,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/C. TLE Essentials/53. TLE-REVIEW-DRAFTING-CARPENTRY-MASONRY-PLUMBING-ELECTRICITY.pptx",
+      "source_type": "pptx",
+      "status": "processed",
+      "text_chars": 59496,
+      "materials": 10,
+      "flashcards": 0,
+      "topic": "major/tle"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/TLE - Ultmate Reviewer for LET.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 52464,
+      "materials": 9,
+      "flashcards": 0,
+      "topic": "major/tle"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_tle_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_tle_source_materials_flashcards.json"
+}

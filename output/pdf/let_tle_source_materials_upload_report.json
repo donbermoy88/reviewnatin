@@ -1,0 +1,33 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_tle_source_materials.json",
+  "source_rows": 479,
+  "insertable_materials": 475,
+  "inserted": 475,
+  "skipped": 4,
+  "skipped_by_reason": {
+    "thin_material": 4
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Technology and Livelihood Education Major: TECHNOLOGY AND HOME ECONOMICS (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Technology and Livelihood Education Major: TECHNOLOGY AND HOME ECONOMICS (Part 7) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Technology and Livelihood Education Major: THE (Part 1) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Technology and Livelihood Education Major: THE (Part 6) - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    }
+  ]
+}

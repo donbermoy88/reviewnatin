@@ -109,6 +109,8 @@ def slug_context(path, text):
     path_source = " ".join(part.lower() for part in path.parts[-5:]).replace("_", " ").replace("-", " ")
     source = f"{path_source} {text[:4000].lower()}".replace("_", " ").replace("-", " ")
     if re.search(r"\bmajor subjects?\b|\barea of specialization\b", path_source):
+        if re.search(r"\b(g\.\s*t\s*l\s*e|t\s*l\s*e|tled|technology\s+and\s+livelihood|home economics|industrial arts|agriculture|fishery|ict|information and communication|technology vocational|tvted)\b", path_source):
+            return "major", "tle"
         if re.search(r"\b(english|literature|vocabulary|grammar|linguistics|composition|reading comprehension|esl|efl)\b", path_source):
             return "major", "english"
         if re.search(r"\b(filipino|panitikan|wika|tagalog|pagtuturo ng filipino)\b", path_source):
@@ -285,6 +287,8 @@ def main():
             title_scope = "General Science Major"
         elif subject_slug == "major" and topic_slug == "social-studies-araling-panlipunan":
             title_scope = "Social Studies Major"
+        elif subject_slug == "major" and topic_slug == "tle":
+            title_scope = "Technology and Livelihood Education Major"
         else:
             title_scope = "General Education"
         exam_scope = "secondary" if subject_slug == "major" else "both"

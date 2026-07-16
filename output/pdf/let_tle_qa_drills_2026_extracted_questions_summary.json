@@ -1,0 +1,78 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills",
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/1.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/2.pdf",
+      "status": "processed",
+      "rows": 60,
+      "ready": 60,
+      "answers": 60
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/3.pdf",
+      "status": "processed",
+      "rows": 100,
+      "ready": 98,
+      "answers": 100
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/4.pdf",
+      "status": "processed",
+      "rows": 100,
+      "ready": 99,
+      "answers": 100
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/5.pdf",
+      "status": "processed",
+      "rows": 121,
+      "ready": 120,
+      "answers": 120
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/6.pdf",
+      "status": "processed",
+      "rows": 119,
+      "ready": 118,
+      "answers": 120
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/TLE Practice Test.pdf",
+      "status": "not_keyed_drill"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/TLE Specialization 150 Items Drill 1.pdf",
+      "status": "not_keyed_drill"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/G. T L E/A. Q&A Drills/TLE Specialization 150 Items Drill 2.pdf",
+      "status": "not_keyed_drill"
+    }
+  ],
+  "extracted_rows": 525,
+  "status_counts": {
+    "Ready for Upload": 490,
+    "Incomplete": 5,
+    "Duplicate": 30
+  },
+  "topic_counts": {
+    "Agriculture and Fishery Arts": 9,
+    "TLE General": 298,
+    "Industrial Arts": 97,
+    "ICT and Electronics": 68,
+    "Home Economics": 7,
+    "Entrepreneurship and Business Management": 46
+  },
+  "outputs": {
+    "json": "/Users/lyndon/reviewnatin/output/pdf/let_tle_qa_drills_2026_extracted_questions.json",
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/let_tle_qa_drills_2026_extracted_questions.csv",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/let_tle_qa_drills_2026_extracted_questions.md"
+  }
+}

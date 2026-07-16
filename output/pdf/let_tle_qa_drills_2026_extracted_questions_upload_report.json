@@ -1,0 +1,23 @@
+{
+  "batch_id": "6897f63c-fb81-4efe-b711-3ebc31e0d27f",
+  "dry_run": false,
+  "source": "output/pdf/let_tle_qa_drills_2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 525,
+  "ready_rows": 490,
+  "candidate_targets": 490,
+  "insertable": 490,
+  "inserted": 490,
+  "skipped": 0,
+  "duplicates": 0,
+  "source_stats": {
+    "output/pdf/let_tle_qa_drills_2026_extracted_questions.json": {
+      "readyRows": 490,
+      "candidateTargets": 490,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [],
+  "skipped_samples": []
+}
