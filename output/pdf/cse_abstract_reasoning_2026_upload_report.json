@@ -5,25 +5,143 @@
   "ready_rows": 115,
   "skipped_non_ready": 0,
   "invalid_ready_rows": 0,
-  "existing_abstract_questions_before": 205,
-  "insertable": 230,
-  "updatable_by_source_key": 0,
+  "existing_abstract_questions_before": 446,
+  "insertable": 0,
+  "updatable_by_source_key": 230,
   "duplicate_existing_content": 0,
-  "inserted": 230,
-  "updated": 0,
+  "inserted": 0,
+  "updated": 230,
   "images_uploaded": 115,
-  "insertable_by_exam": {
-    "cse-professional": 115,
-    "cse-subprofessional": 115
-  },
-  "insertable_by_topic": {
-    "series-completion": 98,
-    "analogies": 40,
-    "odd-one-out": 72,
-    "pattern-completion": 20
-  },
+  "insertable_by_exam": {},
+  "insertable_by_topic": {},
   "skipped_samples": [],
   "invalid_samples": [],
   "duplicate_samples": [],
-  "update_samples": []
+  "update_samples": [
+    {
+      "id": "712bb690-4759-494d-8f0a-c6ecda89803b",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|1",
+      "stem": "Abstract Reasoning Test 1, Question 1. Which figure completes the series?"
+    },
+    {
+      "id": "f9dc290d-dff9-41e3-971f-a192bf61dc46",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|1",
+      "stem": "Abstract Reasoning Test 1, Question 1. Which figure completes the series?"
+    },
+    {
+      "id": "a908a307-d942-424b-8885-e9cbb1087b36",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|2",
+      "stem": "Abstract Reasoning Test 1, Question 2. Which figure completes the series?"
+    },
+    {
+      "id": "5a2ba8bc-22a2-4bb8-bdf6-913c1fe512e4",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|2",
+      "stem": "Abstract Reasoning Test 1, Question 2. Which figure completes the series?"
+    },
+    {
+      "id": "3d742ac4-c022-4030-bd1d-a602afc65447",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|3",
+      "stem": "Abstract Reasoning Test 1, Question 3. Which figure completes the series?"
+    },
+    {
+      "id": "bffe71e0-02e8-4055-93ad-da2270c8404a",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|3",
+      "stem": "Abstract Reasoning Test 1, Question 3. Which figure completes the series?"
+    },
+    {
+      "id": "271eace2-a9a2-4dc3-8e66-8d8eb9a2da55",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|4",
+      "stem": "Abstract Reasoning Test 1, Question 4. Which figure completes the series?"
+    },
+    {
+      "id": "68ab994b-5002-4967-81da-50bcecd1bd8f",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|4",
+      "stem": "Abstract Reasoning Test 1, Question 4. Which figure completes the series?"
+    },
+    {
+      "id": "e6587205-e294-432e-a66f-364b2dbd44de",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|5",
+      "stem": "Abstract Reasoning Test 1, Question 5. Which figure completes the series?"
+    },
+    {
+      "id": "3f05020b-4d3f-4d12-af21-dbf7316f0289",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|5",
+      "stem": "Abstract Reasoning Test 1, Question 5. Which figure completes the series?"
+    },
+    {
+      "id": "d9aaddec-5066-4b33-9975-37b1de9703fd",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|6",
+      "stem": "Abstract Reasoning Test 1, Question 6. Which figure completes the statement?"
+    },
+    {
+      "id": "d51dbab6-d33e-4561-82ae-e6a730b959ae",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|6",
+      "stem": "Abstract Reasoning Test 1, Question 6. Which figure completes the statement?"
+    },
+    {
+      "id": "be80a6b0-0ab5-498c-8fb9-67bda0670467",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|7",
+      "stem": "Abstract Reasoning Test 1, Question 7. Which figure completes the statement?"
+    },
+    {
+      "id": "5b914953-4e18-4ef6-818d-bf7ff4953811",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|7",
+      "stem": "Abstract Reasoning Test 1, Question 7. Which figure completes the statement?"
+    },
+    {
+      "id": "a0a5cd94-5aee-433f-9bfc-8c127a46c813",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|8",
+      "stem": "Abstract Reasoning Test 1, Question 8. Which figure completes the statement?"
+    },
+    {
+      "id": "9a0012a0-29d7-4da9-b8db-fbbf8ac433a3",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|8",
+      "stem": "Abstract Reasoning Test 1, Question 8. Which figure completes the statement?"
+    },
+    {
+      "id": "ec946e6c-4a93-415e-8251-60ddd83f9255",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|9",
+      "stem": "Abstract Reasoning Test 1, Question 9. Which figure completes the statement?"
+    },
+    {
+      "id": "74faa5bb-2791-4ab8-bcc8-a155c73c467a",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|9",
+      "stem": "Abstract Reasoning Test 1, Question 9. Which figure completes the statement?"
+    },
+    {
+      "id": "642c380e-bf60-453e-a8b6-4cb12da116a6",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|10",
+      "stem": "Abstract Reasoning Test 1, Question 10. Which figure completes the statement?"
+    },
+    {
+      "id": "85db7486-7f7f-4ffc-8c82-c9642218afa3",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|10",
+      "stem": "Abstract Reasoning Test 1, Question 10. Which figure completes the statement?"
+    },
+    {
+      "id": "8938e690-9f97-4ea5-a197-ecc5bb7a484f",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|11",
+      "stem": "Abstract Reasoning Test 1, Question 11. Which figure is the odd one out?"
+    },
+    {
+      "id": "d62b7911-82dc-48b3-b3ff-1ebc27768de3",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|11",
+      "stem": "Abstract Reasoning Test 1, Question 11. Which figure is the odd one out?"
+    },
+    {
+      "id": "77a7c72f-0f3f-429c-a15c-2306079a9c1b",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|12",
+      "stem": "Abstract Reasoning Test 1, Question 12. Which figure is the odd one out?"
+    },
+    {
+      "id": "17be72f9-0b94-4ebf-8b74-0419aa9721c9",
+      "source_key": "cse-subprofessional|Abstract Reasoning 1.pdf|12",
+      "stem": "Abstract Reasoning Test 1, Question 12. Which figure is the odd one out?"
+    },
+    {
+      "id": "2b6d5de5-2e8f-48af-bf66-b38ecaf9456c",
+      "source_key": "cse-professional|Abstract Reasoning 1.pdf|13",
+      "stem": "Abstract Reasoning Test 1, Question 13. Which figure is the odd one out?"
+    }
+  ]
 }
