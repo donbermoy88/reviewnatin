@@ -1,0 +1,135 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION",
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/1. CHILD AND ADOLESCENT AND FACILITATING LEARNING.pdf",
+      "status": "no_answer_key",
+      "text_chars": 21
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/2. CHILD AND ADOLESCENT DEV_T PDFBOOKSFORUM.pdf",
+      "status": "processed",
+      "rows": 100,
+      "ready": 99,
+      "answers": 99
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/3. CHILD AND ADOLESCENT DEVELOPMENT PART 1.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/4. CHILD AND ADOLESCENT DEVELOPMENT PART 2.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/5. CHILD-AND-ADOLESCENT-DEVELOPMENT-FACILITATING-LEARNING.pdf",
+      "status": "no_answer_key",
+      "text_chars": 67099
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/6. CHILD-AND-ADOLESCENT-DEVELOPMENT.pdf",
+      "status": "no_answer_key",
+      "text_chars": 14235
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/7. EARLY CHILDHOOD EDUCATION _ SPED.pdf",
+      "status": "no_answer_key",
+      "text_chars": 7091
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/8. LECTURE NOTES - CHILD AND ADOLESCENT.pdf",
+      "status": "no_answer_key",
+      "text_chars": 10034
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 1.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 10.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 2.pdf",
+      "status": "processed",
+      "rows": 25,
+      "ready": 25,
+      "answers": 25
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 3.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 4.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 5.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 6.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 7.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 8.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 9.pdf",
+      "status": "processed",
+      "rows": 50,
+      "ready": 50,
+      "answers": 50
+    }
+  ],
+  "extracted_rows": 575,
+  "status_counts": {
+    "Ready for Upload": 547,
+    "Needs Answer": 1,
+    "Duplicate": 27
+  },
+  "topic_counts": {
+    "Early Childhood Education": 575
+  },
+  "outputs": {
+    "json": "/Users/lyndon/reviewnatin/output/pdf/let_early_childhood_education_qa_2026_extracted_questions.json",
+    "csv": "/Users/lyndon/reviewnatin/output/pdf/let_early_childhood_education_qa_2026_extracted_questions.csv",
+    "markdown": "/Users/lyndon/reviewnatin/output/pdf/let_early_childhood_education_qa_2026_extracted_questions.md"
+  }
+}

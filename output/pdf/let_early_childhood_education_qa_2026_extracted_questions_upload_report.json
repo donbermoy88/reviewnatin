@@ -1,0 +1,33 @@
+{
+  "batch_id": "99a15124-68ba-4408-824e-c916477741bb",
+  "dry_run": false,
+  "source": "output/pdf/let_early_childhood_education_qa_2026_extracted_questions.json",
+  "source_prefix": null,
+  "source_rows": 575,
+  "ready_rows": 547,
+  "candidate_targets": 547,
+  "insertable": 546,
+  "inserted": 546,
+  "skipped": 0,
+  "duplicates": 1,
+  "source_stats": {
+    "output/pdf/let_early_childhood_education_qa_2026_extracted_questions.json": {
+      "readyRows": 547,
+      "candidateTargets": 547,
+      "skipped": 0
+    }
+  },
+  "skipped_by_reason": {},
+  "duplicate_samples": [
+    {
+      "source": "output/pdf/let_early_childhood_education_qa_2026_extracted_questions.json",
+      "row": "124",
+      "page": "3",
+      "exam": "secondary",
+      "topic": "major/early-childhood-education",
+      "reason": "duplicate_existing_content",
+      "existing_id": "8fe03674-7260-4192-9aee-f6048a0bb5c2"
+    }
+  ],
+  "skipped_samples": []
+}

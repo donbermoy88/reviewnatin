@@ -1,0 +1,23 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/let_early_childhood_education_source_materials.json",
+  "source_rows": 63,
+  "insertable_materials": 61,
+  "inserted": 61,
+  "skipped": 2,
+  "skipped_by_reason": {
+    "thin_material": 2
+  },
+  "skipped_samples": [
+    {
+      "title": "LET Early Childhood Education Major: 1 - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    },
+    {
+      "title": "LET Early Childhood Education Major: 12 - LET Secondary",
+      "exam": "secondary",
+      "reason": "thin_material"
+    }
+  ]
+}

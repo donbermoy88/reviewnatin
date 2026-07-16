@@ -1,0 +1,282 @@
+{
+  "input_dir": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION",
+  "source_files_seen": 30,
+  "source_files_processed": 29,
+  "materials_generated": 63,
+  "flashcards_generated": 0,
+  "source_type_counts": {
+    "image": 12,
+    "pdf": 18
+  },
+  "sources": [
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/1. CHILD AND ADOLESCENT AND FACILITATING LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "too_short",
+      "text_chars": 0
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/2. CHILD AND ADOLESCENT DEV_T PDFBOOKSFORUM.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 25765,
+      "materials": 6,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/3. CHILD AND ADOLESCENT DEVELOPMENT PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7132,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/4. CHILD AND ADOLESCENT DEVELOPMENT PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7132,
+      "materials": 0,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/5. CHILD-AND-ADOLESCENT-DEVELOPMENT-FACILITATING-LEARNING.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 68329,
+      "materials": 11,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/6. CHILD-AND-ADOLESCENT-DEVELOPMENT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 14298,
+      "materials": 3,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/7. EARLY CHILDHOOD EDUCATION _ SPED.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 7118,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/CHILD AND ADOLESCENT DEVELOPMENT/8. LECTURE NOTES - CHILD AND ADOLESCENT.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 10040,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 1.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 5025,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 10.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4781,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 2.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 4824,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 3.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 8630,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 4.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9308,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 5.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9410,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 6.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 9210,
+      "materials": 2,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 7.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 18520,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 8.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 18055,
+      "materials": 5,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/DRILLS/EARLY CHILDHOOD ED. PART 9.pdf",
+      "source_type": "pdf",
+      "status": "processed",
+      "text_chars": 17463,
+      "materials": 4,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/1.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 244,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/10.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1055,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/11.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1125,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/12.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 195,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/2.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1145,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/3.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1324,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/4.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1011,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/5.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 824,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/6.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1004,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/7.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1152,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/8.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1189,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    },
+    {
+      "source_path": "/Users/lyndon/All reviewers/-LET REVIEWER 2026/C. MAJOR SUBJECTS/I. EARLY CHILDHOOD EDUCATION/TOS/9.jpg",
+      "source_type": "image",
+      "status": "processed",
+      "text_chars": 1054,
+      "materials": 1,
+      "flashcards": 0,
+      "topic": "major/early-childhood-education"
+    }
+  ],
+  "materials_output": "/Users/lyndon/reviewnatin/output/pdf/let_early_childhood_education_source_materials.json",
+  "flashcards_output": "/Users/lyndon/reviewnatin/output/pdf/let_early_childhood_education_source_materials_flashcards.json"
+}
