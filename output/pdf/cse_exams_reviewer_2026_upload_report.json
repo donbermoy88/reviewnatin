@@ -6,35 +6,14 @@
   "skipped_non_ready": 153,
   "invalid_ready_rows": 0,
   "missing_targets": 0,
-  "existing_questions_before": 2984,
-  "insertable": 279,
-  "updatable_by_source_key": 0,
+  "existing_questions_before": 3372,
+  "insertable": 0,
+  "updatable_by_source_key": 279,
   "duplicate_existing_content": 354,
-  "inserted": 279,
-  "updated": 0,
-  "insertable_by_exam": {
-    "cse-professional": 166,
-    "cse-subprofessional": 113
-  },
-  "insertable_by_topic": {
-    "cse-professional:word-problems": 10,
-    "cse-subprofessional:word-problems-sub": 9,
-    "cse-professional:data-interpretation": 20,
-    "cse-professional:vocabulary": 1,
-    "cse-subprofessional:vocabulary": 1,
-    "cse-professional:verbal-comprehension": 31,
-    "cse-professional:word-association": 1,
-    "cse-professional:grammar": 32,
-    "cse-subprofessional:grammar": 32,
-    "cse-professional:vocabulary-fil": 17,
-    "cse-subprofessional:vocabulary-fil": 17,
-    "cse-professional:grammar-fil": 3,
-    "cse-subprofessional:grammar-fil": 3,
-    "cse-professional:constitution": 2,
-    "cse-subprofessional:phil-government": 2,
-    "cse-professional:number-series": 49,
-    "cse-subprofessional:number-series-sub": 49
-  },
+  "inserted": 0,
+  "updated": 279,
+  "insertable_by_exam": {},
+  "insertable_by_topic": {},
   "skipped_samples": [
     {
       "row": 6,
@@ -791,5 +770,131 @@
       "existing_id": "c7412bbb-e451-4e3d-b0ff-7221ca3c7dcd"
     }
   ],
-  "update_samples": []
+  "update_samples": [
+    {
+      "id": "01093903-d92c-45d4-802f-a82dd88ea8fb",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|2|4",
+      "stem": "Evaluate: 16 (24 8) 22× 8"
+    },
+    {
+      "id": "1a0d0d7a-be7d-4fe9-8f36-aa11760b52c8",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|2|4",
+      "stem": "Evaluate: 16 (24 8) 22× 8"
+    },
+    {
+      "id": "07e4315d-8531-4a18-8ae3-de4011a9612b",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|4|4",
+      "stem": "Find the quotient: 8 000 125"
+    },
+    {
+      "id": "6903c9d1-7afa-43ce-8ace-73d5f9920e74",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|4|4",
+      "stem": "Find the quotient: 8 000 125"
+    },
+    {
+      "id": "f33f386d-1c78-4f73-87d3-6fa65e9428b5",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|12|6",
+      "stem": "Which of the following statements is true?"
+    },
+    {
+      "id": "1c8b56be-4d6c-4fa7-b96b-3a3f2484c432",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|12|6",
+      "stem": "Which of the following statements is true?"
+    },
+    {
+      "id": "4e6bb0ef-a94c-43b8-ae11-f9099363b794",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|16|6-7",
+      "stem": "Which of the foloowing is true?"
+    },
+    {
+      "id": "d72cc8a8-b28c-498b-9337-6c4ba106608f",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|16|6-7",
+      "stem": "Which of the foloowing is true?"
+    },
+    {
+      "id": "e0226c41-3306-4175-b6c6-073b00f9ae4b",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|17|7",
+      "stem": "Find the value of x: 83(72) 75(35)"
+    },
+    {
+      "id": "d9742cb5-0f64-460a-aafb-e5d3b82b2d9a",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|17|7",
+      "stem": "Find the value of x: 83(72) 75(35)"
+    },
+    {
+      "id": "5d9faf9b-4d24-4de6-96c8-5cccddc9689e",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|41|12-13",
+      "stem": "The length of a rectangle is 8 meters more than twice its width. The perimeter is 112 meters. Find its area."
+    },
+    {
+      "id": "32282bb6-d71e-4209-b61e-9efd2e2929ea",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|41|12-13",
+      "stem": "The length of a rectangle is 8 meters more than twice its width. The perimeter is 112 meters. Find its area."
+    },
+    {
+      "id": "97d322a0-0dab-4627-8f85-7857510e91bf",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|44|13",
+      "stem": "How many integers between 197 and 303 are divisible by 4 or 10?"
+    },
+    {
+      "id": "d33d8541-32b9-48f2-9cbb-155ae9660820",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|47|14",
+      "stem": "A wate%r container has 100mL of water in it and is 20% full. How many mL of water can this container hold if it is full? 96"
+    },
+    {
+      "id": "4b390829-b587-4843-b9ca-eea0e50bf65b",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|47|14",
+      "stem": "A wate%r container has 100mL of water in it and is 20% full. How many mL of water can this container hold if it is full? 96"
+    },
+    {
+      "id": "b28f91bf-4949-4c6f-adf4-00beb6dc756a",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|60|16-17",
+      "stem": "If 560 out of 700 examinees passed in the recent Career Service exam for SubProfessional level, what percent of the examinees passed?"
+    },
+    {
+      "id": "3f82a937-48d3-40ae-a387-af692c6f1d01",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|60|16-17",
+      "stem": "If 560 out of 700 examinees passed in the recent Career Service exam for SubProfessional level, what percent of the examinees passed?"
+    },
+    {
+      "id": "d3b78be7-4bca-4270-aec1-707f99444898",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|word-problems|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|72|19",
+      "stem": "How many meters of fencing are needed to enclose an 84-meter by 48-meter rectangular garden?"
+    },
+    {
+      "id": "96fc63bb-875e-4369-90b4-c029cbf47ccc",
+      "source_key": "cse_exams_reviewer_2026|cse-subprofessional|word-problems-sub|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|word-problems|72|19",
+      "stem": "How many meters of fencing are needed to enclose an 84-meter by 48-meter rectangular garden?"
+    },
+    {
+      "id": "95e27675-d1ba-4301-953f-7bf5ec9d9148",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|data-interpretation|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|data-interpretation|1|21",
+      "stem": "By what percent was the price per kilo of chicken inceased? 1) The price per kilo of chicken was increased by Php20 2) The price per kilo of chicken was increased by Php120 if BOTH statements TOGETHER are sufficient, but NEITHER statement ALONE is sufficient."
+    },
+    {
+      "id": "39a1f743-efc3-4fb3-8ef0-072ae7f55516",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|data-interpretation|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|data-interpretation|2|21",
+      "stem": "A real estate broker received a commission of 8% of the selling price of a certain property, what was the selling price of the property? 1) The selling price minus the real estate agent’s commission was Php 9,200,000 2) The selling price was 250% of the original purchase price of Php 4,000,000. if each statement ALONE is sufficient"
+    },
+    {
+      "id": "3d5eb7d5-e5f2-4fba-b309-3600bd71a9c6",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|data-interpretation|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|data-interpretation|3|21-22",
+      "stem": "Cherry and Keanna were among those who sold raffle tickets to raise money for the club. If Cherry and Keanna sold a total of 168 tickets, how many tickets did Cherry sell? 1) Keanna sold 60% as many raffle tickets as Cherry 2) Keanna sold 8% of all the raffle tickets sold. if statement (1) ALONE is sufficient, but statement (2) alone is not sufficient."
+    },
+    {
+      "id": "b5bcbe95-a0bf-49c9-9c5b-86c6954209ac",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|data-interpretation|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|data-interpretation|4|22",
+      "stem": "What is the ratio of m : s: a? 1) a = 2, and ms = 64 2) m/s = 2 and a/s = ¼ ifstatement(2)ALONE is sufficient, but statement (1) alone is not sufficient."
+    },
+    {
+      "id": "3c03ce3e-a461-42a5-94aa-8ad6ff49b97e",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|data-interpretation|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|data-interpretation|5|22",
+      "stem": "If x and y are integers, is x divisible by 17? 1) The product xy is divisible by 17 2) y is not divisible by 17 ifBOTH statements TOGETHER are sufficient, but NEITHER statement ALONE issufficient."
+    },
+    {
+      "id": "a96e3bf6-2b97-4cc5-a18b-82ef284108df",
+      "source_key": "cse_exams_reviewer_2026|cse-professional|data-interpretation|Done - Civil Service Exam Reviewer for 2026.pdf|Numerical Ability|data-interpretation|6|22",
+      "stem": "On Saturday monring the printing machine of Gerpress Printing ran continuously at uniform rate to fill a production order. At what time did it completely fill the order that morning? 1) The supervisor began the plan for production 8:08am. 2) The machine had filled 50% of the order at 9:48am and 5/6 of the order by 10:18am ifstatement(2) ALONEissufficient, but statement(1) alone is not sufficient."
+    }
+  ]
 }
