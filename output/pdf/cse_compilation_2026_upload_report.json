@@ -1,0 +1,37 @@
+{
+  "dry_run": false,
+  "source": "output/pdf/cse_compilation_2026_extracted_questions.json",
+  "extracted_rows": 23962,
+  "ready_rows": 63,
+  "skipped_non_ready": 23899,
+  "invalid_ready_rows": 0,
+  "missing_targets": 0,
+  "existing_questions_before": 5508,
+  "insertable_questions": 0,
+  "updatable_questions": 118,
+  "duplicate_existing_content": 2,
+  "inserted_questions": 0,
+  "updated_questions": 118,
+  "insertable_flashcards": 0,
+  "inserted_flashcards": 0,
+  "insertable_by_exam": {},
+  "insertable_by_topic": {},
+  "invalid_samples": [],
+  "missing_target_samples": [],
+  "duplicate_samples": [
+    {
+      "row": "22985",
+      "source": "BASIC CONCEPTS.pdf",
+      "examSlug": "cse-professional",
+      "topicSlug": "basic-operations",
+      "existing_id": "2bc4d647-a867-4939-ac0a-02175225419e"
+    },
+    {
+      "row": "22985",
+      "source": "BASIC CONCEPTS.pdf",
+      "examSlug": "cse-subprofessional",
+      "topicSlug": "basic-operations-sub",
+      "existing_id": "5b629887-4703-4713-83df-9b7edeaf4d04"
+    }
+  ]
+}
