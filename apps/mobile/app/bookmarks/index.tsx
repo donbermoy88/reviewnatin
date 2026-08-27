@@ -8,6 +8,7 @@ import { ErrorState } from '../../components/error-state';
 import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { ReportContentButton } from '../../components/report-content-button';
+import { IconButton } from '../../components/icon-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createListScreenStyles } from '../../lib/themed-styles';
 import {
@@ -107,9 +108,7 @@ export default function BookmarksScreen() {
   const ListHeader = (
     <>
       <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
-        <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Go back">
-          <Ionicons name="chevron-back" size={22} color={colors.text} />
-        </Pressable>
+        <IconButton variant="plain" buttonSize={28} size={22} icon="chevron-back" color={colors.text} hitSlop={8} accessibilityLabel="Go back" onPress={() => router.back()} />
         <Text style={styles.title}>Bookmarks</Text>
         <Text style={styles.sub}>
           {count} saved {tab === 'questions' ? 'question' : 'lesson'}

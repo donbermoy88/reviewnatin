@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
@@ -7,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PrimaryButton } from '../../components/primary-button';
+import { IconButton } from '../../components/icon-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 
 const DURATION_KEY = 'reviewnatin:focus:last-minutes';
@@ -120,9 +120,7 @@ export default function FocusTimerScreen() {
         style={{ flex: 1, paddingTop: insets.top + spacing.sm, paddingHorizontal: spacing.lg, paddingBottom: insets.bottom + spacing.xl }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Pressable onPress={() => router.back()} hitSlop={8} accessibilityRole="button" accessibilityLabel="Close focus timer">
-            <Ionicons name="chevron-back" size={24} color="#fff" />
-          </Pressable>
+          <IconButton variant="plain" buttonSize={30} size={24} icon="chevron-back" color="#fff" hitSlop={8} accessibilityLabel="Close focus timer" onPress={() => router.back()} />
           <Text style={{ fontFamily: fonts.bodyBold, fontSize: 15, color: '#fff' }}>Focus mode</Text>
           <View style={{ width: 24 }} />
         </View>
