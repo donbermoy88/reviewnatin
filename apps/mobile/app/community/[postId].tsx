@@ -24,6 +24,7 @@ import { UnderReviewPlaceholder } from '../../components/community/under-review-
 import { ErrorState } from '../../components/error-state';
 import { PrimaryButton } from '../../components/primary-button';
 import { communityAccessMessage, useCommunityAccess } from '../../hooks/use-community-access';
+import { IconButton } from '../../components/icon-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { useUserProfile } from '../../hooks/use-user-profile';
 import {
@@ -440,9 +441,16 @@ export default function PostDetailScreen() {
   const Header = (
     <View style={{ paddingHorizontal: spacing.md, paddingTop: insets.top + spacing.sm, paddingBottom: spacing.md }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: spacing.md }}>
-        <Pressable onPress={() => router.back()} hitSlop={8} accessibilityRole="button" accessibilityLabel="Go back">
-          <Ionicons name="chevron-back" size={22} color={colors.text} />
-        </Pressable>
+        <IconButton
+          variant="plain"
+          buttonSize={28}
+          size={22}
+          icon="chevron-back"
+          color={colors.text}
+          hitSlop={8}
+          accessibilityLabel="Go back"
+          onPress={() => router.back()}
+        />
         <Text style={{ fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, marginLeft: spacing.sm }}>
           Post
         </Text>

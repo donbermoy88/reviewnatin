@@ -7,6 +7,7 @@ import { ActivityIndicator, Linking, Pressable, RefreshControl, ScrollView, Text
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { Pill } from '../../components/pill';
+import { IconButton } from '../../components/icon-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createLeaderboardStyles } from '../../lib/themed-styles';
 import { fetchExamSchedules, formatEventType, type ExamScheduleEvent } from '../../lib/api/exam-calendar';
@@ -82,9 +83,7 @@ export default function ExamCalendarScreen() {
           colors={[...gradients.hero]}
           style={[styles.header, { paddingTop: insets.top + spacing.sm }]}
         >
-          <Pressable onPress={() => router.back()} hitSlop={8} style={{ marginBottom: spacing.sm }}>
-            <Ionicons name="chevron-back" size={22} color="#fff" />
-          </Pressable>
+          <IconButton variant="plain" buttonSize={28} size={22} icon="chevron-back" color="#fff" hitSlop={8} accessibilityLabel="Go back" style={{ marginBottom: spacing.sm }} onPress={() => router.back()} />
           <Text style={styles.headerTitle}>Exam calendar</Text>
           <Text style={styles.headerSub}>
             Official-style dates for {getExamCatalogItem(examSlug)?.name ?? examSlug.replace(/-/g, ' ')} — always verify on CSC/PRC sites

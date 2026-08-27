@@ -1,7 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
-import { Alert, Pressable, Share, Text, View } from 'react-native';
+import * as Haptics from 'expo-haptics';
+import { useEffect, useRef, useState } from 'react';
+import { Alert, Animated, Easing, Pressable, Share, Text, View } from 'react-native';
 import { useAppTheme } from '../../hooks/use-app-theme';
+import { useReducedMotion } from '../../hooks/use-reduced-motion';
 import { type CommunityPost } from '../../lib/api/community';
 import { formatRelativeTimeAgo } from '../../lib/format/relative-time';
 import { Avatar } from './avatar';
@@ -22,10 +24,30 @@ type Props = {
 };
 
 export function PostCard({ post, onLike, onSave, onManage, onOpenPost, onOpenProfile, onBlockedAuthor }: Props) {
-  const { colors, fonts, spacing, radii } = useAppTheme();
+  const { colors, fonts, spacing, radii, motion } = useAppTheme();
+  const reduceMotion = useReducedMotion();
   const [reportVisible, setReportVisible] = useState(false);
   const [blockVisible, setBlockVisible] = useState(false);
   const isVisible = post.moderationStatus === 'visible';
+
+  // Subtle heart pop when the viewer likes a post (not on unlike, and not on
+  // the initial mount of an already-liked post). Respects reduced motion.
+  const [heartScale] = useState(() => new Animated.Value(1));
+  const prevLiked = useRef(post.likedByMe);
+  useEffect(() => {
+    if (post.likedByMe && !prevLiked.current && !reduceMotion) {
+      Animated.sequence([
+        Animated.timing(heartScale, { toValue: 1.35, duration: motion.duration.fast, easing: Easing.out(Easing.quad), useNativeDriver: true }),
+        Animated.spring(heartScale, { toValue: 1, friction: 4, tension: 140, useNativeDriver: true }),
+      ]).start();
+    }
+    prevLiked.current = post.likedByMe;
+  }, [post.likedByMe, reduceMotion, heartScale, motion]);
+
+  const handleLike = () => {
+    if (!post.likedByMe) void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    onLike(post);
+  };
 
   const onOverflow = () => {
     Alert.alert('Post options', undefined, [
@@ -97,18 +119,20 @@ export function PostCard({ post, onLike, onSave, onManage, onOpenPost, onOpenPro
       {isVisible ? (
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.lg, marginTop: 2 }}>
           <Pressable
-            onPress={() => onLike(post)}
+            onPress={handleLike}
             accessibilityRole="button"
             accessibilityLabel={post.likedByMe ? 'Unlike' : 'Like'}
             style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}
             hitSlop={8}
           >
-            <Ionicons
-              name={post.likedByMe ? 'heart' : 'heart-outline'}
-              size={18}
-              color={post.likedByMe ? colors.error : colors.textMuted}
-            />
-            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: colors.textMuted }}>
+            <Animated.View style={{ transform: [{ scale: heartScale }] }}>
+              <Ionicons
+                name={post.likedByMe ? 'heart' : 'heart-outline'}
+                size={18}
+                color={post.likedByMe ? colors.error : colors.textMuted}
+              />
+            </Animated.View>
+            <Text style={{ fontFamily: fonts.bodyBold, fontSize: 13, color: post.likedByMe ? colors.error : colors.textMuted }}>
               {post.likeCount}
             </Text>
           </Pressable>

@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Avatar } from '../../../components/community/avatar';
 import { EmptyState } from '../../../components/empty-state';
 import { ErrorState } from '../../../components/error-state';
+import { IconButton } from '../../../components/icon-button';
 import { useAppTheme } from '../../../hooks/use-app-theme';
 import { fetchBlockedUsers, toggleCommunityUserBlock, type CommunityBlockedUser } from '../../../lib/api/community';
 import { toUserFacingError } from '../../../lib/errors/user-facing';
@@ -62,9 +63,16 @@ export default function CommunitySafetySettingsScreen() {
   const Header = (
     <View style={{ paddingHorizontal: spacing.md, paddingTop: insets.top + spacing.sm, paddingBottom: spacing.md }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Pressable onPress={() => router.back()} hitSlop={8} accessibilityRole="button" accessibilityLabel="Go back">
-          <Ionicons name="chevron-back" size={22} color={colors.text} />
-        </Pressable>
+        <IconButton
+          variant="plain"
+          buttonSize={28}
+          size={22}
+          icon="chevron-back"
+          color={colors.text}
+          hitSlop={8}
+          accessibilityLabel="Go back"
+          onPress={() => router.back()}
+        />
         <Text style={{ fontFamily: fonts.bodyBold, fontSize: 16, color: colors.text, marginLeft: spacing.sm }}>
           Blocked Users
         </Text>

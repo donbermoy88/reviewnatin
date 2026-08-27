@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PrimaryButton } from '../../../components/primary-button';
 import { ReportContentButton } from '../../../components/report-content-button';
 import { RichText } from '../../../components/rich-text';
+import { IconButton } from '../../../components/icon-button';
 import { useAppTheme } from '../../../hooks/use-app-theme';
 import { createStudyStyles } from '../../../lib/themed-styles';
 import { fetchReviewMaterialById } from '../../../lib/api/review-materials';
@@ -159,9 +160,7 @@ export default function LessonReaderScreen() {
           colors={[...gradients.hero]}
           style={[styles.header, { paddingTop: insets.top + spacing.sm }]}
         >
-          <Pressable onPress={() => router.back()} hitSlop={8} style={{ marginBottom: spacing.md }}>
-            <Ionicons name="chevron-back" size={22} color="#fff" />
-          </Pressable>
+          <IconButton variant="plain" buttonSize={28} size={22} icon="chevron-back" color="#fff" hitSlop={8} accessibilityLabel="Go back" style={{ marginBottom: spacing.md }} onPress={() => router.back()} />
           <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: spacing.sm }}>
             <View style={{ flex: 1 }}>
               <Text style={{ fontFamily: fonts.bodyBold, fontSize: 12, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase' }}>

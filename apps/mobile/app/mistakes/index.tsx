@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
 import { ErrorState } from '../../components/error-state';
@@ -9,6 +9,7 @@ import { StackShell } from '../../components/stack-shell';
 import { PrimaryButton } from '../../components/primary-button';
 import { PremiumLock } from '../../components/premium-lock';
 import { ReportContentButton } from '../../components/report-content-button';
+import { IconButton } from '../../components/icon-button';
 import { useAppTheme } from '../../hooks/use-app-theme';
 import { createListScreenStyles } from '../../lib/themed-styles';
 import { fetchExamBySlug } from '../../lib/api/catalog';
@@ -97,9 +98,7 @@ export default function MistakesScreen() {
   const ListHeader = (
     <>
       <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
-        <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Go back">
-          <Ionicons name="chevron-back" size={22} color={colors.text} />
-        </Pressable>
+        <IconButton variant="plain" buttonSize={28} size={22} icon="chevron-back" color={colors.text} hitSlop={8} accessibilityLabel="Go back" onPress={() => router.back()} />
         <Text style={styles.title}>Mistake Bank</Text>
         <Text style={styles.sub}>{mistakes.length} item{mistakes.length === 1 ? '' : 's'} to review</Text>
       </View>
