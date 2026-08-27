@@ -8,6 +8,7 @@ import { BlockUserConfirmModal } from '../../../components/community/block-user-
 import { ReportContentModal } from '../../../components/community/report-content-modal';
 import { ErrorState } from '../../../components/error-state';
 import { PrimaryButton } from '../../../components/primary-button';
+import { IconButton } from '../../../components/icon-button';
 import { useAppTheme } from '../../../hooks/use-app-theme';
 import {
   fetchCommunityProfile,
@@ -118,9 +119,16 @@ export default function CommunityProfileScreen() {
   const Header = (
     <View style={{ paddingHorizontal: spacing.md, paddingTop: insets.top + spacing.sm }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.md }}>
-        <Pressable onPress={() => router.back()} hitSlop={8} accessibilityRole="button" accessibilityLabel="Go back">
-          <Ionicons name="chevron-back" size={22} color={colors.text} />
-        </Pressable>
+        <IconButton
+          variant="plain"
+          buttonSize={28}
+          size={22}
+          icon="chevron-back"
+          color={colors.text}
+          hitSlop={8}
+          accessibilityLabel="Go back"
+          onPress={() => router.back()}
+        />
         {!profile.isSelf ? (
           <Pressable onPress={onOverflow} hitSlop={8} accessibilityLabel="Profile options">
             <Ionicons name="ellipsis-horizontal" size={22} color={colors.textLight} />
