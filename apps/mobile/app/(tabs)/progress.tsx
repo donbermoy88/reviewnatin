@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../components/empty-state';
+import { IconButton } from '../../components/icon-button';
 import { ProfileSettingsHint } from '../../components/profile-settings-hint';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { PrimaryButton } from '../../components/primary-button';
@@ -199,18 +200,19 @@ function ProfileScreenContent() {
           </View>
           <View style={styles.headerRow}>
             <Text style={styles.headerTitle}>Profile</Text>
-            <Pressable
+            <IconButton
+              variant="plain"
+              icon="settings-outline"
+              size={20}
+              color="#fff"
+              accessibilityLabel="Open settings"
               style={styles.settingsBtn}
               onPress={() => router.push('/(tabs)/settings')}
-              accessibilityRole="button"
-              accessibilityLabel="Open settings"
-            >
-              <Ionicons name="settings-outline" size={20} color="#fff" />
-            </Pressable>
+            />
           </View>
 
           <Pressable
-            style={styles.avatarRow}
+            style={({ pressed }) => [styles.avatarRow, pressed && !!user && { opacity: 0.85 }]}
             onPress={user ? () => router.push('/profile/edit') : undefined}
             disabled={!user}
           >
@@ -338,7 +340,7 @@ function ProfileScreenContent() {
             {mockHistory.map((m) => (
               <Pressable
                 key={m.sessionId}
-                style={styles.sessionCard}
+                style={({ pressed }) => [styles.sessionCard, pressed && { opacity: 0.9, transform: [{ scale: 0.99 }] }]}
                 onPress={() =>
                   router.push({
                     pathname: '/mock-review/[sessionId]',
